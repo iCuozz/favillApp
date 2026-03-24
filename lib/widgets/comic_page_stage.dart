@@ -50,7 +50,8 @@ class _ComicPageStageState extends State<ComicPageStage> {
   Widget build(BuildContext context) {
     final panel = widget.page.panels.first;
     final visibleTextBlocks = panel.textBlocks.take(visibleBlocks).toList();
-
+    final totalBlocks = panel.textBlocks.length;
+    final isLastBlockVisible = visibleBlocks >= totalBlocks;
     return GestureDetector(
       onTap: _handleTap,
       child: Card(
@@ -128,15 +129,46 @@ class _ComicPageStageState extends State<ComicPageStage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
+              padding: const EdgeInsets.fromLTRB(12, 12, 12, 4),
               child: Text(
-                visibleBlocks < panel.textBlocks.length
-                    ? 'Tocca per continuare'
-                    : 'Tocca per passare alla pagina successiva',
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Colors.grey.shade400,
+                'Pagina ${widget.page.index + 1}',
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15,
                 ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: List.generate(totalBlocks, (index) {
+                      final isVisible = index < visibleBlocks;
+
+                      return Container(
+                        width: 10,
+                        height: 10,
+                        margin: const EdgeInsets.only(right: 6),
+                        decoration: BoxDecoration(
+                          color: isVisible ? Colors.white : Colors.white24,
+                          shape: BoxShape.circle,
+                        ),
+                      );
+                    }),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    isLastBlockVisible
+                        ? 'Tocca per passare alla pagina successiva'
+                        : 'Tocca per continuare',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.grey.shade400,
+                    ),
+                  ),
+                ],
               ),
             ),
           ],

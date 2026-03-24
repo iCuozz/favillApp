@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'models/comic_data.dart';
 import 'services/comic_loader.dart';
 import 'widgets/comic_page_stage.dart';
+import 'package:flutter/services.dart';
+import 'widgets/home_cover_page.dart';
+import 'widgets/episode_cover_card.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,13 +19,13 @@ class MyApp extends StatelessWidget {
       title: 'Favilla Blaze',
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
-      home: const ComicHomePage(),
+      home: const AppBootstrapPage(),
     );
   }
 }
 
-class ComicHomePage extends StatelessWidget {
-  const ComicHomePage({super.key});
+class AppBootstrapPage extends StatelessWidget {
+  const AppBootstrapPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -49,53 +52,9 @@ class ComicHomePage extends StatelessWidget {
         }
 
         final comicData = snapshot.data!;
-        final episodes = comicData.episodes;
 
-        return Scaffold(
-          appBar: AppBar(
-            title: const Text('Favilla Blaze'),
-          ),
-          body: ListView.builder(
-            itemCount: episodes.length,
-            itemBuilder: (context, index) {
-              final episode = episodes[index];
-
-              return Card(
-                margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                child: ListTile(
-                  contentPadding: const EdgeInsets.all(12),
-                  leading: SizedBox(
-                    width: 60,
-                    height: 60,
-                    child: Image.asset(
-                      episode.thumbnail,
-                      fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) {
-                        return Container(
-                          color: Colors.grey.shade800,
-                          alignment: Alignment.center,
-                          child: const Icon(Icons.image_not_supported),
-                        );
-                      },
-                    ),
-                  ),
-                  title: Text(episode.title),
-                  subtitle: Text(episode.subtitle),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => EpisodePage(
-                          comicData: comicData,
-                          episode: episode,
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              );
-            },
-          ),
+        return HomeCoverPage(
+          comicData: comicData,
         );
       },
     );
@@ -118,17 +77,26 @@ class EpisodePage extends StatefulWidget {
 
 class _EpisodePageState extends State<EpisodePage> {
   late final PageController _pageController;
+  final FocusNode _focusNode = FocusNode();
+
   int currentIndex = 0;
 
   @override
   void initState() {
     super.initState();
     _pageController = PageController();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        _focusNode.requestFocus();
+      }
+    });
   }
 
   @override
   void dispose() {
     _pageController.dispose();
+    _focusNode.dispose();
     super.dispose();
   }
 
@@ -152,6 +120,26 @@ class _EpisodePageState extends State<EpisodePage> {
     }
   }
 
+  KeyEventResult _handleKeyEvent(KeyEvent event) {
+    if (event is! KeyDownEvent) {
+      return KeyEventResult.ignored;
+    }
+
+    if (event.logicalKey == LogicalKeyboardKey.arrowRight ||
+        event.logicalKey == LogicalKeyboardKey.space ||
+        event.logicalKey == LogicalKeyboardKey.enter) {
+      _goToNextPage();
+      return KeyEventResult.handled;
+    }
+
+    if (event.logicalKey == LogicalKeyboardKey.arrowLeft) {
+      _goToPreviousPage();
+      return KeyEventResult.handled;
+    }
+
+    return KeyEventResult.ignored;
+  }
+
   @override
   Widget build(BuildContext context) {
     final pages = widget.episode.pages;
@@ -160,67 +148,97 @@ class _EpisodePageState extends State<EpisodePage> {
       appBar: AppBar(
         title: Text(widget.episode.title),
       ),
-      body: Column(
-        children: [
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(12),
-            color: Colors.black26,
-            child: Text(
-              'Pagina ${currentIndex + 1} / ${pages.length}',
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
+      body: KeyboardListener(
+        focusNode: _focusNode,
+        onKeyEvent: _handleKeyEvent,
+        child: Column(
+          children: [
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(12),
+              color: Colors.black26,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                    'Pagina ${currentIndex + 1} / ${pages.length}',
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(999),
+                    child: LinearProgressIndicator(
+                      value:
+                          pages.isEmpty ? 0 : (currentIndex + 1) / pages.length,
+                      minHeight: 8,
+                      backgroundColor: Colors.white12,
+                      valueColor: const AlwaysStoppedAnimation<Color>(
+                          Colors.pinkAccent),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Tastiera: ← blocco/pagina indietro · → spazio invio avanti',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.grey.shade400,
+                    ),
+                  ),
+                ],
               ),
             ),
-          ),
-          Expanded(
-            child: PageView.builder(
-              controller: _pageController,
-              itemCount: pages.length,
-              onPageChanged: (index) {
-                setState(() {
-                  currentIndex = index;
-                });
-              },
-              itemBuilder: (context, index) {
-                final page = pages[index];
+            Expanded(
+              child: PageView.builder(
+                controller: _pageController,
+                itemCount: pages.length,
+                onPageChanged: (index) {
+                  setState(() {
+                    currentIndex = index;
+                  });
+                },
+                itemBuilder: (context, index) {
+                  final page = pages[index];
 
-                return Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: ComicPageStage(
-                    key: ValueKey(page.index),
-                    comicData: widget.comicData,
-                    page: page,
-                    onPageCompleted: _goToNextPage,
-                  ),
-                );
-              },
+                  return Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: ComicPageStage(
+                      key: ValueKey(page.index),
+                      comicData: widget.comicData,
+                      page: page,
+                      onPageCompleted: _goToNextPage,
+                    ),
+                  );
+                },
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(12, 8, 12, 16),
-            child: Row(
-              children: [
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: currentIndex > 0 ? _goToPreviousPage : null,
-                    child: const Text('Indietro'),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(12, 8, 12, 16),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: currentIndex > 0 ? _goToPreviousPage : null,
+                      child: const Text('Indietro'),
+                    ),
                   ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: currentIndex < pages.length - 1
-                        ? _goToNextPage
-                        : null,
-                    child: const Text('Avanti'),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: currentIndex < pages.length - 1
+                          ? _goToNextPage
+                          : null,
+                      child: const Text('Avanti'),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
