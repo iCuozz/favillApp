@@ -1,0 +1,623 @@
+{
+  "characters": [
+    {
+      "id": "favilla",
+      "name": "Favilla",
+      "display_name": "Favilla",
+      "role": "collaboratrice scolastica",
+      "variant": "normal"
+    },
+    {
+      "id": "favilla_blaze",
+      "name": "Favilla Blaze",
+      "display_name": "Favilla Blaze",
+      "role": "supereroina mamma",
+      "variant": "hero"
+    },
+    {
+      "id": "sparkle_ale",
+      "name": "Sparkle Ale",
+      "display_name": "Sparkle Ale",
+      "role": "figlio combinaguai",
+      "variant": "main"
+    },
+    {
+      "id": "mallow_bellow",
+      "name": "Mallow Bellow",
+      "display_name": "Mallow Bellow",
+      "role": "sviluppatore informatico",
+      "variant": "main"
+    },
+    {
+      "id": "bambini",
+      "name": "Bambini",
+      "display_name": "Bambini",
+      "role": "comparse",
+      "variant": "group"
+    },
+    {
+      "id": "bimbo_1",
+      "name": "Bimbo 1",
+      "display_name": "Bimbo 1",
+      "role": "comparsa",
+      "variant": "child"
+    },
+    {
+      "id": "bimbo_2",
+      "name": "Bimbo 2",
+      "display_name": "Bimbo 2",
+      "role": "comparsa",
+      "variant": "child"
+    },
+    {
+      "id": "siri",
+      "name": "Siri",
+      "display_name": "Siri",
+      "role": "voce di sistema",
+      "variant": "ai"
+    }
+  ],
+  "episodes": [
+    {
+      "id": "prologo",
+      "title": "L'ombra della fiamma",
+      "subtitle": "La doppia vita di Favilla",
+      "thumbnail": "assets/episodes/prologo/thumb.png",
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/prologo/page_0.png",
+          "panels": [
+            {
+              "id": "pr0_0",
+              "characters": ["favilla", "bambini"],
+              "text_blocks": [
+                {
+                  "id": "pr0_0_tb_0",
+                  "type": "narration",
+                  "text": "Nova Tutinia, scuola elementare. Di giorno sono Favilla, collaboratrice scolastica. Gestisco venti piccoli uragani ogni giorno."
+                },
+                {
+                  "id": "pr0_0_tb_1",
+                  "type": "dialogue",
+                  "speaker": "bimbo_1",
+                  "text": "Signora Favilla! Ha visto la mia gomma?!?"
+                },
+                {
+                  "id": "pr0_0_tb_2",
+                  "type": "dialogue",
+                  "speaker": "bimbo_2",
+                  "text": "È mia! L'ho trovata prima io!"
+                },
+                {
+                  "id": "pr0_0_tb_3",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Ragazzi... una gomma per tutti e due. Magia?"
+                },
+                {
+                  "id": "pr0_0_tb_4",
+                  "type": "narration",
+                  "text": "Se sapeste cosa mi aspetta a casa..."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "background": "assets/episodes/prologo/page_1.png",
+          "panels": [
+            {
+              "id": "pr1_0",
+              "characters": ["favilla", "sparkle_ale", "mallow_bellow"],
+              "text_blocks": [
+                {
+                  "id": "pr1_0_tb_0",
+                  "type": "narration",
+                  "text": "Poi c'è casa. Il vero campo di battaglia si chiama Sparkle Ale."
+                },
+                {
+                  "id": "pr1_0_tb_1",
+                  "type": "dialogue",
+                  "speaker": "sparkle_ale",
+                  "text": "MAMMAAA! LATTE! GIOCHI! CAOSMAX!"
+                },
+                {
+                  "id": "pr1_0_tb_2",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Ale piccolo, un disastro alla volta!"
+                },
+                {
+                  "id": "pr1_0_tb_3",
+                  "type": "narration",
+                  "text": "Lui è Mallow Bellow, il papà informatico. Programma software, ma spesso manda in crash la casa."
+                },
+                {
+                  "id": "pr1_0_tb_4",
+                  "type": "dialogue",
+                  "speaker": "mallow_bellow",
+                  "text": "Stack trace... latte overflow..."
+                },
+                {
+                  "id": "pr1_0_tb_5",
+                  "type": "dialogue",
+                  "speaker": "sparkle_ale",
+                  "text": "Papà bug! Mamma fix!"
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "background": "assets/episodes/prologo/page_2.png",
+          "panels": [
+            {
+              "id": "pr2_0",
+              "characters": ["favilla", "sparkle_ale", "mallow_bellow"],
+              "text_blocks": [
+                {
+                  "id": "pr2_0_tb_0",
+                  "type": "narration",
+                  "text": "Colazioni esplosive, panni infiniti, giochi ovunque. Questo è il mio allenamento quotidiano."
+                },
+                {
+                  "id": "pr2_0_tb_1",
+                  "type": "narration",
+                  "text": "Siri: \"Disordine domestico: 92%. Tempo stimato per l'ordine: 47 ore.\""
+                },
+                {
+                  "id": "pr2_0_tb_2",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Ale, il cucchiaio si mangia, non si lancia in orbita!"
+                },
+                {
+                  "id": "pr2_0_tb_3",
+                  "type": "dialogue",
+                  "speaker": "sparkle_ale",
+                  "text": "Cucchiaio razzo!"
+                },
+                {
+                  "id": "pr2_0_tb_4",
+                  "type": "dialogue",
+                  "speaker": "mallow_bellow",
+                  "text": "Ho inventato il frisbee-calzino!"
+                },
+                {
+                  "id": "pr2_0_tb_5",
+                  "type": "dialogue",
+                  "speaker": "sparkle_ale",
+                  "text": "Papà campione caos!"
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "background": "assets/episodes/prologo/page_3.png",
+          "panels": [
+            {
+              "id": "pr3_0",
+              "characters": ["favilla", "sparkle_ale", "mallow_bellow"],
+              "text_blocks": [
+                {
+                  "id": "pr3_0_tb_0",
+                  "type": "narration",
+                  "text": "Ma ogni giorno arriva il momento in cui il caos supera il limite."
+                },
+                {
+                  "id": "pr3_0_tb_1",
+                  "type": "narration",
+                  "text": "Giocattoli ovunque, pentole che fumano, panni che invadono il divano."
+                },
+                {
+                  "id": "pr3_0_tb_2",
+                  "type": "narration",
+                  "text": "Il portatile di Mallow Bellow lampeggia: \"COMPILATION FAILED\"."
+                },
+                {
+                  "id": "pr3_0_tb_3",
+                  "type": "narration",
+                  "text": "Siri: \"ALLERTA! Disordine 99%! Evacuare immediatamente!\""
+                },
+                {
+                  "id": "pr3_0_tb_4",
+                  "type": "dialogue",
+                  "speaker": "sparkle_ale",
+                  "text": "CAOS TOTALE! VINCITORI!"
+                },
+                {
+                  "id": "pr3_0_tb_5",
+                  "type": "dialogue",
+                  "speaker": "mallow_bellow",
+                  "text": "Il sistema è completamente down..."
+                },
+                {
+                  "id": "pr3_0_tb_6",
+                  "type": "narration",
+                  "text": "Favilla chiude gli occhi. Due caos. Una scintilla dentro di lei."
+                },
+                {
+                  "id": "pr3_0_tb_7",
+                  "type": "thought",
+                  "text": "È ora."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "background": "assets/episodes/prologo/page_4.png",
+          "panels": [
+            {
+              "id": "pr4_0",
+              "characters": ["favilla_blaze", "sparkle_ale", "mallow_bellow"],
+              "text_blocks": [
+                {
+                  "id": "pr4_0_tb_0",
+                  "type": "narration",
+                  "text": "In un lampo, gli occhiali spariscono, il maglioncino svanisce, i suoi capelli biondi diventano una criniera di fuoco."
+                },
+                {
+                  "id": "pr4_0_tb_1",
+                  "type": "narration",
+                  "text": "La tuta da collaboratrice lascia spazio a un costume super-palestra con fiamme rosa e oro. L'aura intorno a lei esplode di energia."
+                },
+                {
+                  "id": "pr4_0_tb_2",
+                  "type": "dialogue",
+                  "speaker": "favilla_blaze",
+                  "text": "Superpoteri supermamma: ATTIVATI!"
+                },
+                {
+                  "id": "pr4_0_tb_3",
+                  "type": "narration",
+                  "text": "Dall'ombra della scuola... nasce FAVILLA BLAZE."
+                },
+                {
+                  "id": "pr4_0_tb_4",
+                  "type": "dialogue",
+                  "speaker": "mallow_bellow",
+                  "text": "Ho... sposato una dea?"
+                },
+                {
+                  "id": "pr4_0_tb_5",
+                  "type": "dialogue",
+                  "speaker": "sparkle_ale",
+                  "text": "Mamma FLAMMA!"
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "missione_1",
+      "title": "Missione #1 – Caos all'Alba",
+      "subtitle": "Favilla Blaze contro il risveglio più difficile",
+      "thumbnail": "assets/episodes/missione_1/thumb.png",
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/missione_1/page_0.png",
+          "panels": [
+            {
+              "id": "m1_0",
+              "characters": ["favilla", "sparkle_ale", "mallow_bellow"],
+              "text_blocks": [
+                {
+                  "id": "m1_0_tb_0",
+                  "type": "narration",
+                  "text": "È ancora buio a Nova Tutinia. Nel piccolo appartamento al terzo piano, il mondo sembra dormire."
+                },
+                {
+                  "id": "m1_0_tb_1",
+                  "type": "narration",
+                  "text": "Favilla dorme sfinita. Mallow Bellow russa con il portatile acceso sul petto."
+                },
+                {
+                  "id": "m1_0_tb_2",
+                  "type": "dialogue",
+                  "speaker": "sparkle_ale",
+                  "text": "MAMMMAAAA! LATTEEE! ORA!"
+                },
+                {
+                  "id": "m1_0_tb_3",
+                  "type": "dialogue",
+                  "speaker": "mallow_bellow",
+                  "text": "Compilazione... notturna... in corso..."
+                },
+                {
+                  "id": "m1_0_tb_4",
+                  "type": "thought",
+                  "text": "Missione n.1: sopravvivenza."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "background": "assets/episodes/missione_1/page_1.png",
+          "panels": [
+            {
+              "id": "m1_1",
+              "characters": ["favilla", "sparkle_ale", "mallow_bellow"],
+              "text_blocks": [
+                {
+                  "id": "m1_1_tb_0",
+                  "type": "narration",
+                  "text": "La cucina è il primo campo di battaglia."
+                },
+                {
+                  "id": "m1_1_tb_1",
+                  "type": "narration",
+                  "text": "Favilla tiene Sparkle Ale sul fianco, mentre con una mano frulla pancake proteici e con il piede chiude un cassetto ribelle."
+                },
+                {
+                  "id": "m1_1_tb_2",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Precisione livello 10, piccolo disastro nucleare!"
+                },
+                {
+                  "id": "m1_1_tb_3",
+                  "type": "dialogue",
+                  "speaker": "sparkle_ale",
+                  "text": "Cucchiaio razzo!"
+                },
+                {
+                  "id": "m1_1_tb_4",
+                  "type": "narration",
+                  "text": "Il cucchiaio parte davvero, sfiora Mallow Bellow e rimbalza sul frigo."
+                },
+                {
+                  "id": "m1_1_tb_5",
+                  "type": "dialogue",
+                  "speaker": "mallow_bellow",
+                  "text": "Colpito... e quasi affondato."
+                }
+              ],
+              "interactions": [
+                {
+                  "type": "tap",
+                  "target": "cucchiaio",
+                  "effect": "shake",
+                  "sound": "clang"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "background": "assets/episodes/missione_1/page_2.png",
+          "panels": [
+            {
+              "id": "m1_2",
+              "characters": ["favilla", "sparkle_ale", "mallow_bellow"],
+              "text_blocks": [
+                {
+                  "id": "m1_2_tb_0",
+                  "type": "narration",
+                  "text": "Tra briciole, latte e ciotole rovesciate, entra in scena la voce neutrale del giudizio."
+                },
+                {
+                  "id": "m1_2_tb_1",
+                  "type": "narration",
+                  "text": "Siri: \"Disordine domestico: 92%. Suggerimento: restart completo del sistema.\""
+                },
+                {
+                  "id": "m1_2_tb_2",
+                  "type": "thought",
+                  "text": "Non ancora, Blaze. Prima caffeina."
+                },
+                {
+                  "id": "m1_2_tb_3",
+                  "type": "dialogue",
+                  "speaker": "mallow_bellow",
+                  "text": "Siri, puoi debuggare tu anche i panni?"
+                },
+                {
+                  "id": "m1_2_tb_4",
+                  "type": "narration",
+                  "text": "Siri: \"Errore critico: panni.exe ha smesso di funzionare.\""
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "background": "assets/episodes/missione_1/page_3.png",
+          "panels": [
+            {
+              "id": "m1_3",
+              "characters": ["favilla", "sparkle_ale", "mallow_bellow"],
+              "text_blocks": [
+                {
+                  "id": "m1_3_tb_0",
+                  "type": "narration",
+                  "text": "Nel salotto-palestra, la guerriera si allena."
+                },
+                {
+                  "id": "m1_3_tb_1",
+                  "type": "narration",
+                  "text": "Favilla fa squat con Sparkle Ale agganciato al petto come uno zainetto vivente."
+                },
+                {
+                  "id": "m1_3_tb_2",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Resistenza: estrema. Determinazione: infinita."
+                },
+                {
+                  "id": "m1_3_tb_3",
+                  "type": "narration",
+                  "text": "Mallow Bellow, in un angolo, prova a fare plank. Dura esattamente tre secondi."
+                },
+                {
+                  "id": "m1_3_tb_4",
+                  "type": "dialogue",
+                  "speaker": "mallow_bellow",
+                  "text": "Stack... overflow... fisico..."
+                },
+                {
+                  "id": "m1_3_tb_5",
+                  "type": "dialogue",
+                  "speaker": "sparkle_ale",
+                  "text": "Mamma SUPER! Papà morbido!"
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "background": "assets/episodes/missione_1/page_4.png",
+          "panels": [
+            {
+              "id": "m1_4",
+              "characters": ["favilla_blaze", "sparkle_ale", "mallow_bellow"],
+              "text_blocks": [
+                {
+                  "id": "m1_4_tb_0",
+                  "type": "narration",
+                  "text": "Poi arriva lei. La Montagna dei Panni Sporchi. Nemico antico, mai davvero sconfitto."
+                },
+                {
+                  "id": "m1_4_tb_1",
+                  "type": "narration",
+                  "text": "Favilla Blaze la fissa. L'aura intorno a lei aumenta di intensità."
+                },
+                {
+                  "id": "m1_4_tb_2",
+                  "type": "dialogue",
+                  "speaker": "mallow_bellow",
+                  "text": "Ho scritto un algoritmo per piegare i panni!"
+                },
+                {
+                  "id": "m1_4_tb_3",
+                  "type": "narration",
+                  "text": "Clic. Una valanga di magliette e calzini si riversa sul pavimento."
+                },
+                {
+                  "id": "m1_4_tb_4",
+                  "type": "dialogue",
+                  "speaker": "favilla_blaze",
+                  "text": "Ordine Quantico: attivazione."
+                },
+                {
+                  "id": "m1_4_tb_5",
+                  "type": "narration",
+                  "text": "I panni cominciano a piegarsi come per magia, seguendo i suoi gesti esperti."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        },
+        {
+          "index": 5,
+          "background": "assets/episodes/missione_1/page_5.png",
+          "panels": [
+            {
+              "id": "m1_5",
+              "characters": ["favilla_blaze", "sparkle_ale", "mallow_bellow"],
+              "text_blocks": [
+                {
+                  "id": "m1_5_tb_0",
+                  "type": "narration",
+                  "text": "Mallow Bellow e Sparkle Ale osservano affascinati, ma il loro istinto li porta comunque verso il caos."
+                },
+                {
+                  "id": "m1_5_tb_1",
+                  "type": "dialogue",
+                  "speaker": "mallow_bellow",
+                  "text": "Io sono Mallow BufferOverflow!"
+                },
+                {
+                  "id": "m1_5_tb_2",
+                  "type": "dialogue",
+                  "speaker": "sparkle_ale",
+                  "text": "Io sono Sparkle CrashAle!"
+                },
+                {
+                  "id": "m1_5_tb_3",
+                  "type": "dialogue",
+                  "speaker": "mallow_bellow",
+                  "text": "Insieme siamo... TEAM CAOS!"
+                },
+                {
+                  "id": "m1_5_tb_4",
+                  "type": "dialogue",
+                  "speaker": "favilla_blaze",
+                  "text": "Due piccoli bug. Un fix mamma."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        },
+        {
+          "index": 6,
+          "background": "assets/episodes/missione_1/page_6.png",
+          "panels": [
+            {
+              "id": "m1_6",
+              "characters": ["favilla", "sparkle_ale", "mallow_bellow"],
+              "text_blocks": [
+                {
+                  "id": "m1_6_tb_0",
+                  "type": "narration",
+                  "text": "La sera, il caos si spegne. Per qualche ora."
+                },
+                {
+                  "id": "m1_6_tb_1",
+                  "type": "narration",
+                  "text": "Sparkle Ale si addormenta attaccato alla tetta della mamma, abbracciato come un piccolo koala."
+                },
+                {
+                  "id": "m1_6_tb_2",
+                  "type": "narration",
+                  "text": "Mallow Bellow dorme seduto, il portatile sulle ginocchia, con la scritta: \"All systems stable\"."
+                },
+                {
+                  "id": "m1_6_tb_3",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Forse non salvo il mondo intero. Ma oggi ho vinto contro il caos. E questo basta."
+                },
+                {
+                  "id": "m1_6_tb_4",
+                  "type": "narration",
+                  "text": "Una piccola favilla di luce parte dal suo cuore e illumina la stanza."
+                },
+                {
+                  "id": "m1_6_tb_5",
+                  "type": "narration",
+                  "text": "Favilla Blaze. L'eroina del disordine quotidiano."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
