@@ -27,7 +27,7 @@ flutter:
     - assets/splash/
     - assets/episodes/
     - assets/data/comic_data.json
-    - assets/cover
+    - assets/cover/
 
   fonts:
     - family: Bangers

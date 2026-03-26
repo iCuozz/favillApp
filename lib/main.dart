@@ -4,7 +4,6 @@ import 'services/comic_loader.dart';
 import 'widgets/comic_page_stage.dart';
 import 'package:flutter/services.dart';
 import 'widgets/home_cover_page.dart';
-import 'widgets/episode_cover_card.dart';
 
 void main() {
   runApp(const MyApp());
@@ -179,15 +178,7 @@ class _EpisodePageState extends State<EpisodePage> {
                           Colors.pinkAccent),
                     ),
                   ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Tastiera: ← blocco/pagina indietro · → spazio invio avanti',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.grey.shade400,
-                    ),
-                  ),
+                  const SizedBox(height: 8)
                 ],
               ),
             ),

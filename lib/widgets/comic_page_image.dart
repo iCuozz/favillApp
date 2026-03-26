@@ -7,7 +7,7 @@ class ComicPageImage extends StatelessWidget {
   const ComicPageImage({
     super.key,
     required this.assetPath,
-    this.height = 260,
+    this.height = 600,
   });
 
   @override

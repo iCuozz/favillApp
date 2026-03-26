@@ -62,11 +62,11 @@
       "id": "prologo",
       "title": "L'ombra della fiamma",
       "subtitle": "La doppia vita di Favilla",
-      "thumbnail": "assets/episodes/prologo/thumb.png",
+      "thumbnail": "episodes/prologo/thumb0.png",
       "pages": [
         {
           "index": 0,
-          "background": "assets/episodes/prologo/page_0.png",
+          "background": "episodes/prologo/page_0.png",
           "panels": [
             {
               "id": "pr0_0",
@@ -107,7 +107,7 @@
         },
         {
           "index": 1,
-          "background": "assets/episodes/prologo/page_1.png",
+          "background": "episodes/prologo/page_1.png",
           "panels": [
             {
               "id": "pr1_0",
@@ -154,7 +154,7 @@
         },
         {
           "index": 2,
-          "background": "assets/episodes/prologo/page_2.png",
+          "background": "episodes/prologo/page_2.png",
           "panels": [
             {
               "id": "pr2_0",
@@ -201,7 +201,7 @@
         },
         {
           "index": 3,
-          "background": "assets/episodes/prologo/page_3.png",
+          "background": "episodes/prologo/page_3.png",
           "panels": [
             {
               "id": "pr3_0",
@@ -256,7 +256,7 @@
         },
         {
           "index": 4,
-          "background": "assets/episodes/prologo/page_4.png",
+          "background": "episodes/prologo/page_4.png",
           "panels": [
             {
               "id": "pr4_0",
