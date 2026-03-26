@@ -3,7 +3,7 @@
 ![Status](https://img.shields.io/badge/status-in%20sviluppo-f59e0b)
 ![Flutter](https://img.shields.io/badge/Flutter-Android-02569B?logo=flutter&logoColor=white)
 ![Dart](https://img.shields.io/badge/Dart-app-blue?logo=dart&logoColor=white)
-![License](https://img.shields.io/badge/license-da%20definire-6b7280)
+![License](https://github.com/iCuozz)
 
 **FavillApp** è un progetto Flutter per Android dedicato all’universo di **Favilla Blaze**: episodi illustrati, tavole comic book, personaggi coerenti e contenuti strutturati in modo dinamico.
 
