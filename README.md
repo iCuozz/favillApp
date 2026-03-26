@@ -81,7 +81,7 @@ Un episodio può seguire una struttura simile a questa:
   ]
 }
 
-Roadmap
+## Roadmap
 
 Possibili evoluzioni future:
 	•	supporto multi-episodio
@@ -92,13 +92,13 @@ Possibili evoluzioni future:
 	•	editor interno per creare episodi da JSON
 	•	localizzazione multilingua
 
-Stato del progetto
+## Stato del progetto
 
 FavillApp è un progetto creativo in evoluzione, costruito per dare forma a un universo narrativo originale e riconoscibile.
 
 Ogni episodio aggiunge identità, stile e continuità a un mondo fatto di energia, ironia, affetto e caos supereroistico.
 
-Licenza
+## Licenza
 
 Andrea Cuozzo
 
