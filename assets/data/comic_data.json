@@ -306,11 +306,11 @@
       "id": "missione_1",
       "title": "Missione #1 – Caos all'Alba",
       "subtitle": "Favilla Blaze contro il risveglio più difficile",
-      "thumbnail": "assets/episodes/missione_1/thumb.png",
+      "thumbnail": "episodes/missione_1/thumb1.png",
       "pages": [
         {
           "index": 0,
-          "background": "assets/episodes/missione_1/page_0.png",
+          "background": "episodes/missione_1/page1_0.png",
           "panels": [
             {
               "id": "m1_0",
@@ -350,7 +350,7 @@
         },
         {
           "index": 1,
-          "background": "assets/episodes/missione_1/page_1.png",
+          "background": "episodes/missione_1/page1_1.png",
           "panels": [
             {
               "id": "m1_1",
