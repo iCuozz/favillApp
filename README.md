@@ -87,3 +87,12 @@ Un episodio può seguire una struttura dati simile a questa:
     }
   ]
 }
+
+
+📱 Stack tecnologico
+
+Il progetto è sviluppato con:
+	•	Flutter
+	•	Dart
+	•	gestione asset locale per immagini e copertine
+	•	struttura dati configurabile per episodi e pagine
