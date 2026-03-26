@@ -1,54 +1,62 @@
-# favilla_app
+# 🔥 FavillApp
 
-# FavillApp
+![Status](https://img.shields.io/badge/status-in%20sviluppo-f59e0b)
+![Flutter](https://img.shields.io/badge/Flutter-Android-02569B?logo=flutter&logoColor=white)
+![Dart](https://img.shields.io/badge/Dart-app-blue?logo=dart&logoColor=white)
+![License](https://img.shields.io/badge/license-da%20definire-6b7280)
 
-**FavillApp** è un progetto creativo dedicato all’universo di **Favilla Blaze**, una web app pensata per raccontare storie a episodi in stile comic book moderno, con personaggi coerenti, tavole illustrate e contenuti strutturati tramite JSON.
+**FavillApp** è un progetto Flutter per Android dedicato all’universo di **Favilla Blaze**: episodi illustrati, tavole comic book, personaggi coerenti e contenuti strutturati in modo dinamico.
 
-L’app nasce per trasformare scene quotidiane, momenti familiari e missioni supereroistiche in un’esperienza narrativa visiva coinvolgente, organizzata come una vera serie a fumetti digitale.
+L’obiettivo del progetto è trasformare scene quotidiane, caos domestico e missioni supereroistiche in una vera esperienza da **fumetto digitale episodico** su mobile.
 
 ---
 
-## Panoramica
+## ✨ Descrizione
 
-FavillApp permette di gestire episodi composti da:
+FavillApp è un’app mobile che organizza ogni storia come una mini-avventura a episodi:
 
-- **copertine**
+- **copertina episodio**
 - **pagine illustrate**
 - **pannelli narrativi**
-- **blocchi di testo** (narrazione, dialoghi, pensieri)
-- **personaggi ricorrenti** con identità visiva coerente
+- **dialoghi, pensieri e didascalie**
+- **personaggi ricorrenti con identità visiva coerente**
 
-L’obiettivo è avere una struttura semplice da estendere, facilmente mantenibile e adatta sia alla produzione di nuove missioni sia alla futura evoluzione del progetto.
-
----
-
-## Universo narrativo
-
-I protagonisti principali sono:
-
-- **Favilla / Favilla Blaze** – eroina luminosa, cuore del progetto
-- **Sparkle Ale** – piccolo coprotagonista energico e iconico
-- **Mallow Bellow** – presenza di supporto nel mondo narrativo
-
-L’ambientazione unisce vita quotidiana, caos domestico e immaginario supereroistico, con uno stile visivo ispirato ai comic book premium moderni.
+> Un mondo narrativo dove ogni alba può diventare una missione.
 
 ---
 
-## Caratteristiche principali
+## 🦸 Universo narrativo
 
-- Struttura narrativa organizzata in **episodi**
-- Gestione delle tavole tramite **configurazioni JSON**
-- Supporto a **background illustrati** per ogni pagina
-- Rendering di **pannelli con testo strutturato**
-- Separazione tra contenuti, asset grafici e logica applicativa
-- Impostazione scalabile per nuovi episodi e nuove missioni
-- Base ideale per evoluzioni future come animazioni, audio e transizioni cinematiche
+### Favilla / Favilla Blaze
+L’eroina principale del progetto. Una figura luminosa, forte, ironica e affettuosa, sospesa tra quotidianità e immaginario supereroistico.
+
+### Sparkle Ale
+Il piccolo coprotagonista: energia pura, presenza iconica, caos e meraviglia.
+
+### Mallow Bellow
+Elemento ricorrente dell’universo FavillApp, presenza narrativa di supporto nelle missioni e nelle scene quotidiane.
 
 ---
 
-## Struttura contenuti
+## 🚀 Funzionalità principali
 
-Un episodio può seguire una struttura simile a questa:
+- Struttura narrativa a **episodi**
+- Supporto a **copertine e pagine illustrate**
+- Rendering di **pannelli narrativi**
+- Gestione di **testi strutturati**: narrazione, dialoghi, pensieri
+- Architettura pensata per essere **scalabile**
+- Separazione tra **contenuti**, **asset** e **logica applicativa**
+- Base pronta per future evoluzioni come:
+  - animazioni
+  - effetti audio
+  - navigazione avanzata tra episodi
+  - schermata archivio missioni
+
+---
+
+## 🧱 Struttura contenuti
+
+Un episodio può seguire una struttura dati simile a questa:
 
 ```json
 {
@@ -80,4 +88,3 @@ Un episodio può seguire una struttura simile a questa:
     }
   ]
 }
-
