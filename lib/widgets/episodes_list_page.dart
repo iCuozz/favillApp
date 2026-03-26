@@ -59,7 +59,7 @@ class EpisodesListPage extends StatelessWidget {
                         MaterialPageRoute(
                           builder: (_) => EpisodePage(
                             comicData: comicData,
-                            episode: episode,
+                            initialEpisodeIndex: index,
                           ),
                         ),
                       );

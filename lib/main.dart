@@ -4,6 +4,7 @@ import 'services/comic_loader.dart';
 import 'widgets/comic_page_stage.dart';
 import 'package:flutter/services.dart';
 import 'widgets/home_cover_page.dart';
+import 'widgets/episode_cover_card.dart';
 
 void main() {
   runApp(const MyApp());
@@ -62,12 +63,12 @@ class AppBootstrapPage extends StatelessWidget {
 
 class EpisodePage extends StatefulWidget {
   final ComicData comicData;
-  final Episode episode;
+  final int initialEpisodeIndex;
 
   const EpisodePage({
     super.key,
     required this.comicData,
-    required this.episode,
+    required this.initialEpisodeIndex,
   });
 
   @override
@@ -78,11 +79,16 @@ class _EpisodePageState extends State<EpisodePage> {
   late final PageController _pageController;
   final FocusNode _focusNode = FocusNode();
 
-  int currentIndex = 0;
+  late int currentEpisodeIndex;
+  int currentPageIndex = 0;
+
+  Episode get currentEpisode => widget.comicData.episodes[currentEpisodeIndex];
+  List<ComicPage> get currentPages => currentEpisode.pages;
 
   @override
   void initState() {
     super.initState();
+    currentEpisodeIndex = widget.initialEpisodeIndex;
     _pageController = PageController();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -100,23 +106,39 @@ class _EpisodePageState extends State<EpisodePage> {
   }
 
   void _goToNextPage() {
-    final pages = widget.episode.pages;
-
-    if (currentIndex < pages.length - 1) {
+    if (currentPageIndex < currentPages.length - 1) {
       _pageController.nextPage(
+        duration: const Duration(milliseconds: 250),
+        curve: Curves.easeInOut,
+      );
+    } else {
+      _goToNextEpisode();
+    }
+  }
+
+  void _goToPreviousPage() {
+    if (currentPageIndex > 0) {
+      _pageController.previousPage(
         duration: const Duration(milliseconds: 250),
         curve: Curves.easeInOut,
       );
     }
   }
 
-  void _goToPreviousPage() {
-    if (currentIndex > 0) {
-      _pageController.previousPage(
-        duration: const Duration(milliseconds: 250),
-        curve: Curves.easeInOut,
-      );
+  void _goToNextEpisode() {
+    final hasNextEpisode =
+        currentEpisodeIndex < widget.comicData.episodes.length - 1;
+
+    if (!hasNextEpisode) {
+      return;
     }
+
+    setState(() {
+      currentEpisodeIndex++;
+      currentPageIndex = 0;
+    });
+
+    _pageController.jumpToPage(0);
   }
 
   KeyEventResult _handleKeyEvent(KeyEvent event) {
@@ -141,11 +163,15 @@ class _EpisodePageState extends State<EpisodePage> {
 
   @override
   Widget build(BuildContext context) {
-    final pages = widget.episode.pages;
+    final episode = currentEpisode;
+    final pages = currentPages;
+    final isLastPageOfEpisode = currentPageIndex == pages.length - 1;
+    final hasNextEpisode =
+        currentEpisodeIndex < widget.comicData.episodes.length - 1;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.episode.title),
+        title: Text(episode.title),
       ),
       body: KeyboardListener(
         focusNode: _focusNode,
@@ -160,7 +186,7 @@ class _EpisodePageState extends State<EpisodePage> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    'Pagina ${currentIndex + 1} / ${pages.length}',
+                    'Pagina ${currentPageIndex + 1} / ${pages.length}',
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
@@ -170,15 +196,17 @@ class _EpisodePageState extends State<EpisodePage> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(999),
                     child: LinearProgressIndicator(
-                      value:
-                          pages.isEmpty ? 0 : (currentIndex + 1) / pages.length,
+                      value: pages.isEmpty
+                          ? 0
+                          : (currentPageIndex + 1) / pages.length,
                       minHeight: 8,
                       backgroundColor: Colors.white12,
                       valueColor: const AlwaysStoppedAnimation<Color>(
-                          Colors.pinkAccent),
+                        Colors.pinkAccent,
+                      ),
                     ),
                   ),
-                  const SizedBox(height: 8)
+                  const SizedBox(height: 8),
                 ],
               ),
             ),
@@ -188,7 +216,7 @@ class _EpisodePageState extends State<EpisodePage> {
                 itemCount: pages.length,
                 onPageChanged: (index) {
                   setState(() {
-                    currentIndex = index;
+                    currentPageIndex = index;
                   });
                 },
                 itemBuilder: (context, index) {
@@ -197,9 +225,10 @@ class _EpisodePageState extends State<EpisodePage> {
                   return Padding(
                     padding: const EdgeInsets.all(12),
                     child: ComicPageStage(
-                      key: ValueKey(page.index),
+                      key: ValueKey('${currentEpisodeIndex}_${page.index}'),
                       comicData: widget.comicData,
                       page: page,
+                      isLastPageOfEpisode: index == pages.length - 1,
                       onPageCompleted: _goToNextPage,
                     ),
                   );
@@ -212,17 +241,22 @@ class _EpisodePageState extends State<EpisodePage> {
                 children: [
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: currentIndex > 0 ? _goToPreviousPage : null,
+                      onPressed:
+                          currentPageIndex > 0 ? _goToPreviousPage : null,
                       child: const Text('Indietro'),
                     ),
                   ),
                   const SizedBox(width: 12),
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: currentIndex < pages.length - 1
-                          ? _goToNextPage
-                          : null,
-                      child: const Text('Avanti'),
+                      onPressed: isLastPageOfEpisode
+                          ? (hasNextEpisode ? _goToNextEpisode : null)
+                          : _goToNextPage,
+                      child: Text(
+                        isLastPageOfEpisode
+                            ? (hasNextEpisode ? 'Episodio successivo' : 'Fine')
+                            : 'Avanti',
+                      ),
                     ),
                   ),
                 ],

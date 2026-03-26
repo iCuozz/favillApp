@@ -7,12 +7,13 @@ class ComicPageStage extends StatefulWidget {
   final ComicData comicData;
   final ComicPage page;
   final VoidCallback? onPageCompleted;
-
+  final bool isLastPageOfEpisode; // NEW
   const ComicPageStage({
     super.key,
     required this.comicData,
     required this.page,
     this.onPageCompleted,
+    this.isLastPageOfEpisode = false,
   });
 
   @override
@@ -52,6 +53,15 @@ class _ComicPageStageState extends State<ComicPageStage> {
     final visibleTextBlocks = panel.textBlocks.take(visibleBlocks).toList();
     final totalBlocks = panel.textBlocks.length;
     final isLastBlockVisible = visibleBlocks >= totalBlocks;
+
+    String bottomHint;
+    if (!isLastBlockVisible) {
+      bottomHint = 'Tocca per continuare';
+    } else if (widget.isLastPageOfEpisode) {
+      bottomHint = 'Episodio successivo';
+    } else {
+      bottomHint = 'Pagina successiva';
+    }
 
     return GestureDetector(
       onTap: _handleTap,
@@ -151,9 +161,7 @@ class _ComicPageStageState extends State<ComicPageStage> {
                   ),
                   const SizedBox(height: 5),
                   Text(
-                    isLastBlockVisible
-                        ? 'Tocca per pagina successiva'
-                        : 'Tocca per proseguire',
+                    bottomHint,
                     style: TextStyle(
                       fontSize: 10,
                       height: 1.0,
