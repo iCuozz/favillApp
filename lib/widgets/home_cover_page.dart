@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/comic_data.dart';
 import 'episodes_list_page.dart';
+import '../widgets/comic_title.dart';
 
 class HomeCoverPage extends StatelessWidget {
   final ComicData comicData;
@@ -47,23 +48,11 @@ class HomeCoverPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Spacer(),
-                  const Text(
-                    'FAVILLA\nBLAZE',
-                    style: TextStyle(
-                      fontSize: 42,
-                      fontWeight: FontWeight.w900,
-                      height: 0.95,
-                      letterSpacing: 1.2,
-                    ),
-                  ),
                   const SizedBox(height: 16),
-                  Text(
-                    'La supermamma che combatte il caos quotidiano tra scuola, pannolini, bug domestici e missioni impossibili.',
-                    style: TextStyle(
-                      fontSize: 16,
-                      height: 1.4,
-                      color: Colors.grey.shade200,
-                    ),
+                  const ComicTitle(
+                    text:
+                        'La supermamma che combatte il caos quotidiano tra scuola, pannolini, bug domestici e missioni impossibili.',
+                    fontSize: 16,
                   ),
                   const SizedBox(height: 28),
                   SizedBox(
