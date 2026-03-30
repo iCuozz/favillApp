@@ -74,7 +74,7 @@ class _ComicPageStageState extends State<ComicPageStage> {
               children: [
                 ComicPageImage(
                   assetPath: widget.page.background,
-                  height: 650,
+                  height: 495,
                 ),
                 Positioned(
                   left: 0,
