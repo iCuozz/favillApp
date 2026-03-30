@@ -567,6 +567,285 @@
           ]
         }
       ]
+    },
+    {
+      "id": "missione_2",
+      "title": "Missione #2 – Assalto al Supermercato",
+      "subtitle": "Favilla Blaze contro il carrello del destino",
+      "thumbnail": "assets/episodes/missione_2/thumb.png",
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/missione_2/page_0.png",
+          "panels": [
+            {
+              "id": "m2_0",
+              "characters": ["Favilla", "Sparkle Ale", "Mallow Bellow"],
+              "text_blocks": [
+                {
+                  "type": "narration",
+                  "text": "Sabato mattina. A Nova Tutinia c'è un luogo dove il coraggio di una madre viene messo davvero alla prova."
+                },
+                {
+                  "type": "narration",
+                  "text": "Quel luogo ha luci fredde, offerte a tempo e file infinite. Il supermercato."
+                },
+                {
+                  "type": "dialogue",
+                  "speaker": "Favilla",
+                  "text": "Lista pronta. Borsa pronta. Nervi... quasi pronti."
+                },
+                {
+                  "type": "dialogue",
+                  "speaker": "Mallow Bellow",
+                  "text": "Ho ottimizzato il percorso tra corsie. Efficienza massima."
+                },
+                {
+                  "type": "dialogue",
+                  "speaker": "Sparkle Ale",
+                  "text": "Io spingo! Io prendo! Io apro tutto!"
+                },
+                {
+                  "type": "thought",
+                  "text": "No. Tu assolutamente no."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "background": "assets/episodes/missione_2/page_1.png",
+          "panels": [
+            {
+              "id": "m2_1",
+              "characters": ["Favilla", "Sparkle Ale", "Mallow Bellow"],
+              "text_blocks": [
+                {
+                  "type": "narration",
+                  "text": "Per i primi dodici secondi sembra tutto sotto controllo."
+                },
+                {
+                  "type": "dialogue",
+                  "speaker": "Mallow Bellow",
+                  "text": "Corsia 1, acqua. Corsia 3, pasta. Corsia 5, pannolini. È praticamente un algoritmo."
+                },
+                {
+                  "type": "narration",
+                  "text": "Siri: \"Probabilità di missione tranquilla: 3%.\""
+                },
+                {
+                  "type": "dialogue",
+                  "speaker": "Favilla",
+                  "text": "Lo sapevo. Anche Siri ha perso la fiducia."
+                },
+                {
+                  "type": "dialogue",
+                  "speaker": "Sparkle Ale",
+                  "text": "Snack! Biscotti! Succo! Pallaaa!"
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "background": "assets/episodes/missione_2/page_2.png",
+          "panels": [
+            {
+              "id": "m2_2",
+              "characters": ["Favilla", "Sparkle Ale", "Mallow Bellow"],
+              "text_blocks": [
+                {
+                  "type": "narration",
+                  "text": "Poi Sparkle Ale avvista il carrello con la macchinina davanti. I suoi occhi si illuminano di puro caos."
+                },
+                {
+                  "type": "dialogue",
+                  "speaker": "Sparkle Ale",
+                  "text": "MIA! VROOM VROOM!"
+                },
+                {
+                  "type": "narration",
+                  "text": "Sale, sterza, suona il clacson giocattolo e parte in direzione reparto detersivi."
+                },
+                {
+                  "type": "dialogue",
+                  "speaker": "Favilla",
+                  "text": "Ale! Quello non è un bolide da Formula Caos!"
+                },
+                {
+                  "type": "dialogue",
+                  "speaker": "Mallow Bellow",
+                  "text": "Abbiamo perso il controllo del veicolo."
+                }
+              ],
+              "interactions": [
+                {
+                  "type": "tap",
+                  "target": "cart",
+                  "effect": "shake",
+                  "sound": "clonk"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "background": "assets/episodes/missione_2/page_3.png",
+          "panels": [
+            {
+              "id": "m2_3",
+              "characters": ["Favilla", "Sparkle Ale", "Mallow Bellow"],
+              "text_blocks": [
+                {
+                  "type": "narration",
+                  "text": "Intorno a loro si scatena la Tempesta delle Offerte: volantini, gente, promo lampo, bancali, file alle casse."
+                },
+                {
+                  "type": "narration",
+                  "text": "Siri: \"ALLERTA: livello confusione 97%. Rischio acquisto inutile: altissimo.\""
+                },
+                {
+                  "type": "dialogue",
+                  "speaker": "Mallow Bellow",
+                  "text": "Ho preso otto confezioni di cracker. Non so come sia successo."
+                },
+                {
+                  "type": "dialogue",
+                  "speaker": "Favilla",
+                  "text": "Perché sei debole davanti al tre-per-due, amore."
+                },
+                {
+                  "type": "dialogue",
+                  "speaker": "Sparkle Ale",
+                  "text": "Io voglio tutto!"
+                },
+                {
+                  "type": "thought",
+                  "text": "È il momento."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "background": "assets/episodes/missione_2/page_4.png",
+          "panels": [
+            {
+              "id": "m2_4",
+              "characters": ["Favilla Blaze", "Sparkle Ale", "Mallow Bellow"],
+              "text_blocks": [
+                {
+                  "type": "narration",
+                  "text": "Favilla inspira. Il tempo rallenta. Il ronzio del supermercato si trasforma nel richiamo della battaglia."
+                },
+                {
+                  "type": "narration",
+                  "text": "Una scintilla rosa e oro attraversa la corsia dei cereali. La mamma sfinita scompare. Compare Favilla Blaze."
+                },
+                {
+                  "type": "dialogue",
+                  "speaker": "Favilla Blaze",
+                  "text": "Modalità spesa strategica: ATTIVATA."
+                },
+                {
+                  "type": "dialogue",
+                  "speaker": "Mallow Bellow",
+                  "text": "È bellissima. E sta scontando il caos."
+                },
+                {
+                  "type": "dialogue",
+                  "speaker": "Sparkle Ale",
+                  "text": "Mamma turbo!"
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        },
+        {
+          "index": 5,
+          "background": "assets/episodes/missione_2/page_5.png",
+          "panels": [
+            {
+              "id": "m2_5",
+              "characters": ["Favilla Blaze", "Sparkle Ale", "Mallow Bellow"],
+              "text_blocks": [
+                {
+                  "type": "narration",
+                  "text": "Con una mano guida il carrello, con l'altra recupera la lista, evita una torre di passata e intercetta Sparkle Ale prima del reparto giocattoli."
+                },
+                {
+                  "type": "dialogue",
+                  "speaker": "Favilla Blaze",
+                  "text": "Latte, frutta, pasta, pannolini. Solo l'essenziale. Il resto è illusione."
+                },
+                {
+                  "type": "dialogue",
+                  "speaker": "Mallow Bellow",
+                  "text": "Ha ottimizzato il percorso meglio del mio algoritmo."
+                },
+                {
+                  "type": "dialogue",
+                  "speaker": "Sparkle Ale",
+                  "text": "Io tengo il succo!"
+                },
+                {
+                  "type": "narration",
+                  "text": "Per la prima volta nella giornata, il carrello contiene cose sensate."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        },
+        {
+          "index": 6,
+          "background": "assets/episodes/missione_2/page_6.png",
+          "panels": [
+            {
+              "id": "m2_6",
+              "characters": ["Favilla", "Sparkle Ale", "Mallow Bellow"],
+              "text_blocks": [
+                {
+                  "type": "narration",
+                  "text": "Alla cassa, Favilla torna semplicemente mamma. Stanca, spettinata, ma vittoriosa."
+                },
+                {
+                  "type": "dialogue",
+                  "speaker": "Mallow Bellow",
+                  "text": "Abbiamo speso meno del previsto. Questo sì che è un miracolo."
+                },
+                {
+                  "type": "narration",
+                  "text": "Siri: \"Missione completata. Danni collaterali: un pacco di cracker extra.\""
+                },
+                {
+                  "type": "dialogue",
+                  "speaker": "Sparkle Ale",
+                  "text": "Posso suonare ancora il carrello?"
+                },
+                {
+                  "type": "dialogue",
+                  "speaker": "Favilla",
+                  "text": "No, ma puoi aiutarmi con le buste, piccolo agente del caos."
+                },
+                {
+                  "type": "narration",
+                  "text": "Favilla Blaze forse non salva galassie. Però strappa vittorie epiche anche tra le corsie del supermercato."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
     }
   ]
 }
