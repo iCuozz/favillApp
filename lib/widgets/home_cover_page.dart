@@ -17,7 +17,7 @@ class HomeCoverPage extends StatelessWidget {
         fit: StackFit.expand,
         children: [
           Image.asset(
-            'cover/copertina.png',
+            'assets/cover/copertina.png',
             fit: BoxFit.cover,
             errorBuilder: (context, error, stackTrace) {
               return Container(

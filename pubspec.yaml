@@ -26,7 +26,8 @@ flutter:
     - assets/fonts/
     - assets/splash/
     - assets/episodes/
-    - assets/data/comic_data.json
+    - assets/episodes/prologo/
+    - assets/episodes/missione_1/
     - assets/cover/
 
   fonts:
