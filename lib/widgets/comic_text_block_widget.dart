@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import '../models/comic_data.dart';
 
 class ComicTextBlockWidget extends StatelessWidget {
-  final ComicData comicData;
+  final ComicIndex comicIndex;
   final TextBlock block;
 
   const ComicTextBlockWidget({
     super.key,
-    required this.comicData,
+    required this.comicIndex,
     required this.block,
   });
 
   @override
   Widget build(BuildContext context) {
     final speakerId = block.speaker ?? '';
-    final speakerName = comicData.getSpeakerName(block.speaker);
+    final speakerName = comicIndex.getSpeakerName(block.speaker);
 
     if (block.isNarration) {
       return _NarrationBubble(text: block.text);

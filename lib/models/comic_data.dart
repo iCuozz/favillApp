@@ -1,22 +1,22 @@
-class ComicData {
+class ComicIndex {
   final List<CharacterDefinition> characters;
-  final List<Episode> episodes;
+  final List<EpisodeSummary> episodes;
 
-  ComicData({
+  ComicIndex({
     required this.characters,
     required this.episodes,
   });
 
-  factory ComicData.fromJson(Map<String, dynamic> json) {
-    final episodesJson = (json['episodes'] as List<dynamic>? ?? []);
+  factory ComicIndex.fromJson(Map<String, dynamic> json) {
     final charactersJson = (json['characters'] as List<dynamic>? ?? []);
+    final episodesJson = (json['episodes'] as List<dynamic>? ?? []);
 
-    return ComicData(
+    return ComicIndex(
       characters: charactersJson
           .map((e) => CharacterDefinition.fromJson(e as Map<String, dynamic>))
           .toList(),
       episodes: episodesJson
-          .map((e) => Episode.fromJson(e as Map<String, dynamic>))
+          .map((e) => EpisodeSummary.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
   }
@@ -53,9 +53,56 @@ class CharacterDefinition {
     return CharacterDefinition(
       id: json['id'] as String? ?? '',
       name: json['name'] as String? ?? '',
-      displayName: json['display_name'] as String? ?? json['name'] as String? ?? '',
+      displayName: json['display_name'] as String? ?? '',
       role: json['role'] as String? ?? '',
       variant: json['variant'] as String? ?? '',
+    );
+  }
+}
+
+class EpisodeSummary {
+  final String id;
+  final String title;
+  final String subtitle;
+  final String thumbnail;
+  final String file;
+
+  EpisodeSummary({
+    required this.id,
+    required this.title,
+    required this.subtitle,
+    required this.thumbnail,
+    required this.file,
+  });
+
+  factory EpisodeSummary.fromJson(Map<String, dynamic> json) {
+    return EpisodeSummary(
+      id: json['id'] as String? ?? '',
+      title: json['title'] as String? ?? '',
+      subtitle: json['subtitle'] as String? ?? '',
+      thumbnail: json['thumbnail'] as String? ?? '',
+      file: json['file'] as String? ?? '',
+    );
+  }
+}
+
+class EpisodeContent {
+  final String id;
+  final List<ComicPage> pages;
+
+  EpisodeContent({
+    required this.id,
+    required this.pages,
+  });
+
+  factory EpisodeContent.fromJson(Map<String, dynamic> json) {
+    final pagesJson = (json['pages'] as List<dynamic>? ?? []);
+
+    return EpisodeContent(
+      id: json['id'] as String? ?? '',
+      pages: pagesJson
+          .map((p) => ComicPage.fromJson(p as Map<String, dynamic>))
+          .toList(),
     );
   }
 }
@@ -65,7 +112,6 @@ class Episode {
   final String title;
   final String subtitle;
   final String thumbnail;
-  final Map<String, dynamic> metadata;
   final List<ComicPage> pages;
 
   Episode({
@@ -73,36 +119,18 @@ class Episode {
     required this.title,
     required this.subtitle,
     required this.thumbnail,
-    required this.metadata,
     required this.pages,
   });
-
-  factory Episode.fromJson(Map<String, dynamic> json) {
-    final pagesJson = (json['pages'] as List<dynamic>? ?? []);
-
-    return Episode(
-      id: json['id'] as String? ?? '',
-      title: json['title'] as String? ?? '',
-      subtitle: json['subtitle'] as String? ?? '',
-      thumbnail: json['thumbnail'] as String? ?? '',
-      metadata: (json['metadata'] as Map<String, dynamic>?) ?? <String, dynamic>{},
-      pages: pagesJson
-          .map((p) => ComicPage.fromJson(p as Map<String, dynamic>))
-          .toList(),
-    );
-  }
 }
 
 class ComicPage {
   final int index;
   final String background;
-  final Map<String, dynamic> metadata;
   final List<Panel> panels;
 
   ComicPage({
     required this.index,
     required this.background,
-    required this.metadata,
     required this.panels,
   });
 
@@ -112,7 +140,6 @@ class ComicPage {
     return ComicPage(
       index: json['index'] as int? ?? 0,
       background: json['background'] as String? ?? '',
-      metadata: (json['metadata'] as Map<String, dynamic>?) ?? <String, dynamic>{},
       panels: panelsJson
           .map((p) => Panel.fromJson(p as Map<String, dynamic>))
           .toList(),
@@ -122,17 +149,13 @@ class ComicPage {
 
 class Panel {
   final String id;
-  final String layout;
   final List<String> characters;
-  final Map<String, dynamic> metadata;
   final List<TextBlock> textBlocks;
   final List<Interaction> interactions;
 
   Panel({
     required this.id,
-    required this.layout,
     required this.characters,
-    required this.metadata,
     required this.textBlocks,
     required this.interactions,
   });
@@ -144,9 +167,7 @@ class Panel {
 
     return Panel(
       id: json['id'] as String? ?? '',
-      layout: json['layout'] as String? ?? 'full',
       characters: chars,
-      metadata: (json['metadata'] as Map<String, dynamic>?) ?? <String, dynamic>{},
       textBlocks: tbJson
           .map((t) => TextBlock.fromJson(t as Map<String, dynamic>))
           .toList(),
@@ -159,17 +180,15 @@ class Panel {
 
 class TextBlock {
   final String id;
-  final String type; // narration, dialogue, thought, system
+  final String type;
   final String? speaker;
   final String text;
-  final Map<String, dynamic> style;
 
   TextBlock({
     required this.id,
     required this.type,
     this.speaker,
     required this.text,
-    required this.style,
   });
 
   factory TextBlock.fromJson(Map<String, dynamic> json) {
@@ -178,7 +197,6 @@ class TextBlock {
       type: json['type'] as String? ?? 'narration',
       speaker: json['speaker'] as String?,
       text: json['text'] as String? ?? '',
-      style: (json['style'] as Map<String, dynamic>?) ?? <String, dynamic>{},
     );
   }
 
@@ -189,10 +207,10 @@ class TextBlock {
 }
 
 class Interaction {
-  final String type; // tap, etc.
-  final String target; // es. cucchiaio
-  final String effect; // es. shake
-  final String? sound; // path suono
+  final String type;
+  final String target;
+  final String effect;
+  final String? sound;
 
   Interaction({
     required this.type,

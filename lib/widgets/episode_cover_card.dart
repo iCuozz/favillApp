@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/comic_data.dart';
 
 class EpisodeCoverCard extends StatelessWidget {
-  final Episode episode;
+  final EpisodeSummary episode;
   final VoidCallback onTap;
 
   const EpisodeCoverCard({

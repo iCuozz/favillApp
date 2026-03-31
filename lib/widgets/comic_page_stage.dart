@@ -4,47 +4,65 @@ import 'comic_page_image.dart';
 import 'comic_text_block_widget.dart';
 
 class ComicPageStage extends StatefulWidget {
-  final ComicData comicData;
+  final ComicIndex comicIndex;
   final ComicPage page;
   final VoidCallback? onPageCompleted;
-  final bool isLastPageOfEpisode; // NEW
+
   const ComicPageStage({
     super.key,
-    required this.comicData,
+    required this.comicIndex,
     required this.page,
     this.onPageCompleted,
-    this.isLastPageOfEpisode = false,
   });
 
   @override
-  State<ComicPageStage> createState() => _ComicPageStageState();
+  State<ComicPageStage> createState() => ComicPageStageState();
 }
 
-class _ComicPageStageState extends State<ComicPageStage> {
-  int visibleBlocks = 1;
+class ComicPageStageState extends State<ComicPageStage> {
+  late int visibleBlocks;
+
+  @override
+  void initState() {
+    super.initState();
+    visibleBlocks = 1;
+  }
 
   @override
   void didUpdateWidget(covariant ComicPageStage oldWidget) {
     super.didUpdateWidget(oldWidget);
 
     if (oldWidget.page.index != widget.page.index) {
-      setState(() {
-        visibleBlocks = 1;
-      });
+      visibleBlocks = 1;
     }
   }
 
-  void _handleTap() {
-    final panel = widget.page.panels.first;
-    final totalBlocks = panel.textBlocks.length;
+  bool advance() {
+    final totalBlocks = widget.page.panels.first.textBlocks.length;
 
     if (visibleBlocks < totalBlocks) {
       setState(() {
         visibleBlocks++;
       });
-    } else {
-      widget.onPageCompleted?.call();
+      return true;
     }
+
+    widget.onPageCompleted?.call();
+    return false;
+  }
+
+  bool goBackBlock() {
+    if (visibleBlocks > 1) {
+      setState(() {
+        visibleBlocks--;
+      });
+      return true;
+    }
+    return false;
+  }
+
+  void _handleTap() {
+    advance();
   }
 
   @override
@@ -53,15 +71,6 @@ class _ComicPageStageState extends State<ComicPageStage> {
     final visibleTextBlocks = panel.textBlocks.take(visibleBlocks).toList();
     final totalBlocks = panel.textBlocks.length;
     final isLastBlockVisible = visibleBlocks >= totalBlocks;
-
-    String bottomHint;
-    if (!isLastBlockVisible) {
-      bottomHint = 'Tocca per continuare';
-    } else if (widget.isLastPageOfEpisode) {
-      bottomHint = 'Episodio successivo';
-    } else {
-      bottomHint = 'Pagina successiva';
-    }
 
     return GestureDetector(
       onTap: _handleTap,
@@ -74,22 +83,22 @@ class _ComicPageStageState extends State<ComicPageStage> {
               children: [
                 ComicPageImage(
                   assetPath: widget.page.background,
-                  height: 495,
+                  height: 470,
                 ),
                 Positioned(
                   left: 0,
                   right: 0,
                   bottom: 0,
                   child: Container(
-                    padding: const EdgeInsets.fromLTRB(10, 16, 10, 8),
+                    padding: const EdgeInsets.all(12),
                     decoration: const BoxDecoration(
                       gradient: LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: [
                           Colors.transparent,
-                          Color.fromARGB(150, 0, 0, 0),
-                          Color.fromARGB(210, 0, 0, 0),
+                          Color.fromARGB(170, 0, 0, 0),
+                          Color.fromARGB(220, 0, 0, 0),
                         ],
                       ),
                     ),
@@ -110,15 +119,15 @@ class _ComicPageStageState extends State<ComicPageStage> {
                             return Opacity(
                               opacity: value,
                               child: Transform.translate(
-                                offset: Offset(0, (1 - value) * 10),
+                                offset: Offset(0, (1 - value) * 12),
                                 child: child,
                               ),
                             );
                           },
                           child: Padding(
-                            padding: const EdgeInsets.only(bottom: 6),
+                            padding: const EdgeInsets.only(bottom: 8),
                             child: ComicTextBlockWidget(
-                              comicData: widget.comicData,
+                              comicIndex: widget.comicIndex,
                               block: block,
                             ),
                           ),
@@ -130,17 +139,17 @@ class _ComicPageStageState extends State<ComicPageStage> {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(12, 8, 12, 2),
+              padding: const EdgeInsets.fromLTRB(12, 12, 12, 4),
               child: Text(
                 'Pagina ${widget.page.index + 1}',
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 13,
+                  fontSize: 15,
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(12, 2, 12, 8),
+              padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -149,9 +158,9 @@ class _ComicPageStageState extends State<ComicPageStage> {
                       final isVisible = index < visibleBlocks;
 
                       return Container(
-                        width: 7,
-                        height: 7,
-                        margin: const EdgeInsets.only(right: 4),
+                        width: 10,
+                        height: 10,
+                        margin: const EdgeInsets.only(right: 6),
                         decoration: BoxDecoration(
                           color: isVisible ? Colors.white : Colors.white24,
                           shape: BoxShape.circle,
@@ -159,12 +168,13 @@ class _ComicPageStageState extends State<ComicPageStage> {
                       );
                     }),
                   ),
-                  const SizedBox(height: 5),
+                  const SizedBox(height: 8),
                   Text(
-                    bottomHint,
+                    isLastBlockVisible
+                        ? 'Tocca per passare alla pagina successiva'
+                        : 'Tocca per continuare',
                     style: TextStyle(
-                      fontSize: 10,
-                      height: 1.0,
+                      fontSize: 12,
                       color: Colors.grey.shade400,
                     ),
                   ),

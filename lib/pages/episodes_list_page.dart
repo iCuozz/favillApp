@@ -4,16 +4,16 @@ import '../widgets/episode_cover_card.dart';
 import '../main.dart';
 
 class EpisodesListPage extends StatelessWidget {
-  final ComicData comicData;
+  final ComicIndex comicIndex;
 
   const EpisodesListPage({
     super.key,
-    required this.comicData,
+    required this.comicIndex,
   });
 
   @override
   Widget build(BuildContext context) {
-    final episodes = comicData.episodes;
+    final episodes = comicIndex.episodes;
 
     return Scaffold(
       appBar: AppBar(
@@ -57,9 +57,9 @@ class EpisodesListPage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) => EpisodePage(
-                            comicData: comicData,
-                            initialEpisodeIndex: index,
+                          builder: (_) => EpisodeLoaderPage(
+                            comicIndex: comicIndex,
+                            summary: episode,
                           ),
                         ),
                       );
