@@ -22,12 +22,14 @@ flutter:
 
   assets:
     - assets/data/
+    - assets/data/episodes/
     - assets/sfx/
     - assets/fonts/
     - assets/splash/
     - assets/episodes/
     - assets/episodes/prologo/
     - assets/episodes/missione_1/
+    - assets/episodes/missione_2/
     - assets/cover/
 
   fonts:

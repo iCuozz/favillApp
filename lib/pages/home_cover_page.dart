@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import '../models/comic_data.dart';
 import 'episodes_list_page.dart';
+import '../widgets/comic_title.dart';
 
 class HomeCoverPage extends StatelessWidget {
-  final ComicData comicData;
+  final ComicIndex comicIndex;
 
   const HomeCoverPage({
     super.key,
-    required this.comicData,
+    required this.comicIndex,
   });
 
   @override
@@ -47,14 +48,9 @@ class HomeCoverPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Spacer(),
-                  const Text(
-                    'FAVILLA\nBLAZE',
-                    style: TextStyle(
-                      fontSize: 42,
-                      fontWeight: FontWeight.w900,
-                      height: 0.95,
-                      letterSpacing: 1.2,
-                    ),
+                  const ComicTitle(
+                    text: 'FAVILLA\nBLAZE',
+                    fontSize: 48,
                   ),
                   const SizedBox(height: 16),
                   Text(
@@ -77,7 +73,7 @@ class HomeCoverPage extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (_) => EpisodesListPage(
-                              comicData: comicData,
+                              comicIndex: comicIndex,
                             ),
                           ),
                         );
@@ -86,6 +82,7 @@ class HomeCoverPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 12),
+                  const SizedBox(height: 20),
                 ],
               ),
             ),

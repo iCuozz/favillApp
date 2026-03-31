@@ -1,0 +1,83 @@
+{
+  "characters": [
+    {
+      "id": "favilla",
+      "name": "Favilla",
+      "display_name": "Favilla",
+      "role": "collaboratrice scolastica",
+      "variant": "normal"
+    },
+    {
+      "id": "favilla_blaze",
+      "name": "Favilla Blaze",
+      "display_name": "Favilla Blaze",
+      "role": "supereroina mamma",
+      "variant": "hero"
+    },
+    {
+      "id": "sparkle_ale",
+      "name": "Sparkle Ale",
+      "display_name": "Sparkle Ale",
+      "role": "figlio combinaguai",
+      "variant": "main"
+    },
+    {
+      "id": "mallow_bellow",
+      "name": "Mallow Bellow",
+      "display_name": "Mallow Bellow",
+      "role": "sviluppatore informatico",
+      "variant": "main"
+    },
+    {
+      "id": "bambini",
+      "name": "Bambini",
+      "display_name": "Bambini",
+      "role": "comparse",
+      "variant": "group"
+    },
+    {
+      "id": "bimbo_1",
+      "name": "Bimbo 1",
+      "display_name": "Bimbo 1",
+      "role": "comparsa",
+      "variant": "child"
+    },
+    {
+      "id": "bimbo_2",
+      "name": "Bimbo 2",
+      "display_name": "Bimbo 2",
+      "role": "comparsa",
+      "variant": "child"
+    },
+    {
+      "id": "siri",
+      "name": "Siri",
+      "display_name": "Siri",
+      "role": "voce di sistema",
+      "variant": "ai"
+    }
+  ],
+  "episodes": [
+    {
+      "id": "prologo",
+      "title": "L'ombra della fiamma",
+      "subtitle": "La doppia vita di Favilla",
+      "thumbnail": "assets/episodes/prologo/thumb.png",
+      "file": "assets/data/episodes/prologo.json"
+    },
+    {
+      "id": "missione_1",
+      "title": "Missione #1 – Caos all'Alba",
+      "subtitle": "Favilla Blaze contro il risveglio più difficile",
+      "thumbnail": "assets/episodes/missione_1/thumb.png",
+      "file": "assets/data/episodes/missione_1.json"
+    },
+    {
+      "id": "missione_2",
+      "title": "Missione #2 – Assalto al Supermercato",
+      "subtitle": "Favilla Blaze contro il carrello del destino",
+      "thumbnail": "assets/episodes/missione_2/thumb.png",
+      "file": "assets/data/episodes/missione_2.json"
+    }
+  ]
+}
