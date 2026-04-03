@@ -1,8 +1,5 @@
 {
   "id": "missione_2",
-  "title": "Missione #2 – Assalto al Supermercato",
-  "subtitle": "Favilla Blaze contro il carrello del destino",
-  "cover": "assets/episodes/missione_2/thumb.png",
   "pages": [
     {
       "index": 0,
@@ -14,20 +11,22 @@
           "text_blocks": [
             {
               "type": "narration",
+              "speaker": "narration",
               "text": "Sabato mattina, Nova Tutinia. Una missione apparentemente semplice: comprare pannolini, omogeneizzati e due cose al volo."
             },
             {
               "type": "thought",
-              "speaker": "Favilla",
+              "speaker": "favilla",
               "text": "Entro, prendo quattro cose, esco. Dieci minuti netti."
             },
             {
               "type": "dialogue",
-              "speaker": "Sparkle Ale",
+              "speaker": "sparkle_ale",
               "text": "Aaaah!"
             },
             {
               "type": "narration",
+              "speaker": "narration",
               "text": "Ma ogni madre eroina sa che al supermercato il destino ascolta... e ride."
             }
           ]
@@ -44,20 +43,22 @@
           "text_blocks": [
             {
               "type": "narration",
+              "speaker": "narration",
               "text": "Favilla afferra un carrello e sistema Ale nel seggiolino anteriore. Sembra tutto sotto controllo."
             },
             {
               "type": "thought",
-              "speaker": "Favilla",
+              "speaker": "favilla",
               "text": "Lista della spesa, modalità concentrazione. Dieci minuti. Forse dodici."
             },
             {
               "type": "narration",
+              "speaker": "narration",
               "text": "Mentre Favilla scorre la lista sul telefono, Sparkle Ale osserva il campo di battaglia con occhi da genio del caos."
             },
             {
               "type": "dialogue",
-              "speaker": "Sparkle Ale",
+              "speaker": "sparkle_ale",
               "text": "Heh."
             }
           ]
@@ -74,20 +75,22 @@
           "text_blocks": [
             {
               "type": "narration",
+              "speaker": "narration",
               "text": "Con materiali recuperati da chissà dove, Ale costruisce una minuscola cerbottana artigianale degna di un supercriminale in miniatura."
             },
             {
               "type": "thought",
-              "speaker": "Favilla",
+              "speaker": "favilla",
               "text": "Pannolini, latte, biscotti, salviette... sta andando tutto troppo bene."
             },
             {
               "type": "narration",
+              "speaker": "narration",
               "text": "Favilla non si accorge che dal seggiolino parte il primo colpo silenzioso contro una ruota del carrello."
             },
             {
               "type": "dialogue",
-              "speaker": "Sparkle Ale",
+              "speaker": "sparkle_ale",
               "text": "Pff!"
             }
           ]
@@ -104,20 +107,22 @@
           "text_blocks": [
             {
               "type": "narration",
+              "speaker": "narration",
               "text": "Un colpo. Due colpi. Tre colpi. Ale prende la mira come un piccolo sabotatore professionista."
             },
             {
               "type": "dialogue",
-              "speaker": "Sparkle Ale",
+              "speaker": "sparkle_ale",
               "text": "Pff! Pff!"
             },
             {
               "type": "thought",
-              "speaker": "Favilla",
+              "speaker": "favilla",
               "text": "Perché sento il rumore della catastrofe, ma non la vedo ancora?"
             },
             {
               "type": "narration",
+              "speaker": "narration",
               "text": "A metà spesa, il colpo perfetto centra la ruota. Il carrello vibra. Sbandando, prende una traiettoria tutta sua."
             }
           ]
@@ -134,20 +139,22 @@
           "text_blocks": [
             {
               "type": "narration",
+              "speaker": "narration",
               "text": "Il carrello del destino viene dirottato come un missile impazzito verso uno scaffale centrale."
             },
             {
               "type": "dialogue",
-              "speaker": "Favilla",
+              "speaker": "favilla",
               "text": "Ale? ...Ale."
             },
             {
               "type": "narration",
+              "speaker": "narration",
               "text": "Impatto. Scatole, pacchi, bottiglie e confezioni precipitano ovunque. In un istante il supermercato diventa un campo di rovine."
             },
             {
               "type": "thought",
-              "speaker": "Favilla",
+              "speaker": "favilla",
               "text": "No. No no no. Questo no."
             }
           ]
@@ -164,19 +171,22 @@
           "text_blocks": [
             {
               "type": "narration",
+              "speaker": "narration",
               "text": "Ed è allora che Favilla smette di essere soltanto una mamma al supermercato."
             },
             {
               "type": "narration",
+              "speaker": "narration",
               "text": "Una scintilla le attraversa lo sguardo. Il maglioncino si anima di luce. È il richiamo dell'eroina."
             },
             {
               "type": "dialogue",
-              "speaker": "Favilla Blaze",
+              "speaker": "favilla_blaze",
               "text": "Modalità emergenza attivata."
             },
             {
               "type": "narration",
+              "speaker": "narration",
               "text": "Favilla si trasforma in Favilla Blaze."
             }
           ]
@@ -193,19 +203,22 @@
           "text_blocks": [
             {
               "type": "narration",
+              "speaker": "narration",
               "text": "Con velocità sovrumana, Favilla Blaze rimette in piedi lo scaffale, riafferra ogni prodotto al volo e cancella ogni traccia del disastro."
             },
             {
               "type": "narration",
+              "speaker": "narration",
               "text": "In pochi secondi tutto torna perfettamente al suo posto. Nessuno si accorge di nulla."
             },
             {
               "type": "thought",
-              "speaker": "Favilla Blaze",
+              "speaker": "favilla_blaze",
               "text": "Caos neutralizzato. Testimone principale: un neonato con una cerbottana."
             },
             {
               "type": "narration",
+              "speaker": "narration",
               "text": "Un istante dopo, l'energia svanisce. Favilla torna normale, riprende il carrello e si dirige in cassa come se niente fosse successo."
             }
           ]
@@ -222,25 +235,27 @@
           "text_blocks": [
             {
               "type": "narration",
+              "speaker": "narration",
               "text": "Missione completata. Sacchetti pieni. Energia quasi esaurita. Dignità ridotta al 12%."
             },
             {
               "type": "dialogue",
-              "speaker": "Favilla",
+              "speaker": "favilla",
               "text": "Siamo vivi. Abbiamo tutto. E nessuno è rimasto nel reparto biscotti."
             },
             {
               "type": "thought",
-              "speaker": "Favilla",
+              "speaker": "favilla",
               "text": "La prossima volta ordino online."
             },
             {
               "type": "narration",
+              "speaker": "narration",
               "text": "Ma nel cuore di ogni eroina c'è una verità inevitabile: anche il caos quotidiano può diventare leggenda."
             },
             {
               "type": "dialogue",
-              "speaker": "Sparkle Ale",
+              "speaker": "sparkle_ale",
               "text": "Ahhhh!"
             }
           ]
