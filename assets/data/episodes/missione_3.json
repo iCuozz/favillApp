@@ -1,0 +1,269 @@
+{
+  "id": "missione_3",
+  "title": "Missione #3 – L'Ora della Pappa",
+  "subtitle": "Favilla Blaze contro il Ninja del Seggiolone",
+  "cover": "assets/episodes/missione_3/thumb.png",
+  "pages": [
+    {
+      "index": 0,
+      "background": "assets/episodes/missione_3/page_0.png",
+      "panels": [
+        {
+          "id": "m3_0",
+          "characters": ["favilla", "sparkle_ale"],
+          "text_blocks": [
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Ora di cena, casa di Nova Tutinia. In cucina, una nuova missione ha inizio."
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Favilla, cuoca deliziosa e protettrice del focolare, prepara una pastina profumata degna delle leggende."
+            },
+            {
+              "type": "thought",
+              "speaker": "favilla",
+              "text": "Questa volta andrà liscia. Pastina perfetta, temperatura perfetta, tempismo perfetto."
+            },
+            {
+              "type": "dialogue",
+              "speaker": "sparkle_ale",
+              "text": "Prrrt!"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "background": "assets/episodes/missione_3/page_1.png",
+      "panels": [
+        {
+          "id": "m3_1",
+          "characters": ["favilla", "sparkle_ale"],
+          "text_blocks": [
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Ale è nel suo seggiolone, pronto allo scontro. Non mangia ancora. Prima studia l'avversaria."
+            },
+            {
+              "type": "dialogue",
+              "speaker": "sparkle_ale",
+              "text": "Prrrt! Pprrrt!"
+            },
+            {
+              "type": "thought",
+              "speaker": "favilla",
+              "text": "Sta facendo le pernacchie. Bene. Siamo già in territorio ostile."
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Il Ninja del Seggiolone lancia il suo primo avvertimento: saliva, pernacchie e caos psicologico."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "background": "assets/episodes/missione_3/page_2.png",
+      "panels": [
+        {
+          "id": "m3_2",
+          "characters": ["favilla", "sparkle_ale"],
+          "text_blocks": [
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "La pastina è pronta. Favilla si avvicina con il primo cucchiaino, calma, precisa, fiduciosa."
+            },
+            {
+              "type": "dialogue",
+              "speaker": "favilla",
+              "text": "Amore, apri. Solo un cucchiaino."
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Ma con l'agilità di un ninja leggendario, Ale scatta all'attacco."
+            },
+            {
+              "type": "dialogue",
+              "speaker": "sparkle_ale",
+              "text": "Aaah!"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "background": "assets/episodes/missione_3/page_3.png",
+      "panels": [
+        {
+          "id": "m3_3",
+          "characters": ["favilla", "sparkle_ale"],
+          "text_blocks": [
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Uno dopo l'altro, i cucchiaini vengono intercettati. Ale li afferra, devia la traiettoria e scatena una tempesta di pastina."
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Pappina sul pavimento. Pappina sul vassoio. Pappina sulla faccia di Ale. Pappina ovunque tranne dove dovrebbe stare."
+            },
+            {
+              "type": "thought",
+              "speaker": "favilla",
+              "text": "No. Sta usando il colpo delle cento schivate."
+            },
+            {
+              "type": "dialogue",
+              "speaker": "sparkle_ale",
+              "text": "Eeeeh!"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "background": "assets/episodes/missione_3/page_4.png",
+      "panels": [
+        {
+          "id": "m3_4",
+          "characters": ["favilla", "sparkle_ale", "mallow_bellow"],
+          "text_blocks": [
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Vedendo la cucina precipitare nel caos, entra in scena Mallow Bellow, convinto di poter distrarre il piccolo guerriero."
+            },
+            {
+              "type": "dialogue",
+              "speaker": "mallow_bellow",
+              "text": "Ci penso io. Lo distraggo un attimo."
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Errore fatale. Il Ninja del Seggiolone non conosce tregua, né alleati."
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "In un attimo, anche Mallow viene colpito da una raffica di pappina in pieno viso."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "background": "assets/episodes/missione_3/page_5.png",
+      "panels": [
+        {
+          "id": "m3_5",
+          "characters": ["favilla", "sparkle_ale", "mallow_bellow"],
+          "text_blocks": [
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "La situazione è ormai fuori controllo."
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Favilla è piena di pappina. Ale è pieno di pappina. Mallow è pieno di pappina. La cucina sembra il campo di battaglia di una guerra a base di semolino."
+            },
+            {
+              "type": "thought",
+              "speaker": "favilla",
+              "text": "Va bene. Se vuole la guerra ninja... allora avrà la guerra ninja."
+            },
+            {
+              "type": "dialogue",
+              "speaker": "sparkle_ale",
+              "text": "Prrrt!"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "background": "assets/episodes/missione_3/page_6.png",
+      "panels": [
+        {
+          "id": "m3_6",
+          "characters": ["favilla_blaze", "sparkle_ale"],
+          "text_blocks": [
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Ed è qui che entra in scena Favilla Blaze."
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Una scintilla dorata attraversa la cucina. L'aria vibra. Il tempo sembra rallentare."
+            },
+            {
+              "type": "dialogue",
+              "speaker": "favilla_blaze",
+              "text": "Vediamo se riesci a schivare la velocità della mamma."
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Più veloce del Ninja del Seggiolone, Favilla Blaze imbocca Ale a raffica con precisione sovrumana, senza lasciargli il tempo di schivare un solo cucchiaino."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "background": "assets/episodes/missione_3/page_7.png",
+      "panels": [
+        {
+          "id": "m3_7",
+          "characters": ["favilla_blaze", "favilla", "sparkle_ale", "mallow_bellow"],
+          "text_blocks": [
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "In men che non si dica, la pappa è finita."
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Non tutta nello stomaco di Ale, certo. Un po' è sul bavaglino. Un po' sul pavimento. Un po' su Favilla. Un po' su Mallow. Ma la missione può dirsi compiuta."
+            },
+            {
+              "type": "thought",
+              "speaker": "favilla",
+              "text": "Pareggio tecnico. Lo accetto."
+            },
+            {
+              "type": "dialogue",
+              "speaker": "mallow_bellow",
+              "text": "Risultato finale: Ale 1 - Favilla Blaze 1."
+            },
+            {
+              "type": "dialogue",
+              "speaker": "sparkle_ale",
+              "text": "Ahhhh!"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
