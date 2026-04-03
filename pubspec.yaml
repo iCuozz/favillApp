@@ -30,6 +30,7 @@ flutter:
     - assets/episodes/prologo/
     - assets/episodes/missione_1/
     - assets/episodes/missione_2/
+    - assets/episodes/missione_3/
     - assets/cover/
 
   fonts:

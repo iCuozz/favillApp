@@ -78,6 +78,13 @@
       "subtitle": "Favilla Blaze contro il carrello del destino",
       "thumbnail": "assets/episodes/missione_2/thumb.png",
       "file": "assets/data/episodes/missione_2.json"
+    },
+    {
+      "id": "missione_3",
+      "title": "Missione #3 – L'Ora della Pappa",
+      "subtitle": "Favilla Blaze contro il Ninja del Seggiolone",
+      "thumbnail": "assets/episodes/missione_3/thumb.png",
+      "file": "assets/data/episodes/missione_3.json"
     }
   ]
 }
