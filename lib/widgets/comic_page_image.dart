@@ -2,24 +2,24 @@ import 'package:flutter/material.dart';
 
 class ComicPageImage extends StatelessWidget {
   final String assetPath;
-  final double height;
+  final double? height;
 
   const ComicPageImage({
     super.key,
     required this.assetPath,
-    this.height = 600,
+    this.height,
   });
 
   @override
   Widget build(BuildContext context) {
     return Image.asset(
       assetPath,
-      height: height,
+      height: height ?? double.infinity,
       width: double.infinity,
       fit: BoxFit.cover,
       errorBuilder: (context, error, stackTrace) {
         return Container(
-          height: height,
+          height: height ?? double.infinity,
           width: double.infinity,
           color: Colors.grey.shade900,
           alignment: Alignment.center,
