@@ -1,0 +1,90 @@
+{
+  "characters": [
+    {
+      "id": "favilla",
+      "name": "Favilla",
+      "display_name": "Favilla",
+      "role": "school assistant",
+      "variant": "normal"
+    },
+    {
+      "id": "favilla_blaze",
+      "name": "Favilla Blaze",
+      "display_name": "Favilla Blaze",
+      "role": "supermom hero",
+      "variant": "hero"
+    },
+    {
+      "id": "sparkle_ale",
+      "name": "Sparkle Ale",
+      "display_name": "Sparkle Ale",
+      "role": "troublemaker son",
+      "variant": "main"
+    },
+    {
+      "id": "mallow_bellow",
+      "name": "Mallow Bellow",
+      "display_name": "Mallow Bellow",
+      "role": "software developer",
+      "variant": "main"
+    },
+    {
+      "id": "bambini",
+      "name": "Kids",
+      "display_name": "Kids",
+      "role": "extras",
+      "variant": "group"
+    },
+    {
+      "id": "bimbo_1",
+      "name": "Kid 1",
+      "display_name": "Kid 1",
+      "role": "extra",
+      "variant": "child"
+    },
+    {
+      "id": "bimbo_2",
+      "name": "Kid 2",
+      "display_name": "Kid 2",
+      "role": "extra",
+      "variant": "child"
+    },
+    {
+      "id": "siri",
+      "name": "Siri",
+      "display_name": "Siri",
+      "role": "system voice",
+      "variant": "ai"
+    }
+  ],
+  "episodes": [
+    {
+      "id": "prologo",
+      "title": "Shadow of the Flame",
+      "subtitle": "The double life of Favilla",
+      "thumbnail": "assets/episodes/prologo/thumb.webp",
+      "file": "assets/data/episodes/prologo.json"
+    },
+    {
+      "id": "missione_1",
+      "title": "Mission #1 – Dawn Chaos",
+      "subtitle": "Favilla Blaze vs. the toughest wake-up call",
+      "thumbnail": "assets/episodes/missione_1/thumb.webp",
+      "file": "assets/data/episodes/missione_1.json"
+    },
+    {
+      "id": "missione_2",
+      "title": "Mission #2 – Supermarket Assault",
+      "subtitle": "Favilla Blaze vs. the cart of destiny",
+      "thumbnail": "assets/episodes/missione_2/thumb.webp",
+      "file": "assets/data/episodes/missione_2.json"
+    },
+    {
+      "id": "missione_3",
+      "title": "Mission #3 – Feeding Time",
+      "subtitle": "Favilla Blaze vs. the Highchair Ninja",
+      "thumbnail": "assets/episodes/missione_3/thumb.webp",
+      "file": "assets/data/episodes/missione_3.json"
+    }
+  ]
+}

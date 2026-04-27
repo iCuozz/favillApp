@@ -1,0 +1,241 @@
+{
+  "id": "prologo",
+  "pages": [
+    {
+      "index": 0,
+      "background": "assets/episodes/prologo/page_0.webp",
+      "panels": [
+        {
+          "id": "pr0_0",
+          "characters": ["favilla", "bambini"],
+          "text_blocks": [
+            {
+              "id": "pr0_0_tb_0",
+              "type": "narration",
+              "text": "Nova Tutinia, elementary school. By day I'm Favilla, school assistant. I handle 50 little hurricanes every day."
+            },
+            {
+              "id": "pr0_0_tb_1",
+              "type": "dialogue",
+              "speaker": "bimbo_1",
+              "text": "Favilla! Have you seen my eraser?!?"
+            },
+            {
+              "id": "pr0_0_tb_2",
+              "type": "dialogue",
+              "speaker": "bimbo_2",
+              "text": "It's mine! I found it first!"
+            },
+            {
+              "id": "pr0_0_tb_3",
+              "type": "dialogue",
+              "speaker": "favilla",
+              "text": "Kids... careful, the eraser is magic — if you fight, it'll erase your toys!"
+            },
+            {
+              "id": "pr0_0_tb_4",
+              "type": "narration",
+              "text": "If only you knew what's waiting for me at home..."
+            }
+          ],
+          "interactions": []
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "background": "assets/episodes/prologo/page_1.webp",
+      "panels": [
+        {
+          "id": "pr1_0",
+          "characters": ["favilla", "sparkle_ale", "mallow_bellow"],
+          "text_blocks": [
+            {
+              "id": "pr1_0_tb_0",
+              "type": "narration",
+              "text": "Then there's home. The real battlefield is called Sparkle Ale."
+            },
+            {
+              "id": "pr1_0_tb_1",
+              "type": "dialogue",
+              "speaker": "sparkle_ale",
+              "text": "MOOOM! MILK! TOYS! CHAOSMAX!"
+            },
+            {
+              "id": "pr1_0_tb_2",
+              "type": "dialogue",
+              "speaker": "favilla",
+              "text": "Little Ale, one disaster at a time!"
+            },
+            {
+              "id": "pr1_0_tb_3",
+              "type": "narration",
+              "text": "He's Mallow Bellow, the software-developer dad. He writes code, but often crashes the house."
+            },
+            {
+              "id": "pr1_0_tb_4",
+              "type": "dialogue",
+              "speaker": "mallow_bellow",
+              "text": "Milk overflow..."
+            },
+            {
+              "id": "pr1_0_tb_5",
+              "type": "dialogue",
+              "speaker": "sparkle_ale",
+              "text": "Daddy bug! Mommy fix!"
+            }
+          ],
+          "interactions": []
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "background": "assets/episodes/prologo/page_2.webp",
+      "panels": [
+        {
+          "id": "pr2_0",
+          "characters": ["favilla", "sparkle_ale", "mallow_bellow"],
+          "text_blocks": [
+            {
+              "id": "pr2_0_tb_0",
+              "type": "narration",
+              "text": "Explosive breakfasts, endless laundry, toys everywhere. This is my daily training."
+            },
+            {
+              "id": "pr2_0_tb_1",
+              "type": "narration",
+              "text": "Siri: \"Household disorder: 92%. Estimated time to tidy: 47 hours.\""
+            },
+            {
+              "id": "pr2_0_tb_2",
+              "type": "dialogue",
+              "speaker": "favilla",
+              "text": "Ale, the spoon goes in your mouth, not into orbit!"
+            },
+            {
+              "id": "pr2_0_tb_3",
+              "type": "dialogue",
+              "speaker": "sparkle_ale",
+              "text": "Rocket spoon!"
+            },
+            {
+              "id": "pr2_0_tb_4",
+              "type": "dialogue",
+              "speaker": "mallow_bellow",
+              "text": "I just invented the sock-frisbee!"
+            },
+            {
+              "id": "pr2_0_tb_5",
+              "type": "dialogue",
+              "speaker": "sparkle_ale",
+              "text": "Daddy chaos champion!"
+            }
+          ],
+          "interactions": []
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "background": "assets/episodes/prologo/page_3.webp",
+      "panels": [
+        {
+          "id": "pr3_0",
+          "characters": ["favilla", "sparkle_ale", "mallow_bellow"],
+          "text_blocks": [
+            {
+              "id": "pr3_0_tb_0",
+              "type": "narration",
+              "text": "But every day comes the moment when the chaos crosses the line."
+            },
+            {
+              "id": "pr3_0_tb_1",
+              "type": "narration",
+              "text": "Toys everywhere, smoking pots, laundry invading the couch."
+            },
+            {
+              "id": "pr3_0_tb_2",
+              "type": "narration",
+              "text": "Mallow Bellow's laptop blinks: \"COMPILATION FAILED\"."
+            },
+            {
+              "id": "pr3_0_tb_3",
+              "type": "narration",
+              "text": "Siri: \"ALERT! Disorder 99%! Evacuate immediately!\""
+            },
+            {
+              "id": "pr3_0_tb_4",
+              "type": "dialogue",
+              "speaker": "sparkle_ale",
+              "text": "TOTAL CHAOS! WINNERS!"
+            },
+            {
+              "id": "pr3_0_tb_5",
+              "type": "dialogue",
+              "speaker": "mallow_bellow",
+              "text": "The system is completely down..."
+            },
+            {
+              "id": "pr3_0_tb_6",
+              "type": "narration",
+              "text": "Favilla closes her eyes. Two chaoses. A spark inside her."
+            },
+            {
+              "id": "pr3_0_tb_7",
+              "type": "thought",
+              "text": "It's time."
+            }
+          ],
+          "interactions": []
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "background": "assets/episodes/prologo/page_4.webp",
+      "panels": [
+        {
+          "id": "pr4_0",
+          "characters": ["favilla_blaze", "sparkle_ale", "mallow_bellow"],
+          "text_blocks": [
+            {
+              "id": "pr4_0_tb_0",
+              "type": "narration",
+              "text": "In a flash, the glasses vanish, the sweater disappears, her blonde hair turns into a mane of fire."
+            },
+            {
+              "id": "pr4_0_tb_1",
+              "type": "narration",
+              "text": "Her work uniform gives way to a super-gym suit with pink and gold flames. The aura around her bursts with energy."
+            },
+            {
+              "id": "pr4_0_tb_2",
+              "type": "dialogue",
+              "speaker": "favilla_blaze",
+              "text": "Supermom superpowers: ACTIVATED!"
+            },
+            {
+              "id": "pr4_0_tb_3",
+              "type": "narration",
+              "text": "From the shadow of the school... FAVILLA BLAZE is born."
+            },
+            {
+              "id": "pr4_0_tb_4",
+              "type": "dialogue",
+              "speaker": "mallow_bellow",
+              "text": "Did I... marry a superhero?"
+            },
+            {
+              "id": "pr4_0_tb_5",
+              "type": "dialogue",
+              "speaker": "sparkle_ale",
+              "text": "Mommy FLAME!"
+            }
+          ],
+          "interactions": []
+        }
+      ]
+    }
+  ]
+}

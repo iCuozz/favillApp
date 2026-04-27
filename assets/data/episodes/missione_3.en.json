@@ -1,0 +1,269 @@
+{
+  "id": "missione_3",
+  "title": "Mission #3 – Feeding Time",
+  "subtitle": "Favilla Blaze vs. the Highchair Ninja",
+  "cover": "assets/episodes/missione_3/thumb.webp",
+  "pages": [
+    {
+      "index": 0,
+      "background": "assets/episodes/missione_3/page_0.webp",
+      "panels": [
+        {
+          "id": "m3_0",
+          "characters": ["favilla", "sparkle_ale"],
+          "text_blocks": [
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Dinner time, home in Nova Tutinia. In the kitchen, a new mission begins."
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Favilla, beloved cook and guardian of the hearth, prepares a fragrant pasta worthy of legend."
+            },
+            {
+              "type": "thought",
+              "speaker": "favilla",
+              "text": "This time it's going to go smoothly. Perfect pasta, perfect temperature, perfect timing."
+            },
+            {
+              "type": "dialogue",
+              "speaker": "sparkle_ale",
+              "text": "Prrrt!"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "background": "assets/episodes/missione_3/page_1.webp",
+      "panels": [
+        {
+          "id": "m3_1",
+          "characters": ["favilla", "sparkle_ale"],
+          "text_blocks": [
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Ale is in his highchair, ready for combat. He doesn't eat yet. First he sizes up his opponent."
+            },
+            {
+              "type": "dialogue",
+              "speaker": "sparkle_ale",
+              "text": "Prrrt! Pprrrt!"
+            },
+            {
+              "type": "thought",
+              "speaker": "favilla",
+              "text": "He's blowing raspberries. Great. We're already in hostile territory."
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "The Highchair Ninja delivers his first warning: drool, raspberries and psychological chaos."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "background": "assets/episodes/missione_3/page_2.webp",
+      "panels": [
+        {
+          "id": "m3_2",
+          "characters": ["favilla", "sparkle_ale"],
+          "text_blocks": [
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "The pasta is ready. Favilla approaches with the first spoonful — calm, precise, confident."
+            },
+            {
+              "type": "dialogue",
+              "speaker": "favilla",
+              "text": "Honey, open up. Just one spoonful."
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "But with the agility of a legendary ninja, Ale bursts into action."
+            },
+            {
+              "type": "dialogue",
+              "speaker": "sparkle_ale",
+              "text": "Aaah!"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "background": "assets/episodes/missione_3/page_3.webp",
+      "panels": [
+        {
+          "id": "m3_3",
+          "characters": ["favilla", "sparkle_ale"],
+          "text_blocks": [
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "One after another, the spoonfuls are intercepted. Ale grabs them, deflects them and unleashes a pasta-storm."
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Mush on the floor. Mush on the tray. Mush on Ale's face. Mush everywhere except where it's supposed to be."
+            },
+            {
+              "type": "thought",
+              "speaker": "favilla",
+              "text": "No. He's using the Hundred Dodges technique."
+            },
+            {
+              "type": "dialogue",
+              "speaker": "sparkle_ale",
+              "text": "Eeeeh!"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "background": "assets/episodes/missione_3/page_4.webp",
+      "panels": [
+        {
+          "id": "m3_4",
+          "characters": ["favilla", "sparkle_ale", "mallow_bellow"],
+          "text_blocks": [
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Seeing the kitchen plunge into chaos, Mallow Bellow steps in, sure he can distract the little warrior."
+            },
+            {
+              "type": "dialogue",
+              "speaker": "mallow_bellow",
+              "text": "I've got this. I'll distract him for a sec."
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Fatal mistake. The Highchair Ninja knows neither mercy nor allies."
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "In an instant, Mallow too is hit by a barrage of mush right in the face."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "background": "assets/episodes/missione_3/page_5.webp",
+      "panels": [
+        {
+          "id": "m3_5",
+          "characters": ["favilla", "sparkle_ale", "mallow_bellow"],
+          "text_blocks": [
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "The situation is now completely out of control."
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Favilla is covered in mush. Ale is covered in mush. Mallow is covered in mush. The kitchen looks like the battlefield of a semolina war."
+            },
+            {
+              "type": "thought",
+              "speaker": "favilla",
+              "text": "Fine. If you want a ninja war... then you'll get a ninja war."
+            },
+            {
+              "type": "dialogue",
+              "speaker": "sparkle_ale",
+              "text": "Prrrt!"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "background": "assets/episodes/missione_3/page_6.webp",
+      "panels": [
+        {
+          "id": "m3_6",
+          "characters": ["favilla_blaze", "sparkle_ale"],
+          "text_blocks": [
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "And here comes Favilla Blaze."
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "A golden spark crosses the kitchen. The air vibrates. Time seems to slow down."
+            },
+            {
+              "type": "dialogue",
+              "speaker": "favilla_blaze",
+              "text": "Let's see if you can dodge Mom's speed."
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Faster than the Highchair Ninja, Favilla Blaze rapid-fires spoonfuls into Ale with superhuman precision, leaving him no time to dodge a single one."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "background": "assets/episodes/missione_3/page_7.webp",
+      "panels": [
+        {
+          "id": "m3_7",
+          "characters": ["favilla_blaze", "favilla", "sparkle_ale", "mallow_bellow"],
+          "text_blocks": [
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Before you can blink, the meal is over."
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Not all of it in Ale's stomach, of course. Some on the bib. Some on the floor. Some on Favilla. Some on Mallow. But the mission can be called complete."
+            },
+            {
+              "type": "thought",
+              "speaker": "favilla",
+              "text": "Technical draw. I'll take it."
+            },
+            {
+              "type": "dialogue",
+              "speaker": "mallow_bellow",
+              "text": "Final score: Ale 1 - Favilla Blaze 1."
+            },
+            {
+              "type": "dialogue",
+              "speaker": "sparkle_ale",
+              "text": "Ahhhh!"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

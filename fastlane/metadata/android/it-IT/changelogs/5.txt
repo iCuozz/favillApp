@@ -1,0 +1,9 @@
+Novità 1.0.3
+• 🇬🇧 Ora disponibile anche in inglese (UI + episodi)
+• ▶️ Riprendi la lettura da dove l'hai lasciata
+• ⚙️ Nuova schermata Impostazioni: vibrazione, schermo intero, velocità testo
+• 👆 Swipe orizzontale tra le pagine + transizione "page-flip" 3D
+• 🗺️ Salta a una pagina già letta dalla griglia miniature
+• 📤 Condividi gli episodi con i tuoi amici
+• ✨ Splash screen nativa più rapida
+• 🐛 Correzioni grafiche e ottimizzazioni

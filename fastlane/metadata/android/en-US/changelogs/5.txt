@@ -1,0 +1,9 @@
+What's new in 1.0.3
+• 🇬🇧 Now available in English (UI + episodes)
+• ▶️ Resume reading from where you left off
+• ⚙️ New Settings screen: haptics, fullscreen, text speed
+• 👆 Horizontal swipe between pages + 3D page-flip transition
+• 🗺️ Jump to any page you've already read from the thumbnail grid
+• 📤 Share episodes with your friends
+• ✨ Faster native splash screen
+• 🐛 Visual fixes and optimizations
