@@ -1,0 +1,266 @@
+{
+  "id": "missione_2",
+  "pages": [
+    {
+      "index": 0,
+      "background": "assets/episodes/missione_2/page_0.webp",
+      "panels": [
+        {
+          "id": "m2_0",
+          "characters": ["favilla", "sparkle_ale"],
+          "text_blocks": [
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Saturday morning, Nova Tutinia. A seemingly simple mission: pick up diapers, baby food, and two quick things."
+            },
+            {
+              "type": "thought",
+              "speaker": "favilla",
+              "text": "Walk in, grab four things, walk out. Ten minutes flat."
+            },
+            {
+              "type": "dialogue",
+              "speaker": "sparkle_ale",
+              "text": "Aaaah!"
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "But every hero mom knows that at the supermarket, fate is listening... and laughing."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "background": "assets/episodes/missione_2/page_1.webp",
+      "panels": [
+        {
+          "id": "m2_1",
+          "characters": ["favilla", "sparkle_ale"],
+          "text_blocks": [
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Favilla grabs a cart and settles Ale into the front seat. It all looks under control."
+            },
+            {
+              "type": "thought",
+              "speaker": "favilla",
+              "text": "Shopping list, focus mode. Ten minutes. Maybe twelve."
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "While Favilla scrolls the list on her phone, Sparkle Ale watches the battlefield with the eyes of a chaos genius."
+            },
+            {
+              "type": "dialogue",
+              "speaker": "sparkle_ale",
+              "text": "Heh."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "background": "assets/episodes/missione_2/page_2.webp",
+      "panels": [
+        {
+          "id": "m2_2",
+          "characters": ["favilla", "sparkle_ale"],
+          "text_blocks": [
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "With materials scavenged from who knows where, Ale builds a tiny handmade peashooter, worthy of a miniature supervillain."
+            },
+            {
+              "type": "thought",
+              "speaker": "favilla",
+              "text": "Diapers, milk, cookies, wipes... it's all going far too well."
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Favilla doesn't notice that from the seat the first silent shot is fired at one of the cart's wheels."
+            },
+            {
+              "type": "dialogue",
+              "speaker": "sparkle_ale",
+              "text": "Pff!"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "background": "assets/episodes/missione_2/page_3.webp",
+      "panels": [
+        {
+          "id": "m2_3",
+          "characters": ["favilla", "sparkle_ale"],
+          "text_blocks": [
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "One shot. Two shots. Three shots. Ale takes aim like a pro saboteur in training."
+            },
+            {
+              "type": "dialogue",
+              "speaker": "sparkle_ale",
+              "text": "Pff! Pff!"
+            },
+            {
+              "type": "thought",
+              "speaker": "favilla",
+              "text": "Why can I hear catastrophe coming, but I can't see it yet?"
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Halfway through the trip, the perfect shot hits the wheel. The cart wobbles. Swerving, it picks a path of its own."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "background": "assets/episodes/missione_2/page_4.webp",
+      "panels": [
+        {
+          "id": "m2_4",
+          "characters": ["favilla", "sparkle_ale"],
+          "text_blocks": [
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "The cart of destiny is hijacked like a runaway missile straight into a center aisle shelf."
+            },
+            {
+              "type": "dialogue",
+              "speaker": "favilla",
+              "text": "Ale? ...Ale."
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Impact. Boxes, packs, bottles and cans tumble everywhere. In an instant the supermarket looks like a field of ruins."
+            },
+            {
+              "type": "thought",
+              "speaker": "favilla",
+              "text": "No. No no no. Not this."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "background": "assets/episodes/missione_2/page_5.webp",
+      "panels": [
+        {
+          "id": "m2_5",
+          "characters": ["favilla_blaze", "sparkle_ale"],
+          "text_blocks": [
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "And that's when Favilla stops being just a mom at the supermarket."
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "A spark crosses her gaze. Her sweater comes alive with light. It's the call of the hero."
+            },
+            {
+              "type": "dialogue",
+              "speaker": "favilla_blaze",
+              "text": "Emergency mode activated."
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Favilla transforms into Favilla Blaze."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "background": "assets/episodes/missione_2/page_6.webp",
+      "panels": [
+        {
+          "id": "m2_6",
+          "characters": ["favilla_blaze", "sparkle_ale", "favilla"],
+          "text_blocks": [
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "With superhuman speed, Favilla Blaze stands the shelf back up, snatches every product mid-fall and erases every trace of the disaster."
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "In a few seconds everything is back in its perfect place. Nobody notices a thing."
+            },
+            {
+              "type": "thought",
+              "speaker": "favilla_blaze",
+              "text": "Chaos neutralized. Main witness: a baby with a peashooter."
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "A moment later, the energy fades. Favilla goes back to normal, takes the cart and heads for the checkout as if nothing happened."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "background": "assets/episodes/missione_2/page_7.webp",
+      "panels": [
+        {
+          "id": "m2_7",
+          "characters": ["favilla", "sparkle_ale"],
+          "text_blocks": [
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Mission complete. Bags full. Energy almost out. Dignity down to 12%."
+            },
+            {
+              "type": "dialogue",
+              "speaker": "favilla",
+              "text": "We're alive. We've got everything. And nobody got left in the cookie aisle."
+            },
+            {
+              "type": "thought",
+              "speaker": "favilla",
+              "text": "Next time I order online."
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "But in every hero's heart there's one inevitable truth: even everyday chaos can become legend."
+            },
+            {
+              "type": "dialogue",
+              "speaker": "sparkle_ale",
+              "text": "Ahhhh!"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

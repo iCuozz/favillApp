@@ -1,0 +1,263 @@
+{
+  "id": "missione_1",
+  "pages": [
+    {
+      "index": 0,
+      "background": "assets/episodes/missione_1/page1_0.webp",
+      "panels": [
+        {
+          "id": "m1_0",
+          "characters": ["favilla", "sparkle_ale", "mallow_bellow"],
+          "text_blocks": [
+            {
+              "id": "m1_0_tb_0",
+              "type": "narration",
+              "text": "It's still dark in Nova Tutinia. In the small third-floor apartment, the world seems to be sleeping."
+            },
+            {
+              "id": "m1_0_tb_1",
+              "type": "narration",
+              "text": "Favilla sleeps exhausted. Mallow Bellow snores with the laptop still on his chest."
+            },
+            {
+              "id": "m1_0_tb_2",
+              "type": "dialogue",
+              "speaker": "sparkle_ale",
+              "text": "MOOOOM! MIIIILK! NOW!"
+            },
+            {
+              "id": "m1_0_tb_3",
+              "type": "dialogue",
+              "speaker": "mallow_bellow",
+              "text": "Nightly... compilation... in progress..."
+            },
+            {
+              "id": "m1_0_tb_4",
+              "type": "thought",
+              "text": "Mission #1: survival."
+            }
+          ],
+          "interactions": []
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "background": "assets/episodes/missione_1/page1_1.webp",
+      "panels": [
+        {
+          "id": "m1_1",
+          "characters": ["favilla", "sparkle_ale", "mallow_bellow"],
+          "text_blocks": [
+            {
+              "id": "m1_1_tb_0",
+              "type": "narration",
+              "text": "The kitchen is the first battlefield."
+            },
+            {
+              "id": "m1_1_tb_1",
+              "type": "narration",
+              "text": "Favilla holds Sparkle Ale on her hip while one hand whips up protein pancakes and her foot kicks a rebellious drawer shut."
+            },
+            {
+              "id": "m1_1_tb_2",
+              "type": "dialogue",
+              "speaker": "favilla",
+              "text": "Precision level 10, little nuclear disaster!"
+            },
+            {
+              "id": "m1_1_tb_3",
+              "type": "dialogue",
+              "speaker": "sparkle_ale",
+              "text": "Rocket spoon!"
+            },
+            {
+              "id": "m1_1_tb_4",
+              "type": "narration",
+              "text": "The spoon really takes off, grazes Mallow Bellow and bounces off the fridge."
+            },
+            {
+              "id": "m1_1_tb_5",
+              "type": "dialogue",
+              "speaker": "mallow_bellow",
+              "text": "Hit... and almost sunk."
+            }
+          ],
+          "interactions": [
+            {
+              "type": "tap",
+              "target": "cucchiaio",
+              "effect": "shake",
+              "sound": "clang"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "background": "assets/episodes/missione_1/page1_2.webp",
+      "panels": [
+        {
+          "id": "m1_2",
+          "characters": ["favilla", "sparkle_ale", "mallow_bellow"],
+          "text_blocks": [
+            {
+              "id": "m1_2_tb_0",
+              "type": "narration",
+              "text": "In the living-room-gym, the warrior trains."
+            },
+            {
+              "id": "m1_2_tb_1",
+              "type": "narration",
+              "text": "Favilla does squats with Sparkle Ale clipped to her chest like a living backpack."
+            },
+            {
+              "id": "m1_2_tb_2",
+              "type": "dialogue",
+              "speaker": "favilla",
+              "text": "Endurance: extreme. Determination: infinite."
+            },
+            {
+              "id": "m1_2_tb_3",
+              "type": "narration",
+              "text": "Mallow Bellow, in a corner, tries a plank. It lasts exactly three seconds."
+            },
+            {
+              "id": "m1_2_tb_4",
+              "type": "dialogue",
+              "speaker": "mallow_bellow",
+              "text": "Endurance 404 Not Found."
+            },
+            {
+              "id": "m1_2_tb_5",
+              "type": "dialogue",
+              "speaker": "sparkle_ale",
+              "text": "Mommy SUPER! Daddy squishy!"
+            }
+          ],
+          "interactions": []
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "background": "assets/episodes/missione_1/page1_3.webp",
+      "panels": [
+        {
+          "id": "m1_3",
+          "characters": ["favilla_blaze", "sparkle_ale", "mallow_bellow"],
+          "text_blocks": [
+            {
+              "id": "m1_3_tb_0",
+              "type": "narration",
+              "text": "Then she arrives. The Mountain of Dirty Laundry. Ancient enemy, never truly defeated."
+            },
+            {
+              "id": "m1_3_tb_1",
+              "type": "narration",
+              "text": "Favilla Blaze stares at it. The aura around her grows stronger."
+            },
+            {
+              "id": "m1_3_tb_2",
+              "type": "dialogue",
+              "speaker": "mallow_bellow",
+              "text": "I wrote an algorithm to fold the laundry!"
+            },
+            {
+              "id": "m1_3_tb_3",
+              "type": "narration",
+              "text": "Click. An avalanche of t-shirts and socks pours onto the floor."
+            },
+            {
+              "id": "m1_3_tb_4",
+              "type": "dialogue",
+              "speaker": "favilla_blaze",
+              "text": "Quantum Order: activated."
+            },
+            {
+              "id": "m1_3_tb_5",
+              "type": "narration",
+              "text": "The clothes start folding themselves as if by magic, following her expert moves."
+            }
+          ],
+          "interactions": []
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "background": "assets/episodes/missione_1/page1_4.webp",
+      "panels": [
+        {
+          "id": "m1_4",
+          "characters": ["favilla_blaze", "sparkle_ale", "mallow_bellow"],
+          "text_blocks": [
+            {
+              "id": "m1_4_tb_0",
+              "type": "narration",
+              "text": "Mallow Bellow and Sparkle Ale watch in awe — in a moment the house is in perfect order, chaos has been defeated."
+            },
+            {
+              "id": "m1_4_tb_1",
+              "type": "dialogue",
+              "speaker": "mallow_bellow",
+              "text": "Wow... you're incredible, Favilla Blaze!"
+            },
+            {
+              "id": "m1_4_tb_2",
+              "type": "dialogue",
+              "speaker": "sparkle_ale",
+              "text": "Mommy SUPER! Mommy MAGIC!"
+            }
+          ],
+          "interactions": []
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "background": "assets/episodes/missione_1/page1_5.webp",
+      "panels": [
+        {
+          "id": "m1_5",
+          "characters": ["favilla", "sparkle_ale", "mallow_bellow"],
+          "text_blocks": [
+            {
+              "id": "m1_5_tb_0",
+              "type": "narration",
+              "text": "In the evening, the chaos goes quiet. For a few hours."
+            },
+            {
+              "id": "m1_5_tb_1",
+              "type": "narration",
+              "text": "Sparkle Ale falls asleep latched onto Mom, hugging her like a little koala, snug in his sleep-sack."
+            },
+            {
+              "id": "m1_5_tb_2",
+              "type": "narration",
+              "text": "Mallow Bellow sleeps sitting up, a muslin cloth on his lap."
+            },
+            {
+              "id": "m1_5_tb_3",
+              "type": "dialogue",
+              "speaker": "favilla",
+              "text": "Maybe I don't save the world. But today I won against the chaos of my world."
+            },
+            {
+              "id": "m1_5_tb_4",
+              "type": "narration",
+              "text": "A little spark of light leaves her heart and lights up the room."
+            },
+            {
+              "id": "m1_5_tb_5",
+              "type": "narration",
+              "text": "Favilla Blaze. The hero Sparkle Ale and Mallow Bellow need."
+            }
+          ],
+          "interactions": []
+        }
+      ]
+    }
+  ]
+}
