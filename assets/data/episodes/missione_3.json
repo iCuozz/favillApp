@@ -2,11 +2,11 @@
   "id": "missione_3",
   "title": "Missione #3 – L'Ora della Pappa",
   "subtitle": "Favilla Blaze contro il Ninja del Seggiolone",
-  "cover": "assets/episodes/missione_3/thumb.png",
+  "cover": "assets/episodes/missione_3/thumb.webp",
   "pages": [
     {
       "index": 0,
-      "background": "assets/episodes/missione_3/page_0.png",
+      "background": "assets/episodes/missione_3/page_0.webp",
       "panels": [
         {
           "id": "m3_0",
@@ -38,7 +38,7 @@
     },
     {
       "index": 1,
-      "background": "assets/episodes/missione_3/page_1.png",
+      "background": "assets/episodes/missione_3/page_1.webp",
       "panels": [
         {
           "id": "m3_1",
@@ -70,7 +70,7 @@
     },
     {
       "index": 2,
-      "background": "assets/episodes/missione_3/page_2.png",
+      "background": "assets/episodes/missione_3/page_2.webp",
       "panels": [
         {
           "id": "m3_2",
@@ -102,7 +102,7 @@
     },
     {
       "index": 3,
-      "background": "assets/episodes/missione_3/page_3.png",
+      "background": "assets/episodes/missione_3/page_3.webp",
       "panels": [
         {
           "id": "m3_3",
@@ -134,7 +134,7 @@
     },
     {
       "index": 4,
-      "background": "assets/episodes/missione_3/page_4.png",
+      "background": "assets/episodes/missione_3/page_4.webp",
       "panels": [
         {
           "id": "m3_4",
@@ -166,7 +166,7 @@
     },
     {
       "index": 5,
-      "background": "assets/episodes/missione_3/page_5.png",
+      "background": "assets/episodes/missione_3/page_5.webp",
       "panels": [
         {
           "id": "m3_5",
@@ -198,7 +198,7 @@
     },
     {
       "index": 6,
-      "background": "assets/episodes/missione_3/page_6.png",
+      "background": "assets/episodes/missione_3/page_6.webp",
       "panels": [
         {
           "id": "m3_6",
@@ -230,7 +230,7 @@
     },
     {
       "index": 7,
-      "background": "assets/episodes/missione_3/page_7.png",
+      "background": "assets/episodes/missione_3/page_7.webp",
       "panels": [
         {
           "id": "m3_7",

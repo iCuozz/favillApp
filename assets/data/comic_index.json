@@ -62,28 +62,28 @@
       "id": "prologo",
       "title": "L'ombra della fiamma",
       "subtitle": "La doppia vita di Favilla",
-      "thumbnail": "assets/episodes/prologo/thumb.png",
+      "thumbnail": "assets/episodes/prologo/thumb.webp",
       "file": "assets/data/episodes/prologo.json"
     },
     {
       "id": "missione_1",
       "title": "Missione #1 – Caos all'Alba",
       "subtitle": "Favilla Blaze contro il risveglio più difficile",
-      "thumbnail": "assets/episodes/missione_1/thumb.png",
+      "thumbnail": "assets/episodes/missione_1/thumb.webp",
       "file": "assets/data/episodes/missione_1.json"
     },
     {
       "id": "missione_2",
       "title": "Missione #2 – Assalto al Supermercato",
       "subtitle": "Favilla Blaze contro il carrello del destino",
-      "thumbnail": "assets/episodes/missione_2/thumb.png",
+      "thumbnail": "assets/episodes/missione_2/thumb.webp",
       "file": "assets/data/episodes/missione_2.json"
     },
     {
       "id": "missione_3",
       "title": "Missione #3 – L'Ora della Pappa",
       "subtitle": "Favilla Blaze contro il Ninja del Seggiolone",
-      "thumbnail": "assets/episodes/missione_3/thumb.png",
+      "thumbnail": "assets/episodes/missione_3/thumb.webp",
       "file": "assets/data/episodes/missione_3.json"
     }
   ]

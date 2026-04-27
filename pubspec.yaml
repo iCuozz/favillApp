@@ -1,7 +1,7 @@
 name: favilla_app
 description: Fumetto interattivo Favilla - Mamma con Superpoteri
 publish_to: "none"
-version: 1.0.0+1
+version: 1.0.3+5
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
@@ -11,12 +11,20 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.8
+  shared_preferences: ^2.2.0
+  package_info_plus: ^8.0.0
+  share_plus: ^10.0.0
+  in_app_review: ^2.0.9
+  flutter_localizations:
+    sdk: flutter
+  intl: any
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
   flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.4.0
 
 flutter:
   uses-material-design: true
@@ -26,7 +34,6 @@ flutter:
     - assets/data/comic_index.json
     - assets/data/episodes/
     - assets/fonts/
-    - assets/splash/
     - assets/episodes/
     - assets/episodes/prologo/
     - assets/episodes/missione_1/
@@ -47,3 +54,13 @@ flutter_launcher_icons:
   ios: true
   image_path: "assets/icon/app_icon.png"
   min_sdk_android: 21
+
+flutter_native_splash:
+  color: "#120812"
+  image: assets/icon/app_icon.png
+  android_12:
+    color: "#120812"
+    image: assets/icon/app_icon.png
+    icon_background_color: "#120812"
+  android: true
+  ios: true

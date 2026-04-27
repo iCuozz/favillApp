@@ -3,7 +3,7 @@
   "pages": [
     {
       "index": 0,
-      "background": "assets/episodes/missione_1/page1_0.png",
+      "background": "assets/episodes/missione_1/page1_0.webp",
       "panels": [
         {
           "id": "m1_0",
@@ -43,7 +43,7 @@
     },
     {
       "index": 1,
-      "background": "assets/episodes/missione_1/page1_1.png",
+      "background": "assets/episodes/missione_1/page1_1.webp",
       "panels": [
         {
           "id": "m1_1",
@@ -96,7 +96,7 @@
     },
     {
       "index": 2,
-      "background": "assets/episodes/missione_1/page1_2.png",
+      "background": "assets/episodes/missione_1/page1_2.webp",
       "panels": [
         {
           "id": "m1_2",
@@ -142,7 +142,7 @@
     },
     {
       "index": 3,
-      "background": "assets/episodes/missione_1/page1_3.png",
+      "background": "assets/episodes/missione_1/page1_3.webp",
       "panels": [
         {
           "id": "m1_3",
@@ -187,7 +187,7 @@
     },
     {
       "index": 4,
-      "background": "assets/episodes/missione_1/page1_4.png",
+      "background": "assets/episodes/missione_1/page1_4.webp",
       "panels": [
         {
           "id": "m1_4",
@@ -217,7 +217,7 @@
     },
     {
       "index": 5,
-      "background": "assets/episodes/missione_1/page1_5.png",
+      "background": "assets/episodes/missione_1/page1_5.webp",
       "panels": [
         {
           "id": "m1_5",
