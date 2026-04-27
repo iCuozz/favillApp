@@ -17,23 +17,25 @@ class HomeCoverPage extends StatelessWidget {
       body: Stack(
         fit: StackFit.expand,
         children: [
+          Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color(0xFF2A0D1F),
+                  Color(0xFF120812),
+                  Color(0xFF050505),
+                ],
+              ),
+            ),
+          ),
           Image.asset(
             'assets/cover/copertina.png',
-            fit: BoxFit.cover,
+            fit: BoxFit.contain,
+            alignment: Alignment.center,
             errorBuilder: (context, error, stackTrace) {
-              return Container(
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Color(0xFF2A0D1F),
-                      Color(0xFF120812),
-                      Color(0xFF050505),
-                    ],
-                  ),
-                ),
-              );
+              return const SizedBox.shrink();
             },
           ),
           Container(

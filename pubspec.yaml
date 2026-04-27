@@ -25,7 +25,6 @@ flutter:
     - assets/data/
     - assets/data/comic_index.json
     - assets/data/episodes/
-    - assets/sfx/
     - assets/fonts/
     - assets/splash/
     - assets/episodes/
