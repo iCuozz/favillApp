@@ -1,0 +1,291 @@
+{
+  "id": "missione_4",
+  "title": "Missione #4 – Il Sottomarino Pirata",
+  "subtitle": "Favilla Blaze contro il Capitano Sparkle",
+  "cover": "assets/episodes/missione_4/thumb.webp",
+  "pages": [
+    {
+      "index": 0,
+      "background": "assets/episodes/missione_4/page_0.webp",
+      "panels": [
+        {
+          "id": "m4_0",
+          "characters": ["favilla"],
+          "text_blocks": [
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Sera, casa di Nova Tutinia. La luce calda del bagno annuncia l'ultimo grande appuntamento della giornata."
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Vasca pronta, schiuma morbida, asciugamani in pila. Tutto sembra sotto controllo."
+            },
+            {
+              "type": "thought",
+              "speaker": "favilla",
+              "text": "Bagnetto: la frontiera finale, lo rilasserà per la notte. Cinque minuti, pigiama, nanna."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "background": "assets/episodes/missione_4/page_1.webp",
+      "panels": [
+        {
+          "id": "m4_1",
+          "characters": ["favilla", "sparkle_ale"],
+          "text_blocks": [
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Sparkle Ale arriva trotterellando, ma in mano non ha la solita paperella. Ha il libro dei pirati."
+            },
+            {
+              "type": "dialogue",
+              "speaker": "sparkle_ale",
+              "text": "Mamma! Sottomanino!"
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Indica con dito tremante un disegno: un sottomarino giallo che spara bolle in fondo al mare."
+            },
+            {
+              "type": "thought",
+              "speaker": "favilla",
+              "text": "Quegli occhi. Quel sorriso. Sta per succedere qualcosa, e non sarà piccolo."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "background": "assets/episodes/missione_4/page_2.webp",
+      "panels": [
+        {
+          "id": "m4_2",
+          "characters": ["favilla", "sparkle_ale"],
+          "text_blocks": [
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Sparkle Ale entra in vasca con espressione da ingegnere navale. Niente giochi a caso: ha un piano."
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Afferra il secchiello giallo, ci infila dentro tre paperelle, ci appoggia sopra il bicchiere di plastica e ci pianta in cima il flacone dello shampoo come periscopio."
+            },
+            {
+              "type": "dialogue",
+              "speaker": "favilla",
+              "text": "Tesoro... cosa stai costruendo?"
+            },
+            {
+              "type": "dialogue",
+              "speaker": "sparkle_ale",
+              "text": "Sottomanino. Mio."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "background": "assets/episodes/missione_4/page_3.webp",
+      "panels": [
+        {
+          "id": "m4_3",
+          "characters": ["favilla", "sparkle_ale"],
+          "text_blocks": [
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Il sottomarino galleggia. Galleggia davvero. Una papera col cappellino di carta troneggia in cima come capitano onorario."
+            },
+            {
+              "type": "dialogue",
+              "speaker": "sparkle_ale",
+              "text": "VAROOOM! Capitano Sparkle al comando!"
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Per un istante, Favilla è quasi commossa. È bellissimo. È ingegnoso. È totalmente fuori controllo."
+            },
+            {
+              "type": "thought",
+              "speaker": "favilla",
+              "text": "Sono fiera. Sono terrorizzata. Entrambe le cose insieme."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "background": "assets/episodes/missione_4/page_4.webp",
+      "panels": [
+        {
+          "id": "m4_4",
+          "characters": ["favilla", "sparkle_ale"],
+          "text_blocks": [
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Poi il Capitano Sparkle stringe il flacone-periscopio con due manine decise. E la cabina di pilotaggio diventa un cannone ad acqua."
+            },
+            {
+              "type": "dialogue",
+              "speaker": "sparkle_ale",
+              "text": "Fuoco di periscopio!"
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Getti di acqua e schiuma esplodono in ogni direzione: lo specchio, il soffitto, le piastrelle, Favilla. Le paperelle decollano come piloti espulsi."
+            },
+            {
+              "type": "thought",
+              "speaker": "favilla",
+              "text": "Il Capitano Sparkle. Lo sapevo."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "background": "assets/episodes/missione_4/page_5.webp",
+      "panels": [
+        {
+          "id": "m4_5",
+          "characters": ["favilla", "sparkle_ale", "mallow_bellow"],
+          "text_blocks": [
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "In trenta secondi netti, il bagno è un piccolo oceano. Asciugamani fradici, pavimento scivoloso, schiuma fino al lampadario."
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Mallow Bellow apre la porta nel momento sbagliato, col portatile aperto in mano e una pull request da finire."
+            },
+            {
+              "type": "dialogue",
+              "speaker": "mallow_bellow",
+              "text": "Il portatile no, IL PORTATILE NOOO!"
+            },
+            {
+              "type": "dialogue",
+              "speaker": "sparkle_ale",
+              "text": "Papà nuota! Papà nuota!"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "background": "assets/episodes/missione_4/page_6.webp",
+      "panels": [
+        {
+          "id": "m4_6",
+          "characters": ["favilla_blaze"],
+          "text_blocks": [
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Favilla chiude gli occhi. Una scintilla pulsa sotto il cuore. È ora."
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "I capelli si accendono come una criniera dorata, il maglioncino si dissolve in fiamme rosa e oro. Sulla spalla compare una piccola ancora luminosa."
+            },
+            {
+              "type": "dialogue",
+              "speaker": "favilla_blaze",
+              "text": "Modalità Idro-Eroica: ATTIVATA."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "background": "assets/episodes/missione_4/page_7.webp",
+      "panels": [
+        {
+          "id": "m4_7",
+          "characters": ["favilla_blaze", "sparkle_ale", "mallow_bellow"],
+          "text_blocks": [
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Con un gesto morbido, Favilla Blaze richiama ogni goccia d'acqua e ogni bolla in un nastro fluttuante che sale dal pavimento come una marea al contrario."
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Il sottomarino del Capitano Sparkle si solleva delicatamente dall'acqua, scortato come un'ammiraglia in parata."
+            },
+            {
+              "type": "dialogue",
+              "speaker": "favilla_blaze",
+              "text": "Permesso di salire a bordo, Capitano?"
+            },
+            {
+              "type": "dialogue",
+              "speaker": "sparkle_ale",
+              "text": "Cesso! Cesso!"
+            },
+            {
+              "type": "dialogue",
+              "speaker": "mallow_bellow",
+              "text": "Sei... fantastica. Sul serio. Anche col laptop bagnato."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 8,
+      "background": "assets/episodes/missione_4/page_8.webp",
+      "panels": [
+        {
+          "id": "m4_8",
+          "characters": ["favilla", "sparkle_ale", "mallow_bellow"],
+          "text_blocks": [
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Notte. Sparkle Ale dorme avvolto in una copertina rosa, la papera-capitano stretta sotto il braccio."
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Sulla mensola, il sottomarino artigianale riposa asciutto, come un trofeo di guerra. Mallow russa per terra, asciugando il portatile con un asciugamano."
+            },
+            {
+              "type": "thought",
+              "speaker": "favilla",
+              "text": "Domani si naviga di nuovo. Ma stanotte... pace."
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Una bolla di sapone sale dal lavandino, scoppia in una piccola scintilla dorata. Favilla Blaze sorride, e si addormenta."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

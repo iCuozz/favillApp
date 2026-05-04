@@ -1,6 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'models/comic_data.dart';
 import 'services/comic_loader.dart';
 import 'services/engagement_service.dart';
@@ -11,10 +13,27 @@ import 'pages/home_cover_page.dart';
 import 'pages/episodes_list_page.dart';
 import 'widgets/comic_page_stage.dart';
 
-void main() async {
+const String _kSentryDsn =
+    'https://a0191b359e43ba940e6b2bc1107b81ec@o4511291384725504.ingest.de.sentry.io/4511291387543632';
+
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SettingsService.init();
-  runApp(const MyApp());
+
+  await SentryFlutter.init(
+    (options) {
+      options.dsn = _kSentryDsn;
+      options.environment = kReleaseMode ? 'production' : 'debug';
+      options.tracesSampleRate = 0.2;
+      options.sendDefaultPii = false;
+      // In debug evita di spammare Sentry durante lo sviluppo locale.
+      options.beforeSend = (event, hint) {
+        if (kDebugMode) return null;
+        return event;
+      };
+    },
+    appRunner: () => runApp(const MyApp()),
+  );
 }
 
 class MyApp extends StatelessWidget {

@@ -69,6 +69,8 @@ class SettingsService {
   static const _kFullscreenReading = 'settings.fullscreenReading';
   static const _kTextAnimationSpeed = 'settings.textAnimationSpeed';
   static const _kLanguage = 'settings.language';
+  static const _kTtsEnabled = 'settings.ttsEnabled';
+  static const _kTtsAutoplay = 'settings.ttsAutoplay';
 
   static final ValueNotifier<bool> hapticsEnabled = ValueNotifier<bool>(true);
   static final ValueNotifier<bool> fullscreenReading =
@@ -77,6 +79,8 @@ class SettingsService {
       ValueNotifier<TextAnimationSpeed>(TextAnimationSpeed.normal);
   static final ValueNotifier<AppLanguage> language =
       ValueNotifier<AppLanguage>(AppLanguage.italian);
+  static final ValueNotifier<bool> ttsEnabled = ValueNotifier<bool>(true);
+  static final ValueNotifier<bool> ttsAutoplay = ValueNotifier<bool>(false);
 
   static Future<void> init() async {
     final prefs = await SharedPreferences.getInstance();
@@ -87,6 +91,8 @@ class SettingsService {
     textAnimationSpeed.value =
         TextAnimationSpeed.values[speedIndex.clamp(0, TextAnimationSpeed.values.length - 1)];
     language.value = AppLanguageX.fromCode(prefs.getString(_kLanguage));
+    ttsEnabled.value = prefs.getBool(_kTtsEnabled) ?? true;
+    ttsAutoplay.value = prefs.getBool(_kTtsAutoplay) ?? false;
   }
 
   static Future<void> setHapticsEnabled(bool value) async {
@@ -111,6 +117,18 @@ class SettingsService {
     language.value = value;
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_kLanguage, value.code);
+  }
+
+  static Future<void> setTtsEnabled(bool value) async {
+    ttsEnabled.value = value;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_kTtsEnabled, value);
+  }
+
+  static Future<void> setTtsAutoplay(bool value) async {
+    ttsAutoplay.value = value;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_kTtsAutoplay, value);
   }
 
   static void tapFeedback() {

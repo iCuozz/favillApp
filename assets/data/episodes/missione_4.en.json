@@ -1,0 +1,291 @@
+{
+  "id": "missione_4",
+  "title": "Mission #4 – The Pirate Submarine",
+  "subtitle": "Favilla Blaze vs. Captain Sparkle",
+  "cover": "assets/episodes/missione_4/thumb.webp",
+  "pages": [
+    {
+      "index": 0,
+      "background": "assets/episodes/missione_4/page_0.webp",
+      "panels": [
+        {
+          "id": "m4_0",
+          "characters": ["favilla"],
+          "text_blocks": [
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Evening, home in Nova Tutinia. Warm bathroom light announces the day's last great appointment."
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Tub ready, soft foam, towels stacked. Everything seems under control."
+            },
+            {
+              "type": "thought",
+              "speaker": "favilla",
+              "text": "Bath time: the final frontier. Five minutes, pajamas, sleep."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "background": "assets/episodes/missione_4/page_1.webp",
+      "panels": [
+        {
+          "id": "m4_1",
+          "characters": ["favilla", "sparkle_ale"],
+          "text_blocks": [
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Sparkle Ale toddles in, but he isn't holding the usual rubber duck. He's holding the pirate book."
+            },
+            {
+              "type": "dialogue",
+              "speaker": "sparkle_ale",
+              "text": "Mom! Submalin!"
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "He points with a trembling finger at a drawing: a yellow submarine shooting bubbles at the bottom of the sea."
+            },
+            {
+              "type": "thought",
+              "speaker": "favilla",
+              "text": "Those eyes. That smile. Something is about to happen, and it won't be small."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "background": "assets/episodes/missione_4/page_2.webp",
+      "panels": [
+        {
+          "id": "m4_2",
+          "characters": ["favilla", "sparkle_ale"],
+          "text_blocks": [
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Sparkle Ale climbs into the tub with the focus of a naval engineer. No random play tonight: he has a plan."
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "He grabs the yellow bucket, stuffs three rubber ducks inside, balances the plastic cup on top, and plants the shampoo bottle on the very tip as a periscope."
+            },
+            {
+              "type": "dialogue",
+              "speaker": "favilla",
+              "text": "Sweetie... what are you building?"
+            },
+            {
+              "type": "dialogue",
+              "speaker": "sparkle_ale",
+              "text": "Submalin. Mine."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "background": "assets/episodes/missione_4/page_3.webp",
+      "panels": [
+        {
+          "id": "m4_3",
+          "characters": ["favilla", "sparkle_ale"],
+          "text_blocks": [
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "The submarine floats. It actually floats. A duck wearing a tiny paper hat sits on top, an honorary captain."
+            },
+            {
+              "type": "dialogue",
+              "speaker": "sparkle_ale",
+              "text": "VAROOOM! Captain Sparkle in command!"
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "For a moment, Favilla is almost moved. It's beautiful. It's ingenious. It's completely out of control."
+            },
+            {
+              "type": "thought",
+              "speaker": "favilla",
+              "text": "I'm proud. I'm terrified. Both at once."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "background": "assets/episodes/missione_4/page_4.webp",
+      "panels": [
+        {
+          "id": "m4_4",
+          "characters": ["favilla", "sparkle_ale"],
+          "text_blocks": [
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Then Captain Sparkle squeezes the periscope-bottle with two determined little hands. The cockpit becomes a water cannon."
+            },
+            {
+              "type": "dialogue",
+              "speaker": "sparkle_ale",
+              "text": "Periscope fire!"
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Jets of water and foam burst in every direction: the mirror, the ceiling, the tiles, Favilla. The rubber ducks blast off like ejected pilots."
+            },
+            {
+              "type": "thought",
+              "speaker": "favilla",
+              "text": "Captain Sparkle. I knew it."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "background": "assets/episodes/missione_4/page_5.webp",
+      "panels": [
+        {
+          "id": "m4_5",
+          "characters": ["favilla", "sparkle_ale", "mallow_bellow"],
+          "text_blocks": [
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "In thirty seconds flat, the bathroom is a small ocean. Soaked towels, slippery floor, foam climbing up to the ceiling lamp."
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Mallow Bellow opens the door at the worst possible moment, laptop in hand and a pull request to finish."
+            },
+            {
+              "type": "dialogue",
+              "speaker": "mallow_bellow",
+              "text": "Not the laptop, NOT THE LAPTOP!"
+            },
+            {
+              "type": "dialogue",
+              "speaker": "sparkle_ale",
+              "text": "Daddy swims! Daddy swims!"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "background": "assets/episodes/missione_4/page_6.webp",
+      "panels": [
+        {
+          "id": "m4_6",
+          "characters": ["favilla_blaze"],
+          "text_blocks": [
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Favilla closes her eyes. A spark pulses under her heart. It's time."
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Her hair lights up like a golden mane, her sweater dissolves in pink and gold flames. A small glowing anchor appears on her shoulder."
+            },
+            {
+              "type": "dialogue",
+              "speaker": "favilla_blaze",
+              "text": "Hydro-Hero Mode: ACTIVATED."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "background": "assets/episodes/missione_4/page_7.webp",
+      "panels": [
+        {
+          "id": "m4_7",
+          "characters": ["favilla_blaze", "sparkle_ale", "mallow_bellow"],
+          "text_blocks": [
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "With a smooth gesture, Favilla Blaze recalls every drop of water and every bubble into a floating ribbon that rises from the floor like a tide flowing backwards."
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Captain Sparkle's submarine lifts gently from the water, escorted like a flagship in parade."
+            },
+            {
+              "type": "dialogue",
+              "speaker": "favilla_blaze",
+              "text": "Permission to come aboard, Captain?"
+            },
+            {
+              "type": "dialogue",
+              "speaker": "sparkle_ale",
+              "text": "Mishon! Mishon!"
+            },
+            {
+              "type": "dialogue",
+              "speaker": "mallow_bellow",
+              "text": "You're... amazing. Really. Even with a wet laptop."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 8,
+      "background": "assets/episodes/missione_4/page_8.webp",
+      "panels": [
+        {
+          "id": "m4_8",
+          "characters": ["favilla", "sparkle_ale", "mallow_bellow"],
+          "text_blocks": [
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "Night. Sparkle Ale sleeps wrapped in a pink blanket, the captain duck tucked tight under his arm."
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "On the shelf, the handmade submarine rests dry, like a war trophy. Mallow snores on the floor, drying his laptop with a towel."
+            },
+            {
+              "type": "thought",
+              "speaker": "favilla",
+              "text": "Tomorrow we sail again. But tonight... peace."
+            },
+            {
+              "type": "narration",
+              "speaker": "narration",
+              "text": "A soap bubble rises from the sink and pops into a tiny golden spark. Favilla Blaze smiles, and falls asleep."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

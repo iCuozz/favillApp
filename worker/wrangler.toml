@@ -1,0 +1,18 @@
+name = "favilla-ai-worker"
+main = "src/index.ts"
+compatibility_date = "2025-01-15"
+compatibility_flags = ["nodejs_compat"]
+
+# Variabili pubbliche (override con: wrangler deploy --var KEY:VALUE)
+[vars]
+GEMINI_MODEL = "gemini-2.5-flash"
+ALLOWED_ORIGINS = "https://favilla.app,http://localhost"
+MIN_APP_VERSION = "1.0.3"
+
+# KV per rate limit e cache risposte deterministiche.
+# Crea con: wrangler kv namespace create AI_KV
+[[kv_namespaces]]
+binding = "AI_KV"
+id = "e65fcb85730f4410a27501fa96661972"
+
+# Secret da impostare con: wrangler secret put GEMINI_API_KEY
