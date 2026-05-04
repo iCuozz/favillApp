@@ -12,19 +12,28 @@
         {
             "name": "favillApp",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+            "toolArgs": [
+                "--dart-define-from-file=dart_defines.json"
+            ]
         },
         {
             "name": "favillApp (profile mode)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "profile"
+            "flutterMode": "profile",
+            "toolArgs": [
+                "--dart-define-from-file=dart_defines.json"
+            ]
         },
         {
             "name": "favillApp (release mode)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "release"
+            "flutterMode": "release",
+            "toolArgs": [
+                "--dart-define-from-file=dart_defines.json"
+            ]
         }
     ]
 }

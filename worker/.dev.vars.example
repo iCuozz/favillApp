@@ -1,0 +1,3 @@
+// Esempio di .dev.vars per sviluppo locale.
+// Copia in `.dev.vars` (gitignored) e inserisci la tua chiave reale.
+GEMINI_API_KEY=replace-me

@@ -50,6 +50,110 @@ class AppStrings {
   static String get textSpeedTitle =>
       _t('Velocità del testo', 'Text speed');
 
+  static String get ttsSection => _t('Voce e lettura', 'Voice & narration');
+  static String get ttsEnabledTitle =>
+      _t('Lettura ad alta voce', 'Read aloud');
+  static String get ttsEnabledSubtitle => _t(
+      'Attiva il pulsante 🔊 nei pannelli per ascoltare i dialoghi',
+      'Enables the 🔊 button on panels to hear the dialogue');
+  static String get ttsAutoplayTitle =>
+      _t('Avvio automatico', 'Auto play');
+  static String get ttsAutoplaySubtitle => _t(
+      'Inizia la lettura non appena apri una pagina',
+      'Start reading as soon as you open a page');
+  static String get ttsPlayTooltip =>
+      _t('Leggi ad alta voce', 'Read aloud');
+  static String get ttsStopTooltip =>
+      _t('Ferma la lettura', 'Stop reading');
+
+  // === Ask Favilla ===
+  static String get askFavillaTitle =>
+      _t('Chiedi a Favilla', 'Ask Favilla');
+  static String get askFavillaSubtitle => _t(
+      'Chatta con la supermamma in persona',
+      'Chat with the supermom herself');
+  static String get askFavillaHint =>
+      _t('Scrivi a Favilla…', 'Write to Favilla…');
+  static String get askFavillaSend => _t('Invia', 'Send');
+  static String get askFavillaEmptyState => _t(
+      'Sta a Favilla scegliere se rispondere con saggezza, sarcasmo o entrambi.\nIniziamo?',
+      'Favilla decides whether to answer with wisdom, sarcasm, or both.\nLet\'s start?');
+  static String get askFavillaThinking =>
+      _t('Favilla sta pensando…', 'Favilla is thinking…');
+  static String get askFavillaNewChat =>
+      _t('Nuova conversazione', 'New conversation');
+  static String get askFavillaNewChatConfirm => _t(
+      'Cancellare la conversazione attuale?',
+      'Delete the current conversation?');
+  static String askFavillaQuotaLeft(int n) => _t(
+      'Quota di oggi: $n risposte rimanenti',
+      'Today\'s quota: $n replies left');
+  static String get askFavillaQuotaExceeded => _t(
+      'Hai esaurito le domande di oggi. Torna domani! 💫',
+      'You used all of today\'s questions. Come back tomorrow! 💫');
+  static String get askFavillaError => _t(
+      'Favilla è impegnata in una missione. Riprova tra poco.',
+      'Favilla is busy with a mission. Try again shortly.');
+  static String get askFavillaDisabled => _t(
+      'AI non disponibile in questa build.',
+      'AI not available in this build.');
+  static String get askFavillaSafetyDeflect => _t(
+      'Mmh, su questo non posso aiutarti. Cambiamo storia?',
+      'Hmm, can\'t help with that. Let\'s change story?');
+
+  // === AI Hub ===
+  static String get aiHubTitle => _t('Studio AI', 'AI Studio');
+  static String get aiHubIntro => _t(
+      'Esperienze interattive con la voce e l\'estro di Favilla, generate al volo dall\'AI.',
+      'Interactive experiences with Favilla\'s voice and flair, generated on the fly by AI.');
+
+  // === Mission generator ===
+  static String get missionTitle =>
+      _t('Genera missione', 'Generate mission');
+  static String get missionSubtitle => _t(
+      'Trasforma il tuo caos quotidiano in un mini-fumetto.',
+      'Turn your daily chaos into a mini comic.');
+  static String get missionMyCollection =>
+      _t('Le mie missioni', 'My missions');
+  static String get missionMyCollectionSubtitle => _t(
+      'Riapri o condividi le missioni che hai salvato.',
+      'Reopen or share the missions you saved.');
+  static String get missionIntro => _t(
+      'Descrivi una scena vera della tua giornata. Favilla la trasformerà in un mini-fumetto in 3-4 pannelli.',
+      'Describe a real scene from your day. Favilla will turn it into a 3-4 panel mini comic.');
+  static String get missionInputHint => _t(
+      'Es. "I bambini non vogliono dormire e tirano i cuscini"',
+      'E.g. "The kids refuse to sleep and throw pillows"');
+  static String get missionGenerate =>
+      _t('Genera missione', 'Generate mission');
+  static String get missionGenerating =>
+      _t('Favilla sta scrivendo…', 'Favilla is writing…');
+  static String missionPanelLabel(int i, int total) => _t(
+      'PANNELLO $i / $total', 'PANEL $i / $total');
+  static String get missionSave => _t('Salva', 'Save');
+  static String get missionSavedShort => _t('Salvata', 'Saved');
+  static String get missionSaved =>
+      _t('Missione salvata nella collezione.', 'Mission saved to collection.');
+  static String get missionDeleteConfirm => _t(
+      'Eliminare questa missione?', 'Delete this mission?');
+  static String get missionCollectionEmpty => _t(
+      'Non hai ancora salvato missioni. Generane una!',
+      'No saved missions yet. Generate one!');
+  static String missionFromSituation(String s) => _t(
+      'Dalla situazione: $s', 'From situation: $s');
+  static String missionQuotaLeft(int n) => _t(
+      'Quota di oggi: $n missioni rimanenti',
+      'Today\'s quota: $n missions left');
+  static String get missionQuotaExceeded => _t(
+      'Hai esaurito le missioni di oggi. Torna domani! ✨',
+      'You used all today\'s missions. Come back tomorrow! ✨');
+  static String get missionError => _t(
+      'Favilla è impegnata. Riprova tra poco.',
+      'Favilla is busy. Try again shortly.');
+  static String get missionSituationTooShort => _t(
+      'Aggiungi qualche dettaglio in più sulla situazione.',
+      'Add a little more detail to the situation.');
+
   static String get languageSection => _t('Lingua', 'Language');
   static String get languageTitle => _t('Lingua', 'Language');
   static String get languageSubtitle => _t(

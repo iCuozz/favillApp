@@ -3,6 +3,8 @@ import '../l10n/app_strings.dart';
 import '../models/comic_data.dart';
 import '../services/progress_service.dart';
 import '../main.dart';
+import '../services/ai/ai_client.dart';
+import 'ai/ai_hub_page.dart';
 import 'episodes_list_page.dart';
 import 'settings_page.dart';
 import '../widgets/comic_title.dart';
@@ -132,17 +134,35 @@ class _HomeCoverPageState extends State<HomeCoverPage> with WidgetsBindingObserv
                 Positioned(
                   top: 8,
                   right: 8,
-                  child: IconButton(
-                    tooltip: AppStrings.settings,
-                    icon: const Icon(Icons.settings, color: Colors.white),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => const SettingsPage(),
+                  child: Row(
+                    children: [
+                      if (AiClient.instance.enabled)
+                        IconButton(
+                          tooltip: AppStrings.aiHubTitle,
+                          icon: const Icon(Icons.auto_awesome,
+                              color: Colors.white),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => const AiHubPage(),
+                              ),
+                            );
+                          },
                         ),
-                      ).then((_) => _refreshProgress());
-                    },
+                      IconButton(
+                        tooltip: AppStrings.settings,
+                        icon: const Icon(Icons.settings, color: Colors.white),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const SettingsPage(),
+                            ),
+                          ).then((_) => _refreshProgress());
+                        },
+                      ),
+                    ],
                   ),
                 ),
                 Padding(

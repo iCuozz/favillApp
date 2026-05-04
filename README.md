@@ -45,11 +45,42 @@ Elemento ricorrente dell’universo FavillApp, presenza narrativa di supporto ne
 - Gestione di **testi strutturati**: narrazione, dialoghi, pensieri
 - Architettura pensata per essere **scalabile**
 - Separazione tra **contenuti**, **asset** e **logica applicativa**
+- **Lettura ad alta voce** dei pannelli con voce diversa per ogni personaggio
+  (TTS on-device, gratis, offline)
 - Base pronta per future evoluzioni come:
   - animazioni
   - effetti audio
   - navigazione avanzata tra episodi
   - schermata archivio missioni
+
+---
+
+## 🤖 Feature AI (in sviluppo)
+
+Le feature AI usano un **proxy Cloudflare Workers** verso Google Gemini, così
+la API key non finisce nell'APK. Vedere [`worker/README.md`](worker/README.md)
+per il deploy.
+
+Per puntare l'app al Worker:
+
+**Opzione consigliata** — usa `dart_defines.json` (già configurato):
+
+```bash
+flutter run --dart-define-from-file=dart_defines.json
+flutter build apk --release --dart-define-from-file=dart_defines.json
+```
+
+In VS Code basta premere **F5**: i launch profile sono già configurati per
+leggere `dart_defines.json`.
+
+**Opzione manuale**:
+
+```bash
+flutter run --dart-define=AI_BASE_URL=https://favilla-ai-worker.<acct>.workers.dev
+```
+
+Senza `AI_BASE_URL` le feature AI restano disabilitate ma l'app continua a
+funzionare normalmente.
 
 ---
 

@@ -160,6 +160,45 @@ class _SettingsPageState extends State<SettingsPage> {
             },
           ),
           const Divider(height: 32),
+          _SectionHeader(AppStrings.ttsSection),
+          ValueListenableBuilder<bool>(
+            valueListenable: SettingsService.ttsEnabled,
+            builder: (context, enabled, _) {
+              return SwitchListTile(
+                title: Text(AppStrings.ttsEnabledTitle),
+                subtitle: Text(AppStrings.ttsEnabledSubtitle),
+                secondary: const Icon(Icons.volume_up_outlined),
+                value: enabled,
+                onChanged: (v) {
+                  SettingsService.tapFeedback();
+                  SettingsService.setTtsEnabled(v);
+                },
+              );
+            },
+          ),
+          ValueListenableBuilder<bool>(
+            valueListenable: SettingsService.ttsEnabled,
+            builder: (context, ttsOn, _) {
+              return ValueListenableBuilder<bool>(
+                valueListenable: SettingsService.ttsAutoplay,
+                builder: (context, autoplay, _) {
+                  return SwitchListTile(
+                    title: Text(AppStrings.ttsAutoplayTitle),
+                    subtitle: Text(AppStrings.ttsAutoplaySubtitle),
+                    secondary: const Icon(Icons.play_circle_outline),
+                    value: ttsOn && autoplay,
+                    onChanged: ttsOn
+                        ? (v) {
+                            SettingsService.tapFeedback();
+                            SettingsService.setTtsAutoplay(v);
+                          }
+                        : null,
+                  );
+                },
+              );
+            },
+          ),
+          const Divider(height: 32),
           _SectionHeader(AppStrings.languageSection),
           ValueListenableBuilder<AppLanguage>(
             valueListenable: SettingsService.language,

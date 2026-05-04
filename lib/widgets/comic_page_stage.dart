@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/comic_data.dart';
 import '../l10n/app_strings.dart';
 import '../services/settings_service.dart';
+import '../services/tts/tts_service.dart';
 import 'comic_page_image.dart';
 import 'comic_text_block_widget.dart';
 
@@ -32,6 +33,17 @@ class ComicPageStageState extends State<ComicPageStage> {
   void initState() {
     super.initState();
     visibleBlocks = _clampInitial(widget.initialVisibleBlocks);
+    if (SettingsService.ttsEnabled.value && SettingsService.ttsAutoplay.value) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) _startTts();
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    TtsService.instance.stop();
+    super.dispose();
   }
 
   int _clampInitial(int value) {
@@ -50,6 +62,45 @@ class ComicPageStageState extends State<ComicPageStage> {
 
     if (oldWidget.page.index != widget.page.index) {
       visibleBlocks = _clampInitial(widget.initialVisibleBlocks);
+      TtsService.instance.stop();
+      if (SettingsService.ttsEnabled.value &&
+          SettingsService.ttsAutoplay.value) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (mounted) _startTts();
+        });
+      }
+    }
+  }
+
+  Future<void> _startTts() async {
+    if (!mounted) return;
+    final panel = widget.page.panels.isEmpty ? null : widget.page.panels.first;
+    if (panel == null || panel.textBlocks.isEmpty) return;
+    await TtsService.instance.speakBlocks(
+      panel.textBlocks,
+      language: SettingsService.language.value,
+      onBlockStart: (index) {
+        if (!mounted) return;
+        if (index + 1 > visibleBlocks) {
+          setState(() {
+            visibleBlocks = index + 1;
+          });
+          widget.onVisibleBlocksChanged?.call(visibleBlocks);
+        }
+      },
+    );
+    if (!mounted) return;
+    if (visibleBlocks >= panel.textBlocks.length) {
+      widget.onPageCompleted?.call();
+    }
+  }
+
+  void _toggleTts() {
+    SettingsService.tapFeedback();
+    if (TtsService.instance.isSpeaking.value) {
+      TtsService.instance.stop();
+    } else {
+      _startTts();
     }
   }
 
@@ -188,6 +239,36 @@ class ComicPageStageState extends State<ComicPageStage> {
                       }),
                     ),
                   ),
+                  ValueListenableBuilder<bool>(
+                    valueListenable: SettingsService.ttsEnabled,
+                    builder: (context, enabled, _) {
+                      if (!enabled) return const SizedBox.shrink();
+                      return ValueListenableBuilder<bool>(
+                        valueListenable: TtsService.instance.isSpeaking,
+                        builder: (context, speaking, _) {
+                          return IconButton(
+                            tooltip: speaking
+                                ? AppStrings.ttsStopTooltip
+                                : AppStrings.ttsPlayTooltip,
+                            icon: Icon(
+                              speaking
+                                  ? Icons.stop_circle_outlined
+                                  : Icons.volume_up_outlined,
+                              size: 22,
+                            ),
+                            visualDensity: VisualDensity.compact,
+                            padding: EdgeInsets.zero,
+                            constraints: const BoxConstraints(
+                              minWidth: 32,
+                              minHeight: 32,
+                            ),
+                            onPressed: _toggleTts,
+                          );
+                        },
+                      );
+                    },
+                  ),
+                  const SizedBox(width: 4),
                   Text(
                     isLastBlockVisible
                         ? AppStrings.tapToContinue
