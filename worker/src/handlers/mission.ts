@@ -147,7 +147,7 @@ export async function handleMission(
     });
     text = r.text;
   } catch (err) {
-    if (err instanceof GeminiError && err.status >= 500) {
+    if (err instanceof GeminiError && (err.status >= 500 || err.status === 429)) {
       await refundRateLimit(c.env, meta, 'mission');
     }
     throw err;

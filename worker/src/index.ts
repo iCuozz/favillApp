@@ -12,7 +12,6 @@ import {
   handleAskRealAdminList,
 } from './handlers/ask_real';
 import { handleAdminUi } from './handlers/admin_ui';
-import { handleBranch } from './handlers/branch';
 import { handleInbox, handlePushRegister } from './handlers/inbox';
 
 const app = new Hono<{ Bindings: Env }>();
@@ -44,7 +43,6 @@ api.use('*', appGuard);
 
 api.post('/chat', handleChat);
 api.post('/mission', handleMission);
-api.post('/branch', handleBranch);
 api.post('/panel-image', handlePanelImage);
 api.post('/ask-real', handleAskReal);
 api.post('/push/register', handlePushRegister);
@@ -62,6 +60,15 @@ app.onError((err, c) => {
       message: err.message,
       detail: err.detail,
     }));
+    // 429 / 503 upstream = "Gemini è sovraccarico, riprova tra poco".
+    // Codice dedicato così l'app può mostrare un messaggio chiaro
+    // e l'utente non perde la quota (vedi refund nei singoli handler).
+    if (err.status === 429 || err.status === 503) {
+      return c.json(
+        { error: 'upstream_busy', message: err.message },
+        503,
+      );
+    }
     return c.json({ error: 'ai_error', message: err.message }, err.status as 400 | 502);
   }
   console.error(JSON.stringify({

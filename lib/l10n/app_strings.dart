@@ -166,33 +166,6 @@ class AppStrings {
   static String get missionTitle =>
       _t('Genera missione', 'Generate mission');
 
-  // === Branch / Storia a Bivio ===
-  static String get branchTitle => _t('Storia a Bivio', 'Branching Story');
-  static String get branchSubtitle => _t(
-      'Scegli tu come va a finire. Ogni partita è diversa.',
-      'You choose how it ends. Every run is different.');
-  static String get branchIntro => _t(
-      'Inserisci uno spunto e scopri dove ti porta. Ad ogni scena Favilla ti propone bivi: scegli e prosegui.',
-      'Drop a starting hook and see where it goes. At each scene Favilla offers branches: choose and continue.');
-  static String get branchSeedHint => _t(
-      'Es. "Sparkle Ale ha trovato il telecomando del condizionatore"',
-      'E.g. "Sparkle Ale found the AC remote"');
-  static String get branchStart => _t('Inizia la storia', 'Start the story');
-  static String get branchLoading => _t('Carico…', 'Loading…');
-  static String get branchThinking =>
-      _t('Favilla decide cosa succede…', 'Favilla decides what happens…');
-  static String get branchChoosePrompt =>
-      _t('SCEGLI COME PROSEGUIRE', 'CHOOSE WHAT HAPPENS NEXT');
-  static String get branchEnding => _t('Fine della storia', 'End of the story');
-  static String get branchRestart =>
-      _t('Riparti con una nuova storia', 'Restart with a new story');
-  static String get branchQuotaExceeded => _t(
-      'Hai esaurito le storie a bivio per oggi. Riprova domani.',
-      'You used all your branching stories for today. Try again tomorrow.');
-  static String get branchError => _t(
-      'Errore generando la prossima scena. Riprova.',
-      'Error generating the next scene. Try again.');
-
   static String get missionSubtitle => _t(
       'Trasforma il tuo caos quotidiano in un mini-fumetto.',
       'Turn your daily chaos into a mini comic.');

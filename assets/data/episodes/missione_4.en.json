@@ -244,12 +244,12 @@
             {
               "type": "dialogue",
               "speaker": "sparkle_ale",
-              "text": "Mishon! Mishon!"
+              "text": "Maaammaaa! Daaaddyyy!"
             },
             {
               "type": "dialogue",
               "speaker": "mallow_bellow",
-              "text": "You're... amazing. Really. Even with a wet laptop."
+              "text": "You're... amazing. Even with a wet laptop."
             }
           ]
         }
@@ -271,7 +271,7 @@
             {
               "type": "narration",
               "speaker": "narration",
-              "text": "On the shelf, the handmade submarine rests dry, like a war trophy. Mallow snores on the floor, drying his laptop with a towel."
+              "text": "On the shelf, the handmade submarine rests dry, like a war trophy."
             },
             {
               "type": "thought",
@@ -281,7 +281,7 @@
             {
               "type": "narration",
               "speaker": "narration",
-              "text": "A soap bubble rises from the sink and pops into a tiny golden spark. Favilla Blaze smiles, and falls asleep."
+              "text": "A soap bubble rises from the submarine and pops into a tiny golden spark. Favilla Blaze smiles, and falls asleep."
             }
           ]
         }

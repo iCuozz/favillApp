@@ -85,16 +85,15 @@
       "subtitle": "Favilla Blaze contro il Ninja del Seggiolone",
       "thumbnail": "assets/episodes/missione_3/thumb.webp",
       "file": "assets/data/episodes/missione_3.json"
-    }
-  ],
-  "_drafts": [
+    },
     {
       "id": "missione_4",
       "title": "Missione #4 – Il Sottomarino Pirata",
       "subtitle": "Favilla Blaze contro il Capitano Sparkle",
       "thumbnail": "assets/episodes/missione_4/thumb.webp",
-      "file": "assets/data/episodes/missione_4.json",
-      "_note": "Disabilitata: in attesa delle 9 immagini AI consistenti."
+      "file": "assets/data/episodes/missione_4.json"
     }
+  ],
+  "_drafts": [
   ]
 }

@@ -48,6 +48,7 @@ flutter:
     - assets/episodes/missione_1/
     - assets/episodes/missione_2/
     - assets/episodes/missione_3/
+    - assets/episodes/missione_4/
     - assets/cover/
 
   fonts:

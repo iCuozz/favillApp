@@ -107,7 +107,7 @@ export async function handleChat(c: Context<{ Bindings: Env }>): Promise<Respons
     text = r.text;
   } catch (err) {
     // Errore upstream: non punire l'utente, restituisci il tentativo.
-    if (err instanceof GeminiError && err.status >= 500) {
+    if (err instanceof GeminiError && (err.status >= 500 || err.status === 429)) {
       await refundRateLimit(c.env, meta, 'chat');
     }
     throw err;
