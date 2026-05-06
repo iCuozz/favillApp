@@ -46,7 +46,9 @@ app.*.map.json
 /android/key.properties
 
 # Secrets / non-committable
-upload-keystore.jks
+upload-keystore*.jks
+*.keystore
+upload_certificate*.pem
 android/app/google-services.json
 worker/wrangler.toml
 worker/.dev.vars
