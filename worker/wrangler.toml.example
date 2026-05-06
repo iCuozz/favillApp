@@ -1,0 +1,35 @@
+name = "favilla-ai-worker"
+main = "src/index.ts"
+compatibility_date = "2025-01-15"
+compatibility_flags = ["nodejs_compat"]
+
+# Variabili pubbliche (override con: wrangler deploy --var KEY:VALUE)
+[vars]
+GEMINI_MODEL = "gemini-2.5-flash"
+ALLOWED_ORIGINS = "https://favilla.app,http://localhost"
+MIN_APP_VERSION = "1.0.5"
+
+# KV per rate limit e cache risposte deterministiche.
+# Crea con: wrangler kv namespace create AI_KV
+[[kv_namespaces]]
+binding = "AI_KV"
+id = "<YOUR_KV_NAMESPACE_ID>"
+
+# Workers AI binding per la generazione delle immagini dei pannelli (SDXL Lightning).
+[ai]
+binding = "AI"
+
+# D1 database per le domande inviate a "Favilla reale".
+# Crea con:
+#   npx wrangler d1 create favilla-questions
+# poi sostituisci `database_id` qui sotto con quello stampato dal comando,
+# ed esegui la migrazione:
+#   npx wrangler d1 execute favilla-questions --remote --file=./migrations/0001_questions.sql
+[[d1_databases]]
+binding = "DB"
+database_name = "favilla-questions"
+database_id = "<YOUR_D1_DATABASE_ID>"
+
+# Secret da impostare:
+#   wrangler secret put GEMINI_API_KEY
+#   wrangler secret put ADMIN_TOKEN     # token per accedere a /admin/ask-real

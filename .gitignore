@@ -44,3 +44,11 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 /android/key.properties
+
+# Secrets / non-committable
+upload-keystore.jks
+android/app/google-services.json
+worker/wrangler.toml
+worker/.dev.vars
+*.aab
+*.apk
