@@ -1,0 +1,4 @@
+What's new in 1.0.5
+• 🛁 New Mission #4 – The Pirate Submarine: Favilla Blaze vs. Captain Sparkle, bath time will never be the same
+• 🎨 9 brand new illustrations for the new mission
+• 🐛 Minor fixes and optimizations
