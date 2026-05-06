@@ -7,6 +7,7 @@ import '../../services/ai/mission_generator_service.dart';
 import '../../services/settings_service.dart';
 import '../../services/tts/tts_service.dart';
 import '../../widgets/mission_panel_backdrop.dart';
+import '../../widgets/panel_image_view.dart';
 
 /// Visualizza una missione già salvata in modalità sola lettura.
 class MissionViewerPage extends StatelessWidget {
@@ -106,6 +107,7 @@ class MissionViewerPage extends StatelessWidget {
             const SizedBox(height: 16),
             ...List.generate(mission.panels.length, (i) {
               return _MissionViewerPanel(
+                mission: mission,
                 index: i + 1,
                 total: mission.panels.length,
                 panel: mission.panels[i],
@@ -120,12 +122,14 @@ class MissionViewerPage extends StatelessWidget {
 }
 
 class _MissionViewerPanel extends StatelessWidget {
+  final GeneratedMission mission;
   final int index;
   final int total;
   final GeneratedPanel panel;
   final int seed;
 
   const _MissionViewerPanel({
+    required this.mission,
     required this.index,
     required this.total,
     required this.panel,
@@ -134,39 +138,50 @@ class _MissionViewerPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final caption = Padding(
+      padding: const EdgeInsets.fromLTRB(14, 12, 14, 14),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(
+                horizontal: 8, vertical: 3),
+            decoration: BoxDecoration(
+              color: Colors.black.withAlpha(180),
+              borderRadius: BorderRadius.circular(4),
+            ),
+            child: Text(
+              AppStrings.missionPanelLabel(index, total),
+              style: const TextStyle(
+                fontSize: 11,
+                letterSpacing: 1.2,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          const SizedBox(height: 10),
+          ...panel.textBlocks.map((b) => _ViewerBlock(block: b)),
+        ],
+      ),
+    );
+
+    final hasScene = (panel.sceneDescription ?? '').trim().isNotEmpty;
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
-      child: MissionPanelBackdrop(
-        panel: panel,
-        seed: seed,
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(14, 12, 14, 14),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 8, vertical: 3),
-                decoration: BoxDecoration(
-                  color: Colors.black.withAlpha(180),
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                child: Text(
-                  AppStrings.missionPanelLabel(index, total),
-                  style: const TextStyle(
-                    fontSize: 11,
-                    letterSpacing: 1.2,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 10),
-              ...panel.textBlocks.map((b) => _ViewerBlock(block: b)),
-            ],
-          ),
-        ),
-      ),
+      child: hasScene
+          ? PanelImageView(
+              mission: mission,
+              panelIndex: index - 1,
+              seed: seed,
+              child: caption,
+            )
+          : MissionPanelBackdrop(
+              panel: panel,
+              seed: seed,
+              child: caption,
+            ),
     );
   }
 }

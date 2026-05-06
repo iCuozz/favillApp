@@ -5,6 +5,15 @@ import { GeminiError } from './lib/gemini';
 import { notImplemented } from './handlers/_stub';
 import { handleChat } from './handlers/chat';
 import { handleMission } from './handlers/mission';
+import { handlePanelImage } from './handlers/panel_image';
+import {
+  handleAskReal,
+  handleAskRealAdminAnswer,
+  handleAskRealAdminList,
+} from './handlers/ask_real';
+import { handleAdminUi } from './handlers/admin_ui';
+import { handleBranch } from './handlers/branch';
+import { handleInbox, handlePushRegister } from './handlers/inbox';
 
 const app = new Hono<{ Bindings: Env }>();
 
@@ -17,15 +26,29 @@ app.get('/health', (c) =>
     minAppVersion: c.env.MIN_APP_VERSION,
     hasKey: Boolean(c.env.GEMINI_API_KEY),
     hasKv: Boolean(c.env.AI_KV),
+    hasDb: Boolean(c.env.DB),
     time: new Date().toISOString(),
   }),
 );
+
+// Endpoint admin per moderare le domande inviate a "Favilla reale".
+// Protetti da ADMIN_TOKEN (Bearer auth), montati fuori dall'`appGuard`
+// così Favilla può chiamarli da una semplice pagina HTML/curl senza dover
+// inviare gli header `x-client-id`/`x-app-version` dell'app.
+app.get('/admin', handleAdminUi);
+app.get('/admin/ask-real', handleAskRealAdminList);
+app.post('/admin/ask-real/:id', handleAskRealAdminAnswer);
 
 const api = new Hono<{ Bindings: Env }>();
 api.use('*', appGuard);
 
 api.post('/chat', handleChat);
 api.post('/mission', handleMission);
+api.post('/branch', handleBranch);
+api.post('/panel-image', handlePanelImage);
+api.post('/ask-real', handleAskReal);
+api.post('/push/register', handlePushRegister);
+api.get('/inbox', handleInbox);
 api.post('/caption', (c) => notImplemented(c, 'caption'));
 api.post('/next-panel', (c) => notImplemented(c, 'next-panel'));
 

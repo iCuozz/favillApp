@@ -28,6 +28,14 @@ class AiRateLimiter {
     final next = (prefs.getInt(_key) ?? 0) + 1;
     await prefs.setInt(_key, next);
   }
+
+  /// Forza il counter al valore [used] (clamp 0..perDay). Usato per
+  /// sincronizzarsi con `remaining` autorevole restituito dal server.
+  Future<void> setUsed(int used) async {
+    final prefs = await SharedPreferences.getInstance();
+    final clamped = used.clamp(0, perDay);
+    await prefs.setInt(_key, clamped);
+  }
 }
 
 class AiQuotaExceeded implements Exception {

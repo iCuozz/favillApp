@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import '../l10n/app_strings.dart';
 import '../models/comic_data.dart';
+import '../services/inbox_service.dart';
 import '../services/progress_service.dart';
 import '../main.dart';
 import '../services/ai/ai_client.dart';
 import 'ai/ai_hub_page.dart';
+import 'ai/inbox_page.dart';
 import 'episodes_list_page.dart';
 import 'settings_page.dart';
 import '../widgets/comic_title.dart';
@@ -136,6 +138,56 @@ class _HomeCoverPageState extends State<HomeCoverPage> with WidgetsBindingObserv
                   right: 8,
                   child: Row(
                     children: [
+                      ValueListenableBuilder<int>(
+                        valueListenable: InboxService.instance.unreadCount,
+                        builder: (context, unread, _) {
+                          return IconButton(
+                            tooltip: AppStrings.inboxOpenTooltip,
+                            icon: Stack(
+                              clipBehavior: Clip.none,
+                              children: [
+                                const Icon(Icons.mail_outline,
+                                    color: Colors.white),
+                                if (unread > 0)
+                                  Positioned(
+                                    right: -4,
+                                    top: -4,
+                                    child: Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 5, vertical: 1),
+                                      decoration: BoxDecoration(
+                                        color: Colors.amberAccent.shade100,
+                                        borderRadius:
+                                            BorderRadius.circular(10),
+                                      ),
+                                      constraints: const BoxConstraints(
+                                        minWidth: 16,
+                                        minHeight: 16,
+                                      ),
+                                      child: Text(
+                                        unread > 9 ? '9+' : '$unread',
+                                        style: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ),
+                              ],
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => const InboxPage(),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                      ),
                       if (AiClient.instance.enabled)
                         IconButton(
                           tooltip: AppStrings.aiHubTitle,

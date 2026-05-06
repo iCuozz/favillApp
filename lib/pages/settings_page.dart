@@ -79,7 +79,13 @@ class _SettingsPageState extends State<SettingsPage> {
                       else
                         const SizedBox(width: 18),
                       const SizedBox(width: 8),
-                      Text(l.label),
+                      Flexible(
+                        child: Text(
+                          l.label,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
                     ],
                   ),
                 ),

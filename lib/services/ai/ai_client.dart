@@ -109,7 +109,15 @@ class AiClient {
     if (res.statusCode >= 200 && res.statusCode < 300) {
       final decoded = _decodeJson(res.body);
       if (limiter != null) {
-        await limiter.consume();
+        // Server è autorevole: se ha restituito `remaining`, allinea il
+        // counter locale (evita drift quando le cose vanno in errore con
+        // refund). Fallback: incremento standard.
+        final remaining = decoded['remaining'];
+        if (remaining is int) {
+          await limiter.setUsed(limiter.perDay - remaining);
+        } else {
+          await limiter.consume();
+        }
       }
       if (cacheable) {
         await AiCache.write(endpoint, payload, jsonEncode(decoded));
@@ -123,6 +131,11 @@ class AiClient {
     if (kDebugMode) {
       debugPrint('AI error $code (${res.statusCode}): $msg');
     }
+    // Se il server dice "quota esaurita", forza il locale a saturazione:
+    // l'utente vede subito 0 rimasti senza dover ritentare.
+    if (limiter != null && res.statusCode == 429 && code == 'quota_exceeded') {
+      await limiter.setUsed(limiter.perDay);
+    }
     throw AiException(code, msg, status: res.statusCode);
   }
 
@@ -132,6 +145,41 @@ class AiClient {
         .get(Uri.parse('$baseUrl/health'))
         .timeout(const Duration(seconds: 10));
     return _decodeJson(res.body);
+  }
+
+  /// GET verso `/v1/<endpoint>` con headers app standard.
+  Future<Map<String, dynamic>> get(
+    String endpoint, {
+    Map<String, String>? query,
+    Duration timeout = const Duration(seconds: 15),
+  }) async {
+    if (!enabled) {
+      throw AiException('ai_disabled', 'AI base URL non configurato.');
+    }
+    final clientId = await ClientId.get();
+    final appVersion = await _appVersion();
+    final url = Uri.parse('$baseUrl/v1/$endpoint')
+        .replace(queryParameters: query);
+
+    http.Response res;
+    try {
+      res = await http.get(url, headers: {
+        'x-client-id': clientId,
+        'x-app-version': appVersion,
+      }).timeout(timeout);
+    } on TimeoutException {
+      throw AiException('timeout', 'Timeout.');
+    } catch (e) {
+      throw AiException('network', 'Errore di rete: $e');
+    }
+
+    if (res.statusCode >= 200 && res.statusCode < 300) {
+      return _decodeJson(res.body);
+    }
+    final decoded = _safeDecode(res.body);
+    final code = (decoded?['error'] as String?) ?? 'http_${res.statusCode}';
+    final msg = (decoded?['message'] as String?) ?? res.body;
+    throw AiException(code, msg, status: res.statusCode);
   }
 
   Map<String, dynamic> _decodeJson(String body) {

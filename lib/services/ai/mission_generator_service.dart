@@ -6,6 +6,7 @@ import 'package:uuid/uuid.dart';
 import '../settings_service.dart';
 import 'ai_client.dart';
 import 'ai_rate_limiter.dart';
+import 'panel_image_service.dart';
 
 /// Pannello di una missione generata dall'AI. Schema parallelo (ma più
 /// semplice) di [Panel] in models/comic_data.dart.
@@ -36,18 +37,38 @@ class GeneratedTextBlock {
 
 class GeneratedPanel {
   final List<GeneratedTextBlock> textBlocks;
+  final String? sceneDescription;
+  final List<String> characters;
 
-  GeneratedPanel({required this.textBlocks});
+  GeneratedPanel({
+    required this.textBlocks,
+    this.sceneDescription,
+    this.characters = const [],
+  });
 
   factory GeneratedPanel.fromJson(Map<String, dynamic> j) {
     final blocks = (j['textBlocks'] as List<dynamic>? ?? [])
         .map((e) => GeneratedTextBlock.fromJson(e as Map<String, dynamic>))
         .toList();
-    return GeneratedPanel(textBlocks: blocks);
+    final inferredChars = <String>{};
+    for (final b in blocks) {
+      if (b.speaker != 'narrator') inferredChars.add(b.speaker);
+    }
+    final scene = (j['sceneDescription'] as String?)?.trim();
+    return GeneratedPanel(
+      textBlocks: blocks,
+      sceneDescription: (scene == null || scene.isEmpty) ? null : scene,
+      characters: (j['characters'] as List<dynamic>?)
+              ?.map((e) => e.toString())
+              .toList() ??
+          inferredChars.toList(),
+    );
   }
 
   Map<String, dynamic> toJson() => {
         'textBlocks': textBlocks.map((b) => b.toJson()).toList(),
+        if (sceneDescription != null) 'sceneDescription': sceneDescription,
+        if (characters.isNotEmpty) 'characters': characters,
       };
 }
 
@@ -218,11 +239,16 @@ class MissionGeneratorService {
   Future<void> delete(String id) async {
     final prefs = await SharedPreferences.getInstance();
     final current = await loadCollection();
+    final target = current.where((m) => m.id == id).firstOrNull;
     final next = current.where((m) => m.id != id).toList();
     await prefs.setString(
       _kStorageKey,
       jsonEncode(next.map((m) => m.toJson()).toList()),
     );
+    if (target != null) {
+      await PanelImageService.instance
+          .deleteForMission(target.id, target.panels.length);
+    }
   }
 
   /// Suggerimenti di situazioni "tipo".

@@ -9,6 +9,7 @@ import '../../services/ai/mission_generator_service.dart';
 import '../../services/settings_service.dart';
 import '../../services/tts/tts_service.dart';
 import '../../widgets/mission_panel_backdrop.dart';
+import '../../widgets/panel_image_view.dart';
 import 'my_missions_page.dart';
 
 class MissionGeneratorPage extends StatefulWidget {
@@ -314,6 +315,7 @@ class _MissionGeneratorPageState extends State<MissionGeneratorPage> {
         const SizedBox(height: 16),
         ...List.generate(m.panels.length, (i) {
           return _MissionPanelCard(
+            mission: m,
             index: i + 1,
             total: m.panels.length,
             panel: m.panels[i],
@@ -367,12 +369,14 @@ class _MissionGeneratorPageState extends State<MissionGeneratorPage> {
 }
 
 class _MissionPanelCard extends StatelessWidget {
+  final GeneratedMission mission;
   final int index;
   final int total;
   final GeneratedPanel panel;
   final int seed;
 
   const _MissionPanelCard({
+    required this.mission,
     required this.index,
     required this.total,
     required this.panel,
@@ -381,39 +385,50 @@ class _MissionPanelCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final caption = Padding(
+      padding: const EdgeInsets.fromLTRB(14, 12, 14, 14),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(
+                horizontal: 8, vertical: 3),
+            decoration: BoxDecoration(
+              color: Colors.black.withAlpha(180),
+              borderRadius: BorderRadius.circular(4),
+            ),
+            child: Text(
+              AppStrings.missionPanelLabel(index, total),
+              style: const TextStyle(
+                fontSize: 11,
+                letterSpacing: 1.2,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          const SizedBox(height: 10),
+          ...panel.textBlocks.map((b) => _MissionBlock(block: b)),
+        ],
+      ),
+    );
+
+    final hasScene = (panel.sceneDescription ?? '').trim().isNotEmpty;
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
-      child: MissionPanelBackdrop(
-        panel: panel,
-        seed: seed,
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(14, 12, 14, 14),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 8, vertical: 3),
-                decoration: BoxDecoration(
-                  color: Colors.black.withAlpha(180),
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                child: Text(
-                  AppStrings.missionPanelLabel(index, total),
-                  style: const TextStyle(
-                    fontSize: 11,
-                    letterSpacing: 1.2,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 10),
-              ...panel.textBlocks.map((b) => _MissionBlock(block: b)),
-            ],
-          ),
-        ),
-      ),
+      child: hasScene
+          ? PanelImageView(
+              mission: mission,
+              panelIndex: index - 1,
+              seed: seed,
+              child: caption,
+            )
+          : MissionPanelBackdrop(
+              panel: panel,
+              seed: seed,
+              child: caption,
+            ),
     );
   }
 }

@@ -86,5 +86,16 @@
       "thumbnail": "assets/episodes/missione_3/thumb.webp",
       "file": "assets/data/episodes/missione_3.json"
     }
+  ],
+  "_drafts": [
+    {
+      "_comment": "Mission #4 – The Pirate Submarine: Favilla Blaze vs. Captain Sparkle",
+      "id": "missione_4",
+      "title": "Mission #4 – The Pirate Submarine",
+      "subtitle": "Favilla Blaze vs. Captain Sparkle",
+      "thumbnail": "assets/episodes/missione_4/thumb.webp",
+      "file": "assets/data/episodes/missione_4.json",
+      "_note": "Disabled: waiting for the 9 consistent AI images."
+    }
   ]
 }

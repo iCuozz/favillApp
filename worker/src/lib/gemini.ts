@@ -46,47 +46,72 @@ export async function callGemini(
     safetySettings: request.safetySettings ?? SAFETY_STRICT,
   };
 
-  const res = await fetch(url, {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify(body),
-  });
+  // Retry su errori transient upstream (503/502/504/429). Free tier Gemini
+  // saltuariamente risponde 503 sotto carico: backoff esponenziale + jitter
+  // per ammorbidire i picchi.
+  const maxAttempts = 5;
+  let lastErrText = '';
+  let lastStatus = 0;
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(body),
+    });
 
-  if (!res.ok) {
-    const errText = await res.text().catch(() => '');
-    throw new GeminiError(
-      `Gemini upstream error ${res.status}`,
-      res.status >= 500 ? 502 : 400,
-      errText.slice(0, 500),
-    );
+    if (res.ok) {
+      const json = (await res.json()) as GeminiResponse;
+      if (json.promptFeedback?.blockReason) {
+        throw new GeminiError(
+          `Blocked by safety: ${json.promptFeedback.blockReason}`,
+          400,
+        );
+      }
+
+      const text = json.candidates?.[0]?.content?.parts
+        ?.map((p) => ('text' in p ? p.text ?? '' : ''))
+        .join('')
+        .trim() ?? '';
+
+      if (!text) {
+        throw new GeminiError('Empty response from Gemini', 502);
+      }
+
+      console.log(JSON.stringify({
+        event: 'gemini_call',
+        client: meta.clientId,
+        model: env.GEMINI_MODEL,
+        bytes: text.length,
+        attempts: attempt,
+      }));
+
+      return { text, raw: json };
+    }
+
+    lastStatus = res.status;
+    lastErrText = await res.text().catch(() => '');
+
+    const isTransient = res.status === 429 || res.status >= 500;
+    if (!isTransient || attempt === maxAttempts) {
+      break;
+    }
+    // 500ms, 1s, 2s, 4s + jitter (max ~7.5s di attesa totale).
+    const delayMs = 500 * Math.pow(2, attempt - 1) + Math.floor(Math.random() * 250);
+    await new Promise((r) => setTimeout(r, delayMs));
   }
 
-  const json = (await res.json()) as GeminiResponse;
-  if (json.promptFeedback?.blockReason) {
-    throw new GeminiError(
-      `Blocked by safety: ${json.promptFeedback.blockReason}`,
-      400,
-    );
-  }
-
-  const text = json.candidates?.[0]?.content?.parts
-    ?.map((p) => ('text' in p ? p.text ?? '' : ''))
-    .join('')
-    .trim() ?? '';
-
-  if (!text) {
-    throw new GeminiError('Empty response from Gemini', 502);
-  }
-
-  // Logging minimale (no body utente, no PII).
   console.log(JSON.stringify({
-    event: 'gemini_call',
+    event: 'gemini_error',
     client: meta.clientId,
     model: env.GEMINI_MODEL,
-    bytes: text.length,
+    status: lastStatus,
   }));
 
-  return { text, raw: json };
+  throw new GeminiError(
+    `Gemini upstream error ${lastStatus}`,
+    lastStatus >= 500 ? 502 : 400,
+    lastErrText.slice(0, 500),
+  );
 }
 
 export class GeminiError extends Error {

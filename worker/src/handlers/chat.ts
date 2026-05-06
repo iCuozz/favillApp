@@ -1,7 +1,7 @@
 import type { Context } from 'hono';
 import type { Env } from '../env';
-import { callGemini } from '../lib/gemini';
-import { checkRateLimit } from '../lib/rate_limit';
+import { callGemini, GeminiError } from '../lib/gemini';
+import { checkRateLimit, refundRateLimit } from '../lib/rate_limit';
 import { charactersFullBlock } from '../lib/characters';
 
 interface ChatTurn {
@@ -85,23 +85,33 @@ export async function handleChat(c: Context<{ Bindings: Env }>): Promise<Respons
       parts: [{ text: t.text.slice(0, MAX_USER_CHARS) }],
     }));
 
-  const { text } = await callGemini(c.env, meta, {
-    systemInstruction: { parts: [{ text: system }] },
-    contents: [
-      ...history,
-      { role: 'user', parts: [{ text: message }] },
-    ],
-    generationConfig: {
-      temperature: 0.85,
-      topP: 0.95,
-      maxOutputTokens: 512,
-      responseMimeType: 'text/plain',
-      // gemini-2.5-flash usa "thinking tokens": disabilitato per non
-      // consumare il budget output con ragionamenti interni inutili
-      // per una breve risposta in-character.
-      thinkingConfig: { thinkingBudget: 0 },
-    },
-  });
+  let text: string;
+  try {
+    const r = await callGemini(c.env, meta, {
+      systemInstruction: { parts: [{ text: system }] },
+      contents: [
+        ...history,
+        { role: 'user', parts: [{ text: message }] },
+      ],
+      generationConfig: {
+        temperature: 0.85,
+        topP: 0.95,
+        maxOutputTokens: 512,
+        responseMimeType: 'text/plain',
+        // gemini-2.5-flash usa "thinking tokens": disabilitato per non
+        // consumare il budget output con ragionamenti interni inutili
+        // per una breve risposta in-character.
+        thinkingConfig: { thinkingBudget: 0 },
+      },
+    });
+    text = r.text;
+  } catch (err) {
+    // Errore upstream: non punire l'utente, restituisci il tentativo.
+    if (err instanceof GeminiError && err.status >= 500) {
+      await refundRateLimit(c.env, meta, 'chat');
+    }
+    throw err;
+  }
 
   return c.json({
     reply: text,

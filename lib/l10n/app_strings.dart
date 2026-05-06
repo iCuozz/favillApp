@@ -101,6 +101,61 @@ class AppStrings {
       'Mmh, su questo non posso aiutarti. Cambiamo storia?',
       'Hmm, can\'t help with that. Let\'s change story?');
 
+  // === Ask Real Favilla (a.k.a. "Favilla coi superpoteri") ===
+  static String get askRealCta => _t(
+      '✨ Chiedi a Favilla coi superpoteri',
+      '✨ Ask Favilla with superpowers');
+  static String get askRealSheetTitle => _t(
+      'Chiedi a Favilla coi superpoteri',
+      'Ask Favilla with superpowers');
+  static String get askRealSheetIntro => _t(
+      'La tua domanda finisce in una coda moderata. '
+      'Favilla coi superpoteri legge personalmente le domande più belle '
+      'e risponde sui social o direttamente in app. Nessuna risposta è garantita.',
+      'Your question goes into a moderated queue. '
+      'Favilla with superpowers personally reads the best ones and replies '
+      'on social media or directly in the app. No reply is guaranteed.');
+  static String get askRealContactLabel => _t(
+      'Contatto (opzionale: email o @instagram)',
+      'Contact (optional: email or @instagram)');
+  static String get askRealContactHint => _t(
+      'Per essere avvisata se Favilla risponde',
+      'So we can notify you if Favilla replies');
+  static String get askRealSubmit => _t('Invia a Favilla', 'Send to Favilla');
+  static String get askRealSent => _t(
+      '🦸‍♀️ Domanda inviata! Favilla la leggerà presto.',
+      '🦸‍♀️ Question sent! Favilla will read it soon.');
+  static String get askRealAlreadySent => _t(
+      'Già inviata a Favilla',
+      'Already sent to Favilla');
+  static String askRealQuotaLeft(int n) => _t(
+      'Domande rimaste oggi: $n',
+      'Questions left today: $n');
+  static String get askRealQuotaExceeded => _t(
+      'Puoi inviare massimo 3 domande al giorno a Favilla. Riprova domani.',
+      'Max 3 questions per day to Favilla. Try again tomorrow.');
+  static String get askRealError => _t(
+      'Non sono riuscito a inviare. Riprova.',
+      'Couldn\'t send. Try again.');
+  static String get askRealEmptyHint => _t(
+      'Hai una domanda particolare per Favilla coi superpoteri? Inviala direttamente a lei.',
+      'Got a special question for Favilla with superpowers? Send it straight to her.');
+  static String get askRealComposeHint => _t(
+      'Scrivi qui la tua domanda per Favilla…',
+      'Write your question for Favilla here…');
+
+  // === Inbox (risposte di Favilla coi superpoteri) ===
+  static String get inboxTitle => _t('Risposte di Favilla', 'Favilla replies');
+  static String get inboxOpenTooltip => _t('Le tue risposte', 'Your replies');
+  static String get inboxMarkAllRead => _t('Segna tutte come lette', 'Mark all as read');
+  static String get inboxRefresh => _t('Aggiorna', 'Refresh');
+  static String get inboxEmpty => _t(
+      'Ancora nessuna risposta. Quando Favilla coi superpoteri ti risponde, la trovi qui.',
+      'No replies yet. When Favilla with superpowers answers, you\'ll find it here.');
+  static String get inboxFromFavilla => _t(
+      'Favilla coi superpoteri ti ha risposto',
+      'Favilla with superpowers replied');
+
   // === AI Hub ===
   static String get aiHubTitle => _t('Studio AI', 'AI Studio');
   static String get aiHubIntro => _t(
@@ -110,6 +165,34 @@ class AppStrings {
   // === Mission generator ===
   static String get missionTitle =>
       _t('Genera missione', 'Generate mission');
+
+  // === Branch / Storia a Bivio ===
+  static String get branchTitle => _t('Storia a Bivio', 'Branching Story');
+  static String get branchSubtitle => _t(
+      'Scegli tu come va a finire. Ogni partita è diversa.',
+      'You choose how it ends. Every run is different.');
+  static String get branchIntro => _t(
+      'Inserisci uno spunto e scopri dove ti porta. Ad ogni scena Favilla ti propone bivi: scegli e prosegui.',
+      'Drop a starting hook and see where it goes. At each scene Favilla offers branches: choose and continue.');
+  static String get branchSeedHint => _t(
+      'Es. "Sparkle Ale ha trovato il telecomando del condizionatore"',
+      'E.g. "Sparkle Ale found the AC remote"');
+  static String get branchStart => _t('Inizia la storia', 'Start the story');
+  static String get branchLoading => _t('Carico…', 'Loading…');
+  static String get branchThinking =>
+      _t('Favilla decide cosa succede…', 'Favilla decides what happens…');
+  static String get branchChoosePrompt =>
+      _t('SCEGLI COME PROSEGUIRE', 'CHOOSE WHAT HAPPENS NEXT');
+  static String get branchEnding => _t('Fine della storia', 'End of the story');
+  static String get branchRestart =>
+      _t('Riparti con una nuova storia', 'Restart with a new story');
+  static String get branchQuotaExceeded => _t(
+      'Hai esaurito le storie a bivio per oggi. Riprova domani.',
+      'You used all your branching stories for today. Try again tomorrow.');
+  static String get branchError => _t(
+      'Errore generando la prossima scena. Riprova.',
+      'Error generating the next scene. Try again.');
+
   static String get missionSubtitle => _t(
       'Trasforma il tuo caos quotidiano in un mini-fumetto.',
       'Turn your daily chaos into a mini comic.');

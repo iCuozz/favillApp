@@ -1,7 +1,7 @@
 import type { Context } from 'hono';
 import type { Env } from '../env';
-import { callGemini } from '../lib/gemini';
-import { checkRateLimit } from '../lib/rate_limit';
+import { callGemini, GeminiError } from '../lib/gemini';
+import { checkRateLimit, refundRateLimit } from '../lib/rate_limit';
 import { charactersShortBlock, charactersFullBlock } from '../lib/characters';
 
 interface MissionBody {
@@ -30,6 +30,7 @@ Regole:
 - L'ultimo pannello chiude con una battuta di Favilla che dà coraggio al lettore (max 2 frasi, calda, mai didascalica).
 - Niente link, email, numeri di telefono, indirizzi.
 - Niente nomi propri reali del lettore: parla in seconda persona.
+- Per OGNI pannello aggiungi un campo "sceneDescription": UNA frase in INGLESE (max 25 parole) che descriva la scena visiva del pannello (luogo, azione, oggetti, espressione dei personaggi). NIENTE testo, dialoghi, virgolette, parolacce. Esempio: "messy kitchen at dawn, tired smiling supermom holding a small chaotic kid throwing pillows, warm light from window".
 
 Ritorna ESCLUSIVAMENTE JSON valido conforme allo schema fornito. Niente markdown, niente testo extra.`;
 
@@ -51,6 +52,7 @@ Rules:
 - The last panel ends with a line by Favilla encouraging the reader (max 2 sentences, warm, never preachy).
 - No links, emails, phone numbers, addresses.
 - No real reader names: address them in the second person.
+- For EACH panel also output a "sceneDescription" field: ONE sentence in ENGLISH (max 25 words) describing the panel's visual scene (location, action, objects, character expressions). NO text, dialogue, quotes, profanity. Example: "messy kitchen at dawn, tired smiling supermom holding a small chaotic kid throwing pillows, warm light from window".
 
 Return ONLY valid JSON conforming to the provided schema. No markdown, no extra text.`;
 
@@ -66,6 +68,7 @@ const RESPONSE_SCHEMA = {
       items: {
         type: 'OBJECT',
         properties: {
+          sceneDescription: { type: 'STRING' },
           textBlocks: {
             type: 'ARRAY',
             minItems: 2,
@@ -87,7 +90,7 @@ const RESPONSE_SCHEMA = {
             },
           },
         },
-        required: ['textBlocks'],
+        required: ['sceneDescription', 'textBlocks'],
       },
     },
   },
@@ -126,25 +129,36 @@ export async function handleMission(
     ? `Reader's situation: """${situation}"""\nGenerate the comic mission as JSON.`
     : `Situazione del lettore: """${situation}"""\nGenera la missione a fumetti come JSON.`;
 
-  const { text } = await callGemini(c.env, meta, {
-    systemInstruction: { parts: [{ text: system }] },
-    contents: [
-      { role: 'user', parts: [{ text: userPrompt }] },
-    ],
-    generationConfig: {
-      temperature: 0.95,
-      topP: 0.95,
-      maxOutputTokens: 2400,
-      responseMimeType: 'application/json',
-      responseSchema: RESPONSE_SCHEMA,
-      thinkingConfig: { thinkingBudget: 0 },
-    },
-  });
+  let text: string;
+  try {
+    const r = await callGemini(c.env, meta, {
+      systemInstruction: { parts: [{ text: system }] },
+      contents: [
+        { role: 'user', parts: [{ text: userPrompt }] },
+      ],
+      generationConfig: {
+        temperature: 0.95,
+        topP: 0.95,
+        maxOutputTokens: 2400,
+        responseMimeType: 'application/json',
+        responseSchema: RESPONSE_SCHEMA,
+        thinkingConfig: { thinkingBudget: 0 },
+      },
+    });
+    text = r.text;
+  } catch (err) {
+    if (err instanceof GeminiError && err.status >= 500) {
+      await refundRateLimit(c.env, meta, 'mission');
+    }
+    throw err;
+  }
 
   let mission: unknown;
   try {
     mission = JSON.parse(text);
   } catch {
+    // JSON malformato dell'AI: refund + restituiamo errore.
+    await refundRateLimit(c.env, meta, 'mission');
     return c.json(
       { error: 'bad_ai_response', message: 'AI returned invalid JSON.' },
       502,
@@ -152,6 +166,7 @@ export async function handleMission(
   }
 
   if (!isValidMission(mission)) {
+    await refundRateLimit(c.env, meta, 'mission');
     return c.json(
       { error: 'bad_ai_response', message: 'AI mission did not match schema.' },
       502,
@@ -169,6 +184,7 @@ interface MissionShape {
   title: string;
   subtitle?: string;
   panels: Array<{
+    sceneDescription?: string;
     textBlocks: Array<{
       type: 'narration' | 'dialogue' | 'thought';
       speaker: 'favilla' | 'sparkle_ale' | 'mallow_bellow' | 'narrator';

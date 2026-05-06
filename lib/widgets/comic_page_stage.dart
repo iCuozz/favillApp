@@ -223,20 +223,25 @@ class ComicPageStageState extends State<ComicPageStage> {
                   ),
                   const SizedBox(width: 10),
                   Expanded(
-                    child: Row(
-                      children: List.generate(totalBlocks, (index) {
-                        final isVisible = index < visibleBlocks;
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      alignment: Alignment.centerLeft,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: List.generate(totalBlocks, (index) {
+                          final isVisible = index < visibleBlocks;
 
-                        return Container(
-                          width: 7,
-                          height: 7,
-                          margin: const EdgeInsets.only(right: 5),
-                          decoration: BoxDecoration(
-                            color: isVisible ? Colors.white : Colors.white24,
-                            shape: BoxShape.circle,
-                          ),
-                        );
-                      }),
+                          return Container(
+                            width: 7,
+                            height: 7,
+                            margin: const EdgeInsets.only(right: 5),
+                            decoration: BoxDecoration(
+                              color: isVisible ? Colors.white : Colors.white24,
+                              shape: BoxShape.circle,
+                            ),
+                          );
+                        }),
+                      ),
                     ),
                   ),
                   ValueListenableBuilder<bool>(

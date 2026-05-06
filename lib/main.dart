@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -6,7 +8,9 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 import 'models/comic_data.dart';
 import 'services/comic_loader.dart';
 import 'services/engagement_service.dart';
+import 'services/inbox_service.dart';
 import 'services/progress_service.dart';
+import 'services/push_service.dart';
 import 'services/settings_service.dart';
 import 'l10n/app_strings.dart';
 import 'pages/home_cover_page.dart';
@@ -19,6 +23,10 @@ const String _kSentryDsn =
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SettingsService.init();
+
+  // Inbox in locale + push (best-effort, mai bloccante).
+  unawaited(InboxService.instance.init().then((_) => InboxService.instance.sync()));
+  unawaited(PushService.instance.init());
 
   await SentryFlutter.init(
     (options) {
@@ -36,8 +44,34 @@ Future<void> main() async {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      // Polling fallback: anche senza FCM (es. token non ancora registrato)
+      // appena l'app torna in foreground proviamo a recuperare nuove risposte.
+      unawaited(InboxService.instance.sync());
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -437,14 +471,18 @@ class _EpisodePageState extends State<EpisodePage> {
                   children: [
                     const Icon(Icons.grid_view, size: 20),
                     const SizedBox(width: 8),
-                    Text(
-                      AppStrings.jumpToPage,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+                    Expanded(
+                      child: Text(
+                        AppStrings.jumpToPage,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
-                    const Spacer(),
+                    const SizedBox(width: 8),
                     Text(
                       '${_maxVisitedIndex + 1} / ${pages.length}',
                       style: TextStyle(

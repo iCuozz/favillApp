@@ -4,8 +4,10 @@ import '../../l10n/app_strings.dart';
 import '../../services/ai/ai_client.dart';
 import '../../services/ai/ai_rate_limiter.dart';
 import '../../services/ai/ask_favilla_service.dart';
+import '../../services/inbox_service.dart';
 import '../../services/settings_service.dart';
 import '../../services/tts/tts_service.dart';
+import 'inbox_page.dart';
 
 class AskFavillaPage extends StatefulWidget {
   const AskFavillaPage({super.key});
@@ -115,7 +117,14 @@ class _AskFavillaPageState extends State<AskFavillaPage> {
       }
       setState(() {
         _errorBanner = banner;
-        _messages = _messages.sublist(0, _messages.length - 1);
+        // Manteniamo il messaggio utente in cronologia (non lo rimuoviamo):
+        // così l'utente vede che la sua domanda è registrata e può usare
+        // la CTA "Chiedi a Favilla reale" come fallback. Solo per quota
+        // esaurita rimuoviamo il msg, perché in quel caso il fallback
+        // non aggiunge valore (si è già speso il tentativo).
+        if (e.code == 'quota_exceeded' || e.code == 'ai_disabled') {
+          _messages = _messages.sublist(0, _messages.length - 1);
+        }
       });
     } finally {
       if (mounted) {
@@ -165,6 +174,58 @@ class _AskFavillaPageState extends State<AskFavillaPage> {
       appBar: AppBar(
         title: Text(AppStrings.askFavillaTitle),
         actions: [
+          ValueListenableBuilder<int>(
+            valueListenable: InboxService.instance.unreadCount,
+            builder: (context, unread, _) {
+              return IconButton(
+                tooltip: AppStrings.inboxOpenTooltip,
+                icon: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    const Icon(Icons.mail_outline),
+                    if (unread > 0)
+                      Positioned(
+                        right: -4,
+                        top: -4,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 5, vertical: 1),
+                          decoration: BoxDecoration(
+                            color: Colors.amberAccent.shade100,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          constraints: const BoxConstraints(
+                            minWidth: 16,
+                            minHeight: 16,
+                          ),
+                          child: Text(
+                            unread > 9 ? '9+' : '$unread',
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+                onPressed: () {
+                  SettingsService.tapFeedback();
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (_) => const InboxPage(),
+                  ));
+                },
+              );
+            },
+          ),
+          IconButton(
+            tooltip: AppStrings.askRealCta,
+            icon: const Icon(Icons.auto_awesome),
+            color: Colors.amberAccent.shade100,
+            onPressed: _openSendToRealSheetStandalone,
+          ),
           IconButton(
             tooltip: AppStrings.askFavillaNewChat,
             icon: const Icon(Icons.refresh),
@@ -241,7 +302,82 @@ class _AskFavillaPageState extends State<AskFavillaPage> {
                     ))
                 .toList(),
           ),
+          const SizedBox(height: 32),
+          _buildAskRealCard(),
         ],
+      ),
+    );
+  }
+
+  Widget _buildAskRealCard() {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Colors.amber.shade700.withAlpha(60),
+            Colors.deepOrange.shade400.withAlpha(60),
+          ],
+        ),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Colors.amberAccent.shade100, width: 1.4),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Text('✨', style: TextStyle(fontSize: 22)),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  AppStrings.askRealCta,
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w800,
+                    color: Colors.amberAccent.shade100,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Text(
+            AppStrings.askRealEmptyHint,
+            style: TextStyle(
+              fontSize: 12.5,
+              color: Colors.grey.shade300,
+              height: 1.4,
+            ),
+          ),
+          const SizedBox(height: 12),
+          Align(
+            alignment: Alignment.centerRight,
+            child: FilledButton.tonalIcon(
+              onPressed: () => _openSendToRealSheetStandalone(),
+              icon: const Icon(Icons.auto_awesome, size: 18),
+              label: Text(AppStrings.askRealCta),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _openSendToRealSheetStandalone() async {
+    SettingsService.tapFeedback();
+    await showModalBottomSheet<bool>(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (ctx) => const _SendToRealSheet(
+        question: '',
+        aiAnswer: null,
       ),
     );
   }
@@ -256,12 +392,76 @@ class _AskFavillaPageState extends State<AskFavillaPage> {
           return _ThinkingBubble();
         }
         final m = _messages[index];
+        final canSendToReal = m.role == ChatRole.model &&
+            !m.sentToReal &&
+            index > 0 &&
+            _messages[index - 1].role == ChatRole.user;
+        // Se un messaggio utente non ha una risposta model successiva
+        // (tipico dopo un errore AI) e non è già stato inoltrato, offriamo
+        // la CTA "Chiedi a Favilla reale" come fallback diretto.
+        final isOrphanUser = m.role == ChatRole.user &&
+            !m.sentToReal &&
+            !_sending &&
+            (index == _messages.length - 1 ||
+                _messages[index + 1].role != ChatRole.model);
         return _ChatBubble(
           message: m,
           onSpeak: m.role == ChatRole.model ? () => _speak(m.text) : null,
+          onSendToReal: canSendToReal
+              ? () => _openSendToRealSheet(index)
+              : (isOrphanUser ? () => _openSendToRealSheetForUser(index) : null),
         );
       },
     );
+  }
+
+  Future<void> _openSendToRealSheetForUser(int userIndex) async {
+    SettingsService.tapFeedback();
+    final question = _messages[userIndex].text;
+
+    final sent = await showModalBottomSheet<bool>(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (ctx) => _SendToRealSheet(
+        question: question,
+        aiAnswer: null,
+      ),
+    );
+    if (sent != true || !mounted) return;
+
+    final updated = [..._messages];
+    updated[userIndex] = updated[userIndex].copyWith(sentToReal: true);
+    setState(() => _messages = updated);
+    await _service.persist(updated);
+  }
+
+  Future<void> _openSendToRealSheet(int modelIndex) async {
+    SettingsService.tapFeedback();
+    final question = _messages[modelIndex - 1].text;
+    final aiAnswer = _messages[modelIndex].text;
+
+    final sent = await showModalBottomSheet<bool>(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (ctx) => _SendToRealSheet(
+        question: question,
+        aiAnswer: aiAnswer,
+      ),
+    );
+    if (sent != true || !mounted) return;
+
+    final updated = [..._messages];
+    updated[modelIndex] = updated[modelIndex].copyWith(sentToReal: true);
+    setState(() => _messages = updated);
+    await _service.persist(updated);
   }
 
   Widget _buildQuota() {
@@ -325,8 +525,13 @@ class _AskFavillaPageState extends State<AskFavillaPage> {
 class _ChatBubble extends StatelessWidget {
   final ChatMessage message;
   final VoidCallback? onSpeak;
+  final VoidCallback? onSendToReal;
 
-  const _ChatBubble({required this.message, this.onSpeak});
+  const _ChatBubble({
+    required this.message,
+    this.onSpeak,
+    this.onSendToReal,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -413,6 +618,53 @@ class _ChatBubble extends StatelessWidget {
                     },
                   ),
                 ),
+              if (onSendToReal != null || message.sentToReal)
+                Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Align(
+                    alignment:
+                        isUser ? Alignment.centerRight : Alignment.centerLeft,
+                    child: message.sentToReal
+                        ? Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                Icons.check_circle,
+                                size: 14,
+                                color: Colors.white.withAlpha(180),
+                              ),
+                              const SizedBox(width: 4),
+                              Text(
+                                AppStrings.askRealAlreadySent,
+                                style: TextStyle(
+                                  fontSize: 11,
+                                  color: Colors.white.withAlpha(180),
+                                  fontStyle: FontStyle.italic,
+                                ),
+                              ),
+                            ],
+                          )
+                        : InkWell(
+                            onTap: onSendToReal,
+                            borderRadius: BorderRadius.circular(12),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 4),
+                              child: Text(
+                                AppStrings.askRealCta,
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.amberAccent.shade100,
+                                  fontWeight: FontWeight.w600,
+                                  decoration: TextDecoration.underline,
+                                  decorationColor:
+                                      Colors.amberAccent.shade100,
+                                ),
+                              ),
+                            ),
+                          ),
+                  ),
+                ),
             ],
           ),
         ),
@@ -445,6 +697,182 @@ class _ThinkingBubble extends StatelessWidget {
             Text(
               AppStrings.askFavillaThinking,
               style: const TextStyle(color: Colors.white, fontSize: 12),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _SendToRealSheet extends StatefulWidget {
+  final String question;
+  final String? aiAnswer;
+
+  const _SendToRealSheet({
+    required this.question,
+    required this.aiAnswer,
+  });
+
+  @override
+  State<_SendToRealSheet> createState() => _SendToRealSheetState();
+}
+
+class _SendToRealSheetState extends State<_SendToRealSheet> {
+  final TextEditingController _contactCtrl = TextEditingController();
+  final TextEditingController _questionCtrl = TextEditingController();
+  bool _sending = false;
+  String? _error;
+
+  bool get _composeMode => widget.question.isEmpty;
+
+  @override
+  void dispose() {
+    _contactCtrl.dispose();
+    _questionCtrl.dispose();
+    super.dispose();
+  }
+
+  Future<void> _submit() async {
+    if (_sending) return;
+    final question =
+        _composeMode ? _questionCtrl.text.trim() : widget.question;
+    if (question.isEmpty) {
+      setState(() => _error = AppStrings.askRealError);
+      return;
+    }
+    SettingsService.tapFeedback();
+    setState(() {
+      _sending = true;
+      _error = null;
+    });
+    try {
+      final remaining = await AskFavillaService.instance.submitToReal(
+        question: question,
+        aiAnswer: widget.aiAnswer,
+        contact: _contactCtrl.text.trim(),
+      );
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('${AppStrings.askRealSent} '
+              '(${AppStrings.askRealQuotaLeft(remaining)})'),
+        ),
+      );
+      Navigator.pop(context, true);
+    } on AiQuotaExceeded {
+      if (!mounted) return;
+      setState(() {
+        _error = AppStrings.askRealQuotaExceeded;
+        _sending = false;
+      });
+    } on AiException catch (e) {
+      if (!mounted) return;
+      setState(() {
+        _error = e.code == 'quota_exceeded'
+            ? AppStrings.askRealQuotaExceeded
+            : AppStrings.askRealError;
+        _sending = false;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final viewInsets = MediaQuery.of(context).viewInsets;
+    return Padding(
+      padding: EdgeInsets.fromLTRB(20, 16, 20, 20 + viewInsets.bottom),
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(
+              child: Container(
+                width: 40,
+                height: 4,
+                margin: const EdgeInsets.only(bottom: 12),
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade600,
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+            ),
+            Text(
+              AppStrings.askRealSheetTitle,
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              AppStrings.askRealSheetIntro,
+              style: TextStyle(
+                fontSize: 13,
+                color: Colors.grey.shade400,
+                height: 1.4,
+              ),
+            ),
+            const SizedBox(height: 16),
+            if (_composeMode)
+              TextField(
+                controller: _questionCtrl,
+                enabled: !_sending,
+                minLines: 3,
+                maxLines: 6,
+                maxLength: 600,
+                autofocus: true,
+                decoration: InputDecoration(
+                  hintText: AppStrings.askRealComposeHint,
+                  border: const OutlineInputBorder(),
+                  isDense: true,
+                ),
+              )
+            else
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Colors.deepPurple.withAlpha(40),
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: Colors.deepPurple.shade400),
+                ),
+                child: Text(
+                  widget.question,
+                  style: const TextStyle(fontSize: 13, height: 1.35),
+                ),
+              ),
+            const SizedBox(height: 16),
+            TextField(
+              controller: _contactCtrl,
+              enabled: !_sending,
+              maxLength: 120,
+              decoration: InputDecoration(
+                labelText: AppStrings.askRealContactLabel,
+                hintText: AppStrings.askRealContactHint,
+                border: const OutlineInputBorder(),
+                isDense: true,
+              ),
+            ),
+            if (_error != null) ...[
+              const SizedBox(height: 8),
+              Text(_error!,
+                  style: const TextStyle(color: Colors.redAccent, fontSize: 12)),
+            ],
+            const SizedBox(height: 12),
+            SizedBox(
+              width: double.infinity,
+              child: FilledButton.icon(
+                onPressed: _sending ? null : _submit,
+                icon: _sending
+                    ? const SizedBox(
+                        width: 16,
+                        height: 16,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      )
+                    : const Icon(Icons.auto_awesome),
+                label: Text(AppStrings.askRealSubmit),
+              ),
             ),
           ],
         ),

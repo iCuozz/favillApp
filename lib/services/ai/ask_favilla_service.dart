@@ -12,23 +12,34 @@ class ChatMessage {
   final ChatRole role;
   final String text;
   final DateTime timestamp;
+  final bool sentToReal;
 
   ChatMessage({
     required this.role,
     required this.text,
     DateTime? timestamp,
+    this.sentToReal = false,
   }) : timestamp = timestamp ?? DateTime.now();
+
+  ChatMessage copyWith({bool? sentToReal}) => ChatMessage(
+        role: role,
+        text: text,
+        timestamp: timestamp,
+        sentToReal: sentToReal ?? this.sentToReal,
+      );
 
   Map<String, dynamic> toJson() => {
         'role': role.name,
         'text': text,
         'ts': timestamp.toIso8601String(),
+        'sentToReal': sentToReal,
       };
 
   factory ChatMessage.fromJson(Map<String, dynamic> j) => ChatMessage(
         role: j['role'] == 'model' ? ChatRole.model : ChatRole.user,
         text: j['text'] as String? ?? '',
         timestamp: DateTime.tryParse(j['ts'] as String? ?? '') ?? DateTime.now(),
+        sentToReal: j['sentToReal'] as bool? ?? false,
       );
 }
 
@@ -42,6 +53,9 @@ class AskFavillaService {
 
   final AiRateLimiter limiter =
       const AiRateLimiter(endpoint: 'chat', perDay: 20);
+
+  final AiRateLimiter askRealLimiter =
+      const AiRateLimiter(endpoint: 'ask-real', perDay: 3);
 
   Future<List<ChatMessage>> loadHistory() async {
     final prefs = await SharedPreferences.getInstance();
@@ -66,6 +80,33 @@ class AskFavillaService {
       _kHistoryKey,
       jsonEncode(trimmed.map((e) => e.toJson()).toList()),
     );
+  }
+
+  /// Pubblico: salva l'intera lista (usato dopo `submitToReal` per
+  /// persistere il flag `sentToReal`).
+  Future<void> persist(List<ChatMessage> messages) => _saveHistory(messages);
+
+  /// Inoltra una domanda + (opzionale) la risposta IA alla coda moderata
+  /// di "Favilla reale". Ritorna `remaining` (quante domande/giorno restano).
+  Future<int> submitToReal({
+    required String question,
+    String? aiAnswer,
+    String? contact,
+  }) async {
+    final payload = <String, dynamic>{
+      'question': question,
+      if (aiAnswer != null && aiAnswer.isNotEmpty) 'aiAnswer': aiAnswer,
+      if (contact != null && contact.isNotEmpty) 'contact': contact,
+    };
+
+    final res = await AiClient.instance.post(
+      'ask-real',
+      payload,
+      limiter: askRealLimiter,
+    );
+
+    final remaining = res['remaining'];
+    return remaining is int ? remaining : 0;
   }
 
   Future<void> clearHistory() async {

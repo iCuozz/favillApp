@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../l10n/app_strings.dart';
 import '../../services/settings_service.dart';
 import 'ask_favilla_page.dart';
+import 'branch_player_page.dart';
 import 'mission_generator_page.dart';
 import 'my_missions_page.dart';
 
@@ -41,6 +42,13 @@ class AiHubPage extends StatelessWidget {
               subtitle: AppStrings.missionSubtitle,
               accent: Colors.deepPurpleAccent,
               onTap: () => _open(context, const MissionGeneratorPage()),
+            ),
+            _AiCard(
+              icon: Icons.alt_route,
+              title: AppStrings.branchTitle,
+              subtitle: AppStrings.branchSubtitle,
+              accent: Colors.amberAccent,
+              onTap: () => _open(context, const BranchPlayerPage()),
             ),
             _AiCard(
               icon: Icons.collections_bookmark_outlined,
