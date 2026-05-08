@@ -1,7 +1,7 @@
 {
   "id": "missione_5",
-  "title": "Missione #5 – Il Colpo della Mano Robotica",
-  "subtitle": "Sparkle Ale, sette mesi, primo furto epico",
+  "title": "Mission #5 – The Robot-Hand Heist",
+  "subtitle": "Sparkle Ale, seven months old, first epic heist",
   "cover": "assets/episodes/missione_5/thumb.webp",
   "pages": [
     {
@@ -15,17 +15,17 @@
             {
               "type": "narration",
               "speaker": "narration",
-              "text": "Sera, Nova Tutinia. L'insegna al neon della pizzeria \"Ora arrivo!\" lampeggia tra il viola e l'arancio."
+              "text": "Evening, Nova Tutinia. The neon sign of the pizzeria \"Ora arrivo!\" blinks between violet and orange."
             },
             {
               "type": "narration",
               "speaker": "narration",
-              "text": "Sabato. Sala piena. Profumo di mozzarella che galleggia tra i tavoli come una nebbia sacra."
+              "text": "Saturday. Full house. The smell of melted mozzarella floating between tables like a sacred fog."
             },
             {
               "type": "narration",
               "speaker": "narration",
-              "text": "Tre coperti per i Bellow. Più un seggiolone alto, foderato di salviette di scorta. La serata sembra tranquilla. Sembra."
+              "text": "Three covers for the Bellow family. Plus a tall high chair, padded with backup napkins. The evening looks calm. It looks."
             }
           ]
         }
@@ -42,32 +42,32 @@
             {
               "type": "narration",
               "speaker": "narration",
-              "text": "Favilla in camicia bianca e gonna tubino nera, borsa Chanel matelassé appoggiata sulla sedia. Stasera è eleganza pura."
+              "text": "Favilla, white shirt, black pencil skirt, quilted Chanel bag resting on the chair. Pure elegance tonight."
             },
             {
               "type": "narration",
               "speaker": "narration",
-              "text": "Mallow ha azzardato una polo azzurra sopra i jeans. Ai piedi, Converse alte gialle. Sul tavolo, naturalmente, il MacBook."
+              "text": "Mallow has dared a sky-blue polo over jeans. On his feet, high yellow Converse. On the table, of course, the MacBook."
             },
             {
               "type": "dialogue",
               "speaker": "mallow_bellow",
-              "text": "Una review veloce… cinque minuti… giuro…"
+              "text": "Quick code review… five minutes… I swear…"
             },
             {
               "type": "dialogue",
               "speaker": "favilla",
-              "text": "Mallow. Bubbà! Mi hai promesso una serata senza laptop."
+              "text": "Mallow. Bubbà! You promised: a laptop-free evening."
             },
             {
               "type": "dialogue",
               "speaker": "mallow_bellow",
-              "text": "Sto compilando in background. Sono qui. Mentalmente sono qui."
+              "text": "Compiling in the background. I'm here. Mentally I'm here."
             },
             {
               "type": "thought",
               "speaker": "favilla",
-              "text": "Tengo io il fronte caos. Come sempre."
+              "text": "I'm holding the chaos front. As always."
             }
           ]
         }
@@ -79,17 +79,17 @@
       "panels": [
         {
           "id": "m5_2",
-          "characters": ["favilla", "mallow_bellow", "sparkle_ale"],
+          "characters": ["favilla", "sparkle_ale"],
           "text_blocks": [
             {
               "type": "narration",
               "speaker": "narration",
-              "text": "Al tavolo accanto, una signora elegante con tailleur color crema. Davanti a lei, su un piatto largo, ARRIVA: una margherita gigante, fumante, perfetta."
+              "text": "At the next table, an elegant lady in a cream suit. In front of her, on a wide plate: it ARRIVES. A giant Margherita, steaming, perfect."
             },
             {
               "type": "narration",
               "speaker": "narration",
-              "text": "Sul seggiolone, Sparkle Ale (sette mesi, camicia coreana, mini jeans, Converse alte rosse) smette di respirare per un secondo. Gli occhi diventano due lune piene."
+              "text": "On the high chair, Sparkle Ale (seven months, mandarin-collar shirt, mini jeans, high red Converse) stops breathing for a second. His eyes turn into two full moons."
             },
             {
               "type": "dialogue",
@@ -99,17 +99,17 @@
             {
               "type": "dialogue",
               "speaker": "favilla",
-              "text": "Tesoro, no. Quella è della signora. La nostra arriva tra poco."
+              "text": "Sweetheart, no. That's the lady's. Ours is coming."
             },
             {
               "type": "narration",
               "speaker": "narration",
-              "text": "Ma Sparkle Ale ha già le manine sulle posate. Coltello. Forchetta. Cucchiaio. Cucchiaino del caffè. Anche due grissini. Anche il tovagliolo arrotolato."
+              "text": "But Sparkle Ale already has his little hands on the cutlery. Knife. Fork. Spoon. Coffee spoon. Two breadsticks. Even the rolled-up napkin."
             },
             {
               "type": "thought",
               "speaker": "favilla",
-              "text": "Sento il rumore della catastrofe ma non la vedo ancora."
+              "text": "I can hear the sound of the catastrophe but I can't see it yet."
             }
           ]
         }
@@ -126,57 +126,57 @@
             {
               "type": "narration",
               "speaker": "narration",
-              "text": "Tre secondi. Solo tre. Favilla si gira a sistemare la borsa Chanel sulla sedia. Mallow risponde a una notifica. Tre secondi."
+              "text": "Three seconds. Just three. Favilla turns to fix the Chanel bag on her chair. Mallow replies to a notification. Three seconds."
             },
             {
               "type": "dialogue",
               "speaker": "narration",
-              "text": "\"AAAAH! LA MIA PIZZAAA!\""
+              "text": "\"AAAAH! MY PIZZAAA!\""
             },
             {
               "type": "narration",
               "speaker": "narration",
-              "text": "Il piatto della signora è VUOTO. Una scia di mozzarella fusa attraversa la tovaglia, valica il bordo, sale sul seggiolone."
+              "text": "The lady's plate is EMPTY. A trail of melted mozzarella crosses the tablecloth, climbs over the edge, reaches the high chair."
             },
             {
               "type": "narration",
               "speaker": "narration",
-              "text": "E lì, Sparkle Ale. Sorride. Nella manina destra impugna un BRACCIO ROBOTICO costruito in tre secondi netti: coltello, forchetta, cucchiaio, due grissini, tovagliolo annodato. All'estremità, in equilibrio perfetto, la margherita rubata."
+              "text": "And there, Sparkle Ale. Smiling. In his right hand he wields a ROBOT ARM, built in three flat seconds: knife, fork, spoon, two breadsticks, a knotted napkin. At its tip, in perfect balance, the stolen Margherita."
             },
             {
               "type": "dialogue",
               "speaker": "sparkle_ale",
-              "text": "MIIIA! BUONA!"
+              "text": "MIIINE! YUM!"
             },
             {
               "type": "thought",
               "speaker": "favilla",
-              "text": "Mio figlio. Sette mesi. Ha appena commesso il primo furto a mano armata di Nova Tutinia. Bubbà."
+              "text": "My son. Seven months old. He just committed the first armed robbery of Nova Tutinia. Bubbà."
             }
           ]
         }
       ],
       "choice": {
         "id": "pizza_heist",
-        "prompt": "La pizza è in cima al braccio robotico. Ale ha già la bocca aperta. Chi interviene?",
+        "prompt": "The pizza sits on top of the robot arm. Ale's mouth is already open. Who steps in?",
         "options": [
           {
             "id": "blaze",
-            "label": "🔥 Favilla Blaze – ferma il tempo prima del morso",
+            "label": "🔥 Favilla Blaze – freeze time before the bite",
             "goto_branch": "blaze_path",
-            "hint": "Trasformazione lampo, magia chirurgica, pizza riconsegnata intatta"
+            "hint": "Lightning transformation, surgical magic, pizza returned untouched"
           },
           {
             "id": "tech",
-            "label": "💻 Mallow – hackera la mano robotica col MacBook",
+            "label": "💻 Mallow – hack the robot arm with the MacBook",
             "goto_branch": "tech_path",
-            "hint": "Exploit silenzioso, pizza riposata nel piatto della signora, nessuno se ne accorge (tranne Ale)"
+            "hint": "Silent exploit, pizza back on the lady's plate, nobody notices (except Ale)"
           },
           {
             "id": "fail",
-            "label": "🔧 Lascia che il prototipo collassi da solo",
+            "label": "🔧 Let the prototype collapse on its own",
             "goto_branch": "fail_path",
-            "hint": "Errore di calcolo: Ale ha 7 mesi, non sa contare. Posate a terra"
+            "hint": "Math error: Ale is 7 months old, can't count yet. Cutlery hits the floor"
           }
         ]
       }
@@ -196,22 +196,22 @@
                 {
                   "type": "thought",
                   "speaker": "favilla",
-                  "text": "La pizza sta arrivando alla bocca di Ale. Mancano meno di due secondi. Bubbà! Mi tocca."
+                  "text": "The pizza is moving toward Ale's mouth. Less than two seconds left. Bubbà! It's on me."
                 },
                 {
                   "type": "narration",
                   "speaker": "narration",
-                  "text": "Favilla si alza di scatto. La camicia bianca si illumina dall'interno, la gonna tubino diventa un mantello viola, la borsa Chanel resta sospesa a mezz'aria in un campo di forza dorato."
+                  "text": "Favilla springs up. The white shirt glows from within, the pencil skirt becomes a violet cape, the Chanel bag floats mid-air in a golden energy field."
                 },
                 {
                   "type": "dialogue",
                   "speaker": "favilla_blaze",
-                  "text": "Modalità Pizzaiola Stellare: ATTIVATA."
+                  "text": "Stellar Pizzaiola Mode: ACTIVATED."
                 },
                 {
                   "type": "narration",
                   "speaker": "narration",
-                  "text": "Per la sala il tempo si ferma. Forchette sospese. Bicchieri a metà sorso. La pizza di Ale ferma a un centimetro dai dentini di latte appena spuntati."
+                  "text": "For the room, time stops. Forks suspended. Glasses mid-sip. Ale's pizza frozen one centimeter from his freshly grown milk teeth."
                 }
               ]
             }
@@ -228,32 +228,32 @@
                 {
                   "type": "narration",
                   "speaker": "narration",
-                  "text": "Favilla Blaze cammina lenta tra i tavoli congelati. Solleva la pizza dal braccio robotico con la delicatezza di una chirurga. Una scia di scintille viola la accompagna fino al piatto della signora."
+                  "text": "Favilla Blaze walks slowly between the frozen tables. She lifts the pizza off the robot arm with the delicacy of a surgeon. A trail of violet sparks accompanies her to the lady's plate."
                 },
                 {
                   "type": "narration",
                   "speaker": "narration",
-                  "text": "POOF. La margherita atterra fumante nel piatto, le tre olive ricomposte a forma di cuore. Tovagliolo della signora ripiegato meglio. Calice intatto."
+                  "text": "POOF. The Margherita lands steaming on the plate, the three olives recomposed in a heart shape. The lady's napkin neatly folded. Glass intact."
                 },
                 {
                   "type": "dialogue",
                   "speaker": "favilla_blaze",
-                  "text": "Crisi sventata in 1,7 secondi. Pizza salvata, dignità intatta, dentini di mio figlio negativi al furto."
+                  "text": "Crisis averted in 1.7 seconds. Pizza saved, dignity intact, my son's tiny teeth: heist-negative."
                 },
                 {
                   "type": "narration",
                   "speaker": "narration",
-                  "text": "Il tempo riparte. La signora vede la pizza ancora lì, intera. Sospira di sollievo. Non si è accorta di nulla. Mallow alza per un secondo lo sguardo dal MacBook, fa un mezzo sorriso furbo: lui sì, l'ha vista tutta."
+                  "text": "Time resumes. The lady sees the pizza still there, whole. She breathes a sigh of relief. She didn't notice anything. Mallow looks up from the MacBook for a second and gives a sly half-smile: he saw it all."
                 },
                 {
                   "type": "dialogue",
                   "speaker": "mallow_bellow",
-                  "text": "Compagna mia… ufficialmente più rapida di qualunque hot reload. Confermo."
+                  "text": "My partner… officially faster than any hot reload. Confirmed."
                 },
                 {
                   "type": "dialogue",
                   "speaker": "sparkle_ale",
-                  "text": "Mamma SUPER! ANCORA!"
+                  "text": "Mommy SUPER! AGAIN!"
                 }
               ]
             }
@@ -274,22 +274,22 @@
                 {
                   "type": "dialogue",
                   "speaker": "favilla",
-                  "text": "Mallow. MALLOW. Tuo figlio ha appena rapinato il tavolo accanto. Risolvi senza che nessuno se ne accorga."
+                  "text": "Mallow. MALLOW. Your son just robbed the next table. Fix it without anyone noticing."
                 },
                 {
                   "type": "narration",
                   "speaker": "narration",
-                  "text": "Mallow non chiude il MacBook: lo gira verso il seggiolone. Le dita partono a velocità tastiera meccanica."
+                  "text": "Mallow doesn't close the MacBook: he tilts it toward the high chair. His fingers fire up at mechanical-keyboard speed."
                 },
                 {
                   "type": "dialogue",
                   "speaker": "mallow_bellow",
-                  "text": "…aspetta… il braccio è in Bluetooth Low Energy, MAC address tipo \"AL:E0:07:M0\"… ssh-tunnel sul cucchiaio, payload sulla forchetta… ok, sono dentro."
+                  "text": "…wait… the arm is on Bluetooth Low Energy, MAC address something like \"AL:E0:07:M0\"… ssh-tunnel through the spoon, payload on the fork… ok, I'm in."
                 },
                 {
                   "type": "narration",
                   "speaker": "narration",
-                  "text": "Sullo schermo: terminale verde, righe che scorrono, ASCII art di una pizza. Nessuno nella sala se ne accorge. Nessuno tranne Ale, che spalanca gli occhi: papà gli sta hackerando il giocattolo. NON. SI. FA."
+                  "text": "On the screen: green terminal, lines scrolling, ASCII art of a pizza. Nobody in the room notices. Nobody except Ale, whose eyes go wide: dad is hacking his toy. NOT. ALLOWED."
                 }
               ]
             }
@@ -306,32 +306,32 @@
                 {
                   "type": "narration",
                   "speaker": "narration",
-                  "text": "Il braccio robotico si muove da solo, dolcemente, come se ubbidisse a un altro padrone. Inverte la traiettoria, attraversa il confine tra i due tavoli, deposita la pizza al centro del piatto della signora. Tre olive risistemate a faccina sorridente. Tovagliolo ripiegato."
+                  "text": "The robot arm moves on its own, gently, as if obeying a different master. It reverses course, crosses the boundary between the two tables, lays the pizza down at the center of the lady's plate. Three olives rearranged into a smiley face. Napkin re-folded."
                 },
                 {
                   "type": "narration",
                   "speaker": "narration",
-                  "text": "La signora si volta un istante dopo. Vede la sua pizza al posto giusto. Si tocca le tempie. Pensa di essersi distratta. Riprende a mangiare."
+                  "text": "The lady turns around an instant later. She sees her pizza in its rightful place. She rubs her temples. She thinks she got distracted. She goes back to eating."
                 },
                 {
                   "type": "dialogue",
                   "speaker": "mallow_bellow",
-                  "text": "…rollback effettuato… log puliti… nessun crash… ehm… missione completata, signori."
+                  "text": "…rollback complete… logs cleaned… no crash… ehm… mission accomplished, ladies and gentlemen."
                 },
                 {
                   "type": "dialogue",
                   "speaker": "sparkle_ale",
-                  "text": "PAPÀ… NO! PIIIZZA MIA! VENDETTAA!"
+                  "text": "DADDY… NO! PIIIZZA MINE! REVENGEEE!"
                 },
                 {
                   "type": "thought",
                   "speaker": "favilla",
-                  "text": "Marito hacker, figlio di sette mesi che giura vendetta tecnologica. Posso considerare la cena un successo. Per ora."
+                  "text": "Hacker husband, seven-month-old son swearing technological revenge. I can call dinner a success. For now."
                 },
                 {
                   "type": "dialogue",
                   "speaker": "favilla",
-                  "text": "Mallow… domani gli compri un set di posate vere. Tutto in titanio. Te lo sei meritato."
+                  "text": "Mallow… tomorrow you buy him a real cutlery set. All titanium. You earned it."
                 }
               ]
             }
@@ -352,22 +352,22 @@
                 {
                   "type": "thought",
                   "speaker": "favilla",
-                  "text": "Aspetta. Aspetta aspetta aspetta. Quel braccio sta tremando. Bubbà! Sta tremando MALE."
+                  "text": "Wait. Wait wait wait. That arm is shaking. Bubbà! It's shaking BAD."
                 },
                 {
                   "type": "narration",
                   "speaker": "narration",
-                  "text": "Sparkle Ale, sette mesi, sa fare tante cose. Sa lanciare olive, sa dire MOZZAA, sa costruire bracci robotici di posate. Una sola cosa non sa ancora fare: contare."
+                  "text": "Sparkle Ale, seven months old, can do many things. He can throw olives, he can say MOZZAA, he can build cutlery robot arms. There is one thing he can't do yet: count."
                 },
                 {
                   "type": "narration",
                   "speaker": "narration",
-                  "text": "Carico massimo del braccio: tre posate. Carico effettivo: cinque posate, due grissini, un tovagliolo annodato e una margherita gigante. Errore di calcolo: catastrofico."
+                  "text": "Maximum payload of the arm: three pieces of cutlery. Actual payload: five pieces of cutlery, two breadsticks, a knotted napkin, and a giant Margherita. Math error: catastrophic."
                 },
                 {
                   "type": "dialogue",
                   "speaker": "sparkle_ale",
-                  "text": "Uno… DUE… settantaaa…"
+                  "text": "One… TWO… seventyyy…"
                 }
               ]
             }
@@ -384,12 +384,12 @@
                 {
                   "type": "narration",
                   "speaker": "narration",
-                  "text": "Il prototipo cede. Il cucchiaio-gomito si piega all'indietro. La forchetta-pollice si stacca. I grissini si spezzano in tre tronconi. Il tovagliolo annodato vola via come un piccolo paracadute."
+                  "text": "The prototype gives up. The spoon-elbow bends backwards. The fork-thumb pops off. The breadsticks snap into three pieces. The knotted napkin flies away like a tiny parachute."
                 },
                 {
                   "type": "narration",
                   "speaker": "narration",
-                  "text": "Posate a terra, tin-tin-tin-CLANG. La margherita compie un volteggio acrobatico e atterra esattamente nel piatto della signora, capovolta. Mozzarella in alto. Pomodoro sotto. Le tre olive scivolano fuori e si fermano sulle Converse rosse di Ale."
+                  "text": "Cutlery hits the floor, ting-ting-ting-CLANG. The Margherita does an acrobatic flip and lands exactly on the lady's plate, upside down. Mozzarella up. Tomato down. The three olives slip out and stop right on Ale's red Converse."
                 },
                 {
                   "type": "dialogue",
@@ -399,17 +399,17 @@
                 {
                   "type": "dialogue",
                   "speaker": "mallow_bellow",
-                  "text": "Tradotto in linguaggio tecnico: stack overflow per overload progettuale. Sopravvenuto crash hardware. Però… il payload è arrivato a destinazione, eh?"
+                  "text": "Translated into tech language: stack overflow due to design overload. Hardware crash. But… the payload reached its destination, eh?"
                 },
                 {
                   "type": "narration",
                   "speaker": "narration",
-                  "text": "La signora del tailleur fissa la sua pizza capovolta. Poi fissa Ale. Poi le sue Converse rosse decorate di olive. Scoppia a ridere, fortissimo. Ride per tre minuti di fila."
+                  "text": "The lady in the cream suit stares at her upside-down pizza. Then she stares at Ale. Then at his red Converse decorated with olives. She bursts out laughing, loud. Laughs for three solid minutes."
                 },
                 {
                   "type": "dialogue",
                   "speaker": "favilla",
-                  "text": "Tesoro mio. La prossima volta prima impari a contare, poi costruisci robot. Bubbà. Promesso?"
+                  "text": "Sweetheart of mine. Next time you learn to count first, then you build robots. Bubbà. Promise?"
                 }
               ]
             }
@@ -431,22 +431,22 @@
               {
                 "type": "narration",
                 "speaker": "narration",
-                "text": "Tavoli uniti. La signora del tailleur, Favilla, Mallow e Sparkle Ale al centro, tutti su un tavolo solo. Sala in piedi che applaude come se fosse la fine di un concerto."
+                "text": "Tables joined. The lady in the cream suit, Favilla, Mallow and Sparkle Ale at the center, all on one single table. The room standing, applauding like it's the end of a concert."
               },
               {
                 "type": "narration",
                 "speaker": "narration",
-                "text": "Il pizzaiolo esce dalla cucina, posa una pizza speciale al centro: \"Margherita Sparkle\", scritto in basilico. Forma di cuore. Tre olive a corona."
+                "text": "The pizzaiolo walks out of the kitchen, sets a special pizza in the center: \"Margherita Sparkle\", written in basil. Heart-shaped. Three olives crowning it."
               },
               {
                 "type": "dialogue",
                 "speaker": "mallow_bellow",
-                "text": "La metto a menù domani. Ne ordino già quattro a domicilio per la prossima settimana, dal MacBook…"
+                "text": "I'll add it to the menu tomorrow. Already ordering four for delivery next week, from the MacBook…"
               },
               {
                 "type": "dialogue",
                 "speaker": "favilla",
-                "text": "Mallow. Bubbà! Chiudi quel laptop e mangia. Tuo figlio è il più piccolo genio criminale di Nova Tutinia, festeggiamo."
+                "text": "Mallow. Bubbà! Close that laptop and eat. Your son is the youngest criminal mastermind of Nova Tutinia, let's celebrate."
               },
               {
                 "type": "dialogue",
@@ -456,7 +456,7 @@
               {
                 "type": "thought",
                 "speaker": "favilla",
-                "text": "Forse non salviamo il mondo, stasera. Ma una pizzeria, una signora e un cuore: sì. Missione compiuta."
+                "text": "Maybe we don't save the world tonight. But a pizzeria, a lady and a heart: yes. Mission accomplished."
               }
             ]
           }

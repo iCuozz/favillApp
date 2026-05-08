@@ -1,0 +1,17 @@
+{
+  "name": "favilla-image-gen",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Generatore di asset visivi per gli episodi (Gemini 2.5 Flash Image).",
+  "scripts": {
+    "refs": "node generate.mjs refs",
+    "episode": "node generate.mjs episode"
+  },
+  "dependencies": {
+    "sharp": "^0.33.5"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -5,10 +5,15 @@ class ReadingProgress {
   final int pageIndex;
   final int visibleBlocks;
 
+  /// Id del branch narrativo attivo, o null se l'utente è sul percorso principale
+  /// o se l'episodio non ha branching.
+  final String? branchId;
+
   const ReadingProgress({
     required this.episodeId,
     required this.pageIndex,
     required this.visibleBlocks,
+    this.branchId,
   });
 }
 
@@ -16,6 +21,7 @@ class ProgressService {
   static const _kCurrentEpisodeId = 'progress.current.episodeId';
   static const _kCurrentPageIndex = 'progress.current.pageIndex';
   static const _kCurrentVisibleBlocks = 'progress.current.visibleBlocks';
+  static const _kCurrentBranchId = 'progress.current.branchId';
   static const _kCompletedEpisodes = 'progress.completedEpisodes';
 
   static Future<ReadingProgress?> loadCurrent() async {
@@ -23,10 +29,13 @@ class ProgressService {
     final episodeId = prefs.getString(_kCurrentEpisodeId);
     if (episodeId == null || episodeId.isEmpty) return null;
 
+    final branchId = prefs.getString(_kCurrentBranchId);
+
     return ReadingProgress(
       episodeId: episodeId,
       pageIndex: prefs.getInt(_kCurrentPageIndex) ?? 0,
       visibleBlocks: prefs.getInt(_kCurrentVisibleBlocks) ?? 1,
+      branchId: (branchId != null && branchId.isNotEmpty) ? branchId : null,
     );
   }
 
@@ -34,11 +43,17 @@ class ProgressService {
     required String episodeId,
     required int pageIndex,
     required int visibleBlocks,
+    String? branchId,
   }) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_kCurrentEpisodeId, episodeId);
     await prefs.setInt(_kCurrentPageIndex, pageIndex);
     await prefs.setInt(_kCurrentVisibleBlocks, visibleBlocks);
+    if (branchId == null || branchId.isEmpty) {
+      await prefs.remove(_kCurrentBranchId);
+    } else {
+      await prefs.setString(_kCurrentBranchId, branchId);
+    }
   }
 
   static Future<void> clearCurrent() async {
@@ -46,6 +61,7 @@ class ProgressService {
     await prefs.remove(_kCurrentEpisodeId);
     await prefs.remove(_kCurrentPageIndex);
     await prefs.remove(_kCurrentVisibleBlocks);
+    await prefs.remove(_kCurrentBranchId);
   }
 
   static Future<Set<String>> loadCompleted() async {
@@ -66,6 +82,7 @@ class ProgressService {
     await prefs.remove(_kCurrentEpisodeId);
     await prefs.remove(_kCurrentPageIndex);
     await prefs.remove(_kCurrentVisibleBlocks);
+    await prefs.remove(_kCurrentBranchId);
     await prefs.remove(_kCompletedEpisodes);
   }
 }

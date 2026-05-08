@@ -91,6 +91,7 @@ class _HomeCoverPageState extends State<HomeCoverPage> with WidgetsBindingObserv
           summary: episode,
           initialPageIndex: progress.pageIndex,
           initialVisibleBlocks: progress.visibleBlocks,
+          initialBranchId: progress.branchId,
         ),
       ),
     ).then((_) => _refreshProgress());

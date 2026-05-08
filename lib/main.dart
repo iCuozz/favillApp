@@ -16,6 +16,8 @@ import 'l10n/app_strings.dart';
 import 'pages/home_cover_page.dart';
 import 'pages/episodes_list_page.dart';
 import 'widgets/comic_page_stage.dart';
+import 'widgets/choice_card.dart';
+import 'services/branch_history_service.dart';
 
 const String _kSentryDsn =
     'https://a0191b359e43ba940e6b2bc1107b81ec@o4511291384725504.ingest.de.sentry.io/4511291387543632';
@@ -139,6 +141,7 @@ class EpisodeLoaderPage extends StatelessWidget {
   final EpisodeSummary summary;
   final int initialPageIndex;
   final int initialVisibleBlocks;
+  final String? initialBranchId;
 
   const EpisodeLoaderPage({
     super.key,
@@ -146,6 +149,7 @@ class EpisodeLoaderPage extends StatelessWidget {
     required this.summary,
     this.initialPageIndex = 0,
     this.initialVisibleBlocks = 1,
+    this.initialBranchId,
   });
 
   @override
@@ -183,6 +187,8 @@ class EpisodeLoaderPage extends StatelessWidget {
           subtitle: summary.subtitle,
           thumbnail: summary.thumbnail,
           pages: content.pages,
+          branches: content.branches,
+          epilogue: content.epilogue,
         );
 
         return EpisodePage(
@@ -190,6 +196,7 @@ class EpisodeLoaderPage extends StatelessWidget {
           episode: episode,
           initialPageIndex: initialPageIndex,
           initialVisibleBlocks: initialVisibleBlocks,
+          initialBranchId: initialBranchId,
         );
       },
     );
@@ -201,6 +208,7 @@ class EpisodePage extends StatefulWidget {
   final Episode episode;
   final int initialPageIndex;
   final int initialVisibleBlocks;
+  final String? initialBranchId;
 
   const EpisodePage({
     super.key,
@@ -208,6 +216,7 @@ class EpisodePage extends StatefulWidget {
     required this.episode,
     this.initialPageIndex = 0,
     this.initialVisibleBlocks = 1,
+    this.initialBranchId,
   });
 
   @override
@@ -220,15 +229,39 @@ class _EpisodePageState extends State<EpisodePage> {
 
   late int currentIndex;
   late int _maxVisitedIndex;
+  String? _activeBranchId;
+  bool _choiceSheetOpen = false;
   final Map<int, GlobalKey<ComicPageStageState>> _stageKeys = {};
   final Map<int, int> _visibleBlocksByPage = {};
+
+  /// Ritorna le pagine effettive da renderizzare nel PageView, tenendo
+  /// conto dello stato di branching corrente.
+  ///
+  /// - Se l'episodio non ha branches, restituisce semplicemente `episode.pages`.
+  /// - Se non è ancora stata fatta alcuna scelta (`_activeBranchId == null`),
+  ///   restituisce solo le pagine main (la pagina con `choice` è l'ultima visibile).
+  /// - Se è stato scelto un branch, concatena: pagine main + pagine del branch
+  ///   + pagine di epilogue (se presenti).
+  List<ComicPage> get _effectivePages {
+    final ep = widget.episode;
+    if (!ep.hasBranches) return ep.pages;
+
+    final branch = _activeBranchId == null ? null : ep.branches[_activeBranchId];
+    if (branch == null) return ep.pages;
+
+    return [
+      ...ep.pages,
+      ...branch.pages,
+      if (ep.epilogue != null) ...ep.epilogue!.pages,
+    ];
+  }
 
   @override
   void initState() {
     super.initState();
-    final maxIndex = widget.episode.pages.isEmpty
-        ? 0
-        : widget.episode.pages.length - 1;
+    _activeBranchId = widget.initialBranchId;
+    final pages = _effectivePages;
+    final maxIndex = pages.isEmpty ? 0 : pages.length - 1;
     currentIndex = widget.initialPageIndex.clamp(0, maxIndex);
     _maxVisitedIndex = currentIndex;
     _visibleBlocksByPage[currentIndex] = widget.initialVisibleBlocks;
@@ -247,7 +280,7 @@ class _EpisodePageState extends State<EpisodePage> {
   }
 
   void _precacheNeighbors(int index) {
-    final pages = widget.episode.pages;
+    final pages = _effectivePages;
     for (final offset in const [1, -1, 2]) {
       final neighbor = index + offset;
       if (neighbor >= 0 && neighbor < pages.length) {
@@ -292,6 +325,7 @@ class _EpisodePageState extends State<EpisodePage> {
       episodeId: widget.episode.id,
       pageIndex: currentIndex,
       visibleBlocks: blocks,
+      branchId: _activeBranchId,
     );
   }
 
@@ -390,7 +424,17 @@ class _EpisodePageState extends State<EpisodePage> {
   }
 
   void _goToNextPage() {
-    final pages = widget.episode.pages;
+    final pages = _effectivePages;
+
+    // Se la pagina corrente propone una scelta e nessun branch è attivo,
+    // blocchiamo l'avanzamento e mostriamo la card di scelta.
+    if (currentIndex < pages.length) {
+      final currentPage = pages[currentIndex];
+      if (currentPage.choice != null && _activeBranchId == null) {
+        _promptChoice(currentPage.choice!);
+        return;
+      }
+    }
 
     if (currentIndex < pages.length - 1) {
       _pageController.nextPage(
@@ -400,6 +444,65 @@ class _EpisodePageState extends State<EpisodePage> {
     } else {
       _goToNextEpisodeOrFinish();
     }
+  }
+
+  void _promptChoice(Choice choice) {
+    if (_choiceSheetOpen) return;
+    _choiceSheetOpen = true;
+    SettingsService.tapFeedback();
+
+    showModalBottomSheet<void>(
+      context: context,
+      isDismissible: false,
+      enableDrag: false,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (sheetContext) {
+        return SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
+            child: ChoiceCard(
+              choice: choice,
+              onSelected: (option) {
+                Navigator.of(sheetContext).pop();
+                _handleChoiceSelected(option);
+              },
+            ),
+          ),
+        );
+      },
+    ).whenComplete(() {
+      _choiceSheetOpen = false;
+    });
+  }
+
+  void _handleChoiceSelected(ChoiceOption option) {
+    final episodeId = widget.episode.id;
+    final branchId = option.gotoBranch;
+    if (branchId.isEmpty) return;
+
+    setState(() {
+      _activeBranchId = branchId;
+      // Le pagine successive a `currentIndex` ora sono nuove (branch + epilogue):
+      // resettiamo i blocchi visibili per quegli indici e il maxVisitedIndex.
+      _visibleBlocksByPage.removeWhere((k, _) => k > currentIndex);
+      _stageKeys.removeWhere((k, _) => k > currentIndex);
+      if (_maxVisitedIndex < currentIndex) _maxVisitedIndex = currentIndex;
+    });
+
+    BranchHistoryService.markUnlocked(episodeId, branchId);
+    _saveProgress();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      final pages = _effectivePages;
+      if (currentIndex < pages.length - 1) {
+        _pageController.nextPage(
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.easeInOutCubic,
+        );
+      }
+    });
   }
 
   void _goToPreviousPage() {
@@ -451,7 +554,7 @@ class _EpisodePageState extends State<EpisodePage> {
 
   void _openPageJumpSheet() {
     SettingsService.tapFeedback();
-    final pages = widget.episode.pages;
+    final pages = _effectivePages;
 
     showModalBottomSheet<void>(
       context: context,
@@ -560,7 +663,7 @@ class _EpisodePageState extends State<EpisodePage> {
 
   @override
   Widget build(BuildContext context) {
-    final pages = widget.episode.pages;
+    final pages = _effectivePages;
 
     return Scaffold(
       appBar: AppBar(

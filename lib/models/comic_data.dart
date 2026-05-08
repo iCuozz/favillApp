@@ -89,20 +89,42 @@ class EpisodeSummary {
 class EpisodeContent {
   final String id;
   final List<ComicPage> pages;
+  final Map<String, Branch> branches;
+  final Branch? epilogue;
 
   EpisodeContent({
     required this.id,
     required this.pages,
+    this.branches = const {},
+    this.epilogue,
   });
+
+  bool get hasBranches => branches.isNotEmpty;
 
   factory EpisodeContent.fromJson(Map<String, dynamic> json) {
     final pagesJson = (json['pages'] as List<dynamic>? ?? []);
+
+    final branchesJson = json['branches'] as Map<String, dynamic>?;
+    final branches = <String, Branch>{};
+    if (branchesJson != null) {
+      branchesJson.forEach((key, value) {
+        if (value is Map<String, dynamic>) {
+          branches[key] = Branch.fromJson(key, value);
+        }
+      });
+    }
+
+    final epilogueJson = json['epilogue'] as Map<String, dynamic>?;
 
     return EpisodeContent(
       id: json['id'] as String? ?? '',
       pages: pagesJson
           .map((p) => ComicPage.fromJson(p as Map<String, dynamic>))
           .toList(),
+      branches: branches,
+      epilogue: epilogueJson != null
+          ? Branch.fromJson('__epilogue__', epilogueJson)
+          : null,
     );
   }
 }
@@ -113,6 +135,8 @@ class Episode {
   final String subtitle;
   final String thumbnail;
   final List<ComicPage> pages;
+  final Map<String, Branch> branches;
+  final Branch? epilogue;
 
   Episode({
     required this.id,
@@ -120,22 +144,102 @@ class Episode {
     required this.subtitle,
     required this.thumbnail,
     required this.pages,
+    this.branches = const {},
+    this.epilogue,
   });
+
+  bool get hasBranches => branches.isNotEmpty;
+
+  /// Indice della pagina (in `pages`) che contiene un `choice`, o -1 se nessuna.
+  int get choicePageIndex {
+    for (var i = 0; i < pages.length; i++) {
+      if (pages[i].choice != null) return i;
+    }
+    return -1;
+  }
+}
+
+/// Un ramo narrativo alternativo: una sequenza di pagine con un id.
+class Branch {
+  final String id;
+  final List<ComicPage> pages;
+
+  const Branch({required this.id, required this.pages});
+
+  factory Branch.fromJson(String id, Map<String, dynamic> json) {
+    final pagesJson = (json['pages'] as List<dynamic>? ?? []);
+    return Branch(
+      id: id,
+      pages: pagesJson
+          .map((p) => ComicPage.fromJson(p as Map<String, dynamic>))
+          .toList(),
+    );
+  }
+}
+
+/// Una scelta proposta al lettore alla fine di una pagina.
+class Choice {
+  final String id;
+  final String prompt;
+  final List<ChoiceOption> options;
+
+  const Choice({
+    required this.id,
+    required this.prompt,
+    required this.options,
+  });
+
+  factory Choice.fromJson(Map<String, dynamic> json) {
+    final optionsJson = (json['options'] as List<dynamic>? ?? []);
+    return Choice(
+      id: json['id'] as String? ?? '',
+      prompt: json['prompt'] as String? ?? '',
+      options: optionsJson
+          .map((o) => ChoiceOption.fromJson(o as Map<String, dynamic>))
+          .toList(),
+    );
+  }
+}
+
+class ChoiceOption {
+  final String id;
+  final String label;
+  final String gotoBranch;
+  final String? hint;
+
+  const ChoiceOption({
+    required this.id,
+    required this.label,
+    required this.gotoBranch,
+    this.hint,
+  });
+
+  factory ChoiceOption.fromJson(Map<String, dynamic> json) {
+    return ChoiceOption(
+      id: json['id'] as String? ?? '',
+      label: json['label'] as String? ?? '',
+      gotoBranch: json['goto_branch'] as String? ?? '',
+      hint: json['hint'] as String?,
+    );
+  }
 }
 
 class ComicPage {
   final int index;
   final String background;
   final List<Panel> panels;
+  final Choice? choice;
 
   ComicPage({
     required this.index,
     required this.background,
     required this.panels,
+    this.choice,
   });
 
   factory ComicPage.fromJson(Map<String, dynamic> json) {
     final panelsJson = (json['panels'] as List<dynamic>? ?? []);
+    final choiceJson = json['choice'] as Map<String, dynamic>?;
 
     return ComicPage(
       index: json['index'] as int? ?? 0,
@@ -143,6 +247,7 @@ class ComicPage {
       panels: panelsJson
           .map((p) => Panel.fromJson(p as Map<String, dynamic>))
           .toList(),
+      choice: choiceJson != null ? Choice.fromJson(choiceJson) : null,
     );
   }
 }

@@ -96,5 +96,13 @@
     }
   ],
   "_drafts": [
+    {
+      "_comment": "Disabled: waiting for final images (Gemini free tier doesn't guarantee character coherence)",
+      "id": "missione_5",
+      "title": "Mission #5 – The Robot-Hand Heist",
+      "subtitle": "Favilla Blaze vs. Sparkle's Insomnia",
+      "thumbnail": "assets/episodes/missione_5/thumb.webp",
+      "file": "assets/data/episodes/missione_5.json"
+    }
   ]
 }

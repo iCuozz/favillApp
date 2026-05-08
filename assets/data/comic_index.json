@@ -95,5 +95,13 @@
     }
   ],
   "_drafts": [
+    {
+      "_comment": "Disattivata: in attesa di immagini definitive (Gemini free non garantisce coerenza personaggi)",
+      "id": "missione_5",
+      "title": "Missione #5 – Il Colpo della Mano Robotica",
+      "subtitle": "Favilla Blaze contro l'Insonnia di Sparkle",
+      "thumbnail": "assets/episodes/missione_5/thumb.webp",
+      "file": "assets/data/episodes/missione_5.json"
+    }
   ]
 }

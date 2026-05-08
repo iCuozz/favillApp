@@ -210,6 +210,18 @@ class AppStrings {
       'Aggiungi qualche dettaglio in più sulla situazione.',
       'Add a little more detail to the situation.');
 
+  // === Branching narrative ===
+  static String get chooseYourPath =>
+      _t('Scegli il tuo percorso', 'Choose your path');
+  static String get tryAnotherEnding =>
+      _t('Prova un altro finale', 'Try another ending');
+  static String endingsUnlocked(int unlocked, int total) => _t(
+      'Hai sbloccato $unlocked/$total finali',
+      'You unlocked $unlocked/$total endings');
+  static String get branchLockedHint => _t(
+      'Tocca un\'opzione per continuare la storia',
+      'Tap an option to continue the story');
+
   static String get languageSection => _t('Lingua', 'Language');
   static String get languageTitle => _t('Lingua', 'Language');
   static String get languageSubtitle => _t(
