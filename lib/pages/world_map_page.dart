@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,6 +9,7 @@ import '../services/game_state_service.dart';
 import '../services/world_state_service.dart';
 import '../widgets/stats_hud_widget.dart';
 import '../widgets/comic_title.dart';
+import '../widgets/nova_tutinia_map_painter.dart';
 import '../main.dart';
 import '../models/comic_data.dart';
 
@@ -72,22 +72,11 @@ class _WorldMapPageState extends State<WorldMapPage>
       body: Stack(
         fit: StackFit.expand,
         children: [
-          // Sfondo
-          Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  Color(0xFF0D0D1A),
-                  Color(0xFF1A0D2E),
-                  Color(0xFF0D1A1A),
-                ],
-              ),
-            ),
+          // Sfondo mappa di Nova Tutinia
+          CustomPaint(
+            painter: const NovaTutiniaMapPainter(),
+            child: Container(),
           ),
-          // Griglia decorativa stile mappa
-          CustomPaint(painter: _MapGridPainter()),
           // Location nodes
           if (_worldMap != null)
             ValueListenableBuilder<WorldState>(
@@ -99,17 +88,6 @@ class _WorldMapPageState extends State<WorldMapPage>
                     return LayoutBuilder(builder: (context, constraints) {
                       return Stack(
                         children: [
-                          // Linee di connessione tra location sbloccate
-                          CustomPaint(
-                            size: Size(constraints.maxWidth,
-                                constraints.maxHeight),
-                            painter: _ConnectionPainter(
-                              locations: _worldMap!.locations,
-                              worldState: worldState,
-                              canvasSize: Size(constraints.maxWidth,
-                                  constraints.maxHeight),
-                            ),
-                          ),
                           // Nodi location
                           for (final loc in _worldMap!.locations)
                             _LocationNode(
@@ -569,109 +547,4 @@ class _SeasonLabel extends StatelessWidget {
       ),
     );
   }
-}
-
-// ─── Painters ─────────────────────────────────────────────────────────────────
-
-class _MapGridPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = Colors.white.withValues(alpha: 0.03)
-      ..strokeWidth = 1;
-
-    const step = 40.0;
-    for (double x = 0; x < size.width; x += step) {
-      canvas.drawLine(Offset(x, 0), Offset(x, size.height), paint);
-    }
-    for (double y = 0; y < size.height; y += step) {
-      canvas.drawLine(Offset(0, y), Offset(size.width, y), paint);
-    }
-  }
-
-  @override
-  bool shouldRepaint(_MapGridPainter oldDelegate) => false;
-}
-
-class _ConnectionPainter extends CustomPainter {
-  final List<WorldLocation> locations;
-  final WorldState worldState;
-  final Size canvasSize;
-
-  _ConnectionPainter({
-    required this.locations,
-    required this.worldState,
-    required this.canvasSize,
-  });
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = Colors.white.withValues(alpha: 0.08)
-      ..strokeWidth = 1.5
-      ..style = PaintingStyle.stroke;
-
-    final dashPaint = Paint()
-      ..color = Colors.pinkAccent.withValues(alpha: 0.15)
-      ..strokeWidth = 1
-      ..style = PaintingStyle.stroke;
-
-    final unlockedLocations =
-        locations.where((l) => worldState.isLocationUnlocked(l)).toList();
-
-    // Connetti ogni location sbloccata alle altre vicine
-    for (int i = 0; i < unlockedLocations.length; i++) {
-      for (int j = i + 1; j < unlockedLocations.length; j++) {
-        final a = unlockedLocations[i];
-        final b = unlockedLocations[j];
-        final aPos =
-            Offset(a.position.dx * size.width, a.position.dy * size.height);
-        final bPos =
-            Offset(b.position.dx * size.width, b.position.dy * size.height);
-        final dist = (aPos - bPos).distance;
-        if (dist < size.width * 0.55) {
-          canvas.drawLine(aPos, bPos, paint);
-        }
-      }
-    }
-
-    // Linee tratteggiate verso location bloccate vicine
-    final lockedLocations =
-        locations.where((l) => !worldState.isLocationUnlocked(l)).toList();
-    for (final locked in lockedLocations) {
-      final lockedPos = Offset(
-          locked.position.dx * size.width, locked.position.dy * size.height);
-      for (final unlocked in unlockedLocations) {
-        final unlockedPos = Offset(unlocked.position.dx * size.width,
-            unlocked.position.dy * size.height);
-        final dist = (lockedPos - unlockedPos).distance;
-        if (dist < size.width * 0.45) {
-          _drawDashedLine(canvas, unlockedPos, lockedPos, dashPaint);
-          break;
-        }
-      }
-    }
-  }
-
-  void _drawDashedLine(Canvas canvas, Offset start, Offset end, Paint paint) {
-    const dashLength = 6.0;
-    const gapLength = 5.0;
-    final total = (end - start).distance;
-    final dir = (end - start) / total;
-    double drawn = 0;
-    bool drawing = true;
-    while (drawn < total) {
-      final segLen =
-          drawing ? math.min(dashLength, total - drawn) : math.min(gapLength, total - drawn);
-      if (drawing) {
-        canvas.drawLine(start + dir * drawn, start + dir * (drawn + segLen), paint);
-      }
-      drawn += segLen;
-      drawing = !drawing;
-    }
-  }
-
-  @override
-  bool shouldRepaint(_ConnectionPainter old) =>
-      old.worldState != worldState;
 }
