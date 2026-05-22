@@ -66,150 +66,6 @@ class AppStrings {
   static String get ttsStopTooltip =>
       _t('Ferma la lettura', 'Stop reading');
 
-  // === Ask Favilla ===
-  static String get askFavillaTitle =>
-      _t('Chiedi a Favilla', 'Ask Favilla');
-  static String get askFavillaSubtitle => _t(
-      'Chatta con la supermamma in persona',
-      'Chat with the supermom herself');
-  static String get askFavillaHint =>
-      _t('Scrivi a Favilla…', 'Write to Favilla…');
-  static String get askFavillaSend => _t('Invia', 'Send');
-  static String get askFavillaEmptyState => _t(
-      'Sta a Favilla scegliere se rispondere con saggezza, sarcasmo o entrambi.\nIniziamo?',
-      'Favilla decides whether to answer with wisdom, sarcasm, or both.\nLet\'s start?');
-  static String get askFavillaThinking =>
-      _t('Favilla sta pensando…', 'Favilla is thinking…');
-  static String get askFavillaNewChat =>
-      _t('Nuova conversazione', 'New conversation');
-  static String get askFavillaNewChatConfirm => _t(
-      'Cancellare la conversazione attuale?',
-      'Delete the current conversation?');
-  static String askFavillaQuotaLeft(int n) => _t(
-      'Quota di oggi: $n risposte rimanenti',
-      'Today\'s quota: $n replies left');
-  static String get askFavillaQuotaExceeded => _t(
-      'Hai esaurito le domande di oggi. Torna domani! 💫',
-      'You used all of today\'s questions. Come back tomorrow! 💫');
-  static String get askFavillaError => _t(
-      'Favilla è impegnata in una missione. Riprova tra poco.',
-      'Favilla is busy with a mission. Try again shortly.');
-  static String get askFavillaDisabled => _t(
-      'AI non disponibile in questa build.',
-      'AI not available in this build.');
-  static String get askFavillaSafetyDeflect => _t(
-      'Mmh, su questo non posso aiutarti. Cambiamo storia?',
-      'Hmm, can\'t help with that. Let\'s change story?');
-
-  // === Ask Real Favilla (a.k.a. "Favilla coi superpoteri") ===
-  static String get askRealCta => _t(
-      '✨ Chiedi a Favilla coi superpoteri',
-      '✨ Ask Favilla with superpowers');
-  static String get askRealSheetTitle => _t(
-      'Chiedi a Favilla coi superpoteri',
-      'Ask Favilla with superpowers');
-  static String get askRealSheetIntro => _t(
-      'La tua domanda finisce in una coda moderata. '
-      'Favilla coi superpoteri legge personalmente le domande più belle '
-      'e risponde sui social o direttamente in app. Nessuna risposta è garantita.',
-      'Your question goes into a moderated queue. '
-      'Favilla with superpowers personally reads the best ones and replies '
-      'on social media or directly in the app. No reply is guaranteed.');
-  static String get askRealContactLabel => _t(
-      'Contatto (opzionale: email o @instagram)',
-      'Contact (optional: email or @instagram)');
-  static String get askRealContactHint => _t(
-      'Per essere avvisata se Favilla risponde',
-      'So we can notify you if Favilla replies');
-  static String get askRealSubmit => _t('Invia a Favilla', 'Send to Favilla');
-  static String get askRealSent => _t(
-      '🦸‍♀️ Domanda inviata! Favilla la leggerà presto.',
-      '🦸‍♀️ Question sent! Favilla will read it soon.');
-  static String get askRealAlreadySent => _t(
-      'Già inviata a Favilla',
-      'Already sent to Favilla');
-  static String askRealQuotaLeft(int n) => _t(
-      'Domande rimaste oggi: $n',
-      'Questions left today: $n');
-  static String get askRealQuotaExceeded => _t(
-      'Puoi inviare massimo 3 domande al giorno a Favilla. Riprova domani.',
-      'Max 3 questions per day to Favilla. Try again tomorrow.');
-  static String get askRealError => _t(
-      'Non sono riuscito a inviare. Riprova.',
-      'Couldn\'t send. Try again.');
-  static String get askRealEmptyHint => _t(
-      'Hai una domanda particolare per Favilla coi superpoteri? Inviala direttamente a lei.',
-      'Got a special question for Favilla with superpowers? Send it straight to her.');
-  static String get askRealComposeHint => _t(
-      'Scrivi qui la tua domanda per Favilla…',
-      'Write your question for Favilla here…');
-
-  // === Inbox (risposte di Favilla coi superpoteri) ===
-  static String get inboxTitle => _t('Risposte di Favilla', 'Favilla replies');
-  static String get inboxOpenTooltip => _t('Le tue risposte', 'Your replies');
-  static String get inboxMarkAllRead => _t('Segna tutte come lette', 'Mark all as read');
-  static String get inboxRefresh => _t('Aggiorna', 'Refresh');
-  static String get inboxEmpty => _t(
-      'Ancora nessuna risposta. Quando Favilla coi superpoteri ti risponde, la trovi qui.',
-      'No replies yet. When Favilla with superpowers answers, you\'ll find it here.');
-  static String get inboxFromFavilla => _t(
-      'Favilla coi superpoteri ti ha risposto',
-      'Favilla with superpowers replied');
-
-  // === AI Hub ===
-  static String get aiHubTitle => _t('Studio AI', 'AI Studio');
-  static String get aiHubIntro => _t(
-      'Esperienze interattive con la voce e l\'estro di Favilla, generate al volo dall\'AI.',
-      'Interactive experiences with Favilla\'s voice and flair, generated on the fly by AI.');
-
-  // === Mission generator ===
-  static String get missionTitle =>
-      _t('Genera missione', 'Generate mission');
-
-  static String get missionSubtitle => _t(
-      'Trasforma il tuo caos quotidiano in un mini-fumetto.',
-      'Turn your daily chaos into a mini comic.');
-  static String get missionMyCollection =>
-      _t('Le mie missioni', 'My missions');
-  static String get missionMyCollectionSubtitle => _t(
-      'Riapri o condividi le missioni che hai salvato.',
-      'Reopen or share the missions you saved.');
-  static String get missionIntro => _t(
-      'Descrivi una scena vera della tua giornata. Favilla la trasformerà in un mini-fumetto in 3-4 pannelli.',
-      'Describe a real scene from your day. Favilla will turn it into a 3-4 panel mini comic.');
-  static String get missionInputHint => _t(
-      'Es. "I bambini non vogliono dormire e tirano i cuscini"',
-      'E.g. "The kids refuse to sleep and throw pillows"');
-  static String get missionGenerate =>
-      _t('Genera missione', 'Generate mission');
-  static String get missionGenerating =>
-      _t('Favilla sta scrivendo…', 'Favilla is writing…');
-  static String missionPanelLabel(int i, int total) => _t(
-      'PANNELLO $i / $total', 'PANEL $i / $total');
-  static String get missionSave => _t('Salva', 'Save');
-  static String get missionSavedShort => _t('Salvata', 'Saved');
-  static String get missionSaved =>
-      _t('Missione salvata nella collezione.', 'Mission saved to collection.');
-  static String get missionDeleteConfirm => _t(
-      'Eliminare questa missione?', 'Delete this mission?');
-  static String get missionCollectionEmpty => _t(
-      'Non hai ancora salvato missioni. Generane una!',
-      'No saved missions yet. Generate one!');
-  static String missionFromSituation(String s) => _t(
-      'Dalla situazione: $s', 'From situation: $s');
-  static String missionQuotaLeft(int n) => _t(
-      'Quota di oggi: $n missioni rimanenti',
-      'Today\'s quota: $n missions left');
-  static String get missionQuotaExceeded => _t(
-      'Hai esaurito le missioni di oggi. Torna domani! ✨',
-      'You used all today\'s missions. Come back tomorrow! ✨');
-  static String get missionError => _t(
-      'Favilla è impegnata. Riprova tra poco.',
-      'Favilla is busy. Try again shortly.');
-  static String get missionSituationTooShort => _t(
-      'Aggiungi qualche dettaglio in più sulla situazione.',
-      'Add a little more detail to the situation.');
-
   // === Branching narrative ===
   static String get chooseYourPath =>
       _t('Scegli il tuo percorso', 'Choose your path');
@@ -240,17 +96,17 @@ class AppStrings {
 
   static String get progressSection => _t('Progresso', 'Progress');
   static String get resetProgress =>
-      _t('Azzera il progresso', 'Reset progress');
+      _t('Azzera tutto', 'Reset everything');
   static String get resetProgressSubtitle => _t(
-      'Cancella episodi completati e ripresa lettura',
-      'Clear completed episodes and resume position');
+      'Cancella episodi completati, ripresa lettura e statistiche RPG',
+      'Clear completed episodes, reading position and RPG stats');
   static String get resetProgressConfirmTitle =>
       _t('Sicuro?', 'Are you sure?');
   static String get resetProgressConfirmBody => _t(
-      'Tutti i progressi verranno cancellati. Vuoi continuare?',
-      'All progress will be deleted. Continue?');
+      'Tutti i progressi e le statistiche di gioco verranno cancellati. Vuoi continuare?',
+      'All progress and game stats will be deleted. Continue?');
   static String get resetProgressDone =>
-      _t('Progresso azzerato', 'Progress reset');
+      _t('Tutto azzerato', 'Everything reset');
   static String get cancel => _t('Annulla', 'Cancel');
   static String get ok => _t('OK', 'OK');
   static String get reset => _t('Azzera', 'Reset');

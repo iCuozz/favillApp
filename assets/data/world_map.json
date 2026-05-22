@@ -1,0 +1,65 @@
+{
+  "locations": [
+    {
+      "id": "casa",
+      "name": "Casa",
+      "emoji": "🏠",
+      "description": "Via Garibaldi 14, terzo piano. Il campo di battaglia domestico.",
+      "unlocked_by_default": true,
+      "position": { "x": 0.55, "y": 0.60 },
+      "quests": [
+        {
+          "id": "s1_mattina_dopo",
+          "title": "La Mattina Dopo",
+          "subtitle": "Tutto uguale. Tutto diverso.",
+          "file": "assets/data/quests/s1_mattina_dopo.json",
+          "thumbnail": "assets/episodes/prologo/thumb.webp",
+          "season": 1,
+          "requires_completed": ["prologo"],
+          "requires_stats": {}
+        }
+      ]
+    },
+    {
+      "id": "scuola",
+      "name": "Scuola",
+      "emoji": "🏫",
+      "description": "Scuola elementare di Nova Tutinia. 50 piccoli uragani al giorno.",
+      "unlocked_by_default": false,
+      "unlock_after_quest": "s1_mattina_dopo",
+      "position": { "x": 0.25, "y": 0.35 },
+      "quests": [
+        {
+          "id": "s1_scuola_1",
+          "title": "Una Giornata Normale",
+          "subtitle": "Speriamo.",
+          "file": "assets/data/quests/s1_scuola_1.json",
+          "thumbnail": "assets/episodes/prologo/thumb.webp",
+          "season": 1,
+          "requires_completed": ["s1_mattina_dopo"],
+          "requires_stats": {}
+        }
+      ]
+    },
+    {
+      "id": "parco",
+      "name": "Parco",
+      "emoji": "🌳",
+      "description": "Parco Centrale di Nova Tutinia. Qui nessuno ti vede.",
+      "unlocked_by_default": false,
+      "unlock_after_quest": "s1_scuola_1",
+      "position": { "x": 0.70, "y": 0.30 },
+      "quests": []
+    },
+    {
+      "id": "supermercato",
+      "name": "Supermercato",
+      "emoji": "🛒",
+      "description": "Conad di Nova Tutinia. La spesa non si fa da sola.",
+      "unlocked_by_default": false,
+      "unlock_after_quest": "s1_scuola_1",
+      "position": { "x": 0.35, "y": 0.70 },
+      "quests": []
+    }
+  ]
+}

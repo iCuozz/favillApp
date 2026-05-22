@@ -48,41 +48,35 @@
       "panels": [
         {
           "id": "pr1_0",
-          "characters": ["favilla", "sparkle_ale", "mallow_bellow"],
+          "characters": ["favilla", "lex", "mallow"],
           "text_blocks": [
             {
               "id": "pr1_0_tb_0",
               "type": "narration",
-              "text": "Poi c'è casa. Il vero campo di battaglia si chiama Sparkle Ale."
+              "text": "Poi c'è casa. Il vero campo di battaglia si chiama Lex. Sette mesi e mezzo di puro, adorabile caos."
             },
             {
               "id": "pr1_0_tb_1",
               "type": "dialogue",
-              "speaker": "sparkle_ale",
-              "text": "MAMMAAA! LATTE! GIOCHI! CAOSMAX!"
+              "speaker": "lex",
+              "text": "Mmmmh! Waaah! AHHH!"
             },
             {
               "id": "pr1_0_tb_2",
               "type": "dialogue",
               "speaker": "favilla",
-              "text": "Bubbà! Ale piccolo, un disastro alla volta!"
+              "text": "Bubbà! Lex piccolo, un disastro alla volta!"
             },
             {
               "id": "pr1_0_tb_3",
               "type": "narration",
-              "text": "Lui è Mallow Bellow, il papà informatico. Programma software, ma spesso manda in crash la casa."
+              "text": "Lui è Mallow, mio marito. Programma software, ma spesso manda in crash tutta la casa."
             },
             {
               "id": "pr1_0_tb_4",
               "type": "dialogue",
-              "speaker": "mallow_bellow",
-              "text": "Latte overflow..."
-            },
-            {
-              "id": "pr1_0_tb_5",
-              "type": "dialogue",
-              "speaker": "sparkle_ale",
-              "text": "Papà bug! Mamma fix!"
+              "speaker": "mallow",
+              "text": "Ho una call tra cinque minuti..."
             }
           ],
           "interactions": []
@@ -95,41 +89,28 @@
       "panels": [
         {
           "id": "pr2_0",
-          "characters": ["favilla", "sparkle_ale", "mallow_bellow"],
+          "characters": ["favilla", "lex", "mallow"],
           "text_blocks": [
             {
               "id": "pr2_0_tb_0",
               "type": "narration",
-              "text": "Colazioni esplosive, panni infiniti, giochi ovunque. Questo è il mio allenamento quotidiano."
+              "text": "Pappe esplosive, panni infiniti, Lex che lancia qualsiasi cosa a portata di mano."
             },
             {
               "id": "pr2_0_tb_1",
-              "type": "narration",
-              "text": "Siri: \"Disordine domestico: 92%. Tempo stimato per l'ordine: 47 ore.\""
+              "type": "dialogue",
+              "speaker": "favilla",
+              "text": "Lex, il cucchiaino si mangia, non si lancia!"
             },
             {
               "id": "pr2_0_tb_2",
-              "type": "dialogue",
-              "speaker": "favilla",
-              "text": "Ale, il cucchiaio si mangia, non si lancia in orbita!"
+              "type": "narration",
+              "text": "Mallow è in call. Il portatile occupa metà tavolo. La pasta è sul fuoco."
             },
             {
               "id": "pr2_0_tb_3",
-              "type": "dialogue",
-              "speaker": "sparkle_ale",
-              "text": "Cucchiaio razzo!"
-            },
-            {
-              "id": "pr2_0_tb_4",
-              "type": "dialogue",
-              "speaker": "mallow_bellow",
-              "text": "Ho inventato il frisbee-calzino!"
-            },
-            {
-              "id": "pr2_0_tb_5",
-              "type": "dialogue",
-              "speaker": "sparkle_ale",
-              "text": "Papà campione caos!"
+              "type": "thought",
+              "text": "Respira. Ce la fai. Sei una professionista del caos."
             }
           ],
           "interactions": []
@@ -142,49 +123,27 @@
       "panels": [
         {
           "id": "pr3_0",
-          "characters": ["favilla", "sparkle_ale", "mallow_bellow"],
+          "characters": ["favilla", "lex", "mallow"],
           "text_blocks": [
             {
               "id": "pr3_0_tb_0",
               "type": "narration",
-              "text": "Ma ogni giorno arriva il momento in cui il caos supera il limite."
+              "text": "Poi arriva quel momento. Quello in cui tutto accade insieme."
             },
             {
               "id": "pr3_0_tb_1",
               "type": "narration",
-              "text": "Giocattoli ovunque, pentole che fumano, panni che invadono il divano."
+              "text": "La pasta trabocca. Il telefono suona. Mallow: \"Mi senti? La linea è pessima.\""
             },
             {
               "id": "pr3_0_tb_2",
               "type": "narration",
-              "text": "Il portatile di Mallow Bellow lampeggia: \"COMPILATION FAILED\"."
+              "text": "E Lex — Lex si sporge. Troppo. Dal sediolone."
             },
             {
               "id": "pr3_0_tb_3",
-              "type": "narration",
-              "text": "Siri: \"ALLERTA! Disordine 99%! Evacuare immediatamente!\""
-            },
-            {
-              "id": "pr3_0_tb_4",
-              "type": "dialogue",
-              "speaker": "sparkle_ale",
-              "text": "CAOS TOTALE! VINCITORI!"
-            },
-            {
-              "id": "pr3_0_tb_5",
-              "type": "dialogue",
-              "speaker": "mallow_bellow",
-              "text": "Il sistema è completamente down..."
-            },
-            {
-              "id": "pr3_0_tb_6",
-              "type": "narration",
-              "text": "Favilla chiude gli occhi. Due caos. Una scintilla dentro di lei."
-            },
-            {
-              "id": "pr3_0_tb_7",
               "type": "thought",
-              "text": "È ora."
+              "text": "No. No no no—"
             }
           ],
           "interactions": []
@@ -197,45 +156,208 @@
       "panels": [
         {
           "id": "pr4_0",
-          "characters": ["favilla_blaze", "sparkle_ale", "mallow_bellow"],
+          "characters": ["favilla_blaze", "lex"],
           "text_blocks": [
             {
               "id": "pr4_0_tb_0",
               "type": "narration",
-              "text": "In un lampo, gli occhiali spariscono, il maglioncino svanisce, i suoi capelli biondi diventano una criniera di fuoco."
+              "text": "Succede in un lampo. Gli occhiali spariscono. I capelli diventano luce. Una forza che non ha mai sentito prima le attraversa il corpo."
             },
             {
               "id": "pr4_0_tb_1",
               "type": "narration",
-              "text": "La tuta da collaboratrice lascia spazio a un costume super-palestra con fiamme rosa e oro. L'aura intorno a lei esplode di energia."
+              "text": "Lex è al sicuro. La cucina è in ordine. Mallow è ancora in call."
             },
             {
               "id": "pr4_0_tb_2",
-              "type": "dialogue",
-              "speaker": "favilla_blaze",
-              "text": "Superpoteri supermamma: ATTIVATI!"
+              "type": "narration",
+              "text": "Il mondo non si è accorto di niente."
             },
             {
               "id": "pr4_0_tb_3",
               "type": "narration",
-              "text": "Dall'ombra della scuola... nasce FAVILLA BLAZE."
+              "text": "Tranne Lex."
             },
             {
               "id": "pr4_0_tb_4",
-              "type": "dialogue",
-              "speaker": "mallow_bellow",
-              "text": "Ho... sposato una supereroina?"
+              "type": "narration",
+              "text": "Lex la fissa. Occhi spalancati. Poi ride — quella risata piena degli unici due dentini in basso che ha."
             },
             {
               "id": "pr4_0_tb_5",
-              "type": "dialogue",
-              "speaker": "sparkle_ale",
-              "text": "Mamma FLAMMA!"
+              "type": "thought",
+              "text": "Sa. Non può dirlo. Ma sa."
             }
           ],
           "interactions": []
         }
       ]
+    },
+    {
+      "index": 5,
+      "background": "assets/episodes/prologo/page_4.webp",
+      "panels": [
+        {
+          "id": "pr5_0",
+          "characters": ["favilla", "mallow"],
+          "text_blocks": [
+            {
+              "id": "pr5_0_tb_0",
+              "type": "narration",
+              "text": "Mallow chiude la call. Entra in cucina. Si guarda intorno."
+            },
+            {
+              "id": "pr5_0_tb_1",
+              "type": "dialogue",
+              "speaker": "mallow",
+              "text": "Va tutto bene? Sembrava casino, da là dentro."
+            },
+            {
+              "id": "pr5_0_tb_2",
+              "type": "thought",
+              "text": "Cosa gli dico?"
+            }
+          ],
+          "interactions": []
+        }
+      ],
+      "choice": {
+        "id": "prima_scelta",
+        "prompt": "Mallow ti fissa. Cosa rispondi?",
+        "options": [
+          {
+            "id": "bugia",
+            "label": "\"Sì. Pasta quasi pronta.\"",
+            "hint": "Prima bugia. Segreto al sicuro — per ora.",
+            "goto_branch": "branch_segreto",
+            "stat_effects": { "segreto": 10, "legame": -5 }
+          },
+          {
+            "id": "mezzo_vero",
+            "label": "\"Ho avuto uno strano momento...\"",
+            "hint": "Mallow è curioso. Il segreto trema.",
+            "goto_branch": "branch_legame",
+            "stat_effects": { "segreto": -10, "legame": 10 }
+          }
+        ]
+      }
     }
-  ]
+  ],
+  "branches": {
+    "branch_segreto": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/prologo/page_4.webp",
+          "panels": [
+            {
+              "id": "bs_0",
+              "characters": ["favilla", "mallow", "lex"],
+              "text_blocks": [
+                {
+                  "id": "bs_0_tb_0",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "Ok! Bene. Quanto manca?"
+                },
+                {
+                  "id": "bs_0_tb_1",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Dieci minuti."
+                },
+                {
+                  "id": "bs_0_tb_2",
+                  "type": "narration",
+                  "text": "Lex la guarda. Sorride di nuovo. Solo lei capisce cosa significa."
+                },
+                {
+                  "id": "bs_0_tb_3",
+                  "type": "thought",
+                  "text": "Il segreto è mio. E suo. Solo nostro."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "branch_legame": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/prologo/page_4.webp",
+          "panels": [
+            {
+              "id": "bl_0",
+              "characters": ["favilla", "mallow", "lex"],
+              "text_blocks": [
+                {
+                  "id": "bl_0_tb_0",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "Strano come?"
+                },
+                {
+                  "id": "bl_0_tb_1",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Niente. Stanchezza. Dai, siediti."
+                },
+                {
+                  "id": "bl_0_tb_2",
+                  "type": "narration",
+                  "text": "Mallow la guarda un secondo di troppo. Poi annuisce."
+                },
+                {
+                  "id": "bl_0_tb_3",
+                  "type": "thought",
+                  "text": "Quasi. Quasi gli ho detto tutto."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "epilogue": {
+    "pages": [
+      {
+        "index": 0,
+        "background": "assets/episodes/prologo/page_4.webp",
+        "panels": [
+          {
+            "id": "ep_0",
+            "characters": ["favilla"],
+            "text_blocks": [
+              {
+                "id": "ep_0_tb_0",
+                "type": "narration",
+                "text": "Quella sera, mentre Lex dorme e Mallow guarda il suo schermo, Favilla si siede sul bordo del letto."
+              },
+              {
+                "id": "ep_0_tb_1",
+                "type": "thought",
+                "text": "Cosa sono diventata?"
+              },
+              {
+                "id": "ep_0_tb_2",
+                "type": "narration",
+                "text": "Dall'altra parte della città, Nova Tutinia dorme. Ancora per poco."
+              },
+              {
+                "id": "ep_0_tb_3",
+                "type": "system",
+                "text": "FINE PROLOGO — Stagione 1: Alba Strana"
+              }
+            ],
+            "interactions": []
+          }
+        ]
+      }
+    ]
+  }
 }

@@ -1,4 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Necessario per le chiamate HTTPS al Cloudflare Worker (feature AI,
+         FCM register, inbox). Senza questo le build release falliscono
+         tutte le richieste con SocketException. -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:label="Favilla Blaze - La Supermamma"
         android:name="${applicationName}"

@@ -29,6 +29,20 @@
       "variant": "main"
     },
     {
+      "id": "lex",
+      "name": "Lex",
+      "display_name": "Lex",
+      "role": "figlio di Favilla e Mallow",
+      "variant": "main"
+    },
+    {
+      "id": "mallow",
+      "name": "Mallow",
+      "display_name": "Mallow",
+      "role": "sviluppatore informatico, marito di Favilla",
+      "variant": "main"
+    },
+    {
       "id": "bambini",
       "name": "Bambini",
       "display_name": "Bambini",
@@ -64,44 +78,7 @@
       "subtitle": "La doppia vita di Favilla",
       "thumbnail": "assets/episodes/prologo/thumb.webp",
       "file": "assets/data/episodes/prologo.json"
-    },
-    {
-      "id": "missione_1",
-      "title": "Missione #1 – Caos all'Alba",
-      "subtitle": "Favilla Blaze contro il risveglio più difficile",
-      "thumbnail": "assets/episodes/missione_1/thumb.webp",
-      "file": "assets/data/episodes/missione_1.json"
-    },
-    {
-      "id": "missione_2",
-      "title": "Missione #2 – Assalto al Supermercato",
-      "subtitle": "Favilla Blaze contro il carrello del destino",
-      "thumbnail": "assets/episodes/missione_2/thumb.webp",
-      "file": "assets/data/episodes/missione_2.json"
-    },
-    {
-      "id": "missione_3",
-      "title": "Missione #3 – L'Ora della Pappa",
-      "subtitle": "Favilla Blaze contro il Ninja del Seggiolone",
-      "thumbnail": "assets/episodes/missione_3/thumb.webp",
-      "file": "assets/data/episodes/missione_3.json"
-    },
-    {
-      "id": "missione_4",
-      "title": "Missione #4 – Il Sottomarino Pirata",
-      "subtitle": "Favilla Blaze contro il Capitano Sparkle",
-      "thumbnail": "assets/episodes/missione_4/thumb.webp",
-      "file": "assets/data/episodes/missione_4.json"
     }
   ],
-  "_drafts": [
-    {
-      "_comment": "Disattivata: in attesa di immagini definitive (Gemini free non garantisce coerenza personaggi)",
-      "id": "missione_5",
-      "title": "Missione #5 – Il Colpo della Mano Robotica",
-      "subtitle": "Favilla Blaze contro l'Insonnia di Sparkle",
-      "thumbnail": "assets/episodes/missione_5/thumb.webp",
-      "file": "assets/data/episodes/missione_5.json"
-    }
-  ]
+  "_drafts": []
 }

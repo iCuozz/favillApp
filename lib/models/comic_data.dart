@@ -207,19 +207,30 @@ class ChoiceOption {
   final String gotoBranch;
   final String? hint;
 
+  /// Effetti sulle stat RPG: es. {"segreto": 1, "legame": -1}
+  final Map<String, int> statEffects;
+
   const ChoiceOption({
     required this.id,
     required this.label,
     required this.gotoBranch,
     this.hint,
+    this.statEffects = const {},
   });
 
   factory ChoiceOption.fromJson(Map<String, dynamic> json) {
+    final effectsJson = json['stat_effects'] as Map<String, dynamic>?;
+    final statEffects = <String, int>{};
+    effectsJson?.forEach((key, value) {
+      if (value is int) statEffects[key] = value;
+    });
+
     return ChoiceOption(
       id: json['id'] as String? ?? '',
       label: json['label'] as String? ?? '',
       gotoBranch: json['goto_branch'] as String? ?? '',
       hint: json['hint'] as String?,
+      statEffects: statEffects,
     );
   }
 }

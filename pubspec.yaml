@@ -1,7 +1,7 @@
 name: favilla_app
 description: Fumetto interattivo Favilla - Mamma con Superpoteri
 publish_to: "none"
-version: 1.0.5+8
+version: 1.0.6+9
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
@@ -45,11 +45,6 @@ flutter:
     - assets/fonts/
     - assets/episodes/
     - assets/episodes/prologo/
-    - assets/episodes/missione_1/
-    - assets/episodes/missione_2/
-    - assets/episodes/missione_3/
-    - assets/episodes/missione_4/
-    - assets/episodes/missione_5/
     - assets/cover/
 
   fonts:

@@ -8,16 +8,17 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 import 'models/comic_data.dart';
 import 'services/comic_loader.dart';
 import 'services/engagement_service.dart';
-import 'services/inbox_service.dart';
+import 'services/game_state_service.dart';
 import 'services/progress_service.dart';
-import 'services/push_service.dart';
 import 'services/settings_service.dart';
 import 'l10n/app_strings.dart';
 import 'pages/home_cover_page.dart';
-import 'pages/episodes_list_page.dart';
-import 'widgets/comic_page_stage.dart';
-import 'widgets/choice_card.dart';
 import 'services/branch_history_service.dart';
+import 'services/world_state_service.dart';
+import 'pages/world_map_page.dart';
+import 'widgets/choice_card.dart';
+import 'widgets/comic_page_stage.dart';
+import 'widgets/stats_hud_widget.dart';
 
 const String _kSentryDsn =
     'https://a0191b359e43ba940e6b2bc1107b81ec@o4511291384725504.ingest.de.sentry.io/4511291387543632';
@@ -25,10 +26,8 @@ const String _kSentryDsn =
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SettingsService.init();
-
-  // Inbox in locale + push (best-effort, mai bloccante).
-  unawaited(InboxService.instance.init().then((_) => InboxService.instance.sync()));
-  unawaited(PushService.instance.init());
+  await GameStateService.instance.init();
+  await WorldStateService.instance.init();
 
   await SentryFlutter.init(
     (options) {
@@ -68,11 +67,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.resumed) {
-      // Polling fallback: anche senza FCM (es. token non ancora registrato)
-      // appena l'app torna in foreground proviamo a recuperare nuove risposte.
-      unawaited(InboxService.instance.sync());
-    }
+    // Hook per future integrazioni al resume dell'app.
   }
 
   @override
@@ -142,6 +137,7 @@ class EpisodeLoaderPage extends StatelessWidget {
   final int initialPageIndex;
   final int initialVisibleBlocks;
   final String? initialBranchId;
+  final Future<void> Function()? onEpisodeCompleted;
 
   const EpisodeLoaderPage({
     super.key,
@@ -150,6 +146,7 @@ class EpisodeLoaderPage extends StatelessWidget {
     this.initialPageIndex = 0,
     this.initialVisibleBlocks = 1,
     this.initialBranchId,
+    this.onEpisodeCompleted,
   });
 
   @override
@@ -197,6 +194,7 @@ class EpisodeLoaderPage extends StatelessWidget {
           initialPageIndex: initialPageIndex,
           initialVisibleBlocks: initialVisibleBlocks,
           initialBranchId: initialBranchId,
+          onEpisodeCompleted: onEpisodeCompleted,
         );
       },
     );
@@ -209,6 +207,7 @@ class EpisodePage extends StatefulWidget {
   final int initialPageIndex;
   final int initialVisibleBlocks;
   final String? initialBranchId;
+  final Future<void> Function()? onEpisodeCompleted;
 
   const EpisodePage({
     super.key,
@@ -217,6 +216,7 @@ class EpisodePage extends StatefulWidget {
     this.initialPageIndex = 0,
     this.initialVisibleBlocks = 1,
     this.initialBranchId,
+    this.onEpisodeCompleted,
   });
 
   @override
@@ -231,6 +231,7 @@ class _EpisodePageState extends State<EpisodePage> {
   late int _maxVisitedIndex;
   String? _activeBranchId;
   bool _choiceSheetOpen = false;
+  Map<String, int>? _pendingStatEffects;
   final Map<int, GlobalKey<ComicPageStageState>> _stageKeys = {};
   final Map<int, int> _visibleBlocksByPage = {};
 
@@ -347,19 +348,23 @@ class _EpisodePageState extends State<EpisodePage> {
     ProgressService.markCompleted(widget.episode.id);
     EngagementService.onEpisodeCompleted();
 
+    // Chiama il callback custom (es. WorldStateService.completeQuest per le quest)
+    if (widget.onEpisodeCompleted != null) {
+      widget.onEpisodeCompleted!().then((_) => _afterCompletion());
+    } else {
+      _afterCompletion();
+    }
+  }
+
+  void _afterCompletion() {
     final episodes = widget.comicIndex.episodes;
     final currentEpisodeId = widget.episode.id;
 
     final currentEpisodeIndex =
         episodes.indexWhere((e) => e.id == currentEpisodeId);
 
-    if (currentEpisodeIndex == -1) {
-      ProgressService.clearCurrent();
-      _showEpisodeCompletedDialog();
-      return;
-    }
-
-    final hasNextEpisode = currentEpisodeIndex < episodes.length - 1;
+    final hasNextEpisode = currentEpisodeIndex != -1 &&
+        currentEpisodeIndex < episodes.length - 1;
 
     if (hasNextEpisode) {
       final nextSummary = episodes[currentEpisodeIndex + 1];
@@ -380,46 +385,19 @@ class _EpisodePageState extends State<EpisodePage> {
         ),
       );
     } else {
+      // Fine episodio senza successivo → vai alla mappa del mondo
       ProgressService.clearCurrent();
-      _showEpisodeCompletedDialog();
+      _goToWorldMap();
     }
   }
 
-  void _showEpisodeCompletedDialog() {
-    showDialog<void>(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Text(AppStrings.episodeCompletedTitle),
-          content: Text(
-            AppStrings.episodeCompletedBody(widget.episode.title),
-          ),
-          actions: [
-            TextButton.icon(
-              onPressed: () {
-                EngagementService.shareEpisode(widget.episode.title);
-              },
-              icon: const Icon(Icons.share, size: 18),
-              label: Text(AppStrings.share),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => EpisodesListPage(
-                      comicIndex: widget.comicIndex,
-                    ),
-                  ),
-                  (route) => route.isFirst,
-                );
-              },
-              child: Text(AppStrings.backToEpisodes),
-            ),
-          ],
-        );
-      },
+  void _goToWorldMap() {
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(
+        builder: (_) => WorldMapPage(comicIndex: widget.comicIndex),
+      ),
+      (route) => route.isFirst,
     );
   }
 
@@ -481,10 +459,14 @@ class _EpisodePageState extends State<EpisodePage> {
     final branchId = option.gotoBranch;
     if (branchId.isEmpty) return;
 
+    // Applica gli effetti sulle stat RPG.
+    if (option.statEffects.isNotEmpty) {
+      GameStateService.instance.applyEffects(option.statEffects);
+      setState(() => _pendingStatEffects = option.statEffects);
+    }
+
     setState(() {
       _activeBranchId = branchId;
-      // Le pagine successive a `currentIndex` ora sono nuove (branch + epilogue):
-      // resettiamo i blocchi visibili per quegli indici e il maxVisitedIndex.
       _visibleBlocksByPage.removeWhere((k, _) => k > currentIndex);
       _stageKeys.removeWhere((k, _) => k > currentIndex);
       if (_maxVisitedIndex < currentIndex) _maxVisitedIndex = currentIndex;
@@ -733,14 +715,18 @@ class _EpisodePageState extends State<EpisodePage> {
                       ),
                     ),
                   ),
+                  const SizedBox(height: 10),
+                  const Center(child: StatsHudWidget()),
                 ],
               ),
             ),
             Expanded(
-              child: GestureDetector(
-                behavior: HitTestBehavior.translucent,
-                onHorizontalDragEnd: _handleHorizontalSwipe,
-                child: PageView.builder(
+              child: Stack(
+                children: [
+                  GestureDetector(
+                    behavior: HitTestBehavior.translucent,
+                    onHorizontalDragEnd: _handleHorizontalSwipe,
+                    child: PageView.builder(
                   controller: _pageController,
                   itemCount: pages.length,
                   physics: const NeverScrollableScrollPhysics(),
@@ -810,7 +796,23 @@ class _EpisodePageState extends State<EpisodePage> {
                 },
                 ),
               ),
-            ),
+              // Toast degli effetti stat dopo una scelta
+              if (_pendingStatEffects != null)
+                Positioned(
+                  bottom: 16,
+                  left: 0,
+                  right: 0,
+                  child: Center(
+                    child: StatEffectToast(
+                      key: ValueKey(_pendingStatEffects.hashCode),
+                      effects: _pendingStatEffects!,
+                      onDone: () => setState(() => _pendingStatEffects = null),
+                    ),
+                  ),
+                ),
+            ],
+          ),
+        ),
             Padding(
               padding: const EdgeInsets.fromLTRB(12, 8, 12, 16),
               child: Row(
@@ -895,7 +897,7 @@ class _PageThumb extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 4),
                   color: Colors.black.withOpacity(0.55),
                   child: Text(
-                    '${pageIndex + 1}',
+                    '\${pageIndex + 1}',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 12,

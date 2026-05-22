@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import '../l10n/app_strings.dart';
 import '../services/engagement_service.dart';
+import '../services/game_state_service.dart';
 import '../services/progress_service.dart';
 import '../services/settings_service.dart';
+import '../services/world_state_service.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -54,6 +56,8 @@ class _SettingsPageState extends State<SettingsPage> {
 
     if (confirmed == true) {
       await ProgressService.resetAll();
+      await GameStateService.instance.reset();
+      await WorldStateService.instance.reset();
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(AppStrings.resetProgressDone)),

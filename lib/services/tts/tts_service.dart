@@ -73,8 +73,8 @@ class TtsService {
     if (block.isThought) return _profileThought;
     final id = block.speaker ?? '';
     if (id == 'favilla' || id == 'favilla_blaze') return _profileFavilla;
-    if (id == 'sparkle_ale') return _profileSparkle;
-    if (id == 'mallow_bellow') return _profileMallow;
+    if (id == 'lex' || id == 'sparkle_ale') return _profileSparkle;
+    if (id == 'mallow' || id == 'mallow_bellow') return _profileMallow;
     return _profileDefault;
   }
 

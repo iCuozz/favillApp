@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import '../l10n/app_strings.dart';
 import '../models/comic_data.dart';
-import '../services/inbox_service.dart';
 import '../services/progress_service.dart';
+import '../services/world_state_service.dart';
 import '../main.dart';
-import '../services/ai/ai_client.dart';
-import 'ai/ai_hub_page.dart';
-import 'ai/inbox_page.dart';
 import 'episodes_list_page.dart';
+import 'world_map_page.dart';
 import 'settings_page.dart';
 import '../widgets/comic_title.dart';
 
@@ -67,6 +65,15 @@ class _HomeCoverPageState extends State<HomeCoverPage> with WidgetsBindingObserv
     });
   }
 
+  void _openWorldMap() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => WorldMapPage(comicIndex: widget.comicIndex),
+      ),
+    ).then((_) => _refreshProgress());
+  }
+
   void _openEpisodesList() {
     Navigator.push(
       context,
@@ -101,8 +108,13 @@ class _HomeCoverPageState extends State<HomeCoverPage> with WidgetsBindingObserv
   Widget build(BuildContext context) {
     final hasProgress = _progress != null && _progressEpisode != null;
 
-    return Scaffold(
-      body: Stack(
+    return ValueListenableBuilder(
+      valueListenable: WorldStateService.instance.state,
+      builder: (context, worldState, _) {
+        final prologoCompleted = worldState.isQuestCompleted('prologo');
+
+        return Scaffold(
+          body: Stack(
         fit: StackFit.expand,
         children: [
           Container(
@@ -139,70 +151,6 @@ class _HomeCoverPageState extends State<HomeCoverPage> with WidgetsBindingObserv
                   right: 8,
                   child: Row(
                     children: [
-                      ValueListenableBuilder<int>(
-                        valueListenable: InboxService.instance.unreadCount,
-                        builder: (context, unread, _) {
-                          return IconButton(
-                            tooltip: AppStrings.inboxOpenTooltip,
-                            icon: Stack(
-                              clipBehavior: Clip.none,
-                              children: [
-                                const Icon(Icons.mail_outline,
-                                    color: Colors.white),
-                                if (unread > 0)
-                                  Positioned(
-                                    right: -4,
-                                    top: -4,
-                                    child: Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 5, vertical: 1),
-                                      decoration: BoxDecoration(
-                                        color: Colors.amberAccent.shade100,
-                                        borderRadius:
-                                            BorderRadius.circular(10),
-                                      ),
-                                      constraints: const BoxConstraints(
-                                        minWidth: 16,
-                                        minHeight: 16,
-                                      ),
-                                      child: Text(
-                                        unread > 9 ? '9+' : '$unread',
-                                        style: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ),
-                                  ),
-                              ],
-                            ),
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => const InboxPage(),
-                                ),
-                              );
-                            },
-                          );
-                        },
-                      ),
-                      if (AiClient.instance.enabled)
-                        IconButton(
-                          tooltip: AppStrings.aiHubTitle,
-                          icon: const Icon(Icons.auto_awesome,
-                              color: Colors.white),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => const AiHubPage(),
-                              ),
-                            );
-                          },
-                        ),
                       IconButton(
                         tooltip: AppStrings.settings,
                         icon: const Icon(Icons.settings, color: Colors.white),
@@ -250,10 +198,12 @@ class _HomeCoverPageState extends State<HomeCoverPage> with WidgetsBindingObserv
                           backgroundColor: Colors.pinkAccent,
                           foregroundColor: Colors.white,
                         ),
-                        onPressed: _continueReading,
-                        icon: const Icon(Icons.play_arrow),
+                        onPressed: prologoCompleted ? _openWorldMap : _continueReading,
+                        icon: Icon(prologoCompleted ? Icons.map : Icons.play_arrow),
                         label: Text(
-                          AppStrings.continueLabel(_progressEpisode!.title),
+                          prologoCompleted
+                              ? 'Esplora Nova Tutinia'
+                              : AppStrings.continueLabel(_progressEpisode!.title),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -293,6 +243,8 @@ class _HomeCoverPageState extends State<HomeCoverPage> with WidgetsBindingObserv
           ),
         ],
       ),
+        );
+      },
     );
   }
 }
