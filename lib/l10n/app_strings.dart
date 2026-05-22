@@ -17,12 +17,6 @@ class AppStrings {
       _t('Continua: $episodeTitle', 'Continue: $episodeTitle');
   static String get settings => _t('Impostazioni', 'Settings');
 
-  static String get episodesTitle => _t('Tutti gli episodi', 'All episodes');
-  static String get completed => _t('Completato', 'Completed');
-  static String get toBeContinued => _t('Continua…', 'To be continued…');
-  static String get newEpisodesSoon =>
-      _t('Nuovi episodi in arrivo', 'New episodes coming soon');
-
   static String pageOf(int current, int total) =>
       _t('Pagina $current/$total', 'Page $current/$total');
   static String get tapToContinue =>
@@ -33,8 +27,6 @@ class AppStrings {
   static String episodeCompletedBody(String title) =>
       _t('Hai completato "$title".', 'You completed "$title".');
   static String get share => _t('Condividi', 'Share');
-  static String get backToEpisodes =>
-      _t('Torna agli episodi', 'Back to episodes');
   static String get hapticsTooltip => _t('Vibrazione', 'Haptics');
 
   static String get readingSection => _t('Lettura', 'Reading');

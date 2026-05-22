@@ -71,14 +71,5 @@
       "variant": "ai"
     }
   ],
-  "episodes": [
-    {
-      "id": "prologo",
-      "title": "L'ombra della fiamma",
-      "subtitle": "La doppia vita di Favilla",
-      "thumbnail": "assets/episodes/prologo/thumb.webp",
-      "file": "assets/data/episodes/prologo.json"
-    }
-  ],
   "_drafts": []
 }

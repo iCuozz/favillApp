@@ -77,7 +77,7 @@ class _StatPill extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(emoji, style: const TextStyle(fontSize: 14)),
-          const SizedBox(height: 3),
+          const SizedBox(height: 2),
           SizedBox(
             width: 36,
             height: 5,
@@ -88,6 +88,16 @@ class _StatPill extends StatelessWidget {
                 backgroundColor: Colors.white12,
                 valueColor: AlwaysStoppedAnimation<Color>(color),
               ),
+            ),
+          ),
+          const SizedBox(height: 3),
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 9,
+              color: color,
+              fontWeight: FontWeight.w600,
+              letterSpacing: 0.3,
             ),
           ),
         ],
@@ -121,7 +131,7 @@ class _StatEffectToastState extends State<StatEffectToast>
     super.initState();
     _ctrl = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1800),
+      duration: const Duration(milliseconds: 3000),
     );
     _opacity = CurvedAnimation(
       parent: ReverseAnimation(_ctrl),

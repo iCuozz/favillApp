@@ -4,9 +4,12 @@
       "id": "casa",
       "name": "Casa",
       "emoji": "🏠",
-      "description": "Via Garibaldi 14, terzo piano. Il campo di battaglia domestico.",
+      "description": "Via delle Vesciche e dei Brufoli 18, terzo piano. Il campo di battaglia domestico.",
       "unlocked_by_default": true,
-      "position": { "x": 0.55, "y": 0.60 },
+      "position": {
+        "x": 0.55,
+        "y": 0.6
+      },
       "quests": [
         {
           "id": "s1_mattina_dopo",
@@ -15,7 +18,9 @@
           "file": "assets/data/quests/s1_mattina_dopo.json",
           "thumbnail": "assets/episodes/prologo/thumb.webp",
           "season": 1,
-          "requires_completed": ["prologo"],
+          "requires_completed": [
+            "prologo"
+          ],
           "requires_stats": {}
         }
       ]
@@ -27,7 +32,10 @@
       "description": "Scuola elementare di Nova Tutinia. 50 piccoli uragani al giorno.",
       "unlocked_by_default": false,
       "unlock_after_quest": "s1_mattina_dopo",
-      "position": { "x": 0.25, "y": 0.35 },
+      "position": {
+        "x": 0.25,
+        "y": 0.35
+      },
       "quests": [
         {
           "id": "s1_scuola_1",
@@ -36,7 +44,9 @@
           "file": "assets/data/quests/s1_scuola_1.json",
           "thumbnail": "assets/episodes/prologo/thumb.webp",
           "season": 1,
-          "requires_completed": ["s1_mattina_dopo"],
+          "requires_completed": [
+            "s1_mattina_dopo"
+          ],
           "requires_stats": {}
         }
       ]
@@ -48,7 +58,10 @@
       "description": "Parco Centrale di Nova Tutinia. Qui nessuno ti vede.",
       "unlocked_by_default": false,
       "unlock_after_quest": "s1_scuola_1",
-      "position": { "x": 0.70, "y": 0.30 },
+      "position": {
+        "x": 0.7,
+        "y": 0.3
+      },
       "quests": []
     },
     {
@@ -58,7 +71,10 @@
       "description": "Conad di Nova Tutinia. La spesa non si fa da sola.",
       "unlocked_by_default": false,
       "unlock_after_quest": "s1_scuola_1",
-      "position": { "x": 0.35, "y": 0.70 },
+      "position": {
+        "x": 0.35,
+        "y": 0.7
+      },
       "quests": []
     }
   ]

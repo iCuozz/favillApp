@@ -4,7 +4,6 @@ import '../models/comic_data.dart';
 import '../services/progress_service.dart';
 import '../services/world_state_service.dart';
 import '../main.dart';
-import 'episodes_list_page.dart';
 import 'world_map_page.dart';
 import 'settings_page.dart';
 import '../widgets/comic_title.dart';
@@ -22,8 +21,9 @@ class HomeCoverPage extends StatefulWidget {
 }
 
 class _HomeCoverPageState extends State<HomeCoverPage> with WidgetsBindingObserver {
-  ReadingProgress? _progress;
-  EpisodeSummary? _progressEpisode;
+  static const _kPrologoSummary = _PrologoSummary();
+
+  bool _hasProgress = false;
 
   @override
   void initState() {
@@ -48,20 +48,8 @@ class _HomeCoverPageState extends State<HomeCoverPage> with WidgetsBindingObserv
   Future<void> _refreshProgress() async {
     final progress = await ProgressService.loadCurrent();
     if (!mounted) return;
-
-    EpisodeSummary? episode;
-    if (progress != null) {
-      for (final e in widget.comicIndex.episodes) {
-        if (e.id == progress.episodeId) {
-          episode = e;
-          break;
-        }
-      }
-    }
-
     setState(() {
-      _progress = progress;
-      _progressEpisode = episode;
+      _hasProgress = progress != null;
     });
   }
 
@@ -74,31 +62,35 @@ class _HomeCoverPageState extends State<HomeCoverPage> with WidgetsBindingObserv
     ).then((_) => _refreshProgress());
   }
 
-  void _openEpisodesList() {
+  void _startPrologo() {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => EpisodesListPage(
+        builder: (_) => EpisodeLoaderPage(
           comicIndex: widget.comicIndex,
+          summary: _kPrologoSummary,
+          onEpisodeCompleted: () =>
+              WorldStateService.instance.completeQuest('prologo'),
         ),
       ),
     ).then((_) => _refreshProgress());
   }
 
-  void _continueReading() {
-    final progress = _progress;
-    final episode = _progressEpisode;
-    if (progress == null || episode == null) return;
+  Future<void> _continuePrologo() async {
+    final progress = await ProgressService.loadCurrent();
+    if (!mounted || progress == null) return;
 
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (_) => EpisodeLoaderPage(
           comicIndex: widget.comicIndex,
-          summary: episode,
+          summary: _kPrologoSummary,
           initialPageIndex: progress.pageIndex,
           initialVisibleBlocks: progress.visibleBlocks,
           initialBranchId: progress.branchId,
+          onEpisodeCompleted: () =>
+              WorldStateService.instance.completeQuest('prologo'),
         ),
       ),
     ).then((_) => _refreshProgress());
@@ -106,8 +98,6 @@ class _HomeCoverPageState extends State<HomeCoverPage> with WidgetsBindingObserv
 
   @override
   Widget build(BuildContext context) {
-    final hasProgress = _progress != null && _progressEpisode != null;
-
     return ValueListenableBuilder(
       valueListenable: WorldStateService.instance.state,
       builder: (context, worldState, _) {
@@ -189,7 +179,7 @@ class _HomeCoverPageState extends State<HomeCoverPage> with WidgetsBindingObserv
                     ),
                   ),
                   const SizedBox(height: 28),
-                  if (hasProgress) ...[
+                  if (prologoCompleted)
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton.icon(
@@ -198,38 +188,37 @@ class _HomeCoverPageState extends State<HomeCoverPage> with WidgetsBindingObserv
                           backgroundColor: Colors.pinkAccent,
                           foregroundColor: Colors.white,
                         ),
-                        onPressed: prologoCompleted ? _openWorldMap : _continueReading,
-                        icon: Icon(prologoCompleted ? Icons.map : Icons.play_arrow),
+                        onPressed: _openWorldMap,
+                        icon: const Icon(Icons.map),
+                        label: const Text('Esplora Nova Tutinia'),
+                      ),
+                    )
+                  else if (_hasProgress)
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          backgroundColor: Colors.pinkAccent,
+                          foregroundColor: Colors.white,
+                        ),
+                        onPressed: _continuePrologo,
+                        icon: const Icon(Icons.play_arrow),
                         label: Text(
-                          prologoCompleted
-                              ? 'Esplora Nova Tutinia'
-                              : AppStrings.continueLabel(_progressEpisode!.title),
+                          AppStrings.continueLabel('Prologo'),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 12),
-                    SizedBox(
-                      width: double.infinity,
-                      child: OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 14),
-                          side: const BorderSide(color: Colors.white54),
-                          foregroundColor: Colors.white,
-                        ),
-                        onPressed: _openEpisodesList,
-                        child: Text(AppStrings.episodesTitle),
-                      ),
-                    ),
-                  ] else
+                    )
+                  else
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 16),
                         ),
-                        onPressed: _openEpisodesList,
+                        onPressed: _startPrologo,
                         child: Text(AppStrings.tapToStart),
                       ),
                     ),
@@ -247,4 +236,15 @@ class _HomeCoverPageState extends State<HomeCoverPage> with WidgetsBindingObserv
       },
     );
   }
+}
+
+class _PrologoSummary extends EpisodeSummary {
+  const _PrologoSummary()
+      : super(
+          id: 'prologo',
+          title: "L'ombra della fiamma",
+          subtitle: 'La doppia vita di Favilla',
+          thumbnail: 'assets/episodes/prologo/thumb.webp',
+          file: 'assets/data/episodes/prologo.json',
+        );
 }

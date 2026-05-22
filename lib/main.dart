@@ -357,38 +357,8 @@ class _EpisodePageState extends State<EpisodePage> {
   }
 
   void _afterCompletion() {
-    final episodes = widget.comicIndex.episodes;
-    final currentEpisodeId = widget.episode.id;
-
-    final currentEpisodeIndex =
-        episodes.indexWhere((e) => e.id == currentEpisodeId);
-
-    final hasNextEpisode = currentEpisodeIndex != -1 &&
-        currentEpisodeIndex < episodes.length - 1;
-
-    if (hasNextEpisode) {
-      final nextSummary = episodes[currentEpisodeIndex + 1];
-
-      ProgressService.saveCurrent(
-        episodeId: nextSummary.id,
-        pageIndex: 0,
-        visibleBlocks: 1,
-      );
-
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (_) => EpisodeLoaderPage(
-            comicIndex: widget.comicIndex,
-            summary: nextSummary,
-          ),
-        ),
-      );
-    } else {
-      // Fine episodio senza successivo → vai alla mappa del mondo
-      ProgressService.clearCurrent();
-      _goToWorldMap();
-    }
+    ProgressService.clearCurrent();
+    _goToWorldMap();
   }
 
   void _goToWorldMap() {

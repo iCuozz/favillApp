@@ -1,22 +1,16 @@
 class ComicIndex {
   final List<CharacterDefinition> characters;
-  final List<EpisodeSummary> episodes;
 
   ComicIndex({
     required this.characters,
-    required this.episodes,
   });
 
   factory ComicIndex.fromJson(Map<String, dynamic> json) {
     final charactersJson = (json['characters'] as List<dynamic>? ?? []);
-    final episodesJson = (json['episodes'] as List<dynamic>? ?? []);
 
     return ComicIndex(
       characters: charactersJson
           .map((e) => CharacterDefinition.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      episodes: episodesJson
-          .map((e) => EpisodeSummary.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
   }
@@ -67,7 +61,7 @@ class EpisodeSummary {
   final String thumbnail;
   final String file;
 
-  EpisodeSummary({
+  const EpisodeSummary({
     required this.id,
     required this.title,
     required this.subtitle,

@@ -1,7 +1,6 @@
 import type { Context } from 'hono';
 import type { Env } from '../env';
 import { checkRateLimit, refundRateLimit } from '../lib/rate_limit';
-import { sendFcm } from '../lib/fcm';
 
 interface AskRealBody {
   question?: string;
@@ -139,71 +138,5 @@ export async function handleAskRealAdminAnswer(
       WHERE id = ?`,
   ).bind(answer, newStatus, Date.now(), id).run();
 
-  // Se è una vera risposta, prova a inviare la push al client che l'aveva
-  // mandata. Errori FCM non bloccano la risposta admin (best-effort).
-  if (newStatus === 'answered' && answer) {
-    c.executionCtx.waitUntil(notifyClient(c.env, id, answer));
-  }
-
   return c.json({ ok: true });
-}
-
-async function notifyClient(env: Env, questionId: string, answer: string): Promise<void> {
-  if (!env.DB) return;
-  try {
-    const row = await env.DB.prepare(
-      `SELECT q.client_id, q.question, q.lang, p.token
-         FROM questions q
-         LEFT JOIN push_tokens p ON p.client_id = q.client_id
-        WHERE q.id = ?`,
-    ).bind(questionId).first<{
-      client_id: string;
-      question: string;
-      lang: string;
-      token: string | null;
-    }>();
-    if (!row || !row.token) return;
-
-    const isEn = row.lang === 'en';
-    const title = isEn ? '✨ Favilla replied!' : '✨ Favilla ti ha risposto!';
-    const preview = answer.length > 90 ? answer.slice(0, 87) + '...' : answer;
-
-    const result = await sendFcm(env, {
-      token: row.token,
-      notification: { title, body: preview },
-      data: {
-        type: 'ask_real_answer',
-        questionId,
-        question: row.question.slice(0, 200),
-      },
-      android: {
-        priority: 'HIGH',
-        notification: {
-          channel_id: 'favilla_replies',
-          click_action: 'FLUTTER_NOTIFICATION_CLICK',
-        },
-      },
-    });
-
-    console.log(JSON.stringify({
-      event: 'fcm_send',
-      questionId,
-      ok: result.ok,
-      status: result.status,
-    }));
-
-    // Token non valido (404 / UNREGISTERED): rimuoviamo dalla tabella così
-    // non ritentiamo all'infinito.
-    if (result.status === 404 || (result.body && result.body.includes('UNREGISTERED'))) {
-      await env.DB.prepare(
-        `DELETE FROM push_tokens WHERE client_id = ?`,
-      ).bind(row.client_id).run();
-    }
-  } catch (err) {
-    console.error(JSON.stringify({
-      event: 'notify_client_error',
-      questionId,
-      message: err instanceof Error ? err.message : String(err),
-    }));
-  }
 }

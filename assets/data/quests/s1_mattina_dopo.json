@@ -1,0 +1,253 @@
+{
+  "id": "s1_mattina_dopo",
+  "pages": [
+    {
+      "index": 0,
+      "background": "assets/episodes/prologo/page_4.webp",
+      "panels": [
+        {
+          "id": "md0_0",
+          "characters": ["favilla"],
+          "text_blocks": [
+            {
+              "id": "md0_0_tb_0",
+              "type": "narration",
+              "text": "5:12 del mattino. Lex ha smesso di piangere da un'ora. Mallow dorme."
+            },
+            {
+              "id": "md0_0_tb_1",
+              "type": "thought",
+              "text": "E io sono qui, sveglia, a fissare il soffitto come se avesse le risposte."
+            },
+            {
+              "id": "md0_0_tb_2",
+              "type": "narration",
+              "text": "Ieri sera è successa una cosa che non so come chiamare. Non so se è un dono. Non so se è un peso."
+            },
+            {
+              "id": "md0_0_tb_3",
+              "type": "thought",
+              "text": "So solo che adesso la pasta è cotta al punto giusto e mio figlio è al sicuro."
+            }
+          ],
+          "interactions": []
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "background": "assets/episodes/prologo/page_4.webp",
+      "panels": [
+        {
+          "id": "md1_0",
+          "characters": ["favilla", "lex"],
+          "text_blocks": [
+            {
+              "id": "md1_0_tb_0",
+              "type": "narration",
+              "text": "Poi Lex si sveglia. Come sempre — senza preavviso, senza trattative."
+            },
+            {
+              "id": "md1_0_tb_1",
+              "type": "dialogue",
+              "speaker": "lex",
+              "text": "Mmh. Mmmmh!"
+            },
+            {
+              "id": "md1_0_tb_2",
+              "type": "narration",
+              "text": "Ma stavolta, quando Favilla si avvicina, lui non guarda il biberon. Non guarda il pupazzo."
+            },
+            {
+              "id": "md1_0_tb_3",
+              "type": "narration",
+              "text": "La guarda lei. Con quegli occhi enormi che sembrano sapere già tutto."
+            },
+            {
+              "id": "md1_0_tb_4",
+              "type": "thought",
+              "text": "Tu c'eri. Hai visto."
+            }
+          ],
+          "interactions": []
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "background": "assets/episodes/prologo/page_4.webp",
+      "panels": [
+        {
+          "id": "md2_0",
+          "characters": ["favilla", "lex", "mallow"],
+          "text_blocks": [
+            {
+              "id": "md2_0_tb_0",
+              "type": "narration",
+              "text": "Poi Lex decide di agire. Alza le braccia. Le sbatte in avanti con tutta la forza che ha — ovvero quella di un budino."
+            },
+            {
+              "id": "md2_0_tb_1",
+              "type": "dialogue",
+              "speaker": "lex",
+              "text": "WAAAAH! Pff. WAAAAH!"
+            },
+            {
+              "id": "md2_0_tb_2",
+              "type": "narration",
+              "text": "Vuole volare. È ovvio. Sta cercando di volare."
+            },
+            {
+              "id": "md2_0_tb_3",
+              "type": "narration",
+              "text": "Mallow alza gli occhi dal telefono. La guarda. Guarda Lex. Aspetta la sua reazione."
+            }
+          ],
+          "interactions": []
+        }
+      ],
+      "choice": {
+        "id": "reazione_lex",
+        "prompt": "Lex ti fissa aspettandosi una risposta. Come reagisce Favilla?",
+        "options": [
+          {
+            "id": "sorriso",
+            "label": "Un sorriso — piccolo, caldo. Complice.",
+            "hint": "Il segreto è ancora vostro. Solo vostro.",
+            "goto_branch": "branch_sorriso",
+            "stat_effects": { "segreto": 10, "legame": 5 }
+          },
+          {
+            "id": "sudore_freddo",
+            "label": "Si irrigidisce. Un mezzo sorriso che non convince nessuno.",
+            "hint": "Mallow nota. Mallow ricorda.",
+            "goto_branch": "branch_sudore",
+            "stat_effects": { "segreto": -10, "legame": 5 }
+          }
+        ]
+      }
+    }
+  ],
+  "branches": {
+    "branch_sorriso": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/prologo/page_4.webp",
+          "panels": [
+            {
+              "id": "bs_0",
+              "characters": ["favilla", "lex", "mallow"],
+              "text_blocks": [
+                {
+                  "id": "bs_0_tb_0",
+                  "type": "narration",
+                  "text": "Lex ride — quella risata piena con i due dentini. Contagiosa, inevitabile."
+                },
+                {
+                  "id": "bs_0_tb_1",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "Guardate questi due. Già alleati contro di me."
+                },
+                {
+                  "id": "bs_0_tb_2",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Sempre stato così."
+                },
+                {
+                  "id": "bs_0_tb_3",
+                  "type": "thought",
+                  "text": "Il segreto è al sicuro. Per ora è ancora nostro — mio e suo."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "branch_sudore": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/prologo/page_4.webp",
+          "panels": [
+            {
+              "id": "bsu_0",
+              "characters": ["favilla", "lex", "mallow"],
+              "text_blocks": [
+                {
+                  "id": "bsu_0_tb_0",
+                  "type": "narration",
+                  "text": "Mallow abbassa il telefono. La guarda con quella calma precisa che Favilla conosce bene."
+                },
+                {
+                  "id": "bsu_0_tb_1",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "Ieri sera... ti è successo qualcosa, vero?"
+                },
+                {
+                  "id": "bsu_0_tb_2",
+                  "type": "thought",
+                  "text": "No. No no no. Non ancora."
+                },
+                {
+                  "id": "bsu_0_tb_3",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Stanchezza. Solo stanchezza."
+                },
+                {
+                  "id": "bsu_0_tb_4",
+                  "type": "narration",
+                  "text": "Mallow annuisce. Ma non toglie gli occhi da lei."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "epilogue": {
+    "pages": [
+      {
+        "index": 0,
+        "background": "assets/episodes/prologo/page_4.webp",
+        "panels": [
+          {
+            "id": "md_ep_0",
+            "characters": ["favilla"],
+            "text_blocks": [
+              {
+                "id": "md_ep_0_tb_0",
+                "type": "narration",
+                "text": "Alle 7:30 Favilla è in piedi, caffè in mano, Lex sul fianco, Mallow già in call."
+              },
+              {
+                "id": "md_ep_0_tb_1",
+                "type": "narration",
+                "text": "Tutto uguale a ieri. Tutto diverso da ieri."
+              },
+              {
+                "id": "md_ep_0_tb_2",
+                "type": "thought",
+                "text": "Nova Tutinia non sa ancora cosa si nasconde al terzo piano di Via delle Vesciche e dei Brufoli 18."
+              },
+              {
+                "id": "md_ep_0_tb_3",
+                "type": "system",
+                "text": "MISSIONE COMPLETATA — La Mattina Dopo"
+              }
+            ],
+            "interactions": []
+          }
+        ]
+      }
+    ]
+  }
+}
