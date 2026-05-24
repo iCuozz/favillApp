@@ -138,6 +138,7 @@ L'arco narrativo principale converge. Le scelte fatte nel prologo e nelle stagio
 * **Il Burnout Somatizzato:** I poteri di Favilla non derivano da radiazioni o magia antica, ma sono la manifestazione fisica estrema dello stress cronico e dell'istinto di protezione materno. Il suo corpo ha letteralmente "rotto" i limiti biologici umani per far fronte all'impossibilità di fare tutto da sola.
 * **Regola del Potere:** Le *Scintille* si alimentano con l'adrenalina e i picchi emotivi, ma consumano drasticamente la *Resistenza* mentale del personaggio.
 * **L'Effetto Collaterale:** Un uso eccessivo di energia causa il surriscaldamento corporeo e rende i capelli luminosi come un neon difettoso, costringendo Favilla a nascondersi temporaneamente per non bruciare i vestiti o farsi scoprire.
+* **L'Anomalia della Caffeina: Favilla ama il caffè, da sempre il suo unico vero carburante per sopravvivere alla giornata. Tuttavia, il suo nuovo "metabolismo" reagisce in modo disastroso alla caffeina. Il caffè agisce come un acceleratore puro: ripristina temporaneamente la percezione di energia, ma abbassa drasticamente la capacità di controllare i poteri. Più caffè assume, più la Resistenza diventa instabile, aumentando il rischio di trasformazioni involontarie e bagliori improvvisi.
 
 ---
 
