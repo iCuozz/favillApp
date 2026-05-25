@@ -19,7 +19,7 @@ Non è una metropoli da fumetto americano: è un posto reale, con scuole, pizzer
 | **Alter ego** | Favilla Blaze |
 | **Professione** | Collaboratrice scolastica |
 | **Famiglia** | Moglie di Mallow, mamma di Lex (7 mesi e mezzo) |
-| **Aspetto** | Bionda, capelli raccolti in una coda morbida, elegante nel quotidiano |
+| **Aspetto** | Bionda, occhi castani, viso vispo ed espressivo, fisico atletico e sportivo, occhiali neri a punta superiore (cat-eye), jeans stretti, camicina bianca, sneakers bianco-nere |
 | **Carattere** | Forte, ironica, affettuosa, concreta — regge tutto sulle spalle senza lamentarsi |
 
 ### Superpoteri (post-trasformazione)

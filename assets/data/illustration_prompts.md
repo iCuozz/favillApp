@@ -1,190 +1,183 @@
 # FavillApp — Illustration Prompts
 
-## 🛠 Tool consigliato: Draw Things (gratis, nativo M5)
+## 🛠 Tool consigliato: Draw Things
 
 **[drawthings.ai](https://drawthings.ai)** — App gratuita, ottimizzata Apple Silicon, supporta FLUX, SDXL, ControlNet, IP-Adapter.
 
 ---
 
-## 📱 Come usare Draw Things — Guida completa
-
-### 1. Installazione
-1. Scarica **Draw Things** dall'App Store (è gratis)
-2. Apri l'app — al primo avvio ti chiede di scaricare un modello
-3. **Scegli il modello:** cerca `FLUX.1-schnell` nella lista e scaricalo
-   - È veloce (~4 step per immagine) e gratuito
-   - Se vuoi qualità superiore, scarica anche `FLUX.1-dev` (più lento, risultati migliori)
-   - In alternativa cerca `Illustrious XL` o `SDXL` + cerca un LoRA "comic book style"
+## 📱 Guida completa Draw Things — Generare le illustrazioni di FavillApp
 
 ---
 
-### 2. Interfaccia base — prima immagine
+### FASE 1 — Installazione e setup (una volta sola)
 
-Quando apri un nuovo canvas vedi:
+1. Scarica **Draw Things** dall'App Store (gratuito)
+2. Apri l'app → nella schermata modelli cerca e scarica **`FLUX.1-dev`**
+   - È il modello con la qualità migliore per illustrazioni
+   - Se il Mac ha poca RAM, usa **`FLUX.1-schnell`** (più veloce, qualità leggermente inferiore)
+3. Imposta le **dimensioni di default** per FavillApp:
+   - Tocca l'ingranaggio ⚙️ → Image Size
+   - **Width: 768 — Height: 1365** (rapporto 9:16, verticale)
+4. Imposta i **parametri base**:
 
-```
-┌─────────────────────────────────┐
-│  [Canvas — anteprima immagine]  │
-├─────────────────────────────────┤
-│  Prompt (testo positivo)        │
-│  Negative Prompt                │
-├──────────┬──────────┬───────────┤
-│  Model   │  Steps   │   CFG     │
-│  Width   │  Height  │   Seed    │
-└──────────┴──────────┴───────────┘
-            [Generate]
-```
-
-**Impostazioni di partenza per FavillApp:**
-| Campo | Valore |
-|---|---|
-| Width | 768 |
-| Height | 1365 (oppure 1024×1820 se ha abbastanza RAM) |
-| Steps | 4 (FLUX schnell) / 20 (FLUX dev) |
-| CFG Scale | 1.0 (FLUX schnell) / 3.5 (FLUX dev) |
-| Sampler | Euler (FLUX schnell) / DPM++ 2M (FLUX dev) |
-| Seed | -1 la prima volta, poi annota quello che ti piace |
-
-> **Perché 768×1365?** È il rapporto 9:16 che usa l'app. Draw Things scala automaticamente.
+| Campo | FLUX.1-dev | FLUX.1-schnell |
+|---|---|---|
+| Steps | 20–28 | 4 |
+| CFG Scale | 3.5 | 1.0 |
+| Sampler | DPM++ 2M | Euler |
+| Seed | -1 (casuale per ora) | -1 |
 
 ---
 
-### 3. Come inserire un prompt
+### FASE 2 — Genera i Character Sheet (OBBLIGATORIO prima di tutto)
 
-1. Tocca il campo **Prompt**
-2. Incolla il testo del prompt da questo file (vedi sezioni sotto)
-3. Sostituisci `[STYLE BLOCK]` con il testo dello Style Block
-4. Sostituisci `[ENV KITCHEN]` (o l'ambiente giusto) con il testo dell'ENV Block
-5. Tocca il campo **Negative Prompt** e incolla il NEGATIVE BLOCK
-6. Premi **Generate**
+I character sheet sono le immagini di riferimento che userai con IP-Adapter per mantenere i personaggi **sempre identici** in tutte le scene.
 
-**Esempio concreto per page_0 del prologo:**
-```
-Prompt:
-digital comic illustration, semi-flat colors, bold clean black outlines, 
-expressive faces, Franco-Belgian comic style, warm Italian atmosphere, 
-portrait 9:16 vertical composition, cinematic lighting, no text, no speech bubbles, 
-no watermarks, high detail backgrounds,
-Italian elementary school corridor, 1980s institutional architecture, pale green walls, 
-fluorescent ceiling lights, colorful children's drawings on walls, linoleum floor,
-Scene: FAVILLA (Italian woman mid-30s, warm olive skin, biondi hair in a soft ponytail, 
-round tortoiseshell glasses, blue school-worker smock) stands center frame...
+**Genera un character sheet per ogni personaggio principale:**
+1. Apri un nuovo canvas
+2. Nel campo **Prompt**, incolla il CHARACTER SHEET del personaggio (vedi sezione CHARACTER SHEET più avanti in questo file)
+   - Sostituisci `[STYLE BLOCK]` con il testo dello STYLE BLOCK
+   - Sostituisci `[NEGATIVE BLOCK]` con il testo del NEGATIVE BLOCK
+3. Nel campo **Negative Prompt**, incolla il NEGATIVE BLOCK
+4. Imposta **Seed: -1** (casuale)
+5. Premi **Generate** — genera **almeno 6 varianti** (cambia seed ogni volta)
+6. Scegli la variante che somiglia di più al personaggio descritto
+7. **Salvala** nella libreria: tieni premuto sull'immagine → "Salva in libreria"
+8. **Annota il seed** di quella variante (tocca l'immagine → Info → seed number)
 
-Negative Prompt:
-realistic photo, 3D render, anime, manga, chibi, watercolor, 
-speech bubbles, text, letters, watermark, signature, blurry, 
-low quality, extra limbs, deformed hands, ugly faces
-```
+**Personaggi da generare (in ordine):**
+- [ ] CHARACTER SHEET: Favilla (normale)
+- [ ] CHARACTER SHEET: Favilla Blaze
+- [ ] CHARACTER SHEET: Mallow
+- [ ] CHARACTER SHEET: Lex
+
+> ⚠️ Non saltare questa fase. Senza character sheet, ogni scena avrà un personaggio diverso.
 
 ---
 
-### 4. Generare i Character Sheet (PRIMA COSA DA FARE)
+### FASE 3 — Blocca il seed di stile
 
-Prima di ogni scena con personaggi, genera un **character sheet** per ognuno.
-Il character sheet sarà poi usato come reference in IP-Adapter.
+Il seed determina l'"impronta visiva" di tutte le immagini. Usare lo stesso seed su scene diverse garantisce coerenza nello stile di tratto, palette colori e illuminazione.
 
-1. Usa il prompt del character sheet (vedi sezione CHARACTER SHEET più avanti)
-2. Genera 4–6 varianti (cambia seed con `-1`)
-3. Scegli la migliore — quella che "sembra" più il personaggio
-4. **Salvala** nella Libreria di Draw Things (tieni premuto → Salva)
-5. Annota il **seed** dell'immagine migliore (visibile nell'info dell'immagine)
+1. Genera una scena qualsiasi con seed `-1`
+2. Scorri i risultati — quando trovi uno stile di tratto che ti piace (anche se la scena non è perfetta), annota quel seed
+3. **Da quel momento usa sempre quel seed fisso** per tutte le immagini dello stesso episodio
+4. Cambia seed solo se cambi episodio o vuoi un look radicalmente diverso
+
+> 💡 Annota i seed qui o in una nota sul Mac: `seed_stile_prologo: XXXXXXXX`
 
 ---
 
-### 5. IP-Adapter — il segreto della coerenza
+### FASE 4 — Genera ogni scena
 
-IP-Adapter permette di "portare" il volto/stile di una reference image nella nuova generazione.
+Per ogni immagine (ogni `page_X.webp`):
 
-**Come attivarlo:**
-1. Nella schermata principale, tocca **"+"** o cerca il pannello **"Image Input"**
+**Step 1 — Costruisci il prompt positivo**
+Copia il blocco della pagina da questo file e sostituisci le macro:
+
+```
+[STYLE BLOCK]     →  incolla il testo dello STYLE BLOCK (vedi sezione 🎨 sotto)
+[ENV KITCHEN]     →  incolla il testo ENV KITCHEN (o ENV SCHOOL, ENV BEDROOM, ecc.)
+[ENV SCHOOL]      →  stesso principio
+[NEGATIVE BLOCK]  →  va nel campo Negative Prompt, non qui
+```
+
+Il prompt finale avrà questa forma:
+```
+digital comic illustration, semi-flat colors, bold clean black outlines...  ← STYLE BLOCK
+ENV KITCHEN: small cozy Italian apartment kitchen...                        ← ENV BLOCK
+Scene: FAVILLA (...) stands near the table...                               ← DESCRIZIONE SCENA
+```
+
+**Step 2 — Incolla nel Negative Prompt**
+Copia il NEGATIVE BLOCK nel campo Negative Prompt di Draw Things.
+
+**Step 3 — Attiva IP-Adapter**
+1. Nella schermata principale cerca il pannello **"Image Input"** (icona immagine o "+")
 2. Seleziona **IP-Adapter**
-3. Tocca **"Choose Image"** → seleziona il character sheet generato prima
-4. Imposta **Strength: 0.65** (bilancia tra coerenza e libertà creativa)
-5. Genera normalmente con il prompt della scena
+3. Tocca **"Choose Image"** → scegli dalla libreria il character sheet del personaggio principale della scena
+4. Imposta **Strength: 0.65**
 
-**Quando usarlo:** su OGNI immagine che contiene Favilla, Mallow o Lex.
-**Non serve su:** sfondi puri, oggetti, ambienti senza personaggi.
-
-> 💡 Se il personaggio appare ma il volto non è coerente, alza la Strength a 0.75–0.80.
-> Se la scena è troppo simile alla reference e perde il contesto, abbassa a 0.50–0.55.
-
----
-
-### 6. Seed — bloccare lo stile
-
-Il **seed** è il numero casuale che determina il risultato. Stesso seed + stesso prompt = stessa immagine.
-
-**Workflow:**
-1. Prima generazione: seed `-1` (casuale)
-2. Trovi un risultato con lo stile giusto → annota il seed (visibile toccando l'immagine → Info)
-3. Per le immagini successive dello stesso episodio: inserisci quel seed fisso
-4. Cambia solo il prompt descrittivo della scena, non il seed
-
----
-
-### 7. Esportare le immagini
-
-1. Tieni premuto sull'immagine generata → **"Export"**
-2. Scegli **WebP** come formato (quello che usa l'app Flutter)
-3. Qualità: **85** (buon bilanciamento qualità/peso)
-4. Salva in una cartella di lavoro, poi sposta in:
-   - `favillApp/assets/episodes/prologo/` per il prologo
-   - `favillApp/assets/episodes/s1_mattina_dopo/` per la prima quest (crea la cartella)
-5. Rinomina il file secondo il path indicato in ogni prompt (es. `page_0.webp`)
-
----
-
-### 8. Workflow completo dall'inizio alla fine
-
-```
-FASE 1 — Setup (una volta sola)
-  └─ Installa Draw Things
-  └─ Scarica FLUX.1-schnell
-  └─ Imposta dimensioni 768×1365, Steps 4, CFG 1.0
-
-FASE 2 — Character Sheet (una volta per personaggio)
-  └─ Usa il prompt CHARACTER SHEET di questo file
-  └─ Genera 4-6 varianti, scegli la migliore
-  └─ Salva nella libreria + annota il seed
-
-FASE 3 — Genera ogni scena
-  └─ Apri nuovo canvas
-  └─ Incolla STYLE BLOCK + ENV BLOCK + descrizione scena nel prompt
-  └─ Incolla NEGATIVE BLOCK nel negative prompt
-  └─ Attiva IP-Adapter con il character sheet del personaggio principale
-  └─ Imposta seed fisso (quello dello stile che ti piace)
-  └─ Genera → se non va, cambia seed o aggiusta il prompt
-  └─ Esporta come WebP 85% qualità
-
-FASE 4 — Integra nell'app
-  └─ Sposta i .webp nelle cartelle assets/
-  └─ Aggiorna i path nel JSON della quest (s1_mattina_dopo)
-  └─ flutter run per verificare
-```
-
----
-
-### 9. Problemi comuni e soluzioni
-
-| Problema | Soluzione |
+| Situazione | Strength consigliata |
 |---|---|
-| Il personaggio cambia aspetto da un'immagine all'altra | Attiva IP-Adapter con il character sheet, alza Strength a 0.7 |
-| Lo stile cambia tra le pagine | Usa sempre lo stesso seed fisso |
-| L'immagine ha testo o fumetti | Aggiungi "no text, no speech bubbles" al prompt E al negative |
-| Le mani sono deformate | Aggiungi "perfect hands, detailed hands" al prompt positivo |
-| L'immagine è troppo scura/chiara | Aggiungi "well lit, balanced lighting" al prompt |
-| Il bambino sembra troppo grande/piccolo | Specifica "7 months old baby, infant, very young baby" |
-| FLUX genera immagini troppo realistiche | Aggiungi "illustration, drawn, comic art" all'inizio del prompt |
+| Scena normale con personaggio | 0.65 |
+| Volto non abbastanza simile | 0.72–0.80 |
+| Scena perde contesto per troppa somiglianza | 0.50–0.58 |
+| Scena con più personaggi | 0.60 (usa il personaggio principale) |
+
+**Step 4 — Imposta il seed fisso**
+Inserisci il seed annotato nella FASE 3 (non `-1`).
+
+**Step 5 — Generate**
+- Se il risultato non va, **cambia solo il seed** (+1, +2...) senza toccare il prompt
+- Se un elemento specifico è sbagliato (pose, espressione), aggiusta la descrizione di quella parte nel prompt
+- Non cambiare mai lo STYLE BLOCK o il NEGATIVE BLOCK tra una pagina e l'altra dello stesso episodio
 
 ---
 
-### Workflow in sintesi
+### FASE 5 — Esporta e integra nell'app
+
+1. Tieni premuto sull'immagine → **"Export"**
+2. Formato: **WebP** — Qualità: **85**
+3. Salva in una cartella di lavoro temporanea
+4. Rinomina il file esattamente come indicato sopra ogni prompt (es. `page_0.webp`)
+5. Spostalo nella cartella assets corrispondente:
+   - `assets/episodes/prologo/` per il prologo
+   - `assets/episodes/s1_mattina_dopo/` per la prima quest
+   - `assets/episodes/<id>/` per le altre quest
+6. Dopo ogni batch di immagini: lancia `asset-check` skill per verificare che non manchi nulla
+7. Poi `flutter run` per vedere le immagini nell'app
+
+---
+
+### 🔁 Workflow rapido in sintesi
+
 ```
-Character Sheet → IP-Adapter reference → Seed fisso → Scene per scene → Export WebP
+SETUP (1 volta)
+  └─ Installa Draw Things + scarica FLUX.1-dev
+  └─ Dimensioni 768×1365, Steps 20, CFG 3.5
+
+CHARACTER SHEET (1 volta per personaggio)
+  └─ Genera 6+ varianti con seed -1
+  └─ Scegli la migliore → salva in libreria → annota seed
+
+SEED DI STILE (1 volta per episodio)
+  └─ Genera una scena con seed -1 finché lo stile ti piace
+  └─ Annota quel seed → usalo fisso per tutto l'episodio
+
+PER OGNI SCENA
+  └─ STYLE BLOCK + ENV BLOCK + descrizione → campo Prompt
+  └─ NEGATIVE BLOCK → campo Negative Prompt
+  └─ IP-Adapter → character sheet del personaggio principale (Strength 0.65)
+  └─ Seed fisso dell'episodio
+  └─ Generate → aggiusta solo se necessario → Export WebP 85%
+
+INTEGRAZIONE
+  └─ Rinomina → sposta in assets/ → asset-check → flutter run
 ```
 
-> ⚠️ **Regola d'oro:** la coerenza non viene dal prompt — viene dall'IP-Adapter.
-> Il prompt descrive la scena, l'IP-Adapter "porta" il personaggio.
+---
+
+### 🛠 Problemi comuni e soluzioni
+
+| Problema | Causa | Soluzione |
+|---|---|---|
+| Il personaggio cambia faccia da una scena all'altra | IP-Adapter disattivato o Strength troppo bassa | Attiva IP-Adapter, porta Strength a 0.72 |
+| Lo stile di tratto cambia tra le pagine | Seed diverso o STYLE BLOCK modificato | Usa sempre lo stesso seed fisso e STYLE BLOCK identico |
+| L'immagine ha testo, lettere o fumetti | Il modello li genera di default | Aggiungi `no text, no letters, no speech bubbles` sia al prompt che al negative |
+| Le mani sono deformate | Problema comune di tutti i modelli AI | Aggiungi `perfect hands, well-defined fingers` al prompt positivo |
+| Favilla sembra diversa (capelli, occhiali sbagliati) | Descrizione nel prompt incompleta | Copia il CHARACTER BLOCK di Favilla word-for-word dal blocco FAVILLA di questo file |
+| I bambini sembrano troppo grandi | Mancano indicatori di età precisi | Aggiungi `very young children age 5-6, small and chubby, kindergarten size` |
+| Lex sembra troppo grande/vecchio | Il modello non capisce "7 mesi" | Aggiungi `7 months old baby, infant, pre-crawling, chubby baby face` |
+| FLUX genera foto realistiche invece che fumetto | STYLE BLOCK mancante o incompleto | Assicurati che il prompt inizi con `digital comic illustration, semi-flat colors, bold clean black outlines` |
+| L'immagine è scura o sovraesposta | Illuminazione non specificata | Aggiungi la palette mood della scena (vedi sezione 🎭 Palette) |
+| IP-Adapter "schiaccia" troppo la scena verso la reference | Strength troppo alta | Abbassa a 0.55–0.60 |
+
+---
+
+> ⚠️ **Regola d'oro:** la coerenza visiva non viene dal prompt — viene dall'**IP-Adapter + seed fisso**.
+> Il prompt descrive *cosa succede*, IP-Adapter + seed garantiscono *come appare*.
 
 ---
 
@@ -212,16 +205,18 @@ Questi blocchi vanno incollati **word for word** nel prompt. La coerenza viene d
 
 ### FAVILLA (versione normale)
 ```
-FAVILLA: Italian woman mid-30s, warm olive skin, biondi hair in a soft ponytail
-with loose strands, round tortoiseshell glasses, kind tired eyes, 
-slight roundness in the face, practical everyday home clothes or blue school-worker smock
+FAVILLA: Italian woman mid-30s, warm olive skin, blonde hair in a soft ponytail,
+brown expressive lively eyes, beautiful face full of energy,
+athletic and sporty build, black cat-eye glasses (pointed upper frame),
+slim white shirt, tight jeans, black-and-white sneakers
+— at school: same outfit with blue school-worker smock over it
 ```
 
 ### FAVILLA BLAZE (versione supereroina)
 ```
-FAVILLA BLAZE: same Italian woman mid-30s, olive skin, but glasses gone, 
-biondi hair loose and radiating warm golden amber light, 
-posture confident and tall, soft golden light emanating from hands and eyes, 
+FAVILLA BLAZE: same Italian woman mid-30s, olive skin, but glasses gone,
+blonde hair loose and radiating warm golden amber light,
+posture confident and tall, athletic build, soft golden light emanating from hands and eyes,
 same clothes as before — no costume — just illuminated from within
 ```
 
@@ -242,8 +237,8 @@ rounded baby face, expressive — laughs big or stares intensely, sneakers rosse
 
 ### BAMBINI (scuola)
 ```
-BAMBINI: Italian elementary school children age 6-8, 
-white or blue school smocks (grembiulini), varied heights, energetic expressions
+BAMBINI: Italian elementary school children age 5-6 maximum, very young, 
+white or blue school smocks (grembiulini), small and chubby, energetic expressions
 ```
 
 ---
@@ -304,9 +299,11 @@ Prima genera i **character sheet** — poi usa quelli come IP-Adapter in ogni sc
 ```
 [STYLE BLOCK]
 
-Character sheet of FAVILLA: Italian woman mid-30s, warm olive skin, biondi hair 
-in a soft ponytail with loose strands, round tortoiseshell glasses, kind tired eyes, 
-slight roundness in the face. Show 4 expressions on white background: 
+Character sheet of FAVILLA: Italian woman mid-30s, warm olive skin, blonde hair
+in a soft ponytail, brown expressive lively eyes, beautiful face full of energy,
+athletic and sporty build, black cat-eye glasses (pointed upper frame),
+slim white shirt, tight jeans, black-and-white sneakers.
+Show 4 expressions on white background: 
 (1) neutral slight smile, (2) tired worried, (3) determined, (4) surprised.
 Same character, consistent face across all 4 panels. Clean white background.
 
@@ -318,8 +315,8 @@ Same character, consistent face across all 4 panels. Clean white background.
 [STYLE BLOCK]
 
 Character sheet of FAVILLA BLAZE: same Italian woman mid-30s as Favilla but transformed — 
-glasses gone, biondi hair loose radiating warm golden amber light, 
-confident tall posture, golden light from hands and eyes, same casual clothes. 
+glasses gone, blonde hair loose radiating warm golden amber light, 
+confident tall posture, athletic build, golden light from hands and eyes, same casual clothes. 
 Show 3 poses on white background: (1) standing tall arms slightly raised, 
 (2) reaching forward, (3) holding a baby safely. Clean white background.
 
@@ -362,11 +359,12 @@ sneakers rosse tiny.
 [STYLE BLOCK]
 [ENV SCHOOL]
 
-Scene: FAVILLA (Italian woman mid-30s, warm olive skin, biondi hair in a soft ponytail, 
-round tortoiseshell glasses, blue school-worker smock) stands center frame in the school 
-corridor with a knowing tired half-smile. Two BAMBINI (Italian children 6-8, white school 
-smocks) argue intensely at her sides, both reaching for a tiny eraser between them. 
-More children run in blurred background. Warm fluorescent light overhead. 
+Scene: FAVILLA (Italian woman mid-30s, warm olive skin, blonde hair in a soft ponytail, 
+brown lively eyes, black cat-eye glasses, blue school-worker smock over white shirt and tight jeans) 
+stands center frame in the school corridor with a knowing half-smile, full of energy. 
+Two BAMBINI (Italian children age 5-6, very young and small, white school smocks) 
+argue intensely at her sides, both reaching for a tiny eraser between them. 
+More tiny children run in blurred background. Warm fluorescent light overhead. 
 Slightly chaotic, comedic energy.
 
 [NEGATIVE BLOCK]
@@ -382,8 +380,9 @@ Slightly chaotic, comedic energy.
 [STYLE BLOCK]
 [ENV KITCHEN]
 
-Evening warm light. Scene: FAVILLA (Italian woman mid-30s, olive skin, biondi hair in a soft ponytail, 
-round glasses, home clothes) stands near the wooden table, leaning slightly toward LEX 
+Evening warm light. Scene: FAVILLA (Italian woman mid-30s, olive skin, blonde hair in a soft ponytail, 
+brown lively eyes, black cat-eye glasses, home clothes: white shirt tight jeans black-and-white sneakers) 
+stands near the wooden table, leaning slightly toward LEX 
 (chubby baby 7 mesi e mezzo, two bottom teeth, wide excited eyes, capelli castani chiari con mini-cresta come papà, sneakers rosse tiny) who is strapped in a 
 wooden highchair, arms waving energetically. MALLOW (Italian man late-30s, tall, 
 capelli con mini-mohawk, polo azzurra, jeans dritti, sneakers gialle alte) sits at the table with an open laptop and headphones 
@@ -405,7 +404,7 @@ around neck, half-distracted. Warm amber light. Family chaos, affectionate.
 Evening. Scene: Pasta pot boiling over on the gas stovetop (background left). 
 LEX (chubby baby 7 mesi e mezzo, capelli castani chiari con mini-cresta come papà, sneakers rosse tiny) in the wooden highchair laughing triumphantly, 
 having just thrown a baby spoon that flies through the air mid-frame. 
-FAVILLA (Italian woman mid-30s, olive skin, biondi hair in a soft ponytail, round glasses) 
+FAVILLA (Italian woman mid-30s, olive skin, blonde hair in a soft ponytail, brown lively eyes, black cat-eye glasses, white shirt tight jeans) 
 ducks sideways to dodge the spoon while reaching toward the stove. 
 MALLOW (Italian man, tall, capelli con mini-mohawk, polo azzurra, jeans dritti, sneakers gialle alte) is on a laptop call with headphones, 
 completely oblivious. Steam haze from the boiling pot. Comedic energy, slightly chaotic. 
@@ -428,7 +427,7 @@ Dramatic split-moment, high tension. Three simultaneous events:
 (2) phone buzzing on table, background right — 
 (3) LEX (chubby baby 7 mesi e mezzo, capelli castani chiari con mini-cresta come papà, sneakers rosse tiny) leaning dangerously far over the edge of the 
 wooden highchair, about to fall, center foreground. 
-FAVILLA (Italian woman mid-30s, olive skin, biondi hair in a soft ponytail, round glasses) 
+FAVILLA (Italian woman mid-30s, olive skin, blonde hair in a soft ponytail, brown lively eyes, black cat-eye glasses) 
 stares in sudden wide-eyed panic, body frozen mid-motion. 
 Slightly tilted composition, deep warm reds and ambers. Cinematic, tense, urgent.
 
@@ -446,7 +445,7 @@ Slightly tilted composition, deep warm reds and ambers. Cinematic, tense, urgent
 
 Magical moment. Kitchen now strangely calm and orderly. 
 FAVILLA BLAZE: same Italian woman mid-30s, olive skin, but glasses gone, 
-biondi hair loose and radiating warm golden amber light, posture confident and tall, 
+blonde hair loose and radiating warm golden amber light, posture confident and tall, athletic build,
 soft golden light from hands and eyes, same home clothes. 
 She stands protectively near LEX (chubby baby 7 mesi e mezzo, two bottom teeth, capelli castani chiari con mini-cresta come papà, sneakers rosse tiny) 
 who is completely safe, staring at her with enormous wide eyes then breaking 

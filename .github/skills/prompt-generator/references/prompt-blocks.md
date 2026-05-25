@@ -22,16 +22,18 @@ Questi blocchi vanno incollati **word for word** nel prompt. La coerenza viene d
 
 ### FAVILLA (versione normale)
 ```
-FAVILLA: Italian woman mid-30s, warm olive skin, biondi hair in a soft ponytail
-with loose strands, round tortoiseshell glasses, kind tired eyes, 
-slight roundness in the face, practical everyday home clothes or blue school-worker smock
+FAVILLA: Italian woman mid-30s, warm olive skin, blonde hair in a soft ponytail,
+brown expressive lively eyes, beautiful face full of energy,
+athletic and sporty build, black cat-eye glasses (pointed upper frame),
+slim white shirt, tight jeans, black-and-white sneakers
+— at school: same outfit with blue school-worker smock over it
 ```
 
 ### FAVILLA BLAZE (versione supereroina)
 ```
-FAVILLA BLAZE: same Italian woman mid-30s, olive skin, but glasses gone, 
-biondi hair loose and radiating warm golden amber light, 
-posture confident and tall, soft golden light emanating from hands and eyes, 
+FAVILLA BLAZE: same Italian woman mid-30s, olive skin, but glasses gone,
+blonde hair loose and radiating warm golden amber light,
+posture confident and tall, athletic build, soft golden light emanating from hands and eyes,
 same clothes as before — no costume — just illuminated from within
 ```
 
