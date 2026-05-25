@@ -29,13 +29,16 @@ slim white shirt, tight jeans, black-and-white sneakers
 — at school: same outfit with blue school-worker smock over it
 ```
 
-### FAVILLA BLAZE (versione supereroina)
+### FAVILLA BLAZE (versione supereroina — Stagione 1, senza costume)
 ```
 FAVILLA BLAZE: same Italian woman mid-30s, olive skin, but glasses gone,
 blonde hair loose and radiating warm golden amber light,
 posture confident and tall, athletic build, soft golden light emanating from hands and eyes,
-same clothes as before — no costume — just illuminated from within
+wearing the SAME everyday clothes as Favilla — NO superhero costume, NO cape, NO suit —
+just her normal outfit illuminated from within by warm golden energy
 ```
+
+> ⚠️ Stagione 1 = sempre senza costume. Il costume arriverà nelle stagioni successive.
 
 ### MALLOW (marito)
 ```

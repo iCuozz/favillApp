@@ -29,6 +29,17 @@ Non è una metropoli da fumetto americano: è un posto reale, con scuole, pizzer
 * ✨ **Chioma abbagliante** — i capelli diventano luminosi e incontrollabili durante la trasformazione
 * 🔄 **Trasformazione** — stile Goku: rapida, visivamente esplosiva, involontaria la prima volta
 
+### Costume da supereroina
+
+**Stagione 1 — nessun costume.**
+Favilla Blaze si trasforma negli stessi abiti che indossa in quel momento. Non ha un alter ego pianificato, non ha un costume: è solo lei, illuminata dall'interno, con i capelli sciolti e luminosi. Questa è la sua firma visiva nella Stagione 1 — l'assenza di costume è narrativamente significativa: non ha scelto di diventare una supereroina.
+
+**Stagione 2 in poi — il costume arriverà.**
+Con la crescita della consapevolezza dei propri poteri, Favilla inizierà a costruire un'identità visiva deliberata. Il design del costume è da definire, ma dovrà:
+- Richiamare i colori del fuoco (ambra, arancio, bianco caldo)
+- Restare pratico e credibile per una donna della sua vita quotidiana
+- Mantenere un elemento riconoscibile della Favilla "normale" (da decidere quale)
+
 ---
 
 ## 👨 Mallow

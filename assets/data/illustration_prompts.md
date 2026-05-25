@@ -65,7 +65,7 @@ Il seed determina l'"impronta visiva" di tutte le immagini. Usare lo stesso seed
 3. **Da quel momento usa sempre quel seed fisso** per tutte le immagini dello stesso episodio
 4. Cambia seed solo se cambi episodio o vuoi un look radicalmente diverso
 
-> 💡 Annota i seed qui o in una nota sul Mac: `seed_stile_prologo: XXXXXXXX`
+> 💡 Annota i seed qui o in una nota sul Mac: `seed_stile_prologo: 4106420684`
 
 ---
 
@@ -212,13 +212,16 @@ slim white shirt, tight jeans, black-and-white sneakers
 — at school: same outfit with blue school-worker smock over it
 ```
 
-### FAVILLA BLAZE (versione supereroina)
+### FAVILLA BLAZE (versione supereroina — Stagione 1, senza costume)
 ```
 FAVILLA BLAZE: same Italian woman mid-30s, olive skin, but glasses gone,
 blonde hair loose and radiating warm golden amber light,
 posture confident and tall, athletic build, soft golden light emanating from hands and eyes,
-same clothes as before — no costume — just illuminated from within
+wearing the SAME everyday clothes as Favilla — NO superhero costume, NO cape, NO suit —
+just her normal outfit illuminated from within by warm golden energy
 ```
+
+> ⚠️ Stagione 1 = sempre senza costume. Il costume arriverà nelle stagioni successive.
 
 ### MALLOW (marito)
 ```
@@ -314,11 +317,14 @@ Same character, consistent face across all 4 panels. Clean white background.
 ```
 [STYLE BLOCK]
 
-Character sheet of FAVILLA BLAZE: same Italian woman mid-30s as Favilla but transformed — 
-glasses gone, blonde hair loose radiating warm golden amber light, 
-confident tall posture, athletic build, golden light from hands and eyes, same casual clothes. 
-Show 3 poses on white background: (1) standing tall arms slightly raised, 
-(2) reaching forward, (3) holding a baby safely. Clean white background.
+Character sheet of FAVILLA BLAZE (Stagione 1 — NO costume):
+same Italian woman mid-30s as Favilla but transformed —
+glasses gone, blonde hair loose radiating warm golden amber light,
+confident tall posture, athletic build, golden light from hands and eyes,
+wearing her SAME everyday clothes (white shirt, tight jeans, black-and-white sneakers) — no costume, no cape.
+Show 3 poses on white background: (1) standing tall arms slightly raised,
+(2) reaching forward with glowing hands, (3) holding a baby safely.
+Clean white background.
 
 [NEGATIVE BLOCK]
 ```
