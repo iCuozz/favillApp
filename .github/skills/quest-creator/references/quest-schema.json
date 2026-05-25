@@ -1,0 +1,69 @@
+{
+  "id": "id_univoco_snake_case",
+  "pages": [
+    {
+      "index": 0,
+      "background": "assets/episodes/<id>/page_0.webp",
+      "panels": [
+        {
+          "id": "p0_0",
+          "characters": ["favilla"],
+          "text_blocks": [
+            {
+              "id": "p0_0_tb_0",
+              "type": "narration",
+              "text": "Testo narrativo in terza persona."
+            },
+            {
+              "id": "p0_0_tb_1",
+              "type": "dialogue",
+              "speaker": "favilla",
+              "text": "Dialogo del personaggio."
+            },
+            {
+              "id": "p0_0_tb_2",
+              "type": "thought",
+              "text": "Pensiero interiore di Favilla."
+            }
+          ],
+          "interactions": []
+        }
+      ]
+    }
+  ],
+  "branches": {
+    "branch_a": {
+      "pages": [ ]
+    },
+    "branch_b": {
+      "pages": [ ]
+    }
+  },
+  "epilogue": {
+    "pages": [
+      {
+        "index": 0,
+        "background": "assets/episodes/<id>/epilogue.webp",
+        "panels": [
+          {
+            "id": "ep_0",
+            "characters": ["favilla"],
+            "text_blocks": [
+              {
+                "id": "ep_0_tb_0",
+                "type": "narration",
+                "text": "Conclusione della quest."
+              },
+              {
+                "id": "ep_0_tb_3",
+                "type": "system",
+                "text": "MISSIONE COMPLETATA — Titolo Quest"
+              }
+            ],
+            "interactions": []
+          }
+        ]
+      }
+    ]
+  }
+}

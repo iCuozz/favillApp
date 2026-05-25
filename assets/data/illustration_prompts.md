@@ -67,7 +67,7 @@ portrait 9:16 vertical composition, cinematic lighting, no text, no speech bubbl
 no watermarks, high detail backgrounds,
 Italian elementary school corridor, 1980s institutional architecture, pale green walls, 
 fluorescent ceiling lights, colorful children's drawings on walls, linoleum floor,
-Scene: FAVILLA (Italian woman mid-30s, warm olive skin, dark brown hair in a messy bun, 
+Scene: FAVILLA (Italian woman mid-30s, warm olive skin, biondi hair in a soft ponytail, 
 round tortoiseshell glasses, blue school-worker smock) stands center frame...
 
 Negative Prompt:
@@ -212,7 +212,7 @@ Questi blocchi vanno incollati **word for word** nel prompt. La coerenza viene d
 
 ### FAVILLA (versione normale)
 ```
-FAVILLA: Italian woman mid-30s, warm olive skin, dark brown hair in a messy bun 
+FAVILLA: Italian woman mid-30s, warm olive skin, biondi hair in a soft ponytail
 with loose strands, round tortoiseshell glasses, kind tired eyes, 
 slight roundness in the face, practical everyday home clothes or blue school-worker smock
 ```
@@ -220,7 +220,7 @@ slight roundness in the face, practical everyday home clothes or blue school-wor
 ### FAVILLA BLAZE (versione supereroina)
 ```
 FAVILLA BLAZE: same Italian woman mid-30s, olive skin, but glasses gone, 
-dark hair loose and radiating warm golden amber light, 
+biondi hair loose and radiating warm golden amber light, 
 posture confident and tall, soft golden light emanating from hands and eyes, 
 same clothes as before — no costume — just illuminated from within
 ```
@@ -228,16 +228,16 @@ same clothes as before — no costume — just illuminated from within
 ### MALLOW (marito)
 ```
 MALLOW: Italian man late-30s, tall slightly stooped posture, 
-dark hair slightly disheveled, short dark stubble, 
-always near a laptop or phone, casual home clothes: grey sweater, jeans, 
+capelli con mini-mohawk, short dark stubble, 
+always near a laptop or phone, casual home clothes: polo azzurra, jeans dritti, sneakers gialle alte, 
 calm analytical expression
 ```
 
 ### LEX (neonato)
 ```
-LEX: chubby baby boy 7 months old, rosy olive skin, 
+LEX: chubby baby boy 7 mesi e mezzo, rosy olive skin, capelli castani chiari con mini-cresta come papà, 
 two tiny bottom teeth visible when smiling, wide curious intelligent eyes, 
-rounded baby face, expressive — laughs big or stares intensely
+rounded baby face, expressive — laughs big or stares intensely, sneakers rosse tiny
 ```
 
 ### BAMBINI (scuola)
@@ -304,8 +304,8 @@ Prima genera i **character sheet** — poi usa quelli come IP-Adapter in ogni sc
 ```
 [STYLE BLOCK]
 
-Character sheet of FAVILLA: Italian woman mid-30s, warm olive skin, dark brown hair 
-in a messy bun with loose strands, round tortoiseshell glasses, kind tired eyes, 
+Character sheet of FAVILLA: Italian woman mid-30s, warm olive skin, biondi hair 
+in a soft ponytail with loose strands, round tortoiseshell glasses, kind tired eyes, 
 slight roundness in the face. Show 4 expressions on white background: 
 (1) neutral slight smile, (2) tired worried, (3) determined, (4) surprised.
 Same character, consistent face across all 4 panels. Clean white background.
@@ -318,7 +318,7 @@ Same character, consistent face across all 4 panels. Clean white background.
 [STYLE BLOCK]
 
 Character sheet of FAVILLA BLAZE: same Italian woman mid-30s as Favilla but transformed — 
-glasses gone, dark hair loose radiating warm golden amber light, 
+glasses gone, biondi hair loose radiating warm golden amber light, 
 confident tall posture, golden light from hands and eyes, same casual clothes. 
 Show 3 poses on white background: (1) standing tall arms slightly raised, 
 (2) reaching forward, (3) holding a baby safely. Clean white background.
@@ -331,7 +331,7 @@ Show 3 poses on white background: (1) standing tall arms slightly raised,
 [STYLE BLOCK]
 
 Character sheet of MALLOW: Italian man late-30s, tall slightly stooped, 
-dark disheveled hair, short dark stubble, casual grey sweater and jeans. 
+capelli con mini-mohawk, short dark stubble, casual home clothes: polo azzurra, jeans dritti, sneakers gialle alte. 
 Show 3 expressions on white background: 
 (1) distracted on laptop, (2) calm analytical stare, (3) warm genuine smile.
 
@@ -342,10 +342,11 @@ Show 3 expressions on white background:
 ```
 [STYLE BLOCK]
 
-Character sheet of LEX: chubby Italian baby boy 7 months, rosy olive skin, 
-two tiny bottom teeth, wide intelligent eyes. Show 4 expressions on white background: 
+Character sheet of LEX: chubby Italian baby boy 7 mesi e mezzo, rosy olive skin, 
+capelli castani chiari con mini-cresta come papà, two tiny bottom teeth, wide intelligent eyes. Show 4 expressions on white background: 
 (1) full open-mouthed laugh with two teeth showing, (2) intense stare, 
 (3) arms raised mimicking effort, (4) sleepy. All from front/slight angle. 
+sneakers rosse tiny. 
 
 [NEGATIVE BLOCK]
 ```
@@ -361,7 +362,7 @@ two tiny bottom teeth, wide intelligent eyes. Show 4 expressions on white backgr
 [STYLE BLOCK]
 [ENV SCHOOL]
 
-Scene: FAVILLA (Italian woman mid-30s, warm olive skin, dark brown hair in a messy bun, 
+Scene: FAVILLA (Italian woman mid-30s, warm olive skin, biondi hair in a soft ponytail, 
 round tortoiseshell glasses, blue school-worker smock) stands center frame in the school 
 corridor with a knowing tired half-smile. Two BAMBINI (Italian children 6-8, white school 
 smocks) argue intensely at her sides, both reaching for a tiny eraser between them. 
@@ -381,11 +382,11 @@ Slightly chaotic, comedic energy.
 [STYLE BLOCK]
 [ENV KITCHEN]
 
-Evening warm light. Scene: FAVILLA (Italian woman mid-30s, olive skin, dark messy bun, 
+Evening warm light. Scene: FAVILLA (Italian woman mid-30s, olive skin, biondi hair in a soft ponytail, 
 round glasses, home clothes) stands near the wooden table, leaning slightly toward LEX 
-(chubby baby 7 months, two bottom teeth, wide excited eyes) who is strapped in a 
+(chubby baby 7 mesi e mezzo, two bottom teeth, wide excited eyes, capelli castani chiari con mini-cresta come papà, sneakers rosse tiny) who is strapped in a 
 wooden highchair, arms waving energetically. MALLOW (Italian man late-30s, tall, 
-dark stubble, grey sweater) sits at the table with an open laptop and headphones 
+capelli con mini-mohawk, polo azzurra, jeans dritti, sneakers gialle alte) sits at the table with an open laptop and headphones 
 around neck, half-distracted. Warm amber light. Family chaos, affectionate.
 
 [NEGATIVE BLOCK]
@@ -402,11 +403,11 @@ around neck, half-distracted. Warm amber light. Family chaos, affectionate.
 [ENV KITCHEN]
 
 Evening. Scene: Pasta pot boiling over on the gas stovetop (background left). 
-LEX (chubby baby 7 months) in the wooden highchair laughing triumphantly, 
+LEX (chubby baby 7 mesi e mezzo, capelli castani chiari con mini-cresta come papà, sneakers rosse tiny) in the wooden highchair laughing triumphantly, 
 having just thrown a baby spoon that flies through the air mid-frame. 
-FAVILLA (Italian woman mid-30s, olive skin, dark messy bun, round glasses) 
+FAVILLA (Italian woman mid-30s, olive skin, biondi hair in a soft ponytail, round glasses) 
 ducks sideways to dodge the spoon while reaching toward the stove. 
-MALLOW (Italian man, tall, dark stubble) is on a laptop call with headphones, 
+MALLOW (Italian man, tall, capelli con mini-mohawk, polo azzurra, jeans dritti, sneakers gialle alte) is on a laptop call with headphones, 
 completely oblivious. Steam haze from the boiling pot. Comedic energy, slightly chaotic. 
 Warm amber with hint of steam.
 
@@ -425,9 +426,9 @@ Warm amber with hint of steam.
 Dramatic split-moment, high tension. Three simultaneous events: 
 (1) pasta pot boiling over violently on stove, background left — 
 (2) phone buzzing on table, background right — 
-(3) LEX (chubby baby 7 months) leaning dangerously far over the edge of the 
+(3) LEX (chubby baby 7 mesi e mezzo, capelli castani chiari con mini-cresta come papà, sneakers rosse tiny) leaning dangerously far over the edge of the 
 wooden highchair, about to fall, center foreground. 
-FAVILLA (Italian woman mid-30s, olive skin, dark messy bun, round glasses) 
+FAVILLA (Italian woman mid-30s, olive skin, biondi hair in a soft ponytail, round glasses) 
 stares in sudden wide-eyed panic, body frozen mid-motion. 
 Slightly tilted composition, deep warm reds and ambers. Cinematic, tense, urgent.
 
@@ -445,9 +446,9 @@ Slightly tilted composition, deep warm reds and ambers. Cinematic, tense, urgent
 
 Magical moment. Kitchen now strangely calm and orderly. 
 FAVILLA BLAZE: same Italian woman mid-30s, olive skin, but glasses gone, 
-dark hair loose and radiating warm golden amber light, posture confident and tall, 
+biondi hair loose and radiating warm golden amber light, posture confident and tall, 
 soft golden light from hands and eyes, same home clothes. 
-She stands protectively near LEX (chubby baby 7 months, two bottom teeth) 
+She stands protectively near LEX (chubby baby 7 mesi e mezzo, two bottom teeth, capelli castani chiari con mini-cresta come papà, sneakers rosse tiny) 
 who is completely safe, staring at her with enormous wide eyes then breaking 
 into a full open-mouthed laugh. Background: MALLOW still on laptop, unaware. 
 High saturation warm gold on Favilla, desaturated surroundings. 
@@ -473,9 +474,9 @@ Awe, warmth, secret being born.
 [ENV BEDROOM]
 
 Deep night, 5:12 AM. The phone screen glows cold blue on the nightstand showing 5:12. 
-FAVILLA (Italian woman mid-30s, olive skin, dark hair spread loose on pillow, 
+FAVILLA (Italian woman mid-30s, olive skin, biondi hair spread loose on pillow, 
 no glasses — she's in bed) lies awake, eyes wide open staring at the ceiling. 
-MALLOW (Italian man, dark stubble) sleeps peacefully beside her, relaxed face. 
+MALLOW (Italian man, capelli con mini-mohawk) sleeps peacefully beside her, relaxed face. 
 Only light source: cold blue glow of the phone screen softly illuminating their faces. 
 Cool desaturated blues, deep shadows, intimate stillness. Quiet intensity in her expression — 
 a thousand thoughts.
@@ -493,9 +494,9 @@ a thousand thoughts.
 [ENV NURSERY]
 
 Early morning, soft dawn light through thin curtains. 
-FAVILLA (Italian woman mid-30s, olive skin, dark hair loose, no glasses, home clothes) 
-leans over a white wooden baby crib. LEX (chubby baby 7 months, two bottom teeth, 
-wide intelligent eyes) is awake, staring directly at her face with an unnervingly aware, 
+FAVILLA (Italian woman mid-30s, olive skin, biondi hair loose, no glasses, home clothes) 
+leans over a white wooden baby crib. LEX (chubby baby 7 mesi e mezzo, two bottom teeth, 
+wide intelligent eyes, capelli castani chiari con mini-cresta come papà, sneakers rosse tiny) is awake, staring directly at her face with an unnervingly aware, 
 intense gaze — not at a bottle, not at a toy, just at her. She stares back, 
 slightly surprised, a small knot between her brows. Warm early morning amber and pale gold. 
 Quiet, slightly mysterious. The eye contact is the whole scene.
@@ -512,12 +513,12 @@ Quiet, slightly mysterious. The eye contact is the whole scene.
 [STYLE BLOCK]
 [ENV KITCHEN]
 
-Morning light. LEX (chubby baby 7 months, two tiny bottom teeth) in the wooden highchair: 
+Morning light. LEX (chubby baby 7 mesi e mezzo, two tiny bottom teeth, capelli castani chiari con mini-cresta come papà, sneakers rosse tiny) in the wooden highchair: 
 arms raised and thrust forward with maximum baby effort, face scrunched in intense 
 concentration — clearly imitating a superpower pose. 
-FAVILLA (Italian woman mid-30s, olive skin, dark messy bun, round glasses, home clothes) 
+FAVILLA (Italian woman mid-30s, olive skin, biondi hair in a soft ponytail, round glasses, home clothes) 
 stands facing him, expression unreadable — the choice is hers. 
-MALLOW (Italian man, dark stubble, grey sweater) looks up from his phone toward Favilla, 
+MALLOW (Italian man, capelli con mini-mohawk, polo azzurra, jeans dritti, sneakers gialle alte) looks up from his phone toward Favilla, 
 waiting for her reaction. Moment frozen in expectation. Warm morning light, 
 slight comedic tension in the composition.
 
@@ -533,11 +534,10 @@ slight comedic tension in the composition.
 [STYLE BLOCK]
 [ENV KITCHEN]
 
-Morning. FAVILLA (Italian woman mid-30s, olive skin, dark messy bun, round glasses) 
+Morning. FAVILLA (Italian woman mid-30s, olive skin, biondi hair in a soft ponytail, round glasses) 
 gives a small, warm, private smile looking at the baby — something knowing in her eyes, 
-a shared secret. LEX (chubby baby 7 months) erupts in full open-mouthed laughter 
-showing two tiny bottom teeth, arms still raised. MALLOW (Italian man, dark stubble, 
-grey sweater) looks at both of them with a wide genuine smile, completely unaware 
+a shared secret. LEX (chubby baby 7 mesi e mezzo, capelli castani chiari con mini-cresta come papà, sneakers rosse tiny) erupts in full open-mouthed laughter 
+showing two tiny bottom teeth, arms still raised. MALLOW (Italian man, capelli con mini-mohawk, polo azzurra, jeans dritti, sneakers gialle alte) looks at both of them with a wide genuine smile, completely unaware 
 of the shared meaning. Warm amber morning light, joyful family warmth. 
 Open composition, relaxed energy.
 
@@ -553,11 +553,11 @@ Open composition, relaxed energy.
 [STYLE BLOCK]
 [ENV KITCHEN]
 
-Morning. FAVILLA (Italian woman mid-30s, olive skin, dark messy bun, round glasses) 
+Morning. FAVILLA (Italian woman mid-30s, olive skin, biondi hair in a soft ponytail, round glasses) 
 has stiffened — a half-smile that convinces no one, eyes slightly wide, 
-a single bead of cold sweat on her temple. MALLOW (Italian man, dark stubble) 
+a single bead of cold sweat on her temple. MALLOW (Italian man, capelli con mini-mohawk, polo azzurra, jeans dritti, sneakers gialle alte) 
 has lowered his phone and looks at her with quiet precise attention — 
-the focused calm of someone connecting the dots. LEX (chubby baby 7 months) 
+the focused calm of someone connecting the dots. LEX (chubby baby 7 mesi e mezzo, capelli castani chiari con mini-cresta come papà, sneakers rosse tiny) 
 looks back and forth between them, sensing the shift. Subtle underlying tension. 
 Cooler, slightly desaturated morning light cutting the warm amber. Closed composition.
 
@@ -574,10 +574,10 @@ Cooler, slightly desaturated morning light cutting the warm amber. Closed compos
 [ENV KITCHEN]
 
 7:30 AM, morning sun streaming through the small kitchen window. 
-FAVILLA (Italian woman mid-30s, olive skin, dark hair in messy bun, round glasses, 
+FAVILLA (Italian woman mid-30s, olive skin, biondi hair in a soft ponytail, round glasses, 
 home clothes) stands at the counter holding a small espresso cup, LEX (chubby baby 
-7 months) balanced on her hip — the classic Italian motherhood "third arm". 
-MALLOW (Italian man, tall, dark stubble) sits at the table facing away, 
+7 mesi e mezzo, capelli castani chiari con mini-cresta come papà, sneakers rosse tiny) balanced on her hip — the classic Italian motherhood "third arm". 
+MALLOW (Italian man, tall, capelli con mini-mohawk, polo azzurra, jeans dritti, sneakers gialle alte) sits at the table facing away, 
 laptop open, already on a call. Favilla looks out the window — a quiet complex 
 expression, somewhere between determination and wonder. Everything looks the same. 
 Nothing is the same. Warm golden ordinary morning light.
