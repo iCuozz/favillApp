@@ -8,111 +8,110 @@
 
 ## 📱 Guida completa Draw Things — Generare le illustrazioni di FavillApp
 
+> **Strategia di coerenza:** si usano **due modelli distinti**:
+> - **FLUX.1-dev** → genera il character sheet iniziale (text-to-image, qualità massima)
+> - **FLUX.1-Kontext-dev** → genera tutte le scene successive partendo dal character sheet (image+text, mantiene il personaggio identico)
+
 ---
 
 ### FASE 1 — Installazione e setup (una volta sola)
 
 1. Scarica **Draw Things** dall'App Store (gratuito)
-2. Apri l'app → nella schermata modelli cerca e scarica **`FLUX.1-dev`**
-   - È il modello con la qualità migliore per illustrazioni
-   - Se il Mac ha poca RAM, usa **`FLUX.1-schnell`** (più veloce, qualità leggermente inferiore)
+2. Apri l'app → Model Manager → scarica entrambi i modelli:
+   - **`FLUX.1-dev`** — per generare i character sheet
+   - **`FLUX.1-Kontext-dev`** — per generare tutte le scene (coerenza personaggio)
+   - Se il Mac ha poca RAM, scarica le varianti `(5-bit)` di entrambi
 3. Imposta le **dimensioni di default** per FavillApp:
    - Tocca l'ingranaggio ⚙️ → Image Size
    - **Width: 768 — Height: 1365** (rapporto 9:16, verticale)
-4. Imposta i **parametri base**:
+4. Parametri base:
 
-| Campo | FLUX.1-dev | FLUX.1-schnell |
+| Campo | FLUX.1-dev (character sheet) | FLUX.1-Kontext-dev (scene) |
 |---|---|---|
-| Steps | 20–28 | 4 |
-| CFG Scale | 3.5 | 1.0 |
-| Sampler | DPM++ 2M | Euler |
-| Seed | -1 (casuale per ora) | -1 |
+| Steps | 20–28 | 28–35 |
+| CFG Scale | 3.5 | 3.5–4.5 |
+| Sampler | DPM++ 2M | DPM++ 2M |
+| Seed | -1 (casuale) | fisso (vedi FASE 3) |
 
 ---
 
-### FASE 2 — Genera i Character Sheet (OBBLIGATORIO prima di tutto)
+### FASE 2 — Genera i Character Sheet con FLUX.1-dev (OBBLIGATORIO prima di tutto)
 
-I character sheet sono le immagini di riferimento che userai con IP-Adapter per mantenere i personaggi **sempre identici** in tutte le scene.
+Il character sheet è l'immagine "canonica" di ogni personaggio. Da questo momento in poi, Kontext la userà come reference per ogni scena — è la fonte di verità visiva.
 
-**Genera un character sheet per ogni personaggio principale:**
-1. Apri un nuovo canvas
-2. Nel campo **Prompt**, incolla il CHARACTER SHEET del personaggio (vedi sezione CHARACTER SHEET più avanti in questo file)
-   - Sostituisci `[STYLE BLOCK]` con il testo dello STYLE BLOCK
-   - Sostituisci `[NEGATIVE BLOCK]` con il testo del NEGATIVE BLOCK
-3. Nel campo **Negative Prompt**, incolla il NEGATIVE BLOCK
-4. Imposta **Seed: -1** (casuale)
-5. Premi **Generate** — genera **almeno 6 varianti** (cambia seed ogni volta)
-6. Scegli la variante che somiglia di più al personaggio descritto
-7. **Salvala** nella libreria: tieni premuto sull'immagine → "Salva in libreria"
-8. **Annota il seed** di quella variante (tocca l'immagine → Info → seed number)
+**Per ogni personaggio:**
+1. Seleziona il modello **FLUX.1-dev**
+2. Incolla il prompt CHARACTER SHEET del personaggio (vedi sezione CHARACTER SHEET più avanti)
+   - Sostituisci `[STYLE BLOCK]` e `[NEGATIVE BLOCK]` con i rispettivi testi
+3. Imposta **Seed: -1** (casuale)
+4. Genera **almeno 6–8 varianti** (cambia seed ogni volta)
+5. Scegli la variante che corrisponde meglio alla descrizione del personaggio
+6. **Salvala** nella libreria: tieni premuto → "Salva in libreria"
+7. **Annota il seed** (tocca l'immagine → Info)
 
-**Personaggi da generare (in ordine):**
-- [ ] CHARACTER SHEET: Favilla (normale) — genera da zero con seed -1
-- [ ] CHARACTER SHEET: Favilla Blaze — **genera usando IP-Adapter con il character sheet di Favilla** (Strength 0.75), non da zero
-- [ ] CHARACTER SHEET: Mallow — genera da zero con seed -1
-- [ ] CHARACTER SHEET: Lex — genera da zero con seed -1
+**Ordine di generazione:**
+- [ ] CHARACTER SHEET: Favilla (normale) — genera con FLUX.1-dev, seed -1
+- [ ] CHARACTER SHEET: Favilla Blaze — genera con FLUX.1-Kontext-dev **partendo dal character sheet di Favilla** (vedi istruzioni nella sezione CHARACTER SHEET)
+- [ ] CHARACTER SHEET: Mallow — genera con FLUX.1-dev, seed -1
+- [ ] CHARACTER SHEET: Lex — genera con FLUX.1-dev, seed -1
 
-> ⚠️ Non saltare questa fase. Senza character sheet, ogni scena avrà un personaggio diverso.
+> ⚠️ Non saltare questa fase. Il character sheet è la base di tutta la coerenza.
 
 ---
 
 ### FASE 3 — Blocca il seed di stile
 
-Il seed determina l'"impronta visiva" di tutte le immagini. Usare lo stesso seed su scene diverse garantisce coerenza nello stile di tratto, palette colori e illuminazione.
+Il seed fisso garantisce coerenza di tratto, palette e illuminazione tra le pagine dello stesso episodio.
 
-1. Genera una scena qualsiasi con seed `-1`
-2. Scorri i risultati — quando trovi uno stile di tratto che ti piace (anche se la scena non è perfetta), annota quel seed
-3. **Da quel momento usa sempre quel seed fisso** per tutte le immagini dello stesso episodio
-4. Cambia seed solo se cambi episodio o vuoi un look radicalmente diverso
+1. Seleziona **FLUX.1-Kontext-dev**
+2. Carica il character sheet di Favilla come immagine di input
+3. Scrivi un prompt di scena semplice, genera con seed `-1`
+4. Scorri i risultati — quando lo stile di tratto ti piace, annota quel seed
+5. **Da quel momento usa sempre quel seed fisso** per tutto l'episodio
 
-> 💡 Annota i seed qui o in una nota sul Mac: `seed_stile_prologo: 4106420684`
+> 💡 Annota i seed in una nota: `seed_stile_prologo: XXXXXXXX`
 
 ---
 
-### FASE 4 — Genera ogni scena
+### FASE 4 — Genera ogni scena con FLUX.1-Kontext-dev
 
-Per ogni immagine (ogni `page_X.webp`):
+Kontext funziona in modo diverso dagli altri modelli: **l'immagine di input è obbligatoria**, e il prompt descrive le modifiche/la nuova scena.
 
-**Step 1 — Costruisci il prompt positivo**
+**Per ogni pagina (`page_X.webp`):**
+
+**Step 1 — Seleziona FLUX.1-Kontext-dev**
+
+**Step 2 — Carica l'immagine di input**
+- Tocca l'icona immagine (Image Input)
+- Seleziona dalla libreria il **character sheet del personaggio principale** della scena
+- Per scene con Favilla Blaze: usa il character sheet di Favilla Blaze (non quello di Favilla normale)
+
+**Step 3 — Costruisci il prompt**
 Copia il blocco della pagina da questo file e sostituisci le macro:
 
 ```
-[STYLE BLOCK]     →  incolla il testo dello STYLE BLOCK (vedi sezione 🎨 sotto)
-[ENV KITCHEN]     →  incolla il testo ENV KITCHEN (o ENV SCHOOL, ENV BEDROOM, ecc.)
-[ENV SCHOOL]      →  stesso principio
-[NEGATIVE BLOCK]  →  va nel campo Negative Prompt, non qui
+[STYLE BLOCK]    →  testo dello STYLE BLOCK (vedi sezione 🎨 sotto)
+[ENV KITCHEN]    →  testo ENV KITCHEN (o ENV SCHOOL, ENV BEDROOM, ecc.)
+[NEGATIVE BLOCK] →  va nel campo Negative Prompt, non nel Prompt
 ```
 
-Il prompt finale avrà questa forma:
+Con Kontext il prompt descrive **la scena target**, non il personaggio — il personaggio viene dall'immagine di input:
 ```
-digital comic illustration, semi-flat colors, bold clean black outlines...  ← STYLE BLOCK
-ENV KITCHEN: small cozy Italian apartment kitchen...                        ← ENV BLOCK
-Scene: FAVILLA (...) stands near the table...                               ← DESCRIZIONE SCENA
+digital comic illustration, semi-flat colors...   ← STYLE BLOCK
+ENV KITCHEN: small cozy Italian apartment...      ← ENV BLOCK
+Scene: Favilla stands near the table, leaning toward Lex...  ← SOLO LA SCENA
 ```
 
-**Step 2 — Incolla nel Negative Prompt**
-Copia il NEGATIVE BLOCK nel campo Negative Prompt di Draw Things.
+**Step 4 — Negative Prompt**
+Incolla il NEGATIVE BLOCK nel campo Negative Prompt.
 
-**Step 3 — Attiva IP-Adapter**
-1. Nella schermata principale cerca il pannello **"Image Input"** (icona immagine o "+")
-2. Seleziona **IP-Adapter**
-3. Tocca **"Choose Image"** → scegli dalla libreria il character sheet del personaggio principale della scena
-4. Imposta **Strength: 0.65**
+**Step 5 — Seed fisso**
+Inserisci il seed annotato nella FASE 3.
 
-| Situazione | Strength consigliata |
-|---|---|
-| Scena normale con personaggio | 0.65 |
-| Volto non abbastanza simile | 0.72–0.80 |
-| Scena perde contesto per troppa somiglianza | 0.50–0.58 |
-| Scena con più personaggi | 0.60 (usa il personaggio principale) |
-
-**Step 4 — Imposta il seed fisso**
-Inserisci il seed annotato nella FASE 3 (non `-1`).
-
-**Step 5 — Generate**
-- Se il risultato non va, **cambia solo il seed** (+1, +2...) senza toccare il prompt
-- Se un elemento specifico è sbagliato (pose, espressione), aggiusta la descrizione di quella parte nel prompt
-- Non cambiare mai lo STYLE BLOCK o il NEGATIVE BLOCK tra una pagina e l'altra dello stesso episodio
+**Step 6 — Generate**
+- Se il personaggio non è abbastanza coerente con la reference, aumenta il peso dell'immagine di input (slider Image Strength) verso 0.7–0.8
+- Se la scena non corrisponde al prompt, abbassa Image Strength verso 0.4–0.5
+- Non modificare STYLE BLOCK o seed tra le pagine dello stesso episodio
 
 ---
 
@@ -120,38 +119,38 @@ Inserisci il seed annotato nella FASE 3 (non `-1`).
 
 1. Tieni premuto sull'immagine → **"Export"**
 2. Formato: **WebP** — Qualità: **85**
-3. Salva in una cartella di lavoro temporanea
-4. Rinomina il file esattamente come indicato sopra ogni prompt (es. `page_0.webp`)
-5. Spostalo nella cartella assets corrispondente:
+3. Rinomina il file esattamente come indicato sopra ogni prompt (es. `page_0.webp`)
+4. Spostalo nella cartella assets corrispondente:
    - `assets/episodes/prologo/` per il prologo
    - `assets/episodes/s1_mattina_dopo/` per la prima quest
    - `assets/episodes/<id>/` per le altre quest
-6. Dopo ogni batch di immagini: lancia `asset-check` skill per verificare che non manchi nulla
-7. Poi `flutter run` per vedere le immagini nell'app
+5. Dopo ogni batch: lancia la skill `asset-check` per verificare che non manchi nulla
+6. Poi `flutter run` per vedere le immagini nell'app
 
 ---
 
-### 🔁 Workflow rapido in sintesi
+### 🔁 Workflow in sintesi
 
 ```
 SETUP (1 volta)
-  └─ Installa Draw Things + scarica FLUX.1-dev
-  └─ Dimensioni 768×1365, Steps 20, CFG 3.5
+  └─ Scarica FLUX.1-dev + FLUX.1-Kontext-dev
+  └─ Dimensioni 768×1365, Steps 20–28, CFG 3.5
 
-CHARACTER SHEET (1 volta per personaggio)
-  └─ Genera 6+ varianti con seed -1
+CHARACTER SHEET (1 volta per personaggio — con FLUX.1-dev)
+  └─ Genera 6–8 varianti con seed -1
   └─ Scegli la migliore → salva in libreria → annota seed
+  └─ Favilla Blaze: generala con Kontext partendo da Favilla normale
 
-SEED DI STILE (1 volta per episodio)
-  └─ Genera una scena con seed -1 finché lo stile ti piace
-  └─ Annota quel seed → usalo fisso per tutto l'episodio
+SEED DI STILE (1 volta per episodio — con FLUX.1-Kontext-dev)
+  └─ Carica character sheet Favilla come input
+  └─ Genera con seed -1 finché lo stile ti piace → annotalo
 
-PER OGNI SCENA
-  └─ STYLE BLOCK + ENV BLOCK + descrizione → campo Prompt
-  └─ NEGATIVE BLOCK → campo Negative Prompt
-  └─ IP-Adapter → character sheet del personaggio principale (Strength 0.65)
+PER OGNI SCENA (con FLUX.1-Kontext-dev)
+  └─ Image Input → character sheet del personaggio principale
+  └─ Prompt: STYLE BLOCK + ENV BLOCK + descrizione scena
+  └─ Negative Prompt: NEGATIVE BLOCK
   └─ Seed fisso dell'episodio
-  └─ Generate → aggiusta solo se necessario → Export WebP 85%
+  └─ Generate → Export WebP 85%
 
 INTEGRAZIONE
   └─ Rinomina → sposta in assets/ → asset-check → flutter run
@@ -163,21 +162,20 @@ INTEGRAZIONE
 
 | Problema | Causa | Soluzione |
 |---|---|---|
-| Il personaggio cambia faccia da una scena all'altra | IP-Adapter disattivato o Strength troppo bassa | Attiva IP-Adapter, porta Strength a 0.72 |
-| Lo stile di tratto cambia tra le pagine | Seed diverso o STYLE BLOCK modificato | Usa sempre lo stesso seed fisso e STYLE BLOCK identico |
-| L'immagine ha testo, lettere o fumetti | Il modello li genera di default | Aggiungi `no text, no letters, no speech bubbles` sia al prompt che al negative |
-| Le mani sono deformate | Problema comune di tutti i modelli AI | Aggiungi `perfect hands, well-defined fingers` al prompt positivo |
-| Favilla sembra diversa (capelli, occhiali sbagliati) | Descrizione nel prompt incompleta | Copia il CHARACTER BLOCK di Favilla word-for-word dal blocco FAVILLA di questo file |
-| I bambini sembrano troppo grandi | Mancano indicatori di età precisi | Aggiungi `very young children age 5-6, small and chubby, kindergarten size` |
-| Lex sembra troppo grande/vecchio | Il modello non capisce "7 mesi" | Aggiungi `7 months old baby, infant, pre-crawling, chubby baby face` |
-| FLUX genera foto realistiche invece che fumetto | STYLE BLOCK mancante o incompleto | Assicurati che il prompt inizi con `digital comic illustration, semi-flat colors, bold clean black outlines` |
-| L'immagine è scura o sovraesposta | Illuminazione non specificata | Aggiungi la palette mood della scena (vedi sezione 🎭 Palette) |
-| IP-Adapter "schiaccia" troppo la scena verso la reference | Strength troppo alta | Abbassa a 0.55–0.60 |
+| Il personaggio cambia faccia tra le scene | Image Strength troppo bassa | Alza Image Strength verso 0.75–0.80 |
+| La scena ignora il prompt | Image Strength troppo alta | Abbassa Image Strength verso 0.45–0.55 |
+| Lo stile di tratto cambia tra le pagine | Seed diverso o STYLE BLOCK modificato | Usa sempre seed fisso e STYLE BLOCK identico |
+| L'immagine ha testo, lettere o fumetti | Il modello li genera di default | Aggiungi `no text, no letters, no speech bubbles` al prompt E al negative |
+| Le mani sono deformate | Problema comune di tutti i modelli AI | Aggiungi `perfect hands, well-defined fingers` al prompt |
+| Favilla Blaze sembra una persona diversa | Character sheet Blaze non generato da Favilla | Rigenera Blaze usando Kontext con Favilla come input (vedi sezione CHARACTER SHEET) |
+| I bambini sembrano troppo grandi | Mancano indicatori di età | Aggiungi `very young children age 5-6, small and chubby, kindergarten size` |
+| Lex sembra troppo grande | Il modello non capisce "7 mesi" | Aggiungi `7 months old baby, infant, pre-crawling, chubby baby face` |
+| FLUX genera foto realistiche | STYLE BLOCK mancante | Il prompt deve iniziare con `digital comic illustration, semi-flat colors, bold clean black outlines` |
 
 ---
 
-> ⚠️ **Regola d'oro:** la coerenza visiva non viene dal prompt — viene dall'**IP-Adapter + seed fisso**.
-> Il prompt descrive *cosa succede*, IP-Adapter + seed garantiscono *come appare*.
+> ⚠️ **Regola d'oro:** la coerenza non viene dal prompt — viene dall'**immagine di input in Kontext**.
+> Il prompt descrive *cosa succede nella scena*, l'immagine di input *chi c'è e come appare*.
 
 ---
 
@@ -314,24 +312,22 @@ Same character, consistent face across all 4 panels. Clean white background.
 ```
 
 ### CHARACTER SHEET: Favilla Blaze
-> ⚠️ **NON generare da zero.** Segui il workflow qui sotto per ottenere la stessa persona trasformata.
+> ⚠️ **NON generare da zero.** Usa FLUX.1-Kontext-dev partendo dal character sheet di Favilla.
 
 **Come generare Favilla Blaze in Draw Things:**
 
-1. Apri il character sheet di **Favilla (normale)** dalla libreria
-2. Attiva **IP-Adapter** → scegli il character sheet di Favilla → **Strength: 0.75**
-   - Questo "porta" il volto, gli occhi castani e il fisico di Favilla nella nuova immagine
-3. Incolla il prompt qui sotto nel campo Prompt
-4. Genera → il risultato sarà la stessa persona, trasformata
+1. Seleziona il modello **FLUX.1-Kontext-dev**
+2. Image Input → carica il **character sheet di Favilla (normale)** dalla libreria
+3. Incolla il prompt qui sotto
+4. Genera — Kontext preserverà volto, occhi castani e fisico di Favilla, applicando la trasformazione
 
 ```
 [STYLE BLOCK]
 
-Character sheet of FAVILLA BLAZE (Stagione 1 — NO costume):
-same Italian woman mid-30s as Favilla but transformed —
-glasses gone, blonde hair loose radiating warm golden amber light,
-confident tall posture, athletic build, golden light from hands and eyes,
-wearing her SAME everyday clothes (white shirt, tight jeans, black-and-white sneakers) — no costume, no cape.
+FAVILLA BLAZE: the same woman from the reference image, but transformed —
+glasses gone, blonde hair loose and radiating warm golden amber light,
+posture confident and tall, soft golden light emanating from hands and eyes,
+wearing the SAME everyday clothes — NO superhero costume, NO cape, NO suit.
 Show 3 poses on white background: (1) standing tall arms slightly raised,
 (2) reaching forward with glowing hands, (3) holding a baby safely.
 Clean white background.
@@ -339,7 +335,7 @@ Clean white background.
 [NEGATIVE BLOCK]
 ```
 
-> 💡 **Per le scene con Favilla Blaze:** usa sempre il character sheet di Favilla Blaze come IP-Adapter (non quello di Favilla normale), per garantire coerenza con la versione trasformata già approvata.
+> 💡 **Per le scene con Favilla Blaze:** usa il character sheet di Blaze come Image Input in Kontext (non quello di Favilla normale).
 
 ### CHARACTER SHEET: Mallow
 ```
