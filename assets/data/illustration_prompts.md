@@ -47,10 +47,10 @@ I character sheet sono le immagini di riferimento che userai con IP-Adapter per 
 8. **Annota il seed** di quella variante (tocca l'immagine → Info → seed number)
 
 **Personaggi da generare (in ordine):**
-- [ ] CHARACTER SHEET: Favilla (normale)
-- [ ] CHARACTER SHEET: Favilla Blaze
-- [ ] CHARACTER SHEET: Mallow
-- [ ] CHARACTER SHEET: Lex
+- [ ] CHARACTER SHEET: Favilla (normale) — genera da zero con seed -1
+- [ ] CHARACTER SHEET: Favilla Blaze — **genera usando IP-Adapter con il character sheet di Favilla** (Strength 0.75), non da zero
+- [ ] CHARACTER SHEET: Mallow — genera da zero con seed -1
+- [ ] CHARACTER SHEET: Lex — genera da zero con seed -1
 
 > ⚠️ Non saltare questa fase. Senza character sheet, ogni scena avrà un personaggio diverso.
 
@@ -314,6 +314,16 @@ Same character, consistent face across all 4 panels. Clean white background.
 ```
 
 ### CHARACTER SHEET: Favilla Blaze
+> ⚠️ **NON generare da zero.** Segui il workflow qui sotto per ottenere la stessa persona trasformata.
+
+**Come generare Favilla Blaze in Draw Things:**
+
+1. Apri il character sheet di **Favilla (normale)** dalla libreria
+2. Attiva **IP-Adapter** → scegli il character sheet di Favilla → **Strength: 0.75**
+   - Questo "porta" il volto, gli occhi castani e il fisico di Favilla nella nuova immagine
+3. Incolla il prompt qui sotto nel campo Prompt
+4. Genera → il risultato sarà la stessa persona, trasformata
+
 ```
 [STYLE BLOCK]
 
@@ -328,6 +338,8 @@ Clean white background.
 
 [NEGATIVE BLOCK]
 ```
+
+> 💡 **Per le scene con Favilla Blaze:** usa sempre il character sheet di Favilla Blaze come IP-Adapter (non quello di Favilla normale), per garantire coerenza con la versione trasformata già approvata.
 
 ### CHARACTER SHEET: Mallow
 ```
