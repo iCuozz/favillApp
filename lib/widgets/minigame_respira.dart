@@ -95,7 +95,8 @@ class _MinigameRespiraScreenState extends State<MinigameRespiraScreen>
   late AnimationController _pulseCtrl;
   late AnimationController _resultCtrl;
   late AnimationController _surgeWarnCtrl;
-  late AnimationController _tapBounceCtrl; // scala bottone al tap
+  late AnimationController _tapBounceCtrl;
+  late AnimationController _tutorialDemoCtrl; // demo animata tap nel tutorial
 
   @override
   void initState() {
@@ -116,6 +117,10 @@ class _MinigameRespiraScreenState extends State<MinigameRespiraScreen>
       vsync: this,
       duration: const Duration(milliseconds: 130),
     );
+    _tutorialDemoCtrl = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1200),
+    )..repeat();
   }
 
   void _startGame() {
@@ -271,6 +276,7 @@ class _MinigameRespiraScreenState extends State<MinigameRespiraScreen>
     _resultCtrl.dispose();
     _surgeWarnCtrl.dispose();
     _tapBounceCtrl.dispose();
+    _tutorialDemoCtrl.dispose();
     super.dispose();
   }
 
@@ -299,61 +305,191 @@ class _MinigameRespiraScreenState extends State<MinigameRespiraScreen>
           colors: [Color(0xFF0C0820), Color(0xFF1A0010)],
         ),
       ),
-      child: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 36),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text('🔥', style: TextStyle(fontSize: 72)),
-              const SizedBox(height: 24),
-              const Text(
-                'Le mani si scaldano.',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    height: 1.3),
-              ),
-              const SizedBox(height: 14),
-              const Text(
-                'TAP RAPIDO per abbassare il calore.\n'
-                'Più veloce e ritmico → bonus raffreddamento.\n'
-                'Attenzione ai picchi improvvisi — ci sarà un avviso.',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    color: Colors.white54, fontSize: 15, height: 1.6),
-              ),
-              const SizedBox(height: 44),
-              GestureDetector(
-                onTap: _startGame,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 44, vertical: 16),
-                  decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                      colors: [Color(0xFF6A1B9A), Color(0xFFC62828)],
-                    ),
-                    borderRadius: BorderRadius.circular(32),
-                    boxShadow: [
-                      BoxShadow(
-                        color: const Color(0xFFC62828).withValues(alpha: 0.35),
-                        blurRadius: 20,
-                        offset: const Offset(0, 6),
-                      )
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 28),
+        child: Column(
+          children: [
+            // ── Header narrativo ──────────────────────────────────────
+            const Text('🔥', style: TextStyle(fontSize: 64)),
+            const SizedBox(height: 12),
+            const Text(
+              'Le mani si scaldano.',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  height: 1.3),
+            ),
+            const SizedBox(height: 6),
+            const Text(
+              'Senti il bruciore salire lungo le dita.\nDevi controllarlo prima che divampi.',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  color: Colors.white38, fontSize: 14, height: 1.6),
+            ),
+
+            const SizedBox(height: 28),
+
+            // ── Demo animata ──────────────────────────────────────────
+            AnimatedBuilder(
+              animation: _tutorialDemoCtrl,
+              builder: (_, __) {
+                final t = _tutorialDemoCtrl.value;
+                // Ring 1: espande su tutto il ciclo
+                final r1Scale = 0.45 + t * 1.1;
+                final r1Alpha = (1.0 - t) * 0.75;
+                // Ring 2: staccata di mezzo ciclo
+                final t2 = (t + 0.5) % 1.0;
+                final r2Scale = 0.45 + t2 * 1.1;
+                final r2Alpha = (1.0 - t2) * 0.75;
+                // Tap icon: bounce rapido all'inizio
+                final iconScale = t < 0.18
+                    ? (1.0 - 0.22 * sin(t / 0.18 * pi))
+                    : 1.0;
+                return SizedBox(
+                  height: 130,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      // Ring 1 viola
+                      Transform.scale(
+                        scale: r1Scale,
+                        child: Container(
+                          width: 90,
+                          height: 90,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: const Color(0xFF9C8FFF)
+                                  .withValues(alpha: r1Alpha),
+                              width: 2.5,
+                            ),
+                          ),
+                        ),
+                      ),
+                      // Ring 2 azzurro (streak)
+                      Transform.scale(
+                        scale: r2Scale,
+                        child: Container(
+                          width: 90,
+                          height: 90,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: const Color(0xFF80D8FF)
+                                  .withValues(alpha: r2Alpha),
+                              width: 2.5,
+                            ),
+                          ),
+                        ),
+                      ),
+                      // Icona dito che batte
+                      Transform.scale(
+                        scale: iconScale,
+                        child: const Text('👆',
+                            style: TextStyle(fontSize: 46)),
+                      ),
                     ],
                   ),
-                  child: const Text('Inizia',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold)),
+                );
+              },
+            ),
+            const Text(
+              'TAP  VELOCE',
+              style: TextStyle(
+                  color: Colors.white30,
+                  fontSize: 11,
+                  letterSpacing: 3,
+                  fontWeight: FontWeight.bold),
+            ),
+
+            const SizedBox(height: 24),
+            const Divider(color: Colors.white10),
+            const SizedBox(height: 20),
+
+            // ── Regole ────────────────────────────────────────────────
+            _ruleCard('💨', 'Tappa veloce',
+                'Ogni tap raffredda il calore. Più veloce, meglio è.'),
+            const SizedBox(height: 10),
+            _ruleCard('⚡', 'Picchi improvvisi',
+                'Un avviso ti avverte un attimo prima. Non fermarti.'),
+            const SizedBox(height: 10),
+            _ruleCard('❄️', 'Streak ×4',
+                'Quattro tap ravvicinati: bonus raffreddamento extra.'),
+            const SizedBox(height: 10),
+            _ruleCard('⏱', '14 secondi',
+                'Tieni il calore sotto controllo fino alla fine.'),
+
+            const SizedBox(height: 36),
+
+            // ── Start button ──────────────────────────────────────────
+            GestureDetector(
+              onTap: _startGame,
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 52, vertical: 16),
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    colors: [Color(0xFF6A1B9A), Color(0xFFC62828)],
+                  ),
+                  borderRadius: BorderRadius.circular(32),
+                  boxShadow: [
+                    BoxShadow(
+                      color:
+                          const Color(0xFFC62828).withValues(alpha: 0.35),
+                      blurRadius: 20,
+                      offset: const Offset(0, 6),
+                    )
+                  ],
                 ),
+                child: const Text('Inizia',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold)),
               ),
-            ],
-          ),
+            ),
+            const SizedBox(height: 16),
+          ],
         ),
+      ),
+    );
+  }
+
+  /// Card regola con icona, titolo e descrizione.
+  Widget _ruleCard(String icon, String title, String desc) {
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: Colors.white.withValues(alpha: 0.04),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Colors.white10),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(icon, style: const TextStyle(fontSize: 22)),
+          const SizedBox(width: 14),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(title,
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold)),
+                const SizedBox(height: 3),
+                Text(desc,
+                    style: const TextStyle(
+                        color: Colors.white54,
+                        fontSize: 13,
+                        height: 1.4)),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

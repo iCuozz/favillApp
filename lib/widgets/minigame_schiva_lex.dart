@@ -38,6 +38,7 @@ class _MinigameSchivaSscreenState extends State<MinigameSchivaSscreen>
   late AnimationController _feedbackCtrl;
   late AnimationController _resultCtrl;
   late AnimationController _timerBarCtrl;
+  late AnimationController _tutorialDemoCtrl; // demo animata nel tutorial
 
   int get _totalRounds => widget.config.rounds ?? 3;
 
@@ -52,6 +53,9 @@ class _MinigameSchivaSscreenState extends State<MinigameSchivaSscreen>
         vsync: this, duration: const Duration(milliseconds: 600));
     _timerBarCtrl = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 1100));
+    _tutorialDemoCtrl = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 2200))
+      ..repeat();
   }
 
   void _startNextRound() {
@@ -124,6 +128,7 @@ class _MinigameSchivaSscreenState extends State<MinigameSchivaSscreen>
     _feedbackCtrl.dispose();
     _resultCtrl.dispose();
     _timerBarCtrl.dispose();
+    _tutorialDemoCtrl.dispose();
     super.dispose();
   }
 
@@ -142,60 +147,202 @@ class _MinigameSchivaSscreenState extends State<MinigameSchivaSscreen>
   }
 
   Widget _buildTutorial() {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 36),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Text('👶', style: TextStyle(fontSize: 72)),
-            const SizedBox(height: 24),
-            const Text(
-              'Lex vuole vedere la camicia.',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  height: 1.3),
-            ),
-            const SizedBox(height: 14),
-            Text(
-              'Schiva i suoi $_totalRounds tentativi!\nStriscia nella direzione indicata dalla freccia.',
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.white54, fontSize: 15, height: 1.6),
-            ),
-            const SizedBox(height: 44),
-            GestureDetector(
-              onTap: () {
-                setState(() => _phase = _SchivaCPhase.countdown);
-                Future.delayed(const Duration(milliseconds: 300), _startNextRound);
-              },
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 44, vertical: 16),
-                decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    colors: [Color(0xFF4E342E), Color(0xFF6D4C41)],
-                  ),
-                  borderRadius: BorderRadius.circular(32),
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color(0xFF6D4C41).withValues(alpha: 0.5),
-                      blurRadius: 16,
-                      offset: const Offset(0, 4),
-                    )
+    return SingleChildScrollView(
+      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 28),
+      child: Column(
+        children: [
+          // ── Header narrativo ──────────────────────────────────────
+          const Text('👶', style: TextStyle(fontSize: 64)),
+          const SizedBox(height: 12),
+          const Text(
+            'Lex vuole vedere la camicia.',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                height: 1.3),
+          ),
+          const SizedBox(height: 6),
+          const Text(
+            'Non può scoprire i segni bruciati.\nSchiva i suoi tentativi prima che sia troppo tardi.',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                color: Colors.white38, fontSize: 14, height: 1.6),
+          ),
+
+          const SizedBox(height: 28),
+
+          // ── Demo animata ──────────────────────────────────────────
+          AnimatedBuilder(
+            animation: _tutorialDemoCtrl,
+            builder: (_, __) {
+              final t = _tutorialDemoCtrl.value;
+              // Alterna scenario: prima metà attacco da sinistra,
+              // seconda metà attacco da destra
+              final fromLeft = t < 0.5;
+              final phaseT = fromLeft ? t * 2 : (t - 0.5) * 2;
+              final slideIn = Curves.easeOut
+                  .transform((phaseT * 1.6).clamp(0.0, 1.0));
+              final fadeOut =
+                  phaseT > 0.7 ? 1.0 - (phaseT - 0.7) / 0.3 : 1.0;
+              final dodgeAlpha =
+                  phaseT > 0.35 ? (phaseT - 0.35) / 0.2 * fadeOut : 0.0;
+
+              final attackOffset = fromLeft
+                  ? Offset(-110 + slideIn * 70, 0)
+                  : Offset(110 - slideIn * 70, 0);
+
+              return SizedBox(
+                height: 110,
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    // Personaggio centrale
+                    const Text('🧍',
+                        style: TextStyle(fontSize: 38)),
+                    // Freccia attacco
+                    Positioned(
+                      left: fromLeft ? 0 : null,
+                      right: fromLeft ? null : 0,
+                      child: Transform.translate(
+                        offset: attackOffset,
+                        child: Opacity(
+                          opacity: fadeOut.clamp(0.0, 1.0),
+                          child: Text(
+                            fromLeft ? '🔥→' : '←🔥',
+                            style: const TextStyle(
+                                fontSize: 26, color: Colors.redAccent),
+                          ),
+                        ),
+                      ),
+                    ),
+                    // Freccia dodge
+                    Positioned(
+                      right: fromLeft ? 0 : null,
+                      left: fromLeft ? null : 0,
+                      child: Opacity(
+                        opacity: dodgeAlpha.clamp(0.0, 1.0),
+                        child: Text(
+                          fromLeft ? '➡️' : '⬅️',
+                          style: const TextStyle(fontSize: 30),
+                        ),
+                      ),
+                    ),
+                    // Label swipe in fondo
+                    Positioned(
+                      bottom: 4,
+                      child: Opacity(
+                        opacity:
+                            (phaseT > 0.3 ? (phaseT - 0.3) / 0.2 : 0.0)
+                                .clamp(0.0, 1.0) *
+                            fadeOut,
+                        child: Text(
+                          fromLeft
+                              ? 'STRISCIA A DESTRA →'
+                              : '← STRISCIA A SINISTRA',
+                          style: const TextStyle(
+                              color: Colors.white30,
+                              fontSize: 10,
+                              letterSpacing: 1.5,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
-                child: const Text('Inizia',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold)),
+              );
+            },
+          ),
+
+          const SizedBox(height: 24),
+          const Divider(color: Colors.white10),
+          const SizedBox(height: 20),
+
+          // ── Regole ────────────────────────────────────────────────
+          _ruleCard('👈', 'Attacco da sinistra',
+              'Striscia verso DESTRA per schivare.'),
+          const SizedBox(height: 10),
+          _ruleCard('👉', 'Attacco da destra',
+              'Striscia verso SINISTRA per schivare.'),
+          const SizedBox(height: 10),
+          _ruleCard('⏱', 'Hai 1.1 secondi',
+              'Reagisci subito o vieni colto sul fatto.'),
+          const SizedBox(height: 10),
+          _ruleCard('🏅', '3 round totali',
+              'Schiva tutti e 3 per il risultato migliore.'),
+
+          const SizedBox(height: 36),
+
+          // ── Start button ──────────────────────────────────────────
+          GestureDetector(
+            onTap: () {
+              setState(() => _phase = _SchivaCPhase.countdown);
+              Future.delayed(
+                  const Duration(milliseconds: 300), _startNextRound);
+            },
+            child: Container(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 52, vertical: 16),
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                  colors: [Color(0xFF4E342E), Color(0xFF6D4C41)],
+                ),
+                borderRadius: BorderRadius.circular(32),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xFF6D4C41).withValues(alpha: 0.5),
+                    blurRadius: 16,
+                    offset: const Offset(0, 4),
+                  )
+                ],
               ),
+              child: const Text('Inizia',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold)),
             ),
-          ],
-        ),
+          ),
+          const SizedBox(height: 16),
+        ],
+      ),
+    );
+  }
+
+  /// Card regola con icona, titolo e descrizione.
+  Widget _ruleCard(String icon, String title, String desc) {
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: Colors.white.withValues(alpha: 0.04),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Colors.white10),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(icon, style: const TextStyle(fontSize: 22)),
+          const SizedBox(width: 14),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(title,
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold)),
+                const SizedBox(height: 3),
+                Text(desc,
+                    style: const TextStyle(
+                        color: Colors.white54,
+                        fontSize: 13,
+                        height: 1.4)),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
