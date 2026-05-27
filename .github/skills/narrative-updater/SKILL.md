@@ -101,6 +101,14 @@ Output atteso: `✅ VALIDAZIONE PASSATA` — se compare `🔴` correggere i `sta
 
 ---
 
+## 🔄 Git sync — ultimo passo sempre
+
+Dopo ogni aggiornamento narrativo invocare la skill **git-sync**:
+- Committare JSON, docs Obsidian, e codice modificato in un unico commit descrittivo
+- Push a `origin/main` così il progetto è sempre accessibile da qualsiasi dispositivo
+
+---
+
 ## 🪨 REGOLE SU PIETRA (non negoziabili)
 
 ### Stat floor
