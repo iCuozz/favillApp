@@ -232,8 +232,10 @@ class Episode {
 class Branch {
   final String id;
   final List<ComicPage> pages;
+  /// Se true, l'epilogo globale dell'episodio non viene aggiunto dopo questo branch.
+  final bool skipsEpilogue;
 
-  const Branch({required this.id, required this.pages});
+  const Branch({required this.id, required this.pages, this.skipsEpilogue = false});
 
   factory Branch.fromJson(String id, Map<String, dynamic> json) {
     final pagesJson = (json['pages'] as List<dynamic>? ?? []);
@@ -242,6 +244,7 @@ class Branch {
       pages: pagesJson
           .map((p) => ComicPage.fromJson(p as Map<String, dynamic>))
           .toList(),
+      skipsEpilogue: json['skips_epilogue'] as bool? ?? false,
     );
   }
 }

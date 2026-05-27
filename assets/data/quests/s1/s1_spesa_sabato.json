@@ -202,10 +202,7 @@
                 {
                   "min": 0,
                   "label": "Mancato!",
-                  "stat_effects": {
-                    "resistenza": -5,
-                    "legame": 5
-                  },
+                  "stat_effects": {},
                   "goto_branch": "branch_tardi_mancato"
                 }
               ]
@@ -741,6 +738,7 @@
     },
     "branch_tardi_mancato": {
       "id": "branch_tardi_mancato",
+      "skips_epilogue": true,
       "pages": [
         {
           "id": "btm_0",
@@ -752,15 +750,19 @@
               "text_blocks": [
                 {
                   "speaker": "",
-                  "text": "L'orsetto sfreccia. Pulisce l'aria. Atterra morbidamente sul pavimento a un metro dagli scaffali."
+                  "text": "L'orsetto sfreccia. Pulisce l'aria."
                 },
                 {
                   "speaker": "",
-                  "text": "Silenzio."
+                  "text": "Atterra morbidamente sul pavimento a un metro dagli scaffali."
                 },
                 {
                   "speaker": "",
-                  "text": "Gli scaffali sono intatti. I barattoli fermi. L’universo non si è minimamente mosso."
+                  "text": "Silenzio. Gli scaffali sono intatti. I barattoli fermi."
+                },
+                {
+                  "speaker": "",
+                  "text": "Favilla non si è nemmeno girata."
                 }
               ],
               "interactions": []
@@ -781,19 +783,48 @@
                 },
                 {
                   "speaker": "",
-                  "text": "Favilla non si è nemmeno girata."
+                  "text": "Lex fissa l'orsetto. Poi gli scaffali. Poi di nuovo l'orsetto."
                 },
                 {
                   "speaker": "",
-                  "text": "Sta guardando la lista della spesa, indifferente al piccolo disastro mancato che si è svolto a venti centimetri da lei."
+                  "text": "Il piano era perfetto in teoria."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        },
+        {
+          "id": "btm_2",
+          "background": "assets/episodes/s1/s1_spesa_sabato/page_bt_1.webp",
+          "panels": [
+            {
+              "id": "btm_2_p0",
+              "characters": [],
+              "text_blocks": [
+                {
+                  "speaker": "",
+                  "text": "Alla cassa. Favilla passa i prodotti sul nastro."
                 },
                 {
                   "speaker": "",
-                  "text": "Lex dondola le gambette lentamente. Guarda l’orsetto per terra. Riconsiderazione tattica in corso."
+                  "text": "Lex è nel passeggino. Gambette ferme per la prima volta oggi."
+                },
+                {
+                  "speaker": "",
+                  "text": "Guarda il soffitto con gli occhi di chi sta già riprogettando tutto."
+                },
+                {
+                  "speaker": "lex",
+                  "text": "..."
                 },
                 {
                   "speaker": "",
                   "text": "La prossima volta ci vuole più velocità. O un ciuccio più pesante."
+                },
+                {
+                  "speaker": "",
+                  "text": "O entrambe le cose."
                 }
               ],
               "interactions": []

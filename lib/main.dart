@@ -315,7 +315,7 @@ class _EpisodePageState extends State<EpisodePage> {
           ...entryBranch.pages,
           ...ep.pages,
           ...branch.pages,
-          if (ep.epilogue != null) ...ep.epilogue!.pages,
+          if (ep.epilogue != null && !(branch.skipsEpilogue)) ...ep.epilogue!.pages,
           if (secondBranch != null) ...secondBranch.pages,
         ];
       }
@@ -326,7 +326,7 @@ class _EpisodePageState extends State<EpisodePage> {
       return [
         ...entryBranch.pages,
         if (choiceBranch != null) ...choiceBranch.pages,
-        if (choiceBranch != null && ep.epilogue != null)
+        if (choiceBranch != null && ep.epilogue != null && !(choiceBranch.skipsEpilogue))
           ...ep.epilogue!.pages,
       ];
     }
@@ -343,7 +343,7 @@ class _EpisodePageState extends State<EpisodePage> {
     return [
       ...ep.pages,
       ...branch.pages,
-      if (ep.epilogue != null) ...ep.epilogue!.pages,
+      if (ep.epilogue != null && !branch.skipsEpilogue) ...ep.epilogue!.pages,
       if (secondBranch != null) ...secondBranch.pages,
     ];
   }
