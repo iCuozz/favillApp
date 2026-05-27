@@ -162,10 +162,27 @@
             "label": "Guarda il telefono. La lista è lunga. Lex sta bene.",
             "hint": "Certo che sta bene.",
             "goto_branch": "branch_tardi",
-            "stat_effects": {
-              "segreto": -5,
-              "resistenza": -10,
-              "legame": 10
+            "stat_effects": {"segreto": -5, "resistenza": -10},
+            "minigame": {
+              "type": "lex_strike",
+              "products_total": 12,
+              "tiers": [
+                {
+                  "min": 8,
+                  "label": "STRIKE! 🎳",
+                  "stat_effects": {"segreto": -5, "resistenza": -10, "legame": 15}
+                },
+                {
+                  "min": 3,
+                  "label": "Colpo parziale",
+                  "stat_effects": {"segreto": -3, "resistenza": -5, "legame": 10}
+                },
+                {
+                  "min": 0,
+                  "label": "Mancato!",
+                  "stat_effects": {"resistenza": -5, "legame": 5}
+                }
+              ]
             }
           },
           {

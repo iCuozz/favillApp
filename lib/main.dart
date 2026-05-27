@@ -20,6 +20,7 @@ import 'pages/world_map_page.dart';
 import 'widgets/choice_card.dart';
 import 'widgets/comic_page_stage.dart';
 import 'widgets/stats_hud_widget.dart';
+import 'widgets/minigame_lex_strike.dart';
 
 const String _kSentryDsn =
     'https://a0191b359e43ba940e6b2bc1107b81ec@o4511291384725504.ingest.de.sentry.io/4511291387543632';
@@ -538,13 +539,34 @@ class _EpisodePageState extends State<EpisodePage> {
   }
 
   void _handleChoiceSelected(ChoiceOption option) {
+    if (option.minigame != null && option.minigame!.type == 'lex_strike') {
+      // Apri il mini-game prima di applicare effetti e navigare al branch.
+      Navigator.of(context).push<void>(
+        MaterialPageRoute(
+          builder: (_) => MinigameLexStrikeScreen(
+            config: option.minigame!,
+            onComplete: (effects, label) {
+              Navigator.of(context).pop();
+              _applyEffectsAndNavigate(option, overrideEffects: effects);
+            },
+          ),
+        ),
+      );
+    } else {
+      _applyEffectsAndNavigate(option);
+    }
+  }
+
+  void _applyEffectsAndNavigate(ChoiceOption option,
+      {Map<String, int>? overrideEffects}) {
     final episodeId = widget.episode.id;
     final branchId = option.gotoBranch;
+    final effects = overrideEffects ?? option.statEffects;
 
     // Applica gli effetti sulle stat RPG.
-    if (option.statEffects.isNotEmpty) {
-      GameStateService.instance.applyEffects(option.statEffects);
-      setState(() => _pendingStatEffects = option.statEffects);
+    if (effects.isNotEmpty) {
+      GameStateService.instance.applyEffects(effects);
+      setState(() => _pendingStatEffects = effects);
     }
 
     setState(() {

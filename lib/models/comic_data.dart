@@ -270,14 +270,81 @@ class Choice {
   }
 }
 
+/// Singolo livello di risultato per un mini-game.
+class MinigameTier {
+  final int minProducts;
+  final String label;
+  final Map<String, int> statEffects;
+
+  const MinigameTier({
+    required this.minProducts,
+    required this.label,
+    required this.statEffects,
+  });
+
+  factory MinigameTier.fromJson(Map<String, dynamic> json) {
+    final raw = json['stat_effects'] as Map<String, dynamic>?;
+    final effects = <String, int>{};
+    raw?.forEach((k, v) {
+      if (v is int) effects[k] = v;
+    });
+    return MinigameTier(
+      minProducts: json['min'] as int? ?? 0,
+      label: json['label'] as String? ?? '',
+      statEffects: effects,
+    );
+  }
+}
+
+/// Configurazione di un mini-game associato a una scelta.
+class MinigameConfig {
+  final String type;
+  final int productsTotal;
+
+  /// Tiers ordinati dal più alto al più basso (minProducts desc).
+  final List<MinigameTier> tiers;
+
+  const MinigameConfig({
+    required this.type,
+    required this.productsTotal,
+    required this.tiers,
+  });
+
+  factory MinigameConfig.fromJson(Map<String, dynamic> json) {
+    final tiersRaw = (json['tiers'] as List<dynamic>?) ?? [];
+    final tiers = tiersRaw
+        .map((t) => MinigameTier.fromJson(t as Map<String, dynamic>))
+        .toList()
+      ..sort((a, b) => b.minProducts.compareTo(a.minProducts));
+    return MinigameConfig(
+      type: json['type'] as String? ?? '',
+      productsTotal: json['products_total'] as int? ?? 12,
+      tiers: tiers,
+    );
+  }
+
+  /// Restituisce il tier corrispondente al numero di prodotti abbattuti.
+  MinigameTier tierFor(int fallen) {
+    for (final t in tiers) {
+      if (fallen >= t.minProducts) return t;
+    }
+    return tiers.last;
+  }
+}
+
 class ChoiceOption {
   final String id;
   final String label;
   final String gotoBranch;
   final String? hint;
 
-  /// Effetti sulle stat RPG: es. {"segreto": 1, "legame": -1}
+  /// Effetti sulle stat RPG: es. {"segreto": 1, "legame": -1}.
+  /// Quando è presente [minigame], questo campo contiene il worst-case dei tier
+  /// ed è usato solo per il filtro dei floor — gli effetti reali vengono dal tier.
   final Map<String, int> statEffects;
+
+  /// Se presente, questa scelta apre un mini-game prima di navigare al branch.
+  final MinigameConfig? minigame;
 
   const ChoiceOption({
     required this.id,
@@ -285,6 +352,7 @@ class ChoiceOption {
     required this.gotoBranch,
     this.hint,
     this.statEffects = const {},
+    this.minigame,
   });
 
   factory ChoiceOption.fromJson(Map<String, dynamic> json) {
@@ -293,6 +361,7 @@ class ChoiceOption {
     effectsJson?.forEach((key, value) {
       if (value is int) statEffects[key] = value;
     });
+    final minigameJson = json['minigame'] as Map<String, dynamic>?;
 
     return ChoiceOption(
       id: json['id'] as String? ?? '',
@@ -300,6 +369,7 @@ class ChoiceOption {
       gotoBranch: json['goto_branch'] as String? ?? '',
       hint: json['hint'] as String?,
       statEffects: statEffects,
+      minigame: minigameJson != null ? MinigameConfig.fromJson(minigameJson) : null,
     );
   }
 }
