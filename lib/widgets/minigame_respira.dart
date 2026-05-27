@@ -740,3 +740,4 @@ class _EmberPainter extends CustomPainter {
   @override
   bool shouldRepaint(_EmberPainter old) => true;
 }
+// test
