@@ -66,9 +66,86 @@ class _WorldMapPageState extends State<WorldMapPage>
     );
   }
 
+  void _openDevEpisodePicker() {
+    // Lista statica di tutti gli episodi disponibili nel progetto
+    const episodes = [
+      (id: 'prologo',          title: 'Prologo',           file: 'assets/data/quests/prologo.json'),
+      (id: 's1_mattina_dopo',  title: 'EP1 · Mattina dopo', file: 'assets/data/quests/s1/s1_mattina_dopo.json'),
+      (id: 's1_scuola_1',      title: 'EP2 · La Corvi',    file: 'assets/data/quests/s1/s1_scuola_1.json'),
+      (id: 's1_ritorno_casa',  title: 'EP3 · Ritorno a casa', file: 'assets/data/quests/s1/s1_ritorno_casa.json'),
+      (id: 's1_spesa_sabato',  title: 'EP4 · La Spesa del Sabato', file: 'assets/data/quests/s1/s1_spesa_sabato.json'),
+    ];
+
+    showModalBottomSheet<void>(
+      context: context,
+      backgroundColor: const Color(0xFF1A1A2E),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (_) {
+        return SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Row(
+                  children: [
+                    Icon(Icons.developer_mode, color: Colors.pinkAccent, size: 20),
+                    SizedBox(width: 8),
+                    Text('Dev — Salta a episodio',
+                        style: TextStyle(color: Colors.white70, fontSize: 14, fontWeight: FontWeight.bold)),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                ...episodes.map((ep) => ListTile(
+                  dense: true,
+                  contentPadding: EdgeInsets.zero,
+                  leading: const Icon(Icons.play_circle_outline, color: Colors.pinkAccent),
+                  title: Text(ep.title,
+                      style: const TextStyle(color: Colors.white, fontSize: 14)),
+                  onTap: () {
+                    Navigator.pop(context);
+                    final summary = EpisodeSummary(
+                      id: ep.id,
+                      title: ep.title,
+                      subtitle: '',
+                      thumbnail: '',
+                      file: ep.file,
+                    );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => QuestLoaderPage(
+                          comicIndex: widget.comicIndex,
+                          summary: summary,
+                          questId: ep.id,
+                          worldMap: _worldMap!,
+                        ),
+                      ),
+                    );
+                  },
+                )),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton.small(
+        heroTag: 'dev-picker',
+        backgroundColor: Colors.black54,
+        foregroundColor: Colors.pinkAccent,
+        tooltip: 'Dev: salta episodio',
+        onPressed: _worldMap != null ? _openDevEpisodePicker : null,
+        child: const Icon(Icons.developer_mode, size: 18),
+      ),
       body: Stack(
         fit: StackFit.expand,
         children: [
