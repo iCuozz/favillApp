@@ -192,11 +192,7 @@
                 {
                   "min": 3,
                   "label": "Colpo parziale",
-                  "stat_effects": {
-                    "segreto": -3,
-                    "resistenza": -5,
-                    "legame": 10
-                  },
+                  "stat_effects": {},
                   "goto_branch": "branch_tardi_parziale"
                 },
                 {
@@ -667,6 +663,7 @@
     },
     "branch_tardi_parziale": {
       "id": "branch_tardi_parziale",
+      "skips_epilogue": true,
       "pages": [
         {
           "id": "btp_0",
@@ -678,15 +675,19 @@
               "text_blocks": [
                 {
                   "speaker": "",
-                  "text": "L'orsetto vola. Colpisce uno scaffale di lato."
+                  "text": "L'orsetto colpisce lo scaffale di lato."
                 },
                 {
                   "speaker": "",
-                  "text": "Tre barattoli cadono. Due rotolano sotto il carrello. Uno rimane in bilico precario."
+                  "text": "Tre barattoli cadono. Un rumore sordo. Uno rotola fino al centro del corridoio."
                 },
                 {
                   "speaker": "",
-                  "text": "Non è lo strike che Lex aveva in mente."
+                  "text": "Favilla si gira."
+                },
+                {
+                  "speaker": "",
+                  "text": "Barattoli a terra. Lex con ancora il filo del ciuccio in mano. Quella faccia."
                 }
               ],
               "interactions": []
@@ -703,36 +704,49 @@
               "text_blocks": [
                 {
                   "speaker": "",
-                  "text": "Favilla si gira al rumore."
+                  "text": "Le mani di Favilla si scaldano. Solo un istante. Non abbastanza."
                 },
                 {
                   "speaker": "",
-                  "text": "Barattoli a terra. Lex in mano ancora l’orsetto. Il filo del ciuccio ancora teso."
-                },
-                {
-                  "speaker": "favilla",
-                  "text": "Lex."
+                  "text": "Una signora con la borsa si ferma e guarda i barattoli."
                 },
                 {
                   "speaker": "",
-                  "text": "Non succede nulla di drammatico. Le mani si scaldano un istante — poi si calmano."
+                  "text": "Poi guarda Lex. Poi Favilla."
                 },
                 {
                   "speaker": "",
-                  "text": "Favilla raccoglie i barattoli con le mani normali. Li rimette sullo scaffale uno per uno, sotto gli occhi di Lex."
-                },
-                {
-                  "speaker": "",
-                  "text": "Lex la osserva. Poi guarda i barattoli. Poi guarda di nuovo lei."
-                },
-                {
-                  "speaker": "",
-                  "text": "Il piano prevedeva più caos."
+                  "text": "Favilla sente i capelli — solo le punte — fremere leggermente. Come quando c'è troppa elettricità nell'aria."
                 }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "choice": {
+            "id": "choice_parziale",
+            "prompt": "Cosa fa Favilla?",
+            "options": [
+              {
+                "id": "opt_sistema",
+                "label": "Raccoglie i barattoli con calma apparente. Come se niente fosse.",
+                "hint": "Le punte dei capelli continuano a fremere. Solo Lex lo nota.",
+                "goto_branch": "branch_parziale_sistema",
+                "stat_effects": {
+                  "segreto": -3,
+                  "resistenza": -3
+                }
+              },
+              {
+                "id": "opt_lascia",
+                "label": "Li lascia lì. Prende Lex, gira il carrello e va.",
+                "hint": "Non è il suo scaffale. Non è il suo problema.",
+                "goto_branch": "branch_parziale_lascia",
+                "stat_effects": {
+                  "resistenza": -5
+                }
+              }
+            ]
+          }
         }
       ]
     },
@@ -825,6 +839,136 @@
                 {
                   "speaker": "",
                   "text": "O entrambe le cose."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "branch_parziale_sistema": {
+      "id": "branch_parziale_sistema",
+      "pages": [
+        {
+          "id": "bps_0",
+          "background": "assets/episodes/s1/s1_spesa_sabato/page_bt_1.webp",
+          "panels": [
+            {
+              "id": "bps_0_p0",
+              "characters": [],
+              "text_blocks": [
+                {
+                  "speaker": "",
+                  "text": "Raccoglie. Uno, due, tre. Li rimette sullo scaffale."
+                },
+                {
+                  "speaker": "",
+                  "text": "La signora annuisce e passa oltre."
+                },
+                {
+                  "speaker": "",
+                  "text": "Le punte dei capelli fremono ancora per qualche secondo, poi si calmano."
+                },
+                {
+                  "speaker": "favilla",
+                  "text": "Tutto okay."
+                },
+                {
+                  "speaker": "",
+                  "text": "Non è chiaro a chi lo dica."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        },
+        {
+          "id": "bps_1",
+          "background": "assets/episodes/s1/s1_spesa_sabato/page_bt_1.webp",
+          "panels": [
+            {
+              "id": "bps_1_p0",
+              "characters": [],
+              "text_blocks": [
+                {
+                  "speaker": "",
+                  "text": "Alla cassa. Favilla passa i prodotti sul nastro."
+                },
+                {
+                  "speaker": "",
+                  "text": "Lex è nel passeggino, troppo quieto."
+                },
+                {
+                  "speaker": "",
+                  "text": "Guarda il soffitto con l'espressione di chi sta già rivedendo i calcoli."
+                },
+                {
+                  "speaker": "",
+                  "text": "Silenzio sospetto."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "branch_parziale_lascia": {
+      "id": "branch_parziale_lascia",
+      "pages": [
+        {
+          "id": "bpl_0",
+          "background": "assets/episodes/s1/s1_spesa_sabato/page_bt_1.webp",
+          "panels": [
+            {
+              "id": "bpl_0_p0",
+              "characters": [],
+              "text_blocks": [
+                {
+                  "speaker": "",
+                  "text": "Gira il carrello. Si allontana."
+                },
+                {
+                  "speaker": "",
+                  "text": "Un barattolo rotola ancora sul pavimento alle sue spalle."
+                },
+                {
+                  "speaker": "",
+                  "text": "La signora con la borsa la guarda andare."
+                },
+                {
+                  "speaker": "",
+                  "text": "Favilla non si gira."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        },
+        {
+          "id": "bpl_1",
+          "background": "assets/episodes/s1/s1_spesa_sabato/page_bt_1.webp",
+          "panels": [
+            {
+              "id": "bpl_1_p0",
+              "characters": [],
+              "text_blocks": [
+                {
+                  "speaker": "",
+                  "text": "Alla cassa. Favilla passa i prodotti sul nastro."
+                },
+                {
+                  "speaker": "",
+                  "text": "Lex è nel passeggino, troppo quieto."
+                },
+                {
+                  "speaker": "",
+                  "text": "Guarda il soffitto con l'espressione di chi sta già rivedendo i calcoli."
+                },
+                {
+                  "speaker": "",
+                  "text": "Silenzio sospetto."
                 }
               ],
               "interactions": []
