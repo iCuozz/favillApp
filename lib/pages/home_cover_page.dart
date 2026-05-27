@@ -131,7 +131,7 @@ class _HomeCoverPageState extends State<HomeCoverPage> with WidgetsBindingObserv
           ),
           Container(
             decoration: BoxDecoration(
-              color: Colors.black.withOpacity(0.45),
+              color: Colors.black.withValues(alpha: 0.45),
             ),
           ),
           SafeArea(
