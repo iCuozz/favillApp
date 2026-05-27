@@ -308,12 +308,20 @@ class MinigameConfig {
   final String type;
   final int productsTotal;
 
+  /// Durata in secondi per mini-game a timer (es. respira). Null = non usato.
+  final int? durationSeconds;
+
+  /// Numero di round per mini-game a tentativi (es. schiva_lex). Null = non usato.
+  final int? rounds;
+
   /// Tiers ordinati dal più alto al più basso (minProducts desc).
   final List<MinigameTier> tiers;
 
   const MinigameConfig({
     required this.type,
     required this.productsTotal,
+    this.durationSeconds,
+    this.rounds,
     required this.tiers,
   });
 
@@ -326,6 +334,8 @@ class MinigameConfig {
     return MinigameConfig(
       type: json['type'] as String? ?? '',
       productsTotal: json['products_total'] as int? ?? 12,
+      durationSeconds: json['duration_seconds'] as int?,
+      rounds: json['rounds'] as int?,
       tiers: tiers,
     );
   }

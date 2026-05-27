@@ -21,6 +21,8 @@ import 'widgets/choice_card.dart';
 import 'widgets/comic_page_stage.dart';
 import 'widgets/stats_hud_widget.dart';
 import 'widgets/minigame_lex_strike.dart';
+import 'widgets/minigame_respira.dart';
+import 'widgets/minigame_schiva_lex.dart';
 
 const String _kSentryDsn =
     'https://a0191b359e43ba940e6b2bc1107b81ec@o4511291384725504.ingest.de.sentry.io/4511291387543632';
@@ -513,6 +515,15 @@ class _EpisodePageState extends State<EpisodePage> {
       options: safeOptions.isNotEmpty ? safeOptions : choice.options,
     );
 
+    // Auto-avvio: se c'è una sola opzione con minigame, salta lo sheet e
+    // lancia direttamente il minigame (narrativa lineare, nessuna scelta esplicita).
+    if (filteredChoice.options.length == 1 &&
+        filteredChoice.options.first.minigame != null) {
+      _choiceSheetOpen = false;
+      _handleChoiceSelected(filteredChoice.options.first);
+      return;
+    }
+
     showModalBottomSheet<void>(
       context: context,
       isDismissible: false,
@@ -539,24 +550,57 @@ class _EpisodePageState extends State<EpisodePage> {
   }
 
   void _handleChoiceSelected(ChoiceOption option) {
-    if (option.minigame != null && option.minigame!.type == 'lex_strike') {
-      // Apri il mini-game prima di applicare effetti e navigare al branch.
-      Navigator.of(context).push<void>(
-        MaterialPageRoute(
-          builder: (_) => MinigameLexStrikeScreen(
-            config: option.minigame!,
-            onComplete: (effects, label, tier) {
-              Navigator.of(context).pop();
-              // Usa il branch specifico del tier (se definito), altrimenti quello dell'opzione.
-              final branch = tier.gotoBranch.isNotEmpty ? tier.gotoBranch : null;
-              _applyEffectsAndNavigate(option,
-                  overrideEffects: effects, overrideBranch: branch);
-            },
-          ),
-        ),
-      );
-    } else {
+    if (option.minigame == null) {
       _applyEffectsAndNavigate(option);
+      return;
+    }
+    final cfg = option.minigame!;
+    switch (cfg.type) {
+      case 'lex_strike':
+        Navigator.of(context).push<void>(
+          MaterialPageRoute(
+            builder: (_) => MinigameLexStrikeScreen(
+              config: cfg,
+              onComplete: (effects, label, tier) {
+                Navigator.of(context).pop();
+                final branch = tier.gotoBranch.isNotEmpty ? tier.gotoBranch : null;
+                _applyEffectsAndNavigate(option,
+                    overrideEffects: effects, overrideBranch: branch);
+              },
+            ),
+          ),
+        );
+      case 'respira':
+        Navigator.of(context).push<void>(
+          MaterialPageRoute(
+            builder: (_) => MinigameRespiraScreen(
+              config: cfg,
+              onComplete: (effects, label, tier) {
+                Navigator.of(context).pop();
+                final branch = tier.gotoBranch.isNotEmpty ? tier.gotoBranch : null;
+                _applyEffectsAndNavigate(option,
+                    overrideEffects: effects, overrideBranch: branch);
+              },
+            ),
+          ),
+        );
+      case 'schiva_lex':
+        Navigator.of(context).push<void>(
+          MaterialPageRoute(
+            builder: (_) => MinigameSchivaSscreen(
+              config: cfg,
+              onComplete: (effects, label, tier) {
+                Navigator.of(context).pop();
+                final branch = tier.gotoBranch.isNotEmpty ? tier.gotoBranch : null;
+                _applyEffectsAndNavigate(option,
+                    overrideEffects: effects, overrideBranch: branch);
+              },
+            ),
+          ),
+        );
+      default:
+        // Tipo sconosciuto: applica effetti base dell'opzione
+        _applyEffectsAndNavigate(option);
     }
   }
 

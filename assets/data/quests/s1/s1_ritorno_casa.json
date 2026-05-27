@@ -1,7 +1,12 @@
 {
   "id": "s1_ritorno_casa",
   "stat_entry": [
-    { "stat": "segreto", "op": "lt", "value": 50, "goto_branch": "intro_vestiti_bruciati" }
+    {
+      "stat": "segreto",
+      "op": "lt",
+      "value": 50,
+      "goto_branch": "intro_vestiti_bruciati"
+    }
   ],
   "pages": [
     {
@@ -10,7 +15,10 @@
       "panels": [
         {
           "id": "rc_0_0",
-          "characters": ["favilla", "mallow"],
+          "characters": [
+            "favilla",
+            "mallow"
+          ],
           "text_blocks": [
             {
               "id": "rc_0_0_tb_0",
@@ -58,7 +66,10 @@
       "panels": [
         {
           "id": "rc_1_0",
-          "characters": ["favilla", "lex"],
+          "characters": [
+            "favilla",
+            "lex"
+          ],
           "text_blocks": [
             {
               "id": "rc_1_0_tb_0",
@@ -89,14 +100,20 @@
             "label": "\"Cosa vedi?\" — le bisbiglia nell'orecchio.",
             "hint": "Solo loro due possono capire.",
             "goto_branch": "branch_bisbiglia",
-            "stat_effects": { "legame": 15, "scintille": 5 }
+            "stat_effects": {
+              "legame": 15,
+              "scintille": 5
+            }
           },
           {
             "id": "stringe",
             "label": "Lo stringe forte. Senza dire niente.",
             "hint": "A volte non servono le parole.",
             "goto_branch": "branch_stringe",
-            "stat_effects": { "legame": 10, "segreto": 5 }
+            "stat_effects": {
+              "legame": 10,
+              "segreto": 5
+            }
           }
         ]
       }
@@ -111,7 +128,10 @@
           "panels": [
             {
               "id": "ivb_0_0",
-              "characters": ["favilla", "mallow"],
+              "characters": [
+                "favilla",
+                "mallow"
+              ],
               "text_blocks": [
                 {
                   "id": "ivb_0_0_tb_0",
@@ -158,7 +178,10 @@
           "panels": [
             {
               "id": "ivb_1_0",
-              "characters": ["lex", "mallow"],
+              "characters": [
+                "lex",
+                "mallow"
+              ],
               "text_blocks": [
                 {
                   "id": "ivb_1_0_tb_0",
@@ -187,7 +210,11 @@
           "panels": [
             {
               "id": "ivb_2_0",
-              "characters": ["lex", "favilla", "mallow"],
+              "characters": [
+                "lex",
+                "favilla",
+                "mallow"
+              ],
               "text_blocks": [
                 {
                   "id": "ivb_2_0_tb_0",
@@ -233,7 +260,11 @@
           "panels": [
             {
               "id": "ivb_3_0",
-              "characters": ["lex", "favilla", "mallow"],
+              "characters": [
+                "lex",
+                "favilla",
+                "mallow"
+              ],
               "text_blocks": [
                 {
                   "id": "ivb_3_0_tb_0",
@@ -267,7 +298,11 @@
           "panels": [
             {
               "id": "ivb_4_0",
-              "characters": ["lex", "favilla", "mallow"],
+              "characters": [
+                "lex",
+                "favilla",
+                "mallow"
+              ],
               "text_blocks": [
                 {
                   "id": "ivb_4_0_tb_0",
@@ -319,21 +354,46 @@
           ],
           "choice": {
             "id": "lex_tentativo_scelta",
-            "prompt": "Mallow ha detto la cosa più vera del mondo senza saperlo.",
+            "prompt": "",
             "options": [
               {
-                "id": "ride",
-                "label": "Ride. Una risata vera, improvvisa, liberatoria.",
-                "hint": "Finalmente.",
+                "id": "schiva",
+                "label": "Schiva i tentativi di Lex.",
                 "goto_branch": "branch_ride",
-                "stat_effects": { "legame": 20, "segreto": -5 }
-              },
-              {
-                "id": "letto",
-                "label": "\"Vado a mettere Lex a letto.\" Prima che inventi altro.",
-                "hint": "Operazione contenimento attivata.",
-                "goto_branch": "branch_letto",
-                "stat_effects": { "segreto": 10, "resistenza": -15 }
+                "stat_effects": {},
+                "minigame": {
+                  "type": "schiva_lex",
+                  "rounds": 3,
+                  "tiers": [
+                    {
+                      "min": 3,
+                      "label": "Invincibile!",
+                      "goto_branch": "branch_ride",
+                      "stat_effects": {
+                        "legame": 20,
+                        "segreto": -5
+                      }
+                    },
+                    {
+                      "min": 1,
+                      "label": "Quasi...",
+                      "goto_branch": "branch_letto",
+                      "stat_effects": {
+                        "segreto": 10,
+                        "resistenza": -15
+                      }
+                    },
+                    {
+                      "min": 0,
+                      "label": "Scoperta.",
+                      "goto_branch": "branch_letto",
+                      "stat_effects": {
+                        "segreto": -5,
+                        "resistenza": -20
+                      }
+                    }
+                  ]
+                }
               }
             ]
           }
@@ -348,7 +408,10 @@
           "panels": [
             {
               "id": "bb_0_0",
-              "characters": ["favilla", "lex"],
+              "characters": [
+                "favilla",
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "id": "bb_0_0_tb_0",
@@ -405,7 +468,10 @@
           "panels": [
             {
               "id": "bs_0_0",
-              "characters": ["favilla", "lex"],
+              "characters": [
+                "favilla",
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "id": "bs_0_0_tb_0",
@@ -457,7 +523,11 @@
           "panels": [
             {
               "id": "br_0_0",
-              "characters": ["favilla", "mallow", "lex"],
+              "characters": [
+                "favilla",
+                "mallow",
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "id": "br_0_0_tb_0",
@@ -547,7 +617,10 @@
           "panels": [
             {
               "id": "bl_0_0",
-              "characters": ["favilla", "lex"],
+              "characters": [
+                "favilla",
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "id": "bl_0_0_tb_0",

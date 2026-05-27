@@ -7,7 +7,9 @@
       "panels": [
         {
           "id": "md0_0",
-          "characters": ["favilla"],
+          "characters": [
+            "favilla"
+          ],
           "text_blocks": [
             {
               "id": "md0_0_tb_0",
@@ -40,7 +42,10 @@
       "panels": [
         {
           "id": "md1_0",
-          "characters": ["favilla", "lex"],
+          "characters": [
+            "favilla",
+            "lex"
+          ],
           "text_blocks": [
             {
               "id": "md1_0_tb_0",
@@ -79,7 +84,11 @@
       "panels": [
         {
           "id": "md2_0",
-          "characters": ["favilla", "lex", "mallow"],
+          "characters": [
+            "favilla",
+            "lex",
+            "mallow"
+          ],
           "text_blocks": [
             {
               "id": "md2_0_tb_0",
@@ -108,21 +117,37 @@
       ],
       "choice": {
         "id": "reazione_lex",
-        "prompt": "Lex ti fissa aspettandosi una risposta. Come reagisce Favilla?",
+        "prompt": "",
         "options": [
           {
-            "id": "sorriso",
-            "label": "Un sorriso — piccolo, caldo. Complice.",
-            "hint": "Il segreto è ancora vostro. Solo vostro.",
+            "id": "respira",
+            "label": "Le dita si scaldano. Cerca di restare calma.",
             "goto_branch": "branch_sorriso",
-            "stat_effects": { "segreto": 10, "legame": 5 }
-          },
-          {
-            "id": "sudore_freddo",
-            "label": "Si irrigidisce. Un mezzo sorriso che non convince nessuno.",
-            "hint": "Mallow nota. Mallow ricorda.",
-            "goto_branch": "branch_sudore",
-            "stat_effects": { "segreto": -10, "legame": 5 }
+            "stat_effects": {},
+            "minigame": {
+              "type": "respira",
+              "duration_seconds": 12,
+              "tiers": [
+                {
+                  "min": 1,
+                  "label": "Controllo totale.",
+                  "goto_branch": "branch_sorriso",
+                  "stat_effects": {
+                    "segreto": 10,
+                    "legame": 5
+                  }
+                },
+                {
+                  "min": 0,
+                  "label": "Le mani scottano.",
+                  "goto_branch": "branch_sudore",
+                  "stat_effects": {
+                    "segreto": -10,
+                    "legame": 5
+                  }
+                }
+              ]
+            }
           }
         ]
       }
@@ -137,7 +162,11 @@
           "panels": [
             {
               "id": "bs_0",
-              "characters": ["favilla", "lex", "mallow"],
+              "characters": [
+                "favilla",
+                "lex",
+                "mallow"
+              ],
               "text_blocks": [
                 {
                   "id": "bs_0_tb_0",
@@ -176,7 +205,11 @@
           "panels": [
             {
               "id": "bsu_0",
-              "characters": ["favilla", "lex", "mallow"],
+              "characters": [
+                "favilla",
+                "lex",
+                "mallow"
+              ],
               "text_blocks": [
                 {
                   "id": "bsu_0_tb_0",
@@ -220,7 +253,9 @@
           "panels": [
             {
               "id": "ep_caffe_0",
-              "characters": ["favilla"],
+              "characters": [
+                "favilla"
+              ],
               "text_blocks": [
                 {
                   "id": "ep_caffe_0_tb_0",
@@ -262,7 +297,10 @@
           "panels": [
             {
               "id": "ep_nocaffe_0",
-              "characters": ["favilla", "mallow"],
+              "characters": [
+                "favilla",
+                "mallow"
+              ],
               "text_blocks": [
                 {
                   "id": "ep_nocaffe_0_tb_0",
@@ -322,7 +360,9 @@
         "panels": [
           {
             "id": "md_ep_0",
-            "characters": ["favilla"],
+            "characters": [
+              "favilla"
+            ],
             "text_blocks": [
               {
                 "id": "md_ep_0_tb_0",
@@ -357,14 +397,21 @@
               "label": "Lo beve d'un fiato. Come ogni mattina.",
               "hint": "Il corpo lo sa prima della testa.",
               "goto_branch": "epilogue_caffe",
-              "stat_effects": { "resistenza": -15, "scintille": 10 }
+              "stat_effects": {
+                "resistenza": -15,
+                "scintille": 10
+              }
             },
             {
               "id": "caffe_no",
               "label": "Lo lascia lì. Stamattina, meglio di no.",
               "hint": "Mallow la guarda. Favilla non beve mai il caffè freddo.",
               "goto_branch": "epilogue_no_caffe",
-              "stat_effects": { "resistenza": 10, "segreto": -5, "legame": -5 }
+              "stat_effects": {
+                "resistenza": 10,
+                "segreto": -5,
+                "legame": -5
+              }
             }
           ]
         }
