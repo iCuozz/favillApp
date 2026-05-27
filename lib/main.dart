@@ -876,6 +876,7 @@ class _EpisodePageState extends State<EpisodePage> {
                       key: stageKey,
                       comicIndex: widget.comicIndex,
                       page: page,
+                      pageViewIndex: index,
                       initialVisibleBlocks: initialBlocks,
                       onVisibleBlocksChanged: (blocks) =>
                           _handleVisibleBlocksChanged(index, blocks),

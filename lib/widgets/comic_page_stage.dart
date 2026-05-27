@@ -9,6 +9,9 @@ import 'comic_text_block_widget.dart';
 class ComicPageStage extends StatefulWidget {
   final ComicIndex comicIndex;
   final ComicPage page;
+  /// Posizione effettiva della pagina nell'elenco _effectivePages.
+  /// Usata per differenziare pagine di branch che condividono page.index=0.
+  final int pageViewIndex;
   final VoidCallback? onPageCompleted;
   final int initialVisibleBlocks;
   final ValueChanged<int>? onVisibleBlocksChanged;
@@ -17,6 +20,7 @@ class ComicPageStage extends StatefulWidget {
     super.key,
     required this.comicIndex,
     required this.page,
+    required this.pageViewIndex,
     this.onPageCompleted,
     this.initialVisibleBlocks = 1,
     this.onVisibleBlocksChanged,
@@ -60,7 +64,7 @@ class ComicPageStageState extends State<ComicPageStage> {
   void didUpdateWidget(covariant ComicPageStage oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if (oldWidget.page.index != widget.page.index) {
+    if (oldWidget.pageViewIndex != widget.pageViewIndex) {
       visibleBlocks = _clampInitial(widget.initialVisibleBlocks);
       TtsService.instance.stop();
       if (SettingsService.ttsEnabled.value &&
@@ -181,7 +185,7 @@ class ComicPageStageState extends State<ComicPageStage> {
 
                           return TweenAnimationBuilder<double>(
                             key: ValueKey(
-                              '${widget.page.index}_${block.id.isNotEmpty ? block.id : index}',
+                              '${widget.pageViewIndex}_${block.id.isNotEmpty ? block.id : index}',
                             ),
                             tween: Tween(begin: 0, end: 1),
                             duration: SettingsService.textAnimationSpeed.value.duration,
@@ -215,7 +219,7 @@ class ComicPageStageState extends State<ComicPageStage> {
               child: Row(
                 children: [
                   Text(
-                    'Pagina ${widget.page.index + 1}',
+                    'Pagina ${widget.pageViewIndex + 1}',
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 13,
