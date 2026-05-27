@@ -545,9 +545,12 @@ class _EpisodePageState extends State<EpisodePage> {
         MaterialPageRoute(
           builder: (_) => MinigameLexStrikeScreen(
             config: option.minigame!,
-            onComplete: (effects, label) {
+            onComplete: (effects, label, tier) {
               Navigator.of(context).pop();
-              _applyEffectsAndNavigate(option, overrideEffects: effects);
+              // Usa il branch specifico del tier (se definito), altrimenti quello dell'opzione.
+              final branch = tier.gotoBranch.isNotEmpty ? tier.gotoBranch : null;
+              _applyEffectsAndNavigate(option,
+                  overrideEffects: effects, overrideBranch: branch);
             },
           ),
         ),
@@ -558,9 +561,9 @@ class _EpisodePageState extends State<EpisodePage> {
   }
 
   void _applyEffectsAndNavigate(ChoiceOption option,
-      {Map<String, int>? overrideEffects}) {
+      {Map<String, int>? overrideEffects, String? overrideBranch}) {
     final episodeId = widget.episode.id;
-    final branchId = option.gotoBranch;
+    final branchId = overrideBranch ?? option.gotoBranch;
     final effects = overrideEffects ?? option.statEffects;
 
     // Applica gli effetti sulle stat RPG.

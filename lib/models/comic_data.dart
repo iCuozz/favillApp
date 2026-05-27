@@ -275,11 +275,14 @@ class MinigameTier {
   final int minProducts;
   final String label;
   final Map<String, int> statEffects;
+  /// Branch verso cui navigare dopo questo tier. Se vuoto, usa il goto_branch dell'opzione padre.
+  final String gotoBranch;
 
   const MinigameTier({
     required this.minProducts,
     required this.label,
     required this.statEffects,
+    this.gotoBranch = '',
   });
 
   factory MinigameTier.fromJson(Map<String, dynamic> json) {
@@ -292,6 +295,7 @@ class MinigameTier {
       minProducts: json['min'] as int? ?? 0,
       label: json['label'] as String? ?? '',
       statEffects: effects,
+      gotoBranch: json['goto_branch'] as String? ?? '',
     );
   }
 }

@@ -12,7 +12,7 @@ import '../models/comic_data.dart';
 ///   0–2           → Mancato
 class MinigameLexStrikeScreen extends StatefulWidget {
   final MinigameConfig config;
-  final void Function(Map<String, int> statEffects, String tierLabel) onComplete;
+  final void Function(Map<String, int> statEffects, String tierLabel, MinigameTier tier) onComplete;
 
   const MinigameLexStrikeScreen({
     super.key,
@@ -455,7 +455,7 @@ class _MinigameLexStrikeScreenState extends State<MinigameLexStrikeScreen>
                     fontSize: 18, fontWeight: FontWeight.bold),
               ),
               onPressed: () =>
-                  widget.onComplete(tier.statEffects, tier.label),
+                  widget.onComplete(tier.statEffects, tier.label, tier),
               child: const Text('Avanti →'),
             ),
           ],

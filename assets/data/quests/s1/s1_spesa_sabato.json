@@ -16,7 +16,10 @@
       "panels": [
         {
           "id": "ss0_0",
-          "characters": ["favilla", "lex"],
+          "characters": [
+            "favilla",
+            "lex"
+          ],
           "text_blocks": [
             {
               "id": "ss0_0_tb_0",
@@ -65,7 +68,10 @@
       "panels": [
         {
           "id": "ss1_0",
-          "characters": ["favilla", "lex"],
+          "characters": [
+            "favilla",
+            "lex"
+          ],
           "text_blocks": [
             {
               "id": "ss1_0_tb_0",
@@ -132,7 +138,10 @@
       "panels": [
         {
           "id": "ss2_0",
-          "characters": ["favilla", "lex"],
+          "characters": [
+            "favilla",
+            "lex"
+          ],
           "text_blocks": [
             {
               "id": "ss2_0_tb_0",
@@ -162,7 +171,10 @@
             "label": "Guarda il telefono. La lista è lunga. Lex sta bene.",
             "hint": "Certo che sta bene.",
             "goto_branch": "branch_tardi",
-            "stat_effects": {"segreto": -5, "resistenza": -10},
+            "stat_effects": {
+              "segreto": -5,
+              "resistenza": -10
+            },
             "minigame": {
               "type": "lex_strike",
               "products_total": 12,
@@ -170,17 +182,28 @@
                 {
                   "min": 8,
                   "label": "STRIKE! 🎳",
-                  "stat_effects": {"segreto": -5, "resistenza": -10, "legame": 15}
+                  "stat_effects": {
+                    "segreto": -5,
+                    "resistenza": -10,
+                    "legame": 15
+                  }
                 },
                 {
                   "min": 3,
                   "label": "Colpo parziale",
-                  "stat_effects": {"segreto": -3, "resistenza": -5, "legame": 10}
+                  "stat_effects": {
+                    "segreto": -3,
+                    "resistenza": -5,
+                    "legame": 10
+                  }
                 },
                 {
                   "min": 0,
                   "label": "Mancato!",
-                  "stat_effects": {"resistenza": -5, "legame": 5}
+                  "stat_effects": {
+                    "resistenza": -5,
+                    "legame": 5
+                  }
                 }
               ]
             }
@@ -208,7 +231,9 @@
           "panels": [
             {
               "id": "imc_0_p0",
-              "characters": ["favilla"],
+              "characters": [
+                "favilla"
+              ],
               "text_blocks": [
                 {
                   "id": "imc_0_p0_tb_0",
@@ -245,7 +270,10 @@
           "panels": [
             {
               "id": "bt_0_p0",
-              "characters": ["favilla", "lex"],
+              "characters": [
+                "favilla",
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "id": "bt_0_p0_tb_0",
@@ -284,7 +312,9 @@
           "panels": [
             {
               "id": "bt_1_p0",
-              "characters": ["favilla"],
+              "characters": [
+                "favilla"
+              ],
               "text_blocks": [
                 {
                   "id": "bt_1_p0_tb_0",
@@ -332,7 +362,10 @@
           "panels": [
             {
               "id": "bt_2_p0",
-              "characters": ["favilla", "lex"],
+              "characters": [
+                "favilla",
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "id": "bt_2_p0_tb_0",
@@ -390,7 +423,10 @@
           "panels": [
             {
               "id": "bp_0_p0",
-              "characters": ["favilla", "lex"],
+              "characters": [
+                "favilla",
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "id": "bp_0_p0_tb_0",
@@ -450,7 +486,10 @@
           "panels": [
             {
               "id": "bp_1_p0",
-              "characters": ["favilla", "carmela"],
+              "characters": [
+                "favilla",
+                "carmela"
+              ],
               "text_blocks": [
                 {
                   "id": "bp_1_p0_tb_0",
@@ -525,7 +564,10 @@
           "panels": [
             {
               "id": "eo_0_p0",
-              "characters": ["favilla", "lex"],
+              "characters": [
+                "favilla",
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "id": "eo_0_p0_tb_0",
@@ -577,7 +619,9 @@
           "panels": [
             {
               "id": "ec_0_p0",
-              "characters": ["favilla"],
+              "characters": [
+                "favilla"
+              ],
               "text_blocks": [
                 {
                   "id": "ec_0_p0_tb_0",
@@ -620,6 +664,140 @@
           ]
         }
       ]
+    },
+    "branch_tardi_parziale": {
+      "id": "branch_tardi_parziale",
+      "pages": [
+        {
+          "id": "btp_0",
+          "background": "assets/episodes/s1/s1_spesa_sabato/page_bt_1.webp",
+          "panels": [
+            {
+              "id": "btp_0_p0",
+              "characters": [],
+              "text_blocks": [
+                {
+                  "speaker": "",
+                  "text": "L'orsetto vola. Colpisce uno scaffale di lato."
+                },
+                {
+                  "speaker": "",
+                  "text": "Tre barattoli cadono. Due rotolano sotto il carrello. Uno rimane in bilico precario."
+                },
+                {
+                  "speaker": "",
+                  "text": "Non è lo strike che Lex aveva in mente."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        },
+        {
+          "id": "btp_1",
+          "background": "assets/episodes/s1/s1_spesa_sabato/page_bt_1.webp",
+          "panels": [
+            {
+              "id": "btp_1_p0",
+              "characters": [],
+              "text_blocks": [
+                {
+                  "speaker": "",
+                  "text": "Favilla si gira al rumore."
+                },
+                {
+                  "speaker": "",
+                  "text": "Barattoli a terra. Lex in mano ancora l’orsetto. Il filo del ciuccio ancora teso."
+                },
+                {
+                  "speaker": "favilla",
+                  "text": "Lex."
+                },
+                {
+                  "speaker": "",
+                  "text": "Non succede nulla di drammatico. Le mani si scaldano un istante — poi si calmano."
+                },
+                {
+                  "speaker": "",
+                  "text": "Favilla raccoglie i barattoli con le mani normali. Li rimette sullo scaffale uno per uno, sotto gli occhi di Lex."
+                },
+                {
+                  "speaker": "",
+                  "text": "Lex la osserva. Poi guarda i barattoli. Poi guarda di nuovo lei."
+                },
+                {
+                  "speaker": "",
+                  "text": "Il piano prevedeva più caos."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "branch_tardi_mancato": {
+      "id": "branch_tardi_mancato",
+      "pages": [
+        {
+          "id": "btm_0",
+          "background": "assets/episodes/s1/s1_spesa_sabato/page_bt_0.webp",
+          "panels": [
+            {
+              "id": "btm_0_p0",
+              "characters": [],
+              "text_blocks": [
+                {
+                  "speaker": "",
+                  "text": "L'orsetto sfreccia. Pulisce l'aria. Atterra morbidamente sul pavimento a un metro dagli scaffali."
+                },
+                {
+                  "speaker": "",
+                  "text": "Silenzio."
+                },
+                {
+                  "speaker": "",
+                  "text": "Gli scaffali sono intatti. I barattoli fermi. L’universo non si è minimamente mosso."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        },
+        {
+          "id": "btm_1",
+          "background": "assets/episodes/s1/s1_spesa_sabato/page_bt_0.webp",
+          "panels": [
+            {
+              "id": "btm_1_p0",
+              "characters": [],
+              "text_blocks": [
+                {
+                  "speaker": "lex",
+                  "text": "..."
+                },
+                {
+                  "speaker": "",
+                  "text": "Favilla non si è nemmeno girata."
+                },
+                {
+                  "speaker": "",
+                  "text": "Sta guardando la lista della spesa, indifferente al piccolo disastro mancato che si è svolto a venti centimetri da lei."
+                },
+                {
+                  "speaker": "",
+                  "text": "Lex dondola le gambette lentamente. Guarda l’orsetto per terra. Riconsiderazione tattica in corso."
+                },
+                {
+                  "speaker": "",
+                  "text": "La prossima volta ci vuole più velocità. O un ciuccio più pesante."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
     }
   },
   "epilogue": {
@@ -630,7 +808,10 @@
         "panels": [
           {
             "id": "ep_uscita_p0",
-            "characters": ["favilla", "lex"],
+            "characters": [
+              "favilla",
+              "lex"
+            ],
             "text_blocks": [
               {
                 "id": "ep_uscita_p0_tb_0",
