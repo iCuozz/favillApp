@@ -6,6 +6,16 @@ class StatKey {
   static const resistenza = 'resistenza';
 
   static const all = [segreto, legame, scintille, resistenza];
+
+  /// Floor minimi per ciascuna stat.
+  /// Segreto resta sempre > 0 per garantire la tenuta narrativa.
+  /// Resistenza parte da 1 per evitare crisi non ancora scritte.
+  static const Map<String, int> minValues = {
+    segreto: 5,
+    legame: 0,
+    scintille: 0,
+    resistenza: 1,
+  };
 }
 
 /// Stato globale del gioco: le 4 stat di Favilla.
@@ -39,12 +49,13 @@ class GameState {
   }
 
   GameState applyEffects(Map<String, int> effects) {
+    int clamp(String key, int value) =>
+        value.clamp(StatKey.minValues[key] ?? 0, 100);
     return GameState(
-      segreto: (segreto + (effects[StatKey.segreto] ?? 0)).clamp(0, 100),
-      legame: (legame + (effects[StatKey.legame] ?? 0)).clamp(0, 100),
-      scintille: (scintille + (effects[StatKey.scintille] ?? 0)).clamp(0, 100),
-      resistenza:
-          (resistenza + (effects[StatKey.resistenza] ?? 0)).clamp(0, 100),
+      segreto: clamp(StatKey.segreto, segreto + (effects[StatKey.segreto] ?? 0)),
+      legame: clamp(StatKey.legame, legame + (effects[StatKey.legame] ?? 0)),
+      scintille: clamp(StatKey.scintille, scintille + (effects[StatKey.scintille] ?? 0)),
+      resistenza: clamp(StatKey.resistenza, resistenza + (effects[StatKey.resistenza] ?? 0)),
     );
   }
 

@@ -3,7 +3,7 @@
   "pages": [
     {
       "index": 0,
-      "background": "assets/episodes/prologo/page_4.webp",
+      "background": "assets/episodes/s1/s1_mattina_dopo/page_0.webp",
       "panels": [
         {
           "id": "md0_0",
@@ -36,7 +36,7 @@
     },
     {
       "index": 1,
-      "background": "assets/episodes/prologo/page_4.webp",
+      "background": "assets/episodes/s1/s1_mattina_dopo/page_1.webp",
       "panels": [
         {
           "id": "md1_0",
@@ -75,7 +75,7 @@
     },
     {
       "index": 2,
-      "background": "assets/episodes/prologo/page_4.webp",
+      "background": "assets/episodes/s1/s1_mattina_dopo/page_2.webp",
       "panels": [
         {
           "id": "md2_0",
@@ -133,7 +133,7 @@
       "pages": [
         {
           "index": 0,
-          "background": "assets/episodes/prologo/page_4.webp",
+          "background": "assets/episodes/s1/s1_mattina_dopo/branch_sorriso.webp",
           "panels": [
             {
               "id": "bs_0",
@@ -172,7 +172,7 @@
       "pages": [
         {
           "index": 0,
-          "background": "assets/episodes/prologo/page_4.webp",
+          "background": "assets/episodes/s1/s1_mattina_dopo/branch_sudore.webp",
           "panels": [
             {
               "id": "bsu_0",
@@ -211,13 +211,114 @@
           ]
         }
       ]
+    },
+    "epilogue_caffe": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_mattina_dopo/epilogue.webp",
+          "panels": [
+            {
+              "id": "ep_caffe_0",
+              "characters": ["favilla"],
+              "text_blocks": [
+                {
+                  "id": "ep_caffe_0_tb_0",
+                  "type": "narration",
+                  "text": "Caldo. Forte. Familiare."
+                },
+                {
+                  "id": "ep_caffe_0_tb_1",
+                  "type": "narration",
+                  "text": "Un secondo dopo, qualcosa dentro di lei si scalda — non come il caffè."
+                },
+                {
+                  "id": "ep_caffe_0_tb_2",
+                  "type": "thought",
+                  "text": "Eccolo. È il caffè. Il caffè fa questo."
+                },
+                {
+                  "id": "ep_caffe_0_tb_3",
+                  "type": "narration",
+                  "text": "Lex la guarda dalla sedia. Ha già capito."
+                },
+                {
+                  "id": "ep_caffe_0_tb_4",
+                  "type": "system",
+                  "text": "MISSIONE COMPLETATA — La Mattina Dopo"
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "epilogue_no_caffe": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_mattina_dopo/epilogue.webp",
+          "panels": [
+            {
+              "id": "ep_nocaffe_0",
+              "characters": ["favilla", "mallow"],
+              "text_blocks": [
+                {
+                  "id": "ep_nocaffe_0_tb_0",
+                  "type": "narration",
+                  "text": "Lo lascia lì. Si volta verso la finestra."
+                },
+                {
+                  "id": "ep_nocaffe_0_tb_1",
+                  "type": "thought",
+                  "text": "Se il caffè c'entra qualcosa, voglio scoprirlo con la testa lucida."
+                },
+                {
+                  "id": "ep_nocaffe_0_tb_2",
+                  "type": "narration",
+                  "text": "Mallow alza gli occhi dal telefono. Guarda la tazzina. Guarda lei."
+                },
+                {
+                  "id": "ep_nocaffe_0_tb_3",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "Non bevi il caffè?"
+                },
+                {
+                  "id": "ep_nocaffe_0_tb_4",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Stamattina no."
+                },
+                {
+                  "id": "ep_nocaffe_0_tb_5",
+                  "type": "narration",
+                  "text": "Pausa. Mallow non dice nient'altro. Ma non toglie gli occhi da lei."
+                },
+                {
+                  "id": "ep_nocaffe_0_tb_6",
+                  "type": "narration",
+                  "text": "Lex approva, a modo suo. Non sa che ha appena complicato tutto."
+                },
+                {
+                  "id": "ep_nocaffe_0_tb_7",
+                  "type": "system",
+                  "text": "MISSIONE COMPLETATA — La Mattina Dopo"
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
     }
   },
   "epilogue": {
     "pages": [
       {
         "index": 0,
-        "background": "assets/episodes/prologo/page_4.webp",
+        "background": "assets/episodes/s1/s1_mattina_dopo/epilogue.webp",
         "panels": [
           {
             "id": "md_ep_0",
@@ -226,7 +327,7 @@
               {
                 "id": "md_ep_0_tb_0",
                 "type": "narration",
-                "text": "Alle 7:30 Favilla è in piedi, caffè in mano, Lex sul fianco, Mallow già in call."
+                "text": "Alle 7:30 Favilla è in piedi, Lex sul fianco, Mallow già in call."
               },
               {
                 "id": "md_ep_0_tb_1",
@@ -240,13 +341,33 @@
               },
               {
                 "id": "md_ep_0_tb_3",
-                "type": "system",
-                "text": "MISSIONE COMPLETATA — La Mattina Dopo"
+                "type": "narration",
+                "text": "Il caffè è sul bancone. Caldo. Come sempre."
               }
             ],
             "interactions": []
           }
-        ]
+        ],
+        "choice": {
+          "id": "caffe_choice",
+          "prompt": "Favilla fissa la tazzina. Lo prende?",
+          "options": [
+            {
+              "id": "caffe_si",
+              "label": "Lo beve d'un fiato. Come ogni mattina.",
+              "hint": "Il corpo lo sa prima della testa.",
+              "goto_branch": "epilogue_caffe",
+              "stat_effects": { "resistenza": -15, "scintille": 10 }
+            },
+            {
+              "id": "caffe_no",
+              "label": "Lo lascia lì. Stamattina, meglio di no.",
+              "hint": "Mallow la guarda. Favilla non beve mai il caffè freddo.",
+              "goto_branch": "epilogue_no_caffe",
+              "stat_effects": { "resistenza": 10, "segreto": -5, "legame": -5 }
+            }
+          ]
+        }
       }
     ]
   }

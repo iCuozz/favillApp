@@ -89,6 +89,7 @@ class _HomeCoverPageState extends State<HomeCoverPage> with WidgetsBindingObserv
           initialPageIndex: progress.pageIndex,
           initialVisibleBlocks: progress.visibleBlocks,
           initialBranchId: progress.branchId,
+          initialEntryBranchId: progress.entryBranchId,
           onEpisodeCompleted: () =>
               WorldStateService.instance.completeQuest('prologo'),
         ),
@@ -245,6 +246,6 @@ class _PrologoSummary extends EpisodeSummary {
           title: "L'ombra della fiamma",
           subtitle: 'La doppia vita di Favilla',
           thumbnail: 'assets/episodes/prologo/thumb.webp',
-          file: 'assets/data/episodes/prologo.json',
+          file: 'assets/data/quests/prologo.json',
         );
 }

@@ -80,20 +80,91 @@ class EpisodeSummary {
   }
 }
 
+/// Una regola di ingresso condizionale basata sulle stat.
+/// Valutata all'avvio della quest: il primo match determina il branch iniziale.
+/// Esempio JSON: { "stat": "segreto", "op": "lt", "value": 50, "goto_branch": "intro_vestiti_bruciati" }
+/// Con prepend: true il branch viene ANTEPOSTO alle pagine principali invece di sostituirle.
+/// Esempio JSON: { "stat": "resistenza", "op": "lt", "value": 45, "goto_branch": "intro_caffe_effect", "prepend": true }
+class StatEntryRule {
+  final String stat;
+  final String op; // "lt", "lte", "gt", "gte", "eq"
+  final int value;
+  final String gotoBranch;
+
+  /// Se true, il branch viene anteposto alle pagine principali (prepend).
+  /// Se false (default), sostituisce le pagine principali (replace).
+  final bool prepend;
+
+  const StatEntryRule({
+    required this.stat,
+    required this.op,
+    required this.value,
+    required this.gotoBranch,
+    this.prepend = false,
+  });
+
+  bool matches(Map<String, int> stats) {
+    final statVal = stats[stat] ?? 0;
+    switch (op) {
+      case 'lt':
+        return statVal < value;
+      case 'lte':
+        return statVal <= value;
+      case 'gt':
+        return statVal > value;
+      case 'gte':
+        return statVal >= value;
+      case 'eq':
+        return statVal == value;
+      default:
+        return false;
+    }
+  }
+
+  factory StatEntryRule.fromJson(Map<String, dynamic> json) {
+    return StatEntryRule(
+      stat: json['stat'] as String? ?? '',
+      op: json['op'] as String? ?? 'lt',
+      value: json['value'] as int? ?? 0,
+      gotoBranch: json['goto_branch'] as String? ?? '',
+      prepend: json['prepend'] as bool? ?? false,
+    );
+  }
+}
+
 class EpisodeContent {
   final String id;
   final List<ComicPage> pages;
   final Map<String, Branch> branches;
   final Branch? epilogue;
 
+  /// Regole valutate all'avvio: la prima che fa match imposta il branch iniziale
+  /// sostituendo le pagine main (anziché appendersi dopo).
+  final List<StatEntryRule> statEntry;
+
   EpisodeContent({
     required this.id,
     required this.pages,
     this.branches = const {},
     this.epilogue,
+    this.statEntry = const [],
   });
 
   bool get hasBranches => branches.isNotEmpty;
+
+  /// Risolve le regole stat_entry contro le stat correnti.
+  /// Restituisce il branch ID da usare come ingresso, o null se nessuna regola fa match.
+  String? resolveEntryBranch(Map<String, int> stats) {
+    for (final rule in statEntry) {
+      if (rule.matches(stats)) return rule.gotoBranch;
+    }
+    return null;
+  }
+
+  /// Restituisce true se il branch di entry specificato è in modalità prepend.
+  bool isEntryBranchPrepend(String branchId) {
+    return statEntry.any((r) => r.gotoBranch == branchId && r.prepend);
+  }
 
   factory EpisodeContent.fromJson(Map<String, dynamic> json) {
     final pagesJson = (json['pages'] as List<dynamic>? ?? []);
@@ -109,6 +180,7 @@ class EpisodeContent {
     }
 
     final epilogueJson = json['epilogue'] as Map<String, dynamic>?;
+    final statEntryJson = (json['stat_entry'] as List<dynamic>? ?? []);
 
     return EpisodeContent(
       id: json['id'] as String? ?? '',
@@ -119,6 +191,9 @@ class EpisodeContent {
       epilogue: epilogueJson != null
           ? Branch.fromJson('__epilogue__', epilogueJson)
           : null,
+      statEntry: statEntryJson
+          .map((r) => StatEntryRule.fromJson(r as Map<String, dynamic>))
+          .toList(),
     );
   }
 }

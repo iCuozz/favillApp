@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'models/comic_data.dart';
+import 'models/game_state.dart';
 import 'services/comic_loader.dart';
 import 'services/engagement_service.dart';
 import 'services/game_state_service.dart';
@@ -137,6 +138,12 @@ class EpisodeLoaderPage extends StatelessWidget {
   final int initialPageIndex;
   final int initialVisibleBlocks;
   final String? initialBranchId;
+
+  /// Branch di entry ripristinato da un salvataggio precedente.
+  /// Se fornito, viene usato direttamente senza ri-valutare stat_entry,
+  /// garantendo coerenza degli indici di pagina anche se le stat sono cambiate.
+  final String? initialEntryBranchId;
+
   final Future<void> Function()? onEpisodeCompleted;
 
   const EpisodeLoaderPage({
@@ -146,6 +153,7 @@ class EpisodeLoaderPage extends StatelessWidget {
     this.initialPageIndex = 0,
     this.initialVisibleBlocks = 1,
     this.initialBranchId,
+    this.initialEntryBranchId,
     this.onEpisodeCompleted,
   });
 
@@ -178,6 +186,19 @@ class EpisodeLoaderPage extends StatelessWidget {
 
         final content = snapshot.data!;
 
+        // Risolve stat_entry: usa il branch salvato se presente (per coerenza
+        // degli indici di pagina), altrimenti valuta le regole correnti.
+        String? resolvedEntryBranchId = initialEntryBranchId;
+        bool resolvedEntryBranchIsPrepend = false;
+        if (resolvedEntryBranchId == null && content.statEntry.isNotEmpty) {
+          final stats = GameStateService.instance.state.value.toMap();
+          resolvedEntryBranchId = content.resolveEntryBranch(stats);
+        }
+        if (resolvedEntryBranchId != null) {
+          resolvedEntryBranchIsPrepend =
+              content.isEntryBranchPrepend(resolvedEntryBranchId);
+        }
+
         final episode = Episode(
           id: summary.id,
           title: summary.title,
@@ -194,6 +215,8 @@ class EpisodeLoaderPage extends StatelessWidget {
           initialPageIndex: initialPageIndex,
           initialVisibleBlocks: initialVisibleBlocks,
           initialBranchId: initialBranchId,
+          initialEntryBranchId: resolvedEntryBranchId,
+          initialEntryBranchIsPrepend: resolvedEntryBranchIsPrepend,
           onEpisodeCompleted: onEpisodeCompleted,
         );
       },
@@ -206,7 +229,18 @@ class EpisodePage extends StatefulWidget {
   final Episode episode;
   final int initialPageIndex;
   final int initialVisibleBlocks;
+
+  /// Branch ripristinato da salvataggio progresso (scelta già fatta in precedenza).
   final String? initialBranchId;
+
+  /// Branch imposto da stat_entry all'avvio: sostituisce le pagine main (replace)
+  /// o vi si antepone (prepend). Immutabile dopo l'init.
+  final String? initialEntryBranchId;
+
+  /// Se true, il branch di entry è in modalità prepend (anteposto alle pagine main).
+  /// Se false (default), sostituisce le pagine main.
+  final bool initialEntryBranchIsPrepend;
+
   final Future<void> Function()? onEpisodeCompleted;
 
   const EpisodePage({
@@ -216,6 +250,8 @@ class EpisodePage extends StatefulWidget {
     this.initialPageIndex = 0,
     this.initialVisibleBlocks = 1,
     this.initialBranchId,
+    this.initialEntryBranchId,
+    this.initialEntryBranchIsPrepend = false,
     this.onEpisodeCompleted,
   });
 
@@ -229,37 +265,93 @@ class _EpisodePageState extends State<EpisodePage> {
 
   late int currentIndex;
   late int _maxVisitedIndex;
+
+  /// Branch imposto da stat_entry: sostituisce o antepone le pagine main. Immutabile.
+  String? _entryBranchId;
+
+  /// Se true, il branch di entry è in modalità prepend.
+  bool _entryBranchIsPrepend = false;
+
+  /// Branch attivato dalla prima scelta del giocatore.
   String? _activeBranchId;
+
+  /// Branch attivato dalla seconda scelta (es. nell'epilogo).
+  String? _secondBranchId;
+
+  final Set<int> _resolvedChoiceIndices = {};
   bool _choiceSheetOpen = false;
   Map<String, int>? _pendingStatEffects;
   final Map<int, GlobalKey<ComicPageStageState>> _stageKeys = {};
   final Map<int, int> _visibleBlocksByPage = {};
 
-  /// Ritorna le pagine effettive da renderizzare nel PageView, tenendo
-  /// conto dello stato di branching corrente.
+  /// Ritorna le pagine effettive da renderizzare nel PageView.
   ///
-  /// - Se l'episodio non ha branches, restituisce semplicemente `episode.pages`.
-  /// - Se non è ancora stata fatta alcuna scelta (`_activeBranchId == null`),
-  ///   restituisce solo le pagine main (la pagina con `choice` è l'ultima visibile).
-  /// - Se è stato scelto un branch, concatena: pagine main + pagine del branch
-  ///   + pagine di epilogue (se presenti).
+  /// Modalità entry branch replace (stat_entry, prepend: false):
+  ///   entryBranch.pages + [choiceBranch.pages] + [epilogue.pages if choiceBranch]
+  ///
+  /// Modalità entry branch prepend (stat_entry, prepend: true):
+  ///   entryBranch.pages + episode.pages + [choiceBranch.pages] + [epilogue.pages] + [secondBranch.pages]
+  ///
+  /// Modalità normale:
+  ///   episode.pages + [choiceBranch.pages] + [epilogue.pages] + [secondBranch.pages]
   List<ComicPage> get _effectivePages {
     final ep = widget.episode;
-    if (!ep.hasBranches) return ep.pages;
 
-    final branch = _activeBranchId == null ? null : ep.branches[_activeBranchId];
+    if (_entryBranchId != null) {
+      final entryBranch = ep.branches[_entryBranchId!];
+      if (entryBranch == null) return ep.pages;
+
+      if (_entryBranchIsPrepend) {
+        // Modalità prepend: entry branch anteposto, poi flusso normale
+        final branch =
+            _activeBranchId != null ? ep.branches[_activeBranchId!] : null;
+        if (branch == null) {
+          return [...entryBranch.pages, ...ep.pages];
+        }
+        final secondBranch =
+            _secondBranchId == null ? null : ep.branches[_secondBranchId];
+        return [
+          ...entryBranch.pages,
+          ...ep.pages,
+          ...branch.pages,
+          if (ep.epilogue != null) ...ep.epilogue!.pages,
+          if (secondBranch != null) ...secondBranch.pages,
+        ];
+      }
+
+      // Modalità replace: entry branch sostituisce le pagine main
+      final choiceBranch =
+          _activeBranchId != null ? ep.branches[_activeBranchId!] : null;
+      return [
+        ...entryBranch.pages,
+        if (choiceBranch != null) ...choiceBranch.pages,
+        if (choiceBranch != null && ep.epilogue != null)
+          ...ep.epilogue!.pages,
+      ];
+    }
+
+    if (!ep.hasBranches) return ep.pages;
+    final branch =
+        _activeBranchId != null ? ep.branches[_activeBranchId!] : null;
     if (branch == null) return ep.pages;
+
+    // Scelta normale: branch appeso dopo le pagine main
+    final secondBranch =
+        _secondBranchId == null ? null : ep.branches[_secondBranchId];
 
     return [
       ...ep.pages,
       ...branch.pages,
       if (ep.epilogue != null) ...ep.epilogue!.pages,
+      if (secondBranch != null) ...secondBranch.pages,
     ];
   }
 
   @override
   void initState() {
     super.initState();
+    _entryBranchId = widget.initialEntryBranchId;
+    _entryBranchIsPrepend = widget.initialEntryBranchIsPrepend;
     _activeBranchId = widget.initialBranchId;
     final pages = _effectivePages;
     final maxIndex = pages.isEmpty ? 0 : pages.length - 1;
@@ -327,6 +419,7 @@ class _EpisodePageState extends State<EpisodePage> {
       pageIndex: currentIndex,
       visibleBlocks: blocks,
       branchId: _activeBranchId,
+      entryBranchId: _entryBranchId,
     );
   }
 
@@ -374,11 +467,12 @@ class _EpisodePageState extends State<EpisodePage> {
   void _goToNextPage() {
     final pages = _effectivePages;
 
-    // Se la pagina corrente propone una scelta e nessun branch è attivo,
+    // Se la pagina corrente propone una scelta non ancora risolta,
     // blocchiamo l'avanzamento e mostriamo la card di scelta.
     if (currentIndex < pages.length) {
       final currentPage = pages[currentIndex];
-      if (currentPage.choice != null && _activeBranchId == null) {
+      if (currentPage.choice != null &&
+          !_resolvedChoiceIndices.contains(currentIndex)) {
         _promptChoice(currentPage.choice!);
         return;
       }
@@ -399,6 +493,25 @@ class _EpisodePageState extends State<EpisodePage> {
     _choiceSheetOpen = true;
     SettingsService.tapFeedback();
 
+    // Filtra le opzioni che porterebbero una stat sotto il suo floor.
+    // Garantisce che i floor non vengano mai violati tramite scelta del giocatore.
+    // Regola narrativa: ogni scelta deve avere SEMPRE almeno un'opzione sicura.
+    final currentStats = GameStateService.instance.state.value;
+    final safeOptions = choice.options.where((opt) {
+      for (final entry in opt.statEffects.entries) {
+        final floor = StatKey.minValues[entry.key] ?? 0;
+        if (currentStats[entry.key] + entry.value < floor) return false;
+      }
+      return true;
+    }).toList();
+    // Safety net: se tutte le opzioni violano i floor (errore di authoring),
+    // mostra comunque tutto per evitare un dead end.
+    final filteredChoice = Choice(
+      id: choice.id,
+      prompt: choice.prompt,
+      options: safeOptions.isNotEmpty ? safeOptions : choice.options,
+    );
+
     showModalBottomSheet<void>(
       context: context,
       isDismissible: false,
@@ -410,7 +523,7 @@ class _EpisodePageState extends State<EpisodePage> {
           child: Padding(
             padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
             child: ChoiceCard(
-              choice: choice,
+              choice: filteredChoice,
               onSelected: (option) {
                 Navigator.of(sheetContext).pop();
                 _handleChoiceSelected(option);
@@ -427,7 +540,6 @@ class _EpisodePageState extends State<EpisodePage> {
   void _handleChoiceSelected(ChoiceOption option) {
     final episodeId = widget.episode.id;
     final branchId = option.gotoBranch;
-    if (branchId.isEmpty) return;
 
     // Applica gli effetti sulle stat RPG.
     if (option.statEffects.isNotEmpty) {
@@ -436,25 +548,36 @@ class _EpisodePageState extends State<EpisodePage> {
     }
 
     setState(() {
-      _activeBranchId = branchId;
-      _visibleBlocksByPage.removeWhere((k, _) => k > currentIndex);
-      _stageKeys.removeWhere((k, _) => k > currentIndex);
-      if (_maxVisitedIndex < currentIndex) _maxVisitedIndex = currentIndex;
-    });
-
-    BranchHistoryService.markUnlocked(episodeId, branchId);
-    _saveProgress();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!mounted) return;
-      final pages = _effectivePages;
-      if (currentIndex < pages.length - 1) {
-        _pageController.nextPage(
-          duration: const Duration(milliseconds: 500),
-          curve: Curves.easeInOutCubic,
-        );
+      _resolvedChoiceIndices.add(currentIndex);
+      if (branchId.isNotEmpty) {
+        if (_activeBranchId == null) {
+          _activeBranchId = branchId;
+        } else if (_entryBranchId == null || _entryBranchIsPrepend) {
+          // Seconda scelta: consentita in modalità normale e in modalità prepend
+          _secondBranchId = branchId;
+        }
+        // In modalità entry branch replace una sola scelta è supportata
+        _visibleBlocksByPage.removeWhere((k, _) => k > currentIndex);
+        _stageKeys.removeWhere((k, _) => k > currentIndex);
+        if (_maxVisitedIndex < currentIndex) _maxVisitedIndex = currentIndex;
       }
     });
+
+    if (branchId.isNotEmpty) {
+      BranchHistoryService.markUnlocked(episodeId, branchId);
+      _saveProgress();
+
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) return;
+        final pages = _effectivePages;
+        if (currentIndex < pages.length - 1) {
+          _pageController.nextPage(
+            duration: const Duration(milliseconds: 500),
+            curve: Curves.easeInOutCubic,
+          );
+        }
+      });
+    }
   }
 
   void _goToPreviousPage() {

@@ -1,17 +1,15 @@
 ## 🎨 Stile globale (STYLE BLOCK — copia in OGNI prompt)
 
 ```
-digital comic illustration, semi-flat colors, bold clean black outlines, 
-expressive faces, Franco-Belgian comic style, warm Italian atmosphere, 
-portrait 9:16 vertical composition, cinematic lighting, no text, no speech bubbles, 
-no watermarks, high detail backgrounds
+graphic novel style, cel shading, flat colors, bold outlines, comic book illustration,
+2D art, clean linework, vibrant colors, full body portrait, smartphone portrait,
+no text, no speech bubbles, no watermarks
 ```
 
 ### Negative prompt (NEGATIVE BLOCK — usalo sempre)
 ```
-realistic photo, 3D render, anime, manga, chibi, watercolor, 
-speech bubbles, text, letters, watermark, signature, blurry, 
-low quality, extra limbs, deformed hands, ugly faces
+realistic, 3d render, photo, blurry, ugly, deformed, extra limbs, watermark,
+speech bubbles, text, letters, signature, low quality
 ```
 
 ---

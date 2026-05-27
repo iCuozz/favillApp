@@ -1,0 +1,366 @@
+{
+  "id": "s1_scuola_1",
+  "stat_entry": [
+    { "stat": "resistenza", "op": "lt", "value": 45, "goto_branch": "intro_caffe_effect", "prepend": true }
+  ],
+  "pages": [
+    {
+      "index": 0,
+      "background": "assets/episodes/s1/s1_scuola_1/page_0.webp",
+      "panels": [
+        {
+          "id": "sc1_0_0",
+          "characters": ["favilla"],
+          "text_blocks": [
+            {
+              "id": "sc1_0_0_tb_0",
+              "type": "narration",
+              "text": "Scuola elementare di Nova Tutinia. 7:55 del mattino."
+            },
+            {
+              "id": "sc1_0_0_tb_1",
+              "type": "thought",
+              "text": "Era stanchezza. Era solo stanchezza. Queste cose non esistono."
+            },
+            {
+              "id": "sc1_0_0_tb_2",
+              "type": "narration",
+              "text": "I capelli fremono per un secondo. Favilla li stringe in una coda e li ignora."
+            },
+            {
+              "id": "sc1_0_0_tb_3",
+              "type": "thought",
+              "text": "Giornata normale. Testa bassa. Sorriso fisso."
+            }
+          ],
+          "interactions": []
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "background": "assets/episodes/s1/s1_scuola_1/page_1.webp",
+      "panels": [
+        {
+          "id": "sc1_1_0",
+          "characters": ["favilla", "corvi"],
+          "text_blocks": [
+            {
+              "id": "sc1_1_0_tb_0",
+              "type": "narration",
+              "text": "Poi arriva lei. Tacco dodici, cartella di pelle, sguardo da revisione dei conti."
+            },
+            {
+              "id": "sc1_1_0_tb_1",
+              "type": "dialogue",
+              "speaker": "corvi",
+              "text": "Ispezione straordinaria. Entro le 8:30 voglio la palestra libera e i magazzini riordinati. Tutto."
+            },
+            {
+              "id": "sc1_1_0_tb_2",
+              "type": "narration",
+              "text": "In palestra ci sono scaffali metallici da trenta chili l'uno. In magazzino, anni di cartacce e mobili rotti."
+            },
+            {
+              "id": "sc1_1_0_tb_3",
+              "type": "dialogue",
+              "speaker": "corvi",
+              "text": "Ha capito o devo ripetere?"
+            },
+            {
+              "id": "sc1_1_0_tb_4",
+              "type": "thought",
+              "text": "Trentacinque minuti. Da sola."
+            }
+          ],
+          "interactions": []
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "background": "assets/episodes/s1/s1_scuola_1/page_2.webp",
+      "panels": [
+        {
+          "id": "sc1_2_0",
+          "characters": ["favilla"],
+          "text_blocks": [
+            {
+              "id": "sc1_2_0_tb_0",
+              "type": "narration",
+              "text": "Favilla spinge. Trascina. Sudore. Respiro corto. Un minuto. Dieci minuti. Venti."
+            },
+            {
+              "id": "sc1_2_0_tb_1",
+              "type": "thought",
+              "text": "Non ce la faccio. Non ce la faccio. Non ce la—"
+            },
+            {
+              "id": "sc1_2_0_tb_2",
+              "type": "narration",
+              "text": "Poi qualcosa dentro di lei si rompe. O si apre."
+            },
+            {
+              "id": "sc1_2_0_tb_3",
+              "type": "narration",
+              "text": "Venti secondi dopo, la palestra è perfetta. I magazzini sono in ordine. Lei è in piedi nel silenzio, con le mani che tremano."
+            },
+            {
+              "id": "sc1_2_0_tb_4",
+              "type": "thought",
+              "text": "Cosa ho fatto. Cosa ho fatto. Cosa ho—"
+            },
+            {
+              "id": "sc1_2_0_tb_5",
+              "type": "narration",
+              "text": "Abbassa gli occhi. Sul fianco della camicetta, due bruciature scure. Forma di dita."
+            }
+          ],
+          "interactions": []
+        }
+      ],
+      "choice": {
+        "id": "scottature_choice",
+        "prompt": "Le bruciature sono visibili. La Corvi torna tra pochi minuti.",
+        "options": [
+          {
+            "id": "bagno",
+            "label": "Corre in bagno. Ha un cambio nello zaino.",
+            "hint": "Nessuno vede i vestiti. Ma la Corvi nota l'assenza.",
+            "goto_branch": "branch_bagno",
+            "stat_effects": { "segreto": 15, "resistenza": -10 }
+          },
+          {
+            "id": "finge_niente",
+            "label": "Rimane. Fa finta di niente.",
+            "hint": "La faccia tosta regge. Ma qualcuno guarda.",
+            "goto_branch": "branch_finge",
+            "stat_effects": { "segreto": -15, "resistenza": 10 }
+          }
+        ]
+      }
+    }
+  ],
+  "branches": {
+    "intro_caffe_effect": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_scuola_1/page_0.webp",
+          "panels": [
+            {
+              "id": "caffe_intro_0",
+              "characters": ["favilla"],
+              "text_blocks": [
+                {
+                  "id": "caffe_intro_tb_0",
+                  "type": "narration",
+                  "text": "7:55. Le porte della scuola. Come sempre."
+                },
+                {
+                  "id": "caffe_intro_tb_1",
+                  "type": "thought",
+                  "text": "Il caffè. Il caffè è stato un errore."
+                },
+                {
+                  "id": "caffe_intro_tb_2",
+                  "type": "narration",
+                  "text": "I capelli la scaldano lungo la schiena — caldi, come un motore tenuto su troppi giri."
+                },
+                {
+                  "id": "caffe_intro_tb_3",
+                  "type": "thought",
+                  "text": "Testa bassa. Sorriso fisso. Niente di strano. Tutto normalissimo."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "branch_bagno": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_scuola_1/branch_bagno.webp",
+          "panels": [
+            {
+              "id": "bb_0",
+              "characters": ["favilla", "corvi"],
+              "text_blocks": [
+                {
+                  "id": "bb_0_tb_0",
+                  "type": "narration",
+                  "text": "Cambio veloce. Respiro. Sorriso. Favilla rientra in palestra trentatré secondi dopo."
+                },
+                {
+                  "id": "bb_0_tb_1",
+                  "type": "dialogue",
+                  "speaker": "corvi",
+                  "text": "Dov'era?"
+                },
+                {
+                  "id": "bb_0_tb_2",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Bagno. Femminile. Necessità."
+                },
+                {
+                  "id": "bb_0_tb_3",
+                  "type": "narration",
+                  "text": "La Corvi ispeziona la palestra. Annuisce con la stessa calore di un verbale fiscale."
+                },
+                {
+                  "id": "bb_0_tb_4",
+                  "type": "dialogue",
+                  "speaker": "corvi",
+                  "text": "Accettabile."
+                },
+                {
+                  "id": "bb_0_tb_5",
+                  "type": "thought",
+                  "text": "I vestiti bruciati sono in fondo allo zaino. Il segreto è al sicuro. Per ora."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "branch_finge": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_scuola_1/branch_finge.webp",
+          "panels": [
+            {
+              "id": "bf_0",
+              "characters": ["favilla", "corvi", "collega"],
+              "text_blocks": [
+                {
+                  "id": "bf_0_tb_0",
+                  "type": "narration",
+                  "text": "La Corvi entra. Ispeziona. Annuisce. Se ne va senza una parola."
+                },
+                {
+                  "id": "bf_0_tb_1",
+                  "type": "narration",
+                  "text": "Ma in corridoio, una collega si avvicina."
+                },
+                {
+                  "id": "bf_0_tb_2",
+                  "type": "dialogue",
+                  "speaker": "collega",
+                  "text": "Favilla, ti sei fatta del male? La camicia..."
+                },
+                {
+                  "id": "bf_0_tb_3",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Il ferro da stiro. Stamattina ero mezza addormentata."
+                },
+                {
+                  "id": "bf_0_tb_4",
+                  "type": "narration",
+                  "text": "La collega ride. Le crede. Ma ci ha guardato un secondo troppo."
+                },
+                {
+                  "id": "bf_0_tb_5",
+                  "type": "thought",
+                  "text": "Bugia numero due. Le stavo contando?"
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "epilogue_scuola": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_scuola_1/epilogue.webp",
+          "panels": [
+            {
+              "id": "ep_sc_0",
+              "characters": ["favilla"],
+              "text_blocks": [
+                {
+                  "id": "ep_sc_0_tb_0",
+                  "type": "narration",
+                  "text": "Fine turno. Favilla siede sul muretto fuori dalla scuola. Guarda le sue mani."
+                },
+                {
+                  "id": "ep_sc_0_tb_1",
+                  "type": "thought",
+                  "text": "Non era stanchezza. Non era un sogno. Era reale."
+                },
+                {
+                  "id": "ep_sc_0_tb_2",
+                  "type": "narration",
+                  "text": "Per la prima volta da ieri sera, smette di convincersi del contrario."
+                },
+                {
+                  "id": "ep_sc_0_tb_3",
+                  "type": "thought",
+                  "text": "E adesso?"
+                },
+                {
+                  "id": "ep_sc_0_tb_4",
+                  "type": "system",
+                  "text": "MISSIONE COMPLETATA — Una Giornata Normale"
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "epilogue": {
+    "pages": [
+      {
+        "index": 0,
+        "background": "assets/episodes/s1/s1_scuola_1/epilogue.webp",
+        "panels": [
+          {
+            "id": "sc1_ep_0",
+            "characters": ["favilla"],
+            "text_blocks": [
+              {
+                "id": "sc1_ep_0_tb_0",
+                "type": "narration",
+                "text": "Fine turno. Favilla siede sul muretto fuori dalla scuola. Guarda le sue mani."
+              },
+              {
+                "id": "sc1_ep_0_tb_1",
+                "type": "thought",
+                "text": "Non era stanchezza. Non era un sogno. Era reale."
+              },
+              {
+                "id": "sc1_ep_0_tb_2",
+                "type": "narration",
+                "text": "Per la prima volta da ieri sera, smette di convincersi del contrario."
+              },
+              {
+                "id": "sc1_ep_0_tb_3",
+                "type": "thought",
+                "text": "E adesso?"
+              },
+              {
+                "id": "sc1_ep_0_tb_4",
+                "type": "system",
+                "text": "MISSIONE COMPLETATA — Una Giornata Normale"
+              }
+            ],
+            "interactions": []
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "comfyui_url": "http://127.0.0.1:8000",
+  "workflow_path": "~/Desktop/favilla_blaze_ipadapter.json",
+  "output_dir": "~/Documents/ComfyUI/output",
+  "style_block": "graphic novel style, cel shading, flat colors, bold outlines, comic book illustration, 2D art, clean linework, vibrant colors, full body portrait, smartphone portrait, no text, no speech bubbles, no watermarks",
+  "scene_style_block": "graphic novel style, cel shading, flat colors, bold outlines, comic book illustration, 2D art, clean linework, vibrant colors, wide shot, group scene, multiple characters, full scene composition, dynamic composition, smartphone portrait 9:16, no text, no speech bubbles, no watermarks",
+  "scene_ip_weight": 0.35,
+  "negative_block": "realistic, 3d render, photo, blurry, ugly, deformed, extra limbs, watermark, speech bubbles, text, letters, signature, low quality, solo, single character, portrait only",
+  "characters": {
+    "favilla": {
+      "image": "~/Projects/Illustrations/Characters/favilla.png",
+      "descriptor": "FAVILLA: Italian woman mid-30s, warm olive skin, blonde hair in a soft ponytail, brown expressive lively eyes, beautiful face full of energy, athletic and sporty build, black cat-eye glasses (pointed upper frame), slim white shirt, tight jeans, black-and-white sneakers",
+      "ip_weight": 0.80
+    },
+    "favilla_blaze": {
+      "image": "~/Projects/Illustrations/Characters/favillaBlazeV1.png",
+      "descriptor": "FAVILLA BLAZE: same Italian woman mid-30s, olive skin, but glasses gone, blonde hair loose and radiating warm golden amber light, posture confident and tall, athletic build, soft golden light emanating from hands and eyes, wearing the SAME everyday clothes as Favilla — NO superhero costume, NO cape, NO suit — just her normal outfit illuminated from within by warm golden energy",
+      "ip_weight": 0.80
+    },
+    "mallow": {
+      "image": "~/Projects/Illustrations/Characters/mallow.png",
+      "descriptor": "MALLOW: Italian man late-30s, tall slightly stooped posture, capelli con mini-mohawk, short dark stubble, always near a laptop, casual home clothes: polo azzurra, jeans dritti, sneakers gialle alte, calm analytical expression",
+      "ip_weight": 0.80
+    },
+    "lex": {
+      "image": "~/Projects/Illustrations/Characters/lex.png",
+      "descriptor": "LEX: chubby baby boy 7 months old, rosy olive skin, light brown hair with mini-mohawk like dad, two tiny bottom teeth visible when smiling, wide curious intelligent eyes, rounded baby face, expressive — laughs big or stares intensely, tiny red sneakers",
+      "ip_weight": 0.80
+    }
+  },
+  "environments": {
+    "kitchen": "ENV KITCHEN: small cozy Italian apartment kitchen, colorful ceramic tiled floor in terracotta and white, wooden table center frame, small gas stovetop, cluttered countertops with Italian pantry items, single window with thin curtains, warm amber and cream walls",
+    "bedroom": "ENV BEDROOM: modest Italian apartment bedroom, double bed with white linen, wooden nightstand with phone, thin curtains filtering outside light, simple wardrobe, intimate and slightly cluttered",
+    "nursery": "ENV NURSERY: small Italian apartment nursery, white wooden crib, soft pastel walls, simple baby mobile above crib, morning light through thin curtains, warm and gentle",
+    "school": "ENV SCHOOL: Italian elementary school corridor, 1980s institutional architecture, pale green walls, fluorescent ceiling lights, colorful children's drawings on walls, linoleum floor in beige, metal coat hooks at child height"
+  },
+  "nodes": {
+    "favilla":       { "loadImage": "10", "ipAdapter": "11" },
+    "favilla_blaze": { "loadImage": "15", "ipAdapter": "16" },
+    "mallow":        { "loadImage": "20", "ipAdapter": "21" },
+    "lex":           { "loadImage": "30", "ipAdapter": "31" }
+  },
+  "prompt_node":   "40",
+  "negative_node": "41",
+  "sampler_node":  "51",
+  "save_node":     "53"
+}

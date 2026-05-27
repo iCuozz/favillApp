@@ -15,12 +15,22 @@
           "id": "s1_mattina_dopo",
           "title": "La Mattina Dopo",
           "subtitle": "Tutto uguale. Tutto diverso.",
-          "file": "assets/data/quests/s1_mattina_dopo.json",
+          "file": "assets/data/quests/s1/s1_mattina_dopo.json",
           "thumbnail": "assets/episodes/prologo/thumb.webp",
           "season": 1,
           "requires_completed": [
             "prologo"
           ],
+          "requires_stats": {}
+        },
+        {
+          "id": "s1_ritorno_casa",
+          "title": "Il Ritorno a Casa",
+          "subtitle": "Lex ha qualcosa da dire.",
+          "file": "assets/data/quests/s1/s1_ritorno_casa.json",
+          "thumbnail": "assets/episodes/prologo/thumb.webp",
+          "season": 1,
+          "requires_completed": ["s1_scuola_1"],
           "requires_stats": {}
         }
       ]
@@ -41,7 +51,7 @@
           "id": "s1_scuola_1",
           "title": "Una Giornata Normale",
           "subtitle": "Speriamo.",
-          "file": "assets/data/quests/s1_scuola_1.json",
+          "file": "assets/data/quests/s1/s1_scuola_1.json",
           "thumbnail": "assets/episodes/prologo/thumb.webp",
           "season": 1,
           "requires_completed": [
@@ -57,7 +67,7 @@
       "emoji": "🌳",
       "description": "Parco Centrale di Nova Tutinia. Qui nessuno ti vede.",
       "unlocked_by_default": false,
-      "unlock_after_quest": "s1_scuola_1",
+      "unlock_after_quest": "s1_ritorno_casa",
       "position": {
         "x": 0.7,
         "y": 0.3
@@ -70,12 +80,23 @@
       "emoji": "🛒",
       "description": "Conad di Nova Tutinia. La spesa non si fa da sola.",
       "unlocked_by_default": false,
-      "unlock_after_quest": "s1_scuola_1",
+      "unlock_after_quest": "s1_ritorno_casa",
       "position": {
         "x": 0.35,
         "y": 0.7
       },
-      "quests": []
+      "quests": [
+        {
+          "id": "s1_spesa_sabato",
+          "title": "La Spesa del Sabato",
+          "subtitle": "Lex vuole l'orsetto. Favilla no.",
+          "file": "assets/data/quests/s1/s1_spesa_sabato.json",
+          "thumbnail": "assets/episodes/prologo/thumb.webp",
+          "season": 1,
+          "requires_completed": ["s1_ritorno_casa"],
+          "requires_stats": {}
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,666 @@
+{
+  "id": "s1_spesa_sabato",
+  "stat_entry": [
+    {
+      "stat": "scintille",
+      "op": "gte",
+      "value": 60,
+      "goto_branch": "intro_mani_calde",
+      "prepend": true
+    }
+  ],
+  "pages": [
+    {
+      "index": 0,
+      "background": "assets/episodes/s1/s1_spesa_sabato/page_0.webp",
+      "panels": [
+        {
+          "id": "ss0_0",
+          "characters": ["favilla", "lex"],
+          "text_blocks": [
+            {
+              "id": "ss0_0_tb_0",
+              "type": "narration",
+              "text": "Sabato mattina. 9:47. L'IperPassata di Nova Tutinia non dorme mai."
+            },
+            {
+              "id": "ss0_0_tb_1",
+              "type": "narration",
+              "text": "Lex è nel seggiolino del carrello. Guarda gli scaffali."
+            },
+            {
+              "id": "ss0_0_tb_2",
+              "type": "narration",
+              "text": "Li guarda con la stessa espressione con cui un generale guarda una mappa prima della battaglia."
+            },
+            {
+              "id": "ss0_0_tb_3",
+              "type": "thought",
+              "speaker": "lex_pov",
+              "text": "Scaffali. Prodotti. Corsia infinita. Potenziale illimitato."
+            },
+            {
+              "id": "ss0_0_tb_4",
+              "type": "narration",
+              "text": "Favilla non sa cosa sta passando in quella testolina. Pensa stia ammirando le confezioni colorate."
+            },
+            {
+              "id": "ss0_0_tb_5",
+              "type": "thought",
+              "text": "Che bravo bambino. Guarda tutto tranquillo."
+            },
+            {
+              "id": "ss0_0_tb_6",
+              "type": "narration",
+              "text": "Non è tranquillo. Sta pianificando."
+            }
+          ],
+          "interactions": []
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "background": "assets/episodes/s1/s1_spesa_sabato/page_1.webp",
+      "panels": [
+        {
+          "id": "ss1_0",
+          "characters": ["favilla", "lex"],
+          "text_blocks": [
+            {
+              "id": "ss1_0_tb_0",
+              "type": "narration",
+              "text": "Reparto pasta. Terza corsia."
+            },
+            {
+              "id": "ss1_0_tb_1",
+              "type": "narration",
+              "text": "Nella testa di Lex, qualcosa torna. Un ricordo."
+            },
+            {
+              "id": "ss1_0_tb_2",
+              "type": "thought",
+              "speaker": "lex_pov",
+              "text": "Fuoco. La mamma era diventata fuoco."
+            },
+            {
+              "id": "ss1_0_tb_3",
+              "type": "thought",
+              "speaker": "lex_pov",
+              "text": "Era bellissimo."
+            },
+            {
+              "id": "ss1_0_tb_4",
+              "type": "narration",
+              "text": "Gli occhi di Lex scivolano sullo scaffale davanti a lui. Scatolette. Barattoli. Pasta in busta. Prodotti allineati in perfetto equilibrio instabile."
+            },
+            {
+              "id": "ss1_0_tb_5",
+              "type": "thought",
+              "speaker": "lex_pov",
+              "text": "Se tutto cade... la mamma si spaventa... la mamma diventa fuoco."
+            },
+            {
+              "id": "ss1_0_tb_6",
+              "type": "narration",
+              "text": "Lentamente, con la concentrazione di un ingegnere missilistico, Lex afferra il ciuccio. Poi la catenella. Poi l'orsetto di pezza che ha sul grembiule."
+            },
+            {
+              "id": "ss1_0_tb_7",
+              "type": "narration",
+              "text": "La lingua fuori. Gli occhi seri. Inizia ad assemblare."
+            },
+            {
+              "id": "ss1_0_tb_8",
+              "type": "dialogue",
+              "speaker": "lex",
+              "text": "Mmmh. Mmmh. Mmmh."
+            },
+            {
+              "id": "ss1_0_tb_9",
+              "type": "narration",
+              "text": "Favilla scorre la lista della spesa sul telefono. Latte. Yogurt. Pelati."
+            }
+          ],
+          "interactions": []
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "background": "assets/episodes/s1/s1_spesa_sabato/page_2.webp",
+      "panels": [
+        {
+          "id": "ss2_0",
+          "characters": ["favilla", "lex"],
+          "text_blocks": [
+            {
+              "id": "ss2_0_tb_0",
+              "type": "narration",
+              "text": "L'arma è quasi completa."
+            },
+            {
+              "id": "ss2_0_tb_1",
+              "type": "narration",
+              "text": "Lex la esamina con soddisfazione. Ciuccio più catenella più orsetto: strutturalmente impeccabile."
+            },
+            {
+              "id": "ss2_0_tb_2",
+              "type": "narration",
+              "text": "Favilla è a tre scaffali di distanza. Le bastano dieci secondi di attenzione e il piano va a rotoli."
+            }
+          ],
+          "interactions": []
+        }
+      ],
+      "choice": {
+        "id": "attenzione_lex",
+        "prompt": "Favilla è nella sua bolla. Lex sta per lanciare la sua prima operazione militare.",
+        "options": [
+          {
+            "id": "tardi",
+            "label": "Guarda il telefono. La lista è lunga. Lex sta bene.",
+            "hint": "Certo che sta bene.",
+            "goto_branch": "branch_tardi",
+            "stat_effects": {
+              "segreto": -5,
+              "resistenza": -10,
+              "legame": 10
+            }
+          },
+          {
+            "id": "prima",
+            "label": "Alza gli occhi dal telefono. Guarda Lex. Qualcosa non torna.",
+            "hint": "Quella faccia. Quella faccia non è innocente.",
+            "goto_branch": "branch_prima",
+            "stat_effects": {
+              "segreto": 10,
+              "legame": -10
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "branches": {
+    "intro_mani_calde": {
+      "pages": [
+        {
+          "id": "imc_0",
+          "background": "assets/episodes/s1/s1_spesa_sabato/page_entry.webp",
+          "panels": [
+            {
+              "id": "imc_0_p0",
+              "characters": ["favilla"],
+              "text_blocks": [
+                {
+                  "id": "imc_0_p0_tb_0",
+                  "type": "narration",
+                  "text": "Le mani di Favilla sono già calde quando prende il carrello all'ingresso dell'IperPassata."
+                },
+                {
+                  "id": "imc_0_p0_tb_1",
+                  "type": "thought",
+                  "text": "Ancora. Sempre di più."
+                },
+                {
+                  "id": "imc_0_p0_tb_2",
+                  "type": "narration",
+                  "text": "Stringe il manico di plastica. Il calore scende di qualche grado. Abbastanza per sembrare normale. Abbastanza per oggi."
+                },
+                {
+                  "id": "imc_0_p0_tb_3",
+                  "type": "thought",
+                  "text": "Supermercato. Lista. Torna a casa. Semplice."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "branch_tardi": {
+      "pages": [
+        {
+          "id": "bt_0",
+          "background": "assets/episodes/s1/s1_spesa_sabato/page_tardi_0.webp",
+          "panels": [
+            {
+              "id": "bt_0_p0",
+              "characters": ["favilla", "lex"],
+              "text_blocks": [
+                {
+                  "id": "bt_0_p0_tb_0",
+                  "type": "narration",
+                  "text": "L'arma è pronta. Lex la punta verso lo scaffale."
+                },
+                {
+                  "id": "bt_0_p0_tb_1",
+                  "type": "narration",
+                  "text": "Tre secondi di silenzio totale."
+                },
+                {
+                  "id": "bt_0_p0_tb_2",
+                  "type": "dialogue",
+                  "speaker": "lex",
+                  "text": "HA!"
+                },
+                {
+                  "id": "bt_0_p0_tb_3",
+                  "type": "narration",
+                  "text": "Un barattolo di pelati vola. Ne trascina due. I due ne trascinano altri quattro. In un secondo e mezzo, mezza corsia dei pelati è per terra."
+                },
+                {
+                  "id": "bt_0_p0_tb_4",
+                  "type": "narration",
+                  "text": "Il rumore è epico."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        },
+        {
+          "id": "bt_1",
+          "background": "assets/episodes/s1/s1_spesa_sabato/page_tardi_1.webp",
+          "panels": [
+            {
+              "id": "bt_1_p0",
+              "characters": ["favilla"],
+              "text_blocks": [
+                {
+                  "id": "bt_1_p0_tb_0",
+                  "type": "narration",
+                  "text": "Favilla si gira."
+                },
+                {
+                  "id": "bt_1_p0_tb_1",
+                  "type": "narration",
+                  "text": "Lo shock è immediato. I barattoli. Lex. Il rumore. Tre persone che si girano. Una signora che sussulta."
+                },
+                {
+                  "id": "bt_1_p0_tb_2",
+                  "type": "narration",
+                  "text": "Le mani di Favilla — già calde — diventano infuocate."
+                },
+                {
+                  "id": "bt_1_p0_tb_3",
+                  "type": "narration",
+                  "text": "Un lampo."
+                },
+                {
+                  "id": "bt_1_p0_tb_4",
+                  "type": "narration",
+                  "text": "Un solo, brevissimo lampo di luce nei capelli — e poi buio."
+                },
+                {
+                  "id": "bt_1_p0_tb_5",
+                  "type": "narration",
+                  "text": "I barattoli sono di nuovo sullo scaffale. Allineati. Perfetti. Nessuno sa come."
+                },
+                {
+                  "id": "bt_1_p0_tb_6",
+                  "type": "narration",
+                  "text": "Ci sono voluti meno di un secondo. Favilla è già ferma, con la lista in mano, come se non fosse successo nulla."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        },
+        {
+          "id": "bt_2",
+          "background": "assets/episodes/s1/s1_spesa_sabato/page_tardi_2.webp",
+          "panels": [
+            {
+              "id": "bt_2_p0",
+              "characters": ["favilla", "lex"],
+              "text_blocks": [
+                {
+                  "id": "bt_2_p0_tb_0",
+                  "type": "narration",
+                  "text": "Lex l'ha visto."
+                },
+                {
+                  "id": "bt_2_p0_tb_1",
+                  "type": "narration",
+                  "text": "Tutta la scena. In prima fila. Dal seggiolino del carrello, angolo privilegiato."
+                },
+                {
+                  "id": "bt_2_p0_tb_2",
+                  "type": "narration",
+                  "text": "Sotto il grembiulino, un micro-pugno chiuso in segno di vittoria."
+                },
+                {
+                  "id": "bt_2_p0_tb_3",
+                  "type": "dialogue",
+                  "speaker": "lex",
+                  "text": "Ooooh."
+                },
+                {
+                  "id": "bt_2_p0_tb_4",
+                  "type": "narration",
+                  "text": "Favilla lo guarda. Cerca qualcosa nella sua faccia. Qualcosa che tradisca la comprensione."
+                },
+                {
+                  "id": "bt_2_p0_tb_5",
+                  "type": "thought",
+                  "text": "No. Non ha capito. È solo un bambino. Ha visto luci, rumori. L'ha spaventato. Succede."
+                },
+                {
+                  "id": "bt_2_p0_tb_6",
+                  "type": "narration",
+                  "text": "Lex la guarda dritto negli occhi e sorride."
+                },
+                {
+                  "id": "bt_2_p0_tb_7",
+                  "type": "narration",
+                  "text": "Favilla non sa che quel sorriso è la soddisfazione di un piano riuscito."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "branch_prima": {
+      "pages": [
+        {
+          "id": "bp_0",
+          "background": "assets/episodes/s1/s1_spesa_sabato/page_prima_0.webp",
+          "panels": [
+            {
+              "id": "bp_0_p0",
+              "characters": ["favilla", "lex"],
+              "text_blocks": [
+                {
+                  "id": "bp_0_p0_tb_0",
+                  "type": "narration",
+                  "text": "Favilla alza gli occhi."
+                },
+                {
+                  "id": "bp_0_p0_tb_1",
+                  "type": "narration",
+                  "text": "Lex è immobile. La linguetta fuori. L'orsetto in mano. Puntato verso lo scaffale con un'angolazione inquietante."
+                },
+                {
+                  "id": "bp_0_p0_tb_2",
+                  "type": "thought",
+                  "text": "No."
+                },
+                {
+                  "id": "bp_0_p0_tb_3",
+                  "type": "narration",
+                  "text": "Due passi veloci. La mano di Favilla arriva sull'orsetto prima del lancio. Estrazione silenziosa. Professionale."
+                },
+                {
+                  "id": "bp_0_p0_tb_4",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "No."
+                },
+                {
+                  "id": "bp_0_p0_tb_5",
+                  "type": "narration",
+                  "text": "Lex la fissa."
+                },
+                {
+                  "id": "bp_0_p0_tb_6",
+                  "type": "narration",
+                  "text": "La fissa con la faccia di chi ha appena visto il proprio capolavoro distrutto."
+                },
+                {
+                  "id": "bp_0_p0_tb_7",
+                  "type": "dialogue",
+                  "speaker": "lex",
+                  "text": "Eh."
+                },
+                {
+                  "id": "bp_0_p0_tb_8",
+                  "type": "thought",
+                  "text": "Esatto, 'eh'. Rimandato."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        },
+        {
+          "id": "bp_1",
+          "background": "assets/episodes/s1/s1_spesa_sabato/page_prima_1.webp",
+          "panels": [
+            {
+              "id": "bp_1_p0",
+              "characters": ["favilla", "carmela"],
+              "text_blocks": [
+                {
+                  "id": "bp_1_p0_tb_0",
+                  "type": "narration",
+                  "text": "Una voce dietro di lei."
+                },
+                {
+                  "id": "bp_1_p0_tb_1",
+                  "type": "dialogue",
+                  "speaker": "carmela",
+                  "text": "Che bel bambino."
+                },
+                {
+                  "id": "bp_1_p0_tb_2",
+                  "type": "narration",
+                  "text": "Favilla si gira. Una donna anziana, capelli bianchi e occhi troppo svegli per quell'ora del mattino, è comparsa dall'angolo dello scaffale. Un cestino quasi vuoto al braccio."
+                },
+                {
+                  "id": "bp_1_p0_tb_3",
+                  "type": "narration",
+                  "text": "Non guarda Lex."
+                },
+                {
+                  "id": "bp_1_p0_tb_4",
+                  "type": "narration",
+                  "text": "Guarda le mani di Favilla."
+                },
+                {
+                  "id": "bp_1_p0_tb_5",
+                  "type": "dialogue",
+                  "speaker": "carmela",
+                  "text": "Intelligente il piccino."
+                },
+                {
+                  "id": "bp_1_p0_tb_6",
+                  "type": "narration",
+                  "text": "Una pausa. Breve. Chirurgica."
+                },
+                {
+                  "id": "bp_1_p0_tb_7",
+                  "type": "dialogue",
+                  "speaker": "carmela",
+                  "text": "Come la mamma."
+                },
+                {
+                  "id": "bp_1_p0_tb_8",
+                  "type": "narration",
+                  "text": "Prende la bottiglia di passata dallo scaffale. La mette nel cestino. Se ne va senza voltarsi."
+                },
+                {
+                  "id": "bp_1_p0_tb_9",
+                  "type": "thought",
+                  "text": "Chi è?"
+                },
+                {
+                  "id": "bp_1_p0_tb_10",
+                  "type": "thought",
+                  "text": "Perché guardava le mani?"
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "epilogue_ottimista": {
+      "pages": [
+        {
+          "id": "eo_0",
+          "background": "assets/episodes/s1/s1_spesa_sabato/page_epilogo.webp",
+          "panels": [
+            {
+              "id": "eo_0_p0",
+              "characters": ["favilla", "lex"],
+              "text_blocks": [
+                {
+                  "id": "eo_0_p0_tb_0",
+                  "type": "narration",
+                  "text": "Fuori dall'IperPassata. Sole di sabato. Lex nel passeggino, pericolosamente silenzioso."
+                },
+                {
+                  "id": "eo_0_p0_tb_1",
+                  "type": "narration",
+                  "text": "Favilla lo guarda. Pensa a tutto quello che è successo. Poi, senza volerlo, le scappa una mezza risata."
+                },
+                {
+                  "id": "eo_0_p0_tb_2",
+                  "type": "thought",
+                  "text": "Un bambino di sette mesi ha cercato di farmi trasformare al reparto pasta."
+                },
+                {
+                  "id": "eo_0_p0_tb_3",
+                  "type": "thought",
+                  "text": "Con un orsetto di pezza."
+                },
+                {
+                  "id": "eo_0_p0_tb_4",
+                  "type": "narration",
+                  "text": "Lex la guarda. Ha ancora la stessa espressione seria del generale. Studia l'ambiente. Valuta. Pianifica il prossimo tentativo."
+                },
+                {
+                  "id": "eo_0_p0_tb_5",
+                  "type": "thought",
+                  "text": "Andrà meglio. Imparo."
+                },
+                {
+                  "id": "eo_0_p0_tb_6",
+                  "type": "thought",
+                  "text": "Anche lui."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "epilogue_cauta": {
+      "pages": [
+        {
+          "id": "ec_0",
+          "background": "assets/episodes/s1/s1_spesa_sabato/page_epilogo.webp",
+          "panels": [
+            {
+              "id": "ec_0_p0",
+              "characters": ["favilla"],
+              "text_blocks": [
+                {
+                  "id": "ec_0_p0_tb_0",
+                  "type": "narration",
+                  "text": "Fuori dall'IperPassata. Favilla non vede il sole. Vede quella donna."
+                },
+                {
+                  "id": "ec_0_p0_tb_1",
+                  "type": "thought",
+                  "text": "Guardava le mani. Non Lex. Non i barattoli. Le mani."
+                },
+                {
+                  "id": "ec_0_p0_tb_2",
+                  "type": "thought",
+                  "text": "Come se sapesse già cosa cercare."
+                },
+                {
+                  "id": "ec_0_p0_tb_3",
+                  "type": "narration",
+                  "text": "Lex è nel passeggino, stranamente quieto. Gli occhi socchiusi. L'espressione di chi ripensa a un piano e capisce dove ha sbagliato."
+                },
+                {
+                  "id": "ec_0_p0_tb_4",
+                  "type": "thought",
+                  "text": "Devo stare più attenta. Su tutto."
+                },
+                {
+                  "id": "ec_0_p0_tb_5",
+                  "type": "narration",
+                  "text": "Entrambi hanno la stessa espressione."
+                },
+                {
+                  "id": "ec_0_p0_tb_6",
+                  "type": "narration",
+                  "text": "Nessuno dei due ha ancora finito."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "epilogue": {
+    "pages": [
+      {
+        "id": "ep_uscita",
+        "background": "assets/episodes/s1/s1_spesa_sabato/page_epilogo.webp",
+        "panels": [
+          {
+            "id": "ep_uscita_p0",
+            "characters": ["favilla", "lex"],
+            "text_blocks": [
+              {
+                "id": "ep_uscita_p0_tb_0",
+                "type": "narration",
+                "text": "Alla cassa. Favilla passa i prodotti sul nastro."
+              },
+              {
+                "id": "ep_uscita_p0_tb_1",
+                "type": "narration",
+                "text": "Lex è nel passeggino, troppo quieto. Guarda il soffitto con l'espressione di chi sta già rivedendo i calcoli."
+              },
+              {
+                "id": "ep_uscita_p0_tb_2",
+                "type": "thought",
+                "text": "Silenzio sospetto."
+              }
+            ],
+            "interactions": []
+          }
+        ],
+        "choice": {
+          "id": "elaborazione_uscita",
+          "prompt": "Favilla carica la spesa. Lex pensa. Fuori c'è sabato.",
+          "options": [
+            {
+              "id": "ottimista",
+              "label": "In fondo è quasi divertente. Un bambino di sette mesi. Un orsetto. Quasi.",
+              "hint": "Il 'quasi' fa tutto il lavoro.",
+              "goto_branch": "epilogue_ottimista",
+              "stat_effects": {
+                "resistenza": 5,
+                "legame": 5
+              }
+            },
+            {
+              "id": "cauta",
+              "label": "Quella donna. Quegli occhi sulle mani. Devo stare più attenta.",
+              "hint": "Non è paranoia. È istinto.",
+              "goto_branch": "epilogue_cauta",
+              "stat_effects": {
+                "segreto": 10,
+                "resistenza": -5
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

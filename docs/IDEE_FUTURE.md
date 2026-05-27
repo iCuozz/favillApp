@@ -1,0 +1,1 @@
+/Users/andreacuozzo/Library/Mobile Documents/iCloud~md~obsidian/Documents/Favilla Blaze/Idee & Direzioni Future.md
