@@ -186,7 +186,8 @@
                     "segreto": -5,
                     "resistenza": -10,
                     "legame": 15
-                  }
+                  },
+                  "goto_branch": "branch_tardi"
                 },
                 {
                   "min": 3,
@@ -195,7 +196,8 @@
                     "segreto": -3,
                     "resistenza": -5,
                     "legame": 10
-                  }
+                  },
+                  "goto_branch": "branch_tardi_parziale"
                 },
                 {
                   "min": 0,
@@ -203,7 +205,8 @@
                   "stat_effects": {
                     "resistenza": -5,
                     "legame": 5
-                  }
+                  },
+                  "goto_branch": "branch_tardi_mancato"
                 }
               ]
             }
