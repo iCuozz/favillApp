@@ -17,10 +17,10 @@ Da invocare ogni volta che si modifica narrazione, stat, personaggi o regole.
 
 | File Obsidian | Symlink in `docs/` | Contenuto | Aggiornare quando… |
 |---|---|---|---|
-| `NARRATIVE_BIBLE.md` | `docs/NARRATIVE_BIBLE.md` | Capisaldi: mondo, personaggi, stat, lore, principi narrativi, regole su pietra | Cambia un personaggio, una regola, il sistema stat, il lore dei poteri, i principi narrativi |
-| `Mappa Narrativa.md` | `docs/MAPPA_NARRATIVA.md` | Timeline episodi, diagrammi Mermaid, traccia stat cumulativi | Cambia `stat_effects`, branch, scelte, `stat_entry`, testo chiave di una scena; nuovo episodio |
+| `NARRATIVE_BIBLE.md` | `docs/NARRATIVE_BIBLE.md` | Capisaldi: mondo, personaggi, stat, lore, principi narrativi, regole su pietra, sistema mini-game | Cambia un personaggio, una regola, il sistema stat, il lore dei poteri, i principi narrativi, **nuovo tipo di mini-game** |
+| `Mappa Narrativa.md` | `docs/MAPPA_NARRATIVA.md` | Timeline episodi, diagrammi Mermaid, traccia stat cumulativi | Cambia `stat_effects`, branch, scelte, `stat_entry`, testo chiave di una scena; nuovo episodio; **nuovo mini-game** |
 | `Grafo Narrativo.canvas` | `docs/GRAFO_NARRATIVO.canvas` | Grafo visuale interattivo (Obsidian Canvas) | **Stesse occasioni di `Mappa Narrativa.md`** — i due file devono essere sempre sincronizzati |
-| `Idee & Direzioni Future.md` | `docs/IDEE_FUTURE.md` | Idee episodi futuri, archi narrativi, meccaniche in design | L'utente descrive un'idea futura; si decide una direzione narrativa per S2/S3 |
+| `Idee & Direzioni Future.md` | `docs/IDEE_FUTURE.md` | Idee episodi futuri, archi narrativi, meccaniche in design, location, idee mini-game | L'utente descrive un'idea futura; si decide una direzione narrativa per S2/S3; **episodio completato → segnare ✅** |
 
 > **Regola base:** dopo ogni cambio narrativo, aggiorna TUTTI i documenti pertinenti nella stessa sessione. Non lasciare mai un documento indietro.
 
