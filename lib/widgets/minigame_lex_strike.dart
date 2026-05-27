@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../models/comic_data.dart';
 
 /// Schermata mini-game "Lex Strike": slingshot con un singolo lancio.
@@ -44,17 +45,33 @@ class _MinigameLexStrikeScreenState extends State<MinigameLexStrikeScreen>
   late AnimationController _projCtrl;
   Offset _projPos = Offset.zero;
   Offset _projVelocity = Offset.zero;
+  final List<Offset> _projTrail = [];
+
+  // ─── Wind ─────────────────────────────────────────────────────────────────
+  double _windForce = 0.0; // normalised -1..1, randomised at init
+
+  // ─── Impact flash ─────────────────────────────────────────────────────────
+  late AnimationController _flashCtrl;
+  late Animation<double> _flashAnim;
 
   // ─── Layout (computed once) ───────────────────────────────────────────────
   bool _layoutReady = false;
   late Size _screenSize;
   late Offset _slingshotPos;
   late List<Offset> _productCenters;
-  static const double _kProductSize = 46.0;
-  static const double _kProductGap = 10.0;
+  static const double _kProductSize = 44.0;
+  static const double _kProductGap = 14.0;
 
   // ─── Result ───────────────────────────────────────────────────────────────
   int _fallenCount = 0;
+
+  // ─── Screen shake ────────────────────────────────────────────────────────
+  late AnimationController _shakeCtrl;
+  late Animation<Offset> _shakeAnim;
+
+  // ─── Result overlay animation ─────────────────────────────────────────────
+  late AnimationController _resultCtrl;
+  late Animation<double> _resultScaleAnim;
 
   // ─── Cosmetics ────────────────────────────────────────────────────────────
   static const List<Color> _kProductColors = [
@@ -77,6 +94,9 @@ class _MinigameLexStrikeScreenState extends State<MinigameLexStrikeScreen>
   @override
   void initState() {
     super.initState();
+    final rng = Random();
+    _windForce = (rng.nextDouble() * 2 - 1) * 0.65; // -0.65..0.65
+
     final n = widget.config.productsTotal.clamp(1, 12);
     _fallen = List.filled(n, false);
     _fallCtrl = List.generate(
@@ -98,6 +118,30 @@ class _MinigameLexStrikeScreenState extends State<MinigameLexStrikeScreen>
       ..addStatusListener((s) {
         if (s == AnimationStatus.completed) _resolveHits();
       });
+
+    _shakeCtrl = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 400),
+    );
+    _shakeAnim = TweenSequence<Offset>([
+      TweenSequenceItem(tween: Tween(begin: Offset.zero, end: const Offset(8, -6)), weight: 1),
+      TweenSequenceItem(tween: Tween(begin: const Offset(8, -6), end: const Offset(-7, 5)), weight: 1),
+      TweenSequenceItem(tween: Tween(begin: const Offset(-7, 5), end: const Offset(5, -4)), weight: 1),
+      TweenSequenceItem(tween: Tween(begin: const Offset(5, -4), end: const Offset(-4, 3)), weight: 1),
+      TweenSequenceItem(tween: Tween(begin: const Offset(-4, 3), end: Offset.zero), weight: 2),
+    ]).animate(CurvedAnimation(parent: _shakeCtrl, curve: Curves.easeOut));
+
+    _flashCtrl = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 220),
+    );
+    _flashAnim = CurvedAnimation(parent: _flashCtrl, curve: Curves.easeOut);
+
+    _resultCtrl = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 450),
+    );
+    _resultScaleAnim = CurvedAnimation(parent: _resultCtrl, curve: Curves.elasticOut);
   }
 
   void _initLayout(Size size) {
@@ -106,22 +150,22 @@ class _MinigameLexStrikeScreenState extends State<MinigameLexStrikeScreen>
     _screenSize = size;
     _slingshotPos = Offset(size.width / 2, size.height * 0.73);
 
-    const cols = 6;
+    // 3 rows × 4 cols — wider gaps = harder to chain
+    const cols = 4;
     final n = widget.config.productsTotal.clamp(1, 12);
     const stride = _kProductSize + _kProductGap;
     const totalW = cols * stride - _kProductGap;
     final startX = (size.width - totalW) / 2 + _kProductSize / 2;
-    final row1Y = size.height * 0.27;
-    final row2Y = row1Y + _kProductSize + 14;
+    final row1Y = size.height * 0.22;
+    final row2Y = row1Y + _kProductSize + 16;
+    final row3Y = row2Y + _kProductSize + 16;
 
     _productCenters = [];
     for (int i = 0; i < n; i++) {
       final col = i % cols;
       final row = i ~/ cols;
-      _productCenters.add(Offset(
-        startX + col * stride,
-        row == 0 ? row1Y : row2Y,
-      ));
+      final rowY = row == 0 ? row1Y : (row == 1 ? row2Y : row3Y);
+      _productCenters.add(Offset(startX + col * stride, rowY));
     }
     _projPos = _slingshotPos;
   }
@@ -131,21 +175,26 @@ class _MinigameLexStrikeScreenState extends State<MinigameLexStrikeScreen>
     final t = _projCtrl.value;
     const dt = 0.58;
     final g = _screenSize.height * 1.55;
+    // Wind force: horizontal drift proportional to time squared (acceleration)
+    final windAcc = _windForce * _screenSize.width * 0.55;
+    final newPos = Offset(
+      _slingshotPos.dx + _projVelocity.dx * t * dt + 0.5 * windAcc * (t * dt) * (t * dt),
+      _slingshotPos.dy +
+          _projVelocity.dy * t * dt +
+          0.5 * g * (t * dt) * (t * dt),
+    );
     setState(() {
-      _projPos = Offset(
-        _slingshotPos.dx + _projVelocity.dx * t * dt,
-        _slingshotPos.dy +
-            _projVelocity.dy * t * dt +
-            0.5 * g * (t * dt) * (t * dt),
-      );
+      _projTrail.add(_projPos);
+      if (_projTrail.length > 10) _projTrail.removeAt(0);
+      _projPos = newPos;
     });
   }
 
   void _resolveHits() {
     final impact = _projPos;
-    const directR = 68.0;
-    const chainR = 74.0;
-    const chainP = 0.62;
+    const directR = 46.0;   // was 68 — tighter hitbox
+    const chainR = 66.0;    // was 74 — shorter chain range
+    const chainP = 0.40;    // was 0.62 — harder chain
     final rng = Random();
 
     final fallen = <int>{};
@@ -171,6 +220,13 @@ class _MinigameLexStrikeScreenState extends State<MinigameLexStrikeScreen>
     _fallenCount = fallen.length;
     setState(() => _phase = _Phase.chainReaction);
 
+    // Screen shake + flash at impact
+    if (fallen.isNotEmpty) {
+      _shakeCtrl.forward(from: 0);
+      _flashCtrl.forward(from: 0).then((_) => _flashCtrl.reverse());
+      HapticFeedback.heavyImpact();
+    }
+
     final sorted = fallen.toList()..sort();
     for (int k = 0; k < sorted.length; k++) {
       final idx = sorted[k];
@@ -178,12 +234,14 @@ class _MinigameLexStrikeScreenState extends State<MinigameLexStrikeScreen>
         if (!mounted) return;
         setState(() => _fallen[idx] = true);
         _fallCtrl[idx].forward();
+        if (k > 0) HapticFeedback.lightImpact();
       });
     }
 
     Future.delayed(Duration(milliseconds: sorted.length * 70 + 700), () {
       if (!mounted) return;
       setState(() => _phase = _Phase.result);
+      _resultCtrl.forward(from: 0);
     });
   }
 
@@ -217,6 +275,7 @@ class _MinigameLexStrikeScreenState extends State<MinigameLexStrikeScreen>
       _phase = _Phase.launched;
       _dragOffset = null;
     });
+    HapticFeedback.mediumImpact();
     _projCtrl.forward();
   }
 
@@ -225,6 +284,9 @@ class _MinigameLexStrikeScreenState extends State<MinigameLexStrikeScreen>
   void dispose() {
     for (final c in _fallCtrl) { c.dispose(); }
     _projCtrl.dispose();
+    _shakeCtrl.dispose();
+    _flashCtrl.dispose();
+    _resultCtrl.dispose();
     super.dispose();
   }
 
@@ -232,35 +294,50 @@ class _MinigameLexStrikeScreenState extends State<MinigameLexStrikeScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: LayoutBuilder(
-        builder: (ctx, constraints) {
-          _initLayout(Size(constraints.maxWidth, constraints.maxHeight));
-          return GestureDetector(
-            onPanStart: _phase == _Phase.tutorial || _phase == _Phase.aiming
-                ? _onPanStart
-                : null,
-            onPanUpdate:
-                _phase == _Phase.aiming ? _onPanUpdate : null,
-            onPanEnd: _phase == _Phase.aiming ? _onPanEnd : null,
-            behavior: HitTestBehavior.translucent,
-            child: Stack(
-              fit: StackFit.expand,
-              children: [
-                _buildBackground(),
-                _buildShelves(),
-                _buildProducts(),
-                _buildLexCharacter(),
-                _buildSlingshotAndTrajectory(),
-                if (_phase == _Phase.launched ||
-                    _phase == _Phase.chainReaction)
-                  _buildProjectile(),
-                _buildHud(),
-                if (_phase == _Phase.tutorial) _buildTutorialHint(),
-                if (_phase == _Phase.result) _buildResultOverlay(),
-              ],
-            ),
-          );
-        },
+      body: AnimatedBuilder(
+        animation: _shakeAnim,
+        builder: (_, child) => Transform.translate(
+          offset: _shakeAnim.value,
+          child: child,
+        ),
+        child: LayoutBuilder(
+          builder: (ctx, constraints) {
+            _initLayout(Size(constraints.maxWidth, constraints.maxHeight));
+            return GestureDetector(
+              onPanStart: _phase == _Phase.tutorial || _phase == _Phase.aiming
+                  ? _onPanStart
+                  : null,
+              onPanUpdate:
+                  _phase == _Phase.aiming ? _onPanUpdate : null,
+              onPanEnd: _phase == _Phase.aiming ? _onPanEnd : null,
+              behavior: HitTestBehavior.translucent,
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  _buildBackground(),
+                  _buildShelves3D(),
+                  _buildProducts3D(),
+                  _buildLexCharacter(),
+                  _buildSlingshotAndTrajectory(),
+                  if (_phase == _Phase.launched ||
+                      _phase == _Phase.chainReaction) ...[
+                    _buildTrail(),
+                    _buildProjectile(),
+                  ],
+                  _buildWindIndicator(),
+                  _buildHud(),
+                  if (_phase == _Phase.tutorial) _buildTutorialHint(),
+                  // Impact flash overlay
+                  FadeTransition(
+                    opacity: _flashAnim,
+                    child: Container(color: Colors.white.withAlpha(80)),
+                  ),
+                  if (_phase == _Phase.result) _buildResultOverlay(),
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }
@@ -280,61 +357,123 @@ class _MinigameLexStrikeScreenState extends State<MinigameLexStrikeScreen>
     );
   }
 
-  Widget _buildShelves() {
-    final row1Bottom = _screenSize.height * 0.27 + _kProductSize + 2;
-    final row2Bottom = _screenSize.height * 0.27 + _kProductSize + 14 + _kProductSize + 2;
-    return CustomPaint(
-      size: _screenSize,
-      painter: _ShelfPainter(
-        row1Y: row1Bottom,
-        row2Y: row2Bottom,
-        width: _screenSize.width,
+  Widget _buildShelves3D() {
+    final row1Bottom = _screenSize.height * 0.22 + _kProductSize + 2;
+    final row2Bottom = _screenSize.height * 0.22 + _kProductSize + 16 + _kProductSize + 2;
+    final row3Bottom = row2Bottom + _kProductSize + 16 + 2;
+    return Transform(
+      transform: Matrix4.identity()
+        ..setEntry(3, 2, 0.0008)
+        ..rotateX(0.18),
+      alignment: Alignment.bottomCenter,
+      child: CustomPaint(
+        size: _screenSize,
+        painter: _ShelfPainter(
+          row1Y: row1Bottom,
+          row2Y: row2Bottom,
+          row3Y: row3Bottom,
+          width: _screenSize.width,
+        ),
       ),
     );
   }
 
-  Widget _buildProducts() {
-    return Stack(
-      children: List.generate(_productCenters.length, (i) {
-        return AnimatedBuilder(
-          animation: _fallAnim[i],
-          builder: (_, child) {
-            final p = _fallAnim[i].value;
-            return Positioned(
-              left: _productCenters[i].dx - _kProductSize / 2,
-              top: _productCenters[i].dy - _kProductSize / 2 + p * 220,
-              child: Opacity(
-                opacity: (1 - p * 0.85).clamp(0.0, 1.0),
-                child: Transform.rotate(
-                  angle: p * (i.isEven ? 0.9 : -0.9),
-                  child: child,
+  Widget _buildProducts3D() {
+    return Transform(
+      transform: Matrix4.identity()
+        ..setEntry(3, 2, 0.0008)
+        ..rotateX(0.18),
+      alignment: Alignment.bottomCenter,
+      child: Stack(
+        children: List.generate(_productCenters.length, (i) {
+          return AnimatedBuilder(
+            animation: _fallAnim[i],
+            builder: (_, child) {
+              final p = _fallAnim[i].value;
+              return Positioned(
+                left: _productCenters[i].dx - _kProductSize / 2,
+                top: _productCenters[i].dy - _kProductSize / 2 + p * 220,
+                child: Opacity(
+                  opacity: (1 - p * 0.85).clamp(0.0, 1.0),
+                  child: Transform(
+                    transform: Matrix4.identity()
+                      ..rotateX(p * 1.8 * (i.isEven ? 1 : -1))
+                      ..rotateZ(p * (i.isEven ? 0.9 : -0.9)),
+                    alignment: Alignment.center,
+                    child: child,
+                  ),
+                ),
+              );
+            },
+            child: Container(
+              width: _kProductSize,
+              height: _kProductSize,
+              decoration: BoxDecoration(
+                color: _kProductColors[i % _kProductColors.length],
+                borderRadius: BorderRadius.circular(7),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withAlpha(100),
+                    blurRadius: 4,
+                    offset: const Offset(2, 2),
+                  ),
+                ],
+              ),
+              child: Center(
+                child: Text(
+                  _kProductEmojis[i % _kProductEmojis.length],
+                  style: const TextStyle(fontSize: 20),
                 ),
               ),
-            );
-          },
-          child: Container(
-            width: _kProductSize,
-            height: _kProductSize,
-            decoration: BoxDecoration(
-              color: _kProductColors[i % _kProductColors.length],
-              borderRadius: BorderRadius.circular(7),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withAlpha(100),
-                  blurRadius: 4,
-                  offset: const Offset(2, 2),
-                ),
-              ],
             ),
-            child: Center(
-              child: Text(
-                _kProductEmojis[i % _kProductEmojis.length],
-                style: const TextStyle(fontSize: 20),
-              ),
-            ),
+          );
+        }),
+      ),
+    );
+  }
+
+  Widget _buildTrail() {
+    return CustomPaint(
+      size: _screenSize,
+      painter: _TrailPainter(trail: List.from(_projTrail)),
+    );
+  }
+
+  Widget _buildWindIndicator() {
+    if (_phase == _Phase.result) return const SizedBox.shrink();
+    final abs = _windForce.abs();
+    if (abs < 0.08) return const SizedBox.shrink();
+    final isRight = _windForce > 0;
+    final strength = (abs * 3).ceil().clamp(1, 3);
+    final arrows = List.filled(strength, isRight ? '›' : '‹').join(' ');
+    return Positioned(
+      top: 100,
+      left: 0,
+      right: 0,
+      child: Center(
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+          decoration: BoxDecoration(
+            color: Colors.black.withAlpha(120),
+            borderRadius: BorderRadius.circular(14),
           ),
-        );
-      }),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(Icons.air, color: Colors.lightBlueAccent, size: 14),
+              const SizedBox(width: 5),
+              Text(
+                'Vento $arrows',
+                style: const TextStyle(
+                  color: Colors.lightBlueAccent,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 
@@ -347,6 +486,7 @@ class _MinigameLexStrikeScreenState extends State<MinigameLexStrikeScreen>
         maxDrag: _kMaxDrag,
         screenSize: _screenSize,
         showBand: _phase == _Phase.aiming || _phase == _Phase.tutorial,
+        windForce: _windForce,
       ),
     );
   }
@@ -426,37 +566,49 @@ class _MinigameLexStrikeScreenState extends State<MinigameLexStrikeScreen>
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(emoji, style: const TextStyle(fontSize: 80)),
+            ScaleTransition(
+              scale: _resultScaleAnim,
+              child: Text(emoji, style: const TextStyle(fontSize: 80)),
+            ),
             const SizedBox(height: 14),
-            Text(
-              tier.label,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 0.5,
+            FadeTransition(
+              opacity: _resultCtrl,
+              child: Text(
+                tier.label,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 0.5,
+                ),
               ),
             ),
             const SizedBox(height: 10),
-            Text(
-              '$_fallenCount prodotti abbattuti su ${widget.config.productsTotal}',
-              style: const TextStyle(color: Colors.white60, fontSize: 15),
+            FadeTransition(
+              opacity: _resultCtrl,
+              child: Text(
+                '$_fallenCount prodotti abbattuti su ${widget.config.productsTotal}',
+                style: const TextStyle(color: Colors.white60, fontSize: 15),
+              ),
             ),
             const SizedBox(height: 36),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: bgColor,
-                foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 44, vertical: 15),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(28)),
-                textStyle: const TextStyle(
-                    fontSize: 18, fontWeight: FontWeight.bold),
+            FadeTransition(
+              opacity: _resultCtrl,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: bgColor,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 44, vertical: 15),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(28)),
+                  textStyle: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                onPressed: () =>
+                    widget.onComplete(tier.statEffects, tier.label, tier),
+                child: const Text('Avanti →'),
               ),
-              onPressed: () =>
-                  widget.onComplete(tier.statEffects, tier.label, tier),
-              child: const Text('Avanti →'),
             ),
           ],
         ),
@@ -468,9 +620,9 @@ class _MinigameLexStrikeScreenState extends State<MinigameLexStrikeScreen>
 // ─── Painters ────────────────────────────────────────────────────────────────
 
 class _ShelfPainter extends CustomPainter {
-  final double row1Y, row2Y, width;
+  final double row1Y, row2Y, row3Y, width;
   const _ShelfPainter(
-      {required this.row1Y, required this.row2Y, required this.width});
+      {required this.row1Y, required this.row2Y, required this.row3Y, required this.width});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -482,7 +634,7 @@ class _ShelfPainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.5;
 
-    for (final y in [row1Y, row2Y]) {
+    for (final y in [row1Y, row2Y, row3Y]) {
       canvas.drawRect(Rect.fromLTWH(0, y + 3, width, plankH), shadow);
       canvas.drawRect(Rect.fromLTWH(0, y, width, plankH), wood);
       canvas.drawLine(
@@ -494,12 +646,35 @@ class _ShelfPainter extends CustomPainter {
   bool shouldRepaint(_ShelfPainter _) => false;
 }
 
+/// Scia del proiettile in volo.
+class _TrailPainter extends CustomPainter {
+  final List<Offset> trail;
+  const _TrailPainter({required this.trail});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    for (int i = 0; i < trail.length; i++) {
+      final frac = (i + 1) / trail.length;
+      final r = 6.0 * frac;
+      canvas.drawCircle(
+        trail[i],
+        r,
+        Paint()..color = Colors.orangeAccent.withAlpha((frac * 100).round()),
+      );
+    }
+  }
+
+  @override
+  bool shouldRepaint(_TrailPainter old) => trail != old.trail;
+}
+
 class _SlingshotPainter extends CustomPainter {
   final Offset center;
   final Offset? dragOffset;
   final double maxDrag;
   final Size screenSize;
   final bool showBand;
+  final double windForce;
 
   const _SlingshotPainter({
     required this.center,
@@ -507,6 +682,7 @@ class _SlingshotPainter extends CustomPainter {
     required this.maxDrag,
     required this.screenSize,
     required this.showBand,
+    this.windForce = 0.0,
   });
 
   @override
@@ -560,7 +736,8 @@ class _SlingshotPainter extends CustomPainter {
     final vy = -dir.dy * speed;
     const dt = 0.58;
     final g = screenSize.height * 1.55;
-    const steps = 14;
+    final windAcc = windForce * screenSize.width * 0.55;
+    const steps = 16;
 
     final dotPaint = Paint()
       ..color = Colors.white.withAlpha(130)
@@ -568,7 +745,7 @@ class _SlingshotPainter extends CustomPainter {
 
     for (int i = 1; i <= steps; i++) {
       final t = (i / steps) * dt;
-      final px = startPos.dx + vx * t;
+      final px = startPos.dx + vx * t + 0.5 * windAcc * t * t;
       final py = startPos.dy + vy * t + 0.5 * g * t * t;
       if (px < -20 || px > screenSize.width + 20 || py < -80) continue;
       final r = 3.5 * (1.0 - i / (steps * 1.4));
@@ -578,7 +755,7 @@ class _SlingshotPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_SlingshotPainter old) =>
-      dragOffset != old.dragOffset || showBand != old.showBand;
+      dragOffset != old.dragOffset || showBand != old.showBand || windForce != old.windForce;
 }
 
 // ─── Supermarket background ───────────────────────────────────────────────────
