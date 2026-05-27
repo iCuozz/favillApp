@@ -652,94 +652,6 @@ class _EpisodePageState extends State<EpisodePage> {
     }
   }
 
-  void _openPageJumpSheet() {
-    SettingsService.tapFeedback();
-    final pages = _effectivePages;
-
-    showModalBottomSheet<void>(
-      context: context,
-      backgroundColor: const Color(0xFF1A1A1A),
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (context) {
-        return SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    const Icon(Icons.grid_view, size: 20),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Text(
-                        AppStrings.jumpToPage,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    Text(
-                      '${_maxVisitedIndex + 1} / ${pages.length}',
-                      style: TextStyle(
-                        color: Colors.grey.shade400,
-                        fontSize: 13,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 12),
-                Flexible(
-                  child: GridView.builder(
-                    shrinkWrap: true,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                      childAspectRatio: 2 / 3,
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 10,
-                    ),
-                    itemCount: pages.length,
-                    itemBuilder: (context, index) {
-                      final page = pages[index];
-                      final isUnlocked = index <= _maxVisitedIndex;
-                      final isCurrent = index == currentIndex;
-
-                      return _PageThumb(
-                        pageIndex: index,
-                        background: page.background,
-                        isUnlocked: isUnlocked,
-                        isCurrent: isCurrent,
-                        onTap: isUnlocked
-                            ? () {
-                                Navigator.pop(context);
-                                SettingsService.tapFeedback();
-                                _pageController.animateToPage(
-                                  index,
-                                  duration:
-                                      const Duration(milliseconds: 300),
-                                  curve: Curves.easeInOut,
-                                );
-                              }
-                            : null,
-                      );
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
 
   KeyEventResult _handleKeyEvent(KeyEvent event) {
     if (event is! KeyDownEvent) {
@@ -770,25 +682,21 @@ class _EpisodePageState extends State<EpisodePage> {
         title: Text(widget.episode.title),
         actions: [
           IconButton(
-            tooltip: AppStrings.jumpToPage,
-            icon: const Icon(Icons.grid_view),
-            onPressed: _openPageJumpSheet,
-          ),
-          ValueListenableBuilder<bool>(
-            valueListenable: SettingsService.hapticsEnabled,
-            builder: (context, enabled, _) {
-              return IconButton(
-                tooltip: AppStrings.hapticsTooltip,
-                icon: Icon(
+            tooltip: AppStrings.hapticsTooltip,
+            icon: ValueListenableBuilder<bool>(
+              valueListenable: SettingsService.hapticsEnabled,
+              builder: (context, enabled, _) {
+                return Icon(
                   enabled ? Icons.vibration : Icons.do_not_disturb_on_outlined,
-                ),
-                onPressed: () {
-                  SettingsService.setHapticsEnabled(!enabled);
-                  if (!enabled) {
-                    HapticFeedback.selectionClick();
-                  }
-                },
-              );
+                );
+              },
+            ),
+            onPressed: () {
+              final enabled = SettingsService.hapticsEnabled.value;
+              SettingsService.setHapticsEnabled(!enabled);
+              if (!enabled) {
+                HapticFeedback.selectionClick();
+              }
             },
           ),
           IconButton(
@@ -959,77 +867,3 @@ class _EpisodePageState extends State<EpisodePage> {
   }
 }
 
-class _PageThumb extends StatelessWidget {
-  final int pageIndex;
-  final String background;
-  final bool isUnlocked;
-  final bool isCurrent;
-  final VoidCallback? onTap;
-
-  const _PageThumb({
-    required this.pageIndex,
-    required this.background,
-    required this.isUnlocked,
-    required this.isCurrent,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(10),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.black,
-            border: Border.all(
-              color: isCurrent ? Colors.pinkAccent : Colors.white12,
-              width: isCurrent ? 2.5 : 1,
-            ),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Stack(
-            fit: StackFit.expand,
-            children: [
-              if (isUnlocked)
-                Image.asset(
-                  background,
-                  fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) => Container(color: Colors.grey.shade900),
-                )
-              else
-                Container(
-                  color: Colors.grey.shade900,
-                  alignment: Alignment.center,
-                  child: Icon(
-                    Icons.lock,
-                    color: Colors.grey.shade600,
-                    size: 28,
-                  ),
-                ),
-              Positioned(
-                left: 0,
-                right: 0,
-                bottom: 0,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 4),
-                  color: Colors.black.withOpacity(0.55),
-                  child: Text(
-                    '\${pageIndex + 1}',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                      color: isUnlocked ? Colors.white : Colors.grey.shade500,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
