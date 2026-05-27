@@ -29,10 +29,18 @@ class _Ember {
   });
 }
 
+// ─────────────────────────── Ripple tap ────────────────────────────────────
+class _Ripple {
+  double progress; // 0..1
+  final Color color;
+  _Ripple({required this.color}) : progress = 0;
+}
+
 // ─────────────────────────────── Widget ────────────────────────────────────
 
 /// Mini-game EP1 "Respira": gauge del calore con surge randomici.
-/// Difficoltà alta: rise rapido, surge improvvisi, decadimento lento.
+/// Meccanica: TAP RAPIDO per abbassare il calore (non più hold).
+/// Streak bonus dopo 4 tap consecutivi entro 350ms.
 class MinigameRespiraScreen extends StatefulWidget {
   final MinigameConfig config;
   final void Function(
@@ -51,33 +59,43 @@ class _MinigameRespiraScreenState extends State<MinigameRespiraScreen>
   _RespiraPhase _phase = _RespiraPhase.tutorial;
   double _heat = 0.45;
   double _timeLeft = 0;
-  bool _holding = false;
   bool _success = false;
   Timer? _ticker;
 
-  // Surge system
-  double _nextSurgeIn = 2.8;   // secondi al prossimo surge
-  double _surgeProgress = 0.0; // 0=niente, 0..1=warning, >1=esplosione
-  bool _inSurgeWarning = false;
-  static const _kSurgeWarnDuration = 0.9; // secondi di avvertimento
+  // ── Tap mechanic ──────────────────────────────────────────────────────
+  int _streak = 0;                         // tap consecutivi entro 350ms
+  DateTime? _lastTapTime;
+  final List<DateTime> _tapTimestamps = []; // finestra 1.2s per tap rate
+  double _tapRate = 0;                      // tap/s
+  final List<_Ripple> _ripples = [];
 
-  // Shake
+  // ── Surge system ──────────────────────────────────────────────────────
+  double _nextSurgeIn = 2.0;
+  double _surgeProgress = 0.0;
+  bool _inSurgeWarning = false;
+  static const _kSurgeWarnDuration = 0.8;
+
+  // ── Shake ─────────────────────────────────────────────────────────────
   final _rng = Random();
   double _shakeX = 0;
   double _shakeY = 0;
 
-  // Ember particles
+  // ── Ember particles ───────────────────────────────────────────────────
   final List<_Ember> _embers = [];
 
   // ── Parametri difficoltà ──────────────────────────────────────────────
-  static const _kRiseRate = 0.12;   // passivo per secondo (era 0.055)
-  static const _kDecayRate = 0.095; // decadimento mentre si tiene (era 0.14)
-  static const _kStartHeat = 0.45;  // calore iniziale (era 0.28)
-  static const _kTickMs = 40;       // 25fps
+  static const _kRiseRate = 0.13;        // calore passivo per secondo
+  static const _kTapCool = 0.040;        // raffreddamento per singolo tap
+  static const _kStreakBonus = 0.015;    // bonus per tap quando streak >= 4
+  static const _kStreakMin = 4;          // soglia streak
+  static const _kMinTapMs = 60;          // anti-spam (ignora tap < 60ms)
+  static const _kStartHeat = 0.45;
+  static const _kTickMs = 40;            // 25 fps
 
   late AnimationController _pulseCtrl;
   late AnimationController _resultCtrl;
   late AnimationController _surgeWarnCtrl;
+  late AnimationController _tapBounceCtrl; // scala bottone al tap
 
   @override
   void initState() {
@@ -94,20 +112,68 @@ class _MinigameRespiraScreenState extends State<MinigameRespiraScreen>
       vsync: this,
       duration: const Duration(milliseconds: 400),
     )..repeat(reverse: true);
+    _tapBounceCtrl = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 130),
+    );
   }
 
   void _startGame() {
     setState(() {
       _phase = _RespiraPhase.playing;
       _heat = _kStartHeat;
-      _timeLeft = (widget.config.durationSeconds ?? 12).toDouble();
-      _holding = false;
-      _nextSurgeIn = 2.5 + _rng.nextDouble() * 1.5;
+      _timeLeft = (widget.config.durationSeconds ?? 14).toDouble();
+      _streak = 0;
+      _lastTapTime = null;
+      _tapTimestamps.clear();
+      _tapRate = 0;
+      _ripples.clear();
+      _nextSurgeIn = 1.8 + _rng.nextDouble() * 1.5;
       _inSurgeWarning = false;
       _surgeProgress = 0;
     });
-    _ticker = Timer.periodic(
-        const Duration(milliseconds: _kTickMs), _tick);
+    _ticker = Timer.periodic(const Duration(milliseconds: _kTickMs), _tick);
+  }
+
+  /// Chiamato ad ogni tap sul bottone.
+  void _onTap() {
+    if (_phase != _RespiraPhase.playing) return;
+    final now = DateTime.now();
+
+    // Anti-spam: scarta tap troppo ravvicinati
+    if (_lastTapTime != null &&
+        now.difference(_lastTapTime!).inMilliseconds < _kMinTapMs) { return; }
+
+    // Aggiorna streak
+    if (_lastTapTime != null &&
+        now.difference(_lastTapTime!).inMilliseconds < 350) {
+      _streak++;
+    } else {
+      _streak = 1;
+    }
+    _lastTapTime = now;
+
+    // Calcola tap rate su finestra 1.2s
+    _tapTimestamps.add(now);
+    _tapTimestamps.removeWhere(
+        (t) => now.difference(t).inMilliseconds > 1200);
+    _tapRate = _tapTimestamps.length / 1.2;
+
+    // Raffreddamento: base + bonus streak
+    final cool = _kTapCool + (_streak >= _kStreakMin ? _kStreakBonus : 0.0);
+
+    // Colore ripple: azzurro se in streak, viola altrimenti
+    final rippleColor = _streak >= _kStreakMin
+        ? const Color(0xFF80D8FF)
+        : const Color(0xFF9C8FFF);
+
+    HapticFeedback.lightImpact();
+    _tapBounceCtrl.forward(from: 0);
+
+    setState(() {
+      _heat = (_heat - cool).clamp(0.0, 1.0);
+      _ripples.add(_Ripple(color: rippleColor));
+    });
   }
 
   void _tick(Timer _) {
@@ -115,14 +181,15 @@ class _MinigameRespiraScreenState extends State<MinigameRespiraScreen>
     const dt = _kTickMs / 1000.0;
 
     setState(() {
-      // ── Aggiorna calore ──────────────────────────────────────────────
-      _heat = (_holding
-              ? (_heat - _kDecayRate * dt)
-              : (_heat + _kRiseRate * dt))
-          .clamp(0.0, 1.0);
+      // Calore passivo
+      _heat = (_heat + _kRiseRate * dt).clamp(0.0, 1.0);
       _timeLeft -= dt;
 
-      // ── Surge countdown ──────────────────────────────────────────────
+      // Avanza ripple
+      for (final r in _ripples) { r.progress += dt / 0.55; }
+      _ripples.removeWhere((r) => r.progress >= 1.0);
+
+      // Surge countdown
       if (!_inSurgeWarning) {
         _nextSurgeIn -= dt;
         if (_nextSurgeIn <= 0) {
@@ -133,18 +200,16 @@ class _MinigameRespiraScreenState extends State<MinigameRespiraScreen>
       } else {
         _surgeProgress += dt / _kSurgeWarnDuration;
         if (_surgeProgress >= 1.0) {
-          // 💥 SURGE!
-          final spike = 0.12 + _rng.nextDouble() * 0.14;
+          final spike = 0.14 + _rng.nextDouble() * 0.14;
           _heat = (_heat + spike).clamp(0.0, 1.0);
           HapticFeedback.heavyImpact();
           _inSurgeWarning = false;
           _surgeProgress = 0;
-          // Prossimo surge: 2.5..5s
-          _nextSurgeIn = 2.5 + _rng.nextDouble() * 2.5;
+          _nextSurgeIn = 1.5 + _rng.nextDouble() * 2.5;
         }
       }
 
-      // ── Shake a calore alto ──────────────────────────────────────────
+      // Shake ad alta temperatura
       if (_heat > 0.72) {
         final intensity = (_heat - 0.72) / 0.28 * 6;
         _shakeX = (_rng.nextDouble() - 0.5) * intensity;
@@ -154,10 +219,8 @@ class _MinigameRespiraScreenState extends State<MinigameRespiraScreen>
         _shakeY = 0;
       }
 
-      // ── Ember particles ──────────────────────────────────────────────
       _updateEmbers(dt);
 
-      // ── Fine partita ─────────────────────────────────────────────────
       if (_heat >= 1.0) {
         _endGame(false);
       } else if (_timeLeft <= 0) {
@@ -167,15 +230,12 @@ class _MinigameRespiraScreenState extends State<MinigameRespiraScreen>
   }
 
   void _updateEmbers(double dt) {
-    // Rimuovi morti
     _embers.removeWhere((e) => e.life <= 0);
-    // Aggiorna esistenti
     for (final e in _embers) {
       e.y += e.vy * dt;
       e.x += e.vx * dt;
       e.life -= e.decay * dt;
     }
-    // Spawn nuove braci in base al calore
     final spawnRate = (_heat * 12).round();
     for (int i = 0; i < min(spawnRate, 3); i++) {
       if (_rng.nextDouble() < 0.35) {
@@ -198,11 +258,8 @@ class _MinigameRespiraScreenState extends State<MinigameRespiraScreen>
   void _endGame(bool success) {
     _ticker?.cancel();
     _success = success;
-    if (success) {
-      HapticFeedback.mediumImpact();
-    } else {
-      HapticFeedback.heavyImpact();
-    }
+    HapticFeedback.heavyImpact();
+    if (success) HapticFeedback.mediumImpact();
     setState(() => _phase = _RespiraPhase.result);
     _resultCtrl.forward();
   }
@@ -213,6 +270,7 @@ class _MinigameRespiraScreenState extends State<MinigameRespiraScreen>
     _pulseCtrl.dispose();
     _resultCtrl.dispose();
     _surgeWarnCtrl.dispose();
+    _tapBounceCtrl.dispose();
     super.dispose();
   }
 
@@ -260,7 +318,8 @@ class _MinigameRespiraScreenState extends State<MinigameRespiraScreen>
               ),
               const SizedBox(height: 14),
               const Text(
-                'Tieni premuto per sopprimere il calore.\n'
+                'TAP RAPIDO per abbassare il calore.\n'
+                'Più veloce e ritmico → bonus raffreddamento.\n'
                 'Attenzione ai picchi improvvisi — ci sarà un avviso.',
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -313,7 +372,7 @@ class _MinigameRespiraScreenState extends State<MinigameRespiraScreen>
       const Color(0xFF3D0000),
       Curves.easeIn.transform(_heat),
     )!;
-    final duration = (widget.config.durationSeconds ?? 12).toDouble();
+    final duration = (widget.config.durationSeconds ?? 14).toDouble();
     final timerProgress = (_timeLeft / duration).clamp(0.0, 1.0);
 
     return Transform.translate(
@@ -396,9 +455,7 @@ class _MinigameRespiraScreenState extends State<MinigameRespiraScreen>
                 AnimatedBuilder(
                   animation: _pulseCtrl,
                   builder: (_, __) {
-                    final pulse = _holding
-                        ? 0.0
-                        : _pulseCtrl.value * 0.07 * _heat;
+                    final pulse = _pulseCtrl.value * 0.07 * _heat;
                     return CustomPaint(
                       size: const Size(270, 270),
                       painter: _HeatPainter(
@@ -418,8 +475,8 @@ class _MinigameRespiraScreenState extends State<MinigameRespiraScreen>
 
                 const Spacer(),
 
-                // ── Hold button ─────────────────────────────────────────
-                _buildHoldButton(heatColor),
+                // ── Tap button + ripple + tap rate ──────────────────────
+                _buildTapButton(heatColor),
 
                 const SizedBox(height: 48),
               ],
@@ -439,19 +496,24 @@ class _MinigameRespiraScreenState extends State<MinigameRespiraScreen>
       text = '⚡  Picco in arrivo!';
       color = const Color(0xFFFFAB40);
       weight = FontWeight.bold;
-    } else if (_holding) {
-      text = _heat > 0.7 ? '✋  Tieni ancora...' : '✋  Bene, continua.';
-      color = Colors.white60;
     } else if (_heat > 0.85) {
-      text = '⚠️  TROPPO CALDO!';
+      text = '😱  TROPPO CALDO!';
       color = Colors.red[300]!;
       weight = FontWeight.bold;
-    } else if (_heat > 0.6) {
-      text = '🔥  Tieni premuto!';
+    } else if (_streak >= _kStreakMin && _tapRate >= 4) {
+      text = '❄️  In ritmo! (+bonus)';
+      color = const Color(0xFF80D8FF);
+      weight = FontWeight.bold;
+    } else if (_tapRate >= 4) {
+      text = '💨  Bene, continua!';
+      color = Colors.white70;
+    } else if (_tapRate >= 2) {
+      text = '🔥  Più veloce!';
       color = const Color(0xFFFF8A65);
     } else {
-      text = '🔥  Tieni premuto.';
-      color = Colors.white54;
+      text = '⚡  TAP! TAP! TAP!';
+      color = Colors.redAccent[100]!;
+      weight = FontWeight.bold;
     }
 
     return AnimatedDefaultTextStyle(
@@ -461,50 +523,131 @@ class _MinigameRespiraScreenState extends State<MinigameRespiraScreen>
     );
   }
 
-  Widget _buildHoldButton(Color heatColor) {
-    return Listener(
-      onPointerDown: (_) => setState(() => _holding = true),
-      onPointerUp: (_) => setState(() => _holding = false),
-      onPointerCancel: (_) => setState(() => _holding = false),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 80),
-        width: 152,
-        height: 152,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: _holding
-              ? heatColor.withValues(alpha: 0.22)
-              : Colors.white.withValues(alpha: 0.04),
-          border: Border.all(
-            color: _holding
-                ? heatColor
-                : (_inSurgeWarning
-                    ? const Color(0xFFFF6D00)
-                    : Colors.white24),
-            width: _holding ? 3.5 : (_inSurgeWarning ? 2.5 : 1.5),
-          ),
-          boxShadow: [
-            if (_holding)
-              BoxShadow(
-                color: heatColor.withValues(alpha: 0.5),
-                blurRadius: 32,
-                spreadRadius: 6,
+  Widget _buildTapButton(Color heatColor) {
+    final inStreak = _streak >= _kStreakMin;
+    const streakColor = Color(0xFF80D8FF);
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        SizedBox(
+          width: 200,
+          height: 200,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              // ── Ripple rings ──────────────────────────────────────────
+              ..._ripples.map((r) {
+                final scale = 0.55 + r.progress * 0.9;
+                final alpha = (1.0 - r.progress).clamp(0.0, 1.0);
+                return IgnorePointer(
+                  child: Transform.scale(
+                    scale: scale,
+                    child: Container(
+                      width: 200,
+                      height: 200,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: r.color.withValues(alpha: alpha * 0.75),
+                          width: 2.5,
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              }),
+
+              // ── Streak outer glow ─────────────────────────────────────
+              if (inStreak)
+                IgnorePointer(
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 120),
+                    width: 190,
+                    height: 190,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: streakColor.withValues(alpha: 0.30),
+                          blurRadius: 28,
+                          spreadRadius: 6,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+
+              // ── Bottone tap ───────────────────────────────────────────
+              AnimatedBuilder(
+                animation: _tapBounceCtrl,
+                builder: (_, __) {
+                  // scale: 1.0 → 0.86 → 1.0
+                  final t = _tapBounceCtrl.value;
+                  final scale = 1.0 - 0.14 * sin(t * pi);
+                  return Transform.scale(
+                    scale: scale,
+                    child: GestureDetector(
+                      onTap: _onTap,
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 80),
+                        width: 162,
+                        height: 162,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: inStreak
+                              ? streakColor.withValues(alpha: 0.18)
+                              : heatColor.withValues(alpha: 0.08),
+                          border: Border.all(
+                            color: inStreak
+                                ? streakColor
+                                : (_inSurgeWarning
+                                    ? const Color(0xFFFF6D00)
+                                    : Colors.white30),
+                            width: inStreak ? 3.0 : (_inSurgeWarning ? 2.5 : 1.8),
+                          ),
+                          boxShadow: [
+                            if (_inSurgeWarning && !inStreak)
+                              BoxShadow(
+                                color: const Color(0xFFFF6D00).withValues(alpha: 0.35),
+                                blurRadius: 20,
+                                spreadRadius: 2,
+                              ),
+                          ],
+                        ),
+                        child: Center(
+                          child: Text(
+                            _heat > 0.8 ? '😰' : (inStreak ? '❄️' : '💨'),
+                            style: const TextStyle(fontSize: 56),
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                },
               ),
-            if (_inSurgeWarning && !_holding)
-              BoxShadow(
-                color: const Color(0xFFFF6D00).withValues(alpha: 0.35),
-                blurRadius: 20,
-                spreadRadius: 2,
-              ),
-          ],
-        ),
-        child: Center(
-          child: Text(
-            _holding ? '✋' : (_heat > 0.8 ? '😰' : '✋'),
-            style: const TextStyle(fontSize: 52),
+            ],
           ),
         ),
-      ),
+
+        // ── Tap rate indicator ────────────────────────────────────────
+        const SizedBox(height: 10),
+        Text(
+          _tapRate > 0
+              ? '${_tapRate.toStringAsFixed(1)} tap/s'
+                  '${_streak >= _kStreakMin ? "  🔥×$_streak" : ""}' 
+              : 'tap veloce!',
+          style: TextStyle(
+            color: _streak >= _kStreakMin
+                ? const Color(0xFF80D8FF)
+                : Colors.white30,
+            fontSize: 13,
+            fontWeight: _streak >= _kStreakMin
+                ? FontWeight.bold
+                : FontWeight.normal,
+          ),
+        ),
+      ],
     );
   }
 
