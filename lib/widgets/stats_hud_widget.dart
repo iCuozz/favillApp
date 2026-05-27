@@ -131,11 +131,11 @@ class _StatEffectToastState extends State<StatEffectToast>
     super.initState();
     _ctrl = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 3000),
+      duration: const Duration(milliseconds: 5000),
     );
     _opacity = CurvedAnimation(
       parent: ReverseAnimation(_ctrl),
-      curve: const Interval(0.5, 1.0, curve: Curves.easeOut),
+      curve: const Interval(0.75, 1.0, curve: Curves.easeOut),
     );
     _ctrl.forward().then((_) => widget.onDone());
   }
