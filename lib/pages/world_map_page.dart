@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -138,14 +139,16 @@ class _WorldMapPageState extends State<WorldMapPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton.small(
-        heroTag: 'dev-picker',
-        backgroundColor: Colors.black54,
-        foregroundColor: Colors.pinkAccent,
-        tooltip: 'Dev: salta episodio',
-        onPressed: _worldMap != null ? _openDevEpisodePicker : null,
-        child: const Icon(Icons.developer_mode, size: 18),
-      ),
+      floatingActionButton: kDebugMode
+          ? FloatingActionButton.small(
+              heroTag: 'dev-picker',
+              backgroundColor: Colors.black54,
+              foregroundColor: Colors.pinkAccent,
+              tooltip: 'Dev: salta episodio',
+              onPressed: _worldMap != null ? _openDevEpisodePicker : null,
+              child: const Icon(Icons.developer_mode, size: 18),
+            )
+          : null,
       body: Stack(
         fit: StackFit.expand,
         children: [
