@@ -109,7 +109,7 @@ class _MinigameLexStrikeScreenState extends State<MinigameLexStrikeScreen>
     const cols = 6;
     final n = widget.config.productsTotal.clamp(1, 12);
     const stride = _kProductSize + _kProductGap;
-    final totalW = cols * stride - _kProductGap;
+    const totalW = cols * stride - _kProductGap;
     final startX = (size.width - totalW) / 2 + _kProductSize / 2;
     final row1Y = size.height * 0.27;
     final row2Y = row1Y + _kProductSize + 14;
@@ -249,6 +249,7 @@ class _MinigameLexStrikeScreenState extends State<MinigameLexStrikeScreen>
                 _buildBackground(),
                 _buildShelves(),
                 _buildProducts(),
+                _buildLexCharacter(),
                 _buildSlingshotAndTrajectory(),
                 if (_phase == _Phase.launched ||
                     _phase == _Phase.chainReaction)
@@ -265,14 +266,17 @@ class _MinigameLexStrikeScreenState extends State<MinigameLexStrikeScreen>
   }
 
   Widget _buildBackground() {
-    return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [Color(0xFF1A1A2E), Color(0xFF16213E)],
-        ),
-      ),
+    return CustomPaint(
+      size: MediaQuery.of(context).size,
+      painter: const _SupermarketBgPainter(),
+    );
+  }
+
+  Widget _buildLexCharacter() {
+    if (!_layoutReady) return const SizedBox.shrink();
+    return CustomPaint(
+      size: _screenSize,
+      painter: _LexPainter(slingshotPos: _slingshotPos),
     );
   }
 
@@ -520,15 +524,7 @@ class _SlingshotPainter extends CustomPainter {
     canvas.drawLine(center + const Offset(-5, 8), leftTip, forkPaint);
     canvas.drawLine(center + const Offset(5, 8), rightTip, forkPaint);
 
-    // Handle
-    final handlePaint = Paint()
-      ..color = const Color(0xFF8B4513)
-      ..strokeWidth = 9
-      ..strokeCap = StrokeCap.round
-      ..style = PaintingStyle.stroke;
-    canvas.drawLine(
-        center + const Offset(0, 8), center + const Offset(0, 42), handlePaint);
-
+    // Handle — hidden behind Lex's body, skip drawing
     if (!showBand) return;
 
     final orsettoPosNow =
@@ -583,4 +579,269 @@ class _SlingshotPainter extends CustomPainter {
   @override
   bool shouldRepaint(_SlingshotPainter old) =>
       dragOffset != old.dragOffset || showBand != old.showBand;
+}
+
+// ─── Supermarket background ───────────────────────────────────────────────────
+
+class _SupermarketBgPainter extends CustomPainter {
+  const _SupermarketBgPainter();
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final w = size.width;
+    final h = size.height;
+
+    // ── Ceiling strip ─────────────────────────────────────────────────────────
+    canvas.drawRect(
+      Rect.fromLTWH(0, 0, w, h * 0.05),
+      Paint()..color = const Color(0xFFF0EDE3),
+    );
+
+    // Fluorescent light strips (3 across)
+    final lightGlow = Paint()
+      ..color = const Color(0xFFFFFDE7).withAlpha(200)
+      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 14);
+    final lightFace = Paint()..color = const Color(0xFFFFFBEC);
+    for (final frac in [0.18, 0.5, 0.82]) {
+      final lx = w * frac;
+      canvas.drawRect(
+        Rect.fromCenter(
+            center: Offset(lx, h * 0.026),
+            width: w * 0.20,
+            height: h * 0.04),
+        lightGlow,
+      );
+      canvas.drawRect(
+        Rect.fromCenter(
+            center: Offset(lx, h * 0.026),
+            width: w * 0.17,
+            height: h * 0.026),
+        lightFace,
+      );
+    }
+
+    // ── IperPassata banner ────────────────────────────────────────────────────
+    canvas.drawRect(
+      Rect.fromLTWH(0, h * 0.05, w, h * 0.045),
+      Paint()..color = const Color(0xFFBF360C),
+    );
+    final tp = TextPainter(
+      text: const TextSpan(
+        text: '🏪  IperPassata',
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 13,
+          fontWeight: FontWeight.bold,
+          letterSpacing: 1.8,
+        ),
+      ),
+      textDirection: TextDirection.ltr,
+    )..layout();
+    tp.paint(
+      canvas,
+      Offset(
+        (w - tp.width) / 2,
+        h * 0.05 + (h * 0.045 - tp.height) / 2,
+      ),
+    );
+
+    // ── Wall (cream tiles) ────────────────────────────────────────────────────
+    canvas.drawRect(
+      Rect.fromLTWH(0, h * 0.095, w, h * 0.655),
+      Paint()..color = const Color(0xFFF4EFE6),
+    );
+
+    // Tile grid — horizontal
+    final gridH = Paint()
+      ..color = const Color(0xFFDDD6CB)
+      ..strokeWidth = 0.8
+      ..style = PaintingStyle.stroke;
+    final gridV = Paint()
+      ..color = const Color(0xFFE8E0D5)
+      ..strokeWidth = 0.5
+      ..style = PaintingStyle.stroke;
+    const tileS = 52.0;
+    for (double y = h * 0.095; y < h * 0.75; y += tileS) {
+      canvas.drawLine(Offset(0, y), Offset(w, y), gridH);
+    }
+    for (double x = 0; x < w; x += tileS) {
+      canvas.drawLine(Offset(x, h * 0.095), Offset(x, h * 0.75), gridV);
+    }
+
+    // Warm ambient light from ceiling
+    canvas.drawRect(
+      Rect.fromLTWH(0, 0, w, h),
+      Paint()
+        ..shader = const RadialGradient(
+          center: Alignment(0, -0.55),
+          radius: 0.85,
+          colors: [Color(0x22FFFDE7), Color(0x00FFFDE7)],
+        ).createShader(Rect.fromLTWH(0, 0, w, h)),
+    );
+
+    // ── Floor (light grey tiles) ──────────────────────────────────────────────
+    canvas.drawRect(
+      Rect.fromLTWH(0, h * 0.75, w, h * 0.25),
+      Paint()..color = const Color(0xFFCEC9BE),
+    );
+    final floorGrid = Paint()
+      ..color = const Color(0xFFB8B3A8)
+      ..strokeWidth = 0.9
+      ..style = PaintingStyle.stroke;
+    const fTile = 48.0;
+    for (double x = 0; x < w; x += fTile) {
+      canvas.drawLine(
+          Offset(x, h * 0.75), Offset(x, h), floorGrid);
+    }
+    for (double y = h * 0.75; y < h; y += fTile / 2) {
+      canvas.drawLine(Offset(0, y), Offset(w, y), floorGrid);
+    }
+
+    // Floor base shadow along wall
+    canvas.drawRect(
+      Rect.fromLTWH(0, h * 0.75, w, 4),
+      Paint()..color = Colors.black.withAlpha(30),
+    );
+  }
+
+  @override
+  bool shouldRepaint(_) => false;
+}
+
+// ─── Lex character (from behind) ─────────────────────────────────────────────
+
+class _LexPainter extends CustomPainter {
+  final Offset slingshotPos;
+  const _LexPainter({required this.slingshotPos});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final cx = slingshotPos.dx;
+    final sy = slingshotPos.dy;
+
+    // ── Shared paints ─────────────────────────────────────────────────────────
+    final skinPaint = Paint()..color = const Color(0xFFFFCBA4);
+    final oniePaint = Paint()..color = const Color(0xFF82C4E0);
+    final snapPaint = Paint()..color = const Color(0xFF5AAECF);
+    final hairPaint = Paint()
+      ..color = const Color(0xFF5C3317)
+      ..strokeWidth = 3.2
+      ..strokeCap = StrokeCap.round
+      ..style = PaintingStyle.stroke;
+    final armPaint = Paint()
+      ..color = const Color(0xFFFFCBA4)
+      ..strokeWidth = 12
+      ..strokeCap = StrokeCap.round
+      ..style = PaintingStyle.stroke;
+    final legPaint = Paint()
+      ..color = const Color(0xFF82C4E0)
+      ..strokeWidth = 13
+      ..strokeCap = StrokeCap.round
+      ..style = PaintingStyle.stroke;
+    final shoePaint = Paint()..color = const Color(0xFF7B3F00);
+    final shadowPaint = Paint()..color = Colors.black.withAlpha(28);
+
+    // Drop shadow for body
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(
+        Rect.fromCenter(
+            center: Offset(cx + 3, sy + 29), width: 54, height: 62),
+        const Radius.circular(27),
+      ),
+      shadowPaint,
+    );
+
+    // ── Body (onesie) ─────────────────────────────────────────────────────────
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(
+        Rect.fromCenter(
+            center: Offset(cx, sy + 26), width: 52, height: 58),
+        const Radius.circular(26),
+      ),
+      oniePaint,
+    );
+
+    // Collar crease at top of body
+    canvas.drawArc(
+      Rect.fromCenter(
+          center: Offset(cx, sy + 2), width: 30, height: 14),
+      0, 3.14159, false,
+      Paint()
+        ..color = const Color(0xFF5AAECF)
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 2,
+    );
+
+    // Snap buttons at bottom
+    for (final dx in [-9.0, 0.0, 9.0]) {
+      canvas.drawCircle(Offset(cx + dx, sy + 52), 3, snapPaint);
+    }
+
+    // ── Arms (reaching up toward slingshot handle) ────────────────────────────
+    canvas.drawLine(
+        Offset(cx - 25, sy + 10), Offset(cx - 7, sy - 5), armPaint);
+    canvas.drawLine(
+        Offset(cx + 25, sy + 10), Offset(cx + 7, sy - 5), armPaint);
+
+    // ── Legs peeking out ──────────────────────────────────────────────────────
+    canvas.drawLine(
+        Offset(cx - 14, sy + 53), Offset(cx - 16, sy + 76), legPaint);
+    canvas.drawLine(
+        Offset(cx + 14, sy + 53), Offset(cx + 16, sy + 76), legPaint);
+
+    // Little shoes
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(
+        Rect.fromCenter(
+            center: Offset(cx - 19, sy + 83), width: 22, height: 11),
+        const Radius.circular(5),
+      ),
+      shoePaint,
+    );
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(
+        Rect.fromCenter(
+            center: Offset(cx + 19, sy + 83), width: 22, height: 11),
+        const Radius.circular(5),
+      ),
+      shoePaint,
+    );
+
+    // ── Neck ─────────────────────────────────────────────────────────────────
+    canvas.drawRect(
+      Rect.fromCenter(
+          center: Offset(cx, sy - 3), width: 18, height: 16),
+      skinPaint,
+    );
+
+    // ── Head ─────────────────────────────────────────────────────────────────
+    // Shadow
+    canvas.drawCircle(Offset(cx + 2, sy - 34), 22, shadowPaint);
+    // Skin
+    canvas.drawCircle(Offset(cx, sy - 36), 22, skinPaint);
+    // Ear bumps
+    canvas.drawCircle(Offset(cx - 21, sy - 36), 5, skinPaint);
+    canvas.drawCircle(Offset(cx + 21, sy - 36), 5, skinPaint);
+
+    // ── Hair tuft ─────────────────────────────────────────────────────────────
+    final hairBase = Offset(cx, sy - 57);
+    canvas.drawLine(hairBase, hairBase + const Offset(-6, -9), hairPaint);
+    canvas.drawLine(hairBase, hairBase + const Offset(0, -13), hairPaint);
+    canvas.drawLine(hairBase, hairBase + const Offset(6, -9), hairPaint);
+    canvas.drawLine(
+        hairBase + const Offset(-3, -2),
+        hairBase + const Offset(-10, -6),
+        hairPaint..strokeWidth = 2.5);
+    canvas.drawLine(
+        hairBase + const Offset(3, -2),
+        hairBase + const Offset(10, -6),
+        Paint()
+          ..color = const Color(0xFF5C3317)
+          ..strokeWidth = 2.5
+          ..strokeCap = StrokeCap.round
+          ..style = PaintingStyle.stroke);
+  }
+
+  @override
+  bool shouldRepaint(_LexPainter old) => slingshotPos != old.slingshotPos;
 }
