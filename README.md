@@ -100,6 +100,9 @@ Ogni quest è un file JSON in `assets/data/quests/`:
 ## ⚙️ Comandi
 
 ```bash
+# Setup dopo clone (abilita i pre-commit hooks)
+git config core.hooksPath .github/hooks
+
 # Avvia in debug (con dart-defines)
 ./run.sh
 
@@ -111,9 +114,14 @@ flutter analyze
 
 # Test
 flutter test
+
+# Verifica coerenza narrativa manuale
+node .github/skills/narrative-flow-checker/scripts/check-narrative-flow.cjs .
 ```
 
 In VS Code basta **F5**: il launch profile legge già `dart_defines.json`.
+
+> **Pre-commit hooks** — ogni commit che tocca `assets/data/quests/` o `comic_data.dart` esegue automaticamente il **narrative-flow-checker** (256 percorsi simulati) e blocca il commit se trova inconsistenze. Richiede `git config core.hooksPath .github/hooks` dopo ogni clone.
 
 ---
 
