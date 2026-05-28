@@ -85,6 +85,33 @@ class EpisodeSummary {
 /// Esempio JSON: { "stat": "segreto", "op": "lt", "value": 50, "goto_branch": "intro_vestiti_bruciati" }
 /// Con prepend: true il branch viene ANTEPOSTO alle pagine principali invece di sostituirle.
 /// Esempio JSON: { "stat": "resistenza", "op": "lt", "value": 45, "goto_branch": "intro_caffe_effect", "prepend": true }
+/// Singola condizione su una stat: { stat, op, value }
+class StatCondition {
+  final String stat;
+  final String op;
+  final int value;
+
+  const StatCondition({required this.stat, required this.op, required this.value});
+
+  bool matches(Map<String, int> stats) {
+    final v = stats[stat] ?? 0;
+    switch (op) {
+      case 'lt':  return v < value;
+      case 'lte': return v <= value;
+      case 'gt':  return v > value;
+      case 'gte': return v >= value;
+      case 'eq':  return v == value;
+      default:    return false;
+    }
+  }
+
+  factory StatCondition.fromJson(Map<String, dynamic> json) => StatCondition(
+        stat:  json['stat'] as String? ?? '',
+        op:    json['op']   as String? ?? 'lt',
+        value: json['value'] as int?   ?? 0,
+      );
+}
+
 class StatEntryRule {
   final String stat;
   final String op; // "lt", "lte", "gt", "gte", "eq"
@@ -95,39 +122,48 @@ class StatEntryRule {
   /// Se false (default), sostituisce le pagine principali (replace).
   final bool prepend;
 
+  /// Condizioni composte (AND): se non vuota, tutte devono essere vere.
+  /// Sovrascrive i campi stat/op/value individuali.
+  /// JSON: { "all_of": [{stat, op, value}, ...], "goto_branch": "...", "prepend": false }
+  final List<StatCondition> allOf;
+
   const StatEntryRule({
     required this.stat,
     required this.op,
     required this.value,
     required this.gotoBranch,
     this.prepend = false,
+    this.allOf = const [],
   });
 
   bool matches(Map<String, int> stats) {
+    if (allOf.isNotEmpty) {
+      return allOf.every((c) => c.matches(stats));
+    }
     final statVal = stats[stat] ?? 0;
     switch (op) {
-      case 'lt':
-        return statVal < value;
-      case 'lte':
-        return statVal <= value;
-      case 'gt':
-        return statVal > value;
-      case 'gte':
-        return statVal >= value;
-      case 'eq':
-        return statVal == value;
-      default:
-        return false;
+      case 'lt':  return statVal < value;
+      case 'lte': return statVal <= value;
+      case 'gt':  return statVal > value;
+      case 'gte': return statVal >= value;
+      case 'eq':  return statVal == value;
+      default:    return false;
     }
   }
 
   factory StatEntryRule.fromJson(Map<String, dynamic> json) {
+    final allOfJson = json['all_of'] as List<dynamic>?;
     return StatEntryRule(
-      stat: json['stat'] as String? ?? '',
-      op: json['op'] as String? ?? 'lt',
-      value: json['value'] as int? ?? 0,
-      gotoBranch: json['goto_branch'] as String? ?? '',
-      prepend: json['prepend'] as bool? ?? false,
+      stat:         json['stat']         as String? ?? '',
+      op:           json['op']           as String? ?? 'lt',
+      value:        json['value']        as int?    ?? 0,
+      gotoBranch:   json['goto_branch']  as String? ?? '',
+      prepend:      json['prepend']      as bool?   ?? false,
+      allOf: allOfJson == null
+          ? const []
+          : allOfJson
+              .map((e) => StatCondition.fromJson(e as Map<String, dynamic>))
+              .toList(),
     );
   }
 }

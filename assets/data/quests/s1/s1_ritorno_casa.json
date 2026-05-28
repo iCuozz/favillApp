@@ -2,6 +2,21 @@
   "id": "s1_ritorno_casa",
   "stat_entry": [
     {
+      "all_of": [
+        {
+          "stat": "segreto",
+          "op": "lt",
+          "value": 50
+        },
+        {
+          "stat": "resistenza",
+          "op": "gte",
+          "value": 55
+        }
+      ],
+      "goto_branch": "intro_vestiti_bruciati_indosso"
+    },
+    {
       "stat": "segreto",
       "op": "lt",
       "value": 50,
@@ -676,6 +691,286 @@
               "interactions": []
             }
           ]
+        }
+      ]
+    },
+    "intro_vestiti_bruciati_indosso": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_ritorno_casa/ivb_0.webp",
+          "panels": [
+            {
+              "id": "ivbi_0_0",
+              "characters": [
+                "favilla",
+                "mallow"
+              ],
+              "text_blocks": [
+                {
+                  "id": "ivbi_0_0_tb_0",
+                  "type": "narration",
+                  "text": "Favilla entra. Mallow alza gli occhi. Si ferma sulla camicetta."
+                },
+                {
+                  "id": "ivbi_0_0_tb_1",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "Cos’hai sulla camicia?"
+                },
+                {
+                  "id": "ivbi_0_0_tb_2",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Vapore. La mensa. Pasta scotta."
+                },
+                {
+                  "id": "ivbi_0_0_tb_3",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "...Pasta che esplode?"
+                },
+                {
+                  "id": "ivbi_0_0_tb_4",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "È stata una giornata intensa."
+                },
+                {
+                  "id": "ivbi_0_0_tb_5",
+                  "type": "narration",
+                  "text": "Mallow annuisce lentamente. Il tipo di annuire che non significa affatto sì."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "background": "assets/episodes/s1/s1_ritorno_casa/ivb_1.webp",
+          "panels": [
+            {
+              "id": "ivbi_1_0",
+              "characters": [
+                "lex",
+                "favilla"
+              ],
+              "text_blocks": [
+                {
+                  "id": "ivbi_1_0_tb_0",
+                  "type": "narration",
+                  "text": "Lex vede Favilla. TAPPATAP TAPPATAP sul pavimento. Poi si gira verso Mallow con aria grave."
+                },
+                {
+                  "id": "ivbi_1_0_tb_1",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "Ha fatto così tutto il giorno. Penso stia imparando a comunicare."
+                },
+                {
+                  "id": "ivbi_1_0_tb_2",
+                  "type": "narration",
+                  "text": "Lex: faccia da “ci stai arrivando”."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "background": "assets/episodes/s1/s1_ritorno_casa/ivb_2.webp",
+          "panels": [
+            {
+              "id": "ivbi_2_0",
+              "characters": [
+                "lex",
+                "favilla",
+                "mallow"
+              ],
+              "text_blocks": [
+                {
+                  "id": "ivbi_2_0_tb_0",
+                  "type": "narration",
+                  "text": "TENTATIVO 1: Lex si trascina verso Favilla. Con metodo chirurgico, afferra l’orlo della camicetta bruciata con entrambe le manine. Tira. Tira verso Mallow."
+                },
+                {
+                  "id": "ivbi_2_0_tb_1",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "BAAAAAAAH!!"
+                },
+                {
+                  "id": "ivbi_2_0_tb_2",
+                  "type": "narration",
+                  "text": "Favilla lo raccoglie in un millisecondo. Mallow si gira."
+                },
+                {
+                  "id": "ivbi_2_0_tb_3",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "Cosa c’è?"
+                },
+                {
+                  "id": "ivbi_2_0_tb_4",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Vuole giocare. Vuole sempre essere sollevato."
+                },
+                {
+                  "id": "ivbi_2_0_tb_5",
+                  "type": "narration",
+                  "text": "Lex: faccia da “questa è una bugia e lo sappiamo entrambi”."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "background": "assets/episodes/s1/s1_ritorno_casa/ivb_3.webp",
+          "panels": [
+            {
+              "id": "ivbi_3_0",
+              "characters": [
+                "lex",
+                "favilla",
+                "mallow"
+              ],
+              "text_blocks": [
+                {
+                  "id": "ivbi_3_0_tb_0",
+                  "type": "narration",
+                  "text": "TENTATIVO 2: Lex prende la mano di Favilla. La punta verso la camicetta. Verso la bruciatura. Con una precisione da detective di sei chili."
+                },
+                {
+                  "id": "ivbi_3_0_tb_1",
+                  "type": "narration",
+                  "text": "Mallow non guarda. Sta tagliando una cipolla con l’applicazione di un uomo che non ha sentito niente."
+                },
+                {
+                  "id": "ivbi_3_0_tb_2",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Le dita. Gli piacciono le dita. È una fase."
+                },
+                {
+                  "id": "ivbi_3_0_tb_3",
+                  "type": "narration",
+                  "text": "Lex molla il dito. Sbuffa. Questo è stato umiliante."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "background": "assets/episodes/s1/s1_ritorno_casa/ivb_4.webp",
+          "panels": [
+            {
+              "id": "ivbi_4_0",
+              "characters": [
+                "lex",
+                "favilla",
+                "mallow"
+              ],
+              "text_blocks": [
+                {
+                  "id": "ivbi_4_0_tb_0",
+                  "type": "narration",
+                  "text": "TENTATIVO FINALE: Lex alza entrambe le braccia di scatto — WHOOSH — le abbassa. Le rialza. Le abbassa. Tre volte, con crescente enfasi. Poi punta il ditino verso Favilla e fa la sua faccia da esplosione — guance gonfie, soffia tutta l’aria."
+                },
+                {
+                  "id": "ivbi_4_0_tb_1",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "Vuole volare anche lui. Come la mamma."
+                },
+                {
+                  "id": "ivbi_4_0_tb_2",
+                  "type": "narration",
+                  "text": "Silenzio."
+                },
+                {
+                  "id": "ivbi_4_0_tb_3",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "...Come la mamma?"
+                },
+                {
+                  "id": "ivbi_4_0_tb_4",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "Beh. Sembri sempre di corsa ultimamente. Come se volassi."
+                },
+                {
+                  "id": "ivbi_4_0_tb_5",
+                  "type": "narration",
+                  "text": "Pausa lunghissima."
+                },
+                {
+                  "id": "ivbi_4_0_tb_6",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Sì. Sono solo stanca."
+                },
+                {
+                  "id": "ivbi_4_0_tb_7",
+                  "type": "narration",
+                  "text": "Lex la fissa. Ha fatto del suo meglio."
+                }
+              ],
+              "interactions": []
+            }
+          ],
+          "choice": {
+            "id": "lex_tentativo_scelta_indosso",
+            "prompt": "",
+            "options": [
+              {
+                "id": "schiva",
+                "label": "Schiva i tentativi di Lex.",
+                "goto_branch": "branch_ride",
+                "stat_effects": {},
+                "minigame": {
+                  "type": "schiva_lex",
+                  "rounds": 3,
+                  "tiers": [
+                    {
+                      "min": 3,
+                      "label": "Invincibile!",
+                      "goto_branch": "branch_ride",
+                      "stat_effects": {
+                        "legame": 20,
+                        "segreto": -5
+                      }
+                    },
+                    {
+                      "min": 1,
+                      "label": "Quasi...",
+                      "goto_branch": "branch_letto",
+                      "stat_effects": {
+                        "segreto": 10,
+                        "resistenza": -15
+                      }
+                    },
+                    {
+                      "min": 0,
+                      "label": "Scoperta.",
+                      "goto_branch": "branch_letto",
+                      "stat_effects": {
+                        "segreto": -5,
+                        "resistenza": -20
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
         }
       ]
     }
