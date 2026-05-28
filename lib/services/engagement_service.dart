@@ -1,3 +1,7 @@
+// Copyright © 2026 Andrea Cuozzo. All rights reserved.
+// Favilla Blaze — proprietà intellettuale riservata.
+// See LICENSE file in the project root for full license information.
+
 import 'package:in_app_review/in_app_review.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';

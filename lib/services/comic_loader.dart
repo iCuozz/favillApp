@@ -1,3 +1,7 @@
+// Copyright © 2026 Andrea Cuozzo. All rights reserved.
+// Favilla Blaze — proprietà intellettuale riservata.
+// See LICENSE file in the project root for full license information.
+
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import '../models/comic_data.dart';

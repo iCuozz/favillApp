@@ -1,3 +1,7 @@
+// Copyright © 2026 Andrea Cuozzo. All rights reserved.
+// Favilla Blaze — proprietà intellettuale riservata.
+// See LICENSE file in the project root for full license information.
+
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import '../l10n/app_strings.dart';
