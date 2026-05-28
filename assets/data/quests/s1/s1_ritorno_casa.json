@@ -6,6 +6,21 @@
         {
           "stat": "segreto",
           "op": "lt",
+          "value": 40
+        },
+        {
+          "stat": "resistenza",
+          "op": "lt",
+          "value": 50
+        }
+      ],
+      "goto_branch": "intro_vestiti_bruciati_indosso"
+    },
+    {
+      "all_of": [
+        {
+          "stat": "segreto",
+          "op": "lt",
           "value": 50
         },
         {
