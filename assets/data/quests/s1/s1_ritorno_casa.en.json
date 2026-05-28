@@ -1,0 +1,975 @@
+{
+  "id": "s1_ritorno_casa",
+  "stat_entry": [
+    {
+      "stat": "segreto",
+      "op": "lt",
+      "value": 50,
+      "flag_conditions": [
+        {
+          "flag": "shirt_in_backpack",
+          "is": false
+        }
+      ],
+      "goto_branch": "intro_vestiti_bruciati_indosso"
+    },
+    {
+      "stat": "segreto",
+      "op": "lt",
+      "value": 50,
+      "goto_branch": "intro_vestiti_bruciati"
+    }
+  ],
+  "pages": [
+    {
+      "index": 0,
+      "background": "assets/episodes/s1/s1_ritorno_casa/page_0.webp",
+      "panels": [
+        {
+          "id": "rc_0_0",
+          "characters": [
+            "favilla",
+            "mallow"
+          ],
+          "text_blocks": [
+            {
+              "id": "rc_0_0_tb_0",
+              "type": "narration",
+              "text": "Favilla comes in. Mallow looks up from his laptop. Then closes the laptop. First gesture of the evening."
+            },
+            {
+              "id": "rc_0_0_tb_1",
+              "type": "dialogue",
+              "speaker": "mallow",
+              "text": "You're different."
+            },
+            {
+              "id": "rc_0_0_tb_2",
+              "type": "dialogue",
+              "speaker": "favilla",
+              "text": "Different how?"
+            },
+            {
+              "id": "rc_0_0_tb_3",
+              "type": "dialogue",
+              "speaker": "mallow",
+              "text": "I don't know. Like when you come back from a run. Energised. But tired."
+            },
+            {
+              "id": "rc_0_0_tb_4",
+              "type": "dialogue",
+              "speaker": "favilla",
+              "text": "Dr. Corvi."
+            },
+            {
+              "id": "rc_0_0_tb_5",
+              "type": "dialogue",
+              "speaker": "mallow",
+              "text": "Dr. Corvi."
+            }
+          ],
+          "interactions": []
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "background": "assets/episodes/s1/s1_ritorno_casa/page_1.webp",
+      "panels": [
+        {
+          "id": "rc_1_0",
+          "characters": [
+            "favilla",
+            "lex"
+          ],
+          "text_blocks": [
+            {
+              "id": "rc_1_0_tb_0",
+              "type": "narration",
+              "text": "Lex reaches out his arms. When Favilla picks him up, he places both little hands on her face. Holds her there. Studies her."
+            },
+            {
+              "id": "rc_1_0_tb_1",
+              "type": "dialogue",
+              "speaker": "mallow",
+              "text": "He's been doing it since this morning. He was waiting for you."
+            },
+            {
+              "id": "rc_1_0_tb_2",
+              "type": "narration",
+              "text": "Favilla feels something tighten in her throat."
+            }
+          ],
+          "interactions": []
+        }
+      ],
+      "choice": {
+        "id": "lex_mani_scelta",
+        "prompt": "Lex holds her face in his hands. Studies her. What does Favilla do?",
+        "options": [
+          {
+            "id": "bisbiglia",
+            "label": "\"What do you see?\" — he whispers in her ear.",
+            "hint": "Only the two of them can understand.",
+            "goto_branch": "branch_bisbiglia",
+            "stat_effects": {
+              "legame": 15,
+              "scintille": 5
+            }
+          },
+          {
+            "id": "stringe",
+            "label": "He holds her tight. Without saying anything.",
+            "hint": "Sometimes words aren't needed.",
+            "goto_branch": "branch_stringe",
+            "stat_effects": {
+              "legame": 10,
+              "segreto": 5
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "branches": {
+    "intro_vestiti_bruciati": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_ritorno_casa/ivb_0.webp",
+          "panels": [
+            {
+              "id": "ivb_0_0",
+              "characters": [
+                "favilla",
+                "mallow"
+              ],
+              "text_blocks": [
+                {
+                  "id": "ivb_0_0_tb_0",
+                  "type": "narration",
+                  "text": "Favilla comes in. Mallow looks up. His gaze stops on the blouse."
+                },
+                {
+                  "id": "ivb_0_0_tb_1",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "What's on your shirt?"
+                },
+                {
+                  "id": "ivb_0_0_tb_2",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Steam. The canteen. Overcooked pasta."
+                },
+                {
+                  "id": "ivb_0_0_tb_3",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "…Exploding pasta?"
+                },
+                {
+                  "id": "ivb_0_0_tb_4",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "It's been an intense day."
+                },
+                {
+                  "id": "ivb_0_0_tb_5",
+                  "type": "narration",
+                  "text": "Mallow nods slowly. The kind of nod that doesn't mean yes at all."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "background": "assets/episodes/s1/s1_ritorno_casa/ivb_1.webp",
+          "panels": [
+            {
+              "id": "ivb_1_0",
+              "characters": [
+                "lex",
+                "mallow"
+              ],
+              "text_blocks": [
+                {
+                  "id": "ivb_1_0_tb_0",
+                  "type": "narration",
+                  "text": "Lex sees Favilla. TAPPATAP TAPPATAP on the floor. Then turns to Mallow with a solemn look. As if to say: \"Brother. We need to talk.\""
+                },
+                {
+                  "id": "ivb_1_0_tb_1",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "He's been doing that all day. I think he's learning to communicate."
+                },
+                {
+                  "id": "ivb_1_0_tb_2",
+                  "type": "narration",
+                  "text": "Lex: face saying \"you're getting there\"."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "background": "assets/episodes/s1/s1_ritorno_casa/ivb_2.webp",
+          "panels": [
+            {
+              "id": "ivb_2_0",
+              "characters": [
+                "lex",
+                "favilla",
+                "mallow"
+              ],
+              "text_blocks": [
+                {
+                  "id": "ivb_2_0_tb_0",
+                  "type": "narration",
+                  "text": "ATTEMPT 1: Lex crawls to Favilla's bag, still open on the floor. Shoves his little arm in. Pulls out the burnt blouse hidden inside. Waves it in the air like a flag."
+                },
+                {
+                  "id": "ivb_2_0_tb_1",
+                  "type": "dialogue",
+                  "speaker": "lex",
+                  "text": "BAAAAAAAH!!"
+                },
+                {
+                  "id": "ivb_2_0_tb_2",
+                  "type": "narration",
+                  "text": "Favilla grabs it in a millisecond. Mallow turns around."
+                },
+                {
+                  "id": "ivb_2_0_tb_3",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "What was wrong with it?"
+                },
+                {
+                  "id": "ivb_2_0_tb_4",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "An old rag. For cleaning."
+                },
+                {
+                  "id": "ivb_2_0_tb_5",
+                  "type": "narration",
+                  "text": "Lex: face saying \"that's a lie and we both know it\"."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "background": "assets/episodes/s1/s1_ritorno_casa/ivb_3.webp",
+          "panels": [
+            {
+              "id": "ivb_3_0",
+              "characters": [
+                "lex",
+                "favilla",
+                "mallow"
+              ],
+              "text_blocks": [
+                {
+                  "id": "ivb_3_0_tb_0",
+                  "type": "narration",
+                  "text": "ATTEMPT 2: Lex takes Favilla's hand. With all his strength — that of a ripe pudding — tries to bend one of her fingers. Then another. As if to say: \"Look, she's incredibly strong!\""
+                },
+                {
+                  "id": "ivb_3_0_tb_1",
+                  "type": "narration",
+                  "text": "The finger doesn't move a millimetre. Lex yanks with his whole body. Goes red with the effort."
+                },
+                {
+                  "id": "ivb_3_0_tb_2",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "He likes fingers. It's a phase. The paediatrician told me."
+                },
+                {
+                  "id": "ivb_3_0_tb_3",
+                  "type": "narration",
+                  "text": "Lex gives up. Snorts. That was humiliating."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "background": "assets/episodes/s1/s1_ritorno_casa/ivb_4.webp",
+          "panels": [
+            {
+              "id": "ivb_4_0",
+              "characters": [
+                "lex",
+                "favilla",
+                "mallow"
+              ],
+              "text_blocks": [
+                {
+                  "id": "ivb_4_0_tb_0",
+                  "type": "narration",
+                  "text": "FINAL ATTEMPT: Lex raises both arms sharply — WHOOSH — lowers them. Raises. Lowers. Three times, with growing emphasis. Then points his little finger at Favilla and makes his explosion face — puffed cheeks, blows out all the air."
+                },
+                {
+                  "id": "ivb_4_0_tb_1",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "He wants to fly too. Like mummy."
+                },
+                {
+                  "id": "ivb_4_0_tb_2",
+                  "type": "narration",
+                  "text": "Silence."
+                },
+                {
+                  "id": "ivb_4_0_tb_3",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "...Just like mummy?"
+                },
+                {
+                  "id": "ivb_4_0_tb_4",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "Well. You always seem to be rushing lately. Like you're flying."
+                },
+                {
+                  "id": "ivb_4_0_tb_5",
+                  "type": "narration",
+                  "text": "A very long pause."
+                },
+                {
+                  "id": "ivb_4_0_tb_6",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Yes. I'm just tired."
+                },
+                {
+                  "id": "ivb_4_0_tb_7",
+                  "type": "narration",
+                  "text": "Lex stares at her. He did his best."
+                }
+              ],
+              "interactions": []
+            }
+          ],
+          "choice": {
+            "id": "lex_tentativo_scelta",
+            "prompt": "",
+            "options": [
+              {
+                "id": "schiva",
+                "label": "Dodges Lex's attempts.",
+                "goto_branch": "branch_ride",
+                "stat_effects": {},
+                "minigame": {
+                  "type": "schiva_lex",
+                  "rounds": 3,
+                  "tiers": [
+                    {
+                      "min": 3,
+                      "label": "Invincible!",
+                      "goto_branch": "branch_ride",
+                      "stat_effects": {
+                        "legame": 20,
+                        "segreto": -5
+                      }
+                    },
+                    {
+                      "min": 1,
+                      "label": "Almost…",
+                      "goto_branch": "branch_letto",
+                      "stat_effects": {
+                        "segreto": 10,
+                        "resistenza": -15
+                      }
+                    },
+                    {
+                      "min": 0,
+                      "label": "Discovered.",
+                      "goto_branch": "branch_letto",
+                      "stat_effects": {
+                        "segreto": -5,
+                        "resistenza": -20
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "branch_bisbiglia": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_ritorno_casa/branch_bisbiglia.webp",
+          "panels": [
+            {
+              "id": "bb_0_0",
+              "characters": [
+                "favilla",
+                "lex"
+              ],
+              "text_blocks": [
+                {
+                  "id": "bb_0_0_tb_0",
+                  "type": "narration",
+                  "text": "Lex doesn't answer. Obviously. But squeezes her face a little tighter."
+                },
+                {
+                  "id": "bb_0_0_tb_1",
+                  "type": "thought",
+                  "text": "You already know, don't you. You've known from the start."
+                },
+                {
+                  "id": "bb_0_0_tb_2",
+                  "type": "narration",
+                  "text": "Mallow cooks without her asking. Favilla watches him from the couch, Lex in her arms."
+                },
+                {
+                  "id": "bb_0_0_tb_3",
+                  "type": "thought",
+                  "text": "I need to learn to control it. Not for myself. For you."
+                },
+                {
+                  "id": "bb_0_0_tb_4",
+                  "type": "narration",
+                  "text": "Lex in his crib, later. Favilla in the dark."
+                },
+                {
+                  "id": "bb_0_0_tb_5",
+                  "type": "thought",
+                  "text": "You already know everything. Help me understand how it works, sometimes?"
+                },
+                {
+                  "id": "bb_0_0_tb_6",
+                  "type": "narration",
+                  "text": "Lex sleeps. But smiles in his sleep. Favilla doesn't know if she imagined it."
+                },
+                {
+                  "id": "bb_0_0_tb_7",
+                  "type": "system",
+                  "text": "MISSION COMPLETE — Coming Home"
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "branch_stringe": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_ritorno_casa/branch_stringe.webp",
+          "panels": [
+            {
+              "id": "bs_0_0",
+              "characters": [
+                "favilla",
+                "lex"
+              ],
+              "text_blocks": [
+                {
+                  "id": "bs_0_0_tb_0",
+                  "type": "narration",
+                  "text": "Lex makes his surprised laugh — the lost-spoon one. Then grabs Favilla's shoulder with all the strength he has."
+                },
+                {
+                  "id": "bs_0_0_tb_1",
+                  "type": "narration",
+                  "text": "Mallow cooks without her asking. The sound of the hobs. The smell of the sauce. Home."
+                },
+                {
+                  "id": "bs_0_0_tb_2",
+                  "type": "thought",
+                  "text": "I need to learn to control it. Not for myself. For you."
+                },
+                {
+                  "id": "bs_0_0_tb_3",
+                  "type": "narration",
+                  "text": "Lex in his crib, later. Favilla in the dark."
+                },
+                {
+                  "id": "bs_0_0_tb_4",
+                  "type": "thought",
+                  "text": "You already know everything. Help me understand how it works, sometimes?"
+                },
+                {
+                  "id": "bs_0_0_tb_5",
+                  "type": "narration",
+                  "text": "Lex sleeps. But smiles in his sleep. Favilla doesn't know if she imagined it."
+                },
+                {
+                  "id": "bs_0_0_tb_6",
+                  "type": "system",
+                  "text": "MISSION COMPLETE — Coming Home"
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "branch_ride": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_ritorno_casa/branch_ride.webp",
+          "panels": [
+            {
+              "id": "br_0_0",
+              "characters": [
+                "favilla",
+                "mallow",
+                "lex"
+              ],
+              "text_blocks": [
+                {
+                  "id": "br_0_0_tb_0",
+                  "type": "narration",
+                  "text": "Mallow looks at her, surprised. It's the first time she's really laughed in days."
+                },
+                {
+                  "id": "br_0_0_tb_1",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "Finally."
+                },
+                {
+                  "id": "br_0_0_tb_2",
+                  "type": "narration",
+                  "text": "Lex realises he's lost the battle. Turns to Mallow with the most serious face he has. Stares at him. Mallow stares back."
+                },
+                {
+                  "id": "br_0_0_tb_3",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "What are you looking at, little one?"
+                },
+                {
+                  "id": "br_0_0_tb_4",
+                  "type": "narration",
+                  "text": "Lex snorts. Gives up."
+                },
+                {
+                  "id": "br_0_0_tb_5",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "I think he wants his food."
+                },
+                {
+                  "id": "br_0_0_tb_6",
+                  "type": "narration",
+                  "text": "Lex in his crib, later. Favilla in the dark."
+                },
+                {
+                  "id": "br_0_0_tb_7",
+                  "type": "thought",
+                  "text": "You tried everything you had. Fingers, the bag, your arms."
+                },
+                {
+                  "id": "br_0_0_tb_8",
+                  "type": "thought",
+                  "text": "You were magnificent."
+                },
+                {
+                  "id": "br_0_0_tb_9",
+                  "type": "thought",
+                  "text": "Please never do that again."
+                },
+                {
+                  "id": "br_0_0_tb_10",
+                  "type": "narration",
+                  "text": "Lex is already asleep."
+                },
+                {
+                  "id": "br_0_0_tb_11",
+                  "type": "thought",
+                  "text": "I need to learn to control it. Not for myself."
+                },
+                {
+                  "id": "br_0_0_tb_12",
+                  "type": "thought",
+                  "text": "For you."
+                },
+                {
+                  "id": "br_0_0_tb_13",
+                  "type": "system",
+                  "text": "MISSION COMPLETE — Coming Home"
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "branch_letto": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_ritorno_casa/branch_letto.webp",
+          "panels": [
+            {
+              "id": "bl_0_0",
+              "characters": [
+                "favilla",
+                "lex"
+              ],
+              "text_blocks": [
+                {
+                  "id": "bl_0_0_tb_0",
+                  "type": "narration",
+                  "text": "Lex takes the fabric rabbit Favilla puts in his hand. Stares at it accusingly. Throws it on the floor."
+                },
+                {
+                  "id": "bl_0_0_tb_1",
+                  "type": "thought",
+                  "text": "At least one of us knows what they're doing."
+                },
+                {
+                  "id": "bl_0_0_tb_2",
+                  "type": "narration",
+                  "text": "Lex in his crib, five minutes later. Favilla in the dark."
+                },
+                {
+                  "id": "bl_0_0_tb_3",
+                  "type": "thought",
+                  "text": "You tried everything you had. Fingers, the bag, your arms."
+                },
+                {
+                  "id": "bl_0_0_tb_4",
+                  "type": "thought",
+                  "text": "You were magnificent."
+                },
+                {
+                  "id": "bl_0_0_tb_5",
+                  "type": "thought",
+                  "text": "Please never do that again."
+                },
+                {
+                  "id": "bl_0_0_tb_6",
+                  "type": "narration",
+                  "text": "Lex sleeps. Still clutching the rabbit. He's forgiven."
+                },
+                {
+                  "id": "bl_0_0_tb_7",
+                  "type": "thought",
+                  "text": "I need to learn to control it. Not for myself."
+                },
+                {
+                  "id": "bl_0_0_tb_8",
+                  "type": "thought",
+                  "text": "For you."
+                },
+                {
+                  "id": "bl_0_0_tb_9",
+                  "type": "system",
+                  "text": "MISSION COMPLETE — Coming Home"
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "intro_vestiti_bruciati_indosso": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_ritorno_casa/ivb_0.webp",
+          "panels": [
+            {
+              "id": "ivbi_0_0",
+              "characters": [
+                "favilla",
+                "mallow"
+              ],
+              "text_blocks": [
+                {
+                  "id": "ivbi_0_0_tb_0",
+                  "type": "narration",
+                  "text": "Favilla comes in. Mallow looks up. His gaze stops on the blouse."
+                },
+                {
+                  "id": "ivbi_0_0_tb_1",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "Cos’hai sulla camicia?"
+                },
+                {
+                  "id": "ivbi_0_0_tb_2",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Steam. The canteen. Overcooked pasta."
+                },
+                {
+                  "id": "ivbi_0_0_tb_3",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "…Exploding pasta?"
+                },
+                {
+                  "id": "ivbi_0_0_tb_4",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "It's been an intense day."
+                },
+                {
+                  "id": "ivbi_0_0_tb_5",
+                  "type": "narration",
+                  "text": "Mallow nods slowly. The kind of nod that doesn't mean yes at all."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "background": "assets/episodes/s1/s1_ritorno_casa/ivb_1.webp",
+          "panels": [
+            {
+              "id": "ivbi_1_0",
+              "characters": [
+                "lex",
+                "favilla"
+              ],
+              "text_blocks": [
+                {
+                  "id": "ivbi_1_0_tb_0",
+                  "type": "narration",
+                  "text": "Lex sees Favilla. TAPPATAP TAPPATAP on the floor. Then turns to Mallow with a solemn look."
+                },
+                {
+                  "id": "ivbi_1_0_tb_1",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "He's been doing that all day. I think he's learning to communicate."
+                },
+                {
+                  "id": "ivbi_1_0_tb_2",
+                  "type": "narration",
+                  "text": "Lex: faccia da “ci stai arrivando”."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "background": "assets/episodes/s1/s1_ritorno_casa/ivb_2.webp",
+          "panels": [
+            {
+              "id": "ivbi_2_0",
+              "characters": [
+                "lex",
+                "favilla",
+                "mallow"
+              ],
+              "text_blocks": [
+                {
+                  "id": "ivbi_2_0_tb_0",
+                  "type": "narration",
+                  "text": "TENTATIVO 1: Lex si trascina verso Favilla. Con metodo chirurgico, afferra l’orlo della camicetta bruciata con entrambe le manine. Tira. Tira verso Mallow."
+                },
+                {
+                  "id": "ivbi_2_0_tb_1",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "BAAAAAAAH!!"
+                },
+                {
+                  "id": "ivbi_2_0_tb_2",
+                  "type": "narration",
+                  "text": "Favilla catches it in a millisecond. Mallow turns around."
+                },
+                {
+                  "id": "ivbi_2_0_tb_3",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "Cosa c’è?"
+                },
+                {
+                  "id": "ivbi_2_0_tb_4",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "He wants to play. He always wants to be picked up."
+                },
+                {
+                  "id": "ivbi_2_0_tb_5",
+                  "type": "narration",
+                  "text": "Lex: faccia da “questa è una bugia e lo sappiamo entrambi”."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "background": "assets/episodes/s1/s1_ritorno_casa/ivb_3.webp",
+          "panels": [
+            {
+              "id": "ivbi_3_0",
+              "characters": [
+                "lex",
+                "favilla",
+                "mallow"
+              ],
+              "text_blocks": [
+                {
+                  "id": "ivbi_3_0_tb_0",
+                  "type": "narration",
+                  "text": "ATTEMPT 2: Lex takes Favilla's hand. Points it at the blouse. At the scorch mark. With the precision of a six-kilo detective."
+                },
+                {
+                  "id": "ivbi_3_0_tb_1",
+                  "type": "narration",
+                  "text": "Mallow non guarda. Sta tagliando una cipolla con l’applicazione di un uomo che non ha sentito niente."
+                },
+                {
+                  "id": "ivbi_3_0_tb_2",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Fingers. He likes fingers. It's a phase."
+                },
+                {
+                  "id": "ivbi_3_0_tb_3",
+                  "type": "narration",
+                  "text": "Lex lets go of the finger. Snorts. That was humiliating."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "background": "assets/episodes/s1/s1_ritorno_casa/ivb_4.webp",
+          "panels": [
+            {
+              "id": "ivbi_4_0",
+              "characters": [
+                "lex",
+                "favilla",
+                "mallow"
+              ],
+              "text_blocks": [
+                {
+                  "id": "ivbi_4_0_tb_0",
+                  "type": "narration",
+                  "text": "TENTATIVO FINALE: Lex alza entrambe le braccia di scatto — WHOOSH — le abbassa. Le rialza. Le abbassa. Tre volte, con crescente enfasi. Poi punta il ditino verso Favilla e fa la sua faccia da esplosione — guance gonfie, soffia tutta l’aria."
+                },
+                {
+                  "id": "ivbi_4_0_tb_1",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "He wants to fly too. Like mummy."
+                },
+                {
+                  "id": "ivbi_4_0_tb_2",
+                  "type": "narration",
+                  "text": "Silence."
+                },
+                {
+                  "id": "ivbi_4_0_tb_3",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "...Just like mummy?"
+                },
+                {
+                  "id": "ivbi_4_0_tb_4",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "Well. You always seem to be rushing lately. Like you're flying."
+                },
+                {
+                  "id": "ivbi_4_0_tb_5",
+                  "type": "narration",
+                  "text": "A very long pause."
+                },
+                {
+                  "id": "ivbi_4_0_tb_6",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Yes. I'm just tired."
+                },
+                {
+                  "id": "ivbi_4_0_tb_7",
+                  "type": "narration",
+                  "text": "Lex stares at her. He did his best."
+                }
+              ],
+              "interactions": []
+            }
+          ],
+          "choice": {
+            "id": "lex_tentativo_scelta_indosso",
+            "prompt": "",
+            "options": [
+              {
+                "id": "schiva",
+                "label": "Dodges Lex's attempts.",
+                "goto_branch": "branch_ride",
+                "stat_effects": {},
+                "minigame": {
+                  "type": "schiva_lex",
+                  "rounds": 3,
+                  "tiers": [
+                    {
+                      "min": 3,
+                      "label": "Invincible!",
+                      "goto_branch": "branch_ride",
+                      "stat_effects": {
+                        "legame": 20,
+                        "segreto": -5
+                      }
+                    },
+                    {
+                      "min": 1,
+                      "label": "Almost…",
+                      "goto_branch": "branch_letto",
+                      "stat_effects": {
+                        "segreto": 10,
+                        "resistenza": -15
+                      }
+                    },
+                    {
+                      "min": 0,
+                      "label": "Discovered.",
+                      "goto_branch": "branch_letto",
+                      "stat_effects": {
+                        "segreto": -5,
+                        "resistenza": -20
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

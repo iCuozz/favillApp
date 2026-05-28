@@ -1,0 +1,1042 @@
+{
+  "id": "s1_spesa_sabato",
+  "stat_entry": [
+    {
+      "stat": "scintille",
+      "op": "gte",
+      "value": 60,
+      "goto_branch": "intro_mani_calde",
+      "prepend": true
+    }
+  ],
+  "pages": [
+    {
+      "index": 0,
+      "background": "assets/episodes/s1/s1_spesa_sabato/page_0.webp",
+      "panels": [
+        {
+          "id": "ss0_0",
+          "characters": [
+            "favilla",
+            "lex"
+          ],
+          "text_blocks": [
+            {
+              "id": "ss0_0_tb_0",
+              "type": "narration",
+              "text": "Saturday morning. 9:47. Nova Tutinia's IperPassata never sleeps."
+            },
+            {
+              "id": "ss0_0_tb_1",
+              "type": "narration",
+              "text": "Lex is in the trolley seat. Looking at the shelves."
+            },
+            {
+              "id": "ss0_0_tb_2",
+              "type": "narration",
+              "text": "He looks at them with the same expression a general has studying a map before battle."
+            },
+            {
+              "id": "ss0_0_tb_3",
+              "type": "thought",
+              "speaker": "lex_pov",
+              "text": "Shelves. Products. Endless aisle. Unlimited potential."
+            },
+            {
+              "id": "ss0_0_tb_4",
+              "type": "narration",
+              "text": "Favilla has no idea what's going on in that little head. She thinks he's admiring the colourful packaging."
+            },
+            {
+              "id": "ss0_0_tb_5",
+              "type": "thought",
+              "text": "What a good boy. Looks at everything so calmly."
+            },
+            {
+              "id": "ss0_0_tb_6",
+              "type": "narration",
+              "text": "He's not quiet. He's planning."
+            }
+          ],
+          "interactions": []
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "background": "assets/episodes/s1/s1_spesa_sabato/page_1.webp",
+      "panels": [
+        {
+          "id": "ss1_0",
+          "characters": [
+            "favilla",
+            "lex"
+          ],
+          "text_blocks": [
+            {
+              "id": "ss1_0_tb_0",
+              "type": "narration",
+              "text": "Pasta aisle. Third corridor."
+            },
+            {
+              "id": "ss1_0_tb_1",
+              "type": "narration",
+              "text": "Inside Lex's head, something clicks. A memory."
+            },
+            {
+              "id": "ss1_0_tb_2",
+              "type": "thought",
+              "speaker": "lex_pov",
+              "text": "Fire. Mummy had turned into fire."
+            },
+            {
+              "id": "ss1_0_tb_3",
+              "type": "thought",
+              "speaker": "lex_pov",
+              "text": "It was beautiful."
+            },
+            {
+              "id": "ss1_0_tb_4",
+              "type": "narration",
+              "text": "Lex's eyes slide across the shelf in front of him. Tins. Jars. Pasta in bags. Products aligned in perfect unstable balance."
+            },
+            {
+              "id": "ss1_0_tb_5",
+              "type": "thought",
+              "speaker": "lex_pov",
+              "text": "If everything falls… mummy gets scared… mummy becomes fire."
+            },
+            {
+              "id": "ss1_0_tb_6",
+              "type": "narration",
+              "text": "Slowly, with the concentration of a rocket engineer, Lex grabs the dummy. Then the cord. Then the fabric bear on his bib."
+            },
+            {
+              "id": "ss1_0_tb_7",
+              "type": "narration",
+              "text": "Tongue out. Eyes serious. He begins to assemble."
+            },
+            {
+              "id": "ss1_0_tb_8",
+              "type": "dialogue",
+              "speaker": "lex",
+              "text": "Mmmh. Mmmh. Mmmh."
+            },
+            {
+              "id": "ss1_0_tb_9",
+              "type": "narration",
+              "text": "Favilla scrolls through the shopping list on her phone. Milk. Yoghurt. Tinned tomatoes."
+            }
+          ],
+          "interactions": []
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "background": "assets/episodes/s1/s1_spesa_sabato/page_2.webp",
+      "panels": [
+        {
+          "id": "ss2_0",
+          "characters": [
+            "favilla",
+            "lex"
+          ],
+          "text_blocks": [
+            {
+              "id": "ss2_0_tb_0",
+              "type": "narration",
+              "text": "The weapon is almost complete."
+            },
+            {
+              "id": "ss2_0_tb_1",
+              "type": "narration",
+              "text": "Lex examines it with satisfaction. Dummy plus cord plus bear: structurally impeccable."
+            },
+            {
+              "id": "ss2_0_tb_2",
+              "type": "narration",
+              "text": "Favilla is three shelves away. Ten seconds of attention is all it takes and the plan falls apart."
+            }
+          ],
+          "interactions": []
+        }
+      ],
+      "choice": {
+        "id": "attenzione_lex",
+        "prompt": "Favilla is in her own bubble. Lex is about to launch his first military operation.",
+        "options": [
+          {
+            "id": "tardi",
+            "label": "Checks her phone. The list is long. Lex is fine.",
+            "hint": "Of course she's fine.",
+            "goto_branch": "branch_tardi",
+            "stat_effects": {
+              "segreto": -5,
+              "resistenza": -10
+            },
+            "minigame": {
+              "type": "lex_strike",
+              "products_total": 12,
+              "tiers": [
+                {
+                  "min": 8,
+                  "label": "STRIKE! 🎳",
+                  "stat_effects": {
+                    "segreto": -5,
+                    "resistenza": -10,
+                    "legame": 15
+                  },
+                  "goto_branch": "branch_tardi"
+                },
+                {
+                  "min": 3,
+                  "label": "Partial hit",
+                  "stat_effects": {},
+                  "goto_branch": "branch_tardi_parziale"
+                },
+                {
+                  "min": 0,
+                  "label": "Missed!",
+                  "stat_effects": {},
+                  "goto_branch": "branch_tardi_mancato"
+                }
+              ]
+            }
+          },
+          {
+            "id": "prima",
+            "label": "Looks up from her phone. Looks at Lex. Something isn't right.",
+            "hint": "That face. That face is not innocent.",
+            "goto_branch": "branch_prima",
+            "stat_effects": {
+              "segreto": 10,
+              "legame": -10
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "branches": {
+    "intro_mani_calde": {
+      "pages": [
+        {
+          "id": "imc_0",
+          "background": "assets/episodes/s1/s1_spesa_sabato/page_entry.webp",
+          "panels": [
+            {
+              "id": "imc_0_p0",
+              "characters": [
+                "favilla"
+              ],
+              "text_blocks": [
+                {
+                  "id": "imc_0_p0_tb_0",
+                  "type": "narration",
+                  "text": "Favilla's hands are already warm when she takes the trolley at the entrance to the IperPassata."
+                },
+                {
+                  "id": "imc_0_p0_tb_1",
+                  "type": "thought",
+                  "text": "Again. More and more."
+                },
+                {
+                  "id": "imc_0_p0_tb_2",
+                  "type": "narration",
+                  "text": "She grips the plastic handle. The heat drops a few degrees. Enough to seem normal. Enough for today."
+                },
+                {
+                  "id": "imc_0_p0_tb_3",
+                  "type": "thought",
+                  "text": "Supermarket. List. Home. Simple."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "branch_tardi": {
+      "pages": [
+        {
+          "id": "bt_0",
+          "background": "assets/episodes/s1/s1_spesa_sabato/page_tardi_0.webp",
+          "panels": [
+            {
+              "id": "bt_0_p0",
+              "characters": [
+                "favilla",
+                "lex"
+              ],
+              "text_blocks": [
+                {
+                  "id": "bt_0_p0_tb_0",
+                  "type": "narration",
+                  "text": "The weapon is ready. Lex aims it at the shelf."
+                },
+                {
+                  "id": "bt_0_p0_tb_1",
+                  "type": "narration",
+                  "text": "Three seconds of total silence."
+                },
+                {
+                  "id": "bt_0_p0_tb_2",
+                  "type": "dialogue",
+                  "speaker": "lex",
+                  "text": "HA!"
+                },
+                {
+                  "id": "bt_0_p0_tb_3",
+                  "type": "narration",
+                  "text": "A jar of tomatoes goes flying. Drags two more. Those two drag four more. In a second and a half, half the tinned tomato aisle is on the floor."
+                },
+                {
+                  "id": "bt_0_p0_tb_4",
+                  "type": "narration",
+                  "text": "The noise is epic."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        },
+        {
+          "id": "bt_1",
+          "background": "assets/episodes/s1/s1_spesa_sabato/page_tardi_1.webp",
+          "panels": [
+            {
+              "id": "bt_1_p0",
+              "characters": [
+                "favilla"
+              ],
+              "text_blocks": [
+                {
+                  "id": "bt_1_p0_tb_0",
+                  "type": "narration",
+                  "text": "Favilla turns around."
+                },
+                {
+                  "id": "bt_1_p0_tb_1",
+                  "type": "narration",
+                  "text": "The shock is immediate. The jars. Lex. The noise. Three people turning. A woman startling."
+                },
+                {
+                  "id": "bt_1_p0_tb_2",
+                  "type": "narration",
+                  "text": "Favilla's hands — already warm — become scorching."
+                },
+                {
+                  "id": "bt_1_p0_tb_3",
+                  "type": "narration",
+                  "text": "A flash."
+                },
+                {
+                  "id": "bt_1_p0_tb_4",
+                  "type": "narration",
+                  "text": "A single, very brief flash of light in her hair — then darkness."
+                },
+                {
+                  "id": "bt_1_p0_tb_5",
+                  "type": "narration",
+                  "text": "The jars are back on the shelf. Aligned. Perfect. Nobody knows how."
+                },
+                {
+                  "id": "bt_1_p0_tb_6",
+                  "type": "narration",
+                  "text": "It took less than a second. Favilla is already still, list in hand, as if nothing happened."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        },
+        {
+          "id": "bt_2",
+          "background": "assets/episodes/s1/s1_spesa_sabato/page_tardi_2.webp",
+          "panels": [
+            {
+              "id": "bt_2_p0",
+              "characters": [
+                "favilla",
+                "lex"
+              ],
+              "text_blocks": [
+                {
+                  "id": "bt_2_p0_tb_0",
+                  "type": "narration",
+                  "text": "Lex saw it."
+                },
+                {
+                  "id": "bt_2_p0_tb_1",
+                  "type": "narration",
+                  "text": "The whole scene. Front row. From the trolley seat, prime position."
+                },
+                {
+                  "id": "bt_2_p0_tb_2",
+                  "type": "narration",
+                  "text": "Under the little bib, a micro-fist clenched in a gesture of victory."
+                },
+                {
+                  "id": "bt_2_p0_tb_3",
+                  "type": "dialogue",
+                  "speaker": "lex",
+                  "text": "Ooooh."
+                },
+                {
+                  "id": "bt_2_p0_tb_4",
+                  "type": "narration",
+                  "text": "Favilla looks at him. Searching for something in his face. Something that betrays understanding."
+                },
+                {
+                  "id": "bt_2_p0_tb_5",
+                  "type": "thought",
+                  "text": "No. He didn't understand. He's just a baby. He saw lights, noise. It scared him. It happens."
+                },
+                {
+                  "id": "bt_2_p0_tb_6",
+                  "type": "narration",
+                  "text": "Lex looks her straight in the eyes and smiles."
+                },
+                {
+                  "id": "bt_2_p0_tb_7",
+                  "type": "narration",
+                  "text": "Favilla doesn't know that smile is the satisfaction of a plan that worked."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "branch_prima": {
+      "pages": [
+        {
+          "id": "bp_0",
+          "background": "assets/episodes/s1/s1_spesa_sabato/page_prima_0.webp",
+          "panels": [
+            {
+              "id": "bp_0_p0",
+              "characters": [
+                "favilla",
+                "lex"
+              ],
+              "text_blocks": [
+                {
+                  "id": "bp_0_p0_tb_0",
+                  "type": "narration",
+                  "text": "Favilla looks up."
+                },
+                {
+                  "id": "bp_0_p0_tb_1",
+                  "type": "narration",
+                  "text": "Lex is motionless. Tongue out. Teddy bear in hand. Aimed at the shelf at a disturbing angle."
+                },
+                {
+                  "id": "bp_0_p0_tb_2",
+                  "type": "thought",
+                  "text": "No."
+                },
+                {
+                  "id": "bp_0_p0_tb_3",
+                  "type": "narration",
+                  "text": "Two quick steps. Favilla's hand is on the bear before it launches. Silent extraction. Professional."
+                },
+                {
+                  "id": "bp_0_p0_tb_4",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "No."
+                },
+                {
+                  "id": "bp_0_p0_tb_5",
+                  "type": "narration",
+                  "text": "Lex stares at her."
+                },
+                {
+                  "id": "bp_0_p0_tb_6",
+                  "type": "narration",
+                  "text": "He stares at it with the face of someone who's just watched their masterpiece destroyed."
+                },
+                {
+                  "id": "bp_0_p0_tb_7",
+                  "type": "dialogue",
+                  "speaker": "lex",
+                  "text": "Eh."
+                },
+                {
+                  "id": "bp_0_p0_tb_8",
+                  "type": "thought",
+                  "text": "Exactly, 'eh'. Deferred."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        },
+        {
+          "id": "bp_1",
+          "background": "assets/episodes/s1/s1_spesa_sabato/page_prima_1.webp",
+          "panels": [
+            {
+              "id": "bp_1_p0",
+              "characters": [
+                "favilla",
+                "carmela"
+              ],
+              "text_blocks": [
+                {
+                  "id": "bp_1_p0_tb_0",
+                  "type": "narration",
+                  "text": "A voice behind her."
+                },
+                {
+                  "id": "bp_1_p0_tb_1",
+                  "type": "dialogue",
+                  "speaker": "carmela",
+                  "text": "What a beautiful baby."
+                },
+                {
+                  "id": "bp_1_p0_tb_2",
+                  "type": "narration",
+                  "text": "Favilla turns. An elderly woman, white hair and eyes too alert for that hour of the morning, has appeared from around the corner of the shelf. A nearly empty basket on her arm."
+                },
+                {
+                  "id": "bp_1_p0_tb_3",
+                  "type": "narration",
+                  "text": "She doesn't look at Lex."
+                },
+                {
+                  "id": "bp_1_p0_tb_4",
+                  "type": "narration",
+                  "text": "She looks at Favilla's hands."
+                },
+                {
+                  "id": "bp_1_p0_tb_5",
+                  "type": "dialogue",
+                  "speaker": "carmela",
+                  "text": "Smart little one."
+                },
+                {
+                  "id": "bp_1_p0_tb_6",
+                  "type": "narration",
+                  "text": "A pause. Brief. Surgical."
+                },
+                {
+                  "id": "bp_1_p0_tb_7",
+                  "type": "dialogue",
+                  "speaker": "carmela",
+                  "text": "Just like mummy."
+                },
+                {
+                  "id": "bp_1_p0_tb_8",
+                  "type": "narration",
+                  "text": "She takes the bottle of tomato sauce from the shelf. Puts it in her basket. Leaves without turning around."
+                },
+                {
+                  "id": "bp_1_p0_tb_9",
+                  "type": "thought",
+                  "text": "Who is she?"
+                },
+                {
+                  "id": "bp_1_p0_tb_10",
+                  "type": "thought",
+                  "text": "Why was she looking at my hands?"
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "epilogue_ottimista": {
+      "pages": [
+        {
+          "id": "eo_0",
+          "background": "assets/episodes/s1/s1_spesa_sabato/page_epilogo.webp",
+          "panels": [
+            {
+              "id": "eo_0_p0",
+              "characters": [
+                "favilla",
+                "lex"
+              ],
+              "text_blocks": [
+                {
+                  "id": "eo_0_p0_tb_0",
+                  "type": "narration",
+                  "text": "Outside the IperPassata. Saturday sun. Lex in the pushchair, dangerously quiet."
+                },
+                {
+                  "id": "eo_0_p0_tb_1",
+                  "type": "narration",
+                  "text": "Favilla looks at him. Thinks about everything that's happened. Then, without meaning to, a half-laugh escapes her."
+                },
+                {
+                  "id": "eo_0_p0_tb_2",
+                  "type": "thought",
+                  "text": "A seven-month-old baby just tried to make me transform in the pasta aisle."
+                },
+                {
+                  "id": "eo_0_p0_tb_3",
+                  "type": "thought",
+                  "text": "With a fabric bear."
+                },
+                {
+                  "id": "eo_0_p0_tb_4",
+                  "type": "narration",
+                  "text": "Lex looks at her. He still has the same serious general's expression. Studies the environment. Assesses. Plans the next attempt."
+                },
+                {
+                  "id": "eo_0_p0_tb_5",
+                  "type": "thought",
+                  "text": "It'll get better. I'm learning."
+                },
+                {
+                  "id": "eo_0_p0_tb_6",
+                  "type": "thought",
+                  "text": "Him too."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "epilogue_cauta": {
+      "pages": [
+        {
+          "id": "ec_0",
+          "background": "assets/episodes/s1/s1_spesa_sabato/page_epilogo.webp",
+          "panels": [
+            {
+              "id": "ec_0_p0",
+              "characters": [
+                "favilla"
+              ],
+              "text_blocks": [
+                {
+                  "id": "ec_0_p0_tb_0",
+                  "type": "narration",
+                  "text": "Outside the IperPassata. Favilla doesn't see the sun. She sees that woman."
+                },
+                {
+                  "id": "ec_0_p0_tb_1",
+                  "type": "thought",
+                  "text": "She was looking at my hands. Not Lex. Not the jars. My hands."
+                },
+                {
+                  "id": "ec_0_p0_tb_2",
+                  "type": "thought",
+                  "text": "As if he already knows what to look for."
+                },
+                {
+                  "id": "ec_0_p0_tb_3",
+                  "type": "narration",
+                  "text": "Lex is in the pushchair, strangely quiet. Eyes half-closed. The expression of someone reconsidering a plan and seeing where it went wrong."
+                },
+                {
+                  "id": "ec_0_p0_tb_4",
+                  "type": "thought",
+                  "text": "I need to be more careful. About everything."
+                },
+                {
+                  "id": "ec_0_p0_tb_5",
+                  "type": "narration",
+                  "text": "They both have the same expression."
+                },
+                {
+                  "id": "ec_0_p0_tb_6",
+                  "type": "narration",
+                  "text": "Neither of them is done yet."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "branch_tardi_parziale": {
+      "id": "branch_tardi_parziale",
+      "skips_epilogue": true,
+      "pages": [
+        {
+          "id": "btp_0",
+          "background": "assets/episodes/s1/s1_spesa_sabato/page_bt_1.webp",
+          "panels": [
+            {
+              "id": "btp_0_p0",
+              "characters": [],
+              "text_blocks": [
+                {
+                  "speaker": "",
+                  "text": "The bear hits the side of the shelf."
+                },
+                {
+                  "speaker": "",
+                  "text": "Three jars fall. A dull thud. One rolls to the middle of the aisle."
+                },
+                {
+                  "speaker": "",
+                  "text": "Favilla turns around."
+                },
+                {
+                  "speaker": "",
+                  "text": "Jars on the floor. Lex still holding the dummy cord. That face."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        },
+        {
+          "id": "btp_1",
+          "background": "assets/episodes/s1/s1_spesa_sabato/page_bt_1.webp",
+          "panels": [
+            {
+              "id": "btp_1_p0",
+              "characters": [],
+              "text_blocks": [
+                {
+                  "speaker": "",
+                  "text": "Favilla's hands warm up. Just for a moment. Not enough."
+                },
+                {
+                  "speaker": "",
+                  "text": "A woman with a bag stops and looks at the jars."
+                },
+                {
+                  "speaker": "",
+                  "text": "Then looks at Lex. Then Favilla."
+                },
+                {
+                  "speaker": "",
+                  "text": "Favilla feels her hair — just the tips — tremble slightly. Like when there's too much electricity in the air."
+                }
+              ],
+              "interactions": []
+            }
+          ],
+          "choice": {
+            "id": "choice_parziale",
+            "prompt": "What does Favilla do?",
+            "options": [
+              {
+                "id": "opt_sistema",
+                "label": "Picks up the jars with apparent calm. As if nothing happened.",
+                "hint": "The tips of her hair keep trembling. Only Lex notices.",
+                "goto_branch": "branch_parziale_sistema",
+                "stat_effects": {
+                  "segreto": -3,
+                  "resistenza": -3
+                }
+              },
+              {
+                "id": "opt_lascia",
+                "label": "Leaves them there. Takes Lex, turns the trolley and goes.",
+                "hint": "It's not her shelf. It's not her problem.",
+                "goto_branch": "branch_parziale_lascia",
+                "stat_effects": {
+                  "resistenza": -5
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "branch_tardi_mancato": {
+      "id": "branch_tardi_mancato",
+      "skips_epilogue": true,
+      "pages": [
+        {
+          "id": "btm_0",
+          "background": "assets/episodes/s1/s1_spesa_sabato/page_bt_0.webp",
+          "panels": [
+            {
+              "id": "btm_0_p0",
+              "characters": [],
+              "text_blocks": [
+                {
+                  "speaker": "",
+                  "text": "The bear shoots through the air. Clears it."
+                },
+                {
+                  "speaker": "",
+                  "text": "It lands softly on the floor a metre from the shelves."
+                },
+                {
+                  "speaker": "",
+                  "text": "Silence. The shelves are intact. The jars still."
+                },
+                {
+                  "speaker": "",
+                  "text": "Favilla didn't even turn around."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        },
+        {
+          "id": "btm_1",
+          "background": "assets/episodes/s1/s1_spesa_sabato/page_bt_0.webp",
+          "panels": [
+            {
+              "id": "btm_1_p0",
+              "characters": [],
+              "text_blocks": [
+                {
+                  "speaker": "lex",
+                  "text": "..."
+                },
+                {
+                  "speaker": "",
+                  "text": "Lex stares at the bear. Then the shelves. Then the bear again."
+                },
+                {
+                  "speaker": "",
+                  "text": "The plan was perfect in theory."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        },
+        {
+          "id": "btm_2",
+          "background": "assets/episodes/s1/s1_spesa_sabato/page_bt_1.webp",
+          "panels": [
+            {
+              "id": "btm_2_p0",
+              "characters": [],
+              "text_blocks": [
+                {
+                  "speaker": "",
+                  "text": "At the checkout. Favilla places the items on the belt."
+                },
+                {
+                  "speaker": "",
+                  "text": "Lex is in the pushchair. Legs still for the first time today."
+                },
+                {
+                  "speaker": "",
+                  "text": "Looking at the ceiling with the eyes of someone already redesigning everything."
+                },
+                {
+                  "speaker": "lex",
+                  "text": "..."
+                },
+                {
+                  "speaker": "",
+                  "text": "Next time it needs more speed. Or a heavier dummy."
+                },
+                {
+                  "speaker": "",
+                  "text": "Or both."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "branch_parziale_sistema": {
+      "id": "branch_parziale_sistema",
+      "pages": [
+        {
+          "id": "bps_0",
+          "background": "assets/episodes/s1/s1_spesa_sabato/page_bt_1.webp",
+          "panels": [
+            {
+              "id": "bps_0_p0",
+              "characters": [],
+              "text_blocks": [
+                {
+                  "speaker": "",
+                  "text": "She picks them up. One, two, three. Puts them back on the shelf."
+                },
+                {
+                  "speaker": "",
+                  "text": "The woman nods and moves on."
+                },
+                {
+                  "speaker": "",
+                  "text": "The tips of her hair tremble for a few more seconds, then settle."
+                },
+                {
+                  "speaker": "favilla",
+                  "text": "Everything's fine."
+                },
+                {
+                  "speaker": "",
+                  "text": "It's not clear who he's saying it to."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        },
+        {
+          "id": "bps_1",
+          "background": "assets/episodes/s1/s1_spesa_sabato/page_bt_1.webp",
+          "panels": [
+            {
+              "id": "bps_1_p0",
+              "characters": [],
+              "text_blocks": [
+                {
+                  "speaker": "",
+                  "text": "At the checkout. Favilla places the items on the belt."
+                },
+                {
+                  "speaker": "",
+                  "text": "Lex is in the pushchair, too quiet."
+                },
+                {
+                  "speaker": "",
+                  "text": "Looking at the ceiling with the expression of someone already revising the calculations."
+                },
+                {
+                  "speaker": "",
+                  "text": "Suspicious silence."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "branch_parziale_lascia": {
+      "id": "branch_parziale_lascia",
+      "pages": [
+        {
+          "id": "bpl_0",
+          "background": "assets/episodes/s1/s1_spesa_sabato/page_bt_1.webp",
+          "panels": [
+            {
+              "id": "bpl_0_p0",
+              "characters": [],
+              "text_blocks": [
+                {
+                  "speaker": "",
+                  "text": "She turns the trolley. Walks away."
+                },
+                {
+                  "speaker": "",
+                  "text": "A jar is still rolling across the floor behind her."
+                },
+                {
+                  "speaker": "",
+                  "text": "The woman with the bag watches her go."
+                },
+                {
+                  "speaker": "",
+                  "text": "Favilla doesn't turn around."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        },
+        {
+          "id": "bpl_1",
+          "background": "assets/episodes/s1/s1_spesa_sabato/page_bt_1.webp",
+          "panels": [
+            {
+              "id": "bpl_1_p0",
+              "characters": [],
+              "text_blocks": [
+                {
+                  "speaker": "",
+                  "text": "At the checkout. Favilla places the items on the belt."
+                },
+                {
+                  "speaker": "",
+                  "text": "Lex is in the pushchair, too quiet."
+                },
+                {
+                  "speaker": "",
+                  "text": "Looking at the ceiling with the expression of someone already revising the calculations."
+                },
+                {
+                  "speaker": "",
+                  "text": "Suspicious silence."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "epilogue": {
+    "pages": [
+      {
+        "id": "ep_uscita",
+        "background": "assets/episodes/s1/s1_spesa_sabato/page_epilogo.webp",
+        "panels": [
+          {
+            "id": "ep_uscita_p0",
+            "characters": [
+              "favilla",
+              "lex"
+            ],
+            "text_blocks": [
+              {
+                "id": "ep_uscita_p0_tb_0",
+                "type": "narration",
+                "text": "At the checkout. Favilla places the items on the belt."
+              },
+              {
+                "id": "ep_uscita_p0_tb_1",
+                "type": "narration",
+                "text": "Lex is in the pushchair, too quiet. Looking at the ceiling with the expression of someone already revising the calculations."
+              },
+              {
+                "id": "ep_uscita_p0_tb_2",
+                "type": "thought",
+                "text": "Suspicious silence."
+              }
+            ],
+            "interactions": []
+          }
+        ],
+        "choice": {
+          "id": "elaborazione_uscita",
+          "prompt": "Favilla loads the shopping. Lex thinks. Outside, it's Saturday.",
+          "options": [
+            {
+              "id": "ottimista",
+              "label": "All things considered, it's almost funny. A seven-month-old baby. A teddy bear. Almost.",
+              "hint": "The 'almost' does all the work.",
+              "goto_branch": "epilogue_ottimista",
+              "stat_effects": {
+                "resistenza": 5,
+                "legame": 5
+              }
+            },
+            {
+              "id": "cauta",
+              "label": "That woman. Those eyes on my hands. I need to be more careful.",
+              "hint": "It's not paranoia. It's instinct.",
+              "goto_branch": "epilogue_cauta",
+              "stat_effects": {
+                "segreto": 10,
+                "resistenza": -5
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

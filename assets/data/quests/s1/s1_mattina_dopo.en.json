@@ -1,0 +1,421 @@
+{
+  "id": "s1_mattina_dopo",
+  "pages": [
+    {
+      "index": 0,
+      "background": "assets/episodes/s1/s1_mattina_dopo/page_0.webp",
+      "panels": [
+        {
+          "id": "md0_0",
+          "characters": [
+            "favilla"
+          ],
+          "text_blocks": [
+            {
+              "id": "md0_0_tb_0",
+              "type": "narration",
+              "text": "5:12 in the morning. Lex stopped crying an hour ago. Mallow is asleep."
+            },
+            {
+              "id": "md0_0_tb_1",
+              "type": "thought",
+              "text": "And here I am, wide awake, staring at the ceiling as if it had all the answers."
+            },
+            {
+              "id": "md0_0_tb_2",
+              "type": "narration",
+              "text": "Last night something happened that I don't know what to call. I don't know if it's a gift. I don't know if it's a burden."
+            },
+            {
+              "id": "md0_0_tb_3",
+              "type": "thought",
+              "text": "All I know is that now the pasta is perfectly cooked and my son is safe."
+            }
+          ],
+          "interactions": []
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "background": "assets/episodes/s1/s1_mattina_dopo/page_1.webp",
+      "panels": [
+        {
+          "id": "md1_0",
+          "characters": [
+            "favilla",
+            "lex"
+          ],
+          "text_blocks": [
+            {
+              "id": "md1_0_tb_0",
+              "type": "narration",
+              "text": "Then Lex wakes up. As always — without warning, without negotiation."
+            },
+            {
+              "id": "md1_0_tb_1",
+              "type": "dialogue",
+              "speaker": "lex",
+              "text": "Mmh. Mmmmh!"
+            },
+            {
+              "id": "md1_0_tb_2",
+              "type": "narration",
+              "text": "But this time, when Favilla approaches, he doesn't look at the bottle. He doesn't look at the toy."
+            },
+            {
+              "id": "md1_0_tb_3",
+              "type": "narration",
+              "text": "He looks at her. With those enormous eyes that seem to already know everything."
+            },
+            {
+              "id": "md1_0_tb_4",
+              "type": "thought",
+              "text": "You were there. You saw."
+            }
+          ],
+          "interactions": []
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "background": "assets/episodes/s1/s1_mattina_dopo/page_2.webp",
+      "panels": [
+        {
+          "id": "md2_0",
+          "characters": [
+            "favilla",
+            "lex",
+            "mallow"
+          ],
+          "text_blocks": [
+            {
+              "id": "md2_0_tb_0",
+              "type": "narration",
+              "text": "Then Lex decides to act. He raises his arms. Throws them forward with all the strength he has — which is to say, the strength of a pudding."
+            },
+            {
+              "id": "md2_0_tb_1",
+              "type": "dialogue",
+              "speaker": "lex",
+              "text": "WAAAAH! Pff. WAAAAH!"
+            },
+            {
+              "id": "md2_0_tb_2",
+              "type": "narration",
+              "text": "He wants to fly. Obviously. He's trying to fly."
+            },
+            {
+              "id": "md2_0_tb_3",
+              "type": "narration",
+              "text": "Mallow looks up from his phone. Looks at her. Looks at Lex. Waits for her reaction."
+            }
+          ],
+          "interactions": []
+        }
+      ],
+      "choice": {
+        "id": "reazione_lex",
+        "prompt": "",
+        "options": [
+          {
+            "id": "respira",
+            "label": "Her fingers grow warm. She tries to stay calm.",
+            "goto_branch": "branch_sorriso",
+            "stat_effects": {},
+            "minigame": {
+              "type": "respira",
+              "duration_seconds": 12,
+              "tiers": [
+                {
+                  "min": 1,
+                  "label": "Total control.",
+                  "goto_branch": "branch_sorriso",
+                  "stat_effects": {
+                    "segreto": 10,
+                    "legame": 5
+                  }
+                },
+                {
+                  "min": 0,
+                  "label": "Her hands burn.",
+                  "goto_branch": "branch_sudore",
+                  "stat_effects": {
+                    "segreto": -10,
+                    "legame": 5
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "branches": {
+    "branch_sorriso": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_mattina_dopo/branch_sorriso.webp",
+          "panels": [
+            {
+              "id": "bs_0",
+              "characters": [
+                "favilla",
+                "lex",
+                "mallow"
+              ],
+              "text_blocks": [
+                {
+                  "id": "bs_0_tb_0",
+                  "type": "narration",
+                  "text": "Lex laughs — that full laugh with his two little teeth. Contagious. Inevitable."
+                },
+                {
+                  "id": "bs_0_tb_1",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "Look at these two. Already allied against me."
+                },
+                {
+                  "id": "bs_0_tb_2",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Always has been."
+                },
+                {
+                  "id": "bs_0_tb_3",
+                  "type": "thought",
+                  "text": "The secret is safe. For now it's still ours — mine and his."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "branch_sudore": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_mattina_dopo/branch_sudore.webp",
+          "panels": [
+            {
+              "id": "bsu_0",
+              "characters": [
+                "favilla",
+                "lex",
+                "mallow"
+              ],
+              "text_blocks": [
+                {
+                  "id": "bsu_0_tb_0",
+                  "type": "narration",
+                  "text": "Mallow puts his phone down. Looks at her with that precise calm Favilla knows well."
+                },
+                {
+                  "id": "bsu_0_tb_1",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "Last night… something happened to you, didn't it?"
+                },
+                {
+                  "id": "bsu_0_tb_2",
+                  "type": "thought",
+                  "text": "No. No no no. Not yet."
+                },
+                {
+                  "id": "bsu_0_tb_3",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Tiredness. Just tiredness."
+                },
+                {
+                  "id": "bsu_0_tb_4",
+                  "type": "narration",
+                  "text": "Mallow nods. But doesn't take his eyes off her."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "epilogue_caffe": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_mattina_dopo/epilogue.webp",
+          "panels": [
+            {
+              "id": "ep_caffe_0",
+              "characters": [
+                "favilla"
+              ],
+              "text_blocks": [
+                {
+                  "id": "ep_caffe_0_tb_0",
+                  "type": "narration",
+                  "text": "Warm. Strong. Familiar."
+                },
+                {
+                  "id": "ep_caffe_0_tb_1",
+                  "type": "narration",
+                  "text": "A second later, something inside her warms — not like the coffee."
+                },
+                {
+                  "id": "ep_caffe_0_tb_2",
+                  "type": "thought",
+                  "text": "There it is. It's the coffee. Coffee does this."
+                },
+                {
+                  "id": "ep_caffe_0_tb_3",
+                  "type": "narration",
+                  "text": "Lex watches her from his chair. He already knows."
+                },
+                {
+                  "id": "ep_caffe_0_tb_4",
+                  "type": "system",
+                  "text": "MISSION COMPLETE — The Morning After"
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "epilogue_no_caffe": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_mattina_dopo/epilogue.webp",
+          "panels": [
+            {
+              "id": "ep_nocaffe_0",
+              "characters": [
+                "favilla",
+                "mallow"
+              ],
+              "text_blocks": [
+                {
+                  "id": "ep_nocaffe_0_tb_0",
+                  "type": "narration",
+                  "text": "She leaves it there. Turns toward the window."
+                },
+                {
+                  "id": "ep_nocaffe_0_tb_1",
+                  "type": "thought",
+                  "text": "If coffee has anything to do with it, I want to figure that out with a clear head."
+                },
+                {
+                  "id": "ep_nocaffe_0_tb_2",
+                  "type": "narration",
+                  "text": "Mallow looks up from his phone. Looks at the espresso cup. Looks at her."
+                },
+                {
+                  "id": "ep_nocaffe_0_tb_3",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "You're not drinking your coffee?"
+                },
+                {
+                  "id": "ep_nocaffe_0_tb_4",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Not this morning."
+                },
+                {
+                  "id": "ep_nocaffe_0_tb_5",
+                  "type": "narration",
+                  "text": "Pause. Mallow says nothing more. But doesn't take his eyes off her."
+                },
+                {
+                  "id": "ep_nocaffe_0_tb_6",
+                  "type": "narration",
+                  "text": "Lex approves, in his own way. He doesn't know he's just complicated everything."
+                },
+                {
+                  "id": "ep_nocaffe_0_tb_7",
+                  "type": "system",
+                  "text": "MISSION COMPLETE — The Morning After"
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "epilogue": {
+    "pages": [
+      {
+        "index": 0,
+        "background": "assets/episodes/s1/s1_mattina_dopo/epilogue.webp",
+        "panels": [
+          {
+            "id": "md_ep_0",
+            "characters": [
+              "favilla"
+            ],
+            "text_blocks": [
+              {
+                "id": "md_ep_0_tb_0",
+                "type": "narration",
+                "text": "At 7:30 Favilla is on her feet, Lex on her hip, Mallow already on a call."
+              },
+              {
+                "id": "md_ep_0_tb_1",
+                "type": "narration",
+                "text": "Same as yesterday. Completely different from yesterday."
+              },
+              {
+                "id": "md_ep_0_tb_2",
+                "type": "thought",
+                "text": "Nova Tutinia doesn't yet know what's hiding on the third floor of 18 Blemish and Blister Street."
+              },
+              {
+                "id": "md_ep_0_tb_3",
+                "type": "narration",
+                "text": "The coffee is on the counter. Hot. As always."
+              }
+            ],
+            "interactions": []
+          }
+        ],
+        "choice": {
+          "id": "caffe_choice",
+          "prompt": "Favilla stares at the espresso cup. Does she drink it?",
+          "options": [
+            {
+              "id": "caffe_si",
+              "label": "She drinks it in one go. Like every morning.",
+              "hint": "The body knows before the mind.",
+              "goto_branch": "epilogue_caffe",
+              "stat_effects": {
+                "resistenza": -15,
+                "scintille": 10
+              }
+            },
+            {
+              "id": "caffe_no",
+              "label": "She leaves it there. This morning, better not.",
+              "hint": "Mallow looks at her. Favilla never lets her coffee go cold.",
+              "goto_branch": "epilogue_no_caffe",
+              "stat_effects": {
+                "resistenza": 10,
+                "segreto": -5,
+                "legame": -5
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

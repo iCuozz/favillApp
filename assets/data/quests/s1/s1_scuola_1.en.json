@@ -1,0 +1,360 @@
+{
+  "id": "s1_scuola_1",
+  "stat_entry": [
+    {
+      "stat": "resistenza",
+      "op": "lt",
+      "value": 45,
+      "goto_branch": "intro_caffe_effect",
+      "prepend": true
+    }
+  ],
+  "pages": [
+    {
+      "index": 0,
+      "background": "assets/episodes/s1/s1_scuola_1/page_0.webp",
+      "panels": [
+        {
+          "id": "sc1_0_0",
+          "characters": [
+            "favilla"
+          ],
+          "text_blocks": [
+            {
+              "id": "sc1_0_0_tb_0",
+              "type": "narration",
+              "text": "Nova Tutinia elementary school. 7:55 in the morning."
+            },
+            {
+              "id": "sc1_0_0_tb_1",
+              "type": "thought",
+              "text": "It was tiredness. Just tiredness. These things don't exist."
+            },
+            {
+              "id": "sc1_0_0_tb_2",
+              "type": "narration",
+              "text": "Her hair quivers for a second. Favilla pulls it into a ponytail and ignores it."
+            },
+            {
+              "id": "sc1_0_0_tb_3",
+              "type": "thought",
+              "text": "Normal day. Head down. Fixed smile."
+            }
+          ],
+          "interactions": []
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "background": "assets/episodes/s1/s1_scuola_1/page_1.webp",
+      "panels": [
+        {
+          "id": "sc1_1_0",
+          "characters": [
+            "favilla",
+            "corvi"
+          ],
+          "text_blocks": [
+            {
+              "id": "sc1_1_0_tb_0",
+              "type": "narration",
+              "text": "Then she arrives. Twelve-centimetre heels, leather briefcase, the look of an audit."
+            },
+            {
+              "id": "sc1_1_0_tb_1",
+              "type": "dialogue",
+              "speaker": "corvi",
+              "text": "Extraordinary inspection. By 8:30 I want the gym cleared and the storerooms sorted. Everything."
+            },
+            {
+              "id": "sc1_1_0_tb_2",
+              "type": "narration",
+              "text": "In the gym there are metal shelves weighing thirty kilos each. In the storeroom, years of paperwork and broken furniture."
+            },
+            {
+              "id": "sc1_1_0_tb_3",
+              "type": "dialogue",
+              "speaker": "corvi",
+              "text": "Understood, or shall I repeat myself?"
+            },
+            {
+              "id": "sc1_1_0_tb_4",
+              "type": "thought",
+              "text": "Thirty-five minutes. Alone."
+            }
+          ],
+          "interactions": []
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "background": "assets/episodes/s1/s1_scuola_1/page_2.webp",
+      "panels": [
+        {
+          "id": "sc1_2_0",
+          "characters": [
+            "favilla"
+          ],
+          "text_blocks": [
+            {
+              "id": "sc1_2_0_tb_0",
+              "type": "narration",
+              "text": "Favilla pushes. Drags. Sweat. Short breaths. One minute. Ten minutes. Twenty."
+            },
+            {
+              "id": "sc1_2_0_tb_1",
+              "type": "thought",
+              "text": "I can't do it. I can't do it. I can't—"
+            },
+            {
+              "id": "sc1_2_0_tb_2",
+              "type": "narration",
+              "text": "Then something inside her breaks. Or opens."
+            },
+            {
+              "id": "sc1_2_0_tb_3",
+              "type": "narration",
+              "text": "Twenty seconds later, the gym is perfect. The storerooms are in order. She stands in the silence, hands trembling."
+            },
+            {
+              "id": "sc1_2_0_tb_4",
+              "type": "thought",
+              "text": "What have I done. What have I done. What have I—"
+            },
+            {
+              "id": "sc1_2_0_tb_5",
+              "type": "narration",
+              "text": "She looks down. On the side of her blouse, two dark scorch marks. Shaped like fingers."
+            }
+          ],
+          "interactions": []
+        }
+      ],
+      "choice": {
+        "id": "scottature_choice",
+        "prompt": "The burns are visible. Dr. Corvi is coming back in a few minutes.",
+        "options": [
+          {
+            "id": "bagno",
+            "label": "She runs to the bathroom. She has a spare in her bag.",
+            "hint": "Nobody sees the clothes. But Corvi notices the absence.",
+            "goto_branch": "branch_bagno",
+            "stat_effects": {
+              "segreto": 15,
+              "resistenza": -10
+            },
+            "set_flags": {
+              "shirt_in_backpack": true
+            }
+          },
+          {
+            "id": "finge_niente",
+            "label": "She stays. Pretends nothing happened.",
+            "hint": "The brazen face holds. But someone is watching.",
+            "goto_branch": "branch_finge",
+            "stat_effects": {
+              "segreto": -15,
+              "resistenza": 10
+            },
+            "set_flags": {
+              "shirt_in_backpack": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "branches": {
+    "intro_caffe_effect": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_scuola_1/page_0.webp",
+          "panels": [
+            {
+              "id": "caffe_intro_0",
+              "characters": [
+                "favilla"
+              ],
+              "text_blocks": [
+                {
+                  "id": "caffe_intro_tb_0",
+                  "type": "narration",
+                  "text": "7:55. The school doors. As always."
+                },
+                {
+                  "id": "caffe_intro_tb_1",
+                  "type": "thought",
+                  "text": "The coffee. The coffee was a mistake."
+                },
+                {
+                  "id": "caffe_intro_tb_2",
+                  "type": "narration",
+                  "text": "Her hair warms her down her back — hot, like an engine running too high."
+                },
+                {
+                  "id": "caffe_intro_tb_3",
+                  "type": "thought",
+                  "text": "Head down. Fixed smile. Nothing strange. Perfectly normal."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "branch_bagno": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_scuola_1/branch_bagno.webp",
+          "panels": [
+            {
+              "id": "bb_0",
+              "characters": [
+                "favilla",
+                "corvi"
+              ],
+              "text_blocks": [
+                {
+                  "id": "bb_0_tb_0",
+                  "type": "narration",
+                  "text": "Quick change. Breath. Smile. Favilla is back in the gym thirty-three seconds later."
+                },
+                {
+                  "id": "bb_0_tb_1",
+                  "type": "dialogue",
+                  "speaker": "corvi",
+                  "text": "Where were you?"
+                },
+                {
+                  "id": "bb_0_tb_2",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Bathroom. Ladies'. Necessity."
+                },
+                {
+                  "id": "bb_0_tb_3",
+                  "type": "narration",
+                  "text": "Dr. Corvi inspects the gym. Nods with the warmth of a tax report."
+                },
+                {
+                  "id": "bb_0_tb_4",
+                  "type": "dialogue",
+                  "speaker": "corvi",
+                  "text": "Acceptable."
+                },
+                {
+                  "id": "bb_0_tb_5",
+                  "type": "thought",
+                  "text": "The burnt clothes are at the bottom of the bag. The secret is safe. For now."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "branch_finge": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_scuola_1/branch_finge.webp",
+          "panels": [
+            {
+              "id": "bf_0",
+              "characters": [
+                "favilla",
+                "corvi",
+                "collega"
+              ],
+              "text_blocks": [
+                {
+                  "id": "bf_0_tb_0",
+                  "type": "narration",
+                  "text": "Dr. Corvi enters. Inspects. Nods. Leaves without a word."
+                },
+                {
+                  "id": "bf_0_tb_1",
+                  "type": "narration",
+                  "text": "But in the corridor, a colleague approaches."
+                },
+                {
+                  "id": "bf_0_tb_2",
+                  "type": "dialogue",
+                  "speaker": "collega",
+                  "text": "Favilla, did you hurt yourself? Your shirt…"
+                },
+                {
+                  "id": "bf_0_tb_3",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "The iron. This morning I was half asleep."
+                },
+                {
+                  "id": "bf_0_tb_4",
+                  "type": "narration",
+                  "text": "The colleague laughs. Believes her. But looked for a second too long."
+                },
+                {
+                  "id": "bf_0_tb_5",
+                  "type": "thought",
+                  "text": "Lie number two. Was I counting?"
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "epilogue": {
+    "pages": [
+      {
+        "index": 0,
+        "background": "assets/episodes/s1/s1_scuola_1/epilogue.webp",
+        "panels": [
+          {
+            "id": "sc1_ep_0",
+            "characters": [
+              "favilla"
+            ],
+            "text_blocks": [
+              {
+                "id": "sc1_ep_0_tb_0",
+                "type": "narration",
+                "text": "End of shift. Favilla sits on the wall outside school. Looks at her hands."
+              },
+              {
+                "id": "sc1_ep_0_tb_1",
+                "type": "thought",
+                "text": "It wasn't tiredness. It wasn't a dream. It was real."
+              },
+              {
+                "id": "sc1_ep_0_tb_2",
+                "type": "narration",
+                "text": "For the first time since last night, she stops convincing herself otherwise."
+              },
+              {
+                "id": "sc1_ep_0_tb_3",
+                "type": "thought",
+                "text": "And now?"
+              },
+              {
+                "id": "sc1_ep_0_tb_4",
+                "type": "system",
+                "text": "MISSION COMPLETE — A Normal Day"
+              }
+            ],
+            "interactions": []
+          }
+        ]
+      }
+    ]
+  }
+}
