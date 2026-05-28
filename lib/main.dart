@@ -29,7 +29,7 @@ import 'widgets/stats_hud_widget.dart';
 import 'widgets/stats_intro_overlay.dart';
 import 'widgets/minigame_lex_strike.dart';
 import 'widgets/minigame_respira.dart';
-import 'widgets/minigame_distrai_lex.dart';
+import 'widgets/minigame_rincorsa_lex.dart';
 import 'widgets/minigame_rincorsa.dart';
 import 'widgets/minigame_schiva_lex.dart';
 
@@ -629,10 +629,10 @@ class _EpisodePageState extends State<EpisodePage> {
             ),
           ),
         );
-      case 'distrai_lex':
+      case 'rincorsa_lex':
         Navigator.of(context).push<void>(
           MaterialPageRoute(
-            builder: (_) => MinigameDistraiLexScreen(
+            builder: (_) => MinigameRincorsaLexScreen(
               config: cfg,
               onComplete: (effects, label, tier) {
                 Navigator.of(context).pop();

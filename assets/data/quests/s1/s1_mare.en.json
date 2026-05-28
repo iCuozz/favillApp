@@ -180,7 +180,7 @@
                 "goto_branch": "branch_preso_bene",
                 "stat_effects": {},
                 "minigame": {
-                  "type": "distrai_lex",
+                  "type": "rincorsa_lex",
                   "duration_seconds": 15,
                   "tiers": [
                     { "min": 5, "label": "Got him!", "goto_branch": "branch_preso_bene", "stat_effects": { "resistenza": 10, "legame": 5 } },
@@ -237,7 +237,7 @@
                 "goto_branch": "branch_preso_bene",
                 "stat_effects": {},
                 "minigame": {
-                  "type": "distrai_lex",
+                  "type": "rincorsa_lex",
                   "duration_seconds": 15,
                   "tiers": [
                     { "min": 5, "label": "Got him!", "goto_branch": "branch_preso_bene", "stat_effects": { "resistenza": 10, "legame": 5 } },

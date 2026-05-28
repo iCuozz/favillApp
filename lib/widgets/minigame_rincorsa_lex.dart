@@ -9,28 +9,28 @@ import 'package:flutter/scheduler.dart' show Ticker;
 import 'package:flutter/services.dart';
 import '../models/comic_data.dart';
 
-/// Mini-game RINCORSA — city/park Temple-Run: insegui il ladro che ha rubato la borsetta di Favilla.
+/// Mini-game RINCORSA_LEX — beach Temple-Run: insegui Lex che gattonava verso il mare.
 ///
 /// 3 corsie. Scivola sinistra/destra per cambiare corsia ed evitare ostacoli.
 /// Gap decresce naturalmente mentre corri; le collisioni lo aumentano.
 ///
-/// Tier: gap ≤ 0.30 → score 2 (preso) | ≤ 0.65 → score 1 (quasi) | > 0.65 → score 0 (perso).
-class MinigameRincorsaScreen extends StatefulWidget {
+/// Tier: gap ≤ 0.30 → score 2 (presa) | ≤ 0.65 → score 1 (quasi) | > 0.65 → score 0 (perso).
+class MinigameRincorsaLexScreen extends StatefulWidget {
   final MinigameConfig config;
   final void Function(
           Map<String, int> statEffects, String tierLabel, MinigameTier tier)
       onComplete;
 
-  const MinigameRincorsaScreen(
+  const MinigameRincorsaLexScreen(
       {super.key, required this.config, required this.onComplete});
 
   @override
-  State<MinigameRincorsaScreen> createState() => _MinigameRincorsaScreenState();
+  State<MinigameRincorsaLexScreen> createState() => _MinigameRincorsaLexScreenState();
 }
 
 // ─── Game constants ─────────────────────────────────────────────────────────
 const _kStartGap        = 0.55;
-const _kNaturalRecovery = 0.022; // gap/s — running > walking thief
+const _kNaturalRecovery = 0.022; // gap/s — running > crawling
 const _kCollisionPenalty = 0.18;
 const _kObstacleSpeed   = 0.62;  // track-y units/s
 const _kSpawnInterval   = 1.35;  // seconds
@@ -44,16 +44,16 @@ const _kBottomHalfWFrac = 0.44;  // track half-width at bottom = frac * screenW
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
-enum _ObstacleType { branch, trunk, squirrel, hedgehog, puddle }
+enum _ObstacleType { umbrella, sunbather, sandcastle, bag, deckchair }
 
 extension _ObstacleExt on _ObstacleType {
   String get emoji {
     switch (this) {
-      case _ObstacleType.branch:    return '🌿';
-      case _ObstacleType.trunk:     return '🪵';
-      case _ObstacleType.squirrel:  return '🐿️';
-      case _ObstacleType.hedgehog:  return '🦔';
-      case _ObstacleType.puddle:    return '💧';
+      case _ObstacleType.umbrella:   return '⛱';
+      case _ObstacleType.sunbather:  return '🧘';
+      case _ObstacleType.sandcastle: return '🏰';
+      case _ObstacleType.bag:        return '🧺';
+      case _ObstacleType.deckchair:  return '🪑';
     }
   }
 }
@@ -72,7 +72,7 @@ enum _RunState { normal, switching, stunned }
 
 // ─── Widget ───────────────────────────────────────────────────────────────────
 
-class _MinigameRincorsaScreenState extends State<MinigameRincorsaScreen>
+class _MinigameRincorsaLexScreenState extends State<MinigameRincorsaLexScreen>
     with TickerProviderStateMixin {
 
   // ── Game state ────────────────────────────────────────────────────────────
@@ -468,7 +468,7 @@ class _MinigameRincorsaScreenState extends State<MinigameRincorsaScreen>
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text('⚡  IL LADRO SCAPPA!  🦹',
+                const Text('⚡  LEX È SCAPPATO!  👶',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: 'Bangers',
@@ -479,8 +479,8 @@ class _MinigameRincorsaScreenState extends State<MinigameRincorsaScreen>
                 const SizedBox(height: 28),
                 _TutorialItem(icon: '👈', label: 'Swipe sinistra — cambia corsia'),
                 _TutorialItem(icon: '👉', label: 'Swipe destra — cambia corsia'),
-                _TutorialItem(icon: '🪵', label: 'Evita rami, tronchi e animali nel bosco'),
-                _TutorialItem(icon: '🦹', label: 'Raggiungi il ladro prima che svigni!'),
+                _TutorialItem(icon: '⛱', label: 'Evita gli ostacoli sulla spiaggia'),
+                _TutorialItem(icon: '👶', label: 'Raggiungi Lex prima che tocchi l\'acqua!'),
                 const SizedBox(height: 40),
                 GestureDetector(
                   onTap: _startGame,
@@ -548,8 +548,8 @@ class _TrackPainter extends CustomPainter {
     final bHalfW   = size.width  * _kBottomHalfWFrac;
 
     _drawSky(canvas, size, horizonY);
-    _drawTreeLine(canvas, size, horizonY);
-    _drawGrass(canvas, size, horizonY);
+    _drawOcean(canvas, size, horizonY);
+    _drawBeach(canvas, size, horizonY);
     _drawTrack(canvas, size, horizonY, bHalfW);
     _drawLaneMarkings(canvas, size, horizonY, bHalfW);
     _drawEdgeShadow(canvas, size, horizonY, bHalfW);
@@ -561,48 +561,59 @@ class _TrackPainter extends CustomPainter {
       ..shader = const LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
-        colors: [Color(0xFF5BA3D9), Color(0xFF9DCEF0)],
-        stops: [0.0, 1.0],
+        colors: [Color(0xFF87CEEB), Color(0xFFFFE4A0)],
+        stops: [0.5, 1.0],
       ).createShader(rect);
     canvas.drawRect(rect, paint);
   }
 
-  void _drawTreeLine(Canvas canvas, Size size, double horizonY) {
-    // Row of park trees silhouettes at the horizon
-    final treePaint = Paint()..color = const Color(0xFF2E7D32);
-    final trunkPaint = Paint()..color = const Color(0xFF5D4037);
-    final rng = Random(13);
-    final count = 11;
-    for (int i = 0; i < count; i++) {
-      final x = (i + 0.5) * size.width / count + rng.nextDouble() * 8 - 4;
-      final h = 28.0 + rng.nextDouble() * 18;
-      final r = 12.0 + rng.nextDouble() * 6;
-      final base = horizonY + 4;
-      // trunk
-      canvas.drawRect(Rect.fromCenter(center: Offset(x, base - h * 0.35), width: 4, height: h * 0.5), trunkPaint);
-      // canopy
-      canvas.drawCircle(Offset(x, base - h), r, treePaint);
+  void _drawOcean(Canvas canvas, Size size, double horizonY) {
+    // Wavy horizon line
+    final rect = Rect.fromLTWH(0, horizonY - 8, size.width, 28);
+    final paint = Paint()
+      ..shader = LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [const Color(0xFF1E8BC3), const Color(0xFF2C3E7A)],
+      ).createShader(rect);
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(rect, const Radius.circular(3)),
+      paint,
+    );
+
+    // Shimmer reflection dots
+    final dotPaint = Paint()
+      ..color = Colors.white.withOpacity(0.35)
+      ..strokeWidth = 1.5
+      ..style = PaintingStyle.fill;
+    final rng = Random(42);
+    for (int i = 0; i < 14; i++) {
+      final x = rng.nextDouble() * size.width;
+      final y = horizonY - 4 + rng.nextDouble() * 18;
+      canvas.drawOval(
+        Rect.fromCenter(center: Offset(x, y), width: 8, height: 3),
+        dotPaint,
+      );
     }
   }
 
-  void _drawGrass(Canvas canvas, Size size, double horizonY) {
-    // Green grass on either side of the track
+  void _drawBeach(Canvas canvas, Size size, double horizonY) {
     final rect = Rect.fromLTWH(0, horizonY + 20, size.width, size.height);
     final paint = Paint()
       ..shader = LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
-        colors: [const Color(0xFF66BB6A), const Color(0xFF388E3C)],
+        colors: [const Color(0xFFF5D98A), const Color(0xFFC9A44D)],
       ).createShader(rect);
     canvas.drawRect(rect, paint);
 
-    // Grass texture: small tufts
-    final tuft = Paint()..color = const Color(0xFF2E7D32).withOpacity(0.4);
-    final rng = Random(99);
-    for (int i = 0; i < 55; i++) {
+    // Sand texture: random dots/pebbles
+    final pebble = Paint()..color = const Color(0xFFB8934A).withOpacity(0.4);
+    final rng = Random(7);
+    for (int i = 0; i < 60; i++) {
       final x = rng.nextDouble() * size.width;
       final y = horizonY + 20 + rng.nextDouble() * (size.height - horizonY - 20);
-      canvas.drawOval(Rect.fromCenter(center: Offset(x, y), width: 6 + rng.nextDouble() * 8, height: 2.5), tuft);
+      canvas.drawCircle(Offset(x, y), 1.5 + rng.nextDouble() * 2.5, pebble);
     }
   }
 
@@ -620,32 +631,22 @@ class _TrackPainter extends CustomPainter {
       ..shader = LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
-        colors: const [Color(0xFF8B6342), Color(0xFF6B4226)],
+        colors: const [Color(0xFFE2BA78), Color(0xFFAF8040)],
       ).createShader(
           Rect.fromLTWH(0, horizonY, size.width, size.height - horizonY));
     canvas.drawPath(path, paint);
-
-    // Terra texture: pietre e radici sparse
-    final stonePaint = Paint()..color = const Color(0xFF5A3418).withOpacity(0.45);
-    final rng2 = Random(31);
-    for (int i = 0; i < 35; i++) {
-      final tx2 = cx - bHalfW * 0.85 + rng2.nextDouble() * (bHalfW * 1.70);
-      final ty2 = horizonY + 12 + rng2.nextDouble() * (size.height - horizonY - 12);
-      final w = 4.0 + rng2.nextDouble() * 10;
-      canvas.drawOval(Rect.fromCenter(center: Offset(tx2, ty2), width: w, height: w * 0.45), stonePaint);
-    }
   }
 
   void _drawLaneMarkings(
       Canvas canvas, Size size, double horizonY, double bHalfW) {
     final cx = size.width / 2;
-    // Sentiero di terra: solchi scuri animati al posto delle strisce stradali
-    final rutPaint = Paint()
-      ..color = const Color(0xFF4A2810).withOpacity(0.50)
-      ..strokeWidth = 1.8
+    final dashPaint = Paint()
+      ..color = Colors.white.withOpacity(0.55)
+      ..strokeWidth = 2.5
       ..strokeCap = StrokeCap.round;
 
     for (final f in [1 / 3.0, 2 / 3.0]) {
+      // Top and bottom divider x
       final tx = (cx - _kHorizonHalfW) + (_kHorizonHalfW * 2) * f;
       final bx = (cx - bHalfW) + (bHalfW * 2) * f;
       final ty = horizonY + 8;
@@ -654,14 +655,14 @@ class _TrackPainter extends CustomPainter {
       const dashCount = 10;
       for (int i = 0; i < dashCount; i++) {
         final t0 = ((i + scrollOffset) / dashCount) % 1.0;
-        final t1 = ((i + scrollOffset + 0.040) / dashCount) % 1.0;
-        if (t0 >= t1) continue;
+        final t1 = ((i + scrollOffset + 0.045) / dashCount) % 1.0;
+        if (t0 >= t1) continue; // skip wrap-around segment
 
         final x0 = lerpDouble(tx, bx, t0)!;
         final y0 = lerpDouble(ty, by, t0)!;
         final x1 = lerpDouble(tx, bx, t1)!;
         final y1 = lerpDouble(ty, by, t1)!;
-        canvas.drawLine(Offset(x0, y0), Offset(x1, y1), rutPaint);
+        canvas.drawLine(Offset(x0, y0), Offset(x1, y1), dashPaint);
       }
     }
   }
@@ -808,7 +809,7 @@ class _LexSprite extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text('🦹', style: TextStyle(fontSize: size)),
+        Text('👶', style: TextStyle(fontSize: size)),
         if (gap < 0.25) ...[
           const SizedBox(height: 2),
           Container(
@@ -859,7 +860,7 @@ class _Hud extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                lexClose ? 'CI SEI QUASI!' : 'PRENDILO!',
+                lexClose ? 'CI SEI QUASI!' : 'RINCORRILO!',
                 style: TextStyle(
                   fontFamily: 'Bangers',
                   fontSize: 26,
@@ -932,7 +933,7 @@ class _Hud extends StatelessWidget {
                   ),
                 ),
               ),
-              const Text(' 🦹', style: TextStyle(fontSize: 16)),
+              const Text(' 👶', style: TextStyle(fontSize: 16)),
             ],
           ),
 
@@ -958,7 +959,7 @@ class _Hud extends StatelessWidget {
     if (g < 0.30) return 'Stai per raggiungerlo...';
     if (g < 0.50) return 'Continua! Ci sei quasi.';
     if (g < 0.65) return 'Corri, Favilla!';
-    return 'Il ladro sta scappando!';
+    return 'Si sta allontanando!';
   }
 }
 
