@@ -29,6 +29,7 @@ Da invocare ogni volta che si modifica narrazione, stat, personaggi o regole.
 | `Mappa Narrativa.md` | `.../Documents/Favilla Blaze/Mappa Narrativa.md` | `docs/MAPPA_NARRATIVA.md` | Timeline episodi, diagrammi Mermaid, traccia stat cumulativi | Cambia `stat_effects`, branch, scelte, `stat_entry`, testo chiave di una scena; nuovo episodio; **nuovo mini-game** |
 | `Grafo Narrativo.canvas` | `.../Documents/Favilla Blaze/Grafo Narrativo.canvas` | `docs/GRAFO_NARRATIVO.canvas` | Grafo visuale interattivo (Obsidian Canvas) | **Stesse occasioni di `Mappa Narrativa.md`** — i due file devono essere sempre sincronizzati |
 | `Idee & Direzioni Future.md` | `.../Documents/Favilla Blaze/Idee & Direzioni Future.md` | `docs/IDEE_FUTURE.md` | Idee episodi futuri, archi narrativi, meccaniche in design, location, idee mini-game | L'utente descrive un'idea futura; si decide una direzione narrativa per S2/S3; **episodio completato → segnare ✅** |
+| `Libro dei Mondi.md` | `.../Documents/Favilla Blaze/Libro dei Mondi.md` | `docs/LIBRO_DEI_MONDI.md` | Narrazione discorsiva libro-game stile: prosa fluente, dialoghi, bivi segnalati come callout Obsidian, effetti stat come flavor | Viene aggiunto/modificato un episodio, un branch, una scena, un dialogo; nuova stagione; nuovo personaggio introdotto |
 
 > **Regola base:** dopo ogni cambio narrativo, aggiorna TUTTI i documenti pertinenti nella stessa sessione. Non lasciare mai un documento indietro.
 
