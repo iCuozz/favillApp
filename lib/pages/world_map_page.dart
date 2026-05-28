@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import '../models/game_state.dart';
 import '../models/world_map.dart';
 import '../services/game_state_service.dart';
+import '../services/progress_service.dart';
 import '../services/world_state_service.dart';
 import '../widgets/stats_hud_widget.dart';
 import '../widgets/comic_title.dart';
@@ -337,7 +338,7 @@ class _LocationNode extends StatelessWidget {
 
 // ─── Sheet location ───────────────────────────────────────────────────────────
 
-class _LocationSheet extends StatelessWidget {
+class _LocationSheet extends StatefulWidget {
   final WorldLocation location;
   final ComicIndex comicIndex;
   final WorldMap worldMap;
@@ -349,6 +350,22 @@ class _LocationSheet extends StatelessWidget {
   });
 
   @override
+  State<_LocationSheet> createState() => _LocationSheetState();
+}
+
+class _LocationSheetState extends State<_LocationSheet> {
+  String? _currentEpisodeId;
+
+  @override
+  void initState() {
+    super.initState();
+    ProgressService.loadCurrent().then((p) {
+      if (!mounted) return;
+      setState(() => _currentEpisodeId = p?.episodeId);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<WorldState>(
       valueListenable: WorldStateService.instance.state,
@@ -356,7 +373,7 @@ class _LocationSheet extends StatelessWidget {
         return ValueListenableBuilder<GameState>(
           valueListenable: GameStateService.instance.state,
           builder: (context, gameState, _) {
-            final quests = location.quests;
+            final quests = widget.location.quests;
 
             return Container(
               decoration: const BoxDecoration(
@@ -385,7 +402,7 @@ class _LocationSheet extends StatelessWidget {
                   // Header
                   Row(
                     children: [
-                      Text(location.emoji,
+                      Text(widget.location.emoji,
                           style: const TextStyle(fontSize: 32)),
                       const SizedBox(width: 12),
                       Expanded(
@@ -393,7 +410,7 @@ class _LocationSheet extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              location.name,
+                              widget.location.name,
                               style: const TextStyle(
                                 fontSize: 22,
                                 fontWeight: FontWeight.w900,
@@ -401,7 +418,7 @@ class _LocationSheet extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              location.description,
+                              widget.location.description,
                               style: TextStyle(
                                   fontSize: 13,
                                   color: Colors.grey.shade400),
@@ -432,8 +449,9 @@ class _LocationSheet extends StatelessWidget {
                         quest: q,
                         isAvailable: available,
                         isCompleted: completed,
-                        comicIndex: comicIndex,
-                        worldMap: worldMap,
+                        isInProgress: _currentEpisodeId == q.id,
+                        comicIndex: widget.comicIndex,
+                        worldMap: widget.worldMap,
                       );
                     }),
                 ],
@@ -452,6 +470,7 @@ class _QuestTile extends StatelessWidget {
   final WorldQuest quest;
   final bool isAvailable;
   final bool isCompleted;
+  final bool isInProgress;
   final ComicIndex comicIndex;
   final WorldMap worldMap;
 
@@ -459,22 +478,40 @@ class _QuestTile extends StatelessWidget {
     required this.quest,
     required this.isAvailable,
     required this.isCompleted,
+    required this.isInProgress,
     required this.comicIndex,
     required this.worldMap,
   });
 
   @override
   Widget build(BuildContext context) {
+    final isActive = isAvailable && !isCompleted;
+    final IconData leadIcon;
+    final Color iconColor;
+    if (isCompleted) {
+      leadIcon = Icons.check_circle;
+      iconColor = Colors.green.shade400;
+    } else if (isInProgress) {
+      leadIcon = Icons.pause_circle_outline;
+      iconColor = Colors.orangeAccent;
+    } else if (isAvailable) {
+      leadIcon = Icons.play_circle_outline;
+      iconColor = Colors.pinkAccent;
+    } else {
+      leadIcon = Icons.lock_outline;
+      iconColor = Colors.grey.shade600;
+    }
+
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: Material(
-        color: isAvailable && !isCompleted
+        color: isActive
             ? const Color(0xFF2A1A3A)
             : const Color(0xFF141414),
         borderRadius: BorderRadius.circular(14),
         child: InkWell(
           borderRadius: BorderRadius.circular(14),
-          onTap: isAvailable && !isCompleted
+          onTap: isActive
               ? () {
                   Navigator.pop(context);
                   _startQuest(context);
@@ -487,40 +524,57 @@ class _QuestTile extends StatelessWidget {
               border: Border.all(
                 color: isCompleted
                     ? Colors.white10
-                    : (isAvailable
-                        ? Colors.pinkAccent.withValues(alpha: 0.5)
-                        : Colors.white10),
+                    : (isInProgress
+                        ? Colors.orangeAccent.withValues(alpha: 0.5)
+                        : (isAvailable
+                            ? Colors.pinkAccent.withValues(alpha: 0.5)
+                            : Colors.white10)),
               ),
             ),
             child: Row(
               children: [
-                Icon(
-                  isCompleted
-                      ? Icons.check_circle
-                      : (isAvailable
-                          ? Icons.play_circle_outline
-                          : Icons.lock_outline),
-                  color: isCompleted
-                      ? Colors.green.shade400
-                      : (isAvailable
-                          ? Colors.pinkAccent
-                          : Colors.grey.shade600),
-                  size: 28,
-                ),
+                Icon(leadIcon, color: iconColor, size: 28),
                 const SizedBox(width: 12),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        quest.title,
-                        style: TextStyle(
-                          color: isAvailable && !isCompleted
-                              ? Colors.white
-                              : Colors.grey.shade500,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
-                        ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              quest.title,
+                              style: TextStyle(
+                                color: isActive
+                                    ? Colors.white
+                                    : Colors.grey.shade500,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                              ),
+                            ),
+                          ),
+                          if (isInProgress)
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 6, vertical: 2),
+                              decoration: BoxDecoration(
+                                color: Colors.orange.withValues(alpha: 0.15),
+                                borderRadius: BorderRadius.circular(6),
+                                border: Border.all(
+                                    color: Colors.orangeAccent
+                                        .withValues(alpha: 0.5)),
+                              ),
+                              child: const Text(
+                                'IN CORSO',
+                                style: TextStyle(
+                                  color: Colors.orangeAccent,
+                                  fontSize: 9,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 0.8,
+                                ),
+                              ),
+                            ),
+                        ],
                       ),
                       if (quest.subtitle.isNotEmpty)
                         Text(
@@ -537,8 +591,11 @@ class _QuestTile extends StatelessWidget {
                     ],
                   ),
                 ),
-                if (isAvailable && !isCompleted)
-                  const Icon(Icons.chevron_right, color: Colors.pinkAccent),
+                if (isActive)
+                  Icon(Icons.chevron_right,
+                      color: isInProgress
+                          ? Colors.orangeAccent
+                          : Colors.pinkAccent),
               ],
             ),
           ),
@@ -588,13 +645,31 @@ class QuestLoaderPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return EpisodeLoaderPage(
-      comicIndex: comicIndex,
-      summary: summary,
-      onEpisodeCompleted: () async {
-        await WorldStateService.instance.completeQuest(
-          questId,
-          worldMap: worldMap,
+    return FutureBuilder<ReadingProgress?>(
+      future: ProgressService.loadCurrent(),
+      builder: (context, snapshot) {
+        // Schermata nera mentre SharedPreferences carica (milliseconds)
+        if (!snapshot.hasData && snapshot.connectionState != ConnectionState.done) {
+          return const Scaffold(
+            backgroundColor: Color(0xFF0D0D1A),
+            body: SizedBox.shrink(),
+          );
+        }
+        final saved = snapshot.data;
+        final resume = saved?.episodeId == questId;
+        return EpisodeLoaderPage(
+          comicIndex: comicIndex,
+          summary: summary,
+          initialPageIndex: resume ? saved!.pageIndex : 0,
+          initialVisibleBlocks: resume ? saved!.visibleBlocks : 1,
+          initialBranchId: resume ? saved!.branchId : null,
+          initialEntryBranchId: resume ? saved!.entryBranchId : null,
+          onEpisodeCompleted: () async {
+            await WorldStateService.instance.completeQuest(
+              questId,
+              worldMap: worldMap,
+            );
+          },
         );
       },
     );
