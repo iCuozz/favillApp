@@ -27,6 +27,35 @@ if [ -z "$NARRATIVE" ]; then
   exit 0
 fi
 
+# ─── JSON validation ─────────────────────────────────────────────────────────
+# Valida ogni file .json staged. Blocca se malformato.
+JSON_FILES=$(echo "$STAGED" | grep "\.json$")
+if [ -n "$JSON_FILES" ]; then
+  JSON_ERRORS=0
+  while IFS= read -r f; do
+    if [ -f "$ROOT/$f" ]; then
+      ERR=$(python3 -c "import json,sys; json.load(open('$ROOT/$f'))" 2>&1)
+      if [ $? -ne 0 ]; then
+        echo ""
+        echo "❌  JSON non valido: $f"
+        echo "    $ERR" | sed 's/^/    /'
+        JSON_ERRORS=1
+      fi
+    fi
+  done <<< "$JSON_FILES"
+
+  if [ $JSON_ERRORS -ne 0 ]; then
+    echo ""
+    echo "╔══════════════════════════════════════════════════════════════╗"
+    echo "║  🚨  JSON MALFORMATO — commit bloccato                      ║"
+    echo "╠══════════════════════════════════════════════════════════════╣"
+    echo "║  Correggi i file JSON elencati sopra e riprova.             ║"
+    echo "║  Override: git commit --no-verify                           ║"
+    echo "╚══════════════════════════════════════════════════════════════╝"
+    exit 1
+  fi
+fi
+
 # Controlla se i doc sono stati modificati di recente.
 # stat -L per seguire i symlink (necessario su macOS).
 NOW=$(date +%s)
