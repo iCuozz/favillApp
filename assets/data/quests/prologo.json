@@ -7,7 +7,10 @@
       "panels": [
         {
           "id": "pr0_0",
-          "characters": ["favilla", "bambini"],
+          "characters": [
+            "favilla",
+            "bambini"
+          ],
           "text_blocks": [
             {
               "id": "pr0_0_tb_0",
@@ -48,7 +51,11 @@
       "panels": [
         {
           "id": "pr1_0",
-          "characters": ["favilla", "lex", "mallow"],
+          "characters": [
+            "favilla",
+            "lex",
+            "mallow"
+          ],
           "text_blocks": [
             {
               "id": "pr1_0_tb_0",
@@ -89,7 +96,11 @@
       "panels": [
         {
           "id": "pr2_0",
-          "characters": ["favilla", "lex", "mallow"],
+          "characters": [
+            "favilla",
+            "lex",
+            "mallow"
+          ],
           "text_blocks": [
             {
               "id": "pr2_0_tb_0",
@@ -123,7 +134,11 @@
       "panels": [
         {
           "id": "pr3_0",
-          "characters": ["favilla", "lex", "mallow"],
+          "characters": [
+            "favilla",
+            "lex",
+            "mallow"
+          ],
           "text_blocks": [
             {
               "id": "pr3_0_tb_0",
@@ -156,7 +171,10 @@
       "panels": [
         {
           "id": "pr4_0",
-          "characters": ["favilla_blaze", "lex"],
+          "characters": [
+            "favilla_blaze",
+            "lex"
+          ],
           "text_blocks": [
             {
               "id": "pr4_0_tb_0",
@@ -195,11 +213,53 @@
     },
     {
       "index": 5,
+      "background": "assets/episodes/prologo/page_carmela.webp",
+      "panels": [
+        {
+          "id": "pr5_carmela_0",
+          "characters": [
+            "carmela"
+          ],
+          "text_blocks": [
+            {
+              "id": "pr5_carmela_0_tb_0",
+              "type": "narration",
+              "text": "Dall'altra parte della strada, una finestra buia."
+            },
+            {
+              "id": "pr5_carmela_0_tb_1",
+              "type": "narration",
+              "text": "Nel buio, qualcosa si muove."
+            },
+            {
+              "id": "pr5_carmela_0_tb_2",
+              "type": "narration",
+              "text": "Due occhi si aprono di scatto."
+            },
+            {
+              "id": "pr5_carmela_0_tb_3",
+              "type": "narration",
+              "text": "Fermi."
+            },
+            {
+              "id": "pr5_carmela_0_tb_4",
+              "type": "narration",
+              "text": "Svegli."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 6,
       "background": "assets/episodes/prologo/page_4.webp",
       "panels": [
         {
           "id": "pr5_0",
-          "characters": ["favilla", "mallow"],
+          "characters": [
+            "favilla",
+            "mallow"
+          ],
           "text_blocks": [
             {
               "id": "pr5_0_tb_0",
@@ -230,14 +290,20 @@
             "label": "\"Sì. Pasta quasi pronta.\"",
             "hint": "Prima bugia. Segreto al sicuro — per ora.",
             "goto_branch": "branch_segreto",
-            "stat_effects": { "segreto": 10, "legame": -5 }
+            "stat_effects": {
+              "segreto": 10,
+              "legame": -5
+            }
           },
           {
             "id": "mezzo_vero",
             "label": "\"Ho avuto uno strano momento...\"",
             "hint": "Mallow è curioso. Il segreto trema.",
             "goto_branch": "branch_legame",
-            "stat_effects": { "segreto": -10, "legame": 10 }
+            "stat_effects": {
+              "segreto": -10,
+              "legame": 10
+            }
           }
         ]
       }
@@ -252,7 +318,11 @@
           "panels": [
             {
               "id": "bs_0",
-              "characters": ["favilla", "mallow", "lex"],
+              "characters": [
+                "favilla",
+                "mallow",
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "id": "bs_0_tb_0",
@@ -291,7 +361,11 @@
           "panels": [
             {
               "id": "bl_0",
-              "characters": ["favilla", "mallow", "lex"],
+              "characters": [
+                "favilla",
+                "mallow",
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "id": "bl_0_tb_0",
@@ -331,7 +405,9 @@
         "panels": [
           {
             "id": "ep_0",
-            "characters": ["favilla"],
+            "characters": [
+              "favilla"
+            ],
             "text_blocks": [
               {
                 "id": "ep_0_tb_0",

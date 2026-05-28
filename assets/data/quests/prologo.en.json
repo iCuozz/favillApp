@@ -7,7 +7,10 @@
       "panels": [
         {
           "id": "pr0_0",
-          "characters": ["favilla", "bambini"],
+          "characters": [
+            "favilla",
+            "bambini"
+          ],
           "text_blocks": [
             {
               "id": "pr0_0_tb_0",
@@ -48,7 +51,11 @@
       "panels": [
         {
           "id": "pr1_0",
-          "characters": ["favilla", "lex", "mallow"],
+          "characters": [
+            "favilla",
+            "lex",
+            "mallow"
+          ],
           "text_blocks": [
             {
               "id": "pr1_0_tb_0",
@@ -95,7 +102,11 @@
       "panels": [
         {
           "id": "pr2_0",
-          "characters": ["favilla", "lex", "mallow"],
+          "characters": [
+            "favilla",
+            "lex",
+            "mallow"
+          ],
           "text_blocks": [
             {
               "id": "pr2_0_tb_0",
@@ -142,7 +153,11 @@
       "panels": [
         {
           "id": "pr3_0",
-          "characters": ["favilla", "lex", "mallow"],
+          "characters": [
+            "favilla",
+            "lex",
+            "mallow"
+          ],
           "text_blocks": [
             {
               "id": "pr3_0_tb_0",
@@ -193,11 +208,54 @@
     },
     {
       "index": 4,
+      "background": "assets/episodes/prologo/page_carmela.webp",
+      "panels": [
+        {
+          "id": "pr5_carmela_0",
+          "characters": [
+            "carmela"
+          ],
+          "text_blocks": [
+            {
+              "id": "pr5_carmela_0_tb_0",
+              "type": "narration",
+              "text": "Across the street, a dark window."
+            },
+            {
+              "id": "pr5_carmela_0_tb_1",
+              "type": "narration",
+              "text": "Something moves in the dark."
+            },
+            {
+              "id": "pr5_carmela_0_tb_2",
+              "type": "narration",
+              "text": "Two eyes snap open."
+            },
+            {
+              "id": "pr5_carmela_0_tb_3",
+              "type": "narration",
+              "text": "Still."
+            },
+            {
+              "id": "pr5_carmela_0_tb_4",
+              "type": "narration",
+              "text": "Awake."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 5,
       "background": "assets/episodes/prologo/page_4.webp",
       "panels": [
         {
           "id": "pr4_0",
-          "characters": ["favilla_blaze", "lex", "mallow"],
+          "characters": [
+            "favilla_blaze",
+            "lex",
+            "mallow"
+          ],
           "text_blocks": [
             {
               "id": "pr4_0_tb_0",
