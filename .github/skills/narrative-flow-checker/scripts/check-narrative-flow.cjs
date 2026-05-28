@@ -481,6 +481,68 @@ for (const rule of CROSS_EPISODE_RULES) {
   }
 }
 
+// ─── 5. Copertura flag: ogni flag usato in flag_conditions deve essere impostato a monte ──
+
+console.log('\n━━━ 5. COPERTURA DEI WORLD FLAGS ━━━━━━━━━━━━━━━━━━━━━━\n');
+
+// Raccoglie tutti i flag USATI in flag_conditions (con l'episodio che li usa)
+const flagsConsumed = new Map(); // flag → Set<episodeId>
+for (const ep of loadedEpisodes) {
+  for (const rule of (ep.stat_entry || [])) {
+    for (const fc of (rule.flag_conditions || [])) {
+      if (!flagsConsumed.has(fc.flag)) flagsConsumed.set(fc.flag, new Set());
+      flagsConsumed.get(fc.flag).add(ep.id);
+    }
+  }
+}
+
+// Raccoglie tutti i flag IMPOSTATI in set_flags (con l'episodio che li imposta)
+const flagsProduced = new Map(); // flag → Set<episodeId>
+for (const ep of loadedEpisodes) {
+  function collectSetFlags(pages) {
+    for (const pg of (pages || [])) {
+      for (const opt of (pg.choice?.options || [])) {
+        for (const flag of Object.keys(opt.set_flags || {})) {
+          if (!flagsProduced.has(flag)) flagsProduced.set(flag, new Set());
+          flagsProduced.get(flag).add(ep.id);
+        }
+      }
+    }
+  }
+  collectSetFlags(ep.pages);
+  collectSetFlags((ep.epilogue || {}).pages);
+  for (const branchPages of Object.values(ep.branches || {})) {
+    collectSetFlags((branchPages || {}).pages);
+  }
+}
+
+if (flagsConsumed.size === 0 && flagsProduced.size === 0) {
+  console.log('  ℹ️  Nessun world flag definito ancora.\n');
+} else {
+  // Mostra flags prodotti
+  for (const [flag, producers] of flagsProduced) {
+    const consumers = flagsConsumed.get(flag);
+    if (consumers) {
+      console.log(`  ✅ "${flag}"`);
+      console.log(`     Impostato in: ${[...producers].join(', ')}`);
+      console.log(`     Usato in:     ${[...consumers].join(', ')}\n`);
+    } else {
+      console.log(`  ⚠️  "${flag}": impostato in ${[...producers].join(', ')} ma mai usato in flag_conditions`);
+      totalWarnings++;
+    }
+  }
+
+  // Flag usati ma mai impostati da nessun episodio → errore authoring
+  for (const [flag, consumers] of flagsConsumed) {
+    if (!flagsProduced.has(flag)) {
+      console.log(`  ❌ "${flag}": usato in ${[...consumers].join(', ')} ma NESSUN episodio lo imposta con set_flags!`);
+      console.log(`     (Ricorda: flag assente = false — ma potrebbe essere un errore di authoring)\n`);
+      totalErrors++;
+    }
+  }
+}
+
+
 // ─── Summary ───────────────────────────────────────────────────────────────
 
 console.log('━━━ RIEPILOGO ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
