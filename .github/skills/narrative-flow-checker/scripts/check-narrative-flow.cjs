@@ -456,6 +456,22 @@ const CROSS_EPISODE_RULES = [
       return null;
     },
   },
+  {
+    name: 'EP5 favilla_transformed_public flag',
+    description: 'branch_perso_trasformazione deve impostare favilla_transformed_public=true',
+    check(episodeChoices) {
+      const ep5 = episodeChoices.find(e => e.episode === 's1_domenica_parco');
+      if (!ep5) return null;
+      // Only check paths that went through the trasformazione branch
+      if (ep5.branch !== 'branch_perso_trasformazione') return null;
+      // The flag should be set — if we got here the path went through that branch
+      // The checker already tracks flags in worldFlags; if the flag is missing it's an issue
+      if (!ep5.worldFlags || ep5.worldFlags['favilla_transformed_public'] !== true) {
+        return `branch_perso_trasformazione raggiunto ma favilla_transformed_public non impostato a true`;
+      }
+      return null;
+    },
+  },
 ];
 
 let crossErrors = 0;
