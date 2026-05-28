@@ -19,6 +19,7 @@ dependencies:
     sdk: flutter
   intl: any
   sentry_flutter: ^9.19.0
+  audioplayers: ^6.0.0
   flutter_tts: ^4.2.5
   http: ^1.6.0
   crypto: ^3.0.7
@@ -53,6 +54,7 @@ flutter:
     - assets/episodes/s1/s1_scuola_1/
     - assets/episodes/s2/
     - assets/cover/
+    - assets/audio/
 
   fonts:
     - family: Bangers

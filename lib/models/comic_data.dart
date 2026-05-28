@@ -214,12 +214,18 @@ class EpisodeContent {
   /// sostituendo le pagine main (anziché appendersi dopo).
   final List<StatEntryRule> statEntry;
 
+  /// Nome del tema audio ambientale per questo episodio (senza estensione).
+  /// Corrisponde a un file in assets/audio/ambient/<audioTheme>.mp3.
+  /// Null = nessuna musica.
+  final String? audioTheme;
+
   EpisodeContent({
     required this.id,
     required this.pages,
     this.branches = const {},
     this.epilogue,
     this.statEntry = const [],
+    this.audioTheme,
   });
 
   bool get hasBranches => branches.isNotEmpty;
@@ -266,6 +272,7 @@ class EpisodeContent {
       statEntry: statEntryJson
           .map((r) => StatEntryRule.fromJson(r as Map<String, dynamic>))
           .toList(),
+      audioTheme: json['audio_theme'] as String?,
     );
   }
 }
@@ -279,6 +286,10 @@ class Episode {
   final Map<String, Branch> branches;
   final Branch? epilogue;
 
+  /// Nome del tema audio ambientale per questo episodio (senza estensione).
+  /// Corrisponde a un file in assets/audio/ambient/<audioTheme>.mp3.
+  final String? audioTheme;
+
   Episode({
     required this.id,
     required this.title,
@@ -287,6 +298,7 @@ class Episode {
     required this.pages,
     this.branches = const {},
     this.epilogue,
+    this.audioTheme,
   });
 
   bool get hasBranches => branches.isNotEmpty;

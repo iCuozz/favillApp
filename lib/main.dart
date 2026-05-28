@@ -10,6 +10,8 @@ import 'models/game_state.dart';
 import 'services/comic_loader.dart';
 import 'services/engagement_service.dart';
 import 'services/game_state_service.dart';
+import 'services/onboarding_service.dart';
+import 'services/audio_service.dart';
 import 'services/progress_service.dart';
 import 'services/settings_service.dart';
 import 'l10n/app_strings.dart';
@@ -20,6 +22,7 @@ import 'pages/world_map_page.dart';
 import 'widgets/choice_card.dart';
 import 'widgets/comic_page_stage.dart';
 import 'widgets/stats_hud_widget.dart';
+import 'widgets/stats_intro_overlay.dart';
 import 'widgets/minigame_lex_strike.dart';
 import 'widgets/minigame_respira.dart';
 import 'widgets/minigame_schiva_lex.dart';
@@ -32,6 +35,7 @@ Future<void> main() async {
   await SettingsService.init();
   await GameStateService.instance.init();
   await WorldStateService.instance.init();
+  await AudioService.instance.init();
 
   await SentryFlutter.init(
     (options) {
@@ -211,6 +215,7 @@ class EpisodeLoaderPage extends StatelessWidget {
           pages: content.pages,
           branches: content.branches,
           epilogue: content.epilogue,
+          audioTheme: content.audioTheme,
         );
 
         return EpisodePage(
@@ -284,6 +289,7 @@ class _EpisodePageState extends State<EpisodePage> {
 
   final Set<int> _resolvedChoiceIndices = {};
   bool _choiceSheetOpen = false;
+  bool _showStatsIntro = false;
   Map<String, int>? _pendingStatEffects;
   final Map<int, GlobalKey<ComicPageStageState>> _stageKeys = {};
   final Map<int, int> _visibleBlocksByPage = {};
@@ -368,6 +374,16 @@ class _EpisodePageState extends State<EpisodePage> {
     _applyFullscreen(SettingsService.fullscreenReading.value);
     SettingsService.fullscreenReading.addListener(_onFullscreenChanged);
 
+    // Mostra tutorial stat la prima volta (non nel prologo)
+    if (widget.episode.id != 'prologo') {
+      OnboardingService.instance.hasSeenStatsIntro().then((seen) {
+        if (!seen && mounted) setState(() => _showStatsIntro = true);
+      });
+    }
+
+    // Avvia musica ambientale dell'episodio
+    AudioService.instance.playAmbient(widget.episode.audioTheme);
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) {
         _focusNode.requestFocus();
@@ -413,6 +429,7 @@ class _EpisodePageState extends State<EpisodePage> {
     );
     _pageController.dispose();
     _focusNode.dispose();
+    AudioService.instance.stopAmbient();
     super.dispose();
   }
 
@@ -551,6 +568,7 @@ class _EpisodePageState extends State<EpisodePage> {
   }
 
   void _handleChoiceSelected(ChoiceOption option) {
+    AudioService.instance.playSfx(SfxEvent.choiceSelect);
     if (option.minigame == null) {
       _applyEffectsAndNavigate(option);
       return;
@@ -565,6 +583,8 @@ class _EpisodePageState extends State<EpisodePage> {
               onComplete: (effects, label, tier) {
                 Navigator.of(context).pop();
                 final branch = tier.gotoBranch.isNotEmpty ? tier.gotoBranch : null;
+                final isSuccess = tier.minProducts > 0;
+                AudioService.instance.playSfx(isSuccess ? SfxEvent.minigameSuccess : SfxEvent.minigameFail);
                 _applyEffectsAndNavigate(option,
                     overrideEffects: effects, overrideBranch: branch);
               },
@@ -579,6 +599,8 @@ class _EpisodePageState extends State<EpisodePage> {
               onComplete: (effects, label, tier) {
                 Navigator.of(context).pop();
                 final branch = tier.gotoBranch.isNotEmpty ? tier.gotoBranch : null;
+                final isSuccess = tier.minProducts > 0;
+                AudioService.instance.playSfx(isSuccess ? SfxEvent.minigameSuccess : SfxEvent.minigameFail);
                 _applyEffectsAndNavigate(option,
                     overrideEffects: effects, overrideBranch: branch);
               },
@@ -593,6 +615,8 @@ class _EpisodePageState extends State<EpisodePage> {
               onComplete: (effects, label, tier) {
                 Navigator.of(context).pop();
                 final branch = tier.gotoBranch.isNotEmpty ? tier.gotoBranch : null;
+                final isSuccess = tier.minProducts > 0;
+                AudioService.instance.playSfx(isSuccess ? SfxEvent.minigameSuccess : SfxEvent.minigameFail);
                 _applyEffectsAndNavigate(option,
                     overrideEffects: effects, overrideBranch: branch);
               },
@@ -662,6 +686,7 @@ class _EpisodePageState extends State<EpisodePage> {
 
   void _advanceCurrentStageOrPage() {
     SettingsService.tapFeedback();
+    AudioService.instance.playSfx(SfxEvent.tapPanel);
     final stageKey = _keyForPage(currentIndex);
     final stageState = stageKey.currentState;
 
@@ -755,7 +780,9 @@ class _EpisodePageState extends State<EpisodePage> {
           ),
         ],
       ),
-      body: KeyboardListener(
+      body: Stack(
+        children: [
+          KeyboardListener(
         focusNode: _focusNode,
         onKeyEvent: _handleKeyEvent,
         child: Column(
@@ -908,6 +935,15 @@ class _EpisodePageState extends State<EpisodePage> {
             ),
           ],
         ),
+      ),
+          // Overlay onboarding stat — mostrato una sola volta al primo episodio
+          if (_showStatsIntro)
+            Positioned.fill(
+              child: StatsIntroOverlay(
+                onDismiss: () => setState(() => _showStatsIntro = false),
+              ),
+            ),
+        ],
       ),
     );
   }
