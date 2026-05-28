@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../models/comic_data.dart';
 
 /// Schermata mini-game "Lex Strike": slingshot con un singolo lancio.
@@ -69,6 +70,14 @@ class _MinigameLexStrikeScreenState extends State<MinigameLexStrikeScreen>
   late AnimationController _shakeCtrl;
   late Animation<Offset> _shakeAnim;
 
+  // ─── Retry on complete miss ────────────────────────────────────────────────
+  bool _retryUsed = false;
+  double _retryPowerMul = 1.0;
+  bool _showRetryOverlay = false;
+
+  // ─── Wind animation ───────────────────────────────────────────────────────
+  late AnimationController _windParticleCtrl;
+
   // ─── Result overlay animation ─────────────────────────────────────────────
   late AnimationController _resultCtrl;
   late Animation<double> _resultScaleAnim;
@@ -95,7 +104,7 @@ class _MinigameLexStrikeScreenState extends State<MinigameLexStrikeScreen>
   void initState() {
     super.initState();
     final rng = Random();
-    _windForce = (rng.nextDouble() * 2 - 1) * 0.65; // -0.65..0.65
+    _windForce = (rng.nextDouble() * 2 - 1) * 0.65;
 
     final n = widget.config.productsTotal.clamp(1, 12);
     _fallen = List.filled(n, false);
@@ -142,6 +151,21 @@ class _MinigameLexStrikeScreenState extends State<MinigameLexStrikeScreen>
       duration: const Duration(milliseconds: 450),
     );
     _resultScaleAnim = CurvedAnimation(parent: _resultCtrl, curve: Curves.elasticOut);
+
+    _windParticleCtrl = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 900),
+    )..repeat();
+
+    _loadTutorialPref();
+  }
+
+  Future<void> _loadTutorialPref() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (!mounted || _phase != _Phase.tutorial) return;
+    if (prefs.getBool('tut_lex_strike') ?? false) {
+      setState(() => _phase = _Phase.aiming);
+    }
   }
 
   void _initLayout(Size size) {
@@ -192,9 +216,9 @@ class _MinigameLexStrikeScreenState extends State<MinigameLexStrikeScreen>
 
   void _resolveHits() {
     final impact = _projPos;
-    const directR = 46.0;   // was 68 — tighter hitbox
-    const chainR = 66.0;    // was 74 — shorter chain range
-    const chainP = 0.40;    // was 0.62 — harder chain
+    const directR = 46.0;
+    const chainR = 66.0;
+    const chainP = 0.40;
     final rng = Random();
 
     final fallen = <int>{};
@@ -217,10 +241,30 @@ class _MinigameLexStrikeScreenState extends State<MinigameLexStrikeScreen>
       }
     }
 
+    // Retry su miss completo (nessun prodotto colpito, solo una volta)
+    if (fallen.isEmpty && !_retryUsed) {
+      _retryUsed = true;
+      _retryPowerMul = 0.75;
+      _projCtrl.stop();
+      setState(() => _showRetryOverlay = true);
+      HapticFeedback.mediumImpact();
+      Future.delayed(const Duration(milliseconds: 1400), () {
+        if (!mounted) return;
+        setState(() {
+          _showRetryOverlay = false;
+          _phase = _Phase.aiming;
+          _projPos = _slingshotPos;
+          _projTrail.clear();
+          _dragOffset = null;
+        });
+        _projCtrl.reset();
+      });
+      return; // non entrare in chainReaction
+    }
+
     _fallenCount = fallen.length;
     setState(() => _phase = _Phase.chainReaction);
 
-    // Screen shake + flash at impact
     if (fallen.isNotEmpty) {
       _shakeCtrl.forward(from: 0);
       _flashCtrl.forward(from: 0).then((_) => _flashCtrl.reverse());
@@ -247,7 +291,11 @@ class _MinigameLexStrikeScreenState extends State<MinigameLexStrikeScreen>
 
   // ─── Gesture handlers ────────────────────────────────────────────────────
   void _onPanStart(DragStartDetails _) {
-    if (_phase == _Phase.tutorial) setState(() => _phase = _Phase.aiming);
+    if (_phase == _Phase.tutorial) {
+      SharedPreferences.getInstance()
+          .then((p) => p.setBool('tut_lex_strike', true));
+      setState(() => _phase = _Phase.aiming);
+    }
   }
 
   void _onPanUpdate(DragUpdateDetails d) {
@@ -268,7 +316,7 @@ class _MinigameLexStrikeScreenState extends State<MinigameLexStrikeScreen>
       return;
     }
     final dir = drag / drag.distance;
-    final speed = (drag.distance / _kMaxDrag) * _screenSize.height * 2.2;
+    final speed = (drag.distance / _kMaxDrag) * _screenSize.height * 2.2 * _retryPowerMul;
     _projVelocity = Offset(-dir.dx * speed, -dir.dy * speed);
     _projPos = _slingshotPos;
     setState(() {
@@ -276,7 +324,7 @@ class _MinigameLexStrikeScreenState extends State<MinigameLexStrikeScreen>
       _dragOffset = null;
     });
     HapticFeedback.mediumImpact();
-    _projCtrl.forward();
+    _projCtrl.forward(from: 0);
   }
 
   // ─── Build ───────────────────────────────────────────────────────────────
@@ -287,6 +335,7 @@ class _MinigameLexStrikeScreenState extends State<MinigameLexStrikeScreen>
     _shakeCtrl.dispose();
     _flashCtrl.dispose();
     _resultCtrl.dispose();
+    _windParticleCtrl.dispose();
     super.dispose();
   }
 
@@ -333,6 +382,8 @@ class _MinigameLexStrikeScreenState extends State<MinigameLexStrikeScreen>
                     child: Container(color: Colors.white.withAlpha(80)),
                   ),
                   if (_phase == _Phase.result) _buildResultOverlay(),
+                  // Retry overlay
+                  if (_showRetryOverlay) _buildRetryOverlay(),
                 ],
               ),
             );
@@ -446,28 +497,104 @@ class _MinigameLexStrikeScreenState extends State<MinigameLexStrikeScreen>
     final isRight = _windForce > 0;
     final strength = (abs * 3).ceil().clamp(1, 3);
     final arrows = List.filled(strength, isRight ? '›' : '‹').join(' ');
+
     return Positioned(
       top: 100,
       left: 0,
       right: 0,
       child: Center(
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
-          decoration: BoxDecoration(
-            color: Colors.black.withAlpha(120),
-            borderRadius: BorderRadius.circular(14),
-          ),
-          child: Row(
+        child: AnimatedBuilder(
+          animation: _windParticleCtrl,
+          builder: (_, __) {
+            final t = _windParticleCtrl.value;
+            return Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+                  decoration: BoxDecoration(
+                    color: Colors.black.withAlpha(120),
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(Icons.air, color: Colors.lightBlueAccent, size: 14),
+                      const SizedBox(width: 5),
+                      Text(
+                        'Vento $arrows',
+                        style: const TextStyle(
+                          color: Colors.lightBlueAccent,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      // Particelle animate
+                      SizedBox(
+                        width: 36,
+                        height: 14,
+                        child: Stack(
+                          children: List.generate(3, (i) {
+                            // Offset staggerato per ogni particella
+                            final phase = (t + i / 3.0) % 1.0;
+                            final x = isRight ? phase * 36 : (1 - phase) * 36;
+                            final alpha = (sin(phase * pi)).clamp(0.0, 1.0);
+                            return Positioned(
+                              left: x - 3,
+                              top: 3 + (i - 1) * 3.0,
+                              child: Opacity(
+                                opacity: alpha,
+                                child: Container(
+                                  width: 5,
+                                  height: 5,
+                                 decoration: const BoxDecoration(
+                                    color: Colors.lightBlueAccent,
+                                    shape: BoxShape.circle,
+                                  ),
+                                ),
+                              ),
+                            );
+                          }),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget _buildRetryOverlay() {
+    return AnimatedOpacity(
+      opacity: _showRetryOverlay ? 1.0 : 0.0,
+      duration: const Duration(milliseconds: 300),
+      child: Container(
+        color: Colors.black.withAlpha(200),
+        child: Center(
+          child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(Icons.air, color: Colors.lightBlueAccent, size: 14),
-              const SizedBox(width: 5),
+              const Text('😤', style: TextStyle(fontSize: 64)),
+              const SizedBox(height: 12),
+              const Text(
+                'Mancato!',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 6),
               Text(
-                'Vento $arrows',
-                style: const TextStyle(
-                  color: Colors.lightBlueAccent,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
+                'Riprova — un ultimo lancio',
+                style: TextStyle(
+                  color: Colors.white.withValues(alpha: 0.6),
+                  fontSize: 14,
                 ),
               ),
             ],
@@ -560,6 +687,15 @@ class _MinigameLexStrikeScreenState extends State<MinigameLexStrikeScreen>
         ? const Color(0xFF27AE60)
         : (isPartial ? const Color(0xFFF39C12) : const Color(0xFFE74C3C));
 
+    // Quote narrative per tier (indicizzate per posizione, non label)
+    final tierIndex = widget.config.tiers.indexOf(tier);
+    const narrativeQuotes = [
+      '"Prodotti ovunque.\nLex urla, poi ride."',       // tier 0 (STRIKE)
+      '"Quasi. Il bancone\ntrema ancora."',              // tier 1 (parziale)
+      '"L\'orsetto rimbalza.\nNessuno ha visto niente."', // tier 2 (mancato)
+    ];
+    final quote = narrativeQuotes[tierIndex.clamp(0, narrativeQuotes.length - 1)];
+
     return Container(
       color: Colors.black.withAlpha(210),
       child: Center(
@@ -583,7 +719,7 @@ class _MinigameLexStrikeScreenState extends State<MinigameLexStrikeScreen>
                 ),
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 8),
             FadeTransition(
               opacity: _resultCtrl,
               child: Text(
@@ -591,7 +727,25 @@ class _MinigameLexStrikeScreenState extends State<MinigameLexStrikeScreen>
                 style: const TextStyle(color: Colors.white60, fontSize: 15),
               ),
             ),
-            const SizedBox(height: 36),
+            const SizedBox(height: 16),
+            // Quote narrativa
+            FadeTransition(
+              opacity: _resultCtrl,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 40),
+                child: Text(
+                  quote,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white.withValues(alpha: 0.45),
+                    fontSize: 13,
+                    fontStyle: FontStyle.italic,
+                    height: 1.5,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 28),
             FadeTransition(
               opacity: _resultCtrl,
               child: ElevatedButton(

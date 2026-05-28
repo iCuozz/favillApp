@@ -2,9 +2,10 @@ import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../models/comic_data.dart';
 
-enum _SchivaCPhase { tutorial, countdown, attacking, feedback, result }
+enum _SchivaCPhase { tutorial, countdown, windup, attacking, feedback, result }
 
 /// Mini-game EP3 "Schiva Lex": 3 round di tentativi, swipe nella direzione
 /// corretta per schivare. Risultato in 3 tier → ride / letto / letto peggio.
@@ -27,18 +28,26 @@ class _MinigameSchivaSscreenState extends State<MinigameSchivaSscreen>
   _SchivaCPhase _phase = _SchivaCPhase.tutorial;
   int _round = 0;
   int _dodgedCount = 0;
-  bool _attackFromLeft = true;
+  bool _attackFromLeft = true;   // direzione reale dell'attacco
+  bool _windupFromLeft = true;   // direzione mostrata nel windup (può essere fake)
+  bool _isFakeout = false;       // round 3: windup finge direzione sbagliata
   bool _lastDodged = false;
+  bool _lastFellForFakeout = false; // player ha swipato nella direzione fake
   final List<bool> _roundResults = [];
   final _rng = Random();
+
+  // Finestre temporali scalanti: round 1→2→3 = 1400→1100→850 ms
+  static const _kWindowMs = [1400, 1100, 850];
+  int get _windowMs => _kWindowMs[_round.clamp(0, 2)];
 
   Timer? _autoFailTimer;
 
   late AnimationController _attackSlide;
+  late AnimationController _windupCtrl;  // lean del personaggio nel windup
   late AnimationController _feedbackCtrl;
   late AnimationController _resultCtrl;
   late AnimationController _timerBarCtrl;
-  late AnimationController _tutorialDemoCtrl; // demo animata nel tutorial
+  late AnimationController _tutorialDemoCtrl;
 
   int get _totalRounds => widget.config.rounds ?? 3;
 
@@ -47,15 +56,27 @@ class _MinigameSchivaSscreenState extends State<MinigameSchivaSscreen>
     super.initState();
     _attackSlide = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 500));
+    _windupCtrl = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 350));
     _feedbackCtrl = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 400));
     _resultCtrl = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 600));
     _timerBarCtrl = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 1100));
+        vsync: this, duration: Duration(milliseconds: _windowMs));
     _tutorialDemoCtrl = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 2200))
       ..repeat();
+    _loadTutorialPref();
+  }
+
+  Future<void> _loadTutorialPref() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (!mounted || _phase != _SchivaCPhase.tutorial) return;
+    if (prefs.getBool('tut_schiva_lex') ?? false) {
+      setState(() => _phase = _SchivaCPhase.countdown);
+      Future.delayed(const Duration(milliseconds: 300), _startNextRound);
+    }
   }
 
   void _startNextRound() {
@@ -64,21 +85,34 @@ class _MinigameSchivaSscreenState extends State<MinigameSchivaSscreen>
       return;
     }
     _attackFromLeft = _rng.nextBool();
+
+    // Round 3 (indice 2): 50% chance feint — windup mostra direzione sbagliata
+    _isFakeout = (_round == 2) && _rng.nextBool();
+    _windupFromLeft = _isFakeout ? !_attackFromLeft : _attackFromLeft;
+    _lastFellForFakeout = false;
+
     setState(() => _phase = _SchivaCPhase.countdown);
 
-    // Breve pausa poi attacco
-    Future.delayed(const Duration(milliseconds: 400), () {
+    // Breve pausa poi WINDUP
+    Future.delayed(const Duration(milliseconds: 350), () {
       if (!mounted) return;
-      setState(() => _phase = _SchivaCPhase.attacking);
-      _attackSlide.forward(from: 0);
-      _timerBarCtrl.forward(from: 0);
+      setState(() => _phase = _SchivaCPhase.windup);
+      _windupCtrl.forward(from: 0);
 
-      // Auto-fail se nessuno swipe entro 1.1s
-      _autoFailTimer?.cancel();
-      _autoFailTimer = Timer(const Duration(milliseconds: 1100), () {
-        if (mounted && _phase == _SchivaCPhase.attacking) {
-          _registerResult(dodged: false);
-        }
+      // Dopo il windup, transizione ad ATTACKING
+      Future.delayed(const Duration(milliseconds: 370), () {
+        if (!mounted || _phase != _SchivaCPhase.windup) return;
+        setState(() => _phase = _SchivaCPhase.attacking);
+        _attackSlide.forward(from: 0);
+        _timerBarCtrl.duration = Duration(milliseconds: _windowMs);
+        _timerBarCtrl.forward(from: 0);
+
+        _autoFailTimer?.cancel();
+        _autoFailTimer = Timer(Duration(milliseconds: _windowMs), () {
+          if (mounted && _phase == _SchivaCPhase.attacking) {
+            _registerResult(dodged: false, timedOut: true);
+          }
+        });
       });
     });
   }
@@ -88,14 +122,20 @@ class _MinigameSchivaSscreenState extends State<MinigameSchivaSscreen>
     final vx = details.velocity.pixelsPerSecond.dx;
     if (vx.abs() < 150) return;
     final swipedRight = vx > 0;
-    // Schiva = allontanarsi dall'attacco
+    // Schiva = allontanarsi dall'attacco REALE (_attackFromLeft)
     final correctDodge =
         (_attackFromLeft && swipedRight) || (!_attackFromLeft && !swipedRight);
+    // Rileva se il player ha seguito il windup fake (fakeout)
+    if (_isFakeout && !correctDodge) {
+      final swipedTowardWindup =
+          (_windupFromLeft && !swipedRight) || (!_windupFromLeft && swipedRight);
+      _lastFellForFakeout = swipedTowardWindup;
+    }
     _autoFailTimer?.cancel();
-    _registerResult(dodged: correctDodge);
+    _registerResult(dodged: correctDodge, timedOut: false);
   }
 
-  void _registerResult({required bool dodged}) {
+  void _registerResult({required bool dodged, required bool timedOut}) {
     if (_phase != _SchivaCPhase.attacking) return;
     _lastDodged = dodged;
     _roundResults.add(dodged);
@@ -109,7 +149,7 @@ class _MinigameSchivaSscreenState extends State<MinigameSchivaSscreen>
     setState(() => _phase = _SchivaCPhase.feedback);
     _round++;
 
-    Future.delayed(const Duration(milliseconds: 750), () {
+    Future.delayed(const Duration(milliseconds: 850), () {
       if (!mounted) return;
       _startNextRound();
     });
@@ -125,6 +165,7 @@ class _MinigameSchivaSscreenState extends State<MinigameSchivaSscreen>
   void dispose() {
     _autoFailTimer?.cancel();
     _attackSlide.dispose();
+    _windupCtrl.dispose();
     _feedbackCtrl.dispose();
     _resultCtrl.dispose();
     _timerBarCtrl.dispose();
@@ -266,8 +307,8 @@ class _MinigameSchivaSscreenState extends State<MinigameSchivaSscreen>
           _ruleCard('👉', 'Attacco da destra',
               'Striscia verso SINISTRA per schivare.'),
           const SizedBox(height: 10),
-          _ruleCard('⏱', 'Hai 1.1 secondi',
-              'Reagisci subito o vieni colto sul fatto.'),
+          _ruleCard('⚠️', 'Velocità crescente',
+              'Ogni round hai meno tempo. Al terzo occhi aperti.'),
           const SizedBox(height: 10),
           _ruleCard('🏅', '3 round totali',
               'Schiva tutti e 3 per il risultato migliore.'),
@@ -277,6 +318,8 @@ class _MinigameSchivaSscreenState extends State<MinigameSchivaSscreen>
           // ── Start button ──────────────────────────────────────────
           GestureDetector(
             onTap: () {
+              SharedPreferences.getInstance()
+                  .then((p) => p.setBool('tut_schiva_lex', true));
               setState(() => _phase = _SchivaCPhase.countdown);
               Future.delayed(
                   const Duration(milliseconds: 300), _startNextRound);
@@ -348,6 +391,14 @@ class _MinigameSchivaSscreenState extends State<MinigameSchivaSscreen>
   }
 
   Widget _buildGame(BuildContext context) {
+    final screenW = MediaQuery.of(context).size.width;
+    final screenH = MediaQuery.of(context).size.height;
+    // Testi direzione basati su _windupFromLeft (può essere fake)
+    final showWindupHint = _phase == _SchivaCPhase.windup;
+    final showAttackHint = _phase == _SchivaCPhase.attacking;
+    // Nell'attacco, se è fakeout non mostriamo la direzione reale — solo "Schiva!"
+    final showDirectionText = showAttackHint && !_isFakeout;
+
     return GestureDetector(
       onHorizontalDragEnd: _onSwipe,
       behavior: HitTestBehavior.translucent,
@@ -377,18 +428,14 @@ class _MinigameSchivaSscreenState extends State<MinigameSchivaSscreen>
                     shape: BoxShape.circle,
                     color: dotColor,
                     boxShadow: i < _roundResults.length
-                        ? [
-                            BoxShadow(
-                                color: dotColor.withValues(alpha: 0.5),
-                                blurRadius: 6)
-                          ]
+                        ? [BoxShadow(color: dotColor.withValues(alpha: 0.5), blurRadius: 6)]
                         : [],
                   ),
                 );
               }),
             ),
           ),
-          // Timer bar (sotto i dot)
+          // Timer bar
           if (_phase == _SchivaCPhase.attacking)
             Positioned(
               top: 56,
@@ -401,47 +448,99 @@ class _MinigameSchivaSscreenState extends State<MinigameSchivaSscreen>
                   child: LinearProgressIndicator(
                     value: 1.0 - _timerBarCtrl.value,
                     backgroundColor: Colors.white10,
-                    color: Color.lerp(
-                      Colors.greenAccent,
-                      Colors.redAccent,
-                      _timerBarCtrl.value,
-                    ),
+                    color: Color.lerp(Colors.greenAccent, Colors.redAccent, _timerBarCtrl.value),
                     minHeight: 5,
                   ),
                 ),
               ),
             ),
-          // Numero round
+          // Numero round + hint fakeout
           Positioned(
             top: 70,
             left: 0,
             right: 0,
             child: Center(
-              child: Text(
-                'Round ${min(_round + 1, _totalRounds)} / $_totalRounds',
-                style: const TextStyle(color: Colors.white38, fontSize: 13),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'Round ${min(_round + 1, _totalRounds)} / $_totalRounds',
+                    style: const TextStyle(color: Colors.white38, fontSize: 13),
+                  ),
+                  // Avviso round 3
+                  if (_round == 2 && (_phase == _SchivaCPhase.countdown || _phase == _SchivaCPhase.windup))
+                    Padding(
+                      padding: const EdgeInsets.only(top: 4),
+                      child: Text(
+                        '👁  Ultimo round — occhi aperti',
+                        style: TextStyle(
+                          color: Colors.orangeAccent.withValues(alpha: 0.85),
+                          fontSize: 11,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 0.5,
+                        ),
+                      ),
+                    ),
+                ],
               ),
             ),
           ),
-          // Attacco in arrivo
-          if (_phase == _SchivaCPhase.attacking)
+          // ── WINDUP: Lex si inclina dalla parte del windup ──────────────────
+          if (showWindupHint)
+            AnimatedBuilder(
+              animation: _windupCtrl,
+              builder: (_, __) {
+                final t = Curves.easeOut.transform(_windupCtrl.value);
+                final lean = _windupFromLeft ? -22.0 * t : 22.0 * t;
+                return Positioned(
+                  top: screenH * 0.22,
+                  left: 0,
+                  right: 0,
+                  child: Center(
+                    child: Transform.translate(
+                      offset: Offset(lean, 0),
+                      child: Column(
+                        children: [
+                          Text(
+                            _windupFromLeft ? '👈' : '👉',
+                            style: TextStyle(
+                              fontSize: 52 + 10 * t,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Opacity(
+                            opacity: t,
+                            child: Text(
+                              _windupFromLeft ? 'DA SINISTRA' : 'DA DESTRA',
+                              style: TextStyle(
+                                color: Colors.orangeAccent.withValues(alpha: 0.9),
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: 2,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          // ── ATTACKING: mano in arrivo ─────────────────────────────────────
+          if (showAttackHint)
             AnimatedBuilder(
               animation: _attackSlide,
               builder: (_, __) {
                 final t = Curves.easeOut.transform(_attackSlide.value);
-                final screenW = MediaQuery.of(context).size.width;
                 final dx = _attackFromLeft
                     ? (-screenW * 0.6) + (screenW * 0.6) * t
                     : (screenW * 0.6) - (screenW * 0.6) * t;
                 return Positioned(
-                  top: MediaQuery.of(context).size.height * 0.28,
-                  left: _attackFromLeft ? null : null,
-                  right: null,
+                  top: screenH * 0.28,
                   child: Transform.translate(
                     offset: Offset(
-                      _attackFromLeft
-                          ? dx + 32
-                          : screenW - 100 + dx,
+                      _attackFromLeft ? dx + 32 : screenW - 100 + dx,
                       0,
                     ),
                     child: Text(
@@ -452,8 +551,8 @@ class _MinigameSchivaSscreenState extends State<MinigameSchivaSscreen>
                 );
               },
             ),
-          // Freccia direzione schivata
-          if (_phase == _SchivaCPhase.attacking)
+          // Freccia direzione (solo se non fakeout, usa il windup come riferimento)
+          if (showDirectionText)
             Positioned(
               bottom: 180,
               left: 0,
@@ -473,30 +572,42 @@ class _MinigameSchivaSscreenState extends State<MinigameSchivaSscreen>
                     ),
                     const SizedBox(height: 6),
                     Text(
-                      _attackFromLeft
-                          ? 'Lex arriva da sinistra'
-                          : 'Lex arriva da destra',
-                      style: const TextStyle(
-                          color: Colors.white38, fontSize: 13),
+                      _attackFromLeft ? 'Lex arriva da sinistra' : 'Lex arriva da destra',
+                      style: const TextStyle(color: Colors.white38, fontSize: 13),
                     ),
                   ],
                 ),
               ),
             ),
-          // Feedback schivato/preso
+          // Testo generico su round fakeout (non rivela direzione)
+          if (showAttackHint && _isFakeout)
+            Positioned(
+              bottom: 180,
+              left: 0,
+              right: 0,
+              child: FadeTransition(
+                opacity: _attackSlide,
+                child: const Column(
+                  children: [
+                    Text(
+                      'SCHIVA!',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: 2,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          // Feedback schivato/preso — testi variati
           if (_phase == _SchivaCPhase.feedback)
             Center(
               child: FadeTransition(
-                opacity: CurvedAnimation(
-                    parent: _feedbackCtrl, curve: Curves.easeOut),
-                child: Text(
-                  _lastDodged ? '✅  Schivato!' : '❌  Preso!',
-                  style: TextStyle(
-                    fontSize: 38,
-                    fontWeight: FontWeight.bold,
-                    color: _lastDodged ? Colors.greenAccent : Colors.redAccent,
-                  ),
-                ),
+                opacity: CurvedAnimation(parent: _feedbackCtrl, curve: Curves.easeOut),
+                child: _buildFeedbackText(),
               ),
             ),
           // Lex in basso
@@ -508,15 +619,46 @@ class _MinigameSchivaSscreenState extends State<MinigameSchivaSscreen>
               child: Text(
                 '👶',
                 style: TextStyle(
-                    fontSize: _phase == _SchivaCPhase.feedback && !_lastDodged
-                        ? 72
-                        : 52),
+                    fontSize: _phase == _SchivaCPhase.feedback && !_lastDodged ? 72 : 52),
               ),
             ),
           ),
         ],
       ),
     );
+  }
+
+  Widget _buildFeedbackText() {
+    if (_lastDodged) {
+      final texts = ['✅  Perfetto!', '✅  Schivato!', '✅  Ottimo riflesso!'];
+      return Text(
+        texts[_round % texts.length],
+        style: const TextStyle(
+          fontSize: 36,
+          fontWeight: FontWeight.bold,
+          color: Colors.greenAccent,
+        ),
+      );
+    } else if (_isFakeout && _lastFellForFakeout) {
+      return const Text(
+        '😈  Era un bluff!',
+        style: TextStyle(
+          fontSize: 32,
+          fontWeight: FontWeight.bold,
+          color: Colors.orangeAccent,
+        ),
+      );
+    } else {
+      final texts = ['❌  Colpito!', '❌  Preso!', '❌  Troppo lento!'];
+      return Text(
+        texts[_round % texts.length],
+        style: const TextStyle(
+          fontSize: 36,
+          fontWeight: FontWeight.bold,
+          color: Colors.redAccent,
+        ),
+      );
+    }
   }
 
   Widget _buildResult() {

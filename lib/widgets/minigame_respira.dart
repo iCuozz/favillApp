@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../models/comic_data.dart';
 
 enum _RespiraPhase { tutorial, playing, result }
@@ -59,8 +60,10 @@ class _MinigameRespiraScreenState extends State<MinigameRespiraScreen>
   _RespiraPhase _phase = _RespiraPhase.tutorial;
   double _heat = 0.45;
   double _timeLeft = 0;
+  double _timeElapsed = 0;
   bool _success = false;
   Timer? _ticker;
+  DateTime? _gameStartTime;
 
   // ── Tap mechanic ──────────────────────────────────────────────────────
   int _streak = 0;                         // tap consecutivi entro 350ms
@@ -68,6 +71,15 @@ class _MinigameRespiraScreenState extends State<MinigameRespiraScreen>
   final List<DateTime> _tapTimestamps = []; // finestra 1.2s per tap rate
   double _tapRate = 0;                      // tap/s
   final List<_Ripple> _ripples = [];
+
+  // ── Rhythm beat bar (3 Hz = 333 ms period) ────────────────────────────
+  // Posizione cursore 0..1 calcolata real-time da _gameStartTime
+  double _beatCursor = 0.0;
+  bool _lastTapWasOnBeat = false;
+  static const _kBeatPeriodMs = 333.0;     // periodo beat in ms
+  static const _kRhythmBonus = 0.020;      // extra cooling on-beat
+  static const _kBeatSweetLo = 0.40;
+  static const _kBeatSweetHi = 0.60;
 
   // ── Surge system ──────────────────────────────────────────────────────
   double _nextSurgeIn = 2.0;
@@ -96,7 +108,9 @@ class _MinigameRespiraScreenState extends State<MinigameRespiraScreen>
   late AnimationController _resultCtrl;
   late AnimationController _surgeWarnCtrl;
   late AnimationController _tapBounceCtrl;
-  late AnimationController _tutorialDemoCtrl; // demo animata tap nel tutorial
+  late AnimationController _streakBurstCtrl;
+  late AnimationController _tutorialDemoCtrl;
+  int _prevStreak = 0; // per rilevare nuovo raggiungimento streak
 
   @override
   void initState() {
@@ -117,18 +131,34 @@ class _MinigameRespiraScreenState extends State<MinigameRespiraScreen>
       vsync: this,
       duration: const Duration(milliseconds: 130),
     );
+    _streakBurstCtrl = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 500),
+    );
     _tutorialDemoCtrl = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 1200),
     )..repeat();
+    _loadTutorialPref();
+  }
+
+  Future<void> _loadTutorialPref() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (!mounted || _phase != _RespiraPhase.tutorial) return;
+    if (prefs.getBool('tut_respira') ?? false) _startGame();
   }
 
   void _startGame() {
+    SharedPreferences.getInstance()
+        .then((p) => p.setBool('tut_respira', true));
+    final duration = (widget.config.durationSeconds ?? 14).toDouble();
     setState(() {
       _phase = _RespiraPhase.playing;
       _heat = _kStartHeat;
-      _timeLeft = (widget.config.durationSeconds ?? 14).toDouble();
+      _timeLeft = duration;
+      _timeElapsed = 0;
       _streak = 0;
+      _prevStreak = 0;
       _lastTapTime = null;
       _tapTimestamps.clear();
       _tapRate = 0;
@@ -136,7 +166,10 @@ class _MinigameRespiraScreenState extends State<MinigameRespiraScreen>
       _nextSurgeIn = 1.8 + _rng.nextDouble() * 1.5;
       _inSurgeWarning = false;
       _surgeProgress = 0;
+      _beatCursor = 0.0;
+      _lastTapWasOnBeat = false;
     });
+    _gameStartTime = DateTime.now();
     _ticker = Timer.periodic(const Duration(milliseconds: _kTickMs), _tick);
   }
 
@@ -158,19 +191,35 @@ class _MinigameRespiraScreenState extends State<MinigameRespiraScreen>
     }
     _lastTapTime = now;
 
+    // Trigger burst animation quando si raggiunge la soglia streak
+    if (_streak >= _kStreakMin && _prevStreak < _kStreakMin) {
+      _streakBurstCtrl.forward(from: 0);
+    }
+    _prevStreak = _streak;
+
     // Calcola tap rate su finestra 1.2s
     _tapTimestamps.add(now);
     _tapTimestamps.removeWhere(
         (t) => now.difference(t).inMilliseconds > 1200);
     _tapRate = _tapTimestamps.length / 1.2;
 
-    // Raffreddamento: base + bonus streak
-    final cool = _kTapCool + (_streak >= _kStreakMin ? _kStreakBonus : 0.0);
+    // Determina se tap è on-beat (sweet spot del beat bar)
+    _lastTapWasOnBeat = _beatCursor >= _kBeatSweetLo && _beatCursor <= _kBeatSweetHi;
 
-    // Colore ripple: azzurro se in streak, viola altrimenti
-    final rippleColor = _streak >= _kStreakMin
-        ? const Color(0xFF80D8FF)
-        : const Color(0xFF9C8FFF);
+    // Raffreddamento: base + streak bonus + rhythm bonus
+    final cool = _kTapCool
+        + (_streak >= _kStreakMin ? _kStreakBonus : 0.0)
+        + (_lastTapWasOnBeat ? _kRhythmBonus : 0.0);
+
+    // Colore ripple: azzurro se in streak + on-beat, viola streak, bianco altrimenti
+    final Color rippleColor;
+    if (_lastTapWasOnBeat && _streak >= _kStreakMin) {
+      rippleColor = const Color(0xFF40FFD0); // verde acqua
+    } else if (_streak >= _kStreakMin) {
+      rippleColor = const Color(0xFF80D8FF); // azzurro streak
+    } else {
+      rippleColor = const Color(0xFF9C8FFF); // viola base
+    }
 
     HapticFeedback.lightImpact();
     _tapBounceCtrl.forward(from: 0);
@@ -184,17 +233,27 @@ class _MinigameRespiraScreenState extends State<MinigameRespiraScreen>
   void _tick(Timer _) {
     if (_phase != _RespiraPhase.playing) return;
     const dt = _kTickMs / 1000.0;
+    final duration = (widget.config.durationSeconds ?? 14).toDouble();
+
+    // Aggiorna beat cursor real-time (anti-drift)
+    final elapsedMs = _gameStartTime != null
+        ? DateTime.now().difference(_gameStartTime!).inMilliseconds.toDouble()
+        : 0.0;
+    final newBeatCursor = (elapsedMs % _kBeatPeriodMs) / _kBeatPeriodMs;
 
     setState(() {
+      _beatCursor = newBeatCursor;
+
       // Calore passivo
       _heat = (_heat + _kRiseRate * dt).clamp(0.0, 1.0);
       _timeLeft -= dt;
+      _timeElapsed += dt;
 
       // Avanza ripple
       for (final r in _ripples) { r.progress += dt / 0.55; }
       _ripples.removeWhere((r) => r.progress >= 1.0);
 
-      // Surge countdown
+      // Surge countdown — intervallo diminuisce nel tempo (escalation)
       if (!_inSurgeWarning) {
         _nextSurgeIn -= dt;
         if (_nextSurgeIn <= 0) {
@@ -210,7 +269,10 @@ class _MinigameRespiraScreenState extends State<MinigameRespiraScreen>
           HapticFeedback.heavyImpact();
           _inSurgeWarning = false;
           _surgeProgress = 0;
-          _nextSurgeIn = 1.5 + _rng.nextDouble() * 2.5;
+          // Surge più frequenti col passare del tempo (da ~4s a ~0.8s)
+          final baseInterval = 2.5 + _rng.nextDouble() * 1.5;
+          final escalation = (_timeElapsed / duration) * 1.8;
+          _nextSurgeIn = (baseInterval - escalation).clamp(0.8, 4.0);
         }
       }
 
@@ -276,6 +338,7 @@ class _MinigameRespiraScreenState extends State<MinigameRespiraScreen>
     _resultCtrl.dispose();
     _surgeWarnCtrl.dispose();
     _tapBounceCtrl.dispose();
+    _streakBurstCtrl.dispose();
     _tutorialDemoCtrl.dispose();
     super.dispose();
   }
@@ -636,6 +699,10 @@ class _MinigameRespiraScreenState extends State<MinigameRespiraScreen>
       text = '😱  TROPPO CALDO!';
       color = Colors.red[300]!;
       weight = FontWeight.bold;
+    } else if (_lastTapWasOnBeat && _streak >= _kStreakMin && _tapRate >= 4) {
+      text = '🎵  On beat! (+doppio bonus)';
+      color = const Color(0xFF40FFD0);
+      weight = FontWeight.bold;
     } else if (_streak >= _kStreakMin && _tapRate >= 4) {
       text = '❄️  In ritmo! (+bonus)';
       color = const Color(0xFF80D8FF);
@@ -662,10 +729,40 @@ class _MinigameRespiraScreenState extends State<MinigameRespiraScreen>
   Widget _buildTapButton(Color heatColor) {
     final inStreak = _streak >= _kStreakMin;
     const streakColor = Color(0xFF80D8FF);
+    final inSweetSpot = _beatCursor >= _kBeatSweetLo && _beatCursor <= _kBeatSweetHi;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
+        // ── Streak burst banner ───────────────────────────────────────────
+        AnimatedBuilder(
+          animation: _streakBurstCtrl,
+          builder: (_, __) {
+            final t = _streakBurstCtrl.value;
+            final alpha = t < 0.3 ? t / 0.3 : 1.0 - (t - 0.3) / 0.7;
+            final scale = 0.7 + t * 0.5;
+            if (t == 0 && !inStreak) return const SizedBox(height: 28);
+            return SizedBox(
+              height: 28,
+              child: Opacity(
+                opacity: alpha.clamp(0.0, 1.0),
+                child: Transform.scale(
+                  scale: scale,
+                  child: Text(
+                    '❄️  STREAK ×$_streak',
+                    style: const TextStyle(
+                      color: Color(0xFF80D8FF),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w900,
+                      letterSpacing: 1.5,
+                    ),
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
+
         SizedBox(
           width: 200,
           height: 200,
@@ -714,11 +811,29 @@ class _MinigameRespiraScreenState extends State<MinigameRespiraScreen>
                   ),
                 ),
 
+              // ── On-beat glow ──────────────────────────────────────────
+              if (inSweetSpot)
+                IgnorePointer(
+                  child: Container(
+                    width: 190,
+                    height: 190,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: const Color(0xFF40FFD0).withValues(alpha: 0.22),
+                          blurRadius: 32,
+                          spreadRadius: 8,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+
               // ── Bottone tap ───────────────────────────────────────────
               AnimatedBuilder(
                 animation: _tapBounceCtrl,
                 builder: (_, __) {
-                  // scale: 1.0 → 0.86 → 1.0
                   final t = _tapBounceCtrl.value;
                   final scale = 1.0 - 0.14 * sin(t * pi);
                   return Transform.scale(
@@ -735,12 +850,14 @@ class _MinigameRespiraScreenState extends State<MinigameRespiraScreen>
                               ? streakColor.withValues(alpha: 0.18)
                               : heatColor.withValues(alpha: 0.08),
                           border: Border.all(
-                            color: inStreak
-                                ? streakColor
-                                : (_inSurgeWarning
-                                    ? const Color(0xFFFF6D00)
-                                    : Colors.white30),
-                            width: inStreak ? 3.0 : (_inSurgeWarning ? 2.5 : 1.8),
+                            color: inSweetSpot
+                                ? const Color(0xFF40FFD0)
+                                : (inStreak
+                                    ? streakColor
+                                    : (_inSurgeWarning
+                                        ? const Color(0xFFFF6D00)
+                                        : Colors.white30)),
+                            width: inSweetSpot ? 3.5 : (inStreak ? 3.0 : (_inSurgeWarning ? 2.5 : 1.8)),
                           ),
                           boxShadow: [
                             if (_inSurgeWarning && !inStreak)
@@ -766,12 +883,16 @@ class _MinigameRespiraScreenState extends State<MinigameRespiraScreen>
           ),
         ),
 
-        // ── Tap rate indicator ────────────────────────────────────────
-        const SizedBox(height: 10),
+        // ── Beat bar ──────────────────────────────────────────────────────
+        const SizedBox(height: 8),
+        _buildBeatBar(inSweetSpot),
+
+        // ── Tap rate indicator ────────────────────────────────────────────
+        const SizedBox(height: 8),
         Text(
           _tapRate > 0
               ? '${_tapRate.toStringAsFixed(1)} tap/s'
-                  '${_streak >= _kStreakMin ? "  🔥×$_streak" : ""}' 
+                  '${_streak >= _kStreakMin ? "  🔥×$_streak" : ""}'
               : 'tap veloce!',
           style: TextStyle(
             color: _streak >= _kStreakMin
@@ -781,6 +902,104 @@ class _MinigameRespiraScreenState extends State<MinigameRespiraScreen>
             fontWeight: _streak >= _kStreakMin
                 ? FontWeight.bold
                 : FontWeight.normal,
+          ),
+        ),
+      ],
+    );
+  }
+
+  /// Beat bar: indica il ritmo ottimale per il bonus on-beat.
+  Widget _buildBeatBar(bool inSweetSpot) {
+    const barW = 160.0;
+    const barH = 10.0;
+    final cursorX = _beatCursor * barW;
+    const sweetStart = _kBeatSweetLo * barW;
+    const sweetEnd = _kBeatSweetHi * barW;
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        SizedBox(
+          width: barW,
+          height: barH + 16,
+          child: Stack(
+            clipBehavior: Clip.none,
+            children: [
+              // Barra di sfondo
+              Positioned(
+                top: 8,
+                left: 0,
+                child: Container(
+                  width: barW,
+                  height: barH,
+                  decoration: BoxDecoration(
+                    color: Colors.white10,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                ),
+              ),
+              // Zona sweet spot (verde)
+              Positioned(
+                top: 8,
+                left: sweetStart,
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 80),
+                  width: sweetEnd - sweetStart,
+                  height: barH,
+                  decoration: BoxDecoration(
+                    color: inSweetSpot
+                        ? const Color(0xFF40FFD0).withValues(alpha: 0.55)
+                        : const Color(0xFF40FFD0).withValues(alpha: 0.25),
+                    borderRadius: BorderRadius.circular(4),
+                    boxShadow: inSweetSpot
+                        ? [
+                            BoxShadow(
+                              color: const Color(0xFF40FFD0).withValues(alpha: 0.4),
+                              blurRadius: 8,
+                              spreadRadius: 1,
+                            )
+                          ]
+                        : [],
+                  ),
+                ),
+              ),
+              // Cursore
+              Positioned(
+                top: 2,
+                left: (cursorX - 11).clamp(0.0, barW - 22),
+                child: Container(
+                  width: 22,
+                  height: 22,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: inSweetSpot
+                        ? const Color(0xFF40FFD0)
+                        : Colors.white.withValues(alpha: 0.7),
+                    boxShadow: [
+                      BoxShadow(
+                        color: (inSweetSpot
+                                ? const Color(0xFF40FFD0)
+                                : Colors.white)
+                            .withValues(alpha: 0.5),
+                        blurRadius: 8,
+                        spreadRadius: inSweetSpot ? 3 : 0,
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          inSweetSpot ? '✦ ON BEAT' : 'batti sul verde',
+          style: TextStyle(
+            color: inSweetSpot
+                ? const Color(0xFF40FFD0)
+                : Colors.white24,
+            fontSize: 10,
+            letterSpacing: 1.8,
+            fontWeight: inSweetSpot ? FontWeight.bold : FontWeight.normal,
           ),
         ),
       ],
