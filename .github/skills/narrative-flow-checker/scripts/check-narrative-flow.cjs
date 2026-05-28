@@ -39,6 +39,7 @@ const EPISODE_ORDER = [
   'quests/s1/s1_ritorno_casa.json',
   'quests/s1/s1_spesa_sabato.json',
   'quests/s1/s1_domenica_parco.json',
+  'quests/s1/s1_mare.json',
 ];
 
 // ─── Helpers ───────────────────────────────────────────────────────────────
@@ -522,6 +523,13 @@ for (const ep of loadedEpisodes) {
         for (const flag of Object.keys(opt.set_flags || {})) {
           if (!flagsProduced.has(flag)) flagsProduced.set(flag, new Set());
           flagsProduced.get(flag).add(ep.id);
+        }
+        // Also collect set_flags from minigame tiers
+        for (const tier of (opt.minigame?.tiers || [])) {
+          for (const flag of Object.keys(tier.set_flags || {})) {
+            if (!flagsProduced.has(flag)) flagsProduced.set(flag, new Set());
+            flagsProduced.get(flag).add(ep.id);
+          }
         }
       }
     }

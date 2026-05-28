@@ -29,6 +29,7 @@ import 'widgets/stats_hud_widget.dart';
 import 'widgets/stats_intro_overlay.dart';
 import 'widgets/minigame_lex_strike.dart';
 import 'widgets/minigame_respira.dart';
+import 'widgets/minigame_distrai_lex.dart';
 import 'widgets/minigame_rincorsa.dart';
 import 'widgets/minigame_schiva_lex.dart';
 
@@ -622,6 +623,24 @@ class _EpisodePageState extends State<EpisodePage> {
                 final branch = tier.gotoBranch.isNotEmpty ? tier.gotoBranch : null;
                 final isSuccess = tier.minProducts > 0;
                 AudioService.instance.playSfx(isSuccess ? SfxEvent.minigameSuccess : SfxEvent.minigameFail);
+                _applyEffectsAndNavigate(option,
+                    overrideEffects: effects, overrideBranch: branch);
+              },
+            ),
+          ),
+        );
+      case 'distrai_lex':
+        Navigator.of(context).push<void>(
+          MaterialPageRoute(
+            builder: (_) => MinigameDistraiLexScreen(
+              config: cfg,
+              onComplete: (effects, label, tier) {
+                Navigator.of(context).pop();
+                final branch =
+                    tier.gotoBranch.isNotEmpty ? tier.gotoBranch : null;
+                final isSuccess = tier.minProducts >= 3;
+                AudioService.instance.playSfx(
+                    isSuccess ? SfxEvent.minigameSuccess : SfxEvent.minigameFail);
                 _applyEffectsAndNavigate(option,
                     overrideEffects: effects, overrideBranch: branch);
               },

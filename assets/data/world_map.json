@@ -129,10 +129,14 @@
         "x": 0.82,
         "y": 0.9
       },
-      "quests": []
-    },
-    {
-      "id": "centro_commerciale",
+      "quests": [
+        {
+          "id": "s1_mare",
+          "title": "Un Giorno al Mare",
+          "description": "Il mare fa rumore. Lex ha un piano.",
+          "requires_completed": ["s1_domenica_parco"]
+        }
+      ]
       "name": "Centro Commerciale",
       "emoji": "🛍️",
       "description": "Il GalaxiaMall di Nova Tutinia. Tre piani, un bar e mille modi di spendere soldi.",
