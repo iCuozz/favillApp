@@ -2,33 +2,10 @@
   "id": "s1_ritorno_casa",
   "stat_entry": [
     {
-      "all_of": [
-        {
-          "stat": "segreto",
-          "op": "lt",
-          "value": 40
-        },
-        {
-          "stat": "resistenza",
-          "op": "lt",
-          "value": 50
-        }
-      ],
-      "goto_branch": "intro_vestiti_bruciati_indosso"
-    },
-    {
-      "all_of": [
-        {
-          "stat": "segreto",
-          "op": "lt",
-          "value": 50
-        },
-        {
-          "stat": "resistenza",
-          "op": "gte",
-          "value": 55
-        }
-      ],
+      "stat": "segreto",
+      "op": "lt",
+      "value": 50,
+      "flag_conditions": [{"flag": "shirt_in_backpack", "is": false}],
       "goto_branch": "intro_vestiti_bruciati_indosso"
     },
     {

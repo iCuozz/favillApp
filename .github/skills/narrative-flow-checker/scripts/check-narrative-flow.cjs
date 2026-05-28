@@ -65,18 +65,33 @@ function evalOp(value, op, threshold) {
   }
 }
 
-function matchStatEntry(rule, stats) {
+function matchStatEntry(rule, stats, flags) {
+  // Stat conditions
+  let statOk;
   if (rule.all_of) {
-    return rule.all_of.every(c => evalOp(stats[c.stat] ?? 50, c.op, c.value));
+    statOk = rule.all_of.every(c => evalOp(stats[c.stat] ?? 50, c.op, c.value));
+  } else if (rule.stat) {
+    statOk = evalOp(stats[rule.stat] ?? 50, rule.op, rule.value);
+  } else {
+    statOk = true; // flag-only rule
   }
-  return evalOp(stats[rule.stat] ?? 50, rule.op, rule.value);
+  if (!statOk) return false;
+  // Flag conditions (AND)
+  for (const fc of (rule.flag_conditions || [])) {
+    if ((flags[fc.flag] ?? false) !== fc.is) return false;
+  }
+  return true;
 }
 
-function resolveStatEntry(statEntry, stats) {
+function resolveStatEntry(statEntry, stats, flags) {
   for (const rule of (statEntry || [])) {
-    if (matchStatEntry(rule, stats)) return rule.goto_branch;
+    if (matchStatEntry(rule, stats, flags)) return rule.goto_branch;
   }
   return null;
+}
+
+function applySetFlags(flags, setFlags) {
+  return { ...flags, ...(setFlags || {}) };
 }
 
 // ─── Structural checks ─────────────────────────────────────────────────────
@@ -301,10 +316,14 @@ for (const ep of loadedEpisodes) {
     let desc;
     if (rule.all_of) {
       desc = rule.all_of.map(c => `${c.stat} ${c.op} ${c.value}`).join(' AND ');
-    } else {
+    } else if (rule.stat) {
       desc = `${rule.stat} ${rule.op} ${rule.value}`;
+    } else {
+      desc = '(solo flags)';
     }
-    console.log(`     Rule [${desc}] → "${rule.goto_branch}"`);
+    const flagDesc = (rule.flag_conditions || []).map(fc => `${fc.flag}==${fc.is}`).join(' AND ');
+    const full = [desc, flagDesc].filter(Boolean).join(' && ');
+    console.log(`     Rule [${full}] → "${rule.goto_branch}"`);
     if (rule.prepend) console.log(`       (prepend: true — aggiunto prima dei main pages)`);
   }
 }
@@ -313,19 +332,20 @@ for (const ep of loadedEpisodes) {
 
 console.log('\n━━━ 3. SIMULAZIONE PERCORSI CUMULATIVI ━━━━━━━━━━━━━━━━\n');
 console.log('  Statistiche iniziali:', JSON.stringify(INITIAL_STATS));
+console.log('  Flags iniziali: {}');
 console.log('  Episodi in sequenza:', loadedEpisodes.map(e => e.id).join(' → '));
 console.log();
 
 // Build cumulative paths through all episodes sequentially
-let paths = [{ label: '', stats: { ...INITIAL_STATS }, episodeChoices: [] }];
+let paths = [{ label: '', stats: { ...INITIAL_STATS }, flags: {}, episodeChoices: [] }];
 const inconsistencies = [];
 
 for (const ep of loadedEpisodes) {
   const nextPaths = [];
 
   for (const p of paths) {
-    // Check stat_entry for this episode given current stats
-    const entryBranch = resolveStatEntry(ep.stat_entry, p.stats);
+    // Check stat_entry for this episode given current stats + flags
+    const entryBranch = resolveStatEntry(ep.stat_entry, p.stats, p.flags);
 
     // Enumerate all choices in this episode (main pages + epilogue)
     const mainChoices = (ep.pages || []).filter(pg => pg.choice).map(pg => pg.choice);
@@ -338,6 +358,7 @@ for (const ep of loadedEpisodes) {
       const results = [];
       for (const opt of head.options) {
         const baseEffects = opt.stat_effects || {};
+        const baseSetFlags = opt.set_flags || {};
         const baseBranch = opt.goto_branch;
         const baseLabel = opt.id;
 
@@ -345,14 +366,16 @@ for (const ep of loadedEpisodes) {
           ? opt.minigame.tiers.map(t => ({
               id: `${opt.id}[${t.goto_branch || 'tier'}]`,
               effects: mergeEffects(baseEffects, t.stat_effects || {}),
+              setFlags: baseSetFlags, // minigame tiers don't set flags
               branch: t.goto_branch || baseBranch,
             }))
-          : [{ id: baseLabel, effects: baseEffects, branch: baseBranch }];
+          : [{ id: baseLabel, effects: baseEffects, setFlags: baseSetFlags, branch: baseBranch }];
 
         for (const tier of tierList) {
           const newAcc = {
             label: [accumulated.label, tier.id].filter(Boolean).join('+'),
             effects: mergeEffects(accumulated.effects, tier.effects),
+            setFlags: { ...accumulated.setFlags, ...tier.setFlags },
             branches: [...(accumulated.branches || []), tier.branch],
           };
           results.push(...buildPaths(rest, newAcc));
@@ -362,16 +385,18 @@ for (const ep of loadedEpisodes) {
     }
 
     const epChoicePaths = allChoices.length
-      ? buildPaths(allChoices, { label: '', effects: {}, branches: [] })
-      : [{ label: '', effects: {}, branches: [] }];
+      ? buildPaths(allChoices, { label: '', effects: {}, setFlags: {}, branches: [] })
+      : [{ label: '', effects: {}, setFlags: {}, branches: [] }];
 
     for (const ecp of epChoicePaths) {
       const newStats = applyEffects(p.stats, ecp.effects);
+      const newFlags = applySetFlags(p.flags, ecp.setFlags);
       const label = [p.label, `${ep.id}/${ecp.label || '∅'}`].filter(Boolean).join(' | ');
 
       nextPaths.push({
         label,
         stats: newStats,
+        flags: newFlags,
         episodeChoices: [...p.episodeChoices, {
           episode: ep.id,
           entryBranch,
@@ -390,7 +415,8 @@ if (showAllPaths) {
   console.log('\n  Tutti i percorsi:');
   for (const p of paths) {
     const s = p.stats;
-    console.log(`    [S:${s.segreto} L:${s.legame} Sc:${s.scintille} R:${s.resistenza}] ${p.label}`);
+    const f = Object.entries(p.flags).map(([k,v])=>`${k}=${v}`).join(',') || '∅';
+    console.log(`    [S:${s.segreto} L:${s.legame} Sc:${s.scintille} R:${s.resistenza} flags:{${f}}] ${p.label}`);
   }
 }
 

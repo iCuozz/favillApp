@@ -15,20 +15,6 @@
       "variant": "hero"
     },
     {
-      "id": "sparkle_ale",
-      "name": "Sparkle Ale",
-      "display_name": "Sparkle Ale",
-      "role": "troublemaker son",
-      "variant": "main"
-    },
-    {
-      "id": "mallow_bellow",
-      "name": "Mallow Bellow",
-      "display_name": "Mallow Bellow",
-      "role": "software developer",
-      "variant": "main"
-    },
-    {
       "id": "lex",
       "name": "Lex",
       "display_name": "Lex",
@@ -41,6 +27,34 @@
       "display_name": "Mallow",
       "role": "software developer, Favilla's husband",
       "variant": "main"
+    },
+    {
+      "id": "corvi",
+      "name": "Corvi",
+      "display_name": "Corvi",
+      "role": "school principal",
+      "variant": "secondary"
+    },
+    {
+      "id": "collega",
+      "name": "Colleague",
+      "display_name": "Colleague",
+      "role": "Favilla's colleague",
+      "variant": "secondary"
+    },
+    {
+      "id": "lex_pov",
+      "name": "Lex (POV)",
+      "display_name": "Lex",
+      "role": "Lex's narrative point of view",
+      "variant": "pov"
+    },
+    {
+      "id": "carmela",
+      "name": "Carmela",
+      "display_name": "Carmela",
+      "role": "passerby at the supermarket",
+      "variant": "secondary"
     },
     {
       "id": "bambini",

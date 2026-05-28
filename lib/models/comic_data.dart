@@ -82,10 +82,7 @@ class EpisodeSummary {
 
 /// Una regola di ingresso condizionale basata sulle stat.
 /// Valutata all'avvio della quest: il primo match determina il branch iniziale.
-/// Esempio JSON: { "stat": "segreto", "op": "lt", "value": 50, "goto_branch": "intro_vestiti_bruciati" }
-/// Con prepend: true il branch viene ANTEPOSTO alle pagine principali invece di sostituirle.
-/// Esempio JSON: { "stat": "resistenza", "op": "lt", "value": 45, "goto_branch": "intro_caffe_effect", "prepend": true }
-/// Singola condizione su una stat: { stat, op, value }
+/// Singola condizione su una stat numerica: { stat, op, value }
 class StatCondition {
   final String stat;
   final String op;
@@ -112,6 +109,30 @@ class StatCondition {
       );
 }
 
+/// Condizione su un world flag booleano: { "flag": "nome", "is": true/false }
+/// Un flag assente equivale a false.
+class FlagCondition {
+  final String flag;
+  final bool expectedValue;
+
+  const FlagCondition({required this.flag, required this.expectedValue});
+
+  bool matches(Map<String, bool> flags) =>
+      (flags[flag] ?? false) == expectedValue;
+
+  factory FlagCondition.fromJson(Map<String, dynamic> json) => FlagCondition(
+        flag:          json['flag'] as String? ?? '',
+        expectedValue: json['is']   as bool?   ?? false,
+      );
+}
+
+/// Regola stat_entry: determina il branch di ingresso in base a stat e/o flag.
+///
+/// Formati JSON supportati:
+///   - Singola stat:  { "stat": "segreto", "op": "lt", "value": 50, "goto_branch": "..." }
+///   - AND stat:      { "all_of": [{stat,op,value},...], "goto_branch": "..." }
+///   - Con flag:      aggiungere "flag_conditions": [{"flag":"nome","is":true}]
+///   - Prepend:       aggiungere "prepend": true
 class StatEntryRule {
   final String stat;
   final String op; // "lt", "lte", "gt", "gte", "eq"
@@ -119,13 +140,13 @@ class StatEntryRule {
   final String gotoBranch;
 
   /// Se true, il branch viene anteposto alle pagine principali (prepend).
-  /// Se false (default), sostituisce le pagine principali (replace).
   final bool prepend;
 
-  /// Condizioni composte (AND): se non vuota, tutte devono essere vere.
-  /// Sovrascrive i campi stat/op/value individuali.
-  /// JSON: { "all_of": [{stat, op, value}, ...], "goto_branch": "...", "prepend": false }
+  /// Condizioni stat in AND. Se non vuota, sovrascrive stat/op/value.
   final List<StatCondition> allOf;
+
+  /// Condizioni flag in AND. Valutate sempre in aggiunta alle stat.
+  final List<FlagCondition> flagConditions;
 
   const StatEntryRule({
     required this.stat,
@@ -134,12 +155,21 @@ class StatEntryRule {
     required this.gotoBranch,
     this.prepend = false,
     this.allOf = const [],
+    this.flagConditions = const [],
   });
 
-  bool matches(Map<String, int> stats) {
-    if (allOf.isNotEmpty) {
-      return allOf.every((c) => c.matches(stats));
-    }
+  bool matches(Map<String, int> stats, Map<String, bool> flags) {
+    // Valuta le stat conditions
+    final statOk = allOf.isNotEmpty
+        ? allOf.every((c) => c.matches(stats))
+        : _matchSingleStat(stats);
+    if (!statOk) return false;
+    // Valuta le flag conditions (AND con le stat)
+    return flagConditions.every((fc) => fc.matches(flags));
+  }
+
+  bool _matchSingleStat(Map<String, int> stats) {
+    if (stat.isEmpty) return true; // regola solo-flag: nessuna stat richiesta
     final statVal = stats[stat] ?? 0;
     switch (op) {
       case 'lt':  return statVal < value;
@@ -153,6 +183,7 @@ class StatEntryRule {
 
   factory StatEntryRule.fromJson(Map<String, dynamic> json) {
     final allOfJson = json['all_of'] as List<dynamic>?;
+    final flagsJson = json['flag_conditions'] as List<dynamic>?;
     return StatEntryRule(
       stat:         json['stat']         as String? ?? '',
       op:           json['op']           as String? ?? 'lt',
@@ -163,6 +194,11 @@ class StatEntryRule {
           ? const []
           : allOfJson
               .map((e) => StatCondition.fromJson(e as Map<String, dynamic>))
+              .toList(),
+      flagConditions: flagsJson == null
+          ? const []
+          : flagsJson
+              .map((e) => FlagCondition.fromJson(e as Map<String, dynamic>))
               .toList(),
     );
   }
@@ -188,11 +224,11 @@ class EpisodeContent {
 
   bool get hasBranches => branches.isNotEmpty;
 
-  /// Risolve le regole stat_entry contro le stat correnti.
+  /// Risolve le regole stat_entry contro le stat e i world flags correnti.
   /// Restituisce il branch ID da usare come ingresso, o null se nessuna regola fa match.
-  String? resolveEntryBranch(Map<String, int> stats) {
+  String? resolveEntryBranch(Map<String, int> stats, Map<String, bool> flags) {
     for (final rule in statEntry) {
-      if (rule.matches(stats)) return rule.gotoBranch;
+      if (rule.matches(stats, flags)) return rule.gotoBranch;
     }
     return null;
   }
@@ -392,9 +428,11 @@ class ChoiceOption {
   final String? hint;
 
   /// Effetti sulle stat RPG: es. {"segreto": 1, "legame": -1}.
-  /// Quando è presente [minigame], questo campo contiene il worst-case dei tier
-  /// ed è usato solo per il filtro dei floor — gli effetti reali vengono dal tier.
   final Map<String, int> statEffects;
+
+  /// World flags da impostare atomicamente insieme agli effetti stat.
+  /// Es. {"shirt_in_backpack": true}
+  final Map<String, bool> setFlags;
 
   /// Se presente, questa scelta apre un mini-game prima di navigare al branch.
   final MinigameConfig? minigame;
@@ -405,6 +443,7 @@ class ChoiceOption {
     required this.gotoBranch,
     this.hint,
     this.statEffects = const {},
+    this.setFlags = const {},
     this.minigame,
   });
 
@@ -414,6 +453,13 @@ class ChoiceOption {
     effectsJson?.forEach((key, value) {
       if (value is int) statEffects[key] = value;
     });
+
+    final flagsJson = json['set_flags'] as Map<String, dynamic>?;
+    final setFlags = <String, bool>{};
+    flagsJson?.forEach((key, value) {
+      if (value is bool) setFlags[key] = value;
+    });
+
     final minigameJson = json['minigame'] as Map<String, dynamic>?;
 
     return ChoiceOption(
@@ -422,6 +468,7 @@ class ChoiceOption {
       gotoBranch: json['goto_branch'] as String? ?? '',
       hint: json['hint'] as String?,
       statEffects: statEffects,
+      setFlags: setFlags,
       minigame: minigameJson != null ? MinigameConfig.fromJson(minigameJson) : null,
     );
   }

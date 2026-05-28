@@ -15,20 +15,6 @@
       "variant": "hero"
     },
     {
-      "id": "sparkle_ale",
-      "name": "Sparkle Ale",
-      "display_name": "Sparkle Ale",
-      "role": "figlio combinaguai",
-      "variant": "main"
-    },
-    {
-      "id": "mallow_bellow",
-      "name": "Mallow Bellow",
-      "display_name": "Mallow Bellow",
-      "role": "sviluppatore informatico",
-      "variant": "main"
-    },
-    {
       "id": "lex",
       "name": "Lex",
       "display_name": "Lex",
@@ -41,6 +27,34 @@
       "display_name": "Mallow",
       "role": "sviluppatore informatico, marito di Favilla",
       "variant": "main"
+    },
+    {
+      "id": "corvi",
+      "name": "Corvi",
+      "display_name": "Corvi",
+      "role": "dirigente scolastico",
+      "variant": "secondary"
+    },
+    {
+      "id": "collega",
+      "name": "Collega",
+      "display_name": "Collega",
+      "role": "collega di Favilla",
+      "variant": "secondary"
+    },
+    {
+      "id": "lex_pov",
+      "name": "Lex (POV)",
+      "display_name": "Lex",
+      "role": "punto di vista narrativo di Lex",
+      "variant": "pov"
+    },
+    {
+      "id": "carmela",
+      "name": "Carmela",
+      "display_name": "Carmela",
+      "role": "passante al supermercato",
+      "variant": "secondary"
     },
     {
       "id": "bambini",

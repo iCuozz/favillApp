@@ -194,8 +194,9 @@ class EpisodeLoaderPage extends StatelessWidget {
         String? resolvedEntryBranchId = initialEntryBranchId;
         bool resolvedEntryBranchIsPrepend = false;
         if (resolvedEntryBranchId == null && content.statEntry.isNotEmpty) {
-          final stats = GameStateService.instance.state.value.toMap();
-          resolvedEntryBranchId = content.resolveEntryBranch(stats);
+          final stats = GameStateService.instance.state.value.toStatsMap();
+          final flags = GameStateService.instance.state.value.flags;
+          resolvedEntryBranchId = content.resolveEntryBranch(stats, flags);
         }
         if (resolvedEntryBranchId != null) {
           resolvedEntryBranchIsPrepend =
@@ -609,11 +610,12 @@ class _EpisodePageState extends State<EpisodePage> {
     final episodeId = widget.episode.id;
     final branchId = overrideBranch ?? option.gotoBranch;
     final effects = overrideEffects ?? option.statEffects;
+    final newFlags = option.setFlags;
 
-    // Applica gli effetti sulle stat RPG.
-    if (effects.isNotEmpty) {
-      GameStateService.instance.applyEffects(effects);
-      setState(() => _pendingStatEffects = effects);
+    // Applica effetti stat + world flags atomicamente.
+    if (effects.isNotEmpty || newFlags.isNotEmpty) {
+      GameStateService.instance.applyChoice(effects: effects, newFlags: newFlags);
+      if (effects.isNotEmpty) setState(() => _pendingStatEffects = effects);
     }
 
     setState(() {

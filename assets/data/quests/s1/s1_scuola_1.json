@@ -144,6 +144,9 @@
             "stat_effects": {
               "segreto": 15,
               "resistenza": -10
+            },
+            "set_flags": {
+              "shirt_in_backpack": true
             }
           },
           {
@@ -154,6 +157,9 @@
             "stat_effects": {
               "segreto": -15,
               "resistenza": 10
+            },
+            "set_flags": {
+              "shirt_in_backpack": false
             }
           }
         ]

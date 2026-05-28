@@ -48,7 +48,7 @@
       "panels": [
         {
           "id": "pr1_0",
-          "characters": ["favilla", "sparkle_ale", "mallow_bellow"],
+          "characters": ["favilla", "lex", "mallow"],
           "text_blocks": [
             {
               "id": "pr1_0_tb_0",
@@ -58,7 +58,7 @@
             {
               "id": "pr1_0_tb_1",
               "type": "dialogue",
-              "speaker": "sparkle_ale",
+              "speaker": "lex",
               "text": "MOOOM! MILK! TOYS! CHAOSMAX!"
             },
             {
@@ -75,13 +75,13 @@
             {
               "id": "pr1_0_tb_4",
               "type": "dialogue",
-              "speaker": "mallow_bellow",
+              "speaker": "mallow",
               "text": "Milk overflow..."
             },
             {
               "id": "pr1_0_tb_5",
               "type": "dialogue",
-              "speaker": "sparkle_ale",
+              "speaker": "lex",
               "text": "Daddy bug! Mommy fix!"
             }
           ],
@@ -95,7 +95,7 @@
       "panels": [
         {
           "id": "pr2_0",
-          "characters": ["favilla", "sparkle_ale", "mallow_bellow"],
+          "characters": ["favilla", "lex", "mallow"],
           "text_blocks": [
             {
               "id": "pr2_0_tb_0",
@@ -116,19 +116,19 @@
             {
               "id": "pr2_0_tb_3",
               "type": "dialogue",
-              "speaker": "sparkle_ale",
+              "speaker": "lex",
               "text": "Rocket spoon!"
             },
             {
               "id": "pr2_0_tb_4",
               "type": "dialogue",
-              "speaker": "mallow_bellow",
+              "speaker": "mallow",
               "text": "I just invented the sock-frisbee!"
             },
             {
               "id": "pr2_0_tb_5",
               "type": "dialogue",
-              "speaker": "sparkle_ale",
+              "speaker": "lex",
               "text": "Daddy chaos champion!"
             }
           ],
@@ -142,7 +142,7 @@
       "panels": [
         {
           "id": "pr3_0",
-          "characters": ["favilla", "sparkle_ale", "mallow_bellow"],
+          "characters": ["favilla", "lex", "mallow"],
           "text_blocks": [
             {
               "id": "pr3_0_tb_0",
@@ -167,13 +167,13 @@
             {
               "id": "pr3_0_tb_4",
               "type": "dialogue",
-              "speaker": "sparkle_ale",
+              "speaker": "lex",
               "text": "TOTAL CHAOS! WINNERS!"
             },
             {
               "id": "pr3_0_tb_5",
               "type": "dialogue",
-              "speaker": "mallow_bellow",
+              "speaker": "mallow",
               "text": "The system is completely down..."
             },
             {
@@ -197,7 +197,7 @@
       "panels": [
         {
           "id": "pr4_0",
-          "characters": ["favilla_blaze", "sparkle_ale", "mallow_bellow"],
+          "characters": ["favilla_blaze", "lex", "mallow"],
           "text_blocks": [
             {
               "id": "pr4_0_tb_0",
@@ -223,13 +223,13 @@
             {
               "id": "pr4_0_tb_4",
               "type": "dialogue",
-              "speaker": "mallow_bellow",
+              "speaker": "mallow",
               "text": "Did I... marry a superhero?"
             },
             {
               "id": "pr4_0_tb_5",
               "type": "dialogue",
-              "speaker": "sparkle_ale",
+              "speaker": "lex",
               "text": "Mommy FLAME!"
             }
           ],
