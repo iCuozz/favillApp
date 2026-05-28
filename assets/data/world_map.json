@@ -114,6 +114,38 @@
           "requires_stats": {}
         }
       ]
+    },
+    {
+      "id": "mare",
+      "name": "Spiaggia",
+      "emoji": "🏖️",
+      "description": "La costa di Nova Tutinia. Favilla ha bisogno di staccare.",
+      "unlocked_by_default": false,
+      "unlock_after_quest": "s1_domenica_parco",
+      "unlock_if_stat_lt": {
+        "resistenza": 30
+      },
+      "position": {
+        "x": 0.82,
+        "y": 0.9
+      },
+      "quests": []
+    },
+    {
+      "id": "centro_commerciale",
+      "name": "Centro Commerciale",
+      "emoji": "🛍️",
+      "description": "Il GalaxiaMall di Nova Tutinia. Tre piani, un bar e mille modi di spendere soldi.",
+      "unlocked_by_default": false,
+      "unlock_after_quest": "s1_domenica_parco",
+      "unlock_if_stat_gte": {
+        "resistenza": 30
+      },
+      "position": {
+        "x": 0.17,
+        "y": 0.93
+      },
+      "quests": []
     }
   ]
 }

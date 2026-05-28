@@ -672,6 +672,7 @@ class QuestLoaderPage extends StatelessWidget {
             await WorldStateService.instance.completeQuest(
               questId,
               worldMap: worldMap,
+              currentStats: GameStateService.instance.state.value.toMap(),
             );
           },
         );

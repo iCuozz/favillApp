@@ -42,6 +42,7 @@ class WorldStateService {
   Future<void> completeQuest(
     String questId, {
     WorldMap? worldMap,
+    Map<String, int>? currentStats,
   }) async {
     final current = state.value;
     if (current.completedQuests.contains(questId)) return;
@@ -51,12 +52,16 @@ class WorldStateService {
     state.value = next;
     await _persist(next);
 
-    // Sblocca automaticamente le location che dipendono da questa quest.
+    // Sblocca automaticamente le location che dipendono da questa quest,
+    // rispettando eventuali condizioni sulle stat.
     if (worldMap != null) {
       for (final loc in worldMap.locations) {
         if (loc.unlockAfterQuest == questId &&
             !next.unlockedLocations.contains(loc.id)) {
-          await unlockLocation(loc.id);
+          final statsMet = currentStats == null || loc.areStatConditionsMet(currentStats);
+          if (statsMet) {
+            await unlockLocation(loc.id);
+          }
         }
       }
     }

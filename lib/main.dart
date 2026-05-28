@@ -635,12 +635,29 @@ class _EpisodePageState extends State<EpisodePage> {
               config: cfg,
               onComplete: (effects, label, tier) {
                 Navigator.of(context).pop();
-                final branch = tier.gotoBranch.isNotEmpty ? tier.gotoBranch : null;
-                final flags = tier.setFlags.isNotEmpty ? tier.setFlags : null;
-                final isSuccess = tier.minProducts > 0;
-                AudioService.instance.playSfx(isSuccess ? SfxEvent.minigameSuccess : SfxEvent.minigameFail);
+                // Se tier 0 (trasformazione forzata), la trasformazione accade
+                // solo se la resistenza è già sotto soglia critica.
+                // Con resistenza >= 30, il fallimento totale resta grave ma
+                // non supera il limite — Favilla non trasforma.
+                var effectiveTier = tier;
+                if (tier.minProducts == 0) {
+                  final currentResistenza =
+                      GameStateService.instance.state.value.resistenza;
+                  if (currentResistenza >= 30) {
+                    effectiveTier = cfg.tierFor(1); // scala a tier "quasi"
+                  }
+                }
+                final branch = effectiveTier.gotoBranch.isNotEmpty
+                    ? effectiveTier.gotoBranch
+                    : null;
+                final flags = effectiveTier.setFlags.isNotEmpty
+                    ? effectiveTier.setFlags
+                    : null;
+                final isSuccess = effectiveTier.minProducts > 0;
+                AudioService.instance
+                    .playSfx(isSuccess ? SfxEvent.minigameSuccess : SfxEvent.minigameFail);
                 _applyEffectsAndNavigate(option,
-                    overrideEffects: effects,
+                    overrideEffects: effectiveTier.statEffects,
                     overrideBranch: branch,
                     overrideFlags: flags);
               },

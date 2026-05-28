@@ -19,6 +19,8 @@ class NovaTutiniaMapPainter extends CustomPainter {
   static const _zoneSchool = Color(0xFF0A1220);
   static const _zonePark = Color(0xFF081408);
   static const _zoneCommercial = Color(0xFF18100A);
+  static const _zoneMall = Color(0xFF1E1008);
+  static const _zoneCoast = Color(0xFF080E18);
 
   // Strade
   static const _road = Color(0xFF1E1E2E);
@@ -47,6 +49,8 @@ class NovaTutiniaMapPainter extends CustomPainter {
   static const _labelSchool = Color(0xFF6090FF);
   static const _labelPark = Color(0xFF50B850);
   static const _labelCommercial = Color(0xFFD08030);
+  static const _labelMall = Color(0xFFFF9030);
+  static const _labelCoast = Color(0xFF30A0D0);
   static const _labelRiver = Color(0xFF3070A0);
 
   // ─── Entry point ──────────────────────────────────────────────────────────
@@ -159,6 +163,18 @@ class NovaTutiniaMapPainter extends CustomPainter {
     canvas.drawRRect(
       RRect.fromLTRBR(w * 0.06, h * 0.58, w * 0.40, h * 0.88, rr),
       Paint()..color = _zoneCommercial,
+    );
+
+    // GalaxiaMall (CENTRO_COMMERCIALE): basso-sinistra, sotto supermercato
+    canvas.drawRRect(
+      RRect.fromLTRBR(w * 0.06, h * 0.90, w * 0.32, h * 0.97, rr),
+      Paint()..color = _zoneMall,
+    );
+
+    // Zona Costiera (MARE): basso-destra, oltre il residenziale
+    canvas.drawRRect(
+      RRect.fromLTRBR(w * 0.65, h * 0.82, w * 0.97, h * 0.97, rr),
+      Paint()..color = _zoneCoast,
     );
   }
 
@@ -431,6 +447,12 @@ class NovaTutiniaMapPainter extends CustomPainter {
 
     _drawLabel(canvas, 'TORRENTE', Offset(w * 0.91, h * 0.50),
         _labelRiver, 7, false, rotate: true);
+
+    _drawLabel(canvas, 'GALAXIAMALL', Offset(w * 0.17, h * 0.93),
+        _labelMall, 7.5, true);
+
+    _drawLabel(canvas, 'SPIAGGIA', Offset(w * 0.82, h * 0.90),
+        _labelCoast, 7.5, true);
 
     // Nomi strade
     _drawLabel(canvas, 'VIA GARIBALDI', Offset(w * 0.16, h * 0.48),

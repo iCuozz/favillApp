@@ -65,6 +65,14 @@ class WorldLocation {
   /// Id della quest il cui completamento sblocca questa location.
   final String? unlockAfterQuest;
 
+  /// Stat che devono essere SOTTO questa soglia per sbloccare la location
+  /// (verificate al momento del completamento di unlockAfterQuest).
+  final Map<String, int> unlockIfStatLt;
+
+  /// Stat che devono essere SOPRA O UGUALI a questa soglia per sbloccare la location
+  /// (verificate al momento del completamento di unlockAfterQuest).
+  final Map<String, int> unlockIfStatGte;
+
   final List<WorldQuest> quests;
 
   const WorldLocation({
@@ -75,12 +83,27 @@ class WorldLocation {
     required this.position,
     this.unlockedByDefault = false,
     this.unlockAfterQuest,
+    this.unlockIfStatLt = const {},
+    this.unlockIfStatGte = const {},
     this.quests = const [],
   });
+
+  /// Restituisce true se le condizioni stat (se presenti) sono soddisfatte.
+  bool areStatConditionsMet(Map<String, int> stats) {
+    for (final entry in unlockIfStatLt.entries) {
+      if ((stats[entry.key] ?? 0) >= entry.value) return false;
+    }
+    for (final entry in unlockIfStatGte.entries) {
+      if ((stats[entry.key] ?? 0) < entry.value) return false;
+    }
+    return true;
+  }
 
   factory WorldLocation.fromJson(Map<String, dynamic> json) {
     final posJson = json['position'] as Map<String, dynamic>? ?? {};
     final questsJson = (json['quests'] as List<dynamic>? ?? []);
+    final statLtJson = json['unlock_if_stat_lt'] as Map<String, dynamic>? ?? {};
+    final statGteJson = json['unlock_if_stat_gte'] as Map<String, dynamic>? ?? {};
 
     return WorldLocation(
       id: json['id'] as String,
@@ -93,6 +116,8 @@ class WorldLocation {
       ),
       unlockedByDefault: json['unlocked_by_default'] as bool? ?? false,
       unlockAfterQuest: json['unlock_after_quest'] as String?,
+      unlockIfStatLt: statLtJson.map((k, v) => MapEntry(k, v as int)),
+      unlockIfStatGte: statGteJson.map((k, v) => MapEntry(k, v as int)),
       quests: questsJson
           .map((q) => WorldQuest.fromJson(q as Map<String, dynamic>))
           .toList(),
