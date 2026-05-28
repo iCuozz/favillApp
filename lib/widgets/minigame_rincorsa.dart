@@ -256,7 +256,7 @@ class _MinigameRincorsaScreenState extends State<MinigameRincorsaScreen>
         y: 0.88,
         vx: (_rng.nextDouble() - 0.5) * 0.5,
         vy: -0.4 - _rng.nextDouble() * 0.4,
-        color: Color.lerp(const Color(0xFFFFD700), const Color(0xFFFF6B35),
+        color: Color.lerp(const Color(0xFFD4A017), const Color(0xFFBF360C),
             _rng.nextDouble())!,
         life: 1.0,
         size: 6 + _rng.nextDouble() * 8,
@@ -453,14 +453,14 @@ class _MinigameRincorsaScreenState extends State<MinigameRincorsaScreen>
 
   Widget _buildTutorial(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF1A1A1A),
+      backgroundColor: const Color(0xFF0D2A0D),
       body: SafeArea(
         child: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [Color(0xFF1A4068), Color(0xFF0D2035)],
+              colors: [Color(0xFF1B5E20), Color(0xFF0D2A0D)],
             ),
           ),
           child: Padding(
@@ -468,7 +468,7 @@ class _MinigameRincorsaScreenState extends State<MinigameRincorsaScreen>
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text('⚡  IL LADRO SCAPPA!  🦹',
+                const Text('⚡  FERMA IL LADRO!  🏃',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: 'Bangers',
@@ -477,10 +477,10 @@ class _MinigameRincorsaScreenState extends State<MinigameRincorsaScreen>
                       letterSpacing: 3,
                     )),
                 const SizedBox(height: 28),
+                _TutorialItem(icon: '👜', label: 'Ha la tua borsetta. Documenti. Chiavi. Tutto.'),
                 _TutorialItem(icon: '👈', label: 'Swipe sinistra — cambia corsia'),
                 _TutorialItem(icon: '👉', label: 'Swipe destra — cambia corsia'),
-                _TutorialItem(icon: '🪵', label: 'Evita rami, tronchi e animali nel bosco'),
-                _TutorialItem(icon: '🦹', label: 'Raggiungi il ladro prima che svigni!'),
+                _TutorialItem(icon: '🌿', label: 'Evita gli ostacoli nel boschetto'),
                 const SizedBox(height: 40),
                 GestureDetector(
                   onTap: _startGame,
@@ -548,8 +548,8 @@ class _TrackPainter extends CustomPainter {
     final bHalfW   = size.width  * _kBottomHalfWFrac;
 
     _drawSky(canvas, size, horizonY);
-    _drawTreeLine(canvas, size, horizonY);
-    _drawGrass(canvas, size, horizonY);
+    _drawBoschetto(canvas, size, horizonY, bHalfW);
+    _drawUnderbrush(canvas, size, horizonY, bHalfW);
     _drawTrack(canvas, size, horizonY, bHalfW);
     _drawLaneMarkings(canvas, size, horizonY, bHalfW);
     _drawEdgeShadow(canvas, size, horizonY, bHalfW);
@@ -561,48 +561,118 @@ class _TrackPainter extends CustomPainter {
       ..shader = const LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
-        colors: [Color(0xFF5BA3D9), Color(0xFF9DCEF0)],
-        stops: [0.0, 1.0],
+        colors: [Color(0xFF2196F3), Color(0xFF64B5F6)],
       ).createShader(rect);
     canvas.drawRect(rect, paint);
+
+    final cloudPaint = Paint()..color = Colors.white.withOpacity(0.85);
+
+    void drawCloud(double x, double y) {
+      canvas.drawCircle(Offset(x - 12, y + 1), 10, cloudPaint);
+      canvas.drawCircle(Offset(x, y - 3), 14, cloudPaint);
+      canvas.drawCircle(Offset(x + 13, y + 2), 11, cloudPaint);
+    }
+
+    drawCloud(size.width * 0.20, horizonY * 0.35);
+    drawCloud(size.width * 0.58, horizonY * 0.20);
+    drawCloud(size.width * 0.82, horizonY * 0.50);
   }
 
-  void _drawTreeLine(Canvas canvas, Size size, double horizonY) {
-    // Row of park trees silhouettes at the horizon
-    final treePaint = Paint()..color = const Color(0xFF2E7D32);
-    final trunkPaint = Paint()..color = const Color(0xFF5D4037);
-    final rng = Random(13);
-    final count = 11;
-    for (int i = 0; i < count; i++) {
-      final x = (i + 0.5) * size.width / count + rng.nextDouble() * 8 - 4;
-      final h = 28.0 + rng.nextDouble() * 18;
-      final r = 12.0 + rng.nextDouble() * 6;
-      final base = horizonY + 4;
-      // trunk
-      canvas.drawRect(Rect.fromCenter(center: Offset(x, base - h * 0.35), width: 4, height: h * 0.5), trunkPaint);
-      // canopy
-      canvas.drawCircle(Offset(x, base - h), r, treePaint);
+  void _drawBoschetto(Canvas canvas, Size size, double horizonY, double bHalfW) {
+    for (int i = 8; i >= 0; i--) {
+      final t = 1.0 - i / 8.0;
+      final rng = Random(42 + i);
+      final trackEdgeL = size.width / 2 - lerpDouble(_kHorizonHalfW, bHalfW, t)!;
+      final trackEdgeR = size.width / 2 + lerpDouble(_kHorizonHalfW, bHalfW, t)!;
+      final y = lerpDouble(horizonY + 4, size.height * 0.98, t)!;
+      final sideSpacing = 22 * (0.5 + t * 0.5);
+      for (int j = 0; j < 2; j++) {
+        final leftX = trackEdgeL - 18 - (j * sideSpacing) - rng.nextDouble() * (6 + t * 10);
+        final rightX = trackEdgeR + 18 + (j * sideSpacing) + rng.nextDouble() * (6 + t * 10);
+        _drawSingleTree(canvas, leftX, y, t);
+        _drawSingleTree(canvas, rightX, y, t);
+      }
     }
   }
 
-  void _drawGrass(Canvas canvas, Size size, double horizonY) {
-    // Green grass on either side of the track
-    final rect = Rect.fromLTWH(0, horizonY + 20, size.width, size.height);
-    final paint = Paint()
-      ..shader = LinearGradient(
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-        colors: [const Color(0xFF66BB6A), const Color(0xFF388E3C)],
-      ).createShader(rect);
-    canvas.drawRect(rect, paint);
+  void _drawSingleTree(Canvas canvas, double x, double y, double depth) {
+    final scale = lerpDouble(0.12, 1.0, depth)!;
+    final trunkH = 50 * scale;
+    final trunkW = 6 * scale;
+    final baseR = 18 * scale;
+    final trunkRect = Rect.fromCenter(
+      center: Offset(x, y - trunkH * 0.5),
+      width: trunkW,
+      height: trunkH,
+    );
+    canvas.drawRect(
+      trunkRect.shift(const Offset(2, 2)),
+      Paint()..color = Colors.black.withOpacity(0.20),
+    );
+    canvas.drawRect(trunkRect, Paint()..color = const Color(0xFF5D4037));
 
-    // Grass texture: small tufts
-    final tuft = Paint()..color = const Color(0xFF2E7D32).withOpacity(0.4);
-    final rng = Random(99);
-    for (int i = 0; i < 55; i++) {
-      final x = rng.nextDouble() * size.width;
-      final y = horizonY + 20 + rng.nextDouble() * (size.height - horizonY - 20);
-      canvas.drawOval(Rect.fromCenter(center: Offset(x, y), width: 6 + rng.nextDouble() * 8, height: 2.5), tuft);
+    canvas.drawCircle(
+      Offset(x, y - trunkH - baseR * 0.10),
+      baseR * 1.15,
+      Paint()..color = const Color(0xFF1B5E20),
+    );
+    canvas.drawCircle(
+      Offset(x - 8 * scale, y - trunkH + 5 * scale),
+      baseR * 0.9,
+      Paint()..color = const Color(0xFF2E7D32),
+    );
+    canvas.drawCircle(
+      Offset(x + 9 * scale, y - trunkH + 3 * scale),
+      baseR * 0.85,
+      Paint()..color = const Color(0xFF388E3C),
+    );
+    canvas.drawCircle(
+      Offset(x, y - trunkH - 8 * scale),
+      baseR * 0.7,
+      Paint()..color = const Color(0xFF558B2F),
+    );
+  }
+
+  void _drawUnderbrush(Canvas canvas, Size size, double horizonY, double bHalfW) {
+    final rng = Random(91);
+    final bushLight = Paint()..color = const Color(0xFF4CAF50).withOpacity(0.95);
+    final bushDark = Paint()..color = const Color(0xFF2E7D32).withOpacity(0.95);
+    final tuft = Paint()..color = const Color(0xFF2E7D32).withOpacity(0.72);
+
+    for (int side = 0; side < 2; side++) {
+      for (int i = 0; i < 8; i++) {
+        final t = (0.08 + i * 0.11 + rng.nextDouble() * 0.05).clamp(0.08, 0.95);
+        final halfW = lerpDouble(_kHorizonHalfW, bHalfW, t)!;
+        final edgeX = side == 0 ? size.width / 2 - halfW : size.width / 2 + halfW;
+        final y = lerpDouble(horizonY + 10, size.height, t)!;
+        final spread = lerpDouble(8, 22, t)!;
+        final baseX = side == 0 ? edgeX - spread * 0.55 : edgeX + spread * 0.55;
+
+        canvas.drawOval(
+          Rect.fromCenter(center: Offset(baseX, y), width: spread * 1.25, height: spread * 0.7),
+          bushDark,
+        );
+        canvas.drawOval(
+          Rect.fromCenter(center: Offset(baseX + (side == 0 ? -spread * 0.12 : spread * 0.12), y - spread * 0.10), width: spread, height: spread * 0.62),
+          bushLight,
+        );
+        canvas.drawOval(
+          Rect.fromCenter(center: Offset(baseX + (side == 0 ? spread * 0.18 : -spread * 0.18), y - spread * 0.18), width: spread * 0.82, height: spread * 0.55),
+          bushDark,
+        );
+
+        for (int tuftI = 0; tuftI < 2; tuftI++) {
+          final tx = baseX + (tuftI == 0 ? -spread * 0.18 : spread * 0.18);
+          canvas.drawOval(
+            Rect.fromCenter(center: Offset(tx, y - spread * 0.45), width: spread * 0.10, height: spread * 0.45),
+            tuft,
+          );
+          canvas.drawOval(
+            Rect.fromCenter(center: Offset(tx + spread * 0.08, y - spread * 0.48), width: spread * 0.08, height: spread * 0.38),
+            tuft,
+          );
+        }
+      }
     }
   }
 
@@ -617,22 +687,56 @@ class _TrackPainter extends CustomPainter {
       ..close();
 
     final paint = Paint()
-      ..shader = LinearGradient(
+      ..shader = const LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
-        colors: const [Color(0xFF8B6342), Color(0xFF6B4226)],
+        colors: [Color(0xFF8B6342), Color(0xFF6D4C41)],
       ).createShader(
           Rect.fromLTWH(0, horizonY, size.width, size.height - horizonY));
     canvas.drawPath(path, paint);
 
-    // Terra texture: pietre e radici sparse
-    final stonePaint = Paint()..color = const Color(0xFF5A3418).withOpacity(0.45);
-    final rng2 = Random(31);
-    for (int i = 0; i < 35; i++) {
-      final tx2 = cx - bHalfW * 0.85 + rng2.nextDouble() * (bHalfW * 1.70);
-      final ty2 = horizonY + 12 + rng2.nextDouble() * (size.height - horizonY - 12);
-      final w = 4.0 + rng2.nextDouble() * 10;
-      canvas.drawOval(Rect.fromCenter(center: Offset(tx2, ty2), width: w, height: w * 0.45), stonePaint);
+    final leafColors = [
+      const Color(0xFFD4A017),
+      const Color(0xFFBF360C),
+      const Color(0xFF8BC34A),
+      const Color(0xFF795548),
+    ];
+    final rngLeaves = Random(17);
+    for (int i = 0; i < 25; i++) {
+      final t = 0.08 + rngLeaves.nextDouble() * 0.88;
+      final y = lerpDouble(horizonY + 12, size.height - 8, t)!;
+      final halfW = lerpDouble(_kHorizonHalfW, bHalfW, t)!;
+      final x = cx - halfW * 0.88 + rngLeaves.nextDouble() * (halfW * 1.76);
+      final width = 6.0 + rngLeaves.nextDouble() * 6.0;
+      final color = leafColors[rngLeaves.nextInt(leafColors.length)].withOpacity(0.6);
+      canvas.save();
+      canvas.translate(x, y);
+      canvas.rotate((rngLeaves.nextDouble() - 0.5) * 1.2);
+      canvas.drawOval(
+        Rect.fromCenter(center: Offset.zero, width: width, height: 3),
+        Paint()..color = color,
+      );
+      canvas.restore();
+    }
+
+    final rootPaint = Paint()
+      ..color = const Color(0xFF4E342E).withOpacity(0.45)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 2.5
+      ..strokeCap = StrokeCap.round;
+    final rngRoots = Random(31);
+    for (int i = 0; i < 5; i++) {
+      final t = 0.18 + rngRoots.nextDouble() * 0.70;
+      final y = lerpDouble(horizonY + 14, size.height - 26, t)!;
+      final halfW = lerpDouble(_kHorizonHalfW, bHalfW, t)!;
+      final startX = cx - halfW * (0.72 + rngRoots.nextDouble() * 0.10);
+      final endX = cx + halfW * (0.72 + rngRoots.nextDouble() * 0.10);
+      final controlY = y + (rngRoots.nextDouble() - 0.5) * 18;
+      final controlX = cx + (rngRoots.nextDouble() - 0.5) * halfW * 0.35;
+      final rootPath = Path()
+        ..moveTo(startX, y)
+        ..quadraticBezierTo(controlX, controlY, endX, y + (rngRoots.nextDouble() - 0.5) * 10);
+      canvas.drawPath(rootPath, rootPaint);
     }
   }
 
@@ -641,7 +745,7 @@ class _TrackPainter extends CustomPainter {
     final cx = size.width / 2;
     // Sentiero di terra: solchi scuri animati al posto delle strisce stradali
     final rutPaint = Paint()
-      ..color = const Color(0xFF4A2810).withOpacity(0.50)
+      ..color = const Color(0xFF2F1B12).withOpacity(0.62)
       ..strokeWidth = 1.8
       ..strokeCap = StrokeCap.round;
 
@@ -776,22 +880,21 @@ class _FavillaSprite extends StatelessWidget {
     return Stack(
       alignment: Alignment.center,
       children: [
-        // Running glow
-        Container(
-          width: 52,
-          height: 52,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
-                color: (stunned ? Colors.red : const Color(0xFFFFB300))
-                    .withOpacity(stunned ? 0.7 : 0.4),
-                blurRadius: 18,
-                spreadRadius: stunned ? 6 : 2,
-              ),
-            ],
+        if (!stunned)
+          Container(
+            width: 54,
+            height: 54,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: const Color(0xFFFFD54F).withOpacity(0.42),
+                  blurRadius: 18,
+                  spreadRadius: 3,
+                ),
+              ],
+            ),
           ),
-        ),
         Text(stunned ? '😵' : '⚡', style: const TextStyle(fontSize: 38)),
       ],
     );
@@ -805,10 +908,26 @@ class _LexSprite extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final thiefEmoji = gap < 0.15 ? '😱' : '🏃';
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text('🦹', style: TextStyle(fontSize: size)),
+        SizedBox(
+          width: size * 0.95,
+          height: size * 0.95,
+          child: Stack(
+            clipBehavior: Clip.none,
+            alignment: Alignment.center,
+            children: [
+              Text(thiefEmoji, style: TextStyle(fontSize: size)),
+              Positioned(
+                right: -2,
+                bottom: 0,
+                child: Text('👜', style: TextStyle(fontSize: size * 0.45)),
+              ),
+            ],
+          ),
+        ),
         if (gap < 0.25) ...[
           const SizedBox(height: 2),
           Container(
@@ -859,7 +978,7 @@ class _Hud extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                lexClose ? 'CI SEI QUASI!' : 'PRENDILO!',
+                lexClose ? 'LA BORSA! CI SEI!' : 'RINCORRI IL LADRO!',
                 style: TextStyle(
                   fontFamily: 'Bangers',
                   fontSize: 26,
@@ -932,7 +1051,7 @@ class _Hud extends StatelessWidget {
                   ),
                 ),
               ),
-              const Text(' 🦹', style: TextStyle(fontSize: 16)),
+              const Text(' 👜', style: TextStyle(fontSize: 16)),
             ],
           ),
 
@@ -954,10 +1073,10 @@ class _Hud extends StatelessWidget {
   }
 
   String _gapLabel(double g) {
-    if (g < 0.15) return 'QUASI PRESO!';
-    if (g < 0.30) return 'Stai per raggiungerlo...';
-    if (g < 0.50) return 'Continua! Ci sei quasi.';
-    if (g < 0.65) return 'Corri, Favilla!';
+    if (g < 0.15) return 'PRENDILA! ADESSO!';
+    if (g < 0.30) return 'La borsa è quasi tua...';
+    if (g < 0.50) return 'Continua! Non mollare!';
+    if (g < 0.65) return 'Corri, Favilla! Corri!';
     return 'Il ladro sta scappando!';
   }
 }
