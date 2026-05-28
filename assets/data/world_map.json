@@ -30,7 +30,9 @@
           "file": "assets/data/quests/s1/s1_ritorno_casa.json",
           "thumbnail": "assets/episodes/prologo/thumb.webp",
           "season": 1,
-          "requires_completed": ["s1_scuola_1"],
+          "requires_completed": [
+            "s1_scuola_1"
+          ],
           "requires_stats": {}
         }
       ]
@@ -67,12 +69,25 @@
       "emoji": "🌳",
       "description": "Parco Centrale di Nova Tutinia. Qui nessuno ti vede.",
       "unlocked_by_default": false,
-      "unlock_after_quest": "s1_ritorno_casa",
+      "unlock_after_quest": "s1_spesa_sabato",
       "position": {
         "x": 0.7,
         "y": 0.3
       },
-      "quests": []
+      "quests": [
+        {
+          "id": "s1_domenica_parco",
+          "title": "La Domenica al Parco",
+          "subtitle": "Una famiglia. Un parco. Un ladro.",
+          "file": "assets/data/quests/s1/s1_domenica_parco.json",
+          "thumbnail": "assets/episodes/prologo/thumb.webp",
+          "season": 1,
+          "requires_completed": [
+            "s1_spesa_sabato"
+          ],
+          "requires_stats": {}
+        }
+      ]
     },
     {
       "id": "supermercato",
@@ -93,7 +108,9 @@
           "file": "assets/data/quests/s1/s1_spesa_sabato.json",
           "thumbnail": "assets/episodes/prologo/thumb.webp",
           "season": 1,
-          "requires_completed": ["s1_ritorno_casa"],
+          "requires_completed": [
+            "s1_ritorno_casa"
+          ],
           "requires_stats": {}
         }
       ]
