@@ -133,8 +133,12 @@
         {
           "id": "s1_mare",
           "title": "Un Giorno al Mare",
-          "description": "Il mare fa rumore. Lex ha un piano.",
-          "requires_completed": ["s1_domenica_parco"]
+          "subtitle": "Il mare fa rumore. Lex ha un piano.",
+          "file": "assets/data/quests/s1/s1_mare.json",
+          "thumbnail": "assets/episodes/prologo/thumb.webp",
+          "season": 1,
+          "requires_completed": ["s1_domenica_parco"],
+          "requires_stats": {}
         }
       ]
     },

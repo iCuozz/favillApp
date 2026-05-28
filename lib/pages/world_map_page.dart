@@ -44,10 +44,14 @@ class _WorldMapPageState extends State<WorldMapPage>
   }
 
   Future<void> _loadWorldMap() async {
-    final raw = await rootBundle.loadString('assets/data/world_map.json');
-    final json = jsonDecode(raw) as Map<String, dynamic>;
-    if (!mounted) return;
-    setState(() => _worldMap = WorldMap.fromJson(json));
+    try {
+      final raw = await rootBundle.loadString('assets/data/world_map.json');
+      final json = jsonDecode(raw) as Map<String, dynamic>;
+      if (!mounted) return;
+      setState(() => _worldMap = WorldMap.fromJson(json));
+    } catch (e, st) {
+      debugPrint('❌ _loadWorldMap failed: $e\n$st');
+    }
   }
 
   @override
