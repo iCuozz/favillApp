@@ -1,1 +1,1 @@
-/Users/andreacuozzo/Library/Mobile Documents/iCloud~md~obsidian/Documents/Favilla Blaze/Libro dei Mondi.md
+/Users/andreacuozzo/Library/Mobile Documents/iCloud~md~obsidian/Documents/Favilla Blaze/Favilla Blaze/Libro dei Mondi.md

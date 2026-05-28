@@ -1,1 +1,1 @@
-/Users/andreacuozzo/Library/Mobile Documents/iCloud~md~obsidian/Documents/Favilla Blaze/NARRATIVE_BIBLE.md
+/Users/andreacuozzo/Library/Mobile Documents/iCloud~md~obsidian/Documents/Favilla Blaze/Favilla Blaze/NARRATIVE_BIBLE.md

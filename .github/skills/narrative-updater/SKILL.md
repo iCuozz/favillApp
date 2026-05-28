@@ -8,28 +8,28 @@ Da invocare ogni volta che si modifica narrazione, stat, personaggi o regole.
 
 ## Vault Obsidian
 
-**Percorso vault (root):**
+**Percorso cartella documenti (dentro il vault):**
 ```
-~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Favilla Blaze/
+~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Favilla Blaze/Favilla Blaze/
 ```
 
-> ⚠️ **ATTENZIONE — subdirectory stale:** esiste anche `Favilla Blaze/Favilla Blaze/` con copie vecchie.
-> Quella cartella è obsoleta. Non scrivere mai lì. I file attivi sono **direttamente nella root del vault**.
+> ✅ **Struttura corretta del vault:**
+> - Root del vault: `.../Documents/Favilla Blaze/` (contiene `.obsidian/`, `copilot/`, e la cartella `Favilla Blaze/`)
+> - **Tutti i documenti narrativi** si trovano nella sottocartella: `.../Documents/Favilla Blaze/Favilla Blaze/`
 
-> **Fonte di verità unica:** i file in `docs/` del progetto sono **symlink** che puntano direttamente alla root del vault.
+> **Fonte di verità unica:** i file in `docs/` del progetto sono **symlink** che puntano a `.../Favilla Blaze/Favilla Blaze/`.
 > Non esistono due copie — è sempre lo stesso file. iCloud sincronizza le modifiche automaticamente.
 > **Metodo corretto:** modificare sempre tramite il percorso symlink `docs/<FILE>` (relativo alla root del progetto).
-> Non usare mai percorsi assoluti `/Users/.../Favilla Blaze/Favilla Blaze/...` — quella è la cartella stale.
 
 ### Documenti nel vault — percorsi esatti e quando aggiornarli
 
-| File in vault (root) | Percorso assoluto | Symlink in `docs/` | Contenuto | Aggiornare quando… |
+| File nel vault | Percorso assoluto | Symlink in `docs/` | Contenuto | Aggiornare quando… |
 |---|---|---|---|---|
-| `NARRATIVE_BIBLE.md` | `.../Documents/Favilla Blaze/NARRATIVE_BIBLE.md` | `docs/NARRATIVE_BIBLE.md` | Capisaldi: mondo, personaggi, stat, lore, principi narrativi, regole su pietra, sistema mini-game, note tecniche motore | Cambia un personaggio, una regola, il sistema stat, il lore dei poteri, i principi narrativi, **nuovo tipo di mini-game**, **nuova feature motore** |
-| `Mappa Narrativa.md` | `.../Documents/Favilla Blaze/Mappa Narrativa.md` | `docs/MAPPA_NARRATIVA.md` | Timeline episodi, diagrammi Mermaid, traccia stat cumulativi | Cambia `stat_effects`, branch, scelte, `stat_entry`, testo chiave di una scena; nuovo episodio; **nuovo mini-game** |
-| `Grafo Narrativo.canvas` | `.../Documents/Favilla Blaze/Grafo Narrativo.canvas` | `docs/GRAFO_NARRATIVO.canvas` | Grafo visuale interattivo (Obsidian Canvas) | **Stesse occasioni di `Mappa Narrativa.md`** — i due file devono essere sempre sincronizzati |
-| `Idee & Direzioni Future.md` | `.../Documents/Favilla Blaze/Idee & Direzioni Future.md` | `docs/IDEE_FUTURE.md` | Idee episodi futuri, archi narrativi, meccaniche in design, location, idee mini-game | L'utente descrive un'idea futura; si decide una direzione narrativa per S2/S3; **episodio completato → segnare ✅** |
-| `Libro dei Mondi.md` | `.../Documents/Favilla Blaze/Libro dei Mondi.md` | `docs/LIBRO_DEI_MONDI.md` | Narrazione discorsiva libro-game stile: prosa fluente, dialoghi, bivi segnalati come callout Obsidian, effetti stat come flavor | Viene aggiunto/modificato un episodio, un branch, una scena, un dialogo; nuova stagione; nuovo personaggio introdotto |
+| `NARRATIVE_BIBLE.md` | `.../Favilla Blaze/Favilla Blaze/NARRATIVE_BIBLE.md` | `docs/NARRATIVE_BIBLE.md` | Capisaldi: mondo, personaggi, stat, lore, principi narrativi, regole su pietra, sistema mini-game, note tecniche motore | Cambia un personaggio, una regola, il sistema stat, il lore dei poteri, i principi narrativi, **nuovo tipo di mini-game**, **nuova feature motore** |
+| `Mappa Narrativa.md` | `.../Favilla Blaze/Favilla Blaze/Mappa Narrativa.md` | `docs/MAPPA_NARRATIVA.md` | Timeline episodi, diagrammi Mermaid, traccia stat cumulativi | Cambia `stat_effects`, branch, scelte, `stat_entry`, testo chiave di una scena; nuovo episodio; **nuovo mini-game** |
+| `Grafo Narrativo.canvas` | `.../Favilla Blaze/Favilla Blaze/Grafo Narrativo.canvas` | `docs/GRAFO_NARRATIVO.canvas` | Grafo visuale interattivo (Obsidian Canvas) | **Stesse occasioni di `Mappa Narrativa.md`** — i due file devono essere sempre sincronizzati |
+| `Idee & Direzioni Future.md` | `.../Favilla Blaze/Favilla Blaze/Idee & Direzioni Future.md` | `docs/IDEE_FUTURE.md` | Idee episodi futuri, archi narrativi, meccaniche in design, location, idee mini-game | L'utente descrive un'idea futura; si decide una direzione narrativa per S2/S3; **episodio completato → segnare ✅** |
+| `Libro dei Mondi.md` | `.../Favilla Blaze/Favilla Blaze/Libro dei Mondi.md` | `docs/LIBRO_DEI_MONDI.md` | Narrazione discorsiva libro-game stile: prosa fluente, dialoghi, bivi segnalati come callout Obsidian, effetti stat come flavor | Viene aggiunto/modificato un episodio, un branch, una scena, un dialogo; nuova stagione; nuovo personaggio introdotto |
 
 > **Regola base:** dopo ogni cambio narrativo, aggiorna TUTTI i documenti pertinenti nella stessa sessione. Non lasciare mai un documento indietro.
 
@@ -146,5 +146,5 @@ Definiti in `StatKey.minValues` (`lib/models/game_state.dart`). Il motore nascon
 - Non inventare testi narrativi — usare solo quelli dai JSON o concordati con l'utente
 - Non modificare i JSON da questa skill — solo leggere e documentare
 - Episodi non ancora implementati come JSON → segnalare come `(pianificato)` nella mappa
-- `docs/NARRATIVE_BIBLE.md` è un symlink a `.../Documents/Favilla Blaze/NARRATIVE_BIBLE.md` — modificare tramite `docs/` aggiorna direttamente Obsidian. **Non usare percorsi assoluti alla subdirectory `Favilla Blaze/Favilla Blaze/` (cartella stale, ignorare)**
+- `docs/NARRATIVE_BIBLE.md` è un symlink a `.../Favilla Blaze/Favilla Blaze/NARRATIVE_BIBLE.md` — modificare tramite `docs/` aggiorna direttamente Obsidian. Non usare mai percorsi assoluti diretti.
 
