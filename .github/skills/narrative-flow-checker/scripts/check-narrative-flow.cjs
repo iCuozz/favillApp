@@ -38,6 +38,7 @@ const EPISODE_ORDER = [
   'quests/s1/s1_scuola_1.json',
   'quests/s1/s1_ritorno_casa.json',
   'quests/s1/s1_spesa_sabato.json',
+  'quests/s1/s1_domenica_parco.json',
 ];
 
 // ─── Helpers ───────────────────────────────────────────────────────────────

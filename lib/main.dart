@@ -29,6 +29,7 @@ import 'widgets/stats_hud_widget.dart';
 import 'widgets/stats_intro_overlay.dart';
 import 'widgets/minigame_lex_strike.dart';
 import 'widgets/minigame_respira.dart';
+import 'widgets/minigame_rincorsa.dart';
 import 'widgets/minigame_schiva_lex.dart';
 
 const String _kSentryDsn =
@@ -627,6 +628,25 @@ class _EpisodePageState extends State<EpisodePage> {
             ),
           ),
         );
+      case 'rincorsa':
+        Navigator.of(context).push<void>(
+          MaterialPageRoute(
+            builder: (_) => MinigameRincorsaScreen(
+              config: cfg,
+              onComplete: (effects, label, tier) {
+                Navigator.of(context).pop();
+                final branch = tier.gotoBranch.isNotEmpty ? tier.gotoBranch : null;
+                final flags = tier.setFlags.isNotEmpty ? tier.setFlags : null;
+                final isSuccess = tier.minProducts > 0;
+                AudioService.instance.playSfx(isSuccess ? SfxEvent.minigameSuccess : SfxEvent.minigameFail);
+                _applyEffectsAndNavigate(option,
+                    overrideEffects: effects,
+                    overrideBranch: branch,
+                    overrideFlags: flags);
+              },
+            ),
+          ),
+        );
       default:
         // Tipo sconosciuto: applica effetti base dell'opzione
         _applyEffectsAndNavigate(option);
@@ -634,11 +654,13 @@ class _EpisodePageState extends State<EpisodePage> {
   }
 
   void _applyEffectsAndNavigate(ChoiceOption option,
-      {Map<String, int>? overrideEffects, String? overrideBranch}) {
+      {Map<String, int>? overrideEffects,
+      String? overrideBranch,
+      Map<String, bool>? overrideFlags}) {
     final episodeId = widget.episode.id;
     final branchId = overrideBranch ?? option.gotoBranch;
     final effects = overrideEffects ?? option.statEffects;
-    final newFlags = option.setFlags;
+    final newFlags = overrideFlags ?? option.setFlags;
 
     // Applica effetti stat + world flags atomicamente.
     if (effects.isNotEmpty || newFlags.isNotEmpty) {

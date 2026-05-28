@@ -368,12 +368,15 @@ class MinigameTier {
   final Map<String, int> statEffects;
   /// Branch verso cui navigare dopo questo tier. Se vuoto, usa il goto_branch dell'opzione padre.
   final String gotoBranch;
+  /// World flags da impostare quando questo tier viene raggiunto.
+  final Map<String, bool> setFlags;
 
   const MinigameTier({
     required this.minProducts,
     required this.label,
     required this.statEffects,
     this.gotoBranch = '',
+    this.setFlags = const {},
   });
 
   factory MinigameTier.fromJson(Map<String, dynamic> json) {
@@ -382,11 +385,17 @@ class MinigameTier {
     raw?.forEach((k, v) {
       if (v is int) effects[k] = v;
     });
+    final flagsRaw = json['set_flags'] as Map<String, dynamic>?;
+    final flags = <String, bool>{};
+    flagsRaw?.forEach((k, v) {
+      if (v is bool) flags[k] = v;
+    });
     return MinigameTier(
       minProducts: json['min'] as int? ?? 0,
       label: json['label'] as String? ?? '',
       statEffects: effects,
       gotoBranch: json['goto_branch'] as String? ?? '',
+      setFlags: flags,
     );
   }
 }
