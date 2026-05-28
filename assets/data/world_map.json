@@ -137,6 +137,9 @@
           "requires_completed": ["s1_domenica_parco"]
         }
       ]
+    },
+    {
+      "id": "centro_commerciale",
       "name": "Centro Commerciale",
       "emoji": "🛍️",
       "description": "Il GalaxiaMall di Nova Tutinia. Tre piani, un bar e mille modi di spendere soldi.",
