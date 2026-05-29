@@ -420,7 +420,7 @@ class _MinigameRincorsaScreenState extends State<MinigameRincorsaScreen>
         Positioned(
           left: favillaVisX - 24,
           top: size.height * 0.84,
-          child: _FavillaSprite(stunned: _runState == _RunState.stunned),
+          child: _FavillaSprite(stunned: _runState == _RunState.stunned, gap: _gap),
         ),
 
         // ── Flash overlay ─────────────────────────────────────────────────
@@ -929,13 +929,31 @@ class _ObstacleSprite extends StatelessWidget {
 
 class _FavillaSprite extends StatelessWidget {
   final bool stunned;
-  const _FavillaSprite({required this.stunned});
+  final double gap;
+  const _FavillaSprite({required this.stunned, required this.gap});
 
   @override
   Widget build(BuildContext context) {
+    final catching  = !stunned && gap < 0.50;
+    final almostThere = !stunned && gap < 0.30;
+    // Intensity: 0 at gap=0.50, 1 at gap=0.0
+    final intensity = catching ? ((0.50 - gap) / 0.50).clamp(0.0, 1.0) : 0.0;
+
     return Stack(
       alignment: Alignment.center,
+      clipBehavior: Clip.none,
       children: [
+        // Speed-streak ghosts trailing below (= behind in forward-running view)
+        if (catching)
+          for (int i = 1; i <= 3; i++)
+            Positioned(
+              top: i * 13.0,
+              child: Opacity(
+                opacity: ((0.30 - i * 0.08) * intensity).clamp(0.0, 1.0),
+                child: Text('⚡', style: TextStyle(fontSize: 38.0 - i * 5)),
+              ),
+            ),
+        // Glow ring — shifts yellow→green as closing in
         if (!stunned)
           Container(
             width: 54,
@@ -944,9 +962,11 @@ class _FavillaSprite extends StatelessWidget {
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
-                  color: const Color(0xFFFFD54F).withOpacity(0.42),
-                  blurRadius: 18,
-                  spreadRadius: 3,
+                  color: almostThere
+                      ? const Color(0xFF66BB6A).withValues(alpha: 0.72)
+                      : const Color(0xFFFFD54F).withOpacity(0.42),
+                  blurRadius: almostThere ? 30 : 18,
+                  spreadRadius: almostThere ? 8 : 3,
                 ),
               ],
             ),

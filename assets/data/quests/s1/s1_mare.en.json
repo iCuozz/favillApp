@@ -356,7 +356,8 @@
             "characters": ["gatto"],
             "text_blocks": [
               { "id": "ep_sm_2_tb_0", "type": "narration", "text": "On the promenade, sitting on a low wall — the cat." },
-              { "id": "ep_sm_2_tb_1", "type": "narration", "text": "Yellow eyes watching the family as if taking notes." }
+              { "id": "ep_sm_2_tb_1", "type": "narration", "text": "Yellow eyes watching the family as if taking notes." },
+              { "id": "ep_sm_2_tb_2", "type": "narration", "text": "Then it stands, turns its tail. Heading for number 19, third floor." }
             ],
             "interactions": []
           }

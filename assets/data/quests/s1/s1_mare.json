@@ -356,7 +356,8 @@
             "characters": ["gatto"],
             "text_blocks": [
               { "id": "ep_sm_2_tb_0", "type": "narration", "text": "Sul lungomare, seduto su un muretto, il gatto." },
-              { "id": "ep_sm_2_tb_1", "type": "narration", "text": "Gli occhi gialli che guardano la famiglia come se stesse prendendo appunti." }
+              { "id": "ep_sm_2_tb_1", "type": "narration", "text": "Gli occhi gialli che guardano la famiglia come se stesse prendendo appunti." },
+              { "id": "ep_sm_2_tb_2", "type": "narration", "text": "Poi si alza, gira la coda. Direzione civico 19, terzo piano." }
             ],
             "interactions": []
           }
