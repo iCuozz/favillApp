@@ -176,17 +176,17 @@ class _MinigameLexStrikeScreenState extends State<MinigameLexStrikeScreen>
     if (_layoutReady) return;
     _layoutReady = true;
     _screenSize = size;
-    _slingshotPos = Offset(size.width / 2, size.height * 0.73);
+    _slingshotPos = Offset(size.width / 2, size.height * 0.76);
 
-    // 3 rows × 4 cols — wider gaps = harder to chain
+    // 3 rows × 4 cols spread across the far-wall area (h*0.06–h*0.62)
     const cols = 4;
     final n = widget.config.productsTotal.clamp(1, 12);
     const stride = _kProductSize + _kProductGap;
     const totalW = cols * stride - _kProductGap;
     final startX = (size.width - totalW) / 2 + _kProductSize / 2;
-    final row1Y = size.height * 0.22;
-    final row2Y = row1Y + _kProductSize + 16;
-    final row3Y = row2Y + _kProductSize + 16;
+    final row1Y = size.height * 0.15;
+    final row2Y = size.height * 0.30;
+    final row3Y = size.height * 0.45;
 
     _productCenters = [];
     for (int i = 0; i < n; i++) {
@@ -413,34 +413,24 @@ class _MinigameLexStrikeScreenState extends State<MinigameLexStrikeScreen>
   }
 
   Widget _buildShelves3D() {
-    final row1Bottom = _screenSize.height * 0.22 + _kProductSize + 2;
-    final row2Bottom = _screenSize.height * 0.22 + _kProductSize + 16 + _kProductSize + 2;
-    final row3Bottom = row2Bottom + _kProductSize + 16 + 2;
-    return Transform(
-      transform: Matrix4.identity()
-        ..setEntry(3, 2, 0.0008)
-        ..rotateX(0.18),
-      alignment: Alignment.bottomCenter,
-      child: CustomPaint(
-        size: _screenSize,
-        painter: _ShelfPainter(
-          row1Y: row1Bottom,
-          row2Y: row2Bottom,
-          row3Y: row3Bottom,
-          width: _screenSize.width,
-        ),
+    const halfProd = _kProductSize / 2; // 22.0
+    final row1Bottom = _screenSize.height * 0.15 + halfProd + 4;
+    final row2Bottom = _screenSize.height * 0.30 + halfProd + 4;
+    final row3Bottom = _screenSize.height * 0.45 + halfProd + 4;
+    return CustomPaint(
+      size: _screenSize,
+      painter: _ShelfPainter(
+        row1Y: row1Bottom,
+        row2Y: row2Bottom,
+        row3Y: row3Bottom,
+        width: _screenSize.width,
       ),
     );
   }
 
   Widget _buildProducts3D() {
-    return Transform(
-      transform: Matrix4.identity()
-        ..setEntry(3, 2, 0.0008)
-        ..rotateX(0.18),
-      alignment: Alignment.bottomCenter,
-      child: Stack(
-        children: List.generate(_productCenters.length, (i) {
+    return Stack(
+      children: List.generate(_productCenters.length, (i) {
           return AnimatedBuilder(
             animation: _fallAnim[i],
             builder: (_, child) {
@@ -483,7 +473,6 @@ class _MinigameLexStrikeScreenState extends State<MinigameLexStrikeScreen>
             ),
           );
         }),
-      ),
     );
   }
 
@@ -784,19 +773,31 @@ class _ShelfPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    const plankH = 13.0;
-    final shadow = Paint()..color = Colors.black.withAlpha(75);
-    final wood = Paint()..color = const Color(0xFF7B3F00);
-    final highlight = Paint()
-      ..color = const Color(0xFF9E5520)
+    // Shelf spans the far-wall x range
+    final fwL = size.width * 0.18;
+    final fwR = size.width * 0.82;
+
+    const plankTopH  = 5.0;   // top surface — visible because we look slightly from above
+    const plankFaceH = 11.0;  // front face height
+    const plankTotalH = plankTopH + plankFaceH;
+
+    final topSurface = Paint()..color = const Color(0xFF9E6B3E); // lit top
+    final frontFace  = Paint()..color = const Color(0xFF7B3F00); // darker face
+    final highlight  = Paint()
+      ..color = const Color(0xFFBE8B5A)
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 1.5;
+      ..strokeWidth = 1.2;
+    final shadow = Paint()..color = Colors.black.withAlpha(55);
 
     for (final y in [row1Y, row2Y, row3Y]) {
-      canvas.drawRect(Rect.fromLTWH(0, y + 3, width, plankH), shadow);
-      canvas.drawRect(Rect.fromLTWH(0, y, width, plankH), wood);
-      canvas.drawLine(
-          Offset(0, y + 1), Offset(width, y + 1), highlight);
+      // Drop shadow below plank
+      canvas.drawRect(Rect.fromLTWH(fwL, y + plankTotalH, fwR - fwL, 3.5), shadow);
+      // Top surface (lighter wood — lit from ceiling lights)
+      canvas.drawRect(Rect.fromLTWH(fwL, y, fwR - fwL, plankTopH), topSurface);
+      // Front face (darker)
+      canvas.drawRect(Rect.fromLTWH(fwL, y + plankTopH, fwR - fwL, plankFaceH), frontFace);
+      // Highlight on top edge
+      canvas.drawLine(Offset(fwL, y + 0.6), Offset(fwR, y + 0.6), highlight);
     }
   }
 
@@ -926,121 +927,186 @@ class _SupermarketBgPainter extends CustomPainter {
     final w = size.width;
     final h = size.height;
 
-    // ── Ceiling strip ─────────────────────────────────────────────────────────
-    canvas.drawRect(
-      Rect.fromLTWH(0, 0, w, h * 0.05),
-      Paint()..color = const Color(0xFFF0EDE3),
-    );
+    // ── One-point perspective geometry ───────────────────────────────────────
+    // Far wall (back of the supermarket aisle) — derived first, then
+    // floor/ceiling trapezoids are computed FROM these edges (rubber-duck fix).
+    final fwL = w * 0.18;
+    final fwR = w * 0.82;
+    final fwT = h * 0.055;
+    final fwB = h * 0.62;
 
-    // Fluorescent light strips (3 across)
-    final lightGlow = Paint()
-      ..color = const Color(0xFFFFFDE7).withAlpha(200)
-      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 14);
-    final lightFace = Paint()..color = const Color(0xFFFFFBEC);
-    for (final frac in [0.18, 0.5, 0.82]) {
-      final lx = w * frac;
-      canvas.drawRect(
-        Rect.fromCenter(
-            center: Offset(lx, h * 0.026),
-            width: w * 0.20,
-            height: h * 0.04),
-        lightGlow,
+    // ── Ceiling trapezoid ─────────────────────────────────────────────────────
+    final ceilPath = Path()
+      ..moveTo(0, 0)
+      ..lineTo(w, 0)
+      ..lineTo(fwR, fwT)
+      ..lineTo(fwL, fwT)
+      ..close();
+    canvas.drawPath(ceilPath, Paint()..color = const Color(0xFFF2EDE3));
+
+    // Perspective fluorescent light strips (correctly perspected trapezoids)
+    for (final frac in [0.22, 0.50, 0.78]) {
+      // Near end (y=0): strip half-width = 6.5% of screen width
+      final nearLeft  = w * (frac - 0.065);
+      final nearRight = w * (frac + 0.065);
+      // Far end (y=fwT): perspected onto far-wall top edge
+      final farCx     = fwL + frac * (fwR - fwL);
+      final halfFarW  = 0.065 * (fwR - fwL);
+      final farLeft   = farCx - halfFarW;
+      final farRight  = farCx + halfFarW;
+
+      final glowPath = Path()
+        ..moveTo(nearLeft, 0)
+        ..lineTo(nearRight, 0)
+        ..lineTo(farRight, fwT)
+        ..lineTo(farLeft, fwT)
+        ..close();
+      canvas.drawPath(
+        glowPath,
+        Paint()
+          ..color = const Color(0xFFFFFDE7).withAlpha(155)
+          ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 10),
       );
-      canvas.drawRect(
-        Rect.fromCenter(
-            center: Offset(lx, h * 0.026),
-            width: w * 0.17,
-            height: h * 0.026),
-        lightFace,
-      );
+      final facePath = Path()
+        ..moveTo(nearLeft + 3, 0)
+        ..lineTo(nearRight - 3, 0)
+        ..lineTo(farRight - 2, fwT * 0.55)
+        ..lineTo(farLeft + 2, fwT * 0.55)
+        ..close();
+      canvas.drawPath(facePath, Paint()..color = const Color(0xFFFFFBEC));
     }
 
-    // ── IperPassata banner ────────────────────────────────────────────────────
+    // ── Left side wall ────────────────────────────────────────────────────────
+    final leftWall = Path()
+      ..moveTo(0, 0)
+      ..lineTo(fwL, fwT)
+      ..lineTo(fwL, fwB)
+      ..lineTo(0, h)
+      ..close();
+    canvas.drawPath(leftWall, Paint()..color = const Color(0xFFEBE5DA));
+
+    // Shelf outline lines on left side wall (perspective)
+    final sidePaint = Paint()
+      ..color = const Color(0xFFC0BAB0)
+      ..strokeWidth = 0.9
+      ..style = PaintingStyle.stroke;
+    for (final tY in [0.15, 0.30, 0.45]) {
+      // Screen-space y on the left wall edge
+      final yScreen = h * tY;
+      // Matching y on the far-wall left edge (linear in perspective)
+      final tFrac  = (tY - fwT / h) / (fwB / h - fwT / h);
+      final yFar   = (fwT + (fwB - fwT) * tFrac).clamp(fwT, fwB);
+      canvas.drawLine(Offset(0, yScreen), Offset(fwL, yFar), sidePaint);
+    }
+
+    // ── Right side wall ───────────────────────────────────────────────────────
+    final rightWall = Path()
+      ..moveTo(w, 0)
+      ..lineTo(fwR, fwT)
+      ..lineTo(fwR, fwB)
+      ..lineTo(w, h)
+      ..close();
+    canvas.drawPath(rightWall, Paint()..color = const Color(0xFFEBE5DA));
+    for (final tY in [0.15, 0.30, 0.45]) {
+      final yScreen = h * tY;
+      final tFrac   = (tY - fwT / h) / (fwB / h - fwT / h);
+      final yFar    = (fwT + (fwB - fwT) * tFrac).clamp(fwT, fwB);
+      canvas.drawLine(Offset(w, yScreen), Offset(fwR, yFar), sidePaint);
+    }
+
+    // ── Far wall ──────────────────────────────────────────────────────────────
     canvas.drawRect(
-      Rect.fromLTWH(0, h * 0.05, w, h * 0.045),
+      Rect.fromLTRB(fwL, fwT, fwR, fwB),
+      Paint()..color = const Color(0xFFF4EFE6),
+    );
+
+    // Tile grid on far wall
+    final gridPaint = Paint()
+      ..color = const Color(0xFFDDD6CB)
+      ..strokeWidth = 0.7
+      ..style = PaintingStyle.stroke;
+    for (double y = fwT; y < fwB; y += 38) {
+      canvas.drawLine(Offset(fwL, y), Offset(fwR, y), gridPaint);
+    }
+    for (double x = fwL; x < fwR; x += 46) {
+      canvas.drawLine(Offset(x, fwT), Offset(x, fwB), gridPaint);
+    }
+
+    // ── "IperPassata" banner ──────────────────────────────────────────────────
+    final bannerH = (fwB - fwT) * 0.075;
+    canvas.drawRect(
+      Rect.fromLTWH(fwL, fwT, fwR - fwL, bannerH),
       Paint()..color = const Color(0xFFBF360C),
     );
     final tp = TextPainter(
       text: const TextSpan(
         text: '🏪  IperPassata',
         style: TextStyle(
-          color: Colors.white,
-          fontSize: 13,
-          fontWeight: FontWeight.bold,
-          letterSpacing: 1.8,
+          color: Colors.white, fontSize: 11,
+          fontWeight: FontWeight.bold, letterSpacing: 1.4,
         ),
       ),
       textDirection: TextDirection.ltr,
     )..layout();
-    tp.paint(
-      canvas,
-      Offset(
-        (w - tp.width) / 2,
-        h * 0.05 + (h * 0.045 - tp.height) / 2,
-      ),
-    );
+    tp.paint(canvas, Offset(
+      fwL + (fwR - fwL - tp.width) / 2,
+      fwT + (bannerH - tp.height) / 2,
+    ));
 
-    // ── Wall (cream tiles) ────────────────────────────────────────────────────
+    // ── Floor trapezoid (top edge = far wall BOTTOM — not VP) ─────────────────
+    final floorPath = Path()
+      ..moveTo(fwL, fwB)
+      ..lineTo(fwR, fwB)
+      ..lineTo(w, h)
+      ..lineTo(0, h)
+      ..close();
+    canvas.drawPath(floorPath, Paint()..color = const Color(0xFFCEC9BE));
+
+    final tilePaint = Paint()
+      ..color = const Color(0xFFB4AFA4)
+      ..strokeWidth = 0.85
+      ..style = PaintingStyle.stroke;
+
+    // Vertical (depth) lines — radiate FROM far-wall bottom edge TO screen corners
+    const nV = 7;
+    for (int k = 0; k <= nV; k++) {
+      final t = k / nV;
+      canvas.drawLine(
+        Offset(fwL + (fwR - fwL) * t, fwB),
+        Offset(w * t, h),
+        tilePaint,
+      );
+    }
+    // Horizontal lines — quadratic bunching (denser near far wall = more realistic)
+    const nH = 5;
+    for (int k = 1; k < nH; k++) {
+      final t  = (k / nH) * (k / nH); // quadratic compression
+      final y  = fwB + (h - fwB) * t;
+      final xl = fwL + (0 - fwL) * t;
+      final xr = fwR + (w - fwR) * t;
+      canvas.drawLine(Offset(xl, y), Offset(xr, y), tilePaint);
+    }
+
+    // Shadow strip at far-wall / floor junction
     canvas.drawRect(
-      Rect.fromLTWH(0, h * 0.095, w, h * 0.655),
-      Paint()..color = const Color(0xFFF4EFE6),
+      Rect.fromLTWH(fwL, fwB - 1, fwR - fwL, 4),
+      Paint()..color = Colors.black.withAlpha(40),
     );
-
-    // Tile grid — horizontal
-    final gridH = Paint()
-      ..color = const Color(0xFFDDD6CB)
-      ..strokeWidth = 0.8
-      ..style = PaintingStyle.stroke;
-    final gridV = Paint()
-      ..color = const Color(0xFFE8E0D5)
-      ..strokeWidth = 0.5
-      ..style = PaintingStyle.stroke;
-    const tileS = 52.0;
-    for (double y = h * 0.095; y < h * 0.75; y += tileS) {
-      canvas.drawLine(Offset(0, y), Offset(w, y), gridH);
-    }
-    for (double x = 0; x < w; x += tileS) {
-      canvas.drawLine(Offset(x, h * 0.095), Offset(x, h * 0.75), gridV);
-    }
 
     // Warm ambient light from ceiling
     canvas.drawRect(
       Rect.fromLTWH(0, 0, w, h),
       Paint()
         ..shader = const RadialGradient(
-          center: Alignment(0, -0.55),
+          center: Alignment(0, -0.45),
           radius: 0.85,
           colors: [Color(0x22FFFDE7), Color(0x00FFFDE7)],
         ).createShader(Rect.fromLTWH(0, 0, w, h)),
     );
-
-    // ── Floor (light grey tiles) ──────────────────────────────────────────────
-    canvas.drawRect(
-      Rect.fromLTWH(0, h * 0.75, w, h * 0.25),
-      Paint()..color = const Color(0xFFCEC9BE),
-    );
-    final floorGrid = Paint()
-      ..color = const Color(0xFFB8B3A8)
-      ..strokeWidth = 0.9
-      ..style = PaintingStyle.stroke;
-    const fTile = 48.0;
-    for (double x = 0; x < w; x += fTile) {
-      canvas.drawLine(
-          Offset(x, h * 0.75), Offset(x, h), floorGrid);
-    }
-    for (double y = h * 0.75; y < h; y += fTile / 2) {
-      canvas.drawLine(Offset(0, y), Offset(w, y), floorGrid);
-    }
-
-    // Floor base shadow along wall
-    canvas.drawRect(
-      Rect.fromLTWH(0, h * 0.75, w, 4),
-      Paint()..color = Colors.black.withAlpha(30),
-    );
   }
 
   @override
-  bool shouldRepaint(_) => false;
+  bool shouldRepaint(_SupermarketBgPainter _) => false;
 }
 
 // ─── Lex character (from behind) ─────────────────────────────────────────────
