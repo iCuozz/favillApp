@@ -193,6 +193,22 @@
         "y": 0.18
       },
       "quests": []
+    },
+    {
+      "id": "palestra",
+      "name": "Palestra",
+      "emoji": "🏋️",
+      "description": "Palestra comunale di Nova Tutinia. Favilla ci viene per non esplodere. Nel senso letterale.",
+      "unlocked_by_default": false,
+      "unlock_after_quest": "s1_lunedi_asilo",
+      "unlock_if_stat_lt": {
+        "resistenza": 40
+      },
+      "position": {
+        "x": 0.72,
+        "y": 0.55
+      },
+      "quests": []
     }
   ]
 }
