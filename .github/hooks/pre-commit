@@ -25,6 +25,7 @@ GRACE=3600  # 60 minuti di grace period
 DOC_FILES=(
   "$ROOT/docs/NARRATIVE_BIBLE.md"
   "$ROOT/docs/MAPPA_NARRATIVA.md"
+  "$ROOT/docs/GRAFO_NARRATIVO.canvas"
   "$ROOT/docs/LIBRO_DEI_MONDI.md"
   "$ROOT/docs/IDEE_FUTURE.md"
 )
@@ -93,16 +94,21 @@ if [ -n "$QUEST_CHANGES" ] || [ -n "$ENGINE_CHANGES" ]; then
 fi
 
 # ─── Doc freshness check ─────────────────────────────────────────────────────
-# Prende il mtime più recente tra tutti i doc Obsidian (stat -L segue i symlink).
+# Verifica ogni doc singolarmente (stat -L segue i symlink).
 NOW=$(date +%s)
-last_update=0
+STALE_DOCS=()
+freshest_elapsed=999999999
+
 for doc in "${DOC_FILES[@]}"; do
   mtime=$(stat -L -f %m "$doc" 2>/dev/null || echo 0)
-  [ "$mtime" -gt "$last_update" ] && last_update=$mtime
+  elapsed=$(( NOW - mtime ))
+  [ "$elapsed" -lt "$freshest_elapsed" ] && freshest_elapsed=$elapsed
+  if [ "$elapsed" -gt "$GRACE" ]; then
+    STALE_DOCS+=("$(basename "$doc") ($(( elapsed / 60 ))m)")
+  fi
 done
-elapsed=$(( NOW - last_update ))
 
-if [ "$elapsed" -gt "$GRACE" ]; then
+if [ "${#STALE_DOCS[@]}" -gt 0 ]; then
   echo ""
   echo "╔══════════════════════════════════════════════════════════════╗"
   echo "║  📚  DOCUMENTAZIONE NON AGGIORNATA — commit bloccato        ║"
@@ -112,11 +118,15 @@ if [ "$elapsed" -gt "$GRACE" ]; then
     [ -n "$f" ] && printf "║    • %-56s║\n" "$f"
   done <<< "$NARRATIVE"
   echo "╠══════════════════════════════════════════════════════════════╣"
-  printf "║  Docs Obsidian non aggiornate (ultima modifica: %3dm fa)  ║\n" "$(( elapsed / 60 ))"
+  echo "║  I seguenti doc non risultano aggiornati nell'ultima ora:   ║"
+  for d in "${STALE_DOCS[@]}"; do
+    printf "║    • %-56s║\n" "$d"
+  done
   echo "║                                                              ║"
-  echo "║  Aggiorna almeno uno di:                                     ║"
+  echo "║  Aggiorna TUTTI i documenti impattati prima del commit:      ║"
   echo "║    • docs/NARRATIVE_BIBLE.md  (minigame table, authoring)   ║"
   echo "║    • docs/MAPPA_NARRATIVA.md  (branch diagram mermaid)      ║"
+  echo "║    • docs/GRAFO_NARRATIVO.canvas (grafo visuale)            ║"
   echo "║    • docs/LIBRO_DEI_MONDI.md  (narrativa discorsiva)        ║"
   echo "║    • docs/IDEE_FUTURE.md      (episodi e idee future)       ║"
   echo "║                                                              ║"
@@ -126,6 +136,6 @@ if [ "$elapsed" -gt "$GRACE" ]; then
   exit 1
 fi
 
-min_ago=$(( elapsed / 60 ))
-echo "📚  Docs aggiornate ${min_ago}m fa — ok."
+min_ago=$(( freshest_elapsed / 60 ))
+echo "📚  Docs allineate (più recente: ${min_ago}m fa) — ok."
 exit 0
