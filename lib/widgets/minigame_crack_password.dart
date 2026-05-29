@@ -6,6 +6,7 @@ import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../models/comic_data.dart';
 
 // ── Constants ─────────────────────────────────────────────────────────────────
@@ -26,7 +27,7 @@ const int _kMaxAttempts = 4;
 
 // ── Enums ─────────────────────────────────────────────────────────────────────
 
-enum _GameState { intro, playing, feedback, won, lost }
+enum _GameState { tutorial, intro, playing, feedback, won, lost }
 
 enum _FeedbackDot { correctPos, wrongPos, absent }
 
@@ -79,7 +80,7 @@ class _MinigameCrackPasswordScreenState
 
   int _currentRow = 0;
   int _activeSlot = 0;
-  _GameState _gameState = _GameState.intro;
+  _GameState _gameState = _GameState.tutorial;
   bool _isSubmitting = false;
 
   double _timeLeft = _kRowTimers[0];
@@ -100,7 +101,20 @@ class _MinigameCrackPasswordScreenState
     _introAnim = CurvedAnimation(parent: _introCtrl, curve: Curves.easeOut);
     _introCtrl.forward();
 
-    Future.delayed(const Duration(milliseconds: 1000), () {
+    _loadTutorialPref();
+  }
+
+  Future<void> _loadTutorialPref() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (!mounted || _gameState != _GameState.tutorial) return;
+    if (prefs.getBool('tut_crack_password') ?? false) _startGame();
+  }
+
+  void _startGame() {
+    SharedPreferences.getInstance()
+        .then((p) => p.setBool('tut_crack_password', true));
+    setState(() => _gameState = _GameState.intro);
+    Future.delayed(const Duration(milliseconds: 600), () {
       if (mounted) _startRow(0);
     });
   }
@@ -287,16 +301,201 @@ class _MinigameCrackPasswordScreenState
       body: SafeArea(
         child: FadeTransition(
           opacity: _introAnim,
-          child: Column(
-            children: [
-              _buildHintBar(),
-              Expanded(child: _buildLaptop()),
-              _buildSymbolPalette(),
-              _buildSubmitButton(),
-              const SizedBox(height: 16),
-            ],
-          ),
+          child: _gameState == _GameState.tutorial
+              ? _buildTutorial()
+              : Column(
+                  children: [
+                    _buildHintBar(),
+                    Expanded(child: _buildLaptop()),
+                    _buildSymbolPalette(),
+                    _buildSubmitButton(),
+                    const SizedBox(height: 16),
+                  ],
+                ),
         ),
+      ),
+    );
+  }
+
+  // ── Tutorial ──────────────────────────────────────────────────────────────
+
+  Widget _buildTutorial() {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 24),
+      child: Column(
+        children: [
+          const Text('💻', style: TextStyle(fontSize: 60)),
+          const SizedBox(height: 12),
+          const Text(
+            'Il notebook di Mallow è aperto.',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                color: Color(0xFF2D2448),
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                height: 1.3),
+          ),
+          const SizedBox(height: 6),
+          const Text(
+            'Lex vede la schermata di login.\nPassword: ● ● ● ●\nRiesce a decifrarla?',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                color: Color(0xFF6B5E8A), fontSize: 14, height: 1.6),
+          ),
+          const SizedBox(height: 28),
+          _buildTutorialDemo(),
+          const SizedBox(height: 24),
+          const Divider(color: Color(0xFFDDD0F0)),
+          const SizedBox(height: 20),
+          _ruleCard('🎯', '4 simboli, nessun ripetuto',
+              'La password è una sequenza di 4 simboli diversi scelti tra 6. Devi indovinarla.'),
+          const SizedBox(height: 10),
+          _ruleCard('🟢', 'Verde — simbolo e posizione giusti',
+              'Quel simbolo è nella posizione corretta.'),
+          const SizedBox(height: 10),
+          _ruleCard('🟡', 'Giallo — simbolo presente, posizione sbagliata',
+              'Quel simbolo fa parte della password, ma va in un\'altra posizione.'),
+          const SizedBox(height: 10),
+          _ruleCard('⬛', 'Grigio — simbolo assente',
+              'Quel simbolo non è nella password.'),
+          const SizedBox(height: 10),
+          _ruleCard('⏱', 'Timer decrescente',
+              'Ogni tentativo ha meno tempo del precedente. I slot vuoti vengono riempiti automaticamente allo scadere.'),
+          const SizedBox(height: 36),
+          GestureDetector(
+            onTap: _startGame,
+            child: Container(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 52, vertical: 16),
+              decoration: BoxDecoration(
+                color: const Color(0xFF2D2448),
+                borderRadius: BorderRadius.circular(32),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xFF6C5CE7).withValues(alpha: 0.4),
+                    blurRadius: 18,
+                    offset: const Offset(0, 6),
+                  ),
+                ],
+              ),
+              child: const Text('Inizia',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold)),
+            ),
+          ),
+          const SizedBox(height: 16),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTutorialDemo() {
+    // Static preview: one example attempt row with mixed feedback.
+    final exampleSymbols = [0, 2, 4, 1]; // 🐱 ⭐ 🚀 🌙
+    final exampleFeedback = [
+      _FeedbackDot.correctPos,
+      _FeedbackDot.wrongPos,
+      _FeedbackDot.absent,
+      _FeedbackDot.wrongPos,
+    ];
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: const Color(0xFF0B0E1C),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: const Color(0xFF252A48)),
+      ),
+      child: Row(
+        children: [
+          ...List.generate(
+            _kSlots,
+            (i) => Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 3),
+                child: Container(
+                  height: 44,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF1A1F3A),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: const Color(0xFF2E3355), width: 1.5),
+                  ),
+                  child: Center(
+                    child: Text(_kSymbols[exampleSymbols[i]],
+                        style: const TextStyle(fontSize: 22)),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(width: 8),
+          SizedBox(
+            width: 36,
+            height: 44,
+            child: Wrap(
+              spacing: 4,
+              runSpacing: 4,
+              alignment: WrapAlignment.center,
+              runAlignment: WrapAlignment.center,
+              children: exampleFeedback.map((d) {
+                final Color c;
+                switch (d) {
+                  case _FeedbackDot.correctPos:
+                    c = const Color(0xFF4CAF50);
+                    break;
+                  case _FeedbackDot.wrongPos:
+                    c = const Color(0xFFFFD93D);
+                    break;
+                  case _FeedbackDot.absent:
+                    c = Colors.white12;
+                    break;
+                }
+                return Container(
+                  width: 11,
+                  height: 11,
+                  decoration: BoxDecoration(color: c, shape: BoxShape.circle),
+                );
+              }).toList(),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _ruleCard(String icon, String title, String desc) {
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: const Color(0xFF2D2448).withValues(alpha: 0.08),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: const Color(0xFF2D2448).withValues(alpha: 0.2)),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(icon, style: const TextStyle(fontSize: 22)),
+          const SizedBox(width: 14),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(title,
+                    style: const TextStyle(
+                        color: Color(0xFF2D2448),
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold)),
+                const SizedBox(height: 3),
+                Text(desc,
+                    style: const TextStyle(
+                        color: Color(0xFF6B5E8A),
+                        fontSize: 13,
+                        height: 1.4)),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -499,6 +698,7 @@ class _MinigameCrackPasswordScreenState
     final isActiveSlot = isActive && slot == _activeSlot;
     final isFuture = row > _currentRow ||
         (_gameState != _GameState.playing && _gameState != _GameState.feedback &&
+            _gameState != _GameState.intro &&
             row == _currentRow &&
             _gameState != _GameState.won &&
             _gameState != _GameState.lost);

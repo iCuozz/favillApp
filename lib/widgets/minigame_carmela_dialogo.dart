@@ -5,6 +5,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../models/comic_data.dart';
 
 /// Mini-game CARMELA_DIALOGO — conversazione rapida con Carmela.
@@ -70,7 +71,7 @@ class _CarmelaQuestion {
 
 // ─── States ────────────────────────────────────────────────────────────────────
 
-enum _DialogoState { intro, question, feedback, finished }
+enum _DialogoState { tutorial, intro, question, feedback, finished }
 
 // ─── Widget State ─────────────────────────────────────────────────────────────
 
@@ -81,7 +82,7 @@ class _MinigameCarmelaDialogoScreenState
 
   int _qIndex = 0;
   int _safeCount = 0;
-  _DialogoState _state = _DialogoState.intro;
+  _DialogoState _state = _DialogoState.tutorial;
   int? _selectedIndex;
   bool _wasTimeout = false;
 
@@ -89,7 +90,7 @@ class _MinigameCarmelaDialogoScreenState
   late double _timeLeft;
   Timer? _tickTimer;
 
-  // Intro animation
+  // Intro / tutorial animation
   late AnimationController _introCtrl;
   late Animation<double> _introAnim;
 
@@ -103,12 +104,24 @@ class _MinigameCarmelaDialogoScreenState
     _introCtrl = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 800));
     _introAnim = CurvedAnimation(parent: _introCtrl, curve: Curves.easeOut);
+    _introCtrl.forward();
 
-    // Brief intro pause then start first question
+    _loadTutorialPref();
+  }
+
+  Future<void> _loadTutorialPref() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (!mounted || _state != _DialogoState.tutorial) return;
+    if (prefs.getBool('tut_carmela_dialogo') ?? false) _startGame();
+  }
+
+  void _startGame() {
+    SharedPreferences.getInstance()
+        .then((p) => p.setBool('tut_carmela_dialogo', true));
+    setState(() => _state = _DialogoState.intro);
     Future.delayed(const Duration(milliseconds: 900), () {
       if (mounted) _startQuestion();
     });
-    _introCtrl.forward();
   }
 
   @override
@@ -183,8 +196,159 @@ class _MinigameCarmelaDialogoScreenState
       body: SafeArea(
         child: FadeTransition(
           opacity: _introAnim,
-          child: _buildContent(),
+          child: _state == _DialogoState.tutorial
+              ? _buildTutorial()
+              : _buildContent(),
         ),
+      ),
+    );
+  }
+
+  // ── Tutorial ──────────────────────────────────────────────────────────────
+
+  Widget _buildTutorial() {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 24),
+      child: Column(
+        children: [
+          const Text('👵', style: TextStyle(fontSize: 60)),
+          const SizedBox(height: 12),
+          const Text(
+            'Carmela è alla cassa.',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                height: 1.3),
+          ),
+          const SizedBox(height: 6),
+          const Text(
+            'Ha già alzato lo sguardo.\nRispondi bene — o si insospettisce.',
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Colors.white38, fontSize: 14, height: 1.6),
+          ),
+          const SizedBox(height: 28),
+          // Demo: timer bar che si svuota
+          _buildTutorialDemo(),
+          const SizedBox(height: 24),
+          const Divider(color: Colors.white10),
+          const SizedBox(height: 20),
+          _ruleCard('⏱', 'Timer decrescente',
+              'Ogni domanda ha un timer. Più si va avanti, meno tempo hai.'),
+          const SizedBox(height: 10),
+          _ruleCard('✅', 'Rispondi senza tradire',
+              'Scegli la risposta che non svela nulla. Le opzioni pericolose sono una trappola.'),
+          const SizedBox(height: 10),
+          _ruleCard('🔇', 'Tempo scaduto = peggiore opzione',
+              'Se il timer finisce, viene selezionata automaticamente la risposta più rischiosa.'),
+          const SizedBox(height: 10),
+          _ruleCard('🎯', '4 domande',
+              'Quante risposte sicure riesci a dare? Da questo dipende quanto Carmela ha capito.'),
+          const SizedBox(height: 36),
+          GestureDetector(
+            onTap: _startGame,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 52, vertical: 16),
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                    colors: [Color(0xFF3D2E5E), Color(0xFF6A1B9A)]),
+                borderRadius: BorderRadius.circular(32),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xFF6A1B9A).withValues(alpha: 0.4),
+                    blurRadius: 18,
+                    offset: const Offset(0, 6),
+                  ),
+                ],
+              ),
+              child: const Text('Inizia',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold)),
+            ),
+          ),
+          const SizedBox(height: 16),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTutorialDemo() {
+    return Column(
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          decoration: BoxDecoration(
+            color: const Color(0xFF2D2448),
+            borderRadius: BorderRadius.circular(14),
+            border: Border.all(color: const Color(0xFF5A4880), width: 1),
+          ),
+          child: const Text(
+            '«Hai qualcosa di luminoso oggi, cara...»',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                color: Colors.white70,
+                fontSize: 14,
+                fontStyle: FontStyle.italic,
+                height: 1.4),
+          ),
+        ),
+        const SizedBox(height: 10),
+        // Static timer bar (half empty, in warning orange)
+        ClipRRect(
+          borderRadius: BorderRadius.circular(4),
+          child: const LinearProgressIndicator(
+            value: 0.35,
+            minHeight: 6,
+            backgroundColor: Colors.white10,
+            valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFFF8C42)),
+          ),
+        ),
+        const SizedBox(height: 6),
+        const Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text('2.0s', style: TextStyle(color: Color(0xFFFF8C42), fontSize: 10)),
+            Text('tempo che scorre →',
+                style: TextStyle(color: Colors.white24, fontSize: 10)),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _ruleCard(String icon, String title, String desc) {
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: Colors.white.withValues(alpha: 0.04),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Colors.white10),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(icon, style: const TextStyle(fontSize: 22)),
+          const SizedBox(width: 14),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(title,
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold)),
+                const SizedBox(height: 3),
+                Text(desc,
+                    style: const TextStyle(
+                        color: Colors.white54, fontSize: 13, height: 1.4)),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
