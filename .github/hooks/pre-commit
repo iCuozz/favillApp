@@ -10,26 +10,34 @@
 #   lib/models/comic_data.dart
 #   assets/data/quests/**/*.json
 #
+# Doc Obsidian monitorati (via symlink in docs/):
+#   docs/NARRATIVE_BIBLE.md
+#   docs/MAPPA_NARRATIVA.md
+#   docs/LIBRO_DEI_MONDI.md
+#   docs/IDEE_FUTURE.md
+#
 # Override: git commit --no-verify
 # ─────────────────────────────────────────────────────────────────────────────
 
 ROOT="$(git rev-parse --show-toplevel)"
-BIBLE="$ROOT/docs/NARRATIVE_BIBLE.md"
-MAPPA="$ROOT/docs/MAPPA_NARRATIVA.md"
 GRACE=3600  # 60 minuti di grace period
 
-# Raccoglie i file narrativi staged
+DOC_FILES=(
+  "$ROOT/docs/NARRATIVE_BIBLE.md"
+  "$ROOT/docs/MAPPA_NARRATIVA.md"
+  "$ROOT/docs/LIBRO_DEI_MONDI.md"
+  "$ROOT/docs/IDEE_FUTURE.md"
+)
+
 STAGED=$(git diff --cached --name-only)
 NARRATIVE=$(echo "$STAGED" | grep -E \
   "^(lib/widgets/minigame_|lib/main\.dart|lib/models/comic_data\.dart|assets/data/quests/)")
 
-# Se nessun file narrativo è staged, lascia passare
 if [ -z "$NARRATIVE" ]; then
   exit 0
 fi
 
 # ─── JSON validation ─────────────────────────────────────────────────────────
-# Valida ogni file .json staged. Blocca se malformato.
 JSON_FILES=$(echo "$STAGED" | grep "\.json$")
 if [ -n "$JSON_FILES" ]; then
   JSON_ERRORS=0
@@ -44,7 +52,6 @@ if [ -n "$JSON_FILES" ]; then
       fi
     fi
   done <<< "$JSON_FILES"
-
   if [ $JSON_ERRORS -ne 0 ]; then
     echo ""
     echo "╔══════════════════════════════════════════════════════════════╗"
@@ -58,7 +65,6 @@ if [ -n "$JSON_FILES" ]; then
 fi
 
 # ─── narrative-flow-checker ──────────────────────────────────────────────────
-# Eseguito su ogni commit che tocca episodi JSON o il motore narrativo.
 QUEST_CHANGES=$(echo "$STAGED" | grep -E "^assets/data/quests/")
 ENGINE_CHANGES=$(echo "$STAGED" | grep -E "^lib/models/comic_data\.dart")
 
@@ -68,8 +74,7 @@ if [ -n "$QUEST_CHANGES" ] || [ -n "$ENGINE_CHANGES" ]; then
   CHECKER="$ROOT/.github/skills/narrative-flow-checker/scripts/check-narrative-flow.cjs"
   if [ -f "$CHECKER" ]; then
     node "$CHECKER" "$ROOT"
-    CHECKER_EXIT=$?
-    if [ $CHECKER_EXIT -ne 0 ]; then
+    if [ $? -ne 0 ]; then
       echo ""
       echo "╔══════════════════════════════════════════════════════════════╗"
       echo "║  ❌  NARRATIVE FLOW CHECK FALLITO — commit bloccato         ║"
@@ -88,12 +93,13 @@ if [ -n "$QUEST_CHANGES" ] || [ -n "$ENGINE_CHANGES" ]; then
 fi
 
 # ─── Doc freshness check ─────────────────────────────────────────────────────
-# Controlla se i doc sono stati modificati di recente.
-# stat -L per seguire i symlink (necessario su macOS).
+# Prende il mtime più recente tra tutti i doc Obsidian (stat -L segue i symlink).
 NOW=$(date +%s)
-bible_mtime=$(stat -L -f %m "$BIBLE" 2>/dev/null || echo 0)
-mappa_mtime=$(stat -L -f %m "$MAPPA" 2>/dev/null || echo 0)
-last_update=$(( bible_mtime > mappa_mtime ? bible_mtime : mappa_mtime ))
+last_update=0
+for doc in "${DOC_FILES[@]}"; do
+  mtime=$(stat -L -f %m "$doc" 2>/dev/null || echo 0)
+  [ "$mtime" -gt "$last_update" ] && last_update=$mtime
+done
 elapsed=$(( NOW - last_update ))
 
 if [ "$elapsed" -gt "$GRACE" ]; then
@@ -109,57 +115,10 @@ if [ "$elapsed" -gt "$GRACE" ]; then
   printf "║  Docs Obsidian non aggiornate (ultima modifica: %3dm fa)  ║\n" "$(( elapsed / 60 ))"
   echo "║                                                              ║"
   echo "║  Aggiorna almeno uno di:                                     ║"
-  echo "║    • docs/NARRATIVE_BIBLE.md  (mini-game table, authoring)  ║"
-  echo "║    • docs/MAPPA_NARRATIVA.md  (branch diagram)              ║"
-  echo "║                                                              ║"
-  echo "║  Poi riprova. Override: git commit --no-verify              ║"
-  echo "╚══════════════════════════════════════════════════════════════╝"
-  echo ""
-  exit 1
-fi
-
-min_ago=$(( elapsed / 60 ))
-echo "📚  Docs aggiornate ${min_ago}m fa — ok."
-exit 0
-
-ROOT="$(git rev-parse --show-toplevel)"
-BIBLE="$ROOT/docs/NARRATIVE_BIBLE.md"
-MAPPA="$ROOT/docs/MAPPA_NARRATIVA.md"
-GRACE=3600  # 60 minuti di grace period
-
-# Raccoglie i file narrativi staged
-STAGED=$(git diff --cached --name-only)
-NARRATIVE=$(echo "$STAGED" | grep -E \
-  "^(lib/widgets/minigame_|lib/main\.dart|lib/models/comic_data\.dart|assets/data/quests/)")
-
-# Se nessun file narrativo è staged, lascia passare
-if [ -z "$NARRATIVE" ]; then
-  exit 0
-fi
-
-# Controlla se i doc sono stati modificati di recente.
-# stat -L per seguire i symlink (necessario su macOS).
-NOW=$(date +%s)
-bible_mtime=$(stat -L -f %m "$BIBLE" 2>/dev/null || echo 0)
-mappa_mtime=$(stat -L -f %m "$MAPPA" 2>/dev/null || echo 0)
-last_update=$(( bible_mtime > mappa_mtime ? bible_mtime : mappa_mtime ))
-elapsed=$(( NOW - last_update ))
-
-if [ "$elapsed" -gt "$GRACE" ]; then
-  echo ""
-  echo "╔══════════════════════════════════════════════════════════════╗"
-  echo "║  📚  DOCUMENTAZIONE NON AGGIORNATA — commit bloccato        ║"
-  echo "╠══════════════════════════════════════════════════════════════╣"
-  echo "║  File narrativi nel commit:                                  ║"
-  while IFS= read -r f; do
-    [ -n "$f" ] && printf "║    • %-56s║\n" "$f"
-  done <<< "$NARRATIVE"
-  echo "╠══════════════════════════════════════════════════════════════╣"
-  printf "║  Docs Obsidian non aggiornate (ultima modifica: %3dm fa)  ║\n" "$(( elapsed / 60 ))"
-  echo "║                                                              ║"
-  echo "║  Aggiorna almeno uno di:                                     ║"
-  echo "║    • docs/NARRATIVE_BIBLE.md  (mini-game table, authoring)  ║"
-  echo "║    • docs/MAPPA_NARRATIVA.md  (branch diagram)              ║"
+  echo "║    • docs/NARRATIVE_BIBLE.md  (minigame table, authoring)   ║"
+  echo "║    • docs/MAPPA_NARRATIVA.md  (branch diagram mermaid)      ║"
+  echo "║    • docs/LIBRO_DEI_MONDI.md  (narrativa discorsiva)        ║"
+  echo "║    • docs/IDEE_FUTURE.md      (episodi e idee future)       ║"
   echo "║                                                              ║"
   echo "║  Poi riprova. Override: git commit --no-verify              ║"
   echo "╚══════════════════════════════════════════════════════════════╝"
