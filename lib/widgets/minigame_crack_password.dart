@@ -21,7 +21,7 @@ const List<Color> _kSymbolColors = [
   Color(0xFF55EFC4), // 🦋 mint
 ];
 // Timers per row (seconds), decreasing pressure.
-const List<double> _kRowTimers = [22.0, 18.0, 13.0, 10.0];
+const List<double> _kRowTimers = [45.0, 35.0, 25.0, 18.0];
 const int _kSlots = 4;
 const int _kMaxAttempts = 4;
 
