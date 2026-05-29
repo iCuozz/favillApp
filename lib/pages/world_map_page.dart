@@ -79,11 +79,13 @@ class _WorldMapPageState extends State<WorldMapPage>
   void _openDevEpisodePicker() {
     // Lista statica di tutti gli episodi disponibili nel progetto
     const episodes = [
-      (id: 'prologo',          title: 'Prologo',           file: 'assets/data/quests/prologo.json'),
-      (id: 's1_mattina_dopo',  title: 'EP1 · Mattina dopo', file: 'assets/data/quests/s1/s1_mattina_dopo.json'),
-      (id: 's1_scuola_1',      title: 'EP2 · La Corvi',    file: 'assets/data/quests/s1/s1_scuola_1.json'),
-      (id: 's1_ritorno_casa',  title: 'EP3 · Ritorno a casa', file: 'assets/data/quests/s1/s1_ritorno_casa.json'),
-      (id: 's1_spesa_sabato',  title: 'EP4 · La Spesa del Sabato', file: 'assets/data/quests/s1/s1_spesa_sabato.json'),
+      (id: 'prologo',            title: 'Prologo',                    file: 'assets/data/quests/prologo.json'),
+      (id: 's1_mattina_dopo',    title: 'EP1 · Mattina dopo',         file: 'assets/data/quests/s1/s1_mattina_dopo.json'),
+      (id: 's1_scuola_1',        title: 'EP2 · La Corvi',             file: 'assets/data/quests/s1/s1_scuola_1.json'),
+      (id: 's1_ritorno_casa',    title: 'EP3 · Ritorno a casa',       file: 'assets/data/quests/s1/s1_ritorno_casa.json'),
+      (id: 's1_spesa_sabato',    title: 'EP4 · La Spesa del Sabato',  file: 'assets/data/quests/s1/s1_spesa_sabato.json'),
+      (id: 's1_domenica_parco',  title: 'EP5 · La Domenica al Parco', file: 'assets/data/quests/s1/s1_domenica_parco.json'),
+      (id: 's1_mare',            title: 'EP6 · Un Giorno al Mare',    file: 'assets/data/quests/s1/s1_mare.json'),
     ];
 
     showModalBottomSheet<void>(
