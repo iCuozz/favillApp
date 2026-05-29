@@ -2,7 +2,12 @@
   "id": "s1_centro_commerciale",
   "stat_entry": [
     {
-      "flag_conditions": [{"flag": "favilla_transformed_public", "is": true}],
+      "flag_conditions": [
+        {
+          "flag": "favilla_transformed_public",
+          "is": true
+        }
+      ],
       "goto_branch": "intro_mallow_sa_qualcosa",
       "prepend": true
     },
@@ -21,12 +26,32 @@
       "panels": [
         {
           "id": "scc0_0",
-          "characters": ["favilla", "mallow", "lex"],
+          "characters": [
+            "favilla",
+            "mallow",
+            "lex"
+          ],
           "text_blocks": [
-            {"id": "scc0_0_tb_0", "type": "narration", "text": "GalaxiaMall. Piano terra. Sabato mattina."},
-            {"id": "scc0_0_tb_1", "type": "narration", "text": "Lex sul passeggino tiene gli occhi aperti sulle luci LED del soffitto. Agita una mano come se stesse salutando il futuro."},
-            {"id": "scc0_0_tb_2", "type": "narration", "text": "Mallow naviga la folla sabatina con la precisione di chi ha fatto orienteering."},
-            {"id": "scc0_0_tb_3", "type": "thought", "text": "In questo posto non mi conosce nessuno. In questo posto posso solo comprare il sapone e basta."}
+            {
+              "id": "scc0_0_tb_0",
+              "type": "narration",
+              "text": "GalaxiaMall. Piano terra. Sabato mattina."
+            },
+            {
+              "id": "scc0_0_tb_1",
+              "type": "narration",
+              "text": "Lex sul passeggino tiene gli occhi aperti sulle luci LED del soffitto. Agita una mano come se stesse salutando il futuro."
+            },
+            {
+              "id": "scc0_0_tb_2",
+              "type": "narration",
+              "text": "Mallow naviga la folla sabatina con la precisione di chi ha fatto orienteering."
+            },
+            {
+              "id": "scc0_0_tb_3",
+              "type": "thought",
+              "text": "In questo posto non mi conosce nessuno. In questo posto posso solo comprare il sapone e basta."
+            }
           ],
           "interactions": []
         }
@@ -38,12 +63,33 @@
       "panels": [
         {
           "id": "scc1_0",
-          "characters": ["favilla", "mallow", "lex"],
+          "characters": [
+            "favilla",
+            "mallow",
+            "lex"
+          ],
           "text_blocks": [
-            {"id": "scc1_0_tb_0", "type": "narration", "text": "Bimbi & Fantasia. Piano terra, ala ovest."},
-            {"id": "scc1_0_tb_1", "type": "narration", "text": "Lex individua una giraffa di plastica sul banchetto display. La fissa. La prende. Si siede sul passeggino di nuovo, la giraffa stretta nel pugno."},
-            {"id": "scc1_0_tb_2", "type": "dialogue", "speaker": "mallow", "text": "«Beh. Suppongo che sia nostra.»"},
-            {"id": "scc1_0_tb_3", "type": "narration", "text": "Favilla la mette nel cestello. Una piccola vittoria. Una giornata normale."}
+            {
+              "id": "scc1_0_tb_0",
+              "type": "narration",
+              "text": "Bimbi & Fantasia. Piano terra, ala ovest."
+            },
+            {
+              "id": "scc1_0_tb_1",
+              "type": "narration",
+              "text": "Lex individua un gufetto di peluche sul banchetto display. Lo fissa. Lo prende. Si siede sul passeggino di nuovo, il gufetto stretto nel pugno."
+            },
+            {
+              "id": "scc1_0_tb_2",
+              "type": "dialogue",
+              "speaker": "mallow",
+              "text": "«Beh. Suppongo che sia nostro.»"
+            },
+            {
+              "id": "scc1_0_tb_3",
+              "type": "narration",
+              "text": "Favilla lo mette nel cestello. Una piccola vittoria. Una giornata normale."
+            }
           ],
           "interactions": []
         }
@@ -55,12 +101,31 @@
       "panels": [
         {
           "id": "scc2_0",
-          "characters": ["favilla", "carmela"],
+          "characters": [
+            "favilla",
+            "carmela"
+          ],
           "text_blocks": [
-            {"id": "scc2_0_tb_0", "type": "narration", "text": "Alla cassa del supermercato interno: Carmela."},
-            {"id": "scc2_0_tb_1", "type": "narration", "text": "Trolley blu. Cappello di paglia. Gli occhi che non perdono niente."},
-            {"id": "scc2_0_tb_2", "type": "narration", "text": "Favilla la vede prima che Carmela la veda."},
-            {"id": "scc2_0_tb_3", "type": "thought", "text": "Troppo tardi per girare."}
+            {
+              "id": "scc2_0_tb_0",
+              "type": "narration",
+              "text": "Alla cassa del supermercato interno: Carmela."
+            },
+            {
+              "id": "scc2_0_tb_1",
+              "type": "narration",
+              "text": "Trolley blu. Cappello di paglia. Gli occhi che non perdono niente."
+            },
+            {
+              "id": "scc2_0_tb_2",
+              "type": "narration",
+              "text": "Favilla la vede prima che Carmela la veda."
+            },
+            {
+              "id": "scc2_0_tb_3",
+              "type": "thought",
+              "text": "Troppo tardi per girare."
+            }
           ],
           "interactions": []
         }
@@ -82,9 +147,18 @@
                     "text": "«Come stai, cara? Ti vedo... diversa. Hai qualcosa di luminoso.»",
                     "timer": 4.5,
                     "options": [
-                      {"label": "«Benissimo, grazie. E tu?»", "safe": true},
-                      {"label": "«Stanca. È il caldo, sai com'è.»", "safe": true},
-                      {"label": "«Perché me lo chiedi?»", "safe": false}
+                      {
+                        "label": "«Benissimo, grazie. E tu?»",
+                        "safe": true
+                      },
+                      {
+                        "label": "«Stanca. È il caldo, sai com'è.»",
+                        "safe": true
+                      },
+                      {
+                        "label": "«Perché me lo chiedi?»",
+                        "safe": false
+                      }
                     ],
                     "timeout_index": 2
                   },
@@ -92,9 +166,18 @@
                     "text": "«Domenica al parco, voi c'eravate? Ho sentito un po' di confusione.»",
                     "timer": 4.0,
                     "options": [
-                      {"label": "«Sì, ma niente di speciale. Lex dormiva.»", "safe": true},
-                      {"label": "«Domenica? No, siamo stati a casa.»", "safe": true},
-                      {"label": "«Perché? Che ha sentito dire?»", "safe": false}
+                      {
+                        "label": "«Sì, ma niente di speciale. Lex dormiva.»",
+                        "safe": true
+                      },
+                      {
+                        "label": "«Domenica? No, siamo stati a casa.»",
+                        "safe": true
+                      },
+                      {
+                        "label": "«Perché? Che ha sentito dire?»",
+                        "safe": false
+                      }
                     ],
                     "timeout_index": 2
                   },
@@ -102,9 +185,18 @@
                     "text": "«Il mio Filippo è tornato a casa con un odore strano. Quasi di calore — come un ferro da stiro lasciato acceso.»",
                     "timer": 3.5,
                     "options": [
-                      {"label": "«I gatti portano di tutto in giro.»", "safe": true},
-                      {"label": "«Mah, chissà cosa ha trovato.»", "safe": true},
-                      {"label": "«Bruciato? Come... fumo?»", "safe": false}
+                      {
+                        "label": "«I gatti portano di tutto in giro.»",
+                        "safe": true
+                      },
+                      {
+                        "label": "«Mah, chissà cosa ha trovato.»",
+                        "safe": true
+                      },
+                      {
+                        "label": "«Bruciato? Come... fumo?»",
+                        "safe": false
+                      }
                     ],
                     "timeout_index": 2
                   },
@@ -112,9 +204,18 @@
                     "text": "«Sai, a volte passo la sera sola. Venireste a prendere un caffè, voi e Mallow? Parlare un po'.»",
                     "timer": 3.5,
                     "options": [
-                      {"label": "«Certo, ti faccio sapere.»", "safe": true},
-                      {"label": "«Siamo sempre di corsa, purtroppo.»", "safe": true},
-                      {"label": "«Oh, volentieri! Quando?»", "safe": false}
+                      {
+                        "label": "«Certo, ti faccio sapere.»",
+                        "safe": true
+                      },
+                      {
+                        "label": "«Siamo sempre di corsa, purtroppo.»",
+                        "safe": true
+                      },
+                      {
+                        "label": "«Oh, volentieri! Quando?»",
+                        "safe": false
+                      }
                     ],
                     "timeout_index": 2
                   }
@@ -125,20 +226,31 @@
                   "min": 3,
                   "label": "Schivata.",
                   "goto_branch": "branch_risposta_bene",
-                  "stat_effects": {"segreto": 5}
+                  "stat_effects": {
+                    "segreto": 5,
+                    "resistenza": 15
+                  }
                 },
                 {
                   "min": 1,
                   "label": "Quasi.",
                   "goto_branch": "branch_risposta_quasi",
-                  "stat_effects": {"segreto": -10}
+                  "stat_effects": {
+                    "segreto": -10,
+                    "resistenza": 15
+                  }
                 },
                 {
                   "min": 0,
                   "label": "Aperta.",
                   "goto_branch": "branch_risposta_disastro",
-                  "stat_effects": {"segreto": -20},
-                  "set_flags": {"carmela_ha_notato": true}
+                  "stat_effects": {
+                    "segreto": -20,
+                    "resistenza": 15
+                  },
+                  "set_flags": {
+                    "carmela_ha_notato": true
+                  }
                 }
               ]
             }
@@ -156,12 +268,32 @@
           "panels": [
             {
               "id": "scc_imq_0",
-              "characters": ["favilla", "mallow"],
+              "characters": [
+                "favilla",
+                "mallow"
+              ],
               "text_blocks": [
-                {"id": "scc_imq_0_tb_0", "type": "narration", "text": "In macchina, Mallow guida tenendo il volante con una mano sola. L'altra è sul cambio — non la prende, ma è lì."},
-                {"id": "scc_imq_0_tb_1", "type": "dialogue", "speaker": "mallow", "text": "«Non devi dirmi niente. Lo sai, vero? Non devi dirmi niente.»"},
-                {"id": "scc_imq_0_tb_2", "type": "narration", "text": "Favilla guarda il profilo di Nova Tutinia scorrere oltre il finestrino."},
-                {"id": "scc_imq_0_tb_3", "type": "thought", "text": "Lo sa. Non sa cosa. Ma sa che c'è qualcosa. E ha scelto di aspettare."}
+                {
+                  "id": "scc_imq_0_tb_0",
+                  "type": "narration",
+                  "text": "In macchina, Mallow guida tenendo il volante con una mano sola. L'altra è sul cambio — non la prende, ma è lì."
+                },
+                {
+                  "id": "scc_imq_0_tb_1",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "«Non devi dirmi niente. Lo sai, vero? Non devi dirmi niente.»"
+                },
+                {
+                  "id": "scc_imq_0_tb_2",
+                  "type": "narration",
+                  "text": "Favilla guarda il profilo di Nova Tutinia scorrere oltre il finestrino."
+                },
+                {
+                  "id": "scc_imq_0_tb_3",
+                  "type": "thought",
+                  "text": "Lo sa. Non sa cosa. Ma sa che c'è qualcosa. E ha scelto di aspettare."
+                }
               ],
               "interactions": []
             }
@@ -177,11 +309,25 @@
           "panels": [
             {
               "id": "scc_imc_0",
-              "characters": ["favilla"],
+              "characters": [
+                "favilla"
+              ],
               "text_blocks": [
-                {"id": "scc_imc_0_tb_0", "type": "narration", "text": "In macchina, Favilla tiene le mani in grembo. I palmi verso il basso — così non si vede."},
-                {"id": "scc_imc_0_tb_1", "type": "narration", "text": "Non bruciano. Non ancora. Ma c'è quella sensazione — come carbone appena spento sotto la cenere."},
-                {"id": "scc_imc_0_tb_2", "type": "thought", "text": "Folla. Luci. Aria condizionata. Almeno qui non si vede niente."}
+                {
+                  "id": "scc_imc_0_tb_0",
+                  "type": "narration",
+                  "text": "In macchina, Favilla tiene le mani in grembo. I palmi verso il basso — così non si vede."
+                },
+                {
+                  "id": "scc_imc_0_tb_1",
+                  "type": "narration",
+                  "text": "Non bruciano. Non ancora. Ma c'è quella sensazione — come carbone appena spento sotto la cenere."
+                },
+                {
+                  "id": "scc_imc_0_tb_2",
+                  "type": "thought",
+                  "text": "Folla. Luci. Aria condizionata. Almeno qui non si vede niente."
+                }
               ],
               "interactions": []
             }
@@ -197,12 +343,32 @@
           "panels": [
             {
               "id": "scc_rb_0",
-              "characters": ["favilla", "carmela"],
+              "characters": [
+                "favilla",
+                "carmela"
+              ],
               "text_blocks": [
-                {"id": "scc_rb_0_tb_0", "type": "narration", "text": "Carmela sorride. Ha preso quello che è venuta a prendere — qualcosa, anche se non sa bene cosa."},
-                {"id": "scc_rb_0_tb_1", "type": "dialogue", "speaker": "carmela", "text": "«Che bei capelli hai oggi, cara. Sembrano quasi brillare.»"},
-                {"id": "scc_rb_0_tb_2", "type": "narration", "text": "Spinge il trolley verso la cassa. Non si gira."},
-                {"id": "scc_rb_0_tb_3", "type": "thought", "text": "Non sa niente. Ha solo confermato che non so mentire abbastanza bene da non essere interessante."}
+                {
+                  "id": "scc_rb_0_tb_0",
+                  "type": "narration",
+                  "text": "Carmela sorride. Ha preso quello che è venuta a prendere — qualcosa, anche se non sa bene cosa."
+                },
+                {
+                  "id": "scc_rb_0_tb_1",
+                  "type": "dialogue",
+                  "speaker": "carmela",
+                  "text": "«Che bei capelli hai oggi, cara. Sembrano quasi brillare.»"
+                },
+                {
+                  "id": "scc_rb_0_tb_2",
+                  "type": "narration",
+                  "text": "Spinge il trolley verso la cassa. Non si gira."
+                },
+                {
+                  "id": "scc_rb_0_tb_3",
+                  "type": "thought",
+                  "text": "Non sa niente. Ha solo confermato che non so mentire abbastanza bene da non essere interessante."
+                }
               ],
               "interactions": []
             }
@@ -218,12 +384,32 @@
           "panels": [
             {
               "id": "scc_rq_0",
-              "characters": ["favilla", "carmela"],
+              "characters": [
+                "favilla",
+                "carmela"
+              ],
               "text_blocks": [
-                {"id": "scc_rq_0_tb_0", "type": "narration", "text": "Carmela annuisce. I suoi occhi registrano qualcosa che Favilla non voleva mostrare."},
-                {"id": "scc_rq_0_tb_1", "type": "dialogue", "speaker": "carmela", "text": "«Sei sempre così... viva, Favilla. È una qualità rara.»"},
-                {"id": "scc_rq_0_tb_2", "type": "narration", "text": "Una pausa. Poi: «Passa a salutarmi, quando puoi.»"},
-                {"id": "scc_rq_0_tb_3", "type": "thought", "text": "Non era una richiesta."}
+                {
+                  "id": "scc_rq_0_tb_0",
+                  "type": "narration",
+                  "text": "Carmela annuisce. I suoi occhi registrano qualcosa che Favilla non voleva mostrare."
+                },
+                {
+                  "id": "scc_rq_0_tb_1",
+                  "type": "dialogue",
+                  "speaker": "carmela",
+                  "text": "«Sei sempre così... viva, Favilla. È una qualità rara.»"
+                },
+                {
+                  "id": "scc_rq_0_tb_2",
+                  "type": "narration",
+                  "text": "Una pausa. Poi: «Passa a salutarmi, quando puoi.»"
+                },
+                {
+                  "id": "scc_rq_0_tb_3",
+                  "type": "thought",
+                  "text": "Non era una richiesta."
+                }
               ],
               "interactions": []
             }
@@ -239,12 +425,32 @@
           "panels": [
             {
               "id": "scc_rd_0",
-              "characters": ["favilla", "carmela"],
+              "characters": [
+                "favilla",
+                "carmela"
+              ],
               "text_blocks": [
-                {"id": "scc_rd_0_tb_0", "type": "narration", "text": "Carmela la guarda a lungo. Troppo a lungo."},
-                {"id": "scc_rd_0_tb_1", "type": "dialogue", "speaker": "carmela", "text": "«Sai, Favilla cara, tu sei una di quelle persone che si portano dentro qualcosa di grande. Lo sento.»"},
-                {"id": "scc_rd_0_tb_2", "type": "narration", "text": "Sorride. Si gira verso la cassa come se niente fosse."},
-                {"id": "scc_rd_0_tb_3", "type": "thought", "text": "Sa. Non sa cosa. Ma sa che c'è qualcosa — e ora sta cercando il nome da dargli."}
+                {
+                  "id": "scc_rd_0_tb_0",
+                  "type": "narration",
+                  "text": "Carmela la guarda a lungo. Troppo a lungo."
+                },
+                {
+                  "id": "scc_rd_0_tb_1",
+                  "type": "dialogue",
+                  "speaker": "carmela",
+                  "text": "«Sai, Favilla cara, tu sei una di quelle persone che si portano dentro qualcosa di grande. Lo sento.»"
+                },
+                {
+                  "id": "scc_rd_0_tb_2",
+                  "type": "narration",
+                  "text": "Sorride. Si gira verso la cassa come se niente fosse."
+                },
+                {
+                  "id": "scc_rd_0_tb_3",
+                  "type": "thought",
+                  "text": "Sa. Non sa cosa. Ma sa che c'è qualcosa — e ora sta cercando il nome da dargli."
+                }
               ],
               "interactions": []
             }
@@ -261,12 +467,32 @@
         "panels": [
           {
             "id": "ep_scc_0",
-            "characters": ["favilla", "mallow"],
+            "characters": [
+              "favilla",
+              "mallow"
+            ],
             "text_blocks": [
-              {"id": "ep_scc_0_tb_0", "type": "narration", "text": "Parcheggio. Il sole batte sul cemento."},
-              {"id": "ep_scc_0_tb_1", "type": "narration", "text": "Mallow porta i sacchetti. Lex dorme sul passeggino, la giraffa stretta nel pugno."},
-              {"id": "ep_scc_0_tb_2", "type": "dialogue", "speaker": "mallow", "text": "«Non tutte le giornate devono essere qualcosa. Alcune possono solo essere belle.»"},
-              {"id": "ep_scc_0_tb_3", "type": "thought", "text": "È stata normale. È stata quasi normale."}
+              {
+                "id": "ep_scc_0_tb_0",
+                "type": "narration",
+                "text": "Parcheggio. Il sole batte sul cemento."
+              },
+              {
+                "id": "ep_scc_0_tb_1",
+                "type": "narration",
+                "text": "Mallow porta i sacchetti. Lex dorme sul passeggino, il gufetto stretto nel pugno."
+              },
+              {
+                "id": "ep_scc_0_tb_2",
+                "type": "dialogue",
+                "speaker": "mallow",
+                "text": "«Non tutte le giornate devono essere qualcosa. Alcune possono solo essere belle.»"
+              },
+              {
+                "id": "ep_scc_0_tb_3",
+                "type": "thought",
+                "text": "È stata normale. È stata quasi normale."
+              }
             ],
             "interactions": []
           }
@@ -278,27 +504,29 @@
         "panels": [
           {
             "id": "ep_scc_1",
-            "characters": ["gatto"],
+            "characters": [
+              "gatto"
+            ],
             "text_blocks": [
-              {"id": "ep_scc_1_tb_0", "type": "narration", "text": "Sul cofano della macchina accanto: il gatto."},
-              {"id": "ep_scc_1_tb_1", "type": "narration", "text": "Gli occhi gialli. Il pelo arancione. La coda arrotolata con l'aria di chi sa esattamente dove deve essere."},
-              {"id": "ep_scc_1_tb_2", "type": "narration", "text": "Si alza. Scende. Direzione civico 19, terzo piano."}
+              {
+                "id": "ep_scc_1_tb_0",
+                "type": "narration",
+                "text": "Sul cofano della macchina accanto: il gatto."
+              },
+              {
+                "id": "ep_scc_1_tb_1",
+                "type": "narration",
+                "text": "Gli occhi gialli. Il pelo nero. La coda arrotolata con l'aria di chi sa esattamente dove deve essere."
+              },
+              {
+                "id": "ep_scc_1_tb_2",
+                "type": "narration",
+                "text": "Si alza. Scende. Direzione civico 19, terzo piano."
+              }
             ],
             "interactions": []
           }
-        ],
-        "choice": {
-          "id": "fine_mall",
-          "prompt": "Alcune giornate possono solo essere belle.",
-          "options": [
-            {
-              "id": "torna_casa",
-              "label": "Alcune giornate possono solo essere belle.",
-              "goto_branch": "",
-              "stat_effects": {"resistenza": 15}
-            }
-          ]
-        }
+        ]
       }
     ]
   }
