@@ -41,9 +41,9 @@
           "characters": ["favilla", "mallow", "lex"],
           "text_blocks": [
             {"id": "scc1_0_tb_0", "type": "narration", "text": "Bimbi & Fantasia. Piano terra, ala ovest."},
-            {"id": "scc1_0_tb_1", "type": "narration", "text": "Lex individua una giraffa di plastica sul banchetto display — collo cigolante, orecchie assurde. La fissa come chi sta prendendo una decisione importante."},
-            {"id": "scc1_0_tb_2", "type": "dialogue", "speaker": "mallow", "text": "«Ah. Ha deciso.»"},
-            {"id": "scc1_0_tb_3", "type": "narration", "text": "In un momento non negoziabile — Lex scivola via dal passeggino verso il corridoio principale."}
+            {"id": "scc1_0_tb_1", "type": "narration", "text": "Lex individua una giraffa di plastica sul banchetto display. La fissa. La prende. Si siede sul passeggino di nuovo, la giraffa stretta nel pugno."},
+            {"id": "scc1_0_tb_2", "type": "dialogue", "speaker": "mallow", "text": "«Beh. Suppongo che sia nostra.»"},
+            {"id": "scc1_0_tb_3", "type": "narration", "text": "Favilla la mette nel cestello. Una piccola vittoria. Una giornata normale."}
           ],
           "interactions": []
         }
@@ -51,49 +51,94 @@
     },
     {
       "index": 2,
-      "background": "assets/episodes/s1/s1_centro_commerciale/page_2.webp",
+      "background": "assets/episodes/s1/s1_centro_commerciale/page_cassa.webp",
       "panels": [
         {
           "id": "scc2_0",
-          "characters": ["favilla", "lex"],
+          "characters": ["favilla", "carmela"],
           "text_blocks": [
-            {"id": "scc2_0_tb_0", "type": "narration", "text": "Sette mesi. Quattro denti. Una determinazione inesplicabile."},
-            {"id": "scc2_0_tb_1", "type": "thought", "text": "No. No no no no."}
+            {"id": "scc2_0_tb_0", "type": "narration", "text": "Alla cassa del supermercato interno: Carmela."},
+            {"id": "scc2_0_tb_1", "type": "narration", "text": "Trolley blu. Cappello di paglia. Gli occhi che non perdono niente."},
+            {"id": "scc2_0_tb_2", "type": "narration", "text": "Favilla la vede prima che Carmela la veda."},
+            {"id": "scc2_0_tb_3", "type": "thought", "text": "Troppo tardi per girare."}
           ],
           "interactions": []
         }
       ],
       "choice": {
-        "id": "rincorsa_mall_choice",
-        "prompt": "Lex punta verso il corridoio centrale del GalaxiaMall.",
+        "id": "carmela_dialogo_choice",
+        "prompt": "Carmela ha già alzato lo sguardo.",
         "options": [
           {
-            "id": "rincorri_lex_mall",
-            "label": "Rincorrilo.",
-            "goto_branch": "branch_preso_subito",
+            "id": "affronta_carmela",
+            "label": "«Carmela, ciao!»",
+            "goto_branch": "branch_risposta_bene",
             "stat_effects": {},
             "minigame": {
-              "type": "rincorsa_lex",
-              "theme": "mall",
-              "duration_seconds": 15,
+              "type": "carmela_dialogo",
+              "extra": {
+                "questions": [
+                  {
+                    "text": "«Come stai, cara? Ti vedo... diversa. Hai qualcosa di luminoso.»",
+                    "timer": 4.5,
+                    "options": [
+                      {"label": "«Benissimo, grazie. E tu?»", "safe": true},
+                      {"label": "«Stanca. È il caldo, sai com'è.»", "safe": true},
+                      {"label": "«Perché me lo chiedi?»", "safe": false}
+                    ],
+                    "timeout_index": 2
+                  },
+                  {
+                    "text": "«Domenica al parco, voi c'eravate? Ho sentito un po' di confusione.»",
+                    "timer": 4.0,
+                    "options": [
+                      {"label": "«Sì, ma niente di speciale. Lex dormiva.»", "safe": true},
+                      {"label": "«Domenica? No, siamo stati a casa.»", "safe": true},
+                      {"label": "«Perché? Che ha sentito dire?»", "safe": false}
+                    ],
+                    "timeout_index": 2
+                  },
+                  {
+                    "text": "«Il mio Filippo è tornato a casa con un odore strano. Quasi di calore — come un ferro da stiro lasciato acceso.»",
+                    "timer": 3.5,
+                    "options": [
+                      {"label": "«I gatti portano di tutto in giro.»", "safe": true},
+                      {"label": "«Mah, chissà cosa ha trovato.»", "safe": true},
+                      {"label": "«Bruciato? Come... fumo?»", "safe": false}
+                    ],
+                    "timeout_index": 2
+                  },
+                  {
+                    "text": "«Sai, a volte passo la sera sola. Venireste a prendere un caffè, voi e Mallow? Parlare un po'.»",
+                    "timer": 3.5,
+                    "options": [
+                      {"label": "«Certo, ti faccio sapere.»", "safe": true},
+                      {"label": "«Siamo sempre di corsa, purtroppo.»", "safe": true},
+                      {"label": "«Oh, volentieri! Quando?»", "safe": false}
+                    ],
+                    "timeout_index": 2
+                  }
+                ]
+              },
               "tiers": [
                 {
-                  "min": 5,
-                  "label": "Preso!",
-                  "goto_branch": "branch_preso_subito",
-                  "stat_effects": {"resistenza": 10, "legame": 5}
+                  "min": 3,
+                  "label": "Schivata.",
+                  "goto_branch": "branch_risposta_bene",
+                  "stat_effects": {"segreto": 5}
                 },
                 {
-                  "min": 2,
-                  "label": "Quasi!",
-                  "goto_branch": "branch_quasi_casino",
-                  "stat_effects": {"resistenza": 5, "segreto": -5}
+                  "min": 1,
+                  "label": "Quasi.",
+                  "goto_branch": "branch_risposta_quasi",
+                  "stat_effects": {"segreto": -10}
                 },
                 {
                   "min": 0,
-                  "label": "...",
-                  "goto_branch": "branch_momento_tenero",
-                  "stat_effects": {"legame": 15, "scintille": 5, "segreto": -5}
+                  "label": "Aperta.",
+                  "goto_branch": "branch_risposta_disastro",
+                  "stat_effects": {"segreto": -20},
+                  "set_flags": {"carmela_ha_notato": true}
                 }
               ]
             }
@@ -144,19 +189,20 @@
         }
       ]
     },
-    "branch_preso_subito": {
+    "branch_risposta_bene": {
       "pages": [
         {
           "index": 0,
-          "background": "assets/episodes/s1/s1_centro_commerciale/page_corridoio.webp",
+          "background": "assets/episodes/s1/s1_centro_commerciale/page_cassa.webp",
           "panels": [
             {
-              "id": "scc_ps_0",
-              "characters": ["favilla", "lex"],
+              "id": "scc_rb_0",
+              "characters": ["favilla", "carmela"],
               "text_blocks": [
-                {"id": "scc_ps_0_tb_0", "type": "narration", "text": "Preso in tre passi. Lex emette il verso di chi ha perso una trattativa."},
-                {"id": "scc_ps_0_tb_1", "type": "dialogue", "speaker": "mallow", "text": "«Bella rincorsa.»"},
-                {"id": "scc_ps_0_tb_2", "type": "narration", "text": "Favilla lo tiene stretto. Respira. Okay. Nessuno ha visto niente di particolare."}
+                {"id": "scc_rb_0_tb_0", "type": "narration", "text": "Carmela sorride. Ha preso quello che è venuta a prendere — qualcosa, anche se non sa bene cosa."},
+                {"id": "scc_rb_0_tb_1", "type": "dialogue", "speaker": "carmela", "text": "«Che bei capelli hai oggi, cara. Sembrano quasi brillare.»"},
+                {"id": "scc_rb_0_tb_2", "type": "narration", "text": "Spinge il trolley verso la cassa. Non si gira."},
+                {"id": "scc_rb_0_tb_3", "type": "thought", "text": "Non sa niente. Ha solo confermato che non so mentire abbastanza bene da non essere interessante."}
               ],
               "interactions": []
             }
@@ -164,19 +210,20 @@
         }
       ]
     },
-    "branch_quasi_casino": {
+    "branch_risposta_quasi": {
       "pages": [
         {
           "index": 0,
-          "background": "assets/episodes/s1/s1_centro_commerciale/page_corridoio.webp",
+          "background": "assets/episodes/s1/s1_centro_commerciale/page_cassa.webp",
           "panels": [
             {
-              "id": "scc_qc_0",
-              "characters": ["favilla", "lex"],
+              "id": "scc_rq_0",
+              "characters": ["favilla", "carmela"],
               "text_blocks": [
-                {"id": "scc_qc_0_tb_0", "type": "narration", "text": "Lex quasi centra il banchetto dei bicchieri di vetro decorativi. Favilla lo afferra per un centimetro."},
-                {"id": "scc_qc_0_tb_1", "type": "narration", "text": "Una coppia vicino alla fontana si è girata. Guarda Lex. Guarda Favilla. Guarda ancora."},
-                {"id": "scc_qc_0_tb_2", "type": "thought", "text": "Non hanno visto niente. Era solo una rincorsa. Normale. Normalissima."}
+                {"id": "scc_rq_0_tb_0", "type": "narration", "text": "Carmela annuisce. I suoi occhi registrano qualcosa che Favilla non voleva mostrare."},
+                {"id": "scc_rq_0_tb_1", "type": "dialogue", "speaker": "carmela", "text": "«Sei sempre così... viva, Favilla. È una qualità rara.»"},
+                {"id": "scc_rq_0_tb_2", "type": "narration", "text": "Una pausa. Poi: «Passa a salutarmi, quando puoi.»"},
+                {"id": "scc_rq_0_tb_3", "type": "thought", "text": "Non era una richiesta."}
               ],
               "interactions": []
             }
@@ -184,20 +231,20 @@
         }
       ]
     },
-    "branch_momento_tenero": {
+    "branch_risposta_disastro": {
       "pages": [
         {
           "index": 0,
-          "background": "assets/episodes/s1/s1_centro_commerciale/page_fontana.webp",
+          "background": "assets/episodes/s1/s1_centro_commerciale/page_cassa.webp",
           "panels": [
             {
-              "id": "scc_mt_0",
-              "characters": ["favilla", "lex"],
+              "id": "scc_rd_0",
+              "characters": ["favilla", "carmela"],
               "text_blocks": [
-                {"id": "scc_mt_0_tb_0", "type": "narration", "text": "Favilla lo prende vicino alla fontana del piano terra. Le monetine sul fondo, l'acqua che gorgoglia."},
-                {"id": "scc_mt_0_tb_1", "type": "narration", "text": "Lex si gira verso di lei. Gli occhi chiari. Alza una mano e la mette sulla guancia di Favilla — con una gentilezza che non ha ancora imparato a fare apposta."},
-                {"id": "scc_mt_0_tb_2", "type": "thought", "text": "Sette mesi. Non sa ancora le parole. Ma sa esattamente dove devo essere toccata per smettere di correre."},
-                {"id": "scc_mt_0_tb_3", "type": "narration", "text": "Qualcuno intorno ha visto. Favilla sente gli occhi addosso — e non le importa. Poi le importa."}
+                {"id": "scc_rd_0_tb_0", "type": "narration", "text": "Carmela la guarda a lungo. Troppo a lungo."},
+                {"id": "scc_rd_0_tb_1", "type": "dialogue", "speaker": "carmela", "text": "«Sai, Favilla cara, tu sei una di quelle persone che si portano dentro qualcosa di grande. Lo sento.»"},
+                {"id": "scc_rd_0_tb_2", "type": "narration", "text": "Sorride. Si gira verso la cassa come se niente fosse."},
+                {"id": "scc_rd_0_tb_3", "type": "thought", "text": "Sa. Non sa cosa. Ma sa che c'è qualcosa — e ora sta cercando il nome da dargli."}
               ],
               "interactions": []
             }
@@ -210,14 +257,16 @@
     "pages": [
       {
         "index": 0,
-        "background": "assets/episodes/s1/s1_centro_commerciale/page_supermercato.webp",
+        "background": "assets/episodes/s1/s1_centro_commerciale/page_parcheggio.webp",
         "panels": [
           {
             "id": "ep_scc_0",
-            "characters": ["favilla", "mallow", "lex"],
+            "characters": ["favilla", "mallow"],
             "text_blocks": [
-              {"id": "ep_scc_0_tb_0", "type": "narration", "text": "Lex è di nuovo sul passeggino. Tiene la giraffa di plastica stretta nel pugno — l'hanno comprata. Era inevitabile."},
-              {"id": "ep_scc_0_tb_1", "type": "narration", "text": "Mallow spinge il carrello verso la cassa del supermercato interno. Favilla cammina accanto."}
+              {"id": "ep_scc_0_tb_0", "type": "narration", "text": "Parcheggio. Il sole batte sul cemento."},
+              {"id": "ep_scc_0_tb_1", "type": "narration", "text": "Mallow porta i sacchetti. Lex dorme sul passeggino, la giraffa stretta nel pugno."},
+              {"id": "ep_scc_0_tb_2", "type": "dialogue", "speaker": "mallow", "text": "«Non tutte le giornate devono essere qualcosa. Alcune possono solo essere belle.»"},
+              {"id": "ep_scc_0_tb_3", "type": "thought", "text": "È stata normale. È stata quasi normale."}
             ],
             "interactions": []
           }
@@ -225,72 +274,15 @@
       },
       {
         "index": 1,
-        "background": "assets/episodes/s1/s1_centro_commerciale/page_cassa.webp",
-        "panels": [
-          {
-            "id": "ep_scc_1",
-            "characters": ["favilla", "carmela"],
-            "text_blocks": [
-              {"id": "ep_scc_1_tb_0", "type": "narration", "text": "In fila alla cassa: Carmela. Trolley blu. Cappello di paglia. Gli occhi che non perdono niente."},
-              {"id": "ep_scc_1_tb_1", "type": "dialogue", "speaker": "carmela", "text": "«Favilla cara! Che bella sorpresa. Ti osservavo dall'altra parte del corridoio — hai una luce nei capelli che non avevo mai notato. Stai bene?»"},
-              {"id": "ep_scc_1_tb_2", "type": "narration", "text": "Sorride. Non è una domanda. È una semina."}
-            ],
-            "interactions": []
-          }
-        ],
-        "choice": {
-          "id": "carmela_risposta",
-          "prompt": "Carmela aspetta. Ha tutto il tempo del mondo.",
-          "options": [
-            {
-              "id": "risposta_bene",
-              "label": "«Sto benissimo, grazie Carmela.»",
-              "goto_branch": "",
-              "stat_effects": {"segreto": -2}
-            },
-            {
-              "id": "risposta_sole",
-              "label": "«È il sole di questi giorni.»",
-              "goto_branch": "",
-              "stat_effects": {"segreto": -8}
-            },
-            {
-              "id": "risposta_lex",
-              "label": "Prende Lex in braccio. Senza rispondere.",
-              "goto_branch": "",
-              "stat_effects": {"legame": 5, "segreto": -3}
-            }
-          ]
-        }
-      },
-      {
-        "index": 2,
-        "background": "assets/episodes/s1/s1_centro_commerciale/page_parcheggio.webp",
-        "panels": [
-          {
-            "id": "ep_scc_2",
-            "characters": ["favilla", "mallow"],
-            "text_blocks": [
-              {"id": "ep_scc_2_tb_0", "type": "narration", "text": "Parcheggio. Il sole batte sul cemento."},
-              {"id": "ep_scc_2_tb_1", "type": "narration", "text": "Mallow porta i sacchetti. Lex dorme sul passeggino, la giraffa stretta nel pugno."},
-              {"id": "ep_scc_2_tb_2", "type": "dialogue", "speaker": "mallow", "text": "«Non tutte le giornate devono essere qualcosa. Alcune possono solo essere belle.»"},
-              {"id": "ep_scc_2_tb_3", "type": "thought", "text": "È stata normale. È stata proprio normale."}
-            ],
-            "interactions": []
-          }
-        ]
-      },
-      {
-        "index": 3,
         "background": "assets/episodes/s1/s1_centro_commerciale/page_gatto_parcheggio.webp",
         "panels": [
           {
-            "id": "ep_scc_3",
+            "id": "ep_scc_1",
             "characters": ["gatto"],
             "text_blocks": [
-              {"id": "ep_scc_3_tb_0", "type": "narration", "text": "Sul cofano della macchina accanto: il gatto."},
-              {"id": "ep_scc_3_tb_1", "type": "narration", "text": "Gli occhi gialli. Il pelo arancione. La coda arrotolata con l'aria di chi sa esattamente dove deve essere."},
-              {"id": "ep_scc_3_tb_2", "type": "narration", "text": "Si alza. Scende. Direzione civico 19, terzo piano."}
+              {"id": "ep_scc_1_tb_0", "type": "narration", "text": "Sul cofano della macchina accanto: il gatto."},
+              {"id": "ep_scc_1_tb_1", "type": "narration", "text": "Gli occhi gialli. Il pelo arancione. La coda arrotolata con l'aria di chi sa esattamente dove deve essere."},
+              {"id": "ep_scc_1_tb_2", "type": "narration", "text": "Si alza. Scende. Direzione civico 19, terzo piano."}
             ],
             "interactions": []
           }

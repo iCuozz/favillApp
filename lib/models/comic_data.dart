@@ -417,6 +417,9 @@ class MinigameConfig {
   /// Tema visivo opzionale per minigame multi-scenario (es. rincorsa_lex: "beach" | "mall").
   final String theme;
 
+  /// Dati extra arbitrari per minigame specializzati (es. carmela_dialogo: lista domande).
+  final Map<String, dynamic> extra;
+
   const MinigameConfig({
     required this.type,
     required this.productsTotal,
@@ -424,6 +427,7 @@ class MinigameConfig {
     this.rounds,
     required this.tiers,
     this.theme = 'beach',
+    this.extra = const {},
   });
 
   factory MinigameConfig.fromJson(Map<String, dynamic> json) {
@@ -439,6 +443,7 @@ class MinigameConfig {
       rounds: json['rounds'] as int?,
       tiers: tiers,
       theme: json['theme'] as String? ?? 'beach',
+      extra: (json['extra'] as Map<String, dynamic>?) ?? const {},
     );
   }
 
