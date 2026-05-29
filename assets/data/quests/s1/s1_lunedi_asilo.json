@@ -1,0 +1,320 @@
+{
+  "id": "s1_lunedi_asilo",
+  "pages": [
+    {
+      "index": 0,
+      "background": "assets/episodes/s1/s1_lunedi_asilo/page_0.webp",
+      "panels": [
+        {
+          "id": "sla0_0",
+          "characters": ["favilla", "mallow", "lex"],
+          "text_blocks": [
+            {
+              "id": "sla0_0_tb_0",
+              "type": "narration",
+              "text": "Lunedì mattina. Casa. Il sole è appena entrato dalla finestra del corridoio."
+            },
+            {
+              "id": "sla0_0_tb_1",
+              "type": "narration",
+              "text": "Favilla è in ginocchio sul pavimento del soggiorno con lo zaino di Lex aperto davanti. Gufetto dentro. Cambio dentro. Merenda dentro. Fastidio dentro."
+            },
+            {
+              "id": "sla0_0_tb_2",
+              "type": "thought",
+              "text": "Chi ha deciso che a sette mesi si può già avere un zaino?"
+            },
+            {
+              "id": "sla0_0_tb_3",
+              "type": "dialogue",
+              "speaker": "mallow",
+              "text": "«Ci metti anche il manuale di istruzioni per i maestre?»"
+            },
+            {
+              "id": "sla0_0_tb_4",
+              "type": "thought",
+              "text": "Non è divertente. Un po' lo è."
+            }
+          ],
+          "interactions": []
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "background": "assets/episodes/s1/s1_lunedi_asilo/page_1.webp",
+      "panels": [
+        {
+          "id": "sla1_0",
+          "characters": ["mallow", "lex"],
+          "text_blocks": [
+            {
+              "id": "sla1_0_tb_0",
+              "type": "narration",
+              "text": "Lex è nel box. Mallow gli ha sistemato accanto il notebook — «un secondo, poi torno» — ed è andato in cucina."
+            },
+            {
+              "id": "sla1_0_tb_1",
+              "type": "narration",
+              "text": "Il notebook è aperto. Schermata di login. Password oscurata da asterischi."
+            },
+            {
+              "id": "sla1_0_tb_2",
+              "type": "narration",
+              "text": "Lex lo fissa. Lo fissa davvero."
+            },
+            {
+              "id": "sla1_0_tb_3",
+              "type": "thought",
+              "text": "Mamma ha qualcosa che si nasconde. Forse in quel notebook c'è una traccia."
+            },
+            {
+              "id": "sla1_0_tb_4",
+              "type": "narration",
+              "text": "Allunga una mano. Poi l'altra. Raggiunge la tastiera."
+            }
+          ],
+          "interactions": []
+        }
+      ],
+      "choice": {
+        "id": "crack_password_choice",
+        "prompt": "Lex scruta lo schermo. Un clic. Un altro. Un piano.",
+        "options": [
+          {
+            "id": "tenta_password",
+            "label": "Tenta.",
+            "goto_branch": "branch_genio",
+            "stat_effects": {},
+            "minigame": {
+              "type": "crack_password",
+              "tiers": [
+                {
+                  "min": 2,
+                  "label": "Genio.",
+                  "goto_branch": "branch_genio",
+                  "stat_effects": { "segreto": -5 },
+                  "set_flags": { "lex_ha_un_piano": true }
+                },
+                {
+                  "min": 1,
+                  "label": "Quasi.",
+                  "goto_branch": "branch_quasi",
+                  "stat_effects": { "legame": 5 }
+                },
+                {
+                  "min": 0,
+                  "label": "Beccato.",
+                  "goto_branch": "branch_beccato",
+                  "stat_effects": { "legame": 10 }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "branches": {
+    "branch_genio": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_lunedi_asilo/page_genio.webp",
+          "panels": [
+            {
+              "id": "sla_bg_0",
+              "characters": ["lex"],
+              "text_blocks": [
+                {
+                  "id": "sla_bg_0_tb_0",
+                  "type": "narration",
+                  "text": "Il notebook si sblocca. Lex spalanca gli occhi."
+                },
+                {
+                  "id": "sla_bg_0_tb_1",
+                  "type": "narration",
+                  "text": "Apre una cartella. Un'altra. Trova un programma con tante forme colorate. Comincia a disegnare: cerchi, frecce, simboli."
+                },
+                {
+                  "id": "sla_bg_0_tb_2",
+                  "type": "thought",
+                  "text": "Rilevatore di energia. Sì. Come fa la mamma a scaldarsi — ci deve essere uno schema."
+                },
+                {
+                  "id": "sla_bg_0_tb_3",
+                  "type": "narration",
+                  "text": "Passi in corridoio. Lex chiude il notebook in due secondi. Torna nella posizione di default: sdraiato, gufetto in mano, aria da dormire."
+                },
+                {
+                  "id": "sla_bg_0_tb_4",
+                  "type": "narration",
+                  "text": "Mallow non ha notato niente. Favilla neanche. Lex ha un piano."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "branch_quasi": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_lunedi_asilo/page_quasi.webp",
+          "panels": [
+            {
+              "id": "sla_bq_0",
+              "characters": ["lex", "mallow", "favilla"],
+              "text_blocks": [
+                {
+                  "id": "sla_bq_0_tb_0",
+                  "type": "narration",
+                  "text": "Quasi. La password era lì, a un simbolo di distanza."
+                },
+                {
+                  "id": "sla_bq_0_tb_1",
+                  "type": "narration",
+                  "text": "Passi in corridoio. Mallow e Favilla tornano dalla cucina."
+                },
+                {
+                  "id": "sla_bq_0_tb_2",
+                  "type": "narration",
+                  "text": "Trovano Lex con le mani sulla tastiera, lo sguardo concentrato come un piccolo ingegnere."
+                },
+                {
+                  "id": "sla_bq_0_tb_3",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "«Ma… sta cercando di—?»"
+                },
+                {
+                  "id": "sla_bq_0_tb_4",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "«Non dire una parola.»"
+                },
+                {
+                  "id": "sla_bq_0_tb_5",
+                  "type": "narration",
+                  "text": "Ridono. In silenzio, ma ridono."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "branch_beccato": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_lunedi_asilo/page_beccato.webp",
+          "panels": [
+            {
+              "id": "sla_bb_0",
+              "characters": ["lex", "mallow", "favilla"],
+              "text_blocks": [
+                {
+                  "id": "sla_bb_0_tb_0",
+                  "type": "narration",
+                  "text": "La password resiste. Lex non cede: continua a premere tasti con aria metodica."
+                },
+                {
+                  "id": "sla_bb_0_tb_1",
+                  "type": "narration",
+                  "text": "Mallow e Favilla tornano dalla cucina. Si fermano sulla soglia."
+                },
+                {
+                  "id": "sla_bb_0_tb_2",
+                  "type": "narration",
+                  "text": "Lex: manine sulla tastiera, espressione mortalmente seria, schiena dritta."
+                },
+                {
+                  "id": "sla_bb_0_tb_3",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "«...Sta hackerando il mio notebook.»"
+                },
+                {
+                  "id": "sla_bb_0_tb_4",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "«Ovviamente.»"
+                },
+                {
+                  "id": "sla_bb_0_tb_5",
+                  "type": "narration",
+                  "text": "Ridono fino a che Lex li guarda con l'aria offesa di chi stava lavorando."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "epilogue": {
+    "pages": [
+      {
+        "index": 0,
+        "background": "assets/episodes/s1/s1_lunedi_asilo/page_epilogo_0.webp",
+        "panels": [
+          {
+            "id": "ep_sla_0",
+            "characters": ["favilla", "mallow", "lex"],
+            "text_blocks": [
+              {
+                "id": "ep_sla_0_tb_0",
+                "type": "narration",
+                "text": "Dieci minuti dopo. La famiglia esce di casa."
+              },
+              {
+                "id": "ep_sla_0_tb_1",
+                "type": "narration",
+                "text": "Mallow ha la chiave. Favilla ha lo zaino. Lex ha il gufetto e un'espressione che non promette niente di buono."
+              },
+              {
+                "id": "ep_sla_0_tb_2",
+                "type": "thought",
+                "text": "Asilo. Bene. Nuovo territorio. Nuove variabili da mappare."
+              }
+            ],
+            "interactions": []
+          }
+        ]
+      },
+      {
+        "index": 1,
+        "background": "assets/episodes/s1/s1_lunedi_asilo/page_epilogo_1.webp",
+        "panels": [
+          {
+            "id": "ep_sla_1",
+            "characters": [],
+            "text_blocks": [
+              {
+                "id": "ep_sla_1_tb_0",
+                "type": "narration",
+                "text": "Asilo Comunale di Nova Tutinia."
+              },
+              {
+                "id": "ep_sla_1_tb_1",
+                "type": "narration",
+                "text": "Giochi colorati nel cortile. Una maestra che sorride con la stanchezza professionale di chi ne ha viste tante."
+              },
+              {
+                "id": "ep_sla_1_tb_2",
+                "type": "narration",
+                "text": "Un nuovo posto sulla mappa."
+              }
+            ],
+            "interactions": []
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -87,6 +87,7 @@ class _WorldMapPageState extends State<WorldMapPage>
       (id: 's1_domenica_parco',  title: 'EP5 · La Domenica al Parco', file: 'assets/data/quests/s1/s1_domenica_parco.json'),
       (id: 's1_mare',            title: 'EP6 · Un Giorno al Mare',    file: 'assets/data/quests/s1/s1_mare.json'),
       (id: 's1_centro_commerciale', title: 'EP6alt · GalaxiaMall',     file: 'assets/data/quests/s1/s1_centro_commerciale.json'),
+      (id: 's1_lunedi_asilo',      title: 'EP7 · Lunedì all\'Asilo',   file: 'assets/data/quests/s1/s1_lunedi_asilo.json'),
     ];
 
     showModalBottomSheet<void>(

@@ -1,0 +1,320 @@
+{
+  "id": "s1_lunedi_asilo",
+  "pages": [
+    {
+      "index": 0,
+      "background": "assets/episodes/s1/s1_lunedi_asilo/page_0.webp",
+      "panels": [
+        {
+          "id": "sla0_0",
+          "characters": ["favilla", "mallow", "lex"],
+          "text_blocks": [
+            {
+              "id": "sla0_0_tb_0",
+              "type": "narration",
+              "text": "Monday morning. Home. The sun has just come through the hallway window."
+            },
+            {
+              "id": "sla0_0_tb_1",
+              "type": "narration",
+              "text": "Favilla is kneeling on the living room floor with Lex's backpack open in front of her. Little owl inside. Change of clothes inside. Snack inside. Annoyance inside."
+            },
+            {
+              "id": "sla0_0_tb_2",
+              "type": "thought",
+              "text": "Who decided that at seven months you can already have a backpack?"
+            },
+            {
+              "id": "sla0_0_tb_3",
+              "type": "dialogue",
+              "speaker": "mallow",
+              "text": "\"Are you also packing an instruction manual for the teachers?\""
+            },
+            {
+              "id": "sla0_0_tb_4",
+              "type": "thought",
+              "text": "It's not funny. It kind of is."
+            }
+          ],
+          "interactions": []
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "background": "assets/episodes/s1/s1_lunedi_asilo/page_1.webp",
+      "panels": [
+        {
+          "id": "sla1_0",
+          "characters": ["mallow", "lex"],
+          "text_blocks": [
+            {
+              "id": "sla1_0_tb_0",
+              "type": "narration",
+              "text": "Lex is in the playpen. Mallow left his notebook nearby — \"just a sec, be right back\" — and went to the kitchen."
+            },
+            {
+              "id": "sla1_0_tb_1",
+              "type": "narration",
+              "text": "The notebook is open. Login screen. Password hidden behind asterisks."
+            },
+            {
+              "id": "sla1_0_tb_2",
+              "type": "narration",
+              "text": "Lex stares at it. Really stares."
+            },
+            {
+              "id": "sla1_0_tb_3",
+              "type": "thought",
+              "text": "Mom hides something. Maybe there's a clue in that notebook."
+            },
+            {
+              "id": "sla1_0_tb_4",
+              "type": "narration",
+              "text": "He reaches out one hand. Then the other. He finds the keyboard."
+            }
+          ],
+          "interactions": []
+        }
+      ],
+      "choice": {
+        "id": "crack_password_choice",
+        "prompt": "Lex stares at the screen. One click. Another. A plan.",
+        "options": [
+          {
+            "id": "tenta_password",
+            "label": "Try.",
+            "goto_branch": "branch_genio",
+            "stat_effects": {},
+            "minigame": {
+              "type": "crack_password",
+              "tiers": [
+                {
+                  "min": 2,
+                  "label": "Genius.",
+                  "goto_branch": "branch_genio",
+                  "stat_effects": { "segreto": -5 },
+                  "set_flags": { "lex_ha_un_piano": true }
+                },
+                {
+                  "min": 1,
+                  "label": "Almost.",
+                  "goto_branch": "branch_quasi",
+                  "stat_effects": { "legame": 5 }
+                },
+                {
+                  "min": 0,
+                  "label": "Busted.",
+                  "goto_branch": "branch_beccato",
+                  "stat_effects": { "legame": 10 }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "branches": {
+    "branch_genio": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_lunedi_asilo/page_genio.webp",
+          "panels": [
+            {
+              "id": "sla_bg_0",
+              "characters": ["lex"],
+              "text_blocks": [
+                {
+                  "id": "sla_bg_0_tb_0",
+                  "type": "narration",
+                  "text": "The notebook unlocks. Lex's eyes go wide."
+                },
+                {
+                  "id": "sla_bg_0_tb_1",
+                  "type": "narration",
+                  "text": "He opens a folder. Then another. He finds a program with lots of colorful shapes. He starts drawing: circles, arrows, symbols."
+                },
+                {
+                  "id": "sla_bg_0_tb_2",
+                  "type": "thought",
+                  "text": "Energy detector. Yes. The way mom heats up — there must be a pattern."
+                },
+                {
+                  "id": "sla_bg_0_tb_3",
+                  "type": "narration",
+                  "text": "Footsteps in the hallway. Lex closes the notebook in two seconds flat. Returns to default position: lying down, little owl in hand, pretending to sleep."
+                },
+                {
+                  "id": "sla_bg_0_tb_4",
+                  "type": "narration",
+                  "text": "Mallow didn't notice a thing. Neither did Favilla. Lex has a plan."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "branch_quasi": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_lunedi_asilo/page_quasi.webp",
+          "panels": [
+            {
+              "id": "sla_bq_0",
+              "characters": ["lex", "mallow", "favilla"],
+              "text_blocks": [
+                {
+                  "id": "sla_bq_0_tb_0",
+                  "type": "narration",
+                  "text": "Almost. The password was right there, one symbol away."
+                },
+                {
+                  "id": "sla_bq_0_tb_1",
+                  "type": "narration",
+                  "text": "Footsteps in the hallway. Mallow and Favilla return from the kitchen."
+                },
+                {
+                  "id": "sla_bq_0_tb_2",
+                  "type": "narration",
+                  "text": "They find Lex with his hands on the keyboard, focused look of a tiny engineer."
+                },
+                {
+                  "id": "sla_bq_0_tb_3",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "\"Is he… trying to—?\""
+                },
+                {
+                  "id": "sla_bq_0_tb_4",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "\"Don't say a word.\""
+                },
+                {
+                  "id": "sla_bq_0_tb_5",
+                  "type": "narration",
+                  "text": "They laugh. Silently, but they laugh."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "branch_beccato": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_lunedi_asilo/page_beccato.webp",
+          "panels": [
+            {
+              "id": "sla_bb_0",
+              "characters": ["lex", "mallow", "favilla"],
+              "text_blocks": [
+                {
+                  "id": "sla_bb_0_tb_0",
+                  "type": "narration",
+                  "text": "The password holds. Lex doesn't give up: he keeps pressing keys with methodical determination."
+                },
+                {
+                  "id": "sla_bb_0_tb_1",
+                  "type": "narration",
+                  "text": "Mallow and Favilla return from the kitchen. They stop in the doorway."
+                },
+                {
+                  "id": "sla_bb_0_tb_2",
+                  "type": "narration",
+                  "text": "Lex: tiny hands on keyboard, mortally serious expression, perfectly straight back."
+                },
+                {
+                  "id": "sla_bb_0_tb_3",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "\"...He's hacking my notebook.\""
+                },
+                {
+                  "id": "sla_bb_0_tb_4",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "\"Obviously.\""
+                },
+                {
+                  "id": "sla_bb_0_tb_5",
+                  "type": "narration",
+                  "text": "They laugh until Lex gives them the look of someone who was working."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "epilogue": {
+    "pages": [
+      {
+        "index": 0,
+        "background": "assets/episodes/s1/s1_lunedi_asilo/page_epilogo_0.webp",
+        "panels": [
+          {
+            "id": "ep_sla_0",
+            "characters": ["favilla", "mallow", "lex"],
+            "text_blocks": [
+              {
+                "id": "ep_sla_0_tb_0",
+                "type": "narration",
+                "text": "Ten minutes later. The family leaves home."
+              },
+              {
+                "id": "ep_sla_0_tb_1",
+                "type": "narration",
+                "text": "Mallow has the key. Favilla has the backpack. Lex has the little owl and an expression that doesn't bode well."
+              },
+              {
+                "id": "ep_sla_0_tb_2",
+                "type": "thought",
+                "text": "Nursery school. Good. New territory. New variables to map."
+              }
+            ],
+            "interactions": []
+          }
+        ]
+      },
+      {
+        "index": 1,
+        "background": "assets/episodes/s1/s1_lunedi_asilo/page_epilogo_1.webp",
+        "panels": [
+          {
+            "id": "ep_sla_1",
+            "characters": [],
+            "text_blocks": [
+              {
+                "id": "ep_sla_1_tb_0",
+                "type": "narration",
+                "text": "Nova Tutinia Municipal Nursery."
+              },
+              {
+                "id": "ep_sla_1_tb_1",
+                "type": "narration",
+                "text": "Colorful toys in the courtyard. A teacher smiling with the professional weariness of someone who has seen it all."
+              },
+              {
+                "id": "ep_sla_1_tb_2",
+                "type": "narration",
+                "text": "A new place on the map."
+              }
+            ],
+            "interactions": []
+          }
+        ]
+      }
+    ]
+  }
+}

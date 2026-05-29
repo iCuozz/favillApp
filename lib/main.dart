@@ -31,6 +31,7 @@ import 'widgets/minigame_lex_strike.dart';
 import 'widgets/minigame_respira.dart';
 import 'widgets/minigame_rincorsa_lex.dart';
 import 'widgets/minigame_carmela_dialogo.dart';
+import 'widgets/minigame_crack_password.dart';
 import 'widgets/minigame_rincorsa.dart';
 import 'widgets/minigame_schiva_lex.dart';
 
@@ -639,6 +640,28 @@ class _EpisodePageState extends State<EpisodePage> {
                 Navigator.of(context).pop();
                 final branch = tier.gotoBranch.isNotEmpty ? tier.gotoBranch : null;
                 final flags = tier.setFlags.isNotEmpty ? tier.setFlags : null;
+                final isSuccess = tier.minProducts >= 2;
+                AudioService.instance.playSfx(
+                    isSuccess ? SfxEvent.minigameSuccess : SfxEvent.minigameFail);
+                _applyEffectsAndNavigate(option,
+                    overrideEffects: effects,
+                    overrideBranch: branch,
+                    overrideFlags: flags);
+              },
+            ),
+          ),
+        );
+      case 'crack_password':
+        Navigator.of(context).push<void>(
+          MaterialPageRoute(
+            builder: (_) => MinigameCrackPasswordScreen(
+              config: cfg,
+              onComplete: (effects, label, tier) {
+                Navigator.of(context).pop();
+                final branch =
+                    tier.gotoBranch.isNotEmpty ? tier.gotoBranch : null;
+                final flags =
+                    tier.setFlags.isNotEmpty ? tier.setFlags : null;
                 final isSuccess = tier.minProducts >= 2;
                 AudioService.instance.playSfx(
                     isSuccess ? SfxEvent.minigameSuccess : SfxEvent.minigameFail);

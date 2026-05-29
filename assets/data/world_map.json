@@ -34,6 +34,18 @@
             "s1_scuola_1"
           ],
           "requires_stats": {}
+        },
+        {
+          "id": "s1_lunedi_asilo",
+          "title": "Il Lunedì dell'Asilo",
+          "subtitle": "Lex ha un piano. Mallow ha un notebook.",
+          "file": "assets/data/quests/s1/s1_lunedi_asilo.json",
+          "thumbnail": "assets/episodes/prologo/thumb.webp",
+          "season": 1,
+          "requires_completed": [
+            "s1_domenica_parco"
+          ],
+          "requires_stats": {}
         }
       ]
     },
@@ -168,6 +180,19 @@
         "requires_stats": {}
       }
     ]
+    },
+    {
+      "id": "asilo",
+      "name": "Asilo",
+      "emoji": "🏫🧸",
+      "description": "Asilo Comunale di Nova Tutinia. Giochi colorati, maestre stanche, e Lex che osserva tutto.",
+      "unlocked_by_default": false,
+      "unlock_after_quest": "s1_lunedi_asilo",
+      "position": {
+        "x": 0.42,
+        "y": 0.18
+      },
+      "quests": []
     }
   ]
 }
