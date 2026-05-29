@@ -45,24 +45,44 @@ const _kBottomHalfWFrac = 0.44; // track half-width at bottom = frac * screenW
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
-enum _ObstacleType { umbrella, sunbather, sandcastle, bag, deckchair }
+enum _ObstacleType {
+  // beach
+  umbrella, sunbather, sandcastle, bag, deckchair,
+  // mall
+  cart, shopper, kiosk, bench, mallbag,
+}
 
 extension _ObstacleExt on _ObstacleType {
   String get emoji {
     switch (this) {
-      case _ObstacleType.umbrella:
-        return '⛱';
-      case _ObstacleType.sunbather:
-        return '🧘';
-      case _ObstacleType.sandcastle:
-        return '🏰';
-      case _ObstacleType.bag:
-        return '🧺';
-      case _ObstacleType.deckchair:
-        return '🪑';
+      case _ObstacleType.umbrella:   return '⛱';
+      case _ObstacleType.sunbather:  return '🧘';
+      case _ObstacleType.sandcastle: return '🏰';
+      case _ObstacleType.bag:        return '🧺';
+      case _ObstacleType.deckchair:  return '🪑';
+      case _ObstacleType.cart:       return '🛒';
+      case _ObstacleType.shopper:    return '👵';
+      case _ObstacleType.kiosk:      return '🎪';
+      case _ObstacleType.bench:      return '💺';
+      case _ObstacleType.mallbag:    return '🛍️';
     }
   }
 }
+
+const _kBeachObstacles = [
+  _ObstacleType.umbrella,
+  _ObstacleType.sunbather,
+  _ObstacleType.sandcastle,
+  _ObstacleType.bag,
+  _ObstacleType.deckchair,
+];
+const _kMallObstacles = [
+  _ObstacleType.cart,
+  _ObstacleType.shopper,
+  _ObstacleType.kiosk,
+  _ObstacleType.bench,
+  _ObstacleType.mallbag,
+];
 
 class _Obstacle {
   final int lane;
@@ -233,8 +253,8 @@ class _MinigameRincorsaLexScreenState extends State<MinigameRincorsaLexScreen>
       ..shuffle(_rng);
     final lane = available.first;
 
-    final type =
-        _ObstacleType.values[_rng.nextInt(_ObstacleType.values.length)];
+    final pool = widget.config.theme == 'mall' ? _kMallObstacles : _kBeachObstacles;
+    final type = pool[_rng.nextInt(pool.length)];
     _obstacles.add(_Obstacle(lane: lane, y: -0.08, type: type));
 
     if (lane == _lastSpawnLane) {
@@ -359,11 +379,17 @@ class _MinigameRincorsaLexScreenState extends State<MinigameRincorsaLexScreen>
         RepaintBoundary(
           child: CustomPaint(
             size: size,
-            painter: _TrackPainter(
-              scrollOffset: _scrollOffset,
-              flashIntensity: _flashAnim.value,
-              stunProgress: _stunT,
-            ),
+            painter: widget.config.theme == 'mall'
+                ? _MallBgPainter(
+                    scrollOffset: _scrollOffset,
+                    flashIntensity: _flashAnim.value,
+                    stunProgress: _stunT,
+                  )
+                : _TrackPainter(
+                    scrollOffset: _scrollOffset,
+                    flashIntensity: _flashAnim.value,
+                    stunProgress: _stunT,
+                  ),
           ),
         ),
 
@@ -734,7 +760,199 @@ class _TrackPainter extends CustomPainter {
       old.stunProgress != stunProgress;
 }
 
-// ─── Sprite widgets ───────────────────────────────────────────────────────────
+// ─── Mall background painter ─────────────────────────────────────────────────
+
+class _MallBgPainter extends CustomPainter {
+  final double scrollOffset;
+  final double flashIntensity;
+  final double stunProgress;
+
+  const _MallBgPainter({
+    required this.scrollOffset,
+    required this.flashIntensity,
+    required this.stunProgress,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final w = size.width;
+    final h = size.height;
+    final horizonY = h * _kHorizonFrac;
+    final cx = w / 2;
+    final bHalfW = w * _kBottomHalfWFrac;
+
+    _drawCeiling(canvas, size, horizonY, cx);
+    _drawFloor(canvas, size, horizonY, cx, bHalfW);
+    _drawTrack(canvas, size, horizonY, bHalfW);
+    _drawLaneMarkings(canvas, size, horizonY, bHalfW);
+    _drawEdgeShadow(canvas, size, horizonY, bHalfW, cx);
+
+    if (flashIntensity > 0) {
+      canvas.drawRect(
+        Rect.fromLTWH(0, 0, w, h),
+        Paint()..color = Colors.red.withValues(alpha: 0.30 * flashIntensity),
+      );
+    }
+  }
+
+  void _drawCeiling(Canvas canvas, Size size, double horizonY, double cx) {
+    // Ceiling gradient (light beige→white)
+    final rect = Rect.fromLTWH(0, 0, size.width, horizonY + 4);
+    canvas.drawRect(
+      rect,
+      Paint()
+        ..shader = const LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [Color(0xFFE8E4DC), Color(0xFFF5F2EE)],
+        ).createShader(rect),
+    );
+
+    // Fluorescent strip lights converging to VP
+    final lightPaint = Paint()
+      ..color = const Color(0xFFFFFFCC).withValues(alpha: 0.80)
+      ..strokeWidth = 3.5
+      ..strokeCap = StrokeCap.round;
+
+    for (final fx in [-0.28, 0.0, 0.28]) {
+      final topX = cx + fx * size.width;
+      canvas.drawLine(Offset(cx, horizonY), Offset(topX, 0), lightPaint);
+    }
+
+    // Glow on ceiling from lights
+    canvas.drawRect(
+      Rect.fromLTWH(0, 0, size.width, horizonY * 0.4),
+      Paint()
+        ..color = const Color(0xFFFFFFAA).withValues(alpha: 0.18)
+        ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 12),
+    );
+  }
+
+  void _drawFloor(
+      Canvas canvas, Size size, double horizonY, double cx, double bHalfW) {
+    // Floor base (cream-white tiles)
+    final floorRect = Rect.fromLTWH(0, horizonY, size.width, size.height - horizonY);
+    canvas.drawRect(
+      floorRect,
+      Paint()
+        ..shader = const LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [Color(0xFFF0EDE8), Color(0xFFD8D4CD)],
+        ).createShader(floorRect),
+    );
+
+    final gridPaint = Paint()
+      ..color = const Color(0xFFB8B4AC).withValues(alpha: 0.50)
+      ..strokeWidth = 0.8;
+
+    // Horizontal tile lines (quadratic spacing → denser near horizon)
+    const rowCount = 9;
+    for (int k = 1; k <= rowCount; k++) {
+      final t = ((k / rowCount) * (k / rowCount));
+      final y = horizonY + t * (size.height - horizonY);
+      canvas.drawLine(Offset(0, y), Offset(size.width, y), gridPaint);
+    }
+
+    // Vertical tile lines converging to VP
+    for (int k = -6; k <= 6; k++) {
+      final bx = cx + k * (size.width / 6.0);
+      final so = (scrollOffset * 0.06) % 1.0;
+      final y0 = horizonY + so * (size.height - horizonY) * 0.1;
+      canvas.drawLine(Offset(cx, y0), Offset(bx, size.height + 10), gridPaint);
+    }
+  }
+
+  void _drawTrack(Canvas canvas, Size size, double horizonY, double bHalfW) {
+    final cx = size.width / 2;
+    final path = Path()
+      ..moveTo(cx - _kHorizonHalfW, horizonY + 6)
+      ..lineTo(cx + _kHorizonHalfW, horizonY + 6)
+      ..lineTo(cx + bHalfW, size.height + 10)
+      ..lineTo(cx - bHalfW, size.height + 10)
+      ..close();
+
+    canvas.drawPath(
+      path,
+      Paint()
+        ..shader = LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            const Color(0xFFEAE7E2),
+            const Color(0xFFCFC9C0),
+          ],
+        ).createShader(
+            Rect.fromLTWH(0, horizonY, size.width, size.height - horizonY)),
+    );
+  }
+
+  void _drawLaneMarkings(
+      Canvas canvas, Size size, double horizonY, double bHalfW) {
+    final cx = size.width / 2;
+    final dashPaint = Paint()
+      ..color = const Color(0xFF8A8680).withValues(alpha: 0.55)
+      ..strokeWidth = 2.0
+      ..strokeCap = StrokeCap.round;
+
+    for (final f in [1 / 3.0, 2 / 3.0]) {
+      final tx = (cx - _kHorizonHalfW) + (_kHorizonHalfW * 2) * f;
+      final bx = (cx - bHalfW) + (bHalfW * 2) * f;
+      final tyy = horizonY + 6;
+      final by = size.height + 10;
+
+      const dashCount = 10;
+      for (int i = 0; i < dashCount; i++) {
+        final t0 = ((i + scrollOffset) / dashCount) % 1.0;
+        final t1 = ((i + scrollOffset + 0.045) / dashCount) % 1.0;
+        if (t0 >= t1) continue;
+        final x0 = lerpDouble(tx, bx, t0)!;
+        final y0 = lerpDouble(tyy, by, t0)!;
+        final x1 = lerpDouble(tx, bx, t1)!;
+        final y1 = lerpDouble(tyy, by, t1)!;
+        canvas.drawLine(Offset(x0, y0), Offset(x1, y1), dashPaint);
+      }
+    }
+  }
+
+  void _drawEdgeShadow(
+      Canvas canvas, Size size, double horizonY, double bHalfW, double cx) {
+    canvas.drawPath(
+      Path()
+        ..moveTo(0, horizonY + 6)
+        ..lineTo(cx - _kHorizonHalfW, horizonY + 6)
+        ..lineTo(cx - bHalfW, size.height + 10)
+        ..lineTo(0, size.height + 10)
+        ..close(),
+      Paint()
+        ..shader = LinearGradient(
+          begin: Alignment.centerRight,
+          end: Alignment.centerLeft,
+          colors: [Colors.transparent, Colors.black.withValues(alpha: 0.18)],
+        ).createShader(Rect.fromLTWH(0, 0, cx, size.height)),
+    );
+    canvas.drawPath(
+      Path()
+        ..moveTo(size.width, horizonY + 6)
+        ..lineTo(cx + _kHorizonHalfW, horizonY + 6)
+        ..lineTo(cx + bHalfW, size.height + 10)
+        ..lineTo(size.width, size.height + 10)
+        ..close(),
+      Paint()
+        ..shader = LinearGradient(
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+          colors: [Colors.transparent, Colors.black.withValues(alpha: 0.18)],
+        ).createShader(Rect.fromLTWH(cx, 0, cx, size.height)),
+    );
+  }
+
+  @override
+  bool shouldRepaint(_MallBgPainter old) =>
+      old.scrollOffset != scrollOffset ||
+      old.flashIntensity != flashIntensity ||
+      old.stunProgress != stunProgress;
+}
 
 class _ObstacleSprite extends StatelessWidget {
   final String emoji;

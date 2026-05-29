@@ -414,12 +414,16 @@ class MinigameConfig {
   /// Tiers ordinati dal più alto al più basso (minProducts desc).
   final List<MinigameTier> tiers;
 
+  /// Tema visivo opzionale per minigame multi-scenario (es. rincorsa_lex: "beach" | "mall").
+  final String theme;
+
   const MinigameConfig({
     required this.type,
     required this.productsTotal,
     this.durationSeconds,
     this.rounds,
     required this.tiers,
+    this.theme = 'beach',
   });
 
   factory MinigameConfig.fromJson(Map<String, dynamic> json) {
@@ -434,6 +438,7 @@ class MinigameConfig {
       durationSeconds: json['duration_seconds'] as int?,
       rounds: json['rounds'] as int?,
       tiers: tiers,
+      theme: json['theme'] as String? ?? 'beach',
     );
   }
 

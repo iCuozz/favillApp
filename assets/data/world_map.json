@@ -156,7 +156,18 @@
         "x": 0.17,
         "y": 0.93
       },
-      "quests": []
+      "quests": [
+      {
+        "id": "s1_centro_commerciale",
+        "title": "Un Sabato al GalaxiaMall",
+        "subtitle": "Mallow ha una lista. Lex ha un piano.",
+        "thumbnail": "assets/episodes/prologo/thumb.webp",
+        "file": "assets/data/quests/s1/s1_centro_commerciale.json",
+        "season": 1,
+        "requires_completed": ["s1_domenica_parco"],
+        "requires_stats": {}
+      }
+    ]
     }
   ]
 }

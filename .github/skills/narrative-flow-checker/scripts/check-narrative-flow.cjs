@@ -40,6 +40,7 @@ const EPISODE_ORDER = [
   'quests/s1/s1_spesa_sabato.json',
   'quests/s1/s1_domenica_parco.json',
   'quests/s1/s1_mare.json',
+  'quests/s1/s1_centro_commerciale.json',
 ];
 
 // ─── Helpers ───────────────────────────────────────────────────────────────
