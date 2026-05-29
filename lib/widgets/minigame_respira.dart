@@ -100,12 +100,12 @@ class _MinigameRespiraScreenState extends State<MinigameRespiraScreen>
   final List<_Ember> _embers = [];
 
   // ── Parametri difficoltà ──────────────────────────────────────────────
-  static const _kRiseRate = 0.13;        // calore passivo per secondo
-  static const _kTapCool = 0.040;        // raffreddamento per singolo tap
+  static const _kRiseRate = 0.148;       // calore passivo per secondo
+  static const _kTapCool = 0.036;        // raffreddamento per singolo tap
   static const _kStreakBonus = 0.015;    // bonus per tap quando streak >= 4
   static const _kStreakMin = 4;          // soglia streak
   static const _kMinTapMs = 60;          // anti-spam (ignora tap < 60ms)
-  static const _kStartHeat = 0.45;
+  static const _kStartHeat = 0.52;
   static const _kTickMs = 40;            // 25 fps
 
   late AnimationController _pulseCtrl;
