@@ -25,22 +25,23 @@ class MinigameRincorsaLexScreen extends StatefulWidget {
       {super.key, required this.config, required this.onComplete});
 
   @override
-  State<MinigameRincorsaLexScreen> createState() => _MinigameRincorsaLexScreenState();
+  State<MinigameRincorsaLexScreen> createState() =>
+      _MinigameRincorsaLexScreenState();
 }
 
 // ─── Game constants ─────────────────────────────────────────────────────────
-const _kStartGap        = 0.55;
+const _kStartGap = 0.55;
 const _kNaturalRecovery = 0.022; // gap/s — running > crawling
 const _kCollisionPenalty = 0.18;
-const _kObstacleSpeed   = 0.62;  // track-y units/s
-const _kSpawnInterval   = 1.35;  // seconds
-const _kSwitchSpeed     = 9.0;   // lerp units/s
-const _kStunDuration    = 0.55;  // seconds
+const _kObstacleSpeed = 0.62; // track-y units/s
+const _kSpawnInterval = 1.35; // seconds
+const _kSwitchSpeed = 9.0; // lerp units/s
+const _kStunDuration = 0.55; // seconds
 
 // Visual track constants
-const _kHorizonFrac     = 0.38;  // horizon fraction of screen height
-const _kHorizonHalfW    = 44.0;  // track half-width at horizon (px)
-const _kBottomHalfWFrac = 0.44;  // track half-width at bottom = frac * screenW
+const _kHorizonFrac = 0.38; // horizon fraction of screen height
+const _kHorizonHalfW = 44.0; // track half-width at horizon (px)
+const _kBottomHalfWFrac = 0.44; // track half-width at bottom = frac * screenW
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -49,20 +50,25 @@ enum _ObstacleType { umbrella, sunbather, sandcastle, bag, deckchair }
 extension _ObstacleExt on _ObstacleType {
   String get emoji {
     switch (this) {
-      case _ObstacleType.umbrella:   return '⛱';
-      case _ObstacleType.sunbather:  return '🧘';
-      case _ObstacleType.sandcastle: return '🏰';
-      case _ObstacleType.bag:        return '🧺';
-      case _ObstacleType.deckchair:  return '🪑';
+      case _ObstacleType.umbrella:
+        return '⛱';
+      case _ObstacleType.sunbather:
+        return '🧘';
+      case _ObstacleType.sandcastle:
+        return '🏰';
+      case _ObstacleType.bag:
+        return '🧺';
+      case _ObstacleType.deckchair:
+        return '🪑';
     }
   }
 }
 
 class _Obstacle {
   final int lane;
-  double y;         // 0 = top (just spawned), 1 = bottom (at player)
+  double y; // 0 = top (just spawned), 1 = bottom (at player)
   final _ObstacleType type;
-  bool consumed;    // already scored a hit
+  bool consumed; // already scored a hit
 
   _Obstacle({required this.lane, required this.y, required this.type})
       : consumed = false;
@@ -74,25 +80,24 @@ enum _RunState { normal, switching, stunned }
 
 class _MinigameRincorsaLexScreenState extends State<MinigameRincorsaLexScreen>
     with TickerProviderStateMixin {
-
   // ── Game state ────────────────────────────────────────────────────────────
-  double _gap     = _kStartGap;
+  double _gap = _kStartGap;
   double _elapsed = 0;
-  bool   _finished = false;
+  bool _finished = false;
 
   // ── Runner ────────────────────────────────────────────────────────────────
-  int    _lane     = 1; // logical lane (0=L 1=C 2=R)
-  int    _fromLane = 1;
-  int    _toLane   = 1;
-  double _laneT    = 1.0;  // 0→1 lerp during switch
+  int _lane = 1; // logical lane (0=L 1=C 2=R)
+  int _fromLane = 1;
+  int _toLane = 1;
+  double _laneT = 1.0; // 0→1 lerp during switch
   _RunState _runState = _RunState.normal;
-  double _stunT = 0.0;     // 0→1 stun progress
+  double _stunT = 0.0; // 0→1 stun progress
 
   // ── Obstacles ─────────────────────────────────────────────────────────────
   final List<_Obstacle> _obstacles = [];
   double _timeSinceSpawn = 0.0;
-  int    _lastSpawnLane  = -1;
-  int    _consecutiveSpawnSame = 0;
+  int _lastSpawnLane = -1;
+  int _consecutiveSpawnSame = 0;
 
   // ── Scrolling track ───────────────────────────────────────────────────────
   double _scrollOffset = 0.0; // 0..1, loops
@@ -106,11 +111,11 @@ class _MinigameRincorsaLexScreenState extends State<MinigameRincorsaLexScreen>
 
   // ── Stun flash ────────────────────────────────────────────────────────────
   late AnimationController _flashCtrl;
-  late Animation<double>   _flashAnim;
+  late Animation<double> _flashAnim;
 
   // ── Screen shake ─────────────────────────────────────────────────────────
   late AnimationController _shakeCtrl;
-  late Animation<Offset>   _shakeAnim;
+  late Animation<Offset> _shakeAnim;
 
   // ── Tutorial ─────────────────────────────────────────────────────────────
   bool _showTutorial = true;
@@ -147,9 +152,8 @@ class _MinigameRincorsaLexScreenState extends State<MinigameRincorsaLexScreen>
   void _onTick(Duration elapsed) {
     if (_finished) return;
 
-    final dt = _lastTick == null
-        ? 0.0
-        : (elapsed - _lastTick!).inMicroseconds / 1e6;
+    final dt =
+        _lastTick == null ? 0.0 : (elapsed - _lastTick!).inMicroseconds / 1e6;
     _lastTick = elapsed;
 
     if (dt <= 0) return;
@@ -225,10 +229,12 @@ class _MinigameRincorsaLexScreenState extends State<MinigameRincorsaLexScreen>
     final available = [0, 1, 2].where((l) {
       if (_consecutiveSpawnSame >= 2 && l == _lastSpawnLane) return false;
       return true;
-    }).toList()..shuffle(_rng);
+    }).toList()
+      ..shuffle(_rng);
     final lane = available.first;
 
-    final type = _ObstacleType.values[_rng.nextInt(_ObstacleType.values.length)];
+    final type =
+        _ObstacleType.values[_rng.nextInt(_ObstacleType.values.length)];
     _obstacles.add(_Obstacle(lane: lane, y: -0.08, type: type));
 
     if (lane == _lastSpawnLane) {
@@ -271,8 +277,7 @@ class _MinigameRincorsaLexScreenState extends State<MinigameRincorsaLexScreen>
     final vx = details.velocity.pixelsPerSecond.dx;
     if (vx.abs() < 150) return; // threshold
 
-    final currentLogical =
-        _runState == _RunState.switching ? _toLane : _lane;
+    final currentLogical = _runState == _RunState.switching ? _toLane : _lane;
     final target = vx < 0
         ? (currentLogical - 1).clamp(0, 2)
         : (currentLogical + 1).clamp(0, 2);
@@ -282,8 +287,8 @@ class _MinigameRincorsaLexScreenState extends State<MinigameRincorsaLexScreen>
     HapticFeedback.lightImpact();
     setState(() {
       _fromLane = currentLogical;
-      _toLane   = target;
-      _laneT    = 0.0;
+      _toLane = target;
+      _laneT = 0.0;
       _runState = _RunState.switching;
     });
   }
@@ -293,7 +298,11 @@ class _MinigameRincorsaLexScreenState extends State<MinigameRincorsaLexScreen>
     _finished = true;
     _ticker.stop();
 
-    final int score = _gap <= 0.30 ? 2 : _gap <= 0.65 ? 1 : 0;
+    final int score = _gap <= 0.30
+        ? 2
+        : _gap <= 0.65
+            ? 1
+            : 0;
     final tier = widget.config.tierFor(score);
     widget.onComplete(tier.statEffects, tier.label, tier);
   }
@@ -309,7 +318,7 @@ class _MinigameRincorsaLexScreenState extends State<MinigameRincorsaLexScreen>
   // ── Current visual lane x (0..1 normalized) ──────────────────────────────
   double get _visualLaneNorm {
     final from = _fromLane / 2.0;
-    final to   = _toLane   / 2.0;
+    final to = _toLane / 2.0;
     return lerpDouble(from, to, _laneT)!;
   }
 
@@ -334,8 +343,8 @@ class _MinigameRincorsaLexScreenState extends State<MinigameRincorsaLexScreen>
   }
 
   Widget _buildGame(Size size) {
-    final horizonY  = size.height * _kHorizonFrac;
-    final bHalfW    = size.width  * _kBottomHalfWFrac;
+    final horizonY = size.height * _kHorizonFrac;
+    final bHalfW = size.width * _kBottomHalfWFrac;
 
     // Favilla visual X at bottom
     final favillaVisX = _laneVisualX(_visualLaneNorm, size);
@@ -361,14 +370,14 @@ class _MinigameRincorsaLexScreenState extends State<MinigameRincorsaLexScreen>
         // ── Obstacles ─────────────────────────────────────────────────────
         for (final obs in _obstacles) ...[
           () {
-            final pos  = _trackPos(obs.y, obs.lane, size, horizonY, bHalfW);
-            final sz   = _trackSpriteSize(obs.y);
+            final pos = _trackPos(obs.y, obs.lane, size, horizonY, bHalfW);
+            final sz = _trackSpriteSize(obs.y);
             final glow = (!obs.consumed && obs.y >= 0.55 && obs.y <= 0.90)
                 ? (obs.y - 0.55) / 0.35
                 : 0.0;
             return Positioned(
               left: pos.dx - sz / 2,
-              top:  pos.dy - sz * 0.9,
+              top: pos.dy - sz * 0.9,
               child: _ObstacleSprite(
                 emoji: obs.type.emoji,
                 size: sz,
@@ -383,15 +392,15 @@ class _MinigameRincorsaLexScreenState extends State<MinigameRincorsaLexScreen>
         // ── Lex ───────────────────────────────────────────────────────────
         Positioned(
           left: lexPos.dx - lexSize / 2,
-          top:  lexPos.dy - lexSize * 0.85,
+          top: lexPos.dy - lexSize * 0.85,
           child: _LexSprite(size: lexSize, gap: _gap),
         ),
 
         // ── Particles ─────────────────────────────────────────────────────
         for (final p in _particles)
           Positioned(
-            left: p.x * size.width  - p.size / 2,
-            top:  p.y * size.height - p.size / 2,
+            left: p.x * size.width - p.size / 2,
+            top: p.y * size.height - p.size / 2,
             child: Opacity(
               opacity: p.life.clamp(0, 1),
               child: Container(
@@ -400,7 +409,9 @@ class _MinigameRincorsaLexScreenState extends State<MinigameRincorsaLexScreen>
                 decoration: BoxDecoration(
                   color: p.color,
                   shape: BoxShape.circle,
-                  boxShadow: [BoxShadow(color: p.color.withOpacity(0.6), blurRadius: 4)],
+                  boxShadow: [
+                    BoxShadow(color: p.color.withOpacity(0.6), blurRadius: 4)
+                  ],
                 ),
               ),
             ),
@@ -409,7 +420,7 @@ class _MinigameRincorsaLexScreenState extends State<MinigameRincorsaLexScreen>
         // ── Favilla ───────────────────────────────────────────────────────
         Positioned(
           left: favillaVisX - 24,
-          top:  size.height * 0.84,
+          top: size.height * 0.84,
           child: _FavillaSprite(stunned: _runState == _RunState.stunned),
         ),
 
@@ -440,11 +451,12 @@ class _MinigameRincorsaLexScreenState extends State<MinigameRincorsaLexScreen>
   }
 
   // Track position from t (0=horizon, 1=bottom) and lane (0,1,2)
-  static Offset _trackPos(double t, int lane, Size size, double horizonY, double bHalfW) {
-    final screenY  = horizonY + (size.height - horizonY) * t;
-    final halfW    = lerpDouble(_kHorizonHalfW, bHalfW, t)!;
-    final laneW    = halfW * 2 / 3;
-    final x        = (size.width / 2 - halfW) + laneW * (lane + 0.5);
+  static Offset _trackPos(
+      double t, int lane, Size size, double horizonY, double bHalfW) {
+    final screenY = horizonY + (size.height - horizonY) * t;
+    final halfW = lerpDouble(_kHorizonHalfW, bHalfW, t)!;
+    final laneW = halfW * 2 / 3;
+    final x = (size.width / 2 - halfW) + laneW * (lane + 0.5);
     return Offset(x, screenY);
   }
 
@@ -477,15 +489,21 @@ class _MinigameRincorsaLexScreenState extends State<MinigameRincorsaLexScreen>
                       letterSpacing: 3,
                     )),
                 const SizedBox(height: 28),
-                _TutorialItem(icon: '👈', label: 'Swipe sinistra — cambia corsia'),
-                _TutorialItem(icon: '👉', label: 'Swipe destra — cambia corsia'),
-                _TutorialItem(icon: '⛱', label: 'Evita gli ostacoli sulla spiaggia'),
-                _TutorialItem(icon: '👶', label: 'Raggiungi Lex prima che tocchi l\'acqua!'),
+                const _TutorialItem(
+                    icon: '👈', label: 'Swipe sinistra — cambia corsia'),
+                const _TutorialItem(
+                    icon: '👉', label: 'Swipe destra — cambia corsia'),
+                const _TutorialItem(
+                    icon: '⛱', label: 'Evita gli ostacoli sulla spiaggia'),
+                const _TutorialItem(
+                    icon: '👶',
+                    label: 'Raggiungi Lex prima che tocchi l\'acqua!'),
                 const SizedBox(height: 40),
                 GestureDetector(
                   onTap: _startGame,
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 40, vertical: 16),
                     decoration: BoxDecoration(
                       gradient: const LinearGradient(
                         colors: [Color(0xFFFF6B35), Color(0xFFFFD700)],
@@ -525,8 +543,14 @@ class _Particle {
   double life;
   double size;
   Color color;
-  _Particle({required this.x, required this.y, required this.vx,
-    required this.vy, required this.life, required this.size, required this.color});
+  _Particle(
+      {required this.x,
+      required this.y,
+      required this.vx,
+      required this.vy,
+      required this.life,
+      required this.size,
+      required this.color});
 }
 
 // ─── Track CustomPainter ─────────────────────────────────────────────────────
@@ -545,7 +569,7 @@ class _TrackPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final horizonY = size.height * _kHorizonFrac;
-    final bHalfW   = size.width  * _kBottomHalfWFrac;
+    final bHalfW = size.width * _kBottomHalfWFrac;
 
     _drawSky(canvas, size, horizonY);
     _drawOcean(canvas, size, horizonY);
@@ -571,10 +595,10 @@ class _TrackPainter extends CustomPainter {
     // Wavy horizon line
     final rect = Rect.fromLTWH(0, horizonY - 8, size.width, 28);
     final paint = Paint()
-      ..shader = LinearGradient(
+      ..shader = const LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
-        colors: [const Color(0xFF1E8BC3), const Color(0xFF2C3E7A)],
+        colors: [Color(0xFF1E8BC3), Color(0xFF2C3E7A)],
       ).createShader(rect);
     canvas.drawRRect(
       RRect.fromRectAndRadius(rect, const Radius.circular(3)),
@@ -600,10 +624,10 @@ class _TrackPainter extends CustomPainter {
   void _drawBeach(Canvas canvas, Size size, double horizonY) {
     final rect = Rect.fromLTWH(0, horizonY + 20, size.width, size.height);
     final paint = Paint()
-      ..shader = LinearGradient(
+      ..shader = const LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
-        colors: [const Color(0xFFF5D98A), const Color(0xFFC9A44D)],
+        colors: [Color(0xFFF5D98A), Color(0xFFC9A44D)],
       ).createShader(rect);
     canvas.drawRect(rect, paint);
 
@@ -612,7 +636,8 @@ class _TrackPainter extends CustomPainter {
     final rng = Random(7);
     for (int i = 0; i < 60; i++) {
       final x = rng.nextDouble() * size.width;
-      final y = horizonY + 20 + rng.nextDouble() * (size.height - horizonY - 20);
+      final y =
+          horizonY + 20 + rng.nextDouble() * (size.height - horizonY - 20);
       canvas.drawCircle(Offset(x, y), 1.5 + rng.nextDouble() * 2.5, pebble);
     }
   }
@@ -628,10 +653,10 @@ class _TrackPainter extends CustomPainter {
       ..close();
 
     final paint = Paint()
-      ..shader = LinearGradient(
+      ..shader = const LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
-        colors: const [Color(0xFFE2BA78), Color(0xFFAF8040)],
+        colors: [Color(0xFFE2BA78), Color(0xFFAF8040)],
       ).createShader(
           Rect.fromLTWH(0, horizonY, size.width, size.height - horizonY));
     canvas.drawPath(path, paint);
@@ -736,7 +761,7 @@ class _ObstacleSprite extends StatelessWidget {
       children: [
         if (danger)
           Container(
-            width:  size * 1.6,
+            width: size * 1.6,
             height: size * 1.6,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
@@ -842,12 +867,14 @@ class _Hud extends StatelessWidget {
   final int totalSeconds;
 
   const _Hud(
-      {required this.secondsLeft, required this.gap, required this.totalSeconds});
+      {required this.secondsLeft,
+      required this.gap,
+      required this.totalSeconds});
 
   @override
   Widget build(BuildContext context) {
     final timeProgress = secondsLeft / totalSeconds;
-    final lexClose     = gap < 0.35;
+    final lexClose = gap < 0.35;
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
@@ -867,13 +894,17 @@ class _Hud extends StatelessWidget {
                   color: lexClose ? const Color(0xFFFFD700) : Colors.white,
                   letterSpacing: 3,
                   shadows: const [
-                    Shadow(color: Colors.black87, blurRadius: 6, offset: Offset(1, 1))
+                    Shadow(
+                        color: Colors.black87,
+                        blurRadius: 6,
+                        offset: Offset(1, 1))
                   ],
                 ),
               ),
               // Timer pill
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
                 decoration: BoxDecoration(
                   color: secondsLeft <= 5
                       ? Colors.red.withOpacity(0.85)
@@ -915,7 +946,7 @@ class _Hud extends StatelessWidget {
           // Gap / distance indicator
           Row(
             children: [
-              Text('⚡ ', style: const TextStyle(fontSize: 16)),
+              const Text('⚡ ', style: TextStyle(fontSize: 16)),
               Expanded(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(4),

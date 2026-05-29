@@ -29,18 +29,18 @@ class MinigameRincorsaScreen extends StatefulWidget {
 }
 
 // ─── Game constants ─────────────────────────────────────────────────────────
-const _kStartGap        = 0.55;
+const _kStartGap = 0.55;
 const _kNaturalRecovery = 0.022; // gap/s — running > walking thief
 const _kCollisionPenalty = 0.18;
-const _kObstacleSpeed   = 0.62;  // track-y units/s
-const _kSpawnInterval   = 1.35;  // seconds
-const _kSwitchSpeed     = 9.0;   // lerp units/s
-const _kStunDuration    = 0.55;  // seconds
+const _kObstacleSpeed = 0.62; // track-y units/s
+const _kSpawnInterval = 1.35; // seconds
+const _kSwitchSpeed = 9.0; // lerp units/s
+const _kStunDuration = 0.55; // seconds
 
 // Visual track constants
-const _kHorizonFrac     = 0.38;  // horizon fraction of screen height
-const _kHorizonHalfW    = 44.0;  // track half-width at horizon (px)
-const _kBottomHalfWFrac = 0.44;  // track half-width at bottom = frac * screenW
+const _kHorizonFrac = 0.38; // horizon fraction of screen height
+const _kHorizonHalfW = 44.0; // track half-width at horizon (px)
+const _kBottomHalfWFrac = 0.44; // track half-width at bottom = frac * screenW
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -49,20 +49,25 @@ enum _ObstacleType { branch, trunk, squirrel, hedgehog, puddle }
 extension _ObstacleExt on _ObstacleType {
   String get emoji {
     switch (this) {
-      case _ObstacleType.branch:    return '🌿';
-      case _ObstacleType.trunk:     return '🪵';
-      case _ObstacleType.squirrel:  return '🐿️';
-      case _ObstacleType.hedgehog:  return '🦔';
-      case _ObstacleType.puddle:    return '💧';
+      case _ObstacleType.branch:
+        return '🌿';
+      case _ObstacleType.trunk:
+        return '🪵';
+      case _ObstacleType.squirrel:
+        return '🐿️';
+      case _ObstacleType.hedgehog:
+        return '🦔';
+      case _ObstacleType.puddle:
+        return '💧';
     }
   }
 }
 
 class _Obstacle {
   final int lane;
-  double y;         // 0 = top (just spawned), 1 = bottom (at player)
+  double y; // 0 = top (just spawned), 1 = bottom (at player)
   final _ObstacleType type;
-  bool consumed;    // already scored a hit
+  bool consumed; // already scored a hit
 
   _Obstacle({required this.lane, required this.y, required this.type})
       : consumed = false;
@@ -74,25 +79,24 @@ enum _RunState { normal, switching, stunned }
 
 class _MinigameRincorsaScreenState extends State<MinigameRincorsaScreen>
     with TickerProviderStateMixin {
-
   // ── Game state ────────────────────────────────────────────────────────────
-  double _gap     = _kStartGap;
+  double _gap = _kStartGap;
   double _elapsed = 0;
-  bool   _finished = false;
+  bool _finished = false;
 
   // ── Runner ────────────────────────────────────────────────────────────────
-  int    _lane     = 1; // logical lane (0=L 1=C 2=R)
-  int    _fromLane = 1;
-  int    _toLane   = 1;
-  double _laneT    = 1.0;  // 0→1 lerp during switch
+  int _lane = 1; // logical lane (0=L 1=C 2=R)
+  int _fromLane = 1;
+  int _toLane = 1;
+  double _laneT = 1.0; // 0→1 lerp during switch
   _RunState _runState = _RunState.normal;
-  double _stunT = 0.0;     // 0→1 stun progress
+  double _stunT = 0.0; // 0→1 stun progress
 
   // ── Obstacles ─────────────────────────────────────────────────────────────
   final List<_Obstacle> _obstacles = [];
   double _timeSinceSpawn = 0.0;
-  int    _lastSpawnLane  = -1;
-  int    _consecutiveSpawnSame = 0;
+  int _lastSpawnLane = -1;
+  int _consecutiveSpawnSame = 0;
 
   // ── Scrolling track ───────────────────────────────────────────────────────
   double _scrollOffset = 0.0; // 0..1, loops
@@ -106,11 +110,11 @@ class _MinigameRincorsaScreenState extends State<MinigameRincorsaScreen>
 
   // ── Stun flash ────────────────────────────────────────────────────────────
   late AnimationController _flashCtrl;
-  late Animation<double>   _flashAnim;
+  late Animation<double> _flashAnim;
 
   // ── Screen shake ─────────────────────────────────────────────────────────
   late AnimationController _shakeCtrl;
-  late Animation<Offset>   _shakeAnim;
+  late Animation<Offset> _shakeAnim;
 
   // ── Tutorial ─────────────────────────────────────────────────────────────
   bool _showTutorial = true;
@@ -147,9 +151,8 @@ class _MinigameRincorsaScreenState extends State<MinigameRincorsaScreen>
   void _onTick(Duration elapsed) {
     if (_finished) return;
 
-    final dt = _lastTick == null
-        ? 0.0
-        : (elapsed - _lastTick!).inMicroseconds / 1e6;
+    final dt =
+        _lastTick == null ? 0.0 : (elapsed - _lastTick!).inMicroseconds / 1e6;
     _lastTick = elapsed;
 
     if (dt <= 0) return;
@@ -225,10 +228,12 @@ class _MinigameRincorsaScreenState extends State<MinigameRincorsaScreen>
     final available = [0, 1, 2].where((l) {
       if (_consecutiveSpawnSame >= 2 && l == _lastSpawnLane) return false;
       return true;
-    }).toList()..shuffle(_rng);
+    }).toList()
+      ..shuffle(_rng);
     final lane = available.first;
 
-    final type = _ObstacleType.values[_rng.nextInt(_ObstacleType.values.length)];
+    final type =
+        _ObstacleType.values[_rng.nextInt(_ObstacleType.values.length)];
     _obstacles.add(_Obstacle(lane: lane, y: -0.08, type: type));
 
     if (lane == _lastSpawnLane) {
@@ -271,8 +276,7 @@ class _MinigameRincorsaScreenState extends State<MinigameRincorsaScreen>
     final vx = details.velocity.pixelsPerSecond.dx;
     if (vx.abs() < 150) return; // threshold
 
-    final currentLogical =
-        _runState == _RunState.switching ? _toLane : _lane;
+    final currentLogical = _runState == _RunState.switching ? _toLane : _lane;
     final target = vx < 0
         ? (currentLogical - 1).clamp(0, 2)
         : (currentLogical + 1).clamp(0, 2);
@@ -282,8 +286,8 @@ class _MinigameRincorsaScreenState extends State<MinigameRincorsaScreen>
     HapticFeedback.lightImpact();
     setState(() {
       _fromLane = currentLogical;
-      _toLane   = target;
-      _laneT    = 0.0;
+      _toLane = target;
+      _laneT = 0.0;
       _runState = _RunState.switching;
     });
   }
@@ -293,7 +297,11 @@ class _MinigameRincorsaScreenState extends State<MinigameRincorsaScreen>
     _finished = true;
     _ticker.stop();
 
-    final int score = _gap <= 0.30 ? 2 : _gap <= 0.65 ? 1 : 0;
+    final int score = _gap <= 0.30
+        ? 2
+        : _gap <= 0.65
+            ? 1
+            : 0;
     final tier = widget.config.tierFor(score);
     widget.onComplete(tier.statEffects, tier.label, tier);
   }
@@ -309,7 +317,7 @@ class _MinigameRincorsaScreenState extends State<MinigameRincorsaScreen>
   // ── Current visual lane x (0..1 normalized) ──────────────────────────────
   double get _visualLaneNorm {
     final from = _fromLane / 2.0;
-    final to   = _toLane   / 2.0;
+    final to = _toLane / 2.0;
     return lerpDouble(from, to, _laneT)!;
   }
 
@@ -334,8 +342,8 @@ class _MinigameRincorsaScreenState extends State<MinigameRincorsaScreen>
   }
 
   Widget _buildGame(Size size) {
-    final horizonY  = size.height * _kHorizonFrac;
-    final bHalfW    = size.width  * _kBottomHalfWFrac;
+    final horizonY = size.height * _kHorizonFrac;
+    final bHalfW = size.width * _kBottomHalfWFrac;
 
     // Favilla visual X at bottom
     final favillaVisX = _laneVisualX(_visualLaneNorm, size);
@@ -361,14 +369,14 @@ class _MinigameRincorsaScreenState extends State<MinigameRincorsaScreen>
         // ── Obstacles ─────────────────────────────────────────────────────
         for (final obs in _obstacles) ...[
           () {
-            final pos  = _trackPos(obs.y, obs.lane, size, horizonY, bHalfW);
-            final sz   = _trackSpriteSize(obs.y);
+            final pos = _trackPos(obs.y, obs.lane, size, horizonY, bHalfW);
+            final sz = _trackSpriteSize(obs.y);
             final glow = (!obs.consumed && obs.y >= 0.55 && obs.y <= 0.90)
                 ? (obs.y - 0.55) / 0.35
                 : 0.0;
             return Positioned(
               left: pos.dx - sz / 2,
-              top:  pos.dy - sz * 0.9,
+              top: pos.dy - sz * 0.9,
               child: _ObstacleSprite(
                 emoji: obs.type.emoji,
                 size: sz,
@@ -383,15 +391,15 @@ class _MinigameRincorsaScreenState extends State<MinigameRincorsaScreen>
         // ── Lex ───────────────────────────────────────────────────────────
         Positioned(
           left: lexPos.dx - lexSize / 2,
-          top:  lexPos.dy - lexSize * 0.85,
+          top: lexPos.dy - lexSize * 0.85,
           child: _LexSprite(size: lexSize, gap: _gap),
         ),
 
         // ── Particles ─────────────────────────────────────────────────────
         for (final p in _particles)
           Positioned(
-            left: p.x * size.width  - p.size / 2,
-            top:  p.y * size.height - p.size / 2,
+            left: p.x * size.width - p.size / 2,
+            top: p.y * size.height - p.size / 2,
             child: Opacity(
               opacity: p.life.clamp(0, 1),
               child: Container(
@@ -400,7 +408,9 @@ class _MinigameRincorsaScreenState extends State<MinigameRincorsaScreen>
                 decoration: BoxDecoration(
                   color: p.color,
                   shape: BoxShape.circle,
-                  boxShadow: [BoxShadow(color: p.color.withOpacity(0.6), blurRadius: 4)],
+                  boxShadow: [
+                    BoxShadow(color: p.color.withOpacity(0.6), blurRadius: 4)
+                  ],
                 ),
               ),
             ),
@@ -409,7 +419,7 @@ class _MinigameRincorsaScreenState extends State<MinigameRincorsaScreen>
         // ── Favilla ───────────────────────────────────────────────────────
         Positioned(
           left: favillaVisX - 24,
-          top:  size.height * 0.84,
+          top: size.height * 0.84,
           child: _FavillaSprite(stunned: _runState == _RunState.stunned),
         ),
 
@@ -440,11 +450,12 @@ class _MinigameRincorsaScreenState extends State<MinigameRincorsaScreen>
   }
 
   // Track position from t (0=horizon, 1=bottom) and lane (0,1,2)
-  static Offset _trackPos(double t, int lane, Size size, double horizonY, double bHalfW) {
-    final screenY  = horizonY + (size.height - horizonY) * t;
-    final halfW    = lerpDouble(_kHorizonHalfW, bHalfW, t)!;
-    final laneW    = halfW * 2 / 3;
-    final x        = (size.width / 2 - halfW) + laneW * (lane + 0.5);
+  static Offset _trackPos(
+      double t, int lane, Size size, double horizonY, double bHalfW) {
+    final screenY = horizonY + (size.height - horizonY) * t;
+    final halfW = lerpDouble(_kHorizonHalfW, bHalfW, t)!;
+    final laneW = halfW * 2 / 3;
+    final x = (size.width / 2 - halfW) + laneW * (lane + 0.5);
     return Offset(x, screenY);
   }
 
@@ -477,15 +488,21 @@ class _MinigameRincorsaScreenState extends State<MinigameRincorsaScreen>
                       letterSpacing: 3,
                     )),
                 const SizedBox(height: 28),
-                _TutorialItem(icon: '👜', label: 'Ha la tua borsetta. Documenti. Chiavi. Tutto.'),
-                _TutorialItem(icon: '👈', label: 'Swipe sinistra — cambia corsia'),
-                _TutorialItem(icon: '👉', label: 'Swipe destra — cambia corsia'),
-                _TutorialItem(icon: '🌿', label: 'Evita gli ostacoli nel boschetto'),
+                const _TutorialItem(
+                    icon: '👜',
+                    label: 'Ha la tua borsetta. Documenti. Chiavi. Tutto.'),
+                const _TutorialItem(
+                    icon: '👈', label: 'Swipe sinistra — cambia corsia'),
+                const _TutorialItem(
+                    icon: '👉', label: 'Swipe destra — cambia corsia'),
+                const _TutorialItem(
+                    icon: '🌿', label: 'Evita gli ostacoli nel boschetto'),
                 const SizedBox(height: 40),
                 GestureDetector(
                   onTap: _startGame,
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 40, vertical: 16),
                     decoration: BoxDecoration(
                       gradient: const LinearGradient(
                         colors: [Color(0xFFFF6B35), Color(0xFFFFD700)],
@@ -525,8 +542,14 @@ class _Particle {
   double life;
   double size;
   Color color;
-  _Particle({required this.x, required this.y, required this.vx,
-    required this.vy, required this.life, required this.size, required this.color});
+  _Particle(
+      {required this.x,
+      required this.y,
+      required this.vx,
+      required this.vy,
+      required this.life,
+      required this.size,
+      required this.color});
 }
 
 // ─── Track CustomPainter ─────────────────────────────────────────────────────
@@ -545,7 +568,7 @@ class _TrackPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final horizonY = size.height * _kHorizonFrac;
-    final bHalfW   = size.width  * _kBottomHalfWFrac;
+    final bHalfW = size.width * _kBottomHalfWFrac;
 
     _drawSky(canvas, size, horizonY);
     _drawBoschetto(canvas, size, horizonY, bHalfW);
@@ -578,17 +601,26 @@ class _TrackPainter extends CustomPainter {
     drawCloud(size.width * 0.82, horizonY * 0.50);
   }
 
-  void _drawBoschetto(Canvas canvas, Size size, double horizonY, double bHalfW) {
+  void _drawBoschetto(
+      Canvas canvas, Size size, double horizonY, double bHalfW) {
     for (int i = 8; i >= 0; i--) {
       final t = 1.0 - i / 8.0;
       final rng = Random(42 + i);
-      final trackEdgeL = size.width / 2 - lerpDouble(_kHorizonHalfW, bHalfW, t)!;
-      final trackEdgeR = size.width / 2 + lerpDouble(_kHorizonHalfW, bHalfW, t)!;
+      final trackEdgeL =
+          size.width / 2 - lerpDouble(_kHorizonHalfW, bHalfW, t)!;
+      final trackEdgeR =
+          size.width / 2 + lerpDouble(_kHorizonHalfW, bHalfW, t)!;
       final y = lerpDouble(horizonY + 4, size.height * 0.98, t)!;
       final sideSpacing = 22 * (0.5 + t * 0.5);
       for (int j = 0; j < 2; j++) {
-        final leftX = trackEdgeL - 18 - (j * sideSpacing) - rng.nextDouble() * (6 + t * 10);
-        final rightX = trackEdgeR + 18 + (j * sideSpacing) + rng.nextDouble() * (6 + t * 10);
+        final leftX = trackEdgeL -
+            18 -
+            (j * sideSpacing) -
+            rng.nextDouble() * (6 + t * 10);
+        final rightX = trackEdgeR +
+            18 +
+            (j * sideSpacing) +
+            rng.nextDouble() * (6 + t * 10);
         _drawSingleTree(canvas, leftX, y, t);
         _drawSingleTree(canvas, rightX, y, t);
       }
@@ -633,9 +665,11 @@ class _TrackPainter extends CustomPainter {
     );
   }
 
-  void _drawUnderbrush(Canvas canvas, Size size, double horizonY, double bHalfW) {
+  void _drawUnderbrush(
+      Canvas canvas, Size size, double horizonY, double bHalfW) {
     final rng = Random(91);
-    final bushLight = Paint()..color = const Color(0xFF4CAF50).withOpacity(0.95);
+    final bushLight = Paint()
+      ..color = const Color(0xFF4CAF50).withOpacity(0.95);
     final bushDark = Paint()..color = const Color(0xFF2E7D32).withOpacity(0.95);
     final tuft = Paint()..color = const Color(0xFF2E7D32).withOpacity(0.72);
 
@@ -643,32 +677,52 @@ class _TrackPainter extends CustomPainter {
       for (int i = 0; i < 8; i++) {
         final t = (0.08 + i * 0.11 + rng.nextDouble() * 0.05).clamp(0.08, 0.95);
         final halfW = lerpDouble(_kHorizonHalfW, bHalfW, t)!;
-        final edgeX = side == 0 ? size.width / 2 - halfW : size.width / 2 + halfW;
+        final edgeX =
+            side == 0 ? size.width / 2 - halfW : size.width / 2 + halfW;
         final y = lerpDouble(horizonY + 10, size.height, t)!;
         final spread = lerpDouble(8, 22, t)!;
         final baseX = side == 0 ? edgeX - spread * 0.55 : edgeX + spread * 0.55;
 
         canvas.drawOval(
-          Rect.fromCenter(center: Offset(baseX, y), width: spread * 1.25, height: spread * 0.7),
+          Rect.fromCenter(
+              center: Offset(baseX, y),
+              width: spread * 1.25,
+              height: spread * 0.7),
           bushDark,
         );
         canvas.drawOval(
-          Rect.fromCenter(center: Offset(baseX + (side == 0 ? -spread * 0.12 : spread * 0.12), y - spread * 0.10), width: spread, height: spread * 0.62),
+          Rect.fromCenter(
+              center: Offset(
+                  baseX + (side == 0 ? -spread * 0.12 : spread * 0.12),
+                  y - spread * 0.10),
+              width: spread,
+              height: spread * 0.62),
           bushLight,
         );
         canvas.drawOval(
-          Rect.fromCenter(center: Offset(baseX + (side == 0 ? spread * 0.18 : -spread * 0.18), y - spread * 0.18), width: spread * 0.82, height: spread * 0.55),
+          Rect.fromCenter(
+              center: Offset(
+                  baseX + (side == 0 ? spread * 0.18 : -spread * 0.18),
+                  y - spread * 0.18),
+              width: spread * 0.82,
+              height: spread * 0.55),
           bushDark,
         );
 
         for (int tuftI = 0; tuftI < 2; tuftI++) {
           final tx = baseX + (tuftI == 0 ? -spread * 0.18 : spread * 0.18);
           canvas.drawOval(
-            Rect.fromCenter(center: Offset(tx, y - spread * 0.45), width: spread * 0.10, height: spread * 0.45),
+            Rect.fromCenter(
+                center: Offset(tx, y - spread * 0.45),
+                width: spread * 0.10,
+                height: spread * 0.45),
             tuft,
           );
           canvas.drawOval(
-            Rect.fromCenter(center: Offset(tx + spread * 0.08, y - spread * 0.48), width: spread * 0.08, height: spread * 0.38),
+            Rect.fromCenter(
+                center: Offset(tx + spread * 0.08, y - spread * 0.48),
+                width: spread * 0.08,
+                height: spread * 0.38),
             tuft,
           );
         }
@@ -708,7 +762,8 @@ class _TrackPainter extends CustomPainter {
       final halfW = lerpDouble(_kHorizonHalfW, bHalfW, t)!;
       final x = cx - halfW * 0.88 + rngLeaves.nextDouble() * (halfW * 1.76);
       final width = 6.0 + rngLeaves.nextDouble() * 6.0;
-      final color = leafColors[rngLeaves.nextInt(leafColors.length)].withOpacity(0.6);
+      final color =
+          leafColors[rngLeaves.nextInt(leafColors.length)].withOpacity(0.6);
       canvas.save();
       canvas.translate(x, y);
       canvas.rotate((rngLeaves.nextDouble() - 0.5) * 1.2);
@@ -735,7 +790,8 @@ class _TrackPainter extends CustomPainter {
       final controlX = cx + (rngRoots.nextDouble() - 0.5) * halfW * 0.35;
       final rootPath = Path()
         ..moveTo(startX, y)
-        ..quadraticBezierTo(controlX, controlY, endX, y + (rngRoots.nextDouble() - 0.5) * 10);
+        ..quadraticBezierTo(
+            controlX, controlY, endX, y + (rngRoots.nextDouble() - 0.5) * 10);
       canvas.drawPath(rootPath, rootPaint);
     }
   }
@@ -839,7 +895,7 @@ class _ObstacleSprite extends StatelessWidget {
       children: [
         if (danger)
           Container(
-            width:  size * 1.6,
+            width: size * 1.6,
             height: size * 1.6,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
@@ -960,12 +1016,14 @@ class _Hud extends StatelessWidget {
   final int totalSeconds;
 
   const _Hud(
-      {required this.secondsLeft, required this.gap, required this.totalSeconds});
+      {required this.secondsLeft,
+      required this.gap,
+      required this.totalSeconds});
 
   @override
   Widget build(BuildContext context) {
     final timeProgress = secondsLeft / totalSeconds;
-    final lexClose     = gap < 0.35;
+    final lexClose = gap < 0.35;
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
@@ -985,13 +1043,17 @@ class _Hud extends StatelessWidget {
                   color: lexClose ? const Color(0xFFFFD700) : Colors.white,
                   letterSpacing: 3,
                   shadows: const [
-                    Shadow(color: Colors.black87, blurRadius: 6, offset: Offset(1, 1))
+                    Shadow(
+                        color: Colors.black87,
+                        blurRadius: 6,
+                        offset: Offset(1, 1))
                   ],
                 ),
               ),
               // Timer pill
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
                 decoration: BoxDecoration(
                   color: secondsLeft <= 5
                       ? Colors.red.withOpacity(0.85)
@@ -1033,7 +1095,7 @@ class _Hud extends StatelessWidget {
           // Gap / distance indicator
           Row(
             children: [
-              Text('⚡ ', style: const TextStyle(fontSize: 16)),
+              const Text('⚡ ', style: TextStyle(fontSize: 16)),
               Expanded(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(4),

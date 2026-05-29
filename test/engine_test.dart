@@ -40,14 +40,14 @@ void main() {
     });
 
     test('applyChoice preserva i flags esistenti', () {
-      final gs = GameState(flags: const {'shirt_in_backpack': true});
+      const gs = GameState(flags: const {'shirt_in_backpack': true});
       final next = gs.applyChoice(effects: {'segreto': 5});
       expect(next.flags['shirt_in_backpack'], isTrue);
       expect(next.segreto, 55);
     });
 
     test('applyChoice aggiorna i flags specificati', () {
-      final gs = GameState(flags: const {'shirt_in_backpack': true});
+      const gs = GameState(flags: const {'shirt_in_backpack': true});
       final next = gs.applyChoice(newFlags: {'shirt_in_backpack': false});
       expect(next.flags['shirt_in_backpack'], isFalse);
     });
@@ -63,14 +63,14 @@ void main() {
     });
 
     test('applyEffects retrocompatibilità preserva i flags', () {
-      final gs = GameState(flags: const {'mio_flag': true});
+      const gs = GameState(flags: const {'mio_flag': true});
       final next = gs.applyEffects({'legame': 10});
       expect(next.flags['mio_flag'], isTrue);
       expect(next.legame, 60);
     });
 
     test('toStatsMap restituisce solo le stat', () {
-      final gs = GameState(segreto: 70, flags: const {'x': true});
+      const gs = GameState(segreto: 70, flags: const {'x': true});
       final map = gs.toStatsMap();
       expect(map['segreto'], 70);
       expect(map.containsKey('x'), isFalse);
@@ -95,19 +95,19 @@ void main() {
 
   group('StatCondition', () {
     test('lt', () {
-      final c = StatCondition(stat: 'segreto', op: 'lt', value: 50);
+      const c = StatCondition(stat: 'segreto', op: 'lt', value: 50);
       expect(c.matches({'segreto': 49}), isTrue);
       expect(c.matches({'segreto': 50}), isFalse);
     });
 
     test('gte', () {
-      final c = StatCondition(stat: 'resistenza', op: 'gte', value: 55);
+      const c = StatCondition(stat: 'resistenza', op: 'gte', value: 55);
       expect(c.matches({'resistenza': 55}), isTrue);
       expect(c.matches({'resistenza': 54}), isFalse);
     });
 
     test('stat assente vale 0', () {
-      final c = StatCondition(stat: 'segreto', op: 'lt', value: 10);
+      const c = StatCondition(stat: 'segreto', op: 'lt', value: 10);
       expect(c.matches({}), isTrue); // 0 < 10
     });
   });
@@ -116,18 +116,19 @@ void main() {
 
   group('FlagCondition', () {
     test('flag true corrisponde', () {
-      final fc = FlagCondition(flag: 'shirt_in_backpack', expectedValue: true);
+      const fc = FlagCondition(flag: 'shirt_in_backpack', expectedValue: true);
       expect(fc.matches({'shirt_in_backpack': true}), isTrue);
       expect(fc.matches({'shirt_in_backpack': false}), isFalse);
     });
 
     test('flag assente equivale a false', () {
-      final fc = FlagCondition(flag: 'shirt_in_backpack', expectedValue: false);
+      const fc = FlagCondition(flag: 'shirt_in_backpack', expectedValue: false);
       expect(fc.matches({}), isTrue);
     });
 
     test('fromJson', () {
-      final fc = FlagCondition.fromJson({'flag': 'shirt_in_backpack', 'is': true});
+      final fc =
+          FlagCondition.fromJson({'flag': 'shirt_in_backpack', 'is': true});
       expect(fc.flag, 'shirt_in_backpack');
       expect(fc.expectedValue, isTrue);
     });
@@ -137,16 +138,21 @@ void main() {
 
   group('StatEntryRule', () {
     test('singola stat', () {
-      final rule = StatEntryRule(
-        stat: 'segreto', op: 'lt', value: 50, gotoBranch: 'branch_a',
+      const rule = StatEntryRule(
+        stat: 'segreto',
+        op: 'lt',
+        value: 50,
+        gotoBranch: 'branch_a',
       );
       expect(rule.matches({'segreto': 40}, {}), isTrue);
       expect(rule.matches({'segreto': 50}, {}), isFalse);
     });
 
     test('all_of AND logica', () {
-      final rule = StatEntryRule(
-        stat: '', op: 'lt', value: 0,
+      const rule = StatEntryRule(
+        stat: '',
+        op: 'lt',
+        value: 0,
         gotoBranch: 'branch_b',
         allOf: [
           StatCondition(stat: 'segreto', op: 'lt', value: 50),
@@ -159,27 +165,39 @@ void main() {
     });
 
     test('flag_conditions con stat', () {
-      final rule = StatEntryRule(
-        stat: 'segreto', op: 'lt', value: 50,
+      const rule = StatEntryRule(
+        stat: 'segreto',
+        op: 'lt',
+        value: 50,
         gotoBranch: 'intro_indosso',
-        flagConditions: [FlagCondition(flag: 'shirt_in_backpack', expectedValue: false)],
+        flagConditions: [
+          FlagCondition(flag: 'shirt_in_backpack', expectedValue: false)
+        ],
       );
       // shirt on body + low segreto → match
-      expect(rule.matches({'segreto': 35}, {'shirt_in_backpack': false}), isTrue);
+      expect(
+          rule.matches({'segreto': 35}, {'shirt_in_backpack': false}), isTrue);
       // shirt in backpack + low segreto → no match
-      expect(rule.matches({'segreto': 35}, {'shirt_in_backpack': true}), isFalse);
+      expect(
+          rule.matches({'segreto': 35}, {'shirt_in_backpack': true}), isFalse);
       // shirt on body + high segreto → no match (stat fails)
-      expect(rule.matches({'segreto': 60}, {'shirt_in_backpack': false}), isFalse);
+      expect(
+          rule.matches({'segreto': 60}, {'shirt_in_backpack': false}), isFalse);
     });
 
     test('ordine regole: prima match vince', () {
       final rules = [
-        StatEntryRule(
-          stat: 'segreto', op: 'lt', value: 50,
+        const StatEntryRule(
+          stat: 'segreto',
+          op: 'lt',
+          value: 50,
           gotoBranch: 'indosso',
-          flagConditions: [FlagCondition(flag: 'shirt_in_backpack', expectedValue: false)],
+          flagConditions: [
+            FlagCondition(flag: 'shirt_in_backpack', expectedValue: false)
+          ],
         ),
-        StatEntryRule(stat: 'segreto', op: 'lt', value: 50, gotoBranch: 'zaino'),
+        const StatEntryRule(
+            stat: 'segreto', op: 'lt', value: 50, gotoBranch: 'zaino'),
       ];
       final stats = {'segreto': 35};
       final flagsIndosso = {'shirt_in_backpack': false};
@@ -188,14 +206,20 @@ void main() {
       // Primo check: shirt on body → prima regola vince
       String? result;
       for (final r in rules) {
-        if (r.matches(stats, flagsIndosso)) { result = r.gotoBranch; break; }
+        if (r.matches(stats, flagsIndosso)) {
+          result = r.gotoBranch;
+          break;
+        }
       }
       expect(result, 'indosso');
 
       // Secondo check: shirt in backpack → seconda regola vince
       result = null;
       for (final r in rules) {
-        if (r.matches(stats, flagsZaino)) { result = r.gotoBranch; break; }
+        if (r.matches(stats, flagsZaino)) {
+          result = r.gotoBranch;
+          break;
+        }
       }
       expect(result, 'zaino');
     });
@@ -206,7 +230,9 @@ void main() {
         'op': 'lt',
         'value': 50,
         'goto_branch': 'intro_indosso',
-        'flag_conditions': [{'flag': 'shirt_in_backpack', 'is': false}],
+        'flag_conditions': [
+          {'flag': 'shirt_in_backpack', 'is': false}
+        ],
       });
       expect(rule.gotoBranch, 'intro_indosso');
       expect(rule.flagConditions.length, 1);
@@ -258,12 +284,17 @@ void main() {
       id: 'test_ep',
       pages: [],
       statEntry: [
-        StatEntryRule(
-          stat: 'segreto', op: 'lt', value: 50,
+        const StatEntryRule(
+          stat: 'segreto',
+          op: 'lt',
+          value: 50,
           gotoBranch: 'intro_indosso',
-          flagConditions: [FlagCondition(flag: 'shirt_in_backpack', expectedValue: false)],
+          flagConditions: [
+            FlagCondition(flag: 'shirt_in_backpack', expectedValue: false)
+          ],
         ),
-        StatEntryRule(stat: 'segreto', op: 'lt', value: 50, gotoBranch: 'intro_zaino'),
+        const StatEntryRule(
+            stat: 'segreto', op: 'lt', value: 50, gotoBranch: 'intro_zaino'),
       ],
     );
 
@@ -354,7 +385,8 @@ void main() {
 
     test('applyEffects retrocompatibilità preserva flags', () async {
       await GameStateService.instance.init();
-      await GameStateService.instance.applyChoice(newFlags: {'shirt_in_backpack': true});
+      await GameStateService.instance
+          .applyChoice(newFlags: {'shirt_in_backpack': true});
       await GameStateService.instance.applyEffects({'legame': 10});
       final gs = GameStateService.instance.state.value;
       expect(gs.flags['shirt_in_backpack'], isTrue); // non perso
