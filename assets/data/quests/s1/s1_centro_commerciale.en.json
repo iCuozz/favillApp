@@ -4,7 +4,7 @@
     {
       "stat": "legame",
       "op": "lt",
-      "value": 25,
+      "value": 40,
       "goto_branch": "intro_legame_distante",
       "prepend": true
     },

@@ -5,7 +5,7 @@
     {
       "stat": "scintille",
       "op": "lt",
-      "value": 10,
+      "value": 20,
       "goto_branch": "intro_senza_fiamma",
       "prepend": true
     },
