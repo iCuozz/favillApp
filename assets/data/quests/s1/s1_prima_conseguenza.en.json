@@ -1,0 +1,479 @@
+{
+  "id": "s1_prima_conseguenza",
+  "audio_theme": "scuola_pressure",
+  "stat_entry": [
+    {
+      "flag_conditions": [
+        {
+          "flag": "video_virale_visto",
+          "is": true
+        }
+      ],
+      "goto_branch": "intro_gia_visto",
+      "prepend": true
+    }
+  ],
+  "pages": [
+    {
+      "index": 0,
+      "background": "assets/episodes/prologo/page_1.png",
+      "panels": [
+        {
+          "id": "pc_p0_a",
+          "characters": [
+            "favilla",
+            "mallow",
+            "lex"
+          ],
+          "text_blocks": [
+            {
+              "id": "pc_p0_a_t1",
+              "type": "narration",
+              "text": "Home. Afternoon. Lex plays on the rug with the GalaxiaMall owl. Favilla folds laundry. Everything normal."
+            },
+            {
+              "id": "pc_p0_a_t2",
+              "type": "narration",
+              "text": "Then Mallow walks out of the study with his phone in hand. He has the expression of someone who just saw something he shouldn't have."
+            },
+            {
+              "id": "pc_p0_a_t3",
+              "type": "dialogue",
+              "speaker": "mallow",
+              "text": "Hey. Have you seen this?"
+            },
+            {
+              "id": "pc_p0_a_t4",
+              "type": "narration",
+              "text": "Lex looks up from the owl. He noticed Mallow's tone too. That tone."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "background": "assets/episodes/prologo/page_2.png",
+      "panels": [
+        {
+          "id": "pc_p1_a",
+          "characters": [
+            "favilla",
+            "mallow"
+          ],
+          "text_blocks": [
+            {
+              "id": "pc_p1_a_t1",
+              "type": "narration",
+              "text": "On the screen: a TikTok video. Filmed at the park, last Sunday. Shaky footage, 240p, backlit."
+            },
+            {
+              "id": "pc_p1_a_t2",
+              "type": "narration",
+              "text": "A figure moving at impossible speed through the trees. Hair that seems to glow. But the shadows are long and the backlight erases every detail."
+            },
+            {
+              "id": "pc_p1_a_t3",
+              "type": "narration",
+              "text": "Below: 847,000 views. Comments: 'Fake', 'I saw her too!', 'Superhero in Nova Tutinia??'"
+            },
+            {
+              "id": "pc_p1_a_t4",
+              "type": "narration",
+              "text": "Favilla holds her breath. She recognizes herself. But no one else seems to. For now."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "background": "assets/episodes/prologo/page_3.png",
+      "panels": [
+        {
+          "id": "pc_p2_a",
+          "characters": [
+            "favilla",
+            "mallow"
+          ],
+          "text_blocks": [
+            {
+              "id": "pc_p2_a_t1",
+              "type": "narration",
+              "text": "Mallow is standing, phone still in hand. Looking at her like he's searching for something in her face."
+            },
+            {
+              "id": "pc_p2_a_t2",
+              "type": "dialogue",
+              "speaker": "mallow",
+              "text": "It was filmed on Sunday. At the park. When you lost your purse."
+            },
+            {
+              "id": "pc_p2_a_t3",
+              "type": "narration",
+              "text": "Lex, on the rug, has stopped playing. He's staring at Favilla. He recognized the video before even looking at it."
+            }
+          ],
+          "choice": {
+            "id": "video_choice",
+            "prompt": "The video plays. The shadows are indistinct. But you know.",
+            "options": [
+              {
+                "id": "minimizza",
+                "label": "Shrug. «Weird. But you know TikTok, everything looks like a ghost.»",
+                "goto_branch": "branch_minimizza",
+                "stat_effects": {
+                  "segreto": 10,
+                  "legame": -5
+                },
+                "set_flags": {
+                  "video_virale_visto": true
+                },
+                "set_memories": {
+                  "choice.s1_prima_conseguenza": "minimizza"
+                }
+              },
+              {
+                "id": "devia",
+                "label": "«Anyway, Lex did something incredible today...»",
+                "goto_branch": "branch_devia",
+                "stat_effects": {
+                  "resistenza": 5,
+                  "legame": -3
+                },
+                "set_flags": {
+                  "video_virale_visto": true
+                },
+                "set_memories": {
+                  "choice.s1_prima_conseguenza": "devia"
+                }
+              },
+              {
+                "id": "quasi_confessa",
+                "label": "You hesitate. Look at the video. «That day... I was there.»",
+                "goto_branch": "branch_quasi_confessa",
+                "stat_effects": {
+                  "segreto": -10,
+                  "legame": 8
+                },
+                "set_flags": {
+                  "video_virale_visto": true
+                },
+                "set_memories": {
+                  "choice.s1_prima_conseguenza": "quasi_confessa"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "branches": {
+    "intro_gia_visto": {
+      "id": "intro_gia_visto",
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/prologo/page_1.png",
+          "panels": [
+            {
+              "id": "intro_gia_visto_a",
+              "characters": [
+                "favilla"
+              ],
+              "text_blocks": [
+                {
+                  "id": "intro_gia_visto_a_t1",
+                  "type": "narration",
+                  "text": "Favilla opens TikTok. The video is still there. More views. New comments. The same indistinguishable shadow."
+                },
+                {
+                  "id": "intro_gia_visto_a_t2",
+                  "type": "narration",
+                  "text": "No one has figured it out yet. But every day that passes, someone could."
+                },
+                {
+                  "id": "intro_gia_visto_a_t3",
+                  "type": "thought",
+                  "speaker": "favilla",
+                  "text": "I need to be more careful. Much more careful."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "branch_minimizza": {
+      "id": "branch_minimizza",
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/prologo/page_2.png",
+          "panels": [
+            {
+              "id": "branch_minimizza_a",
+              "characters": [
+                "favilla",
+                "mallow"
+              ],
+              "text_blocks": [
+                {
+                  "id": "branch_minimizza_a_t1",
+                  "type": "narration",
+                  "text": "Favilla scrolls the video with one finger. Shrugs. Smiles — that smile she learned to make without thinking."
+                },
+                {
+                  "id": "branch_minimizza_a_t2",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Weird. But you know TikTok. Perspective, backlight, editing. Everything looks like a ghost."
+                },
+                {
+                  "id": "branch_minimizza_a_t3",
+                  "type": "narration",
+                  "text": "Mallow looks at the video. Then at her. Then at the video again. Something doesn't add up, but he doesn't know what."
+                },
+                {
+                  "id": "branch_minimizza_a_t4",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "Right. Probably nothing. Still weird though."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "background": "assets/episodes/prologo/page_3.png",
+          "panels": [
+            {
+              "id": "branch_minimizza_b",
+              "characters": [
+                "favilla"
+              ],
+              "text_blocks": [
+                {
+                  "id": "branch_minimizza_b_t1",
+                  "type": "narration",
+                  "text": "Mallow goes back to the study. Lex looks at her from the rug with the expression of someone who just watched a mediocre performance."
+                },
+                {
+                  "id": "branch_minimizza_b_t2",
+                  "type": "thought",
+                  "speaker": "favilla",
+                  "text": "He didn't recognize me. No one will. I just need to... keep going like this."
+                },
+                {
+                  "id": "branch_minimizza_b_t3",
+                  "type": "narration",
+                  "text": "The phone goes dark. But the video is still there. And it will be for a long time."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "branch_devia": {
+      "id": "branch_devia",
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/prologo/page_2.png",
+          "panels": [
+            {
+              "id": "branch_devia_a",
+              "characters": [
+                "favilla",
+                "mallow",
+                "lex"
+              ],
+              "text_blocks": [
+                {
+                  "id": "branch_devia_a_t1",
+                  "type": "narration",
+                  "text": "Favilla changes the subject with the precision of a pilot avoiding an obstacle. Lex. Talk about Lex."
+                },
+                {
+                  "id": "branch_devia_a_t2",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Anyway, Lex did something incredible today. At daycare. He recognized his name written on the chalkboard."
+                },
+                {
+                  "id": "branch_devia_a_t3",
+                  "type": "narration",
+                  "text": "Mallow lowers the phone. The video disappears from the screen. Lex looks at her like 'nice move, mom'."
+                },
+                {
+                  "id": "branch_devia_a_t4",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "Really? His name? But he's only seven months old!"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "background": "assets/episodes/prologo/page_1.png",
+          "panels": [
+            {
+              "id": "branch_devia_b",
+              "characters": [
+                "favilla",
+                "mallow"
+              ],
+              "text_blocks": [
+                {
+                  "id": "branch_devia_b_t1",
+                  "type": "narration",
+                  "text": "Mallow sits down next to her. The conversation derails into how precocious Lex is. The video is forgotten."
+                },
+                {
+                  "id": "branch_devia_b_t2",
+                  "type": "narration",
+                  "text": "But Favilla has the feeling Mallow hasn't really forgotten. Just postponed."
+                },
+                {
+                  "id": "branch_devia_b_t3",
+                  "type": "thought",
+                  "speaker": "favilla",
+                  "text": "I didn't say anything. But he knows I'm hiding something. He's known for weeks."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "branch_quasi_confessa": {
+      "id": "branch_quasi_confessa",
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/prologo/page_2.png",
+          "panels": [
+            {
+              "id": "branch_quasi_confessa_a",
+              "characters": [
+                "favilla",
+                "mallow"
+              ],
+              "text_blocks": [
+                {
+                  "id": "branch_quasi_confessa_a_t1",
+                  "type": "narration",
+                  "text": "Favilla hesitates. The phone is warm in her hand. The video plays. Then stops playing."
+                },
+                {
+                  "id": "branch_quasi_confessa_a_t2",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "That day... I was there. At the park. I saw everything."
+                },
+                {
+                  "id": "branch_quasi_confessa_a_t3",
+                  "type": "narration",
+                  "text": "Mallow stops his fork mid-air. The seconds stretch. Lex, on the rug, is as still as a statue."
+                },
+                {
+                  "id": "branch_quasi_confessa_a_t4",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "What did you see?"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "background": "assets/episodes/prologo/page_3.png",
+          "panels": [
+            {
+              "id": "branch_quasi_confessa_b",
+              "characters": [
+                "favilla",
+                "mallow"
+              ],
+              "text_blocks": [
+                {
+                  "id": "branch_quasi_confessa_b_t1",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "The thief. I saw him. He ran toward the grove. I was there when it happened."
+                },
+                {
+                  "id": "branch_quasi_confessa_b_t2",
+                  "type": "narration",
+                  "text": "Half-truth. The part Mallow can accept. The other half — the speed, the hair, the light — stays buried."
+                },
+                {
+                  "id": "branch_quasi_confessa_b_t3",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "Why didn't you tell me?"
+                },
+                {
+                  "id": "branch_quasi_confessa_b_t4",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Because... I don't know. Maybe I was afraid you'd worry."
+                },
+                {
+                  "id": "branch_quasi_confessa_b_t5",
+                  "type": "narration",
+                  "text": "Lex smiles. He got what he wanted. Not the whole truth. But a step."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "epilogue": {
+    "id": "epilogue",
+    "pages": [
+      {
+        "index": 0,
+        "background": "assets/episodes/prologo/page_4.png",
+        "panels": [
+          {
+            "id": "pc_epilogue_a",
+            "characters": [
+              "favilla"
+            ],
+            "text_blocks": [
+              {
+                "id": "pc_epilogue_a_t1",
+                "type": "narration",
+                "text": "Favilla is in the bedroom. The phone is on the nightstand, screen off. But the video is still there, in her head."
+              },
+              {
+                "id": "pc_epilogue_a_t2",
+                "type": "narration",
+                "text": "A comment under the video: 'Looks like a superhero.' Another: 'Superhero? It's Photoshop.' A third: 'I live in Nova Tutinia and nothing here is normal.'"
+              },
+              {
+                "id": "pc_epilogue_a_t3",
+                "type": "narration",
+                "text": "No one knows. No one must know. But the world has started to look."
+              },
+              {
+                "id": "pc_epilogue_a_t4",
+                "type": "system",
+                "text": "MISSION COMPLETE — The First Consequence"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

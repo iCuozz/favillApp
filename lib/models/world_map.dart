@@ -19,6 +19,9 @@ class WorldQuest {
   /// Stat minime richieste per sbloccarla, es. {"segreto": 30}.
   final Map<String, int> requiresStats;
 
+  /// World flags richiesti per rendere disponibile la quest, es. {"favilla_transformed_public": true}.
+  final Map<String, bool> requiresFlags;
+
   const WorldQuest({
     required this.id,
     required this.title,
@@ -28,6 +31,7 @@ class WorldQuest {
     required this.season,
     this.requiresCompleted = const [],
     this.requiresStats = const {},
+    this.requiresFlags = const {},
   });
 
   factory WorldQuest.fromJson(Map<String, dynamic> json) {
@@ -35,6 +39,8 @@ class WorldQuest {
         .cast<String>();
     final statsJson = json['requires_stats'] as Map<String, dynamic>? ?? {};
     final stats = statsJson.map((k, v) => MapEntry(k, v as int));
+    final flagsJson = json['requires_flags'] as Map<String, dynamic>? ?? {};
+    final flags = flagsJson.map((k, v) => MapEntry(k, v as bool));
 
     return WorldQuest(
       id: json['id'] as String,
@@ -45,6 +51,7 @@ class WorldQuest {
       season: json['season'] as int? ?? 1,
       requiresCompleted: completed,
       requiresStats: stats,
+      requiresFlags: flags,
     );
   }
 }
@@ -172,12 +179,15 @@ class WorldState {
 
   bool isQuestCompleted(String questId) => completedQuests.contains(questId);
 
-  bool isQuestAvailable(WorldQuest quest, Map<String, int> currentStats) {
+  bool isQuestAvailable(WorldQuest quest, Map<String, int> currentStats, Map<String, bool> currentFlags) {
     for (final req in quest.requiresCompleted) {
       if (!completedQuests.contains(req)) return false;
     }
     for (final entry in quest.requiresStats.entries) {
       if ((currentStats[entry.key] ?? 0) < entry.value) return false;
+    }
+    for (final entry in quest.requiresFlags.entries) {
+      if ((currentFlags[entry.key] ?? false) != entry.value) return false;
     }
     return true;
   }

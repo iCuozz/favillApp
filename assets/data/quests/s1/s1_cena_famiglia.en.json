@@ -1,0 +1,535 @@
+{
+  "id": "s1_cena_famiglia",
+  "audio_theme": "ritorno_casa",
+  "stat_entry": [
+    {
+      "stat": "legame",
+      "op": "gte",
+      "value": 70,
+      "goto_branch": "intro_calda",
+      "prepend": true
+    }
+  ],
+  "pages": [
+    {
+      "index": 0,
+      "background": "assets/episodes/prologo/page_1.png",
+      "panels": [
+        {
+          "id": "cena_p0_a",
+          "characters": [
+            "mallow",
+            "favilla",
+            "lex"
+          ],
+          "text_blocks": [
+            {
+              "id": "cena_p0_a_t1",
+              "type": "narration",
+              "text": "Evening. The kitchen smells of butter and eggs. Mallow is at the stove with the air of someone about to reveal a family secret."
+            },
+            {
+              "id": "cena_p0_a_t2",
+              "type": "dialogue",
+              "speaker": "mallow",
+              "text": "Two eggs. Crack them like this, put the cheese inside, fold them like a calzone. Fry in butter. My grandma called it calzuovo — egg-calzone."
+            },
+            {
+              "id": "cena_p0_a_t3",
+              "type": "narration",
+              "text": "Lex stares at him from the high chair. Not at the calzuovo. At him. With detective eyes."
+            },
+            {
+              "id": "cena_p0_a_t4",
+              "type": "dialogue",
+              "speaker": "favilla",
+              "text": "Calzuovo. I like it. Sounds like something you eat and then go into battle."
+            },
+            {
+              "id": "cena_p0_a_t5",
+              "type": "dialogue",
+              "speaker": "mallow",
+              "text": "Exactly. It's the warrior's dish. Or at least the hungry programmer's."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "background": "assets/episodes/prologo/page_2.png",
+      "panels": [
+        {
+          "id": "cena_p1_a",
+          "characters": [
+            "mallow",
+            "favilla",
+            "lex"
+          ],
+          "text_blocks": [
+            {
+              "id": "cena_p1_a_t1",
+              "type": "narration",
+              "text": "The calzuovo arrives at the table. Mallow serves it with the pride of a Michelin-starred chef. Lex looks at it. Then at Favilla. Then back at Mallow."
+            },
+            {
+              "id": "cena_p1_a_t2",
+              "type": "thought",
+              "speaker": "favilla",
+              "text": "He's plotting. I can see it. Same face as the pasta aisle."
+            },
+            {
+              "id": "cena_p1_a_t3",
+              "type": "narration",
+              "text": "Lex pushes his plate away. He doesn't eat. He squints. Points his little finger toward Favilla, then toward Mallow. Like a silent conductor."
+            },
+            {
+              "id": "cena_p1_a_t4",
+              "type": "dialogue",
+              "speaker": "mallow",
+              "text": "What's up with you tonight? Don't you like calzuovo?"
+            },
+            {
+              "id": "cena_p1_a_t5",
+              "type": "thought",
+              "speaker": "favilla",
+              "text": "It's not the calzuovo. It's his mother. He's trying to tell you."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "background": "assets/episodes/prologo/page_3.png",
+      "panels": [
+        {
+          "id": "cena_p2_a",
+          "characters": [
+            "mallow",
+            "favilla",
+            "lex"
+          ],
+          "text_blocks": [
+            {
+              "id": "cena_p2_a_t1",
+              "type": "narration",
+              "text": "Lex has now staged a small sabotage. The spoon falls. Then the cup. Then three more things in rapid succession. Each time he points at Favilla."
+            },
+            {
+              "id": "cena_p2_a_t2",
+              "type": "narration",
+              "text": "Mallow looks at him. Then at Favilla. Then back at Lex. Something clicks."
+            },
+            {
+              "id": "cena_p2_a_t3",
+              "type": "dialogue",
+              "speaker": "mallow",
+              "text": "You know what's weird? For the past few weeks, every time something... strange happens, Lex looks at you. Not me. You."
+            },
+            {
+              "id": "cena_p2_a_t4",
+              "type": "thought",
+              "speaker": "favilla",
+              "text": "He knows. He doesn't know. But he feels it. And Lex is serving it to him on a silver platter."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "background": "assets/episodes/prologo/page_1.png",
+      "panels": [
+        {
+          "id": "cena_p3_a",
+          "characters": [
+            "mallow",
+            "favilla"
+          ],
+          "text_blocks": [
+            {
+              "id": "cena_p3_a_t1",
+              "type": "narration",
+              "text": "Mallow puts down his fork. Dinner is half-eaten. Lex has stopped throwing things and now stares at his father with almost comical intensity."
+            },
+            {
+              "id": "cena_p3_a_t2",
+              "type": "dialogue",
+              "speaker": "mallow",
+              "text": "Favilla. There's something you're not telling me."
+            },
+            {
+              "id": "cena_p3_a_t3",
+              "type": "narration",
+              "text": "He's not angry. He's... tender. Like he's asking permission to know. Lex holds his breath."
+            }
+          ],
+          "choice": {
+            "id": "cena_choice",
+            "prompt": "Mallow is looking at you. Lex too. Dinner is a powder keg.",
+            "options": [
+              {
+                "id": "confessa_piccolo",
+                "label": "«Mallow... I need to tell you something. That Sunday at the park...»",
+                "goto_branch": "branch_confessa",
+                "stat_effects": {
+                  "legame": 8,
+                  "segreto": -10
+                },
+                "set_flags": {
+                  "cena_famiglia_fatta": true
+                },
+                "set_memories": {
+                  "choice.s1_cena_famiglia": "confessa_piccolo"
+                }
+              },
+              {
+                "id": "facciata",
+                "label": "«Lex, eat. Mallow, this is delicious. Everything's fine.»",
+                "goto_branch": "branch_facciata",
+                "stat_effects": {
+                  "segreto": 8,
+                  "resistenza": 5
+                },
+                "set_flags": {
+                  "cena_famiglia_fatta": true
+                },
+                "set_memories": {
+                  "choice.s1_cena_famiglia": "facciata"
+                }
+              },
+              {
+                "id": "umorismo",
+                "label": "«Mallow, your son is trying to be a matchmaker. Or maybe a film director.»",
+                "goto_branch": "branch_umorismo",
+                "stat_effects": {
+                  "legame": 5,
+                  "scintille": 5
+                },
+                "set_flags": {
+                  "cena_famiglia_fatta": true
+                },
+                "set_memories": {
+                  "choice.s1_cena_famiglia": "umorismo"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "branches": {
+    "intro_calda": {
+      "id": "intro_calda",
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/prologo/page_2.png",
+          "panels": [
+            {
+              "id": "intro_calda_a",
+              "characters": [
+                "favilla",
+                "mallow"
+              ],
+              "text_blocks": [
+                {
+                  "id": "intro_calda_a_t1",
+                  "type": "narration",
+                  "text": "Mallow spent the afternoon cooking. The calzuovo isn't just a recipe — it's his way of saying 'I love you' without having to say it."
+                },
+                {
+                  "id": "intro_calda_a_t2",
+                  "type": "narration",
+                  "text": "Favilla knows this. And it's exactly this warmth she risks losing if he ever finds out everything."
+                },
+                {
+                  "id": "intro_calda_a_t3",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "I figured after the week you've had... you deserved a real dinner."
+                },
+                {
+                  "id": "intro_calda_a_t4",
+                  "type": "narration",
+                  "text": "Lex watches from the high chair. Calculating. Tonight, dad is on his side."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "branch_confessa": {
+      "id": "branch_confessa",
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/prologo/page_3.png",
+          "panels": [
+            {
+              "id": "branch_confessa_a",
+              "characters": [
+                "favilla",
+                "mallow"
+              ],
+              "text_blocks": [
+                {
+                  "id": "branch_confessa_a_t1",
+                  "type": "narration",
+                  "text": "Favilla puts down her fork. Lex stops breathing — or at least seems to, for a seven-and-a-half-month-old."
+                },
+                {
+                  "id": "branch_confessa_a_t2",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "That Sunday at the park... something happened. I don't know how to explain it. Not even to myself."
+                },
+                {
+                  "id": "branch_confessa_a_t3",
+                  "type": "narration",
+                  "text": "Mallow says nothing. He takes her hand. He waits."
+                },
+                {
+                  "id": "branch_confessa_a_t4",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "When you're ready, I'm here. I'm not going anywhere."
+                },
+                {
+                  "id": "branch_confessa_a_t5",
+                  "type": "thought",
+                  "speaker": "favilla",
+                  "text": "Not the whole truth. But a piece of it. Enough for tonight."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "background": "assets/episodes/prologo/page_1.png",
+          "panels": [
+            {
+              "id": "branch_confessa_b",
+              "characters": [
+                "favilla",
+                "mallow",
+                "lex"
+              ],
+              "text_blocks": [
+                {
+                  "id": "branch_confessa_b_t1",
+                  "type": "narration",
+                  "text": "Lex releases his breath. Then smiles — that accomplice smile with two tiny teeth that only Favilla can decipher."
+                },
+                {
+                  "id": "branch_confessa_b_t2",
+                  "type": "narration",
+                  "text": "The calzuovo is almost cold. But Mallow's hand is still there, on top of hers."
+                },
+                {
+                  "id": "branch_confessa_b_t3",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "Let's eat, before it gets cold. Then you can tell me the rest."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "branch_facciata": {
+      "id": "branch_facciata",
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/prologo/page_3.png",
+          "panels": [
+            {
+              "id": "branch_facciata_a",
+              "characters": [
+                "favilla",
+                "mallow",
+                "lex"
+              ],
+              "text_blocks": [
+                {
+                  "id": "branch_facciata_a_t1",
+                  "type": "narration",
+                  "text": "Favilla smiles. It's a well-practiced smile. She changes the subject with the fluidity of someone who's been doing it for months."
+                },
+                {
+                  "id": "branch_facciata_a_t2",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Everything's fine, really. Just tired. La Corvi, the inspection. Heavy week. But this calzuovo is a miracle."
+                },
+                {
+                  "id": "branch_facciata_a_t3",
+                  "type": "narration",
+                  "text": "Mallow nods. But he hasn't stopped looking at her. Lex huffs — frustrated, theatrical, definitive."
+                },
+                {
+                  "id": "branch_facciata_a_t4",
+                  "type": "thought",
+                  "speaker": "favilla",
+                  "text": "I lied to him again. And Lex knows. And he's mad at me."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "background": "assets/episodes/prologo/page_1.png",
+          "panels": [
+            {
+              "id": "branch_facciata_b",
+              "characters": [
+                "favilla",
+                "mallow"
+              ],
+              "text_blocks": [
+                {
+                  "id": "branch_facciata_b_t1",
+                  "type": "narration",
+                  "text": "Mallow goes back to eating. He talks about work, a new JavaScript library. The evening derails into normality."
+                },
+                {
+                  "id": "branch_facciata_b_t2",
+                  "type": "narration",
+                  "text": "But Lex won't look at her anymore. His arms are crossed on the high chair. Seven months old and already capable of holding a grudge."
+                },
+                {
+                  "id": "branch_facciata_b_t3",
+                  "type": "thought",
+                  "speaker": "favilla",
+                  "text": "I kept the secret. But I lost something with my son. I'll get it back tomorrow. Or maybe not."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "branch_umorismo": {
+      "id": "branch_umorismo",
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/prologo/page_3.png",
+          "panels": [
+            {
+              "id": "branch_umorismo_a",
+              "characters": [
+                "favilla",
+                "mallow",
+                "lex"
+              ],
+              "text_blocks": [
+                {
+                  "id": "branch_umorismo_a_t1",
+                  "type": "narration",
+                  "text": "Favilla looks at Lex. Then at Mallow. Then bursts out laughing — that real, full laugh that hasn't come out in days."
+                },
+                {
+                  "id": "branch_umorismo_a_t2",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Mallow, look at him. He has the face of someone trying to make us divorce. Is he our baby, or a tiny secret agent?"
+                },
+                {
+                  "id": "branch_umorismo_a_t3",
+                  "type": "narration",
+                  "text": "Lex makes a face — a kind of raspberry that sounds like 'I'm not a secret agent but I'm working on it'."
+                },
+                {
+                  "id": "branch_umorismo_a_t4",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "He's got more charisma than me. I say that with pride and a little fear."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "background": "assets/episodes/prologo/page_1.png",
+          "panels": [
+            {
+              "id": "branch_umorismo_b",
+              "characters": [
+                "favilla",
+                "mallow",
+                "lex"
+              ],
+              "text_blocks": [
+                {
+                  "id": "branch_umorismo_b_t1",
+                  "type": "narration",
+                  "text": "All three of them laugh at the same moment. The calzuovo is gone, but it doesn't matter. For an instant, it's just a family having dinner."
+                },
+                {
+                  "id": "branch_umorismo_b_t2",
+                  "type": "narration",
+                  "text": "Lex falls asleep shortly after, his head drooping. But he's smiling. He won something, even if he doesn't know what yet."
+                },
+                {
+                  "id": "branch_umorismo_b_t3",
+                  "type": "thought",
+                  "speaker": "favilla",
+                  "text": "Tomorrow everything will be complicated again. But tonight it's not. Tonight is ours."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "epilogue": {
+    "id": "epilogue",
+    "pages": [
+      {
+        "index": 0,
+        "background": "assets/episodes/prologo/page_4.png",
+        "panels": [
+          {
+            "id": "cena_epilogue_a",
+            "characters": [
+              "favilla",
+              "mallow"
+            ],
+            "text_blocks": [
+              {
+                "id": "cena_epilogue_a_t1",
+                "type": "narration",
+                "text": "Lex sleeps in his room. Mallow does the dishes. Favilla watches him from behind, leaning against the doorframe."
+              },
+              {
+                "id": "cena_epilogue_a_t2",
+                "type": "narration",
+                "text": "She doesn't say anything. He doesn't turn around. But he raises one soapy hand in a gesture that says everything."
+              },
+              {
+                "id": "cena_epilogue_a_t3",
+                "type": "narration",
+                "text": "The secret is still there. But tonight it's lighter. Or at least it seems that way."
+              },
+              {
+                "id": "cena_epilogue_a_t4",
+                "type": "system",
+                "text": "MISSION COMPLETE — Family Dinner"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

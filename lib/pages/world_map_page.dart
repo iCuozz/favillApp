@@ -90,6 +90,9 @@ class _WorldMapPageState extends State<WorldMapPage>
       (id: 's1_lunedi_asilo',      title: 'EP7 · Lunedì all\'Asilo',   file: 'assets/data/quests/s1/s1_lunedi_asilo.json'),
       (id: 's1_palestra',          title: 'EP7.5 · La Palestra',      file: 'assets/data/quests/s1/s1_palestra.json'),
       (id: 's1_allagamento',      title: 'EP8 · L\'Allagamento',      file: 'assets/data/quests/s1/s1_allagamento.json'),
+      (id: 's1_prima_conseguenza', title: 'EP9a · La Prima Conseguenza', file: 'assets/data/quests/s1/s1_prima_conseguenza.json'),
+      (id: 's1_comare',            title: 'EP9b · La Comare',             file: 'assets/data/quests/s1/s1_comare.json'),
+      (id: 's1_cena_famiglia',     title: 'EP9c · Cena di Famiglia',      file: 'assets/data/quests/s1/s1_cena_famiglia.json'),
     ];
 
     showModalBottomSheet<void>(
@@ -198,7 +201,7 @@ class _WorldMapPageState extends State<WorldMapPage>
                               hasActiveQuest: loc.quests.any(
                                 (q) => !worldState.isQuestCompleted(q.id) &&
                                     worldState.isQuestAvailable(
-                                        q, gameState.toMap()),
+                                        q, gameState.toMap(), gameState.flags),
                               ),
                               pulseAnim: _pulseCtrl,
                               canvasSize: Size(constraints.maxWidth,
@@ -464,7 +467,7 @@ class _LocationSheetState extends State<_LocationSheet> {
                   else
                     ...quests.map((q) {
                       final available = worldState.isQuestAvailable(
-                          q, gameState.toMap());
+                          q, gameState.toMap(), gameState.flags);
                       final completed = worldState.isQuestCompleted(q.id);
                       return _QuestTile(
                         quest: q,

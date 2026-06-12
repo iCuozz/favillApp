@@ -76,6 +76,9 @@ EPISODES = [
     'assets/data/quests/s1/s1_lunedi_asilo.json',
     'assets/data/quests/s1/s1_palestra.json',
     'assets/data/quests/s1/s1_allagamento.json',
+    'assets/data/quests/s1/s1_prima_conseguenza.json',
+    'assets/data/quests/s1/s1_comare.json',
+    'assets/data/quests/s1/s1_cena_famiglia.json',
 ]
 
 # ─── Helpers ──────────────────────────────────────────────────────────────────

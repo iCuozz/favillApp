@@ -46,6 +46,45 @@
             "s1_domenica_parco"
           ],
           "requires_stats": {}
+        },
+        {
+          "id": "s1_prima_conseguenza",
+          "title": "La Prima Conseguenza",
+          "subtitle": "Un video. Un milione di visualizzazioni. Nessuno sa chi sei.",
+          "file": "assets/data/quests/s1/s1_prima_conseguenza.json",
+          "thumbnail": "assets/episodes/prologo/thumb.webp",
+          "season": 1,
+          "requires_completed": ["s1_allagamento"],
+          "requires_stats": {},
+          "requires_flags": {
+            "favilla_transformed_public": true
+          }
+        },
+        {
+          "id": "s1_comare",
+          "title": "La Comare",
+          "subtitle": "Un campanello. Una scusa. Carmela.",
+          "file": "assets/data/quests/s1/s1_comare.json",
+          "thumbnail": "assets/episodes/prologo/thumb.webp",
+          "season": 1,
+          "requires_completed": ["s1_allagamento"],
+          "requires_stats": {},
+          "requires_flags": {
+            "carmela_ha_notato": true
+          }
+        },
+        {
+          "id": "s1_cena_famiglia",
+          "title": "Cena di Famiglia",
+          "subtitle": "Calzuovo. Riso. Segreti.",
+          "file": "assets/data/quests/s1/s1_cena_famiglia.json",
+          "thumbnail": "assets/episodes/prologo/thumb.webp",
+          "season": 1,
+          "requires_completed": ["s1_allagamento"],
+          "requires_stats": {
+            "legame": 70
+          },
+          "requires_flags": {}
         }
       ]
     },
