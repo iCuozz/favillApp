@@ -2,7 +2,14 @@
   "id": "s1_scuola_1",
   "stat_entry": [
     {
-      "stat": "resistenza",
+      "stat": "segreto",
+      "op": "lt",
+      "value": 30,
+      "goto_branch": "intro_segreto_pericolo",
+      "prepend": true
+    },
+    {
+      "stat": "scintille",
       "op": "lt",
       "value": 45,
       "goto_branch": "intro_caffe_effect",
@@ -142,7 +149,7 @@
             "hint": "Nobody sees the clothes. But Corvi notices the absence.",
             "goto_branch": "branch_bagno",
             "stat_effects": {
-              "segreto": 15,
+              "segreto": 10,
               "resistenza": -10
             },
             "set_flags": {
@@ -155,7 +162,7 @@
             "hint": "The brazen face holds. But someone is watching.",
             "goto_branch": "branch_finge",
             "stat_effects": {
-              "segreto": -15,
+              "segreto": -10,
               "resistenza": 10
             },
             "set_flags": {
@@ -192,7 +199,7 @@
                 {
                   "id": "caffe_intro_tb_2",
                   "type": "narration",
-                  "text": "Her hair warms her down her back — hot, like an engine running too high."
+                  "text": "Her hair doesn't stir anymore. Where yesterday there was ember ready to catch, now there's only cold ash."
                 },
                 {
                   "id": "caffe_intro_tb_3",
@@ -307,6 +314,44 @@
                 }
               ],
               "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "intro_segreto_pericolo": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_scuola_1/page_0.webp",
+          "panels": [
+            {
+              "id": "sp_segreto_0",
+              "characters": [
+                "favilla"
+              ],
+              "text_blocks": [
+                {
+                  "id": "sp_segreto_0_tb_0",
+                  "type": "narration",
+                  "text": "The school gate is in front of her. But the morning has already started — uphill."
+                },
+                {
+                  "id": "sp_segreto_0_tb_1",
+                  "type": "narration",
+                  "text": "Mallow has been silent the whole time. Not the normal silence, the one from days when he's focused on work. A different silence. A waiting one."
+                },
+                {
+                  "id": "sp_segreto_0_tb_2",
+                  "type": "narration",
+                  "text": "He held her hand a second too long when she got out of the car. Like he expected her to say something — and she opened her mouth, and closed it, and nothing."
+                },
+                {
+                  "id": "sp_segreto_0_tb_3",
+                  "type": "thought",
+                  "text": "He knows something's there. He doesn't know what. But he waits. And waiting, sometimes, is worse than asking."
+                }
+              ]
             }
           ]
         }

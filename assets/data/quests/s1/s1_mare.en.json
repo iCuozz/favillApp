@@ -63,13 +63,22 @@
             "id": "prende_caffe",
             "label": "She takes it.",
             "goto_branch": "branch_caffe_si",
-            "stat_effects": { "scintille": 15, "resistenza": -10, "legame": 10 }
+            "stat_effects": { "scintille": -8, "resistenza": 1, "legame": 10 },
+            "setMemories": { "narrative.unwind_memory": "that coffee at the beach, with Mallow smiling" }
           },
           {
             "id": "lascia_caffe",
             "label": "She leaves it there.",
             "goto_branch": "branch_caffe_no",
-            "stat_effects": { "resistenza": 10, "legame": -5 }
+            "stat_effects": { "resistenza": 10, "legame": -5 },
+            "setMemories": { "narrative.unwind_memory": "that coffee left at the beach, in silence" }
+          },
+          {
+            "id": "caffe_irritato",
+            "label": "\"Thanks.\" Cold. Accumulated irritation.",
+            "goto_branch": "branch_caffe_irritato",
+            "stat_effects": { "scintille": -8, "resistenza": -5, "legame": -3, "segreto": 3 },
+            "setMemories": { "choice_tone.s1_mare.caffe_choice": "irritato", "narrative.unwind_memory": "that tense moment at the beach" }
           }
         ]
       }
@@ -149,7 +158,7 @@
               "text_blocks": [
                 { "id": "bcs_0_tb_0", "type": "narration", "text": "She takes it. Drinks it in one sip. Hot, strong, familiar." },
                 { "id": "bcs_0_tb_1", "type": "narration", "text": "Mallow smiles — that small smile he always has ready for her." },
-                { "id": "bcs_0_tb_2", "type": "narration", "text": "Lex watches her drink. His eyes move from the coffee to Favilla's hair. From the coffee to her hair. An expression of updated calculations — and approved." }
+                { "id": "bcs_0_tb_2", "type": "narration", "text": "Lex watches her drink. His eyes move from the coffee to Favilla's hair. From the coffee to her hair. Today she doesn't shine. He takes note. Coffee is the enemy." }
               ],
               "interactions": []
             }
@@ -192,6 +201,76 @@
             ]
           }
         }
+      ]
+    },
+    "branch_caffe_irritato": {
+      "pages": [
+       {
+         "index": 0,
+         "background": "assets/episodes/s1/s1_mare/page_caffe.webp",
+         "panels": [
+           {
+             "id": "bci_0",
+             "characters": ["favilla", "mallow", "lex"],
+             "text_blocks": [
+               { "id": "bci_0_tb_0", "type": "dialogue", "speaker": "favilla", "text": "\"Thanks.\"" },
+               { "id": "bci_0_tb_1", "type": "narration", "text": "The word comes out cold. Not mean — but cold. Like the beach sun has burned away her ability to speak like a human being." },
+               { "id": "bci_0_tb_2", "type": "narration", "text": "Mallow hears it. He registers it. Says nothing. Lex watches the coffee, then watches Mom, then back to the coffee. He registers it too." },
+               { "id": "bci_0_tb_3", "type": "thought", "text": "I wish I were somewhere else. Not with him. Not with anyone." }
+             ],
+             "interactions": []
+           }
+         ]
+       },
+       {
+         "index": 1,
+         "background": "assets/episodes/s1/s1_mare/page_lex_acqua.webp",
+         "panels": [
+           {
+             "id": "bci_1",
+             "characters": ["favilla", "lex"],
+             "text_blocks": [
+               { "id": "bci_1_tb_0", "type": "narration", "text": "He's been on the towel for three minutes when he spots the target." },
+               { "id": "bci_1_tb_1", "type": "narration", "text": "The sea. Big. Glittering. Like Mum — that time." },
+               { "id": "bci_1_tb_2", "type": "narration", "text": "He starts moving." }
+             ],
+             "interactions": []
+           }
+         ],
+         "choice": {
+           "id": "distrai_lex_choice_irritato",
+           "prompt": "Lex is heading for the water.",
+           "options": [
+             {
+               "id": "distrai_lex_irritato",
+               "label": "She grabs him. Pulls him back abruptly.",
+               "goto_branch": "branch_preso_male",
+               "stat_effects": { "resistenza": 5, "legame": -5, "segreto": 5 }
+             }
+           ]
+         }
+       }
+      ]
+    },
+    "branch_preso_male": {
+      "pages": [
+       {
+         "index": 0,
+         "background": "assets/episodes/s1/s1_mare/page_lex_preso.webp",
+         "panels": [
+           {
+             "id": "bpm_0",
+             "characters": ["favilla", "lex"],
+             "text_blocks": [
+               { "id": "bpm_0_tb_0", "type": "narration", "text": "Caught. The grip is sharp, irritated." },
+               { "id": "bpm_0_tb_1", "type": "narration", "text": "It doesn't hurt, but Lex feels the shift. Feels when Mom is no longer with him in this space." },
+               { "id": "bpm_0_tb_2", "type": "narration", "text": "For a second, Lex's eyes go blank." },
+               { "id": "bpm_0_tb_3", "type": "thought", "text": "Perfect. I've broken the moment." }
+             ],
+             "interactions": []
+           }
+         ]
+       }
       ]
     },
     "branch_caffe_no": {

@@ -1,0 +1,300 @@
+{
+  "id": "s1_palestra",
+  "pages": [
+    {
+      "index": 0,
+      "background": "assets/episodes/s1/s1_palestra/page_0.webp",
+      "panels": [
+        {
+          "id": "spl0_0",
+          "characters": ["favilla"],
+          "text_blocks": [
+            {
+              "id": "spl0_0_tb_0",
+              "type": "narration",
+              "text": "Palestra comunale di Nova Tutinia. L'aria sa di disinfettante e gomma scaldata dai passi."
+            },
+            {
+              "id": "spl0_0_tb_1",
+              "type": "narration",
+              "text": "Favilla resta un secondo sulla soglia. La borsa sulla spalla, le spalle già stanche."
+            },
+            {
+              "id": "spl0_0_tb_2",
+              "type": "thought",
+              "text": "Entrare qui da sola dovrebbe sembrare una follia. Invece sembra un lusso."
+            },
+            {
+              "id": "spl0_0_tb_3",
+              "type": "narration",
+              "text": "Nessuno la guarda. Per una volta, davvero nessuno."
+            }
+          ],
+          "interactions": []
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "background": "assets/episodes/s1/s1_palestra/page_1.webp",
+      "panels": [
+        {
+          "id": "spl1_0",
+          "characters": ["favilla"],
+          "text_blocks": [
+            {
+              "id": "spl1_0_tb_0",
+              "type": "narration",
+              "text": "Dentro, il ronzio dei neon copre il resto."
+            },
+            {
+              "id": "spl1_0_tb_1",
+              "type": "narration",
+              "text": "Due persone corrono sui tapis roulant. Un istruttore sistema i pesi in fondo alla sala."
+            },
+            {
+              "id": "spl1_0_tb_2",
+              "type": "narration",
+              "text": "Favilla appoggia una mano sul corrimano. Il metallo è freddo. Le dita, invece, no."
+            },
+            {
+              "id": "spl1_0_tb_3",
+              "type": "thought",
+              "text": "Va bene. Posso stare qui. Solo stare."
+            }
+          ],
+          "interactions": []
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "background": "assets/episodes/s1/s1_palestra/page_2.webp",
+      "panels": [
+        {
+          "id": "spl2_0",
+          "characters": ["favilla"],
+          "text_blocks": [
+            {
+              "id": "spl2_0_tb_0",
+              "type": "narration",
+              "text": "La sala pesi è quasi vuota."
+            },
+            {
+              "id": "spl2_0_tb_1",
+              "type": "narration",
+              "text": "Un manubrio da dieci chili vibra appena quando lo prende."
+            },
+            {
+              "id": "spl2_0_tb_2",
+              "type": "narration",
+              "text": "Nel riflesso, la faccia sembra la sua e non lo è: troppo tirata, troppo tesa, troppo presente."
+            },
+            {
+              "id": "spl2_0_tb_3",
+              "type": "thought",
+              "text": "Oggi non devo salvare nessuno. Nemmeno me stessa."
+            }
+          ],
+          "interactions": []
+        }
+      ],
+      "choice": {
+        "id": "palestra_choice",
+        "prompt": "Il corpo chiede tregua. Favilla ascolta?",
+        "options": [
+          {
+            "id": "si_ferma",
+            "label": "Sì. Si ferma e respira.",
+            "goto_branch": "branch_respiro",
+            "stat_effects": {
+              "resistenza": 20
+            }
+          },
+          {
+            "id": "ultima_serie",
+            "label": "No. Un'ultima serie.",
+            "goto_branch": "branch_spinge",
+            "stat_effects": {
+              "resistenza": 10,
+              "scintille": 10
+            }
+          },
+          {
+            "id": "pigra_escap",
+            "label": "Se ne va. Non ha voglia di niente.",
+            "goto_branch": "branch_scappa",
+            "stat_effects": {
+              "resistenza": -5,
+              "legame": -5,
+              "segreto": 5
+            },
+            "setMemories": { "choice_intent.s1_palestra.palestra_choice": "escaped" }
+          }
+        ]
+      }
+    }
+  ],
+  "branches": {
+    "branch_respiro": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_palestra/branch_respiro.webp",
+          "panels": [
+            {
+              "id": "spr_0",
+              "characters": ["favilla"],
+              "text_blocks": [
+                {
+                  "id": "spr_0_tb_0",
+                  "type": "narration",
+                  "text": "Favilla si siede sul tappetino, schiena al muro."
+                },
+                {
+                  "id": "spr_0_tb_1",
+                  "type": "narration",
+                  "text": "Conta i respiri. Uno. Due. Tre."
+                },
+                {
+                  "id": "spr_0_tb_2",
+                  "type": "narration",
+                  "text": "Quando riapre gli occhi, le spalle hanno smesso di stringere il collo."
+                },
+                {
+                  "id": "spr_0_tb_3",
+                  "type": "thought",
+                  "text": "Non sono leggera. Però sono qui."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "branch_spinge": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_palestra/branch_spinge.webp",
+          "panels": [
+            {
+              "id": "sps_0",
+              "characters": ["favilla"],
+              "text_blocks": [
+                {
+                  "id": "sps_0_tb_0",
+                  "type": "narration",
+                  "text": "Il peso sale. Le braccia tremano una volta sola. Poi reggono."
+                },
+                {
+                  "id": "sps_0_tb_1",
+                  "type": "narration",
+                  "text": "Il manubrio cede appena sotto la sua presa."
+                },
+                {
+                  "id": "sps_0_tb_2",
+                  "type": "narration",
+                  "text": "Favilla ride da sola, piano. Un suono quasi incredulo."
+                },
+                {
+                  "id": "sps_0_tb_3",
+                  "type": "thought",
+                  "text": "Non è pace. È sfogo. Oggi basta."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "branch_scappa": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_palestra/branch_scappa.webp",
+          "panels": [
+            {
+              "id": "sc_0",
+              "characters": ["favilla"],
+              "text_blocks": [
+                {
+                  "id": "sc_0_tb_0",
+                  "type": "narration",
+                  "text": "Appoggia il manubrio. Prende la borsa."
+                },
+                {
+                  "id": "sc_0_tb_1",
+                  "type": "narration",
+                  "text": "Non saluta nessuno. Non pensa a Mallow che la aspetta. Non pensa a Lex."
+                },
+                {
+                  "id": "sc_0_tb_2",
+                  "type": "narration",
+                  "text": "Esce dalla palestra come se il pavimento sotto fosse fragile."
+                },
+                {
+                  "id": "sc_0_tb_3",
+                  "type": "thought",
+                  "text": "Non posso stare qui. Non posso stare da nessuna parte."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "epilogue": {
+    "pages": [
+      {
+        "index": 0,
+        "background": "assets/episodes/s1/s1_palestra/page_epilogo.webp",
+        "panels": [
+          {
+            "id": "spp_0",
+            "characters": ["favilla", "mallow"],
+            "text_blocks": [
+              {
+                "id": "spp_0_tb_0",
+                "type": "narration",
+                "text": "Casa. Mallow sta finendo di preparare la cena."
+              },
+              {
+                "id": "spp_0_tb_1",
+                "type": "narration",
+                "text": "Favilla entra con il borsone, capelli umidi e schiena un po' più dritta."
+              },
+              {
+                "id": "spp_0_tb_2",
+                "type": "dialogue",
+                "speaker": "mallow",
+                "text": "«Ti vedo meglio.»"
+              },
+              {
+                "id": "spp_0_tb_3",
+                "type": "dialogue",
+                "speaker": "favilla",
+                "text": "«Era ora.»"
+              },
+              {
+                "id": "spp_0_tb_4",
+                "type": "thought",
+                "text": "Per una sera può essere stanca soltanto. E le torna in mente {{memory:narrative.unwind_memory|quel piccolo istante di tregua}}."
+              },
+              {
+                "id": "spp_0_tb_5",
+                "type": "system",
+                "text": "MISSIONE COMPLETATA — La Palestra"
+              }
+            ],
+            "interactions": []
+          }
+        ]
+      }
+    ]
+  }
+}

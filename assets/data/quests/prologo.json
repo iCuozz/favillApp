@@ -3,7 +3,7 @@
   "pages": [
     {
       "index": 0,
-      "background": "assets/episodes/prologo/page_0.webp",
+      "background": "assets/episodes/prologo/page_0.png",
       "panels": [
         {
           "id": "pr0_0",
@@ -47,7 +47,7 @@
     },
     {
       "index": 1,
-      "background": "assets/episodes/prologo/page_1.webp",
+      "background": "assets/episodes/prologo/page_1.png",
       "panels": [
         {
           "id": "pr1_0",
@@ -92,7 +92,7 @@
     },
     {
       "index": 2,
-      "background": "assets/episodes/prologo/page_2.webp",
+      "background": "assets/episodes/prologo/page_2.png",
       "panels": [
         {
           "id": "pr2_0",
@@ -130,7 +130,7 @@
     },
     {
       "index": 3,
-      "background": "assets/episodes/prologo/page_3.webp",
+      "background": "assets/episodes/prologo/page_3.png",
       "panels": [
         {
           "id": "pr3_0",
@@ -167,7 +167,7 @@
     },
     {
       "index": 4,
-      "background": "assets/episodes/prologo/page_4.webp",
+      "background": "assets/episodes/prologo/page_4.png",
       "panels": [
         {
           "id": "pr4_0",
@@ -213,7 +213,7 @@
     },
     {
       "index": 5,
-      "background": "assets/episodes/prologo/page_carmela.webp",
+      "background": "assets/episodes/prologo/page_carmela.png",
       "panels": [
         {
           "id": "pr5_carmela_0",
@@ -252,7 +252,7 @@
     },
     {
       "index": 6,
-      "background": "assets/episodes/prologo/page_4.webp",
+      "background": "assets/episodes/prologo/page_4.png",
       "panels": [
         {
           "id": "pr5_0",
@@ -314,7 +314,7 @@
       "pages": [
         {
           "index": 0,
-          "background": "assets/episodes/prologo/page_4.webp",
+          "background": "assets/episodes/prologo/page_4.png",
           "panels": [
             {
               "id": "bs_0",
@@ -357,7 +357,7 @@
       "pages": [
         {
           "index": 0,
-          "background": "assets/episodes/prologo/page_4.webp",
+          "background": "assets/episodes/prologo/page_4.png",
           "panels": [
             {
               "id": "bl_0",
@@ -401,7 +401,7 @@
     "pages": [
       {
         "index": 0,
-        "background": "assets/episodes/prologo/page_4.webp",
+        "background": "assets/episodes/prologo/page_4.png",
         "panels": [
           {
             "id": "ep_0",

@@ -88,6 +88,8 @@ class _WorldMapPageState extends State<WorldMapPage>
       (id: 's1_mare',            title: 'EP6 · Un Giorno al Mare',    file: 'assets/data/quests/s1/s1_mare.json'),
       (id: 's1_centro_commerciale', title: 'EP6alt · GalaxiaMall',     file: 'assets/data/quests/s1/s1_centro_commerciale.json'),
       (id: 's1_lunedi_asilo',      title: 'EP7 · Lunedì all\'Asilo',   file: 'assets/data/quests/s1/s1_lunedi_asilo.json'),
+      (id: 's1_palestra',          title: 'EP7.5 · La Palestra',      file: 'assets/data/quests/s1/s1_palestra.json'),
+      (id: 's1_allagamento',      title: 'EP8 · L\'Allagamento',      file: 'assets/data/quests/s1/s1_allagamento.json'),
     ];
 
     showModalBottomSheet<void>(
@@ -113,34 +115,41 @@ class _WorldMapPageState extends State<WorldMapPage>
                   ],
                 ),
                 const SizedBox(height: 12),
-                ...episodes.map((ep) => ListTile(
-                  dense: true,
-                  contentPadding: EdgeInsets.zero,
-                  leading: const Icon(Icons.play_circle_outline, color: Colors.pinkAccent),
-                  title: Text(ep.title,
-                      style: const TextStyle(color: Colors.white, fontSize: 14)),
-                  onTap: () {
-                    Navigator.pop(context);
-                    final summary = EpisodeSummary(
-                      id: ep.id,
-                      title: ep.title,
-                      subtitle: '',
-                      thumbnail: '',
-                      file: ep.file,
-                    );
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => QuestLoaderPage(
-                          comicIndex: widget.comicIndex,
-                          summary: summary,
-                          questId: ep.id,
-                          worldMap: _worldMap!,
-                        ),
-                      ),
-                    );
-                  },
-                )),
+                Flexible(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: episodes.map((ep) => ListTile(
+                        dense: true,
+                        contentPadding: EdgeInsets.zero,
+                        leading: const Icon(Icons.play_circle_outline, color: Colors.pinkAccent),
+                        title: Text(ep.title,
+                            style: const TextStyle(color: Colors.white, fontSize: 14)),
+                        onTap: () {
+                          Navigator.pop(context);
+                          final summary = EpisodeSummary(
+                            id: ep.id,
+                            title: ep.title,
+                            subtitle: '',
+                            thumbnail: '',
+                            file: ep.file,
+                          );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => QuestLoaderPage(
+                                comicIndex: widget.comicIndex,
+                                summary: summary,
+                                questId: ep.id,
+                                worldMap: _worldMap!,
+                              ),
+                            ),
+                          );
+                        },
+                      )).toList(),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

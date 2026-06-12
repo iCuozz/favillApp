@@ -11,27 +11,30 @@ import '../models/comic_data.dart';
 
 /// Mini-game RINCORSA — city/park Temple-Run: insegui il ladro che ha rubato la borsetta di Favilla.
 ///
+/// La difficoltà scala con la stat Scintille: più scintille = più potenza = più facile.
 /// 3 corsie. Scivola sinistra/destra per cambiare corsia ed evitare ostacoli.
 /// Gap decresce naturalmente mentre corri; le collisioni lo aumentano.
 ///
 /// Tier: gap ≤ 0.30 → score 2 (preso) | ≤ 0.65 → score 1 (quasi) | > 0.65 → score 0 (perso).
 class MinigameRincorsaScreen extends StatefulWidget {
   final MinigameConfig config;
+  final int scintille;
   final void Function(
           Map<String, int> statEffects, String tierLabel, MinigameTier tier)
       onComplete;
 
   const MinigameRincorsaScreen(
-      {super.key, required this.config, required this.onComplete});
+      {super.key, required this.config, required this.scintille, required this.onComplete});
 
   @override
   State<MinigameRincorsaScreen> createState() => _MinigameRincorsaScreenState();
 }
 
-// ─── Game constants ─────────────────────────────────────────────────────────
-const _kStartGap = 0.55;
-const _kNaturalRecovery = 0.022; // gap/s — running > walking thief
-const _kCollisionPenalty = 0.18;
+// ─── Base game constants ────────────────────────────────────────────────────
+// Scaled by scintille stat via _scintilleModifier — see _MinigameRincorsaScreenState
+const _kBaseStartGap = 0.55;
+const _kBaseRecovery = 0.022; // gap/s — running > walking thief
+const _kBaseCollisionPenalty = 0.18;
 const _kObstacleSpeed = 0.62; // track-y units/s
 const _kSpawnInterval = 1.35; // seconds
 const _kSwitchSpeed = 9.0; // lerp units/s
@@ -79,8 +82,21 @@ enum _RunState { normal, switching, stunned }
 
 class _MinigameRincorsaScreenState extends State<MinigameRincorsaScreen>
     with TickerProviderStateMixin {
+  // ── Scintille scaling ─────────────────────────────────────────────────────
+  /// Modificatore [-0.25 .. +0.25] basato su Scintille.
+  /// Scintille=50 → 0.0 (neutro). Ogni 10pt sopra/sotto → ±5%.
+  double get _scintilleModifier =>
+      ((widget.scintille - 50) / 10 * 0.05).clamp(-0.25, 0.25);
+
+  double get _startGap =>
+      _kBaseStartGap * (1.0 - _scintilleModifier);
+  double get _naturalRecovery =>
+      _kBaseRecovery * (1.0 + _scintilleModifier);
+  double get _collisionPenalty =>
+      _kBaseCollisionPenalty * (1.0 - _scintilleModifier);
+
   // ── Game state ────────────────────────────────────────────────────────────
-  double _gap = _kStartGap;
+  late double _gap;
   double _elapsed = 0;
   bool _finished = false;
 
@@ -127,6 +143,7 @@ class _MinigameRincorsaScreenState extends State<MinigameRincorsaScreen>
   @override
   void initState() {
     super.initState();
+    _gap = _startGap;
 
     _flashCtrl = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 400));
@@ -162,7 +179,7 @@ class _MinigameRincorsaScreenState extends State<MinigameRincorsaScreen>
       _scrollOffset = (_scrollOffset + dt * 0.55) % 1.0;
 
       // ── Natural gap recovery ─────────────────────────────────────────────
-      _gap = (_gap - _kNaturalRecovery * dt).clamp(0.0, 1.0);
+      _gap = (_gap - _naturalRecovery * dt).clamp(0.0, 1.0);
 
       // ── Lane switch lerp ─────────────────────────────────────────────────
       if (_runState == _RunState.switching) {
@@ -246,7 +263,7 @@ class _MinigameRincorsaScreenState extends State<MinigameRincorsaScreen>
 
   void _onCollision(_Obstacle obs) {
     obs.consumed = true;
-    _gap = (_gap + _kCollisionPenalty).clamp(0.0, 1.0);
+    _gap = (_gap + _collisionPenalty).clamp(0.0, 1.0);
     _runState = _RunState.stunned;
     _stunT = 0.0;
     _flashCtrl.forward(from: 0).then((_) => _flashCtrl.reverse());
@@ -437,6 +454,7 @@ class _MinigameRincorsaScreenState extends State<MinigameRincorsaScreen>
           secondsLeft: _secondsLeft,
           gap: _gap,
           totalSeconds: _durationSeconds,
+          scintilleBoost: _scintilleModifier,
         ),
       ],
     );
@@ -1034,11 +1052,13 @@ class _Hud extends StatelessWidget {
   final int secondsLeft;
   final double gap;
   final int totalSeconds;
+  final double scintilleBoost;
 
   const _Hud(
       {required this.secondsLeft,
       required this.gap,
-      required this.totalSeconds});
+      required this.totalSeconds,
+      required this.scintilleBoost});
 
   @override
   Widget build(BuildContext context) {
@@ -1137,6 +1157,31 @@ class _Hud extends StatelessWidget {
             ],
           ),
 
+          const SizedBox(height: 4),
+          // Scintille boost indicator
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text('⚡', style: TextStyle(fontSize: 13)),
+              const SizedBox(width: 4),
+              Text(
+                scintilleBoost >= 0.05
+                    ? 'Scintille alte — potenza! ⚡'
+                    : scintilleBoost <= -0.05
+                        ? 'Scintille basse — kryptonite... 🧊'
+                        : 'Scintille nella norma',
+                style: TextStyle(
+                  fontSize: 11,
+                  color: scintilleBoost > 0
+                      ? const Color(0xFFFFD700)
+                      : scintilleBoost < 0
+                          ? const Color(0xFF90CAF9)
+                          : Colors.white.withOpacity(0.6),
+                  letterSpacing: 0.5,
+                ),
+              ),
+            ],
+          ),
           const SizedBox(height: 4),
           Center(
             child: Text(

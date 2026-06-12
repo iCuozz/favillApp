@@ -44,16 +44,18 @@ class _Ripple {
 // ─────────────────────────────── Widget ────────────────────────────────────
 
 /// Mini-game EP1 "Respira": gauge del calore con surge randomici.
+/// La difficoltà scala con Scintille: più scintille = più calore = più difficile.
 /// Meccanica: TAP RAPIDO per abbassare il calore (non più hold).
 /// Streak bonus dopo 4 tap consecutivi entro 350ms.
 class MinigameRespiraScreen extends StatefulWidget {
   final MinigameConfig config;
+  final int scintille;
   final void Function(
           Map<String, int> statEffects, String tierLabel, MinigameTier tier)
       onComplete;
 
   const MinigameRespiraScreen(
-      {super.key, required this.config, required this.onComplete});
+      {super.key, required this.config, required this.scintille, required this.onComplete});
 
   @override
   State<MinigameRespiraScreen> createState() => _MinigameRespiraScreenState();
@@ -61,6 +63,15 @@ class MinigameRespiraScreen extends StatefulWidget {
 
 class _MinigameRespiraScreenState extends State<MinigameRespiraScreen>
     with TickerProviderStateMixin {
+  // ── Scintille scaling ─────────────────────────────────────────────────
+  double get _scintilleModifier =>
+      ((widget.scintille - 50) / 10 * 0.05).clamp(-0.25, 0.25);
+
+  /// Rise rate: più scintille = più calore = sale più veloce (più difficile)
+  double get _riseRate => _kBaseRiseRate * (1.0 + _scintilleModifier);
+  /// Tap cooling: più scintille = meno efficace (più difficile da raffreddare)
+  double get _tapCool => _kBaseTapCool * (1.0 - _scintilleModifier);
+
   _RespiraPhase _phase = _RespiraPhase.tutorial;
   double _heat = 0.45;
   double _timeLeft = 0;
@@ -99,9 +110,9 @@ class _MinigameRespiraScreenState extends State<MinigameRespiraScreen>
   // ── Ember particles ───────────────────────────────────────────────────
   final List<_Ember> _embers = [];
 
-  // ── Parametri difficoltà ──────────────────────────────────────────────
-  static const _kRiseRate = 0.148;       // calore passivo per secondo
-  static const _kTapCool = 0.036;        // raffreddamento per singolo tap
+  // ── Base difficulty params (scaled by scintille) ───────────────────────
+  static const _kBaseRiseRate = 0.148;   // calore passivo per secondo
+  static const _kBaseTapCool = 0.036;    // raffreddamento per singolo tap
   static const _kStreakBonus = 0.015;    // bonus per tap quando streak >= 4
   static const _kStreakMin = 4;          // soglia streak
   static const _kMinTapMs = 60;          // anti-spam (ignora tap < 60ms)
@@ -211,7 +222,7 @@ class _MinigameRespiraScreenState extends State<MinigameRespiraScreen>
     _lastTapWasOnBeat = _beatCursor >= _kBeatSweetLo && _beatCursor <= _kBeatSweetHi;
 
     // Raffreddamento: base + streak bonus + rhythm bonus
-    final cool = _kTapCool
+    final cool = _tapCool
         + (_streak >= _kStreakMin ? _kStreakBonus : 0.0)
         + (_lastTapWasOnBeat ? _kRhythmBonus : 0.0);
 
@@ -249,7 +260,7 @@ class _MinigameRespiraScreenState extends State<MinigameRespiraScreen>
       _beatCursor = newBeatCursor;
 
       // Calore passivo
-      _heat = (_heat + _kRiseRate * dt).clamp(0.0, 1.0);
+      _heat = (_heat + _riseRate * dt).clamp(0.0, 1.0);
       _timeLeft -= dt;
       _timeElapsed += dt;
 
@@ -647,6 +658,22 @@ class _MinigameRespiraScreenState extends State<MinigameRespiraScreen>
                         '${_timeLeft.ceil()}s',
                         style: const TextStyle(
                             color: Colors.white30, fontSize: 12),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        _scintilleModifier >= 0.05
+                            ? '⚡ Scintille alte — più calore!'
+                            : _scintilleModifier <= -0.05
+                                ? '🧊 Scintille basse — kryptonite...'
+                                : '⚡ Scintille nella norma',
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: _scintilleModifier > 0
+                              ? const Color(0xFFFFD700)
+                              : _scintilleModifier < 0
+                                  ? const Color(0xFF90CAF9)
+                                  : Colors.white54,
+                        ),
                       ),
                     ],
                   ),

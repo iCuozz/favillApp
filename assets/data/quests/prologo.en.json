@@ -3,7 +3,7 @@
   "pages": [
     {
       "index": 0,
-      "background": "assets/episodes/prologo/page_0.webp",
+      "background": "assets/episodes/prologo/page_0.png",
       "panels": [
         {
           "id": "pr0_0",
@@ -47,7 +47,7 @@
     },
     {
       "index": 1,
-      "background": "assets/episodes/prologo/page_1.webp",
+      "background": "assets/episodes/prologo/page_1.png",
       "panels": [
         {
           "id": "pr1_0",
@@ -98,7 +98,7 @@
     },
     {
       "index": 2,
-      "background": "assets/episodes/prologo/page_2.webp",
+      "background": "assets/episodes/prologo/page_2.png",
       "panels": [
         {
           "id": "pr2_0",
@@ -149,7 +149,7 @@
     },
     {
       "index": 3,
-      "background": "assets/episodes/prologo/page_3.webp",
+      "background": "assets/episodes/prologo/page_3.png",
       "panels": [
         {
           "id": "pr3_0",
@@ -208,7 +208,52 @@
     },
     {
       "index": 4,
-      "background": "assets/episodes/prologo/page_carmela.webp",
+      "background": "assets/episodes/prologo/page_4.png",
+      "panels": [
+        {
+          "id": "pr4_0",
+          "characters": [
+            "favilla_blaze",
+            "lex"
+          ],
+          "text_blocks": [
+            {
+              "id": "pr4_0_tb_0",
+              "type": "narration",
+              "text": "It happens in a flash. The glasses vanish. Her hair becomes light. A force she has never felt before surges through her body."
+            },
+            {
+              "id": "pr4_0_tb_1",
+              "type": "narration",
+              "text": "Lex is safe. The kitchen is back in order. Mallow is still on his call."
+            },
+            {
+              "id": "pr4_0_tb_2",
+              "type": "narration",
+              "text": "The world didn't notice a thing."
+            },
+            {
+              "id": "pr4_0_tb_3",
+              "type": "narration",
+              "text": "Except Lex."
+            },
+            {
+              "id": "pr4_0_tb_4",
+              "type": "narration",
+              "text": "Lex stares at her. Eyes wide. Then he laughs — that full laugh with his only two bottom teeth."
+            },
+            {
+              "id": "pr4_0_tb_5",
+              "type": "thought",
+              "text": "He knows. He can't tell. But he knows."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "background": "assets/episodes/prologo/page_carmela.png",
       "panels": [
         {
           "id": "pr5_carmela_0",
@@ -246,54 +291,185 @@
       ]
     },
     {
-      "index": 5,
-      "background": "assets/episodes/prologo/page_4.webp",
+      "index": 6,
+      "background": "assets/episodes/prologo/page_4.png",
       "panels": [
         {
-          "id": "pr4_0",
+          "id": "pr5_0",
           "characters": [
-            "favilla_blaze",
-            "lex",
+            "favilla",
             "mallow"
           ],
           "text_blocks": [
             {
-              "id": "pr4_0_tb_0",
+              "id": "pr5_0_tb_0",
               "type": "narration",
-              "text": "In a flash, the glasses vanish, the sweater disappears, her blonde hair turns into a mane of fire."
+              "text": "Mallow hangs up the call. He walks into the kitchen. Looks around."
             },
             {
-              "id": "pr4_0_tb_1",
-              "type": "narration",
-              "text": "Her work uniform gives way to a super-gym suit with pink and gold flames. The aura around her bursts with energy."
-            },
-            {
-              "id": "pr4_0_tb_2",
-              "type": "dialogue",
-              "speaker": "favilla_blaze",
-              "text": "Supermom superpowers: ACTIVATED!"
-            },
-            {
-              "id": "pr4_0_tb_3",
-              "type": "narration",
-              "text": "From the shadow of the school... FAVILLA BLAZE is born."
-            },
-            {
-              "id": "pr4_0_tb_4",
+              "id": "pr5_0_tb_1",
               "type": "dialogue",
               "speaker": "mallow",
-              "text": "Did I... marry a superhero?"
+              "text": "Everything okay? Sounded like chaos in there."
             },
             {
-              "id": "pr4_0_tb_5",
-              "type": "dialogue",
-              "speaker": "lex",
-              "text": "Mommy FLAME!"
+              "id": "pr5_0_tb_2",
+              "type": "thought",
+              "text": "What do I tell him?"
             }
-          ],
-          "interactions": []
+          ]
+        }
+      ],
+      "choice": {
+        "id": "prima_scelta",
+        "prompt": "Mallow is looking at you. What do you say?",
+        "options": [
+          {
+            "id": "bugia",
+            "label": "\"Yeah. Pasta's almost ready.\"",
+            "hint": "First lie. The secret is safe — for now.",
+            "goto_branch": "branch_segreto",
+            "stat_effects": {
+              "segreto": 10,
+              "legame": -5
+            }
+          },
+          {
+            "id": "mezzo_vero",
+            "label": "\"I had a strange moment...\"",
+            "hint": "Mallow is curious. The secret trembles.",
+            "goto_branch": "branch_legame",
+            "stat_effects": {
+              "segreto": -10,
+              "legame": 10
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "branches": {
+    "branch_segreto": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/prologo/page_4.png",
+          "panels": [
+            {
+              "id": "bs_0",
+              "characters": [
+                "favilla",
+                "mallow",
+                "lex"
+              ],
+              "text_blocks": [
+                {
+                  "id": "bs_0_tb_0",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "Okay! How long?"
+                },
+                {
+                  "id": "bs_0_tb_1",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Ten minutes."
+                },
+                {
+                  "id": "bs_0_tb_2",
+                  "type": "narration",
+                  "text": "Lex watches her. He smiles again. Only she knows what it means."
+                },
+                {
+                  "id": "bs_0_tb_3",
+                  "type": "thought",
+                  "text": "The secret is mine. And his. Only ours."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "branch_legame": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/prologo/page_4.png",
+          "panels": [
+            {
+              "id": "bl_0",
+              "characters": [
+                "favilla",
+                "mallow",
+                "lex"
+              ],
+              "text_blocks": [
+                {
+                  "id": "bl_0_tb_0",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "Strange how?"
+                },
+                {
+                  "id": "bl_0_tb_1",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Nothing. Just tired. Come, sit."
+                },
+                {
+                  "id": "bl_0_tb_2",
+                  "type": "narration",
+                  "text": "Mallow looks at her one second too long. Then he nods."
+                },
+                {
+                  "id": "bl_0_tb_3",
+                  "type": "thought",
+                  "text": "So close. I almost told him everything."
+                }
+              ]
+            }
+          ]
         }
       ]
     }
-  ]
+  },
+  "epilogue": {
+    "pages": [
+      {
+        "index": 0,
+        "background": "assets/episodes/prologo/page_4.png",
+        "panels": [
+          {
+            "id": "ep_0",
+            "characters": [
+              "favilla"
+            ],
+            "text_blocks": [
+              {
+                "id": "ep_0_tb_0",
+                "type": "narration",
+                "text": "That evening, while Lex sleeps and Mallow stares at his screen, Favilla sits on the edge of the bed."
+              },
+              {
+                "id": "ep_0_tb_1",
+                "type": "thought",
+                "text": "What have I become?"
+              },
+              {
+                "id": "ep_0_tb_2",
+                "type": "narration",
+                "text": "On the other side of the city, Nova Tutinia sleeps. Not for long."
+              },
+              {
+                "id": "ep_0_tb_3",
+                "type": "system",
+                "text": "END OF PROLOGUE — Season 1: Strange Dawn"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

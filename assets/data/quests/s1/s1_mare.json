@@ -63,13 +63,22 @@
             "id": "prende_caffe",
             "label": "Lo prende.",
             "goto_branch": "branch_caffe_si",
-            "stat_effects": { "scintille": 15, "resistenza": -10, "legame": 10 }
+            "stat_effects": { "scintille": -8, "resistenza": 1, "legame": 10 },
+            "setMemories": { "narrative.unwind_memory": "quel caffè al mare, con Mallow che sorrideva" }
           },
           {
             "id": "lascia_caffe",
             "label": "Lo lascia lì.",
             "goto_branch": "branch_caffe_no",
-            "stat_effects": { "resistenza": 10, "legame": -5 }
+            "stat_effects": { "resistenza": 10, "legame": -5 },
+            "setMemories": { "narrative.unwind_memory": "quel caffè lasciato al mare, in silenzio" }
+          },
+          {
+            "id": "caffe_irritato",
+            "label": "«Grazie.» Fredda. Innervosita cumulata.",
+            "goto_branch": "branch_caffe_irritato",
+            "stat_effects": { "scintille": -8, "resistenza": -5, "legame": -3, "segreto": 3 },
+            "setMemories": { "choice_tone.s1_mare.caffe_choice": "irritato", "narrative.unwind_memory": "quel momento di tensione al mare" }
           }
         ]
       }
@@ -149,7 +158,7 @@
               "text_blocks": [
                 { "id": "bcs_0_tb_0", "type": "narration", "text": "Lo prende. Lo beve d'un sorso. Caldo, forte, familiare." },
                 { "id": "bcs_0_tb_1", "type": "narration", "text": "Mallow sorride — quel sorriso piccolo che tiene sempre pronto per lei." },
-                { "id": "bcs_0_tb_2", "type": "narration", "text": "Lex guarda il caffè. Poi i capelli di Favilla. Poi torna al caffè. Un'espressione di calcoli aggiornati — e approvati." }
+                { "id": "bcs_0_tb_2", "type": "narration", "text": "Lex guarda il caffè. Poi i capelli di Favilla. Oggi non brilla. Prende nota. Il caffè è il nemico." }
               ],
               "interactions": []
             }
@@ -192,6 +201,76 @@
             ]
           }
         }
+      ]
+    },
+    "branch_caffe_irritato": {
+      "pages": [
+       {
+         "index": 0,
+         "background": "assets/episodes/s1/s1_mare/page_caffe.webp",
+         "panels": [
+           {
+             "id": "bci_0",
+             "characters": ["favilla", "mallow", "lex"],
+             "text_blocks": [
+               { "id": "bci_0_tb_0", "type": "dialogue", "speaker": "favilla", "text": "«Grazie.»" },
+               { "id": "bci_0_tb_1", "type": "narration", "text": "La parola esce fredda. Non offensiva — ma fredda. Come se il sole al mare avesse bruciato via la capacità di parlare come un essere umano." },
+               { "id": "bci_0_tb_2", "type": "narration", "text": "Mallow la sente. La registra. Non dice niente. Lex guarda il caffè, poi guarda mamma, poi torna al caffè. La registra anche lui." },
+               { "id": "bci_0_tb_3", "type": "thought", "text": "Vorrei essere altrove. Non da lui. Non con nessuno." }
+             ],
+             "interactions": []
+           }
+         ]
+       },
+       {
+         "index": 1,
+         "background": "assets/episodes/s1/s1_mare/page_lex_acqua.webp",
+         "panels": [
+           {
+             "id": "bci_1",
+             "characters": ["favilla", "lex"],
+             "text_blocks": [
+               { "id": "bci_1_tb_0", "type": "narration", "text": "È sull'asciugamano da tre minuti quando individua il bersaglio." },
+               { "id": "bci_1_tb_1", "type": "narration", "text": "Il mare. Grande. Luccicante. Come la mamma — quella volta." },
+               { "id": "bci_1_tb_2", "type": "narration", "text": "Inizia a muoversi." }
+             ],
+             "interactions": []
+           }
+         ],
+         "choice": {
+           "id": "distrai_lex_choice_irritato",
+           "prompt": "Lex si muove verso l'acqua.",
+           "options": [
+             {
+               "id": "distrai_lex_irritato",
+               "label": "Lo prende. Ma lo tira indietro secco.",
+               "goto_branch": "branch_preso_male",
+               "stat_effects": { "resistenza": 5, "legame": -5, "segreto": 5 }
+             }
+           ]
+         }
+       }
+      ]
+    },
+    "branch_preso_male": {
+      "pages": [
+       {
+         "index": 0,
+         "background": "assets/episodes/s1/s1_mare/page_lex_preso.webp",
+         "panels": [
+           {
+             "id": "bpm_0",
+             "characters": ["favilla", "lex"],
+             "text_blocks": [
+               { "id": "bpm_0_tb_0", "type": "narration", "text": "Afferrato. La presa è brusca, innervosita." },
+               { "id": "bpm_0_tb_1", "type": "narration", "text": "Non fa male, ma Lex sente il cambio. Sente quando la mamma non è più con lui nello spazio." },
+               { "id": "bpm_0_tb_2", "type": "narration", "text": "Per un secondo lo sguarda di Lex si azzera." },
+               { "id": "bpm_0_tb_3", "type": "thought", "text": "Perfetto. Ho rotto il momento." }
+             ],
+             "interactions": []
+           }
+         ]
+       }
       ]
     },
     "branch_caffe_no": {

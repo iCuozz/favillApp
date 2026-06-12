@@ -1,0 +1,300 @@
+{
+  "id": "s1_palestra",
+  "pages": [
+    {
+      "index": 0,
+      "background": "assets/episodes/s1/s1_palestra/page_0.webp",
+      "panels": [
+        {
+          "id": "spl0_0",
+          "characters": ["favilla"],
+          "text_blocks": [
+            {
+              "id": "spl0_0_tb_0",
+              "type": "narration",
+              "text": "Nova Tutinia municipal gym. The air smells like disinfectant and rubber warmed by footsteps."
+            },
+            {
+              "id": "spl0_0_tb_1",
+              "type": "narration",
+              "text": "Favilla pauses on the threshold. Bag on her shoulder, shoulders already tired."
+            },
+            {
+              "id": "spl0_0_tb_2",
+              "type": "thought",
+              "text": "Coming in here alone should feel like madness. Instead it feels like a luxury."
+            },
+            {
+              "id": "spl0_0_tb_3",
+              "type": "narration",
+              "text": "Nobody is looking at her. For once, really nobody."
+            }
+          ],
+          "interactions": []
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "background": "assets/episodes/s1/s1_palestra/page_1.webp",
+      "panels": [
+        {
+          "id": "spl1_0",
+          "characters": ["favilla"],
+          "text_blocks": [
+            {
+              "id": "spl1_0_tb_0",
+              "type": "narration",
+              "text": "Inside, the hum of the neon lights covers everything else."
+            },
+            {
+              "id": "spl1_0_tb_1",
+              "type": "narration",
+              "text": "Two people run on treadmills. A trainer sorts weights at the back of the room."
+            },
+            {
+              "id": "spl1_0_tb_2",
+              "type": "narration",
+              "text": "Favilla rests a hand on the rail. The metal is cold. Her fingers are not."
+            },
+            {
+              "id": "spl1_0_tb_3",
+              "type": "thought",
+              "text": "Okay. I can stay here. Just stay."
+            }
+          ],
+          "interactions": []
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "background": "assets/episodes/s1/s1_palestra/page_2.webp",
+      "panels": [
+        {
+          "id": "spl2_0",
+          "characters": ["favilla"],
+          "text_blocks": [
+            {
+              "id": "spl2_0_tb_0",
+              "type": "narration",
+              "text": "The weights room is almost empty."
+            },
+            {
+              "id": "spl2_0_tb_1",
+              "type": "narration",
+              "text": "A ten-kilo dumbbell trembles slightly when she picks it up."
+            },
+            {
+              "id": "spl2_0_tb_2",
+              "type": "narration",
+              "text": "In the mirror, the face staring back is hers and not hers: too pulled tight, too present."
+            },
+            {
+              "id": "spl2_0_tb_3",
+              "type": "thought",
+              "text": "Today I don't have to save anyone. Not even myself."
+            }
+          ],
+          "interactions": []
+        }
+      ],
+      "choice": {
+        "id": "palestra_choice",
+        "prompt": "Her body asks for a break. Does Favilla listen?",
+        "options": [
+          {
+            "id": "si_ferma",
+            "label": "Yes. She stops and breathes.",
+            "goto_branch": "branch_respiro",
+            "stat_effects": {
+              "resistenza": 20
+            }
+          },
+          {
+            "id": "ultima_serie",
+            "label": "No. One last set.",
+            "goto_branch": "branch_spinge",
+            "stat_effects": {
+              "resistenza": 10,
+              "scintille": 10
+            }
+          },
+          {
+            "id": "pigra_escap",
+            "label": "She leaves. She doesn't feel like anything.",
+            "goto_branch": "branch_scappa",
+            "stat_effects": {
+              "resistenza": -5,
+              "legame": -5,
+              "segreto": 5
+            },
+            "setMemories": { "choice_intent.s1_palestra.palestra_choice": "escaped" }
+          }
+        ]
+      }
+    }
+  ],
+  "branches": {
+    "branch_respiro": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_palestra/branch_respiro.webp",
+          "panels": [
+            {
+              "id": "spr_0",
+              "characters": ["favilla"],
+              "text_blocks": [
+                {
+                  "id": "spr_0_tb_0",
+                  "type": "narration",
+                  "text": "Favilla sits on the mat, back against the wall."
+                },
+                {
+                  "id": "spr_0_tb_1",
+                  "type": "narration",
+                  "text": "She counts the breaths. One. Two. Three."
+                },
+                {
+                  "id": "spr_0_tb_2",
+                  "type": "narration",
+                  "text": "When she opens her eyes again, her shoulders have stopped climbing toward her neck."
+                },
+                {
+                  "id": "spr_0_tb_3",
+                  "type": "thought",
+                  "text": "I'm not light. But I'm here."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "branch_spinge": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_palestra/branch_spinge.webp",
+          "panels": [
+            {
+              "id": "sps_0",
+              "characters": ["favilla"],
+              "text_blocks": [
+                {
+                  "id": "sps_0_tb_0",
+                  "type": "narration",
+                  "text": "The weight goes up. Her arms shake once. Then they hold."
+                },
+                {
+                  "id": "sps_0_tb_1",
+                  "type": "narration",
+                  "text": "The dumbbell gives a tiny bend under her grip."
+                },
+                {
+                  "id": "sps_0_tb_2",
+                  "type": "narration",
+                  "text": "Favilla laughs to herself, softly. A sound that feels almost disbelieving."
+                },
+                {
+                  "id": "sps_0_tb_3",
+                  "type": "thought",
+                  "text": "This isn't peace. It's release. For today, that's enough."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "branch_scappa": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_palestra/branch_scappa.webp",
+          "panels": [
+            {
+              "id": "sc_0",
+              "characters": ["favilla"],
+              "text_blocks": [
+                {
+                  "id": "sc_0_tb_0",
+                  "type": "narration",
+                  "text": "She sets the dumbbell down. Grabs her bag."
+                },
+                {
+                  "id": "sc_0_tb_1",
+                  "type": "narration",
+                  "text": "She doesn't say goodbye to anyone. Doesn't think about Mallow waiting for her. Doesn't think about Lex."
+                },
+                {
+                  "id": "sc_0_tb_2",
+                  "type": "narration",
+                  "text": "She leaves the gym as if the floor beneath her is fragile."
+                },
+                {
+                  "id": "sc_0_tb_3",
+                  "type": "thought",
+                  "text": "I can't stay here. I can't stay anywhere."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "epilogue": {
+    "pages": [
+      {
+        "index": 0,
+        "background": "assets/episodes/s1/s1_palestra/page_epilogo.webp",
+        "panels": [
+          {
+            "id": "spp_0",
+            "characters": ["favilla", "mallow"],
+            "text_blocks": [
+              {
+                "id": "spp_0_tb_0",
+                "type": "narration",
+                "text": "Home. Mallow is finishing dinner."
+              },
+              {
+                "id": "spp_0_tb_1",
+                "type": "narration",
+                "text": "Favilla comes in with the gym bag, damp hair and a back that's a little straighter."
+              },
+              {
+                "id": "spp_0_tb_2",
+                "type": "dialogue",
+                "speaker": "mallow",
+                "text": "\"You look better.\""
+              },
+              {
+                "id": "spp_0_tb_3",
+                "type": "dialogue",
+                "speaker": "favilla",
+                "text": "\"About time.\""
+              },
+              {
+                "id": "spp_0_tb_4",
+                "type": "thought",
+                "text": "For one evening, she can be tired only. And she remembers {{memory:narrative.unwind_memory|that small moment of respite}}."
+              },
+              {
+                "id": "spp_0_tb_5",
+                "type": "system",
+                "text": "MISSION COMPLETE — The Gym"
+              }
+            ],
+            "interactions": []
+          }
+        ]
+      }
+    ]
+  }
+}

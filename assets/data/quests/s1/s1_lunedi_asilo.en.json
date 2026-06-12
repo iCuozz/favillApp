@@ -66,7 +66,7 @@
             {
               "id": "sla1_0_tb_3",
               "type": "thought",
-              "text": "Mom hides something. Maybe there's a clue in that notebook."
+              "text": "Lex already knows the secret. He just needs notebook access to build the device and expose her."
             },
             {
               "id": "sla1_0_tb_4",
@@ -81,6 +81,17 @@
         "id": "crack_password_choice",
         "prompt": "Lex stares at the screen. One click. Another. A plan.",
         "options": [
+          {
+            "id": "mentire",
+            "label": "\"Lex, no!\" Grabs the notebook. Real nervousness.",
+            "goto_branch": "branch_scoperta_quasi",
+            "stat_effects": {
+              "segreto": 10,
+              "resistenza": -3,
+              "legame": -2
+            },
+            "setMemories": { "choice_intent.s1_lunedi_asilo.crack_password_choice": "panicked" }
+          },
           {
             "id": "tenta_password",
             "label": "Try.",
@@ -116,6 +127,49 @@
     }
   ],
   "branches": {
+    "branch_scoperta_quasi": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_lunedi_asilo/page_scoperta.webp",
+          "panels": [
+            {
+              "id": "sla_scoperta_0",
+              "characters": ["favilla", "mallow", "lex"],
+              "text_blocks": [
+                {
+                  "id": "sla_scoperta_0_tb_0",
+                  "type": "narration",
+                  "text": "Favilla sees the notebook open. Lex with his hands on the keyboard. She reacts sharp."
+                },
+                {
+                  "id": "sla_scoperta_0_tb_1",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "\"Away from there.\""
+                },
+                {
+                  "id": "sla_scoperta_0_tb_2",
+                  "type": "narration",
+                  "text": "Not a question. Exhaustion becoming command. Her hand trembles a little — not with fear. With accumulated tension."
+                },
+                {
+                  "id": "sla_scoperta_0_tb_3",
+                  "type": "narration",
+                  "text": "Lex watches the notebook. Then watches Mom. Mom is afraid of the notebook. Not water. Not falls. Of what's inside it."
+                },
+                {
+                  "id": "sla_scoperta_0_tb_4",
+                  "type": "thought",
+                  "text": "It's there. The data. The schema. Everything needed to build the detector. She knows it could be useful."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
     "branch_genio": {
       "pages": [
         {
@@ -280,7 +334,7 @@
               {
                 "id": "ep_sla_0_tb_2",
                 "type": "thought",
-                "text": "Nursery school. Good. New territory. New variables to map."
+                "text": "Nursery school. Good. New territory. After {{memory:choice_label.s1_centro_commerciale.carmela_dialogo_choice|that scene with Carmela}}, new variables to map."
               }
             ],
             "interactions": []

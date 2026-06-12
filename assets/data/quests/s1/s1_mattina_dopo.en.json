@@ -214,29 +214,54 @@
                 {
                   "id": "bsu_0_tb_0",
                   "type": "narration",
-                  "text": "Mallow puts his phone down. Looks at her with that precise calm Favilla knows well."
+                  "text": "An hour later. Favilla is trying to have breakfast with one hand. The other one she keeps hidden."
                 },
                 {
                   "id": "bsu_0_tb_1",
-                  "type": "dialogue",
-                  "speaker": "mallow",
-                  "text": "Last night… something happened to you, didn't it?"
+                  "type": "narration",
+                  "text": "Mallow looks up from his coffee."
                 },
                 {
                   "id": "bsu_0_tb_2",
-                  "type": "thought",
-                  "text": "No. No no no. Not yet."
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "Favilla. Your hands."
                 },
                 {
                   "id": "bsu_0_tb_3",
-                  "type": "dialogue",
-                  "speaker": "favilla",
-                  "text": "Tiredness. Just tiredness."
+                  "type": "narration",
+                  "text": "It's not a question. Mallow knows something is wrong."
                 },
                 {
                   "id": "bsu_0_tb_4",
+                  "type": "thought",
+                  "text": "You looked burned."
+                },
+                {
+                  "id": "bsu_0_tb_5",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "I burned myself making pasta. Nothing serious."
+                },
+                {
+                  "id": "bsu_0_tb_6",
                   "type": "narration",
-                  "text": "Mallow nods. But doesn't take his eyes off her."
+                  "text": "Lex watches from his chair. His eyes move from Mallow to Favilla. From his grandfather's reaction. He knows that she knows."
+                },
+                {
+                  "id": "bsu_0_tb_7",
+                  "type": "thought",
+                  "text": "I had to lie faster than expected."
+                },
+                {
+                  "id": "bsu_0_tb_8",
+                  "type": "narration",
+                  "text": "Mallow doesn't comment. But he looks at that hand one second too long."
+                },
+                {
+                  "id": "bsu_0_tb_9",
+                  "type": "system",
+                  "text": "MISSION COMPLETED — The Morning After"
                 }
               ],
               "interactions": []
@@ -265,17 +290,17 @@
                 {
                   "id": "ep_caffe_0_tb_1",
                   "type": "narration",
-                  "text": "A second later, something inside her warms — not like the coffee."
+                  "text": "For a second she feels almost normal. Then she feels the void — where last night there was a storm, now there's only silence."
                 },
                 {
                   "id": "ep_caffe_0_tb_2",
                   "type": "thought",
-                  "text": "There it is. It's the coffee. Coffee does this."
+                  "text": "It doesn't warm. Coffee... extinguishes."
                 },
                 {
                   "id": "ep_caffe_0_tb_3",
                   "type": "narration",
-                  "text": "Lex watches her from his chair. He already knows."
+                  "text": "Lex watches her from his chair. Today mom doesn't shine. And he doesn't know if he should worry."
                 },
                 {
                   "id": "ep_caffe_0_tb_4",
@@ -395,11 +420,11 @@
             {
               "id": "caffe_si",
               "label": "She drinks it in one go. Like every morning.",
-              "hint": "The body knows before the mind.",
+              "hint": "Coffee dampens the Spark. But the body asks for mercy.",
               "goto_branch": "epilogue_caffe",
               "stat_effects": {
-                "resistenza": -15,
-                "scintille": 10
+                "scintille": -8,
+                "resistenza": 1
               }
             },
             {

@@ -2,9 +2,9 @@
   "comfyui_url": "http://127.0.0.1:8000",
   "workflow_path": "~/Desktop/favilla_blaze_ipadapter.json",
   "output_dir": "~/Documents/ComfyUI/output",
-  "style_block": "graphic novel style, cel shading, flat colors, bold outlines, comic book illustration, 2D art, clean linework, vibrant colors, full body portrait, smartphone portrait, no text, no speech bubbles, no watermarks",
-  "scene_style_block": "graphic novel style, cel shading, flat colors, bold outlines, comic book illustration, 2D art, clean linework, vibrant colors, wide shot, group scene, multiple characters, full scene composition, dynamic composition, smartphone portrait 9:16, no text, no speech bubbles, no watermarks",
-  "scene_ip_weight": 0.35,
+  "style_block": "graphic novel style, Franco-Belgian comic art, clean bold ink outlines, flat cel-shaded colors, vibrant warm palette, detailed background, cinematic composition, no text, no speech bubbles, no watermarks, high detail",
+  "scene_style_block": "graphic novel style, Franco-Belgian comic art, clean bold ink outlines, flat cel-shaded colors, vibrant warm palette, wide establishing shot, detailed environment background, cinematic composition, no text, no speech bubbles, no watermarks, high detail",
+  "scene_ip_weight": 0.15,
   "negative_block": "realistic, 3d render, photo, blurry, ugly, deformed, extra limbs, watermark, speech bubbles, text, letters, signature, low quality, solo, single character, portrait only",
   "characters": {
     "favilla": {
@@ -24,7 +24,7 @@
     },
     "lex": {
       "image": "~/Projects/Illustrations/Characters/lex.png",
-      "descriptor": "LEX: chubby baby boy 7 months old, rosy olive skin, light brown hair with mini-mohawk like dad, two tiny bottom teeth visible when smiling, wide curious intelligent eyes, rounded baby face, expressive — laughs big or stares intensely, tiny red sneakers",
+      "descriptor": "LEX: tiny baby boy only 7 months old, very chubby rounded baby face, big round cheeks, rosy olive skin, light brown baby fuzz hair with mini-mohawk like dad, two tiny bottom teeth visible when smiling, huge curious round eyes, tiny baby hands and feet, wears tiny red sneakers, clearly an infant not a toddler, small baby body, sits in high chair",
       "ip_weight": 0.80
     }
   },

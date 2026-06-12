@@ -7,7 +7,11 @@
       "panels": [
         {
           "id": "sla0_0",
-          "characters": ["favilla", "mallow", "lex"],
+          "characters": [
+            "favilla",
+            "mallow",
+            "lex"
+          ],
           "text_blocks": [
             {
               "id": "sla0_0_tb_0",
@@ -46,7 +50,10 @@
       "panels": [
         {
           "id": "sla1_0",
-          "characters": ["mallow", "lex"],
+          "characters": [
+            "mallow",
+            "lex"
+          ],
           "text_blocks": [
             {
               "id": "sla1_0_tb_0",
@@ -66,7 +73,7 @@
             {
               "id": "sla1_0_tb_3",
               "type": "thought",
-              "text": "Mamma ha qualcosa che si nasconde. Forse in quel notebook c'è una traccia."
+              "text": "Lex sa già il segreto. Gli serve solo entrare nel notebook per costruire il dispositivo e smascherarla."
             },
             {
               "id": "sla1_0_tb_4",
@@ -82,6 +89,19 @@
         "prompt": "Lex scruta lo schermo. Un clic. Un altro. Un piano.",
         "options": [
           {
+            "id": "mentire",
+            "label": "«Lex, no!» Prende il notebook. Innervosita vera.",
+            "goto_branch": "branch_scoperta_quasi",
+            "stat_effects": {
+              "segreto": 10,
+              "resistenza": -3,
+              "legame": -2
+            },
+            "setMemories": {
+              "choice_intent.s1_lunedi_asilo.crack_password_choice": "panicked"
+            }
+          },
+          {
             "id": "tenta_password",
             "label": "Tenta.",
             "goto_branch": "branch_genio",
@@ -93,20 +113,28 @@
                   "min": 2,
                   "label": "Genio.",
                   "goto_branch": "branch_genio",
-                  "stat_effects": { "segreto": -5 },
-                  "set_flags": { "lex_ha_un_piano": true }
+                  "stat_effects": {
+                    "segreto": -5
+                  },
+                  "set_flags": {
+                    "lex_ha_un_piano": true
+                  }
                 },
                 {
                   "min": 1,
                   "label": "Quasi.",
                   "goto_branch": "branch_quasi",
-                  "stat_effects": { "legame": 5 }
+                  "stat_effects": {
+                    "legame": 5
+                  }
                 },
                 {
                   "min": 0,
                   "label": "Beccato.",
                   "goto_branch": "branch_beccato",
-                  "stat_effects": { "legame": 10 }
+                  "stat_effects": {
+                    "legame": 10
+                  }
                 }
               ]
             }
@@ -116,6 +144,53 @@
     }
   ],
   "branches": {
+    "branch_scoperta_quasi": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_lunedi_asilo/page_scoperta.webp",
+          "panels": [
+            {
+              "id": "sla_scoperta_0",
+              "characters": [
+                "favilla",
+                "mallow",
+                "lex"
+              ],
+              "text_blocks": [
+                {
+                  "id": "sla_scoperta_0_tb_0",
+                  "type": "narration",
+                  "text": "Favilla vede il notebook aperto. Lex con le mani sulla tastiera. Reagisce secco."
+                },
+                {
+                  "id": "sla_scoperta_0_tb_1",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "«Via di lì.»"
+                },
+                {
+                  "id": "sla_scoperta_0_tb_2",
+                  "type": "narration",
+                  "text": "Non è una domanda. È stanchezza che diventa comando. La mano le trema un po' — non di paura. Di tensione cumulata."
+                },
+                {
+                  "id": "sla_scoperta_0_tb_3",
+                  "type": "narration",
+                  "text": "Lex guarda il notebook. Poi guarda mamma. Mamma ha paura del notebook. Non dell'acqua. Non di cadute. Di quello che c'è dentro."
+                },
+                {
+                  "id": "sla_scoperta_0_tb_4",
+                  "type": "thought",
+                  "text": "È lì. I dati. Lo schema. Tutto quello che serviva per costruire il rilevatore. Lei lo sa che potrebbe servire."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
     "branch_genio": {
       "pages": [
         {
@@ -124,7 +199,9 @@
           "panels": [
             {
               "id": "sla_bg_0",
-              "characters": ["lex"],
+              "characters": [
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "id": "sla_bg_0_tb_0",
@@ -166,7 +243,11 @@
           "panels": [
             {
               "id": "sla_bq_0",
-              "characters": ["lex", "mallow", "favilla"],
+              "characters": [
+                "lex",
+                "mallow",
+                "favilla"
+              ],
               "text_blocks": [
                 {
                   "id": "sla_bq_0_tb_0",
@@ -215,7 +296,11 @@
           "panels": [
             {
               "id": "sla_bb_0",
-              "characters": ["lex", "mallow", "favilla"],
+              "characters": [
+                "lex",
+                "mallow",
+                "favilla"
+              ],
               "text_blocks": [
                 {
                   "id": "sla_bb_0_tb_0",
@@ -265,7 +350,11 @@
         "panels": [
           {
             "id": "ep_sla_0",
-            "characters": ["favilla", "mallow", "lex"],
+            "characters": [
+              "favilla",
+              "mallow",
+              "lex"
+            ],
             "text_blocks": [
               {
                 "id": "ep_sla_0_tb_0",
@@ -280,7 +369,7 @@
               {
                 "id": "ep_sla_0_tb_2",
                 "type": "thought",
-                "text": "Asilo. Bene. Nuovo territorio. Nuove variabili da mappare."
+                "text": "Asilo. Bene. Nuovo territorio. Dopo {{memory:choice_label.s1_centro_commerciale.carmela_dialogo_choice|la scena con Carmela}}, nuove variabili da mappare."
               }
             ],
             "interactions": []

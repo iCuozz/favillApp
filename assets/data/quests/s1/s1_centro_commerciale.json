@@ -2,6 +2,13 @@
   "id": "s1_centro_commerciale",
   "stat_entry": [
     {
+      "stat": "legame",
+      "op": "lt",
+      "value": 25,
+      "goto_branch": "intro_legame_distante",
+      "prepend": true
+    },
+    {
       "flag_conditions": [
         {
           "flag": "favilla_transformed_public",
@@ -139,6 +146,7 @@
             "label": "«Carmela, ciao!»",
             "goto_branch": "branch_risposta_bene",
             "stat_effects": {},
+            "setMemories": { "narrative.unwind_memory": "quel pomeriggio quasi normale al centro commerciale" },
             "minigame": {
               "type": "carmela_dialogo",
               "extra": {
@@ -254,12 +262,64 @@
                 }
               ]
             }
+          },
+          {
+            "id": "evita_carmela",
+            "label": "Gira subito. Niente Carmela.",
+            "goto_branch": "branch_evita",
+            "stat_effects": {
+              "resistenza": -3,
+              "legame": -5,
+              "segreto": 5
+            },
+            "setMemories": { "choice_intent.s1_centro_commerciale.carmela_dialogo_choice": "avoided", "narrative.unwind_memory": "quel pomeriggio al centro commerciale, tagliato corto" }
           }
         ]
       }
     }
   ],
   "branches": {
+    "branch_evita": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_centro_commerciale/page_cassa.webp",
+          "panels": [
+            {
+              "id": "scc_evita_0",
+              "characters": [
+                "favilla",
+                "mallow",
+                "lex"
+              ],
+              "text_blocks": [
+                {
+                  "id": "scc_evita_0_tb_0",
+                  "type": "narration",
+                  "text": "Favilla gira in fretta. Non verso la cassa — verso l'uscita."
+                },
+                {
+                  "id": "scc_evita_0_tb_1",
+                  "type": "narration",
+                  "text": "Mallow la raggiunge, non fa domande. Prende il passeggino."
+                },
+                {
+                  "id": "scc_evita_0_tb_2",
+                  "type": "narration",
+                  "text": "Lex guarda mamma, poi guarda la cassa. Prende nota."
+                },
+                {
+                  "id": "scc_evita_0_tb_3",
+                  "type": "thought",
+                  "text": "Non affrontare = problema rimandato. Il tipo migliore di problema."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
     "intro_mallow_sa_qualcosa": {
       "pages": [
         {
@@ -326,7 +386,7 @@
                 {
                   "id": "scc_imc_0_tb_2",
                   "type": "thought",
-                  "text": "Folla. Luci. Aria condizionata. Almeno qui non si vede niente."
+                  "text": "Folla. Luci. Aria condizionata. Dopo {{memory:choice_label.s1_scuola_1.scottature_choice|quello che è successo a scuola}}, almeno qui non si vede niente."
                 }
               ],
               "interactions": []
@@ -453,6 +513,42 @@
                 }
               ],
               "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "intro_legame_distante": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_centro_commerciale/page_0.webp",
+          "panels": [
+            {
+              "id": "sp_legame_0",
+              "characters": ["favilla", "mallow", "lex"],
+              "text_blocks": [
+                {
+                  "id": "sp_legame_0_tb_0",
+                  "type": "narration",
+                  "text": "La domenica al centro commerciale doveva essere una tregua. Invece è una passeggiata nel silenzio."
+                },
+                {
+                  "id": "sp_legame_0_tb_1",
+                  "type": "narration",
+                  "text": "Mallow cammina avanti con il carrello. Non è arrabbiato — è peggio: è distante. Come se avesse smesso di aspettare una risposta."
+                },
+                {
+                  "id": "sp_legame_0_tb_2",
+                  "type": "narration",
+                  "text": "Lex guarda dall'uno all'altra. Calcola. Il divario tra i suoi genitori è una mappa che sta imparando a leggere."
+                },
+                {
+                  "id": "sp_legame_0_tb_3",
+                  "type": "thought",
+                  "text": "Non è litigare il problema. È il silenzio. Il silenzio è molto più rumoroso."
+                }
+              ]
             }
           ]
         }

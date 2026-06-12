@@ -2,6 +2,13 @@
   "id": "s1_centro_commerciale",
   "stat_entry": [
     {
+      "stat": "legame",
+      "op": "lt",
+      "value": 25,
+      "goto_branch": "intro_legame_distante",
+      "prepend": true
+    },
+    {
       "flag_conditions": [
         {
           "flag": "favilla_transformed_public",
@@ -139,6 +146,7 @@
             "label": "«Carmela, hi!»",
             "goto_branch": "branch_risposta_bene",
             "stat_effects": {},
+            "setMemories": { "narrative.unwind_memory": "that almost normal afternoon at the mall" },
             "minigame": {
               "type": "carmela_dialogo",
               "extra": {
@@ -254,12 +262,64 @@
                 }
               ]
             }
+          },
+          {
+            "id": "evita_carmela",
+            "label": "Turn around immediately. No Carmela.",
+            "goto_branch": "branch_evita",
+            "stat_effects": {
+              "resistenza": -3,
+              "legame": -5,
+              "segreto": 5
+            },
+            "setMemories": { "choice_intent.s1_centro_commerciale.carmela_dialogo_choice": "avoided", "narrative.unwind_memory": "that afternoon at the mall, cut short" }
           }
         ]
       }
     }
   ],
   "branches": {
+    "branch_evita": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_centro_commerciale/page_cassa.webp",
+          "panels": [
+            {
+              "id": "scc_evita_0",
+              "characters": [
+                "favilla",
+                "mallow",
+                "lex"
+              ],
+              "text_blocks": [
+                {
+                  "id": "scc_evita_0_tb_0",
+                  "type": "narration",
+                  "text": "Favilla turns quickly. Not toward the checkout — toward the exit."
+                },
+                {
+                  "id": "scc_evita_0_tb_1",
+                  "type": "narration",
+                  "text": "Mallow catches up, doesn't ask questions. Takes the stroller."
+                },
+                {
+                  "id": "scc_evita_0_tb_2",
+                  "type": "narration",
+                  "text": "Lex looks at Mom, then at the checkout. Takes note."
+                },
+                {
+                  "id": "scc_evita_0_tb_3",
+                  "type": "thought",
+                  "text": "Not facing it = problem postponed. The best kind of problem."
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
     "intro_mallow_sa_qualcosa": {
       "pages": [
         {
@@ -326,7 +386,7 @@
                 {
                   "id": "scc_imc_0_tb_2",
                   "type": "thought",
-                  "text": "Crowds. Lights. Air conditioning. At least nobody can see anything here."
+                  "text": "Crowds. Lights. Air conditioning. After {{memory:choice_label.s1_scuola_1.scottature_choice|what happened at school}}, at least nobody can see anything here."
                 }
               ],
               "interactions": []
@@ -453,6 +513,42 @@
                 }
               ],
               "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "intro_legame_distante": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_centro_commerciale/page_0.webp",
+          "panels": [
+            {
+              "id": "sp_legame_0",
+              "characters": ["favilla", "mallow", "lex"],
+              "text_blocks": [
+                {
+                  "id": "sp_legame_0_tb_0",
+                  "type": "narration",
+                  "text": "The Sunday trip to the mall was supposed to be a truce. Instead, it's a walk in silence."
+                },
+                {
+                  "id": "sp_legame_0_tb_1",
+                  "type": "narration",
+                  "text": "Mallow walks ahead with the cart. He's not angry — it's worse: he's distant. Like he's stopped waiting for an answer."
+                },
+                {
+                  "id": "sp_legame_0_tb_2",
+                  "type": "narration",
+                  "text": "Lex looks from one to the other. Calculating. The gap between his parents is a map he's learning to read."
+                },
+                {
+                  "id": "sp_legame_0_tb_3",
+                  "type": "thought",
+                  "text": "Fighting isn't the problem. It's the silence. The silence is much louder."
+                }
+              ]
             }
           ]
         }

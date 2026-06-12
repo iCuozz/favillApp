@@ -2,6 +2,13 @@
   "id": "s1_spesa_sabato",
   "stat_entry": [
     {
+      "stat": "resistenza",
+      "op": "lt",
+      "value": 25,
+      "goto_branch": "intro_esausta",
+      "prepend": true
+    },
+    {
       "stat": "scintille",
       "op": "gte",
       "value": 60,
@@ -972,6 +979,45 @@
                 }
               ],
               "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "intro_esausta": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_spesa_sabato/page_0.webp",
+          "panels": [
+            {
+              "id": "sp_esausta_0",
+              "characters": [
+                "favilla",
+                "lex"
+              ],
+              "text_blocks": [
+                {
+                  "id": "sp_esausta_0_tb_0",
+                  "type": "narration",
+                  "text": "Favilla pushes the cart as if it weighs twice as much."
+                },
+                {
+                  "id": "sp_esausta_0_tb_1",
+                  "type": "narration",
+                  "text": "Her legs are lead. Every step is a negotiation with her body: one more, then one more."
+                },
+                {
+                  "id": "sp_esausta_0_tb_2",
+                  "type": "narration",
+                  "text": "Lex watches her from the seat. He doesn't say anything — but Lex never says anything when mom is like this. He just watches, as if waiting for her to stop."
+                },
+                {
+                  "id": "sp_esausta_0_tb_3",
+                  "type": "thought",
+                  "text": "One more aisle. Then the checkout. Then home. I can do this."
+                }
+              ]
             }
           ]
         }

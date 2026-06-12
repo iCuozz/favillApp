@@ -1,0 +1,660 @@
+{
+  "id": "s1_allagamento",
+  "audio_theme": "allagamento",
+  "stat_entry": [
+    {
+      "stat": "scintille",
+      "op": "lt",
+      "value": 10,
+      "goto_branch": "intro_senza_fiamma",
+      "prepend": true
+    },
+    {
+      "stat": "resistenza",
+      "op": "lt",
+      "value": 15,
+      "goto_branch": "intro_sfondata",
+      "prepend": true
+    },
+    {
+      "flag_conditions": [
+        {
+          "flag": "favilla_transformed_public",
+          "is": true
+        }
+      ],
+      "goto_branch": "intro_voci",
+      "prepend": true
+    },
+    {
+      "stat": "segreto",
+      "op": "lt",
+      "value": 30,
+      "goto_branch": "intro_segreto_fragile",
+      "prepend": true
+    },
+    {
+      "stat": "scintille",
+      "op": "lt",
+      "value": 45,
+      "goto_branch": "intro_kryptonite",
+      "prepend": true
+    }
+  ],
+  "pages": [
+    {
+      "index": 0,
+      "background": "assets/episodes/s1/s1_allagamento/page_0.webp",
+      "panels": [
+        {
+          "id": "all0_0",
+          "characters": ["favilla", "corvi"],
+          "text_blocks": [
+            {
+              "id": "all0_0_tb_0",
+              "type": "narration",
+              "text": "La scuola è deserta. O quasi."
+            },
+            {
+              "id": "all0_0_tb_1",
+              "type": "narration",
+              "text": "La Dott.ssa Corvi ha voluto un'ispezione a sorpresa. Senza preavviso, senza colleghi, senza via di fuga."
+            },
+            {
+              "id": "all0_0_tb_2",
+              "type": "dialogue",
+              "speaker": "corvi",
+              "text": "Voglio vedere il bagno del piano terra. Quello con la porta che non si chiude bene."
+            },
+            {
+              "id": "all0_0_tb_3",
+              "type": "narration",
+              "text": "Favilla la segue. Ogni passo è una trattativa con il corpo."
+            },
+            {
+              "id": "all0_0_tb_4",
+              "type": "thought",
+              "text": "Trenta minuti. Trenta minuti e se ne va. Posso farcela."
+            }
+          ],
+          "interactions": []
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "background": "assets/episodes/s1/s1_allagamento/page_1.webp",
+      "panels": [
+        {
+          "id": "all1_0",
+          "characters": ["favilla"],
+          "text_blocks": [
+            {
+              "id": "all1_0_tb_0",
+              "type": "narration",
+              "text": "La porta del bagno si chiude alle sue spalle. Scatta con un rumore secco — non il solito legno che non tiene, ma qualcosa che ha deciso di non aprirsi più."
+            },
+            {
+              "id": "all1_0_tb_1",
+              "type": "narration",
+              "text": "Favilla tira. Niente. Spinge. Niente. La maniglia gira a vuoto."
+            },
+            {
+              "id": "all1_0_tb_2",
+              "type": "narration",
+              "text": "Poi sente l'acqua."
+            },
+            {
+              "id": "all1_0_tb_3",
+              "type": "narration",
+              "text": "Un gocciolio regolare dal lavandino di sinistra. Che diventa un rivolo. Che diventa un flusso costante dal tubo sotto il lavello."
+            },
+            {
+              "id": "all1_0_tb_4",
+              "type": "narration",
+              "text": "L'acqua sale. Lentamente. Inesorabilmente."
+            },
+            {
+              "id": "all1_0_tb_5",
+              "type": "dialogue",
+              "speaker": "corvi",
+              "text": "Tutto bene lì dentro? Sembra che ci sia corrente."
+            }
+          ],
+          "interactions": []
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "background": "assets/episodes/s1/s1_allagamento/page_2.webp",
+      "panels": [
+        {
+          "id": "all2_0",
+          "characters": ["favilla"],
+          "text_blocks": [
+            {
+              "id": "all2_0_tb_0",
+              "type": "narration",
+              "text": "L'acqua è alta qualche centimetro. Non abbastanza per annegare. Abbastanza per farti capire che il tempo è contato."
+            },
+            {
+              "id": "all2_0_tb_1",
+              "type": "thought",
+              "text": "Tra poco arriva sotto la porta. Arriva nell'atrio. Arriva dalla Corvi."
+            },
+            {
+              "id": "all2_0_tb_2",
+              "type": "thought",
+              "text": "Devo uscire. Come?"
+            }
+          ],
+          "interactions": []
+        }
+      ],
+      "choice": {
+        "id": "allagamento_choice",
+        "prompt": "Acqua alle caviglie. La Corvi bussa. La porta è bloccata.",
+        "options": [
+          {
+            "id": "potenza",
+            "label": "Un lampo. La porta salta. Favilla Blaze esce.",
+            "hint": "Serve Scintille alte. Ma lascia tracce.",
+            "goto_branch": "branch_potenza",
+            "stat_effects": {
+              "scintille": -15,
+              "resistenza": -5,
+              "segreto": -15
+            }
+          },
+          {
+            "id": "forza_bruta",
+            "label": "Spalla sulla porta. Con tutto il peso.",
+            "hint": "Forza bruta e disperazione.",
+            "goto_branch": "branch_forza",
+            "stat_effects": {
+              "resistenza": -15,
+              "scintille": -5
+            },
+            "minigame": {
+              "type": "mash_door",
+              "duration_seconds": 12,
+              "tiers": [
+                {
+                  "min": 3,
+                  "label": "Sfondata!",
+                  "goto_branch": "branch_forza",
+                  "stat_effects": {
+                    "resistenza": -8,
+                    "segreto": -3
+                  }
+                },
+                {
+                  "min": 2,
+                  "label": "Ammaccata",
+                  "goto_branch": "branch_forza",
+                  "stat_effects": {
+                    "resistenza": -15,
+                    "scintille": -5
+                  }
+                },
+                {
+                  "min": 0,
+                  "label": "Non cede",
+                  "goto_branch": "branch_forza",
+                  "stat_effects": {
+                    "resistenza": -15,
+                    "scintille": -5,
+                    "segreto": -10
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "id": "astuzia",
+            "label": "Cerchi qualcosa. Una graffetta, un pezzo di plastica. Scassini la serratura.",
+            "hint": "Mani ferme. Testa fredda.",
+            "goto_branch": "branch_astuzia",
+            "stat_effects": {
+              "segreto": -5,
+              "resistenza": -12
+            },
+            "minigame": {
+              "type": "lockpick",
+              "duration_seconds": 20,
+              "tiers": [
+                {
+                  "min": 3,
+                  "label": "Scasso perfetto",
+                  "goto_branch": "branch_astuzia",
+                  "stat_effects": {
+                    "segreto": 5,
+                    "resistenza": -5
+                  }
+                },
+                {
+                  "min": 2,
+                  "label": "Scasso rumoroso",
+                  "goto_branch": "branch_astuzia",
+                  "stat_effects": {
+                    "segreto": 2,
+                    "resistenza": -8
+                  }
+                },
+                {
+                  "min": 0,
+                  "label": "Serratura bloccata",
+                  "goto_branch": "branch_astuzia",
+                  "stat_effects": {
+                    "resistenza": -12,
+                    "segreto": -5
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "id": "resa",
+            "label": "Niente. Non ce la fai. Bussi. Aspetti.",
+            "hint": "Senza forze. Senza poteri. Solo la verità.",
+            "goto_branch": "branch_resa",
+            "stat_effects": {
+              "segreto": -20,
+              "legame": 5
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "branches": {
+    "intro_senza_fiamma": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_allagamento/page_0.webp",
+          "panels": [
+            {
+              "id": "all_sf_0",
+              "characters": ["favilla"],
+              "text_blocks": [
+                {
+                  "id": "all_sf_0_tb_0",
+                  "type": "narration",
+                  "text": "Favilla prova a chiamare la Scintilla. Non risponde."
+                },
+                {
+                  "id": "all_sf_0_tb_1",
+                  "type": "narration",
+                  "text": "È come cercare di accendere un fiammifero bagnato. Il potere è lì — lo sente — ma non si accende."
+                },
+                {
+                  "id": "all_sf_0_tb_2",
+                  "type": "thought",
+                  "text": "Non oggi. Oggi sei solo Favilla. E oggi devi bastare."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "intro_sfondata": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_allagamento/page_0.webp",
+          "panels": [
+            {
+              "id": "all_sd_0",
+              "characters": ["favilla"],
+              "text_blocks": [
+                {
+                  "id": "all_sd_0_tb_0",
+                  "type": "narration",
+                  "text": "Favilla appoggia la mano alla parete. La gamba destra trema. Ha già dato tutto oggi."
+                },
+                {
+                  "id": "all_sd_0_tb_1",
+                  "type": "thought",
+                  "text": "Non so se ho abbastanza per uscire da qui."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "intro_segreto_fragile": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_allagamento/page_0.webp",
+          "panels": [
+            {
+              "id": "all_frag_0",
+              "characters": ["favilla", "corvi"],
+              "text_blocks": [
+                {
+                  "id": "all_frag_0_tb_0",
+                  "type": "narration",
+                  "text": "La Corvi è più silenziosa del solito. Ogni tanto scrive appunti. Favilla sa che non sono solo appunti sull'ispezione."
+                },
+                {
+                  "id": "all_frag_0_tb_1",
+                  "type": "dialogue",
+                  "speaker": "corvi",
+                  "text": "Sento che c'è qualcosa che non mi dice. È normale, con le ispezioni. Ma di solito scopro cos'è."
+                },
+                {
+                  "id": "all_frag_0_tb_2",
+                  "type": "thought",
+                  "text": "Sa qualcosa. Forse non cosa. Ma che c'è."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "intro_kryptonite": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_allagamento/page_0.webp",
+          "panels": [
+            {
+              "id": "all_kr_0",
+              "characters": ["favilla"],
+              "text_blocks": [
+                {
+                  "id": "all_kr_0_tb_0",
+                  "type": "narration",
+                  "text": "La Scintilla c'è. Ma è fioca. Come una candela in un barattolo."
+                },
+                {
+                  "id": "all_kr_0_tb_1",
+                  "type": "thought",
+                  "text": "Potrei usarla. Ma durerà poco. Devo scegliere bene."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "intro_voci": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_allagamento/page_0.webp",
+          "panels": [
+            {
+              "id": "all_voci_0",
+              "characters": ["favilla", "corvi"],
+              "text_blocks": [
+                {
+                  "id": "all_voci_0_tb_0",
+                  "type": "narration",
+                  "text": "La Corvi oggi ha un'espressione diversa. Non solo ispettiva — curiosa."
+                },
+                {
+                  "id": "all_voci_0_tb_1",
+                  "type": "dialogue",
+                  "speaker": "corvi",
+                  "text": "Ho sentito cose strane sul parco, l'altra domenica. Qualcuno ha parlato di luci, movimento veloce. Roba da matti."
+                },
+                {
+                  "id": "all_voci_0_tb_2",
+                  "type": "narration",
+                  "text": "Favilla tiene il respiro. La Corvi non la guarda mentre lo dice. Ma lo dice apposta."
+                },
+                {
+                  "id": "all_voci_0_tb_3",
+                  "type": "thought",
+                  "text": "Non ci crede. Ma ci sta pensando. È quasi peggio."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "branch_potenza": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_allagamento/page_0.webp",
+          "panels": [
+            {
+              "id": "pot0_0",
+              "characters": ["favilla", "favilla_blaze"],
+              "text_blocks": [
+                {
+                  "id": "pot0_0_tb_0",
+                  "type": "narration",
+                  "text": "Favilla chiude gli occhi."
+                },
+                {
+                  "id": "pot0_0_tb_1",
+                  "type": "narration",
+                  "text": "Quando li riapre, i capelli sono luce."
+                },
+                {
+                  "id": "pot0_0_tb_2",
+                  "type": "narration",
+                  "text": "La porta salta in un lampo accecante. L'acqua si apre come il Mar Rosso. Favilla Blaze è in corridoio in meno di un secondo."
+                },
+                {
+                  "id": "pot0_0_tb_3",
+                  "type": "narration",
+                  "text": "La Corvi è in fondo al corridoio. Ha sentito il boato."
+                },
+                {
+                  "id": "pot0_0_tb_4",
+                  "type": "narration",
+                  "text": "Favilla è già china sul tubo — mani nell'acqua, finte — come se stesse riparando il danno da minuti."
+                },
+                {
+                  "id": "pot0_0_tb_5",
+                  "type": "narration",
+                  "text": "I capelli fumano ancora. La scusa arriverà dopo."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "branch_forza": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_allagamento/page_0.webp",
+          "panels": [
+            {
+              "id": "for0_0",
+              "characters": ["favilla"],
+              "text_blocks": [
+                {
+                  "id": "for0_0_tb_0",
+                  "type": "narration",
+                  "text": "Un colpo. Due. La spalla duole. La porta cede di un millimetro."
+                },
+                {
+                  "id": "for0_0_tb_1",
+                  "type": "narration",
+                  "text": "Al terzo colpo, Favilla sente qualcosa cedere — non la porta, la maniglia. Il legno scheggiato le graffia la mano."
+                },
+                {
+                  "id": "for0_0_tb_2",
+                  "type": "narration",
+                  "text": "Si infila tra lo stipite e la porta con un movimento che è più istinto che tecnica. È fuori. Maddalena nell'acqua."
+                },
+                {
+                  "id": "for0_0_tb_3",
+                  "type": "narration",
+                  "text": "La Corvi la vede uscire, tutta sporca e bagnata. Sta arrivando di corsa."
+                },
+                {
+                  "id": "for0_0_tb_4",
+                  "type": "dialogue",
+                  "speaker": "corvi",
+                  "text": "Ha rotto la porta? Ma che cos'è successo?"
+                },
+                {
+                  "id": "for0_0_tb_5",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Il tubo è scoppiato. Mi sono fatta prendere dal panico."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "branch_astuzia": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_allagamento/page_0.webp",
+          "panels": [
+            {
+              "id": "ast0_0",
+              "characters": ["favilla"],
+              "text_blocks": [
+                {
+                  "id": "ast0_0_tb_0",
+                  "type": "narration",
+                  "text": "Favilla si guarda intorno. L'acqua sale, ma il panico no."
+                },
+                {
+                  "id": "ast0_0_tb_1",
+                  "type": "narration",
+                  "text": "Sotto il lavandino trova un vecchio fermacarte di metallo. Sottile. Robustissimo."
+                },
+                {
+                  "id": "ast0_0_tb_2",
+                  "type": "narration",
+                  "text": "Inserisce la punta nella fessura della serratura. La stanza è silenziosa — solo l'acqua che scorre e il suo respiro."
+                },
+                {
+                  "id": "ast0_0_tb_3",
+                  "type": "narration",
+                  "text": "Un clic. La maniglia gira."
+                },
+                {
+                  "id": "ast0_0_tb_4",
+                  "type": "narration",
+                  "text": "Favilla apre la porta. La Corvi è lì, con gli occhi socchiusi."
+                },
+                {
+                  "id": "ast0_0_tb_5",
+                  "type": "dialogue",
+                  "speaker": "corvi",
+                  "text": "…brava. Svelta di riflessi."
+                },
+                {
+                  "id": "ast0_0_tb_6",
+                  "type": "narration",
+                  "text": "Non è un complimento. È un appunto mentale."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "branch_resa": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_allagamento/page_0.webp",
+          "panels": [
+            {
+              "id": "res0_0",
+              "characters": ["favilla", "corvi"],
+              "text_blocks": [
+                {
+                  "id": "res0_0_tb_0",
+                  "type": "narration",
+                  "text": "Favilla bussa. Piano. Poi più forte."
+                },
+                {
+                  "id": "res0_0_tb_1",
+                  "type": "narration",
+                  "text": "La Corvi apre con il passepartout. La scena che vede è peggio di quanto immaginasse."
+                },
+                {
+                  "id": "res0_0_tb_2",
+                  "type": "narration",
+                  "text": "Favilla in piedi nell'acqua, mani sporche, capelli scomposti. Sembra una sopravvissuta."
+                },
+                {
+                  "id": "res0_0_tb_3",
+                  "type": "dialogue",
+                  "speaker": "corvi",
+                  "text": "Ma che… si è sentita male?"
+                },
+                {
+                  "id": "res0_0_tb_4",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Non lo so. Credo di sì."
+                },
+                {
+                  "id": "res0_0_tb_5",
+                  "type": "narration",
+                  "text": "Per la prima volta, Favilla non mente. E la verità è più pericolosa di qualsiasi bugia."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "epilogue": {
+    "pages": [
+      {
+        "index": 0,
+        "background": "assets/episodes/s1/s1_allagamento/page_epilogo.webp",
+        "panels": [
+          {
+            "id": "all_ep_0",
+            "characters": ["favilla"],
+            "text_blocks": [
+              {
+                "id": "all_ep_0_tb_0",
+                "type": "narration",
+                "text": "La Corvi se ne va con un fascicolo più spesso di quando è arrivata."
+              },
+              {
+                "id": "all_ep_0_tb_1",
+                "type": "narration",
+                "text": "Favilla resta sola nel corridoio bagnato. I piedi nell'acqua che si ritira."
+              },
+              {
+                "id": "all_ep_0_tb_2",
+                "type": "thought",
+                "text": "Oggi l'ho scampata. Ma domani?"
+              },
+              {
+                "id": "all_ep_0_tb_3",
+                "type": "narration",
+                "text": "Fuori, Nova Tutinia continua a vivere. Non sa cosa è successo oggi in quella scuola."
+              },
+              {
+                "id": "all_ep_0_tb_4",
+                "type": "system",
+                "text": "MISSIONE COMPLETATA — L'Allagamento"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -45,6 +45,7 @@ flutter:
     - assets/data/quests/
     - assets/data/quests/s1/
     - assets/data/quests/s2/
+    - assets/episodes/prologo/
     - assets/fonts/
     - assets/episodes/
     - assets/episodes/prologo/

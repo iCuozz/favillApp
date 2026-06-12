@@ -393,7 +393,7 @@
                     {
                       "min": 0,
                       "label": "Scoperta.",
-                      "goto_branch": "branch_letto",
+                      "goto_branch": "branch_lex_quasi_scoperto",
                       "stat_effects": {
                         "segreto": -5,
                         "resistenza": -20
@@ -676,6 +676,93 @@
                 },
                 {
                   "id": "bl_0_0_tb_9",
+                  "type": "system",
+                  "text": "MISSIONE COMPLETATA — Il Ritorno a Casa"
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "branch_lex_quasi_scoperto": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_ritorno_casa/branch_lex_quasi_scoperto.webp",
+          "panels": [
+            {
+              "id": "blqs_0_0",
+              "characters": [
+                "favilla",
+                "lex",
+                "mallow"
+              ],
+              "text_blocks": [
+                {
+                  "id": "blqs_0_0_tb_0",
+                  "type": "narration",
+                  "text": "Lex riesce a toccarle la spalla. Non tanto da bruciarla — il contatto è troppo breve."
+                },
+                {
+                  "id": "blqs_0_0_tb_1",
+                  "type": "narration",
+                  "text": "Ma abbastanza da farsi male. Lex urla."
+                },
+                {
+                  "id": "blqs_0_0_tb_2",
+                  "type": "dialogue",
+                  "speaker": "lex",
+                  "text": "AH! AH!"
+                },
+                {
+                  "id": "blqs_0_0_tb_3",
+                  "type": "narration",
+                  "text": "Favilla lo raccolte subito. Ma Lex non piange. Lo guarda in faccia con quegli occhi enormi."
+                },
+                {
+                  "id": "blqs_0_0_tb_4",
+                  "type": "narration",
+                  "text": "E sorride. Strano. Un sorriso che dice: 'L'ho toccato davvero'."
+                },
+                {
+                  "id": "blqs_0_0_tb_5",
+                  "type": "narration",
+                  "text": "Mallow si alza dal divano. Ha visto tutto."
+                },
+                {
+                  "id": "blqs_0_0_tb_6",
+                  "type": "narration",
+                  "text": "Osserva Lex. Osserva Favilla. La mano di Favilla sulla spalla di Lex — come se lo proteggesse da qualcosa."
+                },
+                {
+                  "id": "blqs_0_0_tb_7",
+                  "type": "thought",
+                  "text": "Perché Lex sorride? Perché ha urlato così veloce?"
+                },
+                {
+                  "id": "blqs_0_0_tb_8",
+                  "type": "narration",
+                  "text": "Mallow non domanda. Ma nei suoi occhi c'è la prima domanda vera: come mai tuo figlio e tu siete così strani, uno con l'altro?"
+                },
+                {
+                  "id": "blqs_0_0_tb_9",
+                  "type": "narration",
+                  "text": "Lex nel lettino, più tardi. La sua manina ancora rossa sul dorso."
+                },
+                {
+                  "id": "blqs_0_0_tb_10",
+                  "type": "thought",
+                  "text": "Hai provato. E lui lo sa che l'hai fatto."
+                },
+                {
+                  "id": "blqs_0_0_tb_11",
+                  "type": "thought",
+                  "text": "Ora Mallow inizia a domandare."
+                },
+                {
+                  "id": "blqs_0_0_tb_12",
                   "type": "system",
                   "text": "MISSIONE COMPLETATA — Il Ritorno a Casa"
                 }

@@ -38,12 +38,22 @@ class GameState {
   /// World flags: Map<flagName, bool>. Immutabile per design.
   final Map<String, bool> flags;
 
+  /// Memoria narrativa persistente: Map<key, value>.
+  /// Permette callback testuali coerenti tra episodi.
+  final Map<String, String> memories;
+
+  /// Ultimo episodio in cui è stato usato l'espresso.
+  /// Traccia il cooldown: disponibile ogni 3 episodi a partire dal 3.
+  final int? lastCaffeEpisode;
+
   const GameState({
     this.segreto = 50,
     this.legame = 50,
     this.scintille = 50,
     this.resistenza = 50,
     this.flags = const {},
+    this.memories = const {},
+    this.lastCaffeEpisode,
   });
 
   int operator [](String key) {
@@ -66,16 +76,25 @@ class GameState {
   GameState applyChoice({
     Map<String, int> effects = const {},
     Map<String, bool> newFlags = const {},
+    Map<String, String> newMemories = const {},
+    int? newLastCaffeEpisode,
   }) {
     int clamp(String key, int value) =>
         value.clamp(StatKey.minValues[key] ?? 0, 100);
     final mergedFlags = {...flags, ...newFlags};
+    final mergedMemories = {...memories, ...newMemories};
+    mergedMemories.removeWhere((key, value) => key.isEmpty || value.isEmpty);
     return GameState(
-      segreto: clamp(StatKey.segreto, segreto + (effects[StatKey.segreto] ?? 0)),
+      segreto:
+          clamp(StatKey.segreto, segreto + (effects[StatKey.segreto] ?? 0)),
       legame: clamp(StatKey.legame, legame + (effects[StatKey.legame] ?? 0)),
-      scintille: clamp(StatKey.scintille, scintille + (effects[StatKey.scintille] ?? 0)),
-      resistenza: clamp(StatKey.resistenza, resistenza + (effects[StatKey.resistenza] ?? 0)),
+      scintille: clamp(
+          StatKey.scintille, scintille + (effects[StatKey.scintille] ?? 0)),
+      resistenza: clamp(
+          StatKey.resistenza, resistenza + (effects[StatKey.resistenza] ?? 0)),
       flags: Map.unmodifiable(mergedFlags),
+      memories: Map.unmodifiable(mergedMemories),
+      lastCaffeEpisode: newLastCaffeEpisode ?? lastCaffeEpisode,
     );
   }
 
@@ -97,6 +116,8 @@ class GameState {
   factory GameState.fromMaps({
     required Map<String, int> stats,
     Map<String, bool> flags = const {},
+    Map<String, String> memories = const {},
+    int? lastCaffeEpisode,
   }) =>
       GameState(
         segreto: stats[StatKey.segreto] ?? 50,
@@ -104,6 +125,8 @@ class GameState {
         scintille: stats[StatKey.scintille] ?? 50,
         resistenza: stats[StatKey.resistenza] ?? 50,
         flags: Map.unmodifiable(flags),
+        memories: Map.unmodifiable(memories),
+        lastCaffeEpisode: lastCaffeEpisode,
       );
 
   /// @deprecated Usa [GameState.fromMaps]. Mantenuto per retrocompatibilità.

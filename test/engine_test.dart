@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:favilla_app/models/game_state.dart';
 import 'package:favilla_app/models/comic_data.dart';
 import 'package:favilla_app/services/game_state_service.dart';
+import 'package:favilla_app/services/narrative_memory_service.dart';
 
 void main() {
   // ─── GameState ──────────────────────────────────────────────────────────
@@ -17,6 +18,7 @@ void main() {
       expect(gs.scintille, 50);
       expect(gs.resistenza, 50);
       expect(gs.flags, isEmpty);
+      expect(gs.memories, isEmpty);
     });
 
     test('applyChoice aggiorna le stat', () {
@@ -40,14 +42,14 @@ void main() {
     });
 
     test('applyChoice preserva i flags esistenti', () {
-      const gs = GameState(flags: const {'shirt_in_backpack': true});
+      const gs = GameState(flags: {'shirt_in_backpack': true});
       final next = gs.applyChoice(effects: {'segreto': 5});
       expect(next.flags['shirt_in_backpack'], isTrue);
       expect(next.segreto, 55);
     });
 
     test('applyChoice aggiorna i flags specificati', () {
-      const gs = GameState(flags: const {'shirt_in_backpack': true});
+      const gs = GameState(flags: {'shirt_in_backpack': true});
       final next = gs.applyChoice(newFlags: {'shirt_in_backpack': false});
       expect(next.flags['shirt_in_backpack'], isFalse);
     });
@@ -62,15 +64,23 @@ void main() {
       expect(next.flags['shirt_in_backpack'], isFalse);
     });
 
+    test('applyChoice aggiorna anche la memoria narrativa', () {
+      const gs = GameState();
+      final next = gs.applyChoice(newMemories: {
+        'choice.s1_mare.caffe_choice': 'caffe_si',
+      });
+      expect(next.memories['choice.s1_mare.caffe_choice'], 'caffe_si');
+    });
+
     test('applyEffects retrocompatibilità preserva i flags', () {
-      const gs = GameState(flags: const {'mio_flag': true});
+      const gs = GameState(flags: {'mio_flag': true});
       final next = gs.applyEffects({'legame': 10});
       expect(next.flags['mio_flag'], isTrue);
       expect(next.legame, 60);
     });
 
     test('toStatsMap restituisce solo le stat', () {
-      const gs = GameState(segreto: 70, flags: const {'x': true});
+      const gs = GameState(segreto: 70, flags: {'x': true});
       final map = gs.toStatsMap();
       expect(map['segreto'], 70);
       expect(map.containsKey('x'), isFalse);
@@ -80,9 +90,11 @@ void main() {
       final gs = GameState.fromMaps(
         stats: {'segreto': 30, 'legame': 60, 'scintille': 40, 'resistenza': 80},
         flags: {'shirt_in_backpack': true},
+        memories: {'choice.s1_mare.caffe_choice': 'caffe_no'},
       );
       expect(gs.segreto, 30);
       expect(gs.flags['shirt_in_backpack'], isTrue);
+      expect(gs.memories['choice.s1_mare.caffe_choice'], 'caffe_no');
     });
 
     test('flag assente vale false', () {
@@ -267,6 +279,18 @@ void main() {
       expect(opt.setFlags['shirt_in_backpack'], isTrue);
     });
 
+    test('parsing set_memories', () {
+      final opt = ChoiceOption.fromJson({
+        'id': 'bagno',
+        'label': 'Corre in bagno.',
+        'goto_branch': 'branch_bagno',
+        'set_memories': {
+          'callback.lex_notte': 'ha taciuto',
+        },
+      });
+      expect(opt.setMemories['callback.lex_notte'], 'ha taciuto');
+    });
+
     test('set_flags vuoti se non presenti', () {
       final opt = ChoiceOption.fromJson({
         'id': 'finge_niente',
@@ -328,6 +352,26 @@ void main() {
     });
   });
 
+  // ─── NarrativeMemoryService ─────────────────────────────────────────────
+
+  group('NarrativeMemoryService', () {
+    test('sostituisce token con memoria salvata', () {
+      final text = NarrativeMemoryService.resolveText(
+        'Ripensa a {{memory:choice_label.s1_mare.caffe_choice|quella scelta}}.',
+        {'choice_label.s1_mare.caffe_choice': '"Sì, prendiamolo"'},
+      );
+      expect(text, 'Ripensa a "Sì, prendiamolo".');
+    });
+
+    test('usa fallback quando memoria assente', () {
+      final text = NarrativeMemoryService.resolveText(
+        'Ripensa a {{memory:choice_label.s1_mare.caffe_choice|quella scelta}}.',
+        const {},
+      );
+      expect(text, 'Ripensa a quella scelta.');
+    });
+  });
+
   // ─── GameStateService persistenza ──────────────────────────────────────
 
   group('GameStateService', () {
@@ -347,10 +391,12 @@ void main() {
       await GameStateService.instance.applyChoice(
         effects: {'segreto': -20},
         newFlags: {'shirt_in_backpack': true},
+        newMemories: {'choice.s1_mare.caffe_choice': 'caffe_si'},
       );
       final gs = GameStateService.instance.state.value;
       expect(gs.segreto, 30);
       expect(gs.flags['shirt_in_backpack'], isTrue);
+      expect(gs.memories['choice.s1_mare.caffe_choice'], 'caffe_si');
     });
 
     test('init ricarica stat e flags salvati', () async {
@@ -360,11 +406,13 @@ void main() {
         'game_state.scintille': 50,
         'game_state.resistenza': 45,
         'game_state.flags': '{"shirt_in_backpack":true}',
+        'game_state.memories': '{"choice.s1_mare.caffe_choice":"caffe_no"}',
       });
       await GameStateService.instance.init();
       final gs = GameStateService.instance.state.value;
       expect(gs.segreto, 35);
       expect(gs.flags['shirt_in_backpack'], isTrue);
+      expect(gs.memories['choice.s1_mare.caffe_choice'], 'caffe_no');
     });
 
     test('reset azzera stat e rimuove flags', () async {
@@ -381,6 +429,7 @@ void main() {
       // Verifica anche che SharedPreferences sia pulito
       final prefs = await SharedPreferences.getInstance();
       expect(prefs.getString('game_state.flags'), isNull);
+      expect(prefs.getString('game_state.memories'), isNull);
     });
 
     test('applyEffects retrocompatibilità preserva flags', () async {

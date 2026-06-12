@@ -34,6 +34,8 @@ import 'widgets/minigame_carmela_dialogo.dart';
 import 'widgets/minigame_crack_password.dart';
 import 'widgets/minigame_rincorsa.dart';
 import 'widgets/minigame_schiva_lex.dart';
+import 'widgets/minigame_lockpick.dart';
+import 'widgets/minigame_mash_door.dart';
 
 const String _kSentryDsn =
     'https://a0191b359e43ba940e6b2bc1107b81ec@o4511291384725504.ingest.de.sentry.io/4511291387543632';
@@ -332,7 +334,8 @@ class _EpisodePageState extends State<EpisodePage> {
           ...entryBranch.pages,
           ...ep.pages,
           ...branch.pages,
-          if (ep.epilogue != null && !(branch.skipsEpilogue)) ...ep.epilogue!.pages,
+          if (ep.epilogue != null && !(branch.skipsEpilogue))
+            ...ep.epilogue!.pages,
           if (secondBranch != null) ...secondBranch.pages,
         ];
       }
@@ -343,7 +346,9 @@ class _EpisodePageState extends State<EpisodePage> {
       return [
         ...entryBranch.pages,
         if (choiceBranch != null) ...choiceBranch.pages,
-        if (choiceBranch != null && ep.epilogue != null && !(choiceBranch.skipsEpilogue))
+        if (choiceBranch != null &&
+            ep.epilogue != null &&
+            !(choiceBranch.skipsEpilogue))
           ...ep.epilogue!.pages,
       ];
     }
@@ -389,8 +394,13 @@ class _EpisodePageState extends State<EpisodePage> {
       });
     }
 
-    // Avvia musica ambientale dell'episodio
-    AudioService.instance.playAmbient(widget.episode.audioTheme);
+    // Avvia musica ambientale dell'episodio + layer contestuali della pagina corrente
+    AudioService.instance.updateEpisodeContext(
+      episodeId: widget.episode.id,
+      episodeTheme: widget.episode.audioTheme,
+      vfx: pages.isNotEmpty ? pages[currentIndex].vfx : null,
+      forceRefresh: true,
+    );
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) {
@@ -546,7 +556,10 @@ class _EpisodePageState extends State<EpisodePage> {
     if (filteredChoice.options.length == 1 &&
         filteredChoice.options.first.minigame != null) {
       _choiceSheetOpen = false;
-      _handleChoiceSelected(filteredChoice.options.first);
+      _handleChoiceSelected(
+        filteredChoice.options.first,
+        choiceId: filteredChoice.id,
+      );
       return;
     }
 
@@ -564,7 +577,7 @@ class _EpisodePageState extends State<EpisodePage> {
               choice: filteredChoice,
               onSelected: (option) {
                 Navigator.of(sheetContext).pop();
-                _handleChoiceSelected(option);
+                _handleChoiceSelected(option, choiceId: filteredChoice.id);
               },
             ),
           ),
@@ -575,10 +588,13 @@ class _EpisodePageState extends State<EpisodePage> {
     });
   }
 
-  void _handleChoiceSelected(ChoiceOption option) {
+  void _handleChoiceSelected(
+    ChoiceOption option, {
+    required String choiceId,
+  }) {
     AudioService.instance.playSfx(SfxEvent.choiceSelect);
     if (option.minigame == null) {
-      _applyEffectsAndNavigate(option);
+      _applyEffectsAndNavigate(option, choiceId: choiceId);
       return;
     }
     final cfg = option.minigame!;
@@ -590,11 +606,16 @@ class _EpisodePageState extends State<EpisodePage> {
               config: cfg,
               onComplete: (effects, label, tier) {
                 Navigator.of(context).pop();
-                final branch = tier.gotoBranch.isNotEmpty ? tier.gotoBranch : null;
+                final branch =
+                    tier.gotoBranch.isNotEmpty ? tier.gotoBranch : null;
                 final isSuccess = tier.minProducts > 0;
-                AudioService.instance.playSfx(isSuccess ? SfxEvent.minigameSuccess : SfxEvent.minigameFail);
+                AudioService.instance.playSfx(isSuccess
+                    ? SfxEvent.minigameSuccess
+                    : SfxEvent.minigameFail);
                 _applyEffectsAndNavigate(option,
-                    overrideEffects: effects, overrideBranch: branch);
+                    choiceId: choiceId,
+                    overrideEffects: effects,
+                    overrideBranch: branch);
               },
             ),
           ),
@@ -604,13 +625,19 @@ class _EpisodePageState extends State<EpisodePage> {
           MaterialPageRoute(
             builder: (_) => MinigameRespiraScreen(
               config: cfg,
+              scintille: GameStateService.instance.state.value.scintille,
               onComplete: (effects, label, tier) {
                 Navigator.of(context).pop();
-                final branch = tier.gotoBranch.isNotEmpty ? tier.gotoBranch : null;
+                final branch =
+                    tier.gotoBranch.isNotEmpty ? tier.gotoBranch : null;
                 final isSuccess = tier.minProducts > 0;
-                AudioService.instance.playSfx(isSuccess ? SfxEvent.minigameSuccess : SfxEvent.minigameFail);
+                AudioService.instance.playSfx(isSuccess
+                    ? SfxEvent.minigameSuccess
+                    : SfxEvent.minigameFail);
                 _applyEffectsAndNavigate(option,
-                    overrideEffects: effects, overrideBranch: branch);
+                    choiceId: choiceId,
+                    overrideEffects: effects,
+                    overrideBranch: branch);
               },
             ),
           ),
@@ -622,11 +649,16 @@ class _EpisodePageState extends State<EpisodePage> {
               config: cfg,
               onComplete: (effects, label, tier) {
                 Navigator.of(context).pop();
-                final branch = tier.gotoBranch.isNotEmpty ? tier.gotoBranch : null;
+                final branch =
+                    tier.gotoBranch.isNotEmpty ? tier.gotoBranch : null;
                 final isSuccess = tier.minProducts > 0;
-                AudioService.instance.playSfx(isSuccess ? SfxEvent.minigameSuccess : SfxEvent.minigameFail);
+                AudioService.instance.playSfx(isSuccess
+                    ? SfxEvent.minigameSuccess
+                    : SfxEvent.minigameFail);
                 _applyEffectsAndNavigate(option,
-                    overrideEffects: effects, overrideBranch: branch);
+                    choiceId: choiceId,
+                    overrideEffects: effects,
+                    overrideBranch: branch);
               },
             ),
           ),
@@ -638,12 +670,15 @@ class _EpisodePageState extends State<EpisodePage> {
               config: cfg,
               onComplete: (effects, label, tier) {
                 Navigator.of(context).pop();
-                final branch = tier.gotoBranch.isNotEmpty ? tier.gotoBranch : null;
+                final branch =
+                    tier.gotoBranch.isNotEmpty ? tier.gotoBranch : null;
                 final flags = tier.setFlags.isNotEmpty ? tier.setFlags : null;
                 final isSuccess = tier.minProducts >= 2;
-                AudioService.instance.playSfx(
-                    isSuccess ? SfxEvent.minigameSuccess : SfxEvent.minigameFail);
+                AudioService.instance.playSfx(isSuccess
+                    ? SfxEvent.minigameSuccess
+                    : SfxEvent.minigameFail);
                 _applyEffectsAndNavigate(option,
+                    choiceId: choiceId,
                     overrideEffects: effects,
                     overrideBranch: branch,
                     overrideFlags: flags);
@@ -660,12 +695,13 @@ class _EpisodePageState extends State<EpisodePage> {
                 Navigator.of(context).pop();
                 final branch =
                     tier.gotoBranch.isNotEmpty ? tier.gotoBranch : null;
-                final flags =
-                    tier.setFlags.isNotEmpty ? tier.setFlags : null;
+                final flags = tier.setFlags.isNotEmpty ? tier.setFlags : null;
                 final isSuccess = tier.minProducts >= 2;
-                AudioService.instance.playSfx(
-                    isSuccess ? SfxEvent.minigameSuccess : SfxEvent.minigameFail);
+                AudioService.instance.playSfx(isSuccess
+                    ? SfxEvent.minigameSuccess
+                    : SfxEvent.minigameFail);
                 _applyEffectsAndNavigate(option,
+                    choiceId: choiceId,
                     overrideEffects: effects,
                     overrideBranch: branch,
                     overrideFlags: flags);
@@ -678,15 +714,19 @@ class _EpisodePageState extends State<EpisodePage> {
           MaterialPageRoute(
             builder: (_) => MinigameRincorsaLexScreen(
               config: cfg,
+              scintille: GameStateService.instance.state.value.scintille,
               onComplete: (effects, label, tier) {
                 Navigator.of(context).pop();
                 final branch =
                     tier.gotoBranch.isNotEmpty ? tier.gotoBranch : null;
                 final isSuccess = tier.minProducts >= 3;
-                AudioService.instance.playSfx(
-                    isSuccess ? SfxEvent.minigameSuccess : SfxEvent.minigameFail);
+                AudioService.instance.playSfx(isSuccess
+                    ? SfxEvent.minigameSuccess
+                    : SfxEvent.minigameFail);
                 _applyEffectsAndNavigate(option,
-                    overrideEffects: effects, overrideBranch: branch);
+                    choiceId: choiceId,
+                    overrideEffects: effects,
+                    overrideBranch: branch);
               },
             ),
           ),
@@ -696,6 +736,7 @@ class _EpisodePageState extends State<EpisodePage> {
           MaterialPageRoute(
             builder: (_) => MinigameRincorsaScreen(
               config: cfg,
+              scintille: GameStateService.instance.state.value.scintille,
               onComplete: (effects, label, tier) {
                 Navigator.of(context).pop();
                 // Se tier 0 (trasformazione forzata), la trasformazione accade
@@ -706,7 +747,12 @@ class _EpisodePageState extends State<EpisodePage> {
                 if (tier.minProducts == 0) {
                   final currentResistenza =
                       GameStateService.instance.state.value.resistenza;
-                  if (currentResistenza >= 30) {
+                  final currentScintille =
+                      GameStateService.instance.state.value.scintille;
+                  // Trasformazione impossibile se Scintille < 10
+                  if (currentScintille < 10) {
+                    effectiveTier = cfg.tierFor(1);
+                  } else if (currentResistenza >= 30) {
                     effectiveTier = cfg.tierFor(1); // scala a tier "quasi"
                   }
                 }
@@ -717,9 +763,11 @@ class _EpisodePageState extends State<EpisodePage> {
                     ? effectiveTier.setFlags
                     : null;
                 final isSuccess = effectiveTier.minProducts > 0;
-                AudioService.instance
-                    .playSfx(isSuccess ? SfxEvent.minigameSuccess : SfxEvent.minigameFail);
+                AudioService.instance.playSfx(isSuccess
+                    ? SfxEvent.minigameSuccess
+                    : SfxEvent.minigameFail);
                 _applyEffectsAndNavigate(option,
+                    choiceId: choiceId,
                     overrideEffects: effectiveTier.statEffects,
                     overrideBranch: branch,
                     overrideFlags: flags);
@@ -727,24 +775,79 @@ class _EpisodePageState extends State<EpisodePage> {
             ),
           ),
         );
+      case 'mash_door':
+        Navigator.of(context).push<void>(
+          MaterialPageRoute(
+            builder: (_) => MinigameMashDoorScreen(
+              config: cfg,
+              resistenza: GameStateService.instance.state.value.resistenza,
+              onComplete: (effects, label, tier) {
+                Navigator.of(context).pop();
+                final branch =
+                    tier.gotoBranch.isNotEmpty ? tier.gotoBranch : null;
+                final isSuccess = tier.minProducts >= 2;
+                AudioService.instance.playSfx(isSuccess
+                    ? SfxEvent.minigameSuccess
+                    : SfxEvent.minigameFail);
+                _applyEffectsAndNavigate(option,
+                    choiceId: choiceId,
+                    overrideEffects: effects,
+                    overrideBranch: branch);
+              },
+            ),
+          ),
+        );
+      case 'lockpick':
+        Navigator.of(context).push<void>(
+          MaterialPageRoute(
+            builder: (_) => MinigameLockpickScreen(
+              config: cfg,
+              onComplete: (effects, label, tier) {
+                Navigator.of(context).pop();
+                final branch =
+                    tier.gotoBranch.isNotEmpty ? tier.gotoBranch : null;
+                final isSuccess = tier.minProducts >= 3;
+                AudioService.instance.playSfx(isSuccess
+                    ? SfxEvent.minigameSuccess
+                    : SfxEvent.minigameFail);
+                _applyEffectsAndNavigate(option,
+                    choiceId: choiceId,
+                    overrideEffects: effects,
+                    overrideBranch: branch);
+              },
+            ),
+          ),
+        );
       default:
         // Tipo sconosciuto: applica effetti base dell'opzione
-        _applyEffectsAndNavigate(option);
+        _applyEffectsAndNavigate(option, choiceId: choiceId);
     }
   }
 
   void _applyEffectsAndNavigate(ChoiceOption option,
-      {Map<String, int>? overrideEffects,
+      {required String choiceId,
+      Map<String, int>? overrideEffects,
       String? overrideBranch,
       Map<String, bool>? overrideFlags}) {
     final episodeId = widget.episode.id;
     final branchId = overrideBranch ?? option.gotoBranch;
     final effects = overrideEffects ?? option.statEffects;
     final newFlags = overrideFlags ?? option.setFlags;
+    final newMemories = <String, String>{
+      ...option.setMemories,
+      if (choiceId.trim().isNotEmpty) 'choice.$episodeId.$choiceId': option.id,
+      if (choiceId.trim().isNotEmpty)
+        'choice_label.$episodeId.$choiceId': option.label,
+      if (branchId.trim().isNotEmpty) 'branch.$episodeId.last': branchId,
+    };
 
-    // Applica effetti stat + world flags atomicamente.
-    if (effects.isNotEmpty || newFlags.isNotEmpty) {
-      GameStateService.instance.applyChoice(effects: effects, newFlags: newFlags);
+    // Applica effetti stat + world flags + memoria narrativa atomicamente.
+    if (effects.isNotEmpty || newFlags.isNotEmpty || newMemories.isNotEmpty) {
+      GameStateService.instance.applyChoice(
+        effects: effects,
+        newFlags: newFlags,
+        newMemories: newMemories,
+      );
       if (effects.isNotEmpty) setState(() => _pendingStatEffects = effects);
     }
 
@@ -829,7 +932,6 @@ class _EpisodePageState extends State<EpisodePage> {
     }
   }
 
-
   KeyEventResult _handleKeyEvent(KeyEvent event) {
     if (event is! KeyDownEvent) {
       return KeyEventResult.ignored;
@@ -889,159 +991,170 @@ class _EpisodePageState extends State<EpisodePage> {
       body: Stack(
         children: [
           KeyboardListener(
-        focusNode: _focusNode,
-        onKeyEvent: _handleKeyEvent,
-        child: Column(
-          children: [
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(12),
-              color: Colors.black26,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Text(
-                    AppStrings.pageOf(currentIndex + 1, pages.length),
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(999),
-                    child: LinearProgressIndicator(
-                      value:
-                          pages.isEmpty ? 0 : (currentIndex + 1) / pages.length,
-                      minHeight: 8,
-                      backgroundColor: Colors.white12,
-                      valueColor: const AlwaysStoppedAnimation<Color>(
-                        Colors.pinkAccent,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  const Center(child: StatsHudWidget()),
-                ],
-              ),
-            ),
-            Expanded(
-              child: Stack(
-                children: [
-                  GestureDetector(
-                    behavior: HitTestBehavior.translucent,
-                    onHorizontalDragEnd: _handleHorizontalSwipe,
-                    child: PageView.builder(
-                  controller: _pageController,
-                  itemCount: pages.length,
-                  physics: const NeverScrollableScrollPhysics(),
-                  onPageChanged: (index) {
-                  setState(() {
-                    currentIndex = index;
-                    if (index > _maxVisitedIndex) {
-                      _maxVisitedIndex = index;
-                    }
-                  });
-                  _visibleBlocksByPage.putIfAbsent(index, () => 1);
-                  _saveProgress();
-                  _precacheNeighbors(index);
-
-                  WidgetsBinding.instance.addPostFrameCallback((_) {
-                    if (mounted) {
-                      _focusNode.requestFocus();
-                    }
-                  });
-                },
-                itemBuilder: (context, index) {
-                  final page = pages[index];
-                  final stageKey = _keyForPage(index);
-                  final initialBlocks = _visibleBlocksByPage[index] ?? 1;
-
-                  final stage = Padding(
-                    padding: const EdgeInsets.all(12),
-                    child: ComicPageStage(
-                      key: stageKey,
-                      comicIndex: widget.comicIndex,
-                      page: page,
-                      pageViewIndex: index,
-                      initialVisibleBlocks: initialBlocks,
-                      onVisibleBlocksChanged: (blocks) =>
-                          _handleVisibleBlocksChanged(index, blocks),
-                      onPageCompleted: _goToNextPage,
-                    ),
-                  );
-
-                  return AnimatedBuilder(
-                    animation: _pageController,
-                    builder: (context, child) {
-                      double delta = 0;
-                      if (_pageController.position.haveDimensions) {
-                        delta = (_pageController.page ?? index.toDouble()) - index;
-                      }
-                      final clamped = delta.clamp(-1.0, 1.0);
-                      final rotation = clamped * 0.9;
-                      final scale = 1 - (clamped.abs() * 0.18);
-                      final opacity = (1 - clamped.abs() * 0.7).clamp(0.0, 1.0);
-
-                      return Transform(
-                        alignment: clamped >= 0
-                            ? Alignment.centerLeft
-                            : Alignment.centerRight,
-                        transform: Matrix4.identity()
-                          ..setEntry(3, 2, 0.0015)
-                          ..rotateY(rotation)
-                          ..scaleByDouble(scale, scale, 1.0, 1.0),
-                        child: Opacity(
-                          opacity: opacity,
-                          child: child,
+            focusNode: _focusNode,
+            onKeyEvent: _handleKeyEvent,
+            child: Column(
+              children: [
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(12),
+                  color: Colors.black26,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Text(
+                        AppStrings.pageOf(currentIndex + 1, pages.length),
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
                         ),
-                      );
-                    },
-                    child: stage,
-                  );
-                },
-                ),
-              ),
-              // Toast degli effetti stat dopo una scelta
-              if (_pendingStatEffects != null)
-                Positioned(
-                  bottom: 16,
-                  left: 0,
-                  right: 0,
-                  child: Center(
-                    child: StatEffectToast(
-                      key: ValueKey(_pendingStatEffects.hashCode),
-                      effects: _pendingStatEffects!,
-                      onDone: () => setState(() => _pendingStatEffects = null),
-                    ),
+                      ),
+                      const SizedBox(height: 8),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(999),
+                        child: LinearProgressIndicator(
+                          value: pages.isEmpty
+                              ? 0
+                              : (currentIndex + 1) / pages.length,
+                          minHeight: 8,
+                          backgroundColor: Colors.white12,
+                          valueColor: const AlwaysStoppedAnimation<Color>(
+                            Colors.pinkAccent,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      const Center(child: StatsHudWidget()),
+                    ],
                   ),
                 ),
-            ],
-          ),
-        ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(12, 8, 12, 16),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: _goBackBlockOrPage,
-                      child: const Text('Indietro'),
-                    ),
+                Expanded(
+                  child: Stack(
+                    children: [
+                      GestureDetector(
+                        behavior: HitTestBehavior.translucent,
+                        onHorizontalDragEnd: _handleHorizontalSwipe,
+                        child: PageView.builder(
+                          controller: _pageController,
+                          itemCount: pages.length,
+                          physics: const NeverScrollableScrollPhysics(),
+                          onPageChanged: (index) {
+                            setState(() {
+                              currentIndex = index;
+                              if (index > _maxVisitedIndex) {
+                                _maxVisitedIndex = index;
+                              }
+                            });
+                            _visibleBlocksByPage.putIfAbsent(index, () => 1);
+                            _saveProgress();
+                            AudioService.instance.updateEpisodeContext(
+                              episodeId: widget.episode.id,
+                              episodeTheme: widget.episode.audioTheme,
+                              vfx: pages[index].vfx,
+                            );
+                            _precacheNeighbors(index);
+
+                            WidgetsBinding.instance.addPostFrameCallback((_) {
+                              if (mounted) {
+                                _focusNode.requestFocus();
+                              }
+                            });
+                          },
+                          itemBuilder: (context, index) {
+                            final page = pages[index];
+                            final stageKey = _keyForPage(index);
+                            final initialBlocks =
+                                _visibleBlocksByPage[index] ?? 1;
+
+                            final stage = Padding(
+                              padding: const EdgeInsets.all(12),
+                              child: ComicPageStage(
+                                key: stageKey,
+                                comicIndex: widget.comicIndex,
+                                page: page,
+                                pageViewIndex: index,
+                                initialVisibleBlocks: initialBlocks,
+                                onVisibleBlocksChanged: (blocks) =>
+                                    _handleVisibleBlocksChanged(index, blocks),
+                                onPageCompleted: _goToNextPage,
+                              ),
+                            );
+
+                            return AnimatedBuilder(
+                              animation: _pageController,
+                              builder: (context, child) {
+                                double delta = 0;
+                                if (_pageController.position.haveDimensions) {
+                                  delta = (_pageController.page ??
+                                          index.toDouble()) -
+                                      index;
+                                }
+                                final clamped = delta.clamp(-1.0, 1.0);
+                                final rotation = clamped * 0.9;
+                                final scale = 1 - (clamped.abs() * 0.18);
+                                final opacity =
+                                    (1 - clamped.abs() * 0.7).clamp(0.0, 1.0);
+
+                                return Transform(
+                                  alignment: clamped >= 0
+                                      ? Alignment.centerLeft
+                                      : Alignment.centerRight,
+                                  transform: Matrix4.identity()
+                                    ..setEntry(3, 2, 0.0015)
+                                    ..rotateY(rotation)
+                                    ..scaleByDouble(scale, scale, 1.0, 1.0),
+                                  child: Opacity(
+                                    opacity: opacity,
+                                    child: child,
+                                  ),
+                                );
+                              },
+                              child: stage,
+                            );
+                          },
+                        ),
+                      ),
+                      // Toast degli effetti stat dopo una scelta
+                      if (_pendingStatEffects != null)
+                        Positioned(
+                          bottom: 16,
+                          left: 0,
+                          right: 0,
+                          child: Center(
+                            child: StatEffectToast(
+                              key: ValueKey(_pendingStatEffects.hashCode),
+                              effects: _pendingStatEffects!,
+                              onDone: () =>
+                                  setState(() => _pendingStatEffects = null),
+                            ),
+                          ),
+                        ),
+                    ],
                   ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: _advanceCurrentStageOrPage,
-                      child: const Text('Avanti'),
-                    ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(12, 8, 12, 16),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: _goBackBlockOrPage,
+                          child: const Text('Indietro'),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: _advanceCurrentStageOrPage,
+                          child: const Text('Avanti'),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
           // Overlay onboarding stat — mostrato una sola volta al primo episodio
           if (_showStatsIntro)
             Positioned.fill(
@@ -1054,4 +1167,3 @@ class _EpisodePageState extends State<EpisodePage> {
     );
   }
 }
-

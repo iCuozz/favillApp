@@ -2,7 +2,14 @@
   "id": "s1_scuola_1",
   "stat_entry": [
     {
-      "stat": "resistenza",
+      "stat": "segreto",
+      "op": "lt",
+      "value": 30,
+      "goto_branch": "intro_segreto_pericolo",
+      "prepend": true
+    },
+    {
+      "stat": "scintille",
       "op": "lt",
       "value": 45,
       "goto_branch": "intro_caffe_effect",
@@ -142,7 +149,7 @@
             "hint": "Nessuno vede i vestiti. Ma la Corvi nota l'assenza.",
             "goto_branch": "branch_bagno",
             "stat_effects": {
-              "segreto": 15,
+              "segreto": 10,
               "resistenza": -10
             },
             "set_flags": {
@@ -155,7 +162,7 @@
             "hint": "La faccia tosta regge. Ma qualcuno guarda.",
             "goto_branch": "branch_finge",
             "stat_effects": {
-              "segreto": -15,
+              "segreto": -10,
               "resistenza": 10
             },
             "set_flags": {
@@ -192,7 +199,7 @@
                 {
                   "id": "caffe_intro_tb_2",
                   "type": "narration",
-                  "text": "I capelli la scaldano lungo la schiena — caldi, come un motore tenuto su troppi giri."
+                  "text": "I capelli non fremono più. Dove ieri c'era una brace pronta ad accendersi, ora c'è solo cenere fredda."
                 },
                 {
                   "id": "caffe_intro_tb_3",
@@ -311,6 +318,44 @@
           ]
         }
       ]
+    },
+    "intro_segreto_pericolo": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_scuola_1/page_0.webp",
+          "panels": [
+            {
+              "id": "sp_segreto_0",
+              "characters": [
+                "favilla"
+              ],
+              "text_blocks": [
+                {
+                  "id": "sp_segreto_0_tb_0",
+                  "type": "narration",
+                  "text": "Il cancello della scuola è davanti a lei. Ma la mattina è già iniziata — in salita."
+                },
+                {
+                  "id": "sp_segreto_0_tb_1",
+                  "type": "narration",
+                  "text": "Mallow è stato silenzioso tutto il tempo. Non il silenzio normale, quello dei giorni in cui lavora concentrato. Un silenzio diverso. Attendista."
+                },
+                {
+                  "id": "sp_segreto_0_tb_2",
+                  "type": "narration",
+                  "text": "Le ha stretto la mano un secondo in più, quando è scesa dalla macchina. Come se aspettasse che lei dicesse qualcosa — e lei ha aperto bocca, e ha chiuso bocca, e niente."
+                },
+                {
+                  "id": "sp_segreto_0_tb_3",
+                  "type": "thought",
+                  "text": "Sa che c'è qualcosa. Non sa cosa. Ma aspetta. E aspettare, a volte, è peggio che chiedere."
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   },
   "epilogue": {
@@ -328,27 +373,27 @@
               {
                 "id": "sc1_ep_0_tb_0",
                 "type": "narration",
-                "text": "Fine turno. Favilla siede sul muretto fuori dalla scuola. Guarda le sue mani."
+                "text": "End of shift. Favilla sits on the wall outside school. Looks at her hands."
               },
               {
                 "id": "sc1_ep_0_tb_1",
                 "type": "thought",
-                "text": "Non era stanchezza. Non era un sogno. Era reale."
+                "text": "It wasn't tiredness. It wasn't a dream. It was real."
               },
               {
                 "id": "sc1_ep_0_tb_2",
                 "type": "narration",
-                "text": "Per la prima volta da ieri sera, smette di convincersi del contrario."
+                "text": "For the first time since last night, she stops convincing herself otherwise."
               },
               {
                 "id": "sc1_ep_0_tb_3",
                 "type": "thought",
-                "text": "E adesso?"
+                "text": "And now?"
               },
               {
                 "id": "sc1_ep_0_tb_4",
                 "type": "system",
-                "text": "MISSIONE COMPLETATA — Una Giornata Normale"
+                "text": "MISSION COMPLETE — A Normal Day"
               }
             ],
             "interactions": []

@@ -11,28 +11,31 @@ import '../models/comic_data.dart';
 
 /// Mini-game RINCORSA_LEX — beach Temple-Run: insegui Lex che gattonava verso il mare.
 ///
+/// La difficoltà scala con la stat Scintille: più scintille = più potenza = più facile.
 /// 3 corsie. Scivola sinistra/destra per cambiare corsia ed evitare ostacoli.
 /// Gap decresce naturalmente mentre corri; le collisioni lo aumentano.
 ///
 /// Tier: gap ≤ 0.30 → score 2 (presa) | ≤ 0.65 → score 1 (quasi) | > 0.65 → score 0 (perso).
 class MinigameRincorsaLexScreen extends StatefulWidget {
   final MinigameConfig config;
+  final int scintille;
   final void Function(
           Map<String, int> statEffects, String tierLabel, MinigameTier tier)
       onComplete;
 
   const MinigameRincorsaLexScreen(
-      {super.key, required this.config, required this.onComplete});
+      {super.key, required this.config, required this.scintille, required this.onComplete});
 
   @override
   State<MinigameRincorsaLexScreen> createState() =>
       _MinigameRincorsaLexScreenState();
 }
 
-// ─── Game constants ─────────────────────────────────────────────────────────
-const _kStartGap = 0.55;
-const _kNaturalRecovery = 0.022; // gap/s — running > crawling
-const _kCollisionPenalty = 0.18;
+// ─── Base game constants ────────────────────────────────────────────────────
+// Scaled by scintille stat via _scintilleModifier — see State class
+const _kBaseStartGap = 0.55;
+const _kBaseRecovery = 0.022; // gap/s — running > crawling
+const _kBaseCollisionPenalty = 0.18;
 const _kObstacleSpeed = 0.62; // track-y units/s
 const _kSpawnInterval = 1.35; // seconds
 const _kSwitchSpeed = 9.0; // lerp units/s
@@ -47,24 +50,42 @@ const _kBottomHalfWFrac = 0.44; // track half-width at bottom = frac * screenW
 
 enum _ObstacleType {
   // beach
-  umbrella, sunbather, sandcastle, bag, deckchair,
+  umbrella,
+  sunbather,
+  sandcastle,
+  bag,
+  deckchair,
   // mall
-  cart, shopper, kiosk, bench, mallbag,
+  cart,
+  shopper,
+  kiosk,
+  bench,
+  mallbag,
 }
 
 extension _ObstacleExt on _ObstacleType {
   String get emoji {
     switch (this) {
-      case _ObstacleType.umbrella:   return '⛱';
-      case _ObstacleType.sunbather:  return '🧘';
-      case _ObstacleType.sandcastle: return '🏰';
-      case _ObstacleType.bag:        return '🧺';
-      case _ObstacleType.deckchair:  return '🪑';
-      case _ObstacleType.cart:       return '🛒';
-      case _ObstacleType.shopper:    return '👵';
-      case _ObstacleType.kiosk:      return '🎪';
-      case _ObstacleType.bench:      return '💺';
-      case _ObstacleType.mallbag:    return '🛍️';
+      case _ObstacleType.umbrella:
+        return '⛱';
+      case _ObstacleType.sunbather:
+        return '🧘';
+      case _ObstacleType.sandcastle:
+        return '🏰';
+      case _ObstacleType.bag:
+        return '🧺';
+      case _ObstacleType.deckchair:
+        return '🪑';
+      case _ObstacleType.cart:
+        return '🛒';
+      case _ObstacleType.shopper:
+        return '👵';
+      case _ObstacleType.kiosk:
+        return '🎪';
+      case _ObstacleType.bench:
+        return '💺';
+      case _ObstacleType.mallbag:
+        return '🛍️';
     }
   }
 }
@@ -100,8 +121,17 @@ enum _RunState { normal, switching, stunned }
 
 class _MinigameRincorsaLexScreenState extends State<MinigameRincorsaLexScreen>
     with TickerProviderStateMixin {
+  // ── Scintille scaling ─────────────────────────────────────────────────────
+  double get _scintilleModifier =>
+      ((widget.scintille - 50) / 10 * 0.05).clamp(-0.25, 0.25);
+
+  double get _startGap => _kBaseStartGap * (1.0 - _scintilleModifier);
+  double get _naturalRecovery => _kBaseRecovery * (1.0 + _scintilleModifier);
+  double get _collisionPenalty =>
+      _kBaseCollisionPenalty * (1.0 - _scintilleModifier);
+
   // ── Game state ────────────────────────────────────────────────────────────
-  double _gap = _kStartGap;
+  late double _gap;
   double _elapsed = 0;
   bool _finished = false;
 
@@ -148,6 +178,7 @@ class _MinigameRincorsaLexScreenState extends State<MinigameRincorsaLexScreen>
   @override
   void initState() {
     super.initState();
+    _gap = _startGap;
 
     _flashCtrl = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 400));
@@ -183,7 +214,7 @@ class _MinigameRincorsaLexScreenState extends State<MinigameRincorsaLexScreen>
       _scrollOffset = (_scrollOffset + dt * 0.55) % 1.0;
 
       // ── Natural gap recovery ─────────────────────────────────────────────
-      _gap = (_gap - _kNaturalRecovery * dt).clamp(0.0, 1.0);
+      _gap = (_gap - _naturalRecovery * dt).clamp(0.0, 1.0);
 
       // ── Lane switch lerp ─────────────────────────────────────────────────
       if (_runState == _RunState.switching) {
@@ -253,7 +284,8 @@ class _MinigameRincorsaLexScreenState extends State<MinigameRincorsaLexScreen>
       ..shuffle(_rng);
     final lane = available.first;
 
-    final pool = widget.config.theme == 'mall' ? _kMallObstacles : _kBeachObstacles;
+    final pool =
+        widget.config.theme == 'mall' ? _kMallObstacles : _kBeachObstacles;
     final type = pool[_rng.nextInt(pool.length)];
     _obstacles.add(_Obstacle(lane: lane, y: -0.08, type: type));
 
@@ -267,7 +299,7 @@ class _MinigameRincorsaLexScreenState extends State<MinigameRincorsaLexScreen>
 
   void _onCollision(_Obstacle obs) {
     obs.consumed = true;
-    _gap = (_gap + _kCollisionPenalty).clamp(0.0, 1.0);
+    _gap = (_gap + _collisionPenalty).clamp(0.0, 1.0);
     _runState = _RunState.stunned;
     _stunT = 0.0;
     _flashCtrl.forward(from: 0).then((_) => _flashCtrl.reverse());
@@ -464,6 +496,7 @@ class _MinigameRincorsaLexScreenState extends State<MinigameRincorsaLexScreen>
           secondsLeft: _secondsLeft,
           gap: _gap,
           totalSeconds: _durationSeconds,
+          scintilleBoost: _scintilleModifier,
         ),
       ],
     );
@@ -831,7 +864,8 @@ class _MallBgPainter extends CustomPainter {
   void _drawFloor(
       Canvas canvas, Size size, double horizonY, double cx, double bHalfW) {
     // Floor base (cream-white tiles)
-    final floorRect = Rect.fromLTWH(0, horizonY, size.width, size.height - horizonY);
+    final floorRect =
+        Rect.fromLTWH(0, horizonY, size.width, size.height - horizonY);
     canvas.drawRect(
       floorRect,
       Paint()
@@ -875,12 +909,12 @@ class _MallBgPainter extends CustomPainter {
     canvas.drawPath(
       path,
       Paint()
-        ..shader = LinearGradient(
+        ..shader = const LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            const Color(0xFFEAE7E2),
-            const Color(0xFFCFC9C0),
+            Color(0xFFEAE7E2),
+            Color(0xFFCFC9C0),
           ],
         ).createShader(
             Rect.fromLTWH(0, horizonY, size.width, size.height - horizonY)),
@@ -1083,11 +1117,13 @@ class _Hud extends StatelessWidget {
   final int secondsLeft;
   final double gap;
   final int totalSeconds;
+  final double scintilleBoost;
 
   const _Hud(
       {required this.secondsLeft,
       required this.gap,
-      required this.totalSeconds});
+      required this.totalSeconds,
+      required this.scintilleBoost});
 
   @override
   Widget build(BuildContext context) {
@@ -1186,6 +1222,30 @@ class _Hud extends StatelessWidget {
             ],
           ),
 
+          const SizedBox(height: 4),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text('⚡', style: TextStyle(fontSize: 13)),
+              const SizedBox(width: 4),
+              Text(
+                scintilleBoost >= 0.05
+                    ? 'Scintille alte — potenza! ⚡'
+                    : scintilleBoost <= -0.05
+                        ? 'Scintille basse — kryptonite... 🧊'
+                        : 'Scintille nella norma',
+                style: TextStyle(
+                  fontSize: 11,
+                  color: scintilleBoost > 0
+                      ? const Color(0xFFFFD700)
+                      : scintilleBoost < 0
+                          ? const Color(0xFF90CAF9)
+                          : Colors.white.withOpacity(0.6),
+                  letterSpacing: 0.5,
+                ),
+              ),
+            ],
+          ),
           const SizedBox(height: 4),
           Center(
             child: Text(

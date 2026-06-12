@@ -2,6 +2,20 @@
   "id": "s1_domenica_parco",
   "stat_entry": [
     {
+      "stat": "segreto",
+      "op": "lt",
+      "value": 15,
+      "goto_branch": "intro_segreto_corda",
+      "prepend": true
+    },
+    {
+      "stat": "resistenza",
+      "op": "lt",
+      "value": 10,
+      "goto_branch": "intro_resistenza_limite",
+      "prepend": true
+    },
+    {
       "stat": "scintille",
       "op": "gte",
       "value": 55,
@@ -106,7 +120,7 @@
             "id": "rincorri",
             "label": "Go after him. Now.",
             "goto_branch": "branch_presa",
-            "stat_effects": {},
+            "stat_effects": { "resistenza": -12, "segreto": -8 },
             "minigame": {
               "type": "rincorsa",
               "duration_seconds": 15,
@@ -115,19 +129,19 @@
                   "min": 2,
                   "label": "Caught!",
                   "goto_branch": "branch_presa",
-                  "stat_effects": { "segreto": 15, "scintille": 10 }
+                  "stat_effects": { "segreto": 5, "scintille": 8 }
                 },
                 {
                   "min": 1,
                   "label": "Almost…",
                   "goto_branch": "branch_quasi",
-                  "stat_effects": { "resistenza": -15, "segreto": -10 }
+                  "stat_effects": { "resistenza": -8, "segreto": -5 }
                 },
                 {
                   "min": 0,
                   "label": "Lost.",
                   "goto_branch": "branch_perso_trasformazione",
-                  "stat_effects": { "resistenza": -30, "segreto": -20, "scintille": 20 },
+                  "stat_effects": { "resistenza": -12, "segreto": -8, "scintille": 10 },
                   "set_flags": { "favilla_transformed_public": true }
                 }
               ]
@@ -302,6 +316,83 @@
                 { "id": "bpt_1_tb_12", "type": "narration", "text": "Neither of them says anything more." }
               ],
               "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "intro_segreto_corda": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_domenica_parco/page_0.webp",
+          "panels": [
+            {
+              "id": "sp_corda_0",
+              "characters": ["favilla", "mallow", "lex"],
+              "text_blocks": [
+                {
+                  "id": "sp_corda_0_tb_0",
+                  "type": "narration",
+                  "text": "Sunday should be a day of rest. But Favilla can't look Mallow in the eyes."
+                },
+                {
+                  "id": "sp_corda_0_tb_1",
+                  "type": "narration",
+                  "text": "Every time he reaches for her — a glance, a hand on the shoulder, a smile — she tenses up. He feels it."
+                },
+                {
+                  "id": "sp_corda_0_tb_2",
+                  "type": "narration",
+                  "text": "Lex notices. He studies the scene like he's solving a puzzle: mom not looking at dad. Dad watching mom too long."
+                },
+                {
+                  "id": "sp_corda_0_tb_3",
+                  "type": "thought",
+                  "text": "Not long now. A few more cracks and the secret comes down all at once."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "intro_resistenza_limite": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_domenica_parco/page_0.webp",
+          "panels": [
+            {
+              "id": "sp_limite_0",
+              "characters": ["favilla"],
+              "text_blocks": [
+                {
+                  "id": "sp_limite_0_tb_0",
+                  "type": "narration",
+                  "text": "Favilla is standing. But she really shouldn't be."
+                },
+                {
+                  "id": "sp_limite_0_tb_1",
+                  "type": "narration",
+                  "text": "Her legs tremble under the weight of nothing — or perhaps under the weight of everything. Her vision blurs at the edges."
+                },
+                {
+                  "id": "sp_limite_0_tb_2",
+                  "type": "narration",
+                  "text": "One more thing could be the last. One more push. One more run. One more collapse."
+                },
+                {
+                  "id": "sp_limite_0_tb_3",
+                  "type": "narration",
+                  "text": "Mallow doesn't see it. Lex does. Lex always sees."
+                },
+                {
+                  "id": "sp_limite_0_tb_4",
+                  "type": "thought",
+                  "text": "Not now. Not here. Not in front of them."
+                }
+              ]
             }
           ]
         }

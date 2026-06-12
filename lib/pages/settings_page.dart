@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import '../l10n/app_strings.dart';
 import '../services/engagement_service.dart';
+import '../services/audio_service.dart';
 import '../services/game_state_service.dart';
 import '../services/progress_service.dart';
 import '../services/settings_service.dart';
@@ -117,6 +118,36 @@ class _SettingsPageState extends State<SettingsPage> {
         children: [
           _SectionHeader(AppStrings.readingSection),
           ValueListenableBuilder<bool>(
+            valueListenable: AudioService.instance.enabledListenable,
+            builder: (context, enabled, _) {
+              return SwitchListTile(
+                title: const Text('Audio ambientale'),
+                subtitle: const Text('Musica, layer e cue contestuali'),
+                secondary: const Icon(Icons.graphic_eq),
+                value: enabled,
+                onChanged: (v) {
+                  SettingsService.tapFeedback();
+                  AudioService.instance.setEnabled(v);
+                },
+              );
+            },
+          ),
+          ValueListenableBuilder<double>(
+            valueListenable: AudioService.instance.volumeListenable,
+            builder: (context, volume, _) {
+              return ListTile(
+                leading: const Icon(Icons.volume_up),
+                title: const Text('Volume audio'),
+                subtitle: Slider(
+                  value: volume,
+                  onChanged: (v) {
+                    AudioService.instance.setVolume(v);
+                  },
+                ),
+              );
+            },
+          ),
+          ValueListenableBuilder<bool>(
             valueListenable: SettingsService.hapticsEnabled,
             builder: (context, enabled, _) {
               return SwitchListTile(
@@ -220,7 +251,8 @@ class _SettingsPageState extends State<SettingsPage> {
               return ListTile(
                 leading: const Icon(Icons.language),
                 title: Text(AppStrings.languageTitle),
-                subtitle: Text('${AppStrings.languageSubtitle}\n→ ${lang.label}'),
+                subtitle:
+                    Text('${AppStrings.languageSubtitle}\n→ ${lang.label}'),
                 isThreeLine: true,
                 onTap: _pickLanguage,
               );

@@ -2,6 +2,13 @@
   "id": "s1_spesa_sabato",
   "stat_entry": [
     {
+      "stat": "resistenza",
+      "op": "lt",
+      "value": 25,
+      "goto_branch": "intro_esausta",
+      "prepend": true
+    },
+    {
       "stat": "scintille",
       "op": "gte",
       "value": 60,
@@ -972,6 +979,45 @@
                 }
               ],
               "interactions": []
+            }
+          ]
+        }
+      ]
+    },
+    "intro_esausta": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_spesa_sabato/page_0.webp",
+          "panels": [
+            {
+              "id": "sp_esausta_0",
+              "characters": [
+                "favilla",
+                "lex"
+              ],
+              "text_blocks": [
+                {
+                  "id": "sp_esausta_0_tb_0",
+                  "type": "narration",
+                  "text": "Favilla spinge il carrello come se pesasse il doppio del solito."
+                },
+                {
+                  "id": "sp_esausta_0_tb_1",
+                  "type": "narration",
+                  "text": "Le gambe sono di piombo. Ogni passo è una trattativa con il corpo: uno ancora, poi uno ancora."
+                },
+                {
+                  "id": "sp_esausta_0_tb_2",
+                  "type": "narration",
+                  "text": "Lex la guarda dal seggiolino. Non dice niente — ma Lex non dice mai niente quando la mamma è così. La osserva, come se aspettasse che lei si fermi."
+                },
+                {
+                  "id": "sp_esausta_0_tb_3",
+                  "type": "thought",
+                  "text": "Ancora un corridoio. Poi la cassa. Poi casa. Ce la posso fare."
+                }
+              ]
             }
           ]
         }

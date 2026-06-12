@@ -214,29 +214,54 @@
                 {
                   "id": "bsu_0_tb_0",
                   "type": "narration",
-                  "text": "Mallow abbassa il telefono. La guarda con quella calma precisa che Favilla conosce bene."
+                  "text": "Un'ora dopo. Favilla sta cercando di fare colazione con una mano. L'altra la tiene nascosta."
                 },
                 {
                   "id": "bsu_0_tb_1",
-                  "type": "dialogue",
-                  "speaker": "mallow",
-                  "text": "Ieri sera... ti è successo qualcosa, vero?"
+                  "type": "narration",
+                  "text": "Mallow alza gli occhi dal caffè."
                 },
                 {
                   "id": "bsu_0_tb_2",
-                  "type": "thought",
-                  "text": "No. No no no. Non ancora."
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "Favilla. Le mani."
                 },
                 {
                   "id": "bsu_0_tb_3",
-                  "type": "dialogue",
-                  "speaker": "favilla",
-                  "text": "Stanchezza. Solo stanchezza."
+                  "type": "narration",
+                  "text": "Non è una domanda. Mallow sa che c'è qualcosa che non va."
                 },
                 {
                   "id": "bsu_0_tb_4",
+                  "type": "thought",
+                  "text": "Sembravi bruciata."
+                },
+                {
+                  "id": "bsu_0_tb_5",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Mi sono scottata facendo la pasta. Nulla di grave."
+                },
+                {
+                  "id": "bsu_0_tb_6",
                   "type": "narration",
-                  "text": "Mallow annuisce. Ma non toglie gli occhi da lei."
+                  "text": "Lex osserva da dove sta, seduto nel seggiolone. I suoi occhi vanno da Mallow a Favilla. Dalla reazione di suo nonno. Lei sa che sa."
+                },
+                {
+                  "id": "bsu_0_tb_7",
+                  "type": "thought",
+                  "text": "Ho dovuto mentire più velocemente del previsto."
+                },
+                {
+                  "id": "bsu_0_tb_8",
+                  "type": "narration",
+                  "text": "Mallow non commenta. Ma guarda quella mano un secondo in più."
+                },
+                {
+                  "id": "bsu_0_tb_9",
+                  "type": "system",
+                  "text": "MISSIONE COMPLETATA — La Mattina Dopo"
                 }
               ],
               "interactions": []
@@ -265,17 +290,17 @@
                 {
                   "id": "ep_caffe_0_tb_1",
                   "type": "narration",
-                  "text": "Un secondo dopo, qualcosa dentro di lei si scalda — non come il caffè."
+                  "text": "Per un secondo si sente quasi normale. Poi sente il vuoto — dove ieri sera c'era una tempesta, ora c'è solo silenzio."
                 },
                 {
                   "id": "ep_caffe_0_tb_2",
                   "type": "thought",
-                  "text": "Eccolo. È il caffè. Il caffè fa questo."
+                  "text": "Non si scalda. Il caffè... spegne."
                 },
                 {
                   "id": "ep_caffe_0_tb_3",
                   "type": "narration",
-                  "text": "Lex la guarda dalla sedia. Ha già capito."
+                  "text": "Lex la guarda dalla sedia. Oggi la mamma non brilla. E non sa se preoccuparsi."
                 },
                 {
                   "id": "ep_caffe_0_tb_4",
@@ -395,11 +420,11 @@
             {
               "id": "caffe_si",
               "label": "Lo beve d'un fiato. Come ogni mattina.",
-              "hint": "Il corpo lo sa prima della testa.",
+              "hint": "Il caffè smorza la Scintilla. Ma il corpo chiede tregua.",
               "goto_branch": "epilogue_caffe",
               "stat_effects": {
-                "resistenza": -15,
-                "scintille": 10
+                "scintille": -8,
+                "resistenza": 1
               }
             },
             {

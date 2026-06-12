@@ -92,24 +92,31 @@ class StatCondition {
   final String op;
   final int value;
 
-  const StatCondition({required this.stat, required this.op, required this.value});
+  const StatCondition(
+      {required this.stat, required this.op, required this.value});
 
   bool matches(Map<String, int> stats) {
     final v = stats[stat] ?? 0;
     switch (op) {
-      case 'lt':  return v < value;
-      case 'lte': return v <= value;
-      case 'gt':  return v > value;
-      case 'gte': return v >= value;
-      case 'eq':  return v == value;
-      default:    return false;
+      case 'lt':
+        return v < value;
+      case 'lte':
+        return v <= value;
+      case 'gt':
+        return v > value;
+      case 'gte':
+        return v >= value;
+      case 'eq':
+        return v == value;
+      default:
+        return false;
     }
   }
 
   factory StatCondition.fromJson(Map<String, dynamic> json) => StatCondition(
-        stat:  json['stat'] as String? ?? '',
-        op:    json['op']   as String? ?? 'lt',
-        value: json['value'] as int?   ?? 0,
+        stat: json['stat'] as String? ?? '',
+        op: json['op'] as String? ?? 'lt',
+        value: json['value'] as int? ?? 0,
       );
 }
 
@@ -125,8 +132,8 @@ class FlagCondition {
       (flags[flag] ?? false) == expectedValue;
 
   factory FlagCondition.fromJson(Map<String, dynamic> json) => FlagCondition(
-        flag:          json['flag'] as String? ?? '',
-        expectedValue: json['is']   as bool?   ?? false,
+        flag: json['flag'] as String? ?? '',
+        expectedValue: json['is'] as bool? ?? false,
       );
 }
 
@@ -176,12 +183,18 @@ class StatEntryRule {
     if (stat.isEmpty) return true; // regola solo-flag: nessuna stat richiesta
     final statVal = stats[stat] ?? 0;
     switch (op) {
-      case 'lt':  return statVal < value;
-      case 'lte': return statVal <= value;
-      case 'gt':  return statVal > value;
-      case 'gte': return statVal >= value;
-      case 'eq':  return statVal == value;
-      default:    return false;
+      case 'lt':
+        return statVal < value;
+      case 'lte':
+        return statVal <= value;
+      case 'gt':
+        return statVal > value;
+      case 'gte':
+        return statVal >= value;
+      case 'eq':
+        return statVal == value;
+      default:
+        return false;
     }
   }
 
@@ -189,11 +202,11 @@ class StatEntryRule {
     final allOfJson = json['all_of'] as List<dynamic>?;
     final flagsJson = json['flag_conditions'] as List<dynamic>?;
     return StatEntryRule(
-      stat:         json['stat']         as String? ?? '',
-      op:           json['op']           as String? ?? 'lt',
-      value:        json['value']        as int?    ?? 0,
-      gotoBranch:   json['goto_branch']  as String? ?? '',
-      prepend:      json['prepend']      as bool?   ?? false,
+      stat: json['stat'] as String? ?? '',
+      op: json['op'] as String? ?? 'lt',
+      value: json['value'] as int? ?? 0,
+      gotoBranch: json['goto_branch'] as String? ?? '',
+      prepend: json['prepend'] as bool? ?? false,
       allOf: allOfJson == null
           ? const []
           : allOfJson
@@ -320,10 +333,12 @@ class Episode {
 class Branch {
   final String id;
   final List<ComicPage> pages;
+
   /// Se true, l'epilogo globale dell'episodio non viene aggiunto dopo questo branch.
   final bool skipsEpilogue;
 
-  const Branch({required this.id, required this.pages, this.skipsEpilogue = false});
+  const Branch(
+      {required this.id, required this.pages, this.skipsEpilogue = false});
 
   factory Branch.fromJson(String id, Map<String, dynamic> json) {
     final pagesJson = (json['pages'] as List<dynamic>? ?? []);
@@ -366,8 +381,10 @@ class MinigameTier {
   final int minProducts;
   final String label;
   final Map<String, int> statEffects;
+
   /// Branch verso cui navigare dopo questo tier. Se vuoto, usa il goto_branch dell'opzione padre.
   final String gotoBranch;
+
   /// World flags da impostare quando questo tier viene raggiunto.
   final Map<String, bool> setFlags;
 
@@ -469,6 +486,10 @@ class ChoiceOption {
   /// Es. {"shirt_in_backpack": true}
   final Map<String, bool> setFlags;
 
+  /// Memorie narrative da salvare quando l'opzione viene scelta.
+  /// Es. {"callback.lex_notte": "non dire nulla a Lex"}
+  final Map<String, String> setMemories;
+
   /// Se presente, questa scelta apre un mini-game prima di navigare al branch.
   final MinigameConfig? minigame;
 
@@ -479,6 +500,7 @@ class ChoiceOption {
     this.hint,
     this.statEffects = const {},
     this.setFlags = const {},
+    this.setMemories = const {},
     this.minigame,
   });
 
@@ -495,6 +517,23 @@ class ChoiceOption {
       if (value is bool) setFlags[key] = value;
     });
 
+    final memoriesJson = json['set_memories'] as Map<String, dynamic>?;
+    final setMemories = <String, String>{};
+    memoriesJson?.forEach((key, value) {
+      final normalizedKey = key.trim();
+      if (normalizedKey.isEmpty) return;
+      final normalizedValue = switch (value) {
+        final String s => s.trim(),
+        final int n => n.toString(),
+        final double n => n.toString(),
+        final bool b => b.toString(),
+        _ => '',
+      };
+      if (normalizedValue.isNotEmpty) {
+        setMemories[normalizedKey] = normalizedValue;
+      }
+    });
+
     final minigameJson = json['minigame'] as Map<String, dynamic>?;
 
     return ChoiceOption(
@@ -504,7 +543,42 @@ class ChoiceOption {
       hint: json['hint'] as String?,
       statEffects: statEffects,
       setFlags: setFlags,
-      minigame: minigameJson != null ? MinigameConfig.fromJson(minigameJson) : null,
+      setMemories: setMemories,
+      minigame:
+          minigameJson != null ? MinigameConfig.fromJson(minigameJson) : null,
+    );
+  }
+}
+
+class PageVfxConfig {
+  final String? scene;
+  final String? focus;
+  final bool? forcePower;
+  final bool? cinematicBars;
+  final double intensity;
+
+  const PageVfxConfig({
+    this.scene,
+    this.focus,
+    this.forcePower,
+    this.cinematicBars,
+    this.intensity = 1.0,
+  });
+
+  factory PageVfxConfig.fromJson(Map<String, dynamic> json) {
+    final rawIntensity = json['intensity'];
+    final parsedIntensity = switch (rawIntensity) {
+      final int v => v.toDouble(),
+      final double v => v,
+      _ => 1.0,
+    };
+    final clampedIntensity = parsedIntensity.clamp(0.25, 2.0);
+    return PageVfxConfig(
+      scene: json['scene'] as String?,
+      focus: json['focus'] as String?,
+      forcePower: json['force_power'] as bool?,
+      cinematicBars: json['cinematic_bars'] as bool?,
+      intensity: clampedIntensity,
     );
   }
 }
@@ -514,17 +588,20 @@ class ComicPage {
   final String background;
   final List<Panel> panels;
   final Choice? choice;
+  final PageVfxConfig? vfx;
 
   ComicPage({
     required this.index,
     required this.background,
     required this.panels,
     this.choice,
+    this.vfx,
   });
 
   factory ComicPage.fromJson(Map<String, dynamic> json) {
     final panelsJson = (json['panels'] as List<dynamic>? ?? []);
     final choiceJson = json['choice'] as Map<String, dynamic>?;
+    final vfxJson = json['vfx'] as Map<String, dynamic>?;
 
     return ComicPage(
       index: json['index'] as int? ?? 0,
@@ -533,6 +610,7 @@ class ComicPage {
           .map((p) => Panel.fromJson(p as Map<String, dynamic>))
           .toList(),
       choice: choiceJson != null ? Choice.fromJson(choiceJson) : null,
+      vfx: vfxJson != null ? PageVfxConfig.fromJson(vfxJson) : null,
     );
   }
 }

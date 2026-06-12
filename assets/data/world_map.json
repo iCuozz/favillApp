@@ -72,6 +72,18 @@
             "s1_mattina_dopo"
           ],
           "requires_stats": {}
+        },
+        {
+          "id": "s1_allagamento",
+          "title": "L'Allagamento",
+          "subtitle": "Acqua. Buio. La Corvi fuori dalla porta.",
+          "file": "assets/data/quests/s1/s1_allagamento.json",
+          "thumbnail": "assets/episodes/prologo/thumb.webp",
+          "season": 1,
+          "requires_completed": [
+            "s1_lunedi_asilo"
+          ],
+          "requires_stats": {}
         }
       ]
     },
@@ -171,7 +183,7 @@
       "quests": [
       {
         "id": "s1_centro_commerciale",
-        "title": "Un Sabato al GalaxiaMall",
+        "title": "GalaxiaMall",
         "subtitle": "Mallow ha una lista. Lex ha un piano.",
         "thumbnail": "assets/episodes/prologo/thumb.webp",
         "file": "assets/data/quests/s1/s1_centro_commerciale.json",
@@ -208,7 +220,20 @@
         "x": 0.72,
         "y": 0.55
       },
-      "quests": []
+      "quests": [
+        {
+          "id": "s1_palestra",
+          "title": "La Palestra",
+          "subtitle": "Favilla si prende un respiro tutto suo.",
+          "file": "assets/data/quests/s1/s1_palestra.json",
+          "thumbnail": "assets/episodes/prologo/thumb.webp",
+          "season": 1,
+          "requires_completed": [
+            "s1_lunedi_asilo"
+          ],
+          "requires_stats": {}
+        }
+      ]
     }
   ]
 }

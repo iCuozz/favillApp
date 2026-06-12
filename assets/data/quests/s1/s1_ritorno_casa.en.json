@@ -398,7 +398,7 @@
                     {
                       "min": 0,
                       "label": "Discovered.",
-                      "goto_branch": "branch_letto",
+                      "goto_branch": "branch_lex_quasi_scoperto",
                       "stat_effects": {
                         "segreto": -5,
                         "resistenza": -20
@@ -691,6 +691,93 @@
         }
       ]
     },
+    "branch_lex_quasi_scoperto": {
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/s1/s1_ritorno_casa/branch_lex_quasi_scoperto.webp",
+          "panels": [
+            {
+              "id": "blqs_0_0",
+              "characters": [
+                "favilla",
+                "lex",
+                "mallow"
+              ],
+              "text_blocks": [
+                {
+                  "id": "blqs_0_0_tb_0",
+                  "type": "narration",
+                  "text": "Lex manages to touch her shoulder. Not enough to burn her — the contact is too brief."
+                },
+                {
+                  "id": "blqs_0_0_tb_1",
+                  "type": "narration",
+                  "text": "But enough to hurt him. Lex shrieks."
+                },
+                {
+                  "id": "blqs_0_0_tb_2",
+                  "type": "dialogue",
+                  "speaker": "lex",
+                  "text": "AH! AH!"
+                },
+                {
+                  "id": "blqs_0_0_tb_3",
+                  "type": "narration",
+                  "text": "Favilla scoops him up immediately. But Lex doesn't cry. He looks her in the face with those enormous eyes."
+                },
+                {
+                  "id": "blqs_0_0_tb_4",
+                  "type": "narration",
+                  "text": "And smiles. Strange. A smile that says: 'I actually touched it'."
+                },
+                {
+                  "id": "blqs_0_0_tb_5",
+                  "type": "narration",
+                  "text": "Mallow stands up from the couch. He saw everything."
+                },
+                {
+                  "id": "blqs_0_0_tb_6",
+                  "type": "narration",
+                  "text": "He observes Lex. He observes Favilla. Favilla's hand on Lex's shoulder — as if protecting him from something."
+                },
+                {
+                  "id": "blqs_0_0_tb_7",
+                  "type": "thought",
+                  "text": "Why is Lex smiling? Why did he scream so fast?"
+                },
+                {
+                  "id": "blqs_0_0_tb_8",
+                  "type": "narration",
+                  "text": "Mallow doesn't ask. But in his eyes there's the first real question: why are you and your son so strange with each other?"
+                },
+                {
+                  "id": "blqs_0_0_tb_9",
+                  "type": "narration",
+                  "text": "Lex in his crib, later. His little hand still red on the back."
+                },
+                {
+                  "id": "blqs_0_0_tb_10",
+                  "type": "thought",
+                  "text": "You tried. And he knows you did it."
+                },
+                {
+                  "id": "blqs_0_0_tb_11",
+                  "type": "thought",
+                  "text": "Now Mallow starts to wonder."
+                },
+                {
+                  "id": "blqs_0_0_tb_12",
+                  "type": "system",
+                  "text": "MISSION COMPLETE — Coming Home"
+                }
+              ],
+              "interactions": []
+            }
+          ]
+        }
+      ]
+    },
     "intro_vestiti_bruciati_indosso": {
       "pages": [
         {
@@ -768,7 +855,7 @@
                 {
                   "id": "ivbi_1_0_tb_2",
                   "type": "narration",
-                  "text": "Lex: faccia da “ci stai arrivando”."
+                  "text": "Lex: face saying \"you're getting there\"."
                 }
               ],
               "interactions": []
@@ -790,7 +877,7 @@
                 {
                   "id": "ivbi_2_0_tb_0",
                   "type": "narration",
-                  "text": "TENTATIVO 1: Lex si trascina verso Favilla. Con metodo chirurgico, afferra l’orlo della camicetta bruciata con entrambe le manine. Tira. Tira verso Mallow."
+                  "text": "ATTEMPT 1: Lex crawls toward Favilla. With surgical precision, he grabs the hem of the burned blouse with both little hands. Pulls. Pulls toward Mallow."
                 },
                 {
                   "id": "ivbi_2_0_tb_1",
@@ -807,7 +894,7 @@
                   "id": "ivbi_2_0_tb_3",
                   "type": "dialogue",
                   "speaker": "mallow",
-                  "text": "Cosa c’è?"
+                  "text": "What's wrong?"
                 },
                 {
                   "id": "ivbi_2_0_tb_4",
@@ -818,7 +905,7 @@
                 {
                   "id": "ivbi_2_0_tb_5",
                   "type": "narration",
-                  "text": "Lex: faccia da “questa è una bugia e lo sappiamo entrambi”."
+                  "text": "Lex: face saying \"that's a lie and we both know it\"."
                 }
               ],
               "interactions": []
@@ -845,7 +932,7 @@
                 {
                   "id": "ivbi_3_0_tb_1",
                   "type": "narration",
-                  "text": "Mallow non guarda. Sta tagliando una cipolla con l’applicazione di un uomo che non ha sentito niente."
+                  "text": "Mallow isn't looking. He's chopping an onion with the dedication of a man who heard absolutely nothing."
                 },
                 {
                   "id": "ivbi_3_0_tb_2",
@@ -878,7 +965,7 @@
                 {
                   "id": "ivbi_4_0_tb_0",
                   "type": "narration",
-                  "text": "TENTATIVO FINALE: Lex alza entrambe le braccia di scatto — WHOOSH — le abbassa. Le rialza. Le abbassa. Tre volte, con crescente enfasi. Poi punta il ditino verso Favilla e fa la sua faccia da esplosione — guance gonfie, soffia tutta l’aria."
+                  "text": "FINAL ATTEMPT: Lex snaps both arms up — WHOOSH — drops them. Raises them. Drops them. Three times, with growing emphasis. Then he points his tiny finger at Favilla and makes his explosion face — cheeks puffed, blowing out all his air."
                 },
                 {
                   "id": "ivbi_4_0_tb_1",
