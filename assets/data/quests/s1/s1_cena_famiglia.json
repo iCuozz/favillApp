@@ -177,6 +177,36 @@
                 "stat_effects": {"legame": 5, "scintille": 5},
                 "set_flags": {"cena_famiglia_fatta": true},
                 "set_memories": {"choice.s1_cena_famiglia": "umorismo"}
+              },
+              {
+                "id": "distrai_lex",
+                "label": "Guardi Lex. Ha i pastelli in mano. Sta disegnando qualcosa.",
+                "stat_effects": {"segreto": -3},
+                "set_flags": {"cena_famiglia_fatta": true},
+                "set_memories": {"choice.s1_cena_famiglia": "distrai_lex"},
+                "minigame": {
+                  "type": "disegna",
+                  "tiers": [
+                    {
+                      "min": 4,
+                      "label": "Disegno innocuo.",
+                      "goto_branch": "branch_umorismo",
+                      "stat_effects": {"legame": 8, "scintille": 5}
+                    },
+                    {
+                      "min": 2,
+                      "label": "Quasi...",
+                      "goto_branch": "branch_facciata",
+                      "stat_effects": {"segreto": 5, "resistenza": 5}
+                    },
+                    {
+                      "min": 0,
+                      "label": "Mallow ha visto.",
+                      "goto_branch": "branch_confessa",
+                      "stat_effects": {"legame": 5, "segreto": -10}
+                    }
+                  ]
+                }
               }
             ]
           }

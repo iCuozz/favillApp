@@ -36,6 +36,7 @@ import 'widgets/minigame_rincorsa.dart';
 import 'widgets/minigame_schiva_lex.dart';
 import 'widgets/minigame_lockpick.dart';
 import 'widgets/minigame_mash_door.dart';
+import 'widgets/minigame_disegna.dart';
 
 const String _kSentryDsn =
     'https://a0191b359e43ba940e6b2bc1107b81ec@o4511291384725504.ingest.de.sentry.io/4511291387543632';
@@ -697,6 +698,29 @@ class _EpisodePageState extends State<EpisodePage> {
                     tier.gotoBranch.isNotEmpty ? tier.gotoBranch : null;
                 final flags = tier.setFlags.isNotEmpty ? tier.setFlags : null;
                 final isSuccess = tier.minProducts >= 2;
+                AudioService.instance.playSfx(isSuccess
+                    ? SfxEvent.minigameSuccess
+                    : SfxEvent.minigameFail);
+                _applyEffectsAndNavigate(option,
+                    choiceId: choiceId,
+                    overrideEffects: effects,
+                    overrideBranch: branch,
+                    overrideFlags: flags);
+              },
+            ),
+          ),
+        );
+      case 'disegna':
+        Navigator.of(context).push<void>(
+          MaterialPageRoute(
+            builder: (_) => MinigameDisegnaScreen(
+              config: cfg,
+              onComplete: (effects, label, tier) {
+                Navigator.of(context).pop();
+                final branch =
+                    tier.gotoBranch.isNotEmpty ? tier.gotoBranch : null;
+                final flags = tier.setFlags.isNotEmpty ? tier.setFlags : null;
+                final isSuccess = tier.minProducts >= 3;
                 AudioService.instance.playSfx(isSuccess
                     ? SfxEvent.minigameSuccess
                     : SfxEvent.minigameFail);
