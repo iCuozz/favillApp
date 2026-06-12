@@ -5,14 +5,14 @@
     {
       "stat": "scintille",
       "op": "lt",
-      "value": 20,
+      "value": 35,
       "goto_branch": "intro_senza_fiamma",
       "prepend": true
     },
     {
       "stat": "resistenza",
       "op": "lt",
-      "value": 15,
+      "value": 20,
       "goto_branch": "intro_sfondata",
       "prepend": true
     },

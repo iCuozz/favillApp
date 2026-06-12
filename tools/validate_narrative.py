@@ -45,13 +45,14 @@ THRESHOLDS = {
         {'value': 8,  'label': '🔒 Rivelazione', 'direction': 'lt', 'impact': 'Imminente scoperta — tono e scelte radicalmente diversi'},
     ],
     'legame': [
+        {'value': 70, 'label': '💞 Fortissimo',  'direction': 'gte','impact': 'Sblocca EP9c "Cena di Famiglia".'},
         {'value': 40, 'label': '💞 Solido',     'direction': 'gte','impact': 'Sblocca "Cena di Famiglia". Mallow più presente.'},
-        {'value': 25, 'label': '💞 Distante',   'direction': 'lt', 'impact': 'Mallow nota la distanza. Dialoghi più guardinghi.'},
+        {'value': 40, 'label': '💞 Distante',   'direction': 'lt', 'impact': 'EP6alt intro_legame_distante. Mallow nota la distanza.'},
         {'value': 10, 'label': '💞 Crisi',      'direction': 'lt', 'impact': 'Crisi familiare. Lex lo sente. Scene molto tese.'},
     ],
     'scintille': [
         {'value': 45, 'label': '✨ Kryptonite',  'direction': 'lt', 'impact': 'Minigame più difficili (già implementato). Intro EP2 se <45.'},
-        {'value': 10, 'label': '✨ Spenta',      'direction': 'lt', 'impact': 'Trasformazione impossibile. Storia alternativa obbligatoria.'},
+        {'value': 20, 'label': '✨ Spenta',      'direction': 'lt', 'impact': 'EP8 intro_senza_fiamma. Poteri molto ridotti.'},
     ],
     'resistenza': [
         {'value': 40, 'label': '💪 Affaticata',  'direction': 'lt', 'impact': 'Sblocca Palestra (già implementato). Intro stanchezza.'},
@@ -323,6 +324,109 @@ def simulate_thresholds(episodes: list) -> None:
             print(f"      Peggior singolo effetto: {worst_val} → ~{max(1, abs(steps))} scelte per raggiungerla")
 
 
+# ─── Verifica raggiungibilità stat_entry ──────────────────────────────────────
+
+def _all_effects_from_choice(choice: dict) -> list[dict]:
+    """Espande una choice in tutte le possibili combinazioni di effetti,
+    inclusi i tier dei minigame."""
+    all_effects = []
+    for opt in choice.get('options', []):
+        base = dict(opt.get('stat_effects', {}))
+        mg = opt.get('minigame')
+        if mg and mg.get('tiers'):
+            # Ogni tier è un possibile esito
+            for tier in mg['tiers']:
+                tier_eff = dict(tier.get('stat_effects', base))
+                all_effects.append(tier_eff)
+        else:
+            # Opzione senza minigame, usa gli effetti base
+            all_effects.append(base)
+    return all_effects
+
+
+def _min_max_stat_for_episode(episodes: list, stat_name: str, up_to_episode_idx: int):
+    """
+    Calcola il minimo e massimo raggiungibile per stat_name dopo aver giocato
+    tutti gli episodi fino a up_to_episode_idx (escluso).
+    Considera TUTTI i possibili esiti dei minigame (tutti i tier).
+    """
+    stats_min = dict(STAT_INITIAL)
+    stats_max = dict(STAT_INITIAL)
+
+    for idx in range(up_to_episode_idx):
+        path_ep = episodes[idx]
+        data = json.load(open(path_ep))
+        choices = get_choices_from_quest(data)
+
+        for ctx, choice in choices:
+            # Raccogli TUTTI i possibili effetti (inclusi tier minigame)
+            all_effects = _all_effects_from_choice(choice)
+
+            # Filtra quelli che violano i floor
+            safe_min = [e for e in all_effects if not would_violate_floor(stats_min, e)]
+            safe_max = [e for e in all_effects if not would_violate_floor(stats_max, e)]
+
+            if safe_min:
+                worst = min(safe_min, key=lambda e: e.get(stat_name, 0))
+                stats_min = apply_effects(stats_min, worst)
+
+            if safe_max:
+                best = max(safe_max, key=lambda e: e.get(stat_name, 0))
+                stats_max = apply_effects(stats_max, best)
+
+    return stats_min.get(stat_name, 50), stats_max.get(stat_name, 50)
+
+
+def check_stat_entry_reachability(episodes: list) -> bool:
+    """
+    Verifica che ogni condizione stat_entry sia raggiungibile.
+    Per 'lt': il valore minimo della stat deve scendere sotto la soglia.
+    Per 'gte': il valore massimo deve superare la soglia.
+    Salta le condizioni basate solo su flag (verificabili solo a runtime).
+    """
+    ok = True
+
+    for ep_idx, path_ep in enumerate(episodes):
+        data = json.load(open(path_ep))
+        ep_id = data.get('id', path_ep)
+        stat_entries = data.get('stat_entry', [])
+
+        for rule_idx, rule in enumerate(stat_entries):
+            conditions = []
+
+            if rule.get('all_of'):
+                conditions = [{'stat': c['stat'], 'op': c['op'], 'value': c['value']} for c in rule['all_of']]
+            elif rule.get('stat'):
+                conditions = [{'stat': rule['stat'], 'op': rule['op'], 'value': rule['value']}]
+
+            # Le flag_conditions da sole non hanno soglia stat numerica
+            if not conditions and rule.get('flag_conditions'):
+                continue
+
+            for cond in conditions:
+                stat = cond['stat']
+                op = cond['op']
+                value = cond['value']
+                branch = rule.get('goto_branch', '?')
+
+                if op in ('lt', 'lte'):
+                    min_val, _ = _min_max_stat_for_episode(episodes, stat, ep_idx)
+                    if value <= min_val:
+                        print(f"  \U0001f534 [{ep_id}] stat_entry[{rule_idx}]: {stat} {op} {value} \u2192 {branch}")
+                        print(f"     Soglia {value} \u2264 min raggiungibile {min_val} \u2014 CONDIZIONE MAI VERA")
+                        ok = False
+
+                elif op in ('gt', 'gte'):
+                    _, max_val = _min_max_stat_for_episode(episodes, stat, ep_idx)
+                    if value > max_val:
+                        print(f"  \U0001f534 [{ep_id}] stat_entry[{rule_idx}]: {stat} {op} {value} \u2192 {branch}")
+                        print(f"     Soglia {value} > max raggiungibile {max_val} \u2014 CONDIZIONE MAI VERA")
+                        ok = False
+
+    if ok:
+        print("  \u2705 Tutte le soglie stat_entry sono raggiungibili")
+    return ok
+
 # ─── Main ─────────────────────────────────────────────────────────────────────
 
 def main():
@@ -371,8 +475,8 @@ def main():
     # Mappa delle soglie già implementate nel motore
     implemented = {
         'segreto': {50: 'EP3 (stat_entry)', 30: 'EP2 (intro_segreto_pericolo)', 15: 'EP5 (intro_segreto_corda)', 8: '—'},
-        'legame': {40: 'Backlog (Cena di Famiglia)', 25: 'EP6alt (intro_legame_distante)', 10: '—'},
-        'scintille': {45: 'EP2 (stat_entry) + minigame', 10: 'main.dart (rincorsa)'},
+        'legame': {70: 'EP9c (requires_stats)', 40: 'EP6alt (intro_legame_distante) + EP9c soglia', 10: '—'},
+        'scintille': {45: 'EP2 (stat_entry) + minigame', 20: 'EP8 (intro_senza_fiamma)'},
         'resistenza': {40: 'EP7.5 (stat unlock)', 25: 'EP4 (intro_esausta)', 10: 'EP5 (intro_resistenza_limite)'},
     }
 
@@ -418,7 +522,12 @@ def main():
     print(f"  Legenda: ✅ = già gestito dal motore | ❌ = serve narrativa alternativa")
     print(f"{'─'*60}")
 
-    # 6. Riepilogo finale
+    # 6. Verifica raggiungibilità stat_entry (branch non morti)
+    print("\n─── 6. Raggiungibilità soglie stat_entry ─────────────────")
+    if not check_stat_entry_reachability(EPISODES):
+        all_ok = False
+
+    # 7. Riepilogo finale
     print("\n╔══════════════════════════════════════════════════════════╗")
     if all_ok:
         print("║  ✅  VALIDAZIONE PASSATA — tutti i floor sono rispettati ║")

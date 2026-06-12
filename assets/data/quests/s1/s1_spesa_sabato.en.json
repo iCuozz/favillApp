@@ -11,7 +11,7 @@
     {
       "stat": "scintille",
       "op": "gte",
-      "value": 60,
+      "value": 55,
       "goto_branch": "intro_mani_calde",
       "prepend": true
     }
