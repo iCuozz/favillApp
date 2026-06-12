@@ -17,7 +17,11 @@
       "panels": [
         {
           "id": "cena_p0_a",
-          "characters": ["mallow", "favilla", "lex"],
+          "characters": [
+            "mallow",
+            "favilla",
+            "lex"
+          ],
           "text_blocks": [
             {
               "id": "cena_p0_a_t1",
@@ -57,7 +61,11 @@
       "panels": [
         {
           "id": "cena_p1_a",
-          "characters": ["mallow", "favilla", "lex"],
+          "characters": [
+            "mallow",
+            "favilla",
+            "lex"
+          ],
           "text_blocks": [
             {
               "id": "cena_p1_a_t1",
@@ -97,7 +105,11 @@
       "panels": [
         {
           "id": "cena_p2_a",
-          "characters": ["mallow", "favilla", "lex"],
+          "characters": [
+            "mallow",
+            "favilla",
+            "lex"
+          ],
           "text_blocks": [
             {
               "id": "cena_p2_a_t1",
@@ -131,7 +143,10 @@
       "panels": [
         {
           "id": "cena_p3_a",
-          "characters": ["mallow", "favilla"],
+          "characters": [
+            "mallow",
+            "favilla"
+          ],
           "text_blocks": [
             {
               "id": "cena_p3_a_t1",
@@ -158,52 +173,88 @@
                 "id": "confessa_piccolo",
                 "label": "«Mallow... devo dirti una cosa. Quella domenica al parco...»",
                 "goto_branch": "branch_confessa",
-                "stat_effects": {"legame": 8, "segreto": -10},
-                "set_flags": {"cena_famiglia_fatta": true},
-                "set_memories": {"choice.s1_cena_famiglia": "confessa_piccolo"}
+                "stat_effects": {
+                  "legame": 8,
+                  "segreto": -10
+                },
+                "set_flags": {
+                  "cena_famiglia_fatta": true
+                },
+                "set_memories": {
+                  "choice.s1_cena_famiglia": "confessa_piccolo"
+                }
               },
               {
                 "id": "facciata",
                 "label": "«Lex, mangia. Mallow, è buonissimo. Tutto a posto.»",
                 "goto_branch": "branch_facciata",
-                "stat_effects": {"segreto": 8, "resistenza": 5},
-                "set_flags": {"cena_famiglia_fatta": true},
-                "set_memories": {"choice.s1_cena_famiglia": "facciata"}
+                "stat_effects": {
+                  "segreto": 8,
+                  "resistenza": 5
+                },
+                "set_flags": {
+                  "cena_famiglia_fatta": true
+                },
+                "set_memories": {
+                  "choice.s1_cena_famiglia": "facciata"
+                }
               },
               {
                 "id": "umorismo",
                 "label": "«Mallow, tuo figlio sta cercando di fare il regista. O forse il matchmaker.»",
                 "goto_branch": "branch_umorismo",
-                "stat_effects": {"legame": 5, "scintille": 5},
-                "set_flags": {"cena_famiglia_fatta": true},
-                "set_memories": {"choice.s1_cena_famiglia": "umorismo"}
+                "stat_effects": {
+                  "legame": 5,
+                  "scintille": 5
+                },
+                "set_flags": {
+                  "cena_famiglia_fatta": true
+                },
+                "set_memories": {
+                  "choice.s1_cena_famiglia": "umorismo"
+                }
               },
               {
                 "id": "distrai_lex",
                 "label": "Guardi Lex. Ha i pastelli in mano. Sta disegnando qualcosa.",
-                "stat_effects": {"segreto": -3},
-                "set_flags": {"cena_famiglia_fatta": true},
-                "set_memories": {"choice.s1_cena_famiglia": "distrai_lex"},
+                "stat_effects": {
+                  "segreto": -3
+                },
+                "set_flags": {
+                  "cena_famiglia_fatta": true
+                },
+                "set_memories": {
+                  "choice.s1_cena_famiglia": "distrai_lex"
+                },
                 "minigame": {
                   "type": "disegna",
                   "tiers": [
                     {
                       "min": 4,
                       "label": "Disegno innocuo.",
-                      "goto_branch": "branch_umorismo",
-                      "stat_effects": {"legame": 8, "scintille": 5}
+                      "goto_branch": "branch_disegno_innocuo",
+                      "stat_effects": {
+                        "legame": 8,
+                        "scintille": 5
+                      }
                     },
                     {
                       "min": 2,
                       "label": "Quasi...",
-                      "goto_branch": "branch_facciata",
-                      "stat_effects": {"segreto": 5, "resistenza": 5}
+                      "goto_branch": "branch_disegno_quasi",
+                      "stat_effects": {
+                        "segreto": -5,
+                        "legame": 3
+                      }
                     },
                     {
                       "min": 0,
                       "label": "Mallow ha visto.",
-                      "goto_branch": "branch_confessa",
-                      "stat_effects": {"legame": 5, "segreto": -10}
+                      "goto_branch": "branch_disegno_visto",
+                      "stat_effects": {
+                        "segreto": -12,
+                        "legame": 5
+                      }
                     }
                   ]
                 }
@@ -224,7 +275,10 @@
           "panels": [
             {
               "id": "intro_calda_a",
-              "characters": ["favilla", "mallow"],
+              "characters": [
+                "favilla",
+                "mallow"
+              ],
               "text_blocks": [
                 {
                   "id": "intro_calda_a_t1",
@@ -262,7 +316,10 @@
           "panels": [
             {
               "id": "branch_confessa_a",
-              "characters": ["favilla", "mallow"],
+              "characters": [
+                "favilla",
+                "mallow"
+              ],
               "text_blocks": [
                 {
                   "id": "branch_confessa_a_t1",
@@ -302,7 +359,11 @@
           "panels": [
             {
               "id": "branch_confessa_b",
-              "characters": ["favilla", "mallow", "lex"],
+              "characters": [
+                "favilla",
+                "mallow",
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "id": "branch_confessa_b_t1",
@@ -335,7 +396,11 @@
           "panels": [
             {
               "id": "branch_facciata_a",
-              "characters": ["favilla", "mallow", "lex"],
+              "characters": [
+                "favilla",
+                "mallow",
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "id": "branch_facciata_a_t1",
@@ -369,7 +434,10 @@
           "panels": [
             {
               "id": "branch_facciata_b",
-              "characters": ["favilla", "mallow"],
+              "characters": [
+                "favilla",
+                "mallow"
+              ],
               "text_blocks": [
                 {
                   "id": "branch_facciata_b_t1",
@@ -402,7 +470,11 @@
           "panels": [
             {
               "id": "branch_umorismo_a",
-              "characters": ["favilla", "mallow", "lex"],
+              "characters": [
+                "favilla",
+                "mallow",
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "id": "branch_umorismo_a_t1",
@@ -436,7 +508,11 @@
           "panels": [
             {
               "id": "branch_umorismo_b",
-              "characters": ["favilla", "mallow", "lex"],
+              "characters": [
+                "favilla",
+                "mallow",
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "id": "branch_umorismo_b_t1",
@@ -459,6 +535,248 @@
           ]
         }
       ]
+    },
+    "branch_disegno_innocuo": {
+      "id": "branch_disegno_innocuo",
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/prologo/page_2.png",
+          "panels": [
+            {
+              "id": "disegno_innocuo_a",
+              "characters": [
+                "favilla",
+                "lex",
+                "mallow"
+              ],
+              "text_blocks": [
+                {
+                  "id": "disegno_innocuo_a_t1",
+                  "type": "narration",
+                  "text": "Lex guarda il suo stesso disegno. La mamma coi capelli a fuoco ora ha capelli normali. Le scintille sono diventate... stelle? Il dito puntato è una mano che saluta."
+                },
+                {
+                  "id": "disegno_innocuo_a_t2",
+                  "type": "narration",
+                  "text": "Il suo capolavoro è stato modificato. Da qualcuno che aveva un pastello grigio e una conoscenza sospetta del suo piano."
+                },
+                {
+                  "id": "disegno_innocuo_a_t3",
+                  "type": "narration",
+                  "text": "Lex fissa Favilla con l'espressione di chi ha appena perso una partita a scacchi. Mallow si avvicina, guarda il foglio."
+                },
+                {
+                  "id": "disegno_innocuo_a_t4",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "Che bel disegno! Siamo noi? Guarda, quello sei tu, quelli siamo io e la mamma."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "background": "assets/episodes/prologo/page_1.png",
+          "panels": [
+            {
+              "id": "disegno_innocuo_b",
+              "characters": [
+                "favilla",
+                "lex",
+                "mallow"
+              ],
+              "text_blocks": [
+                {
+                  "id": "disegno_innocuo_b_t1",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Sì. Noi tre."
+                },
+                {
+                  "id": "disegno_innocuo_b_t2",
+                  "type": "narration",
+                  "text": "Mallow sorride. Lex incrocia le braccia sul seggiolone. Sconfitto. Per ora."
+                },
+                {
+                  "id": "disegno_innocuo_b_t3",
+                  "type": "narration",
+                  "text": "Il calzuovo è quasi finito. Il disegno è innocuo. E Lex ha imparato che la mamma è più veloce di lui anche a tavola."
+                },
+                {
+                  "id": "disegno_innocuo_b_t4",
+                  "type": "thought",
+                  "speaker": "favilla",
+                  "text": "Bel tentativo, piccolo. Ma stasera vinco io."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "branch_disegno_quasi": {
+      "id": "branch_disegno_quasi",
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/prologo/page_2.png",
+          "panels": [
+            {
+              "id": "disegno_quasi_a",
+              "characters": [
+                "favilla",
+                "lex",
+                "mallow"
+              ],
+              "text_blocks": [
+                {
+                  "id": "disegno_quasi_a_t1",
+                  "type": "narration",
+                  "text": "Favilla modifica in fretta quello che può. Il risultato è un disegno strano: una figura coi capelli metà gialli e metà grigi, un'altra figura che sembra guardare ma anche no."
+                },
+                {
+                  "id": "disegno_quasi_a_t2",
+                  "type": "narration",
+                  "text": "Un pastello rotola via. Lex lo segue con gli occhi. Favilla lo raccoglie prima che Mallow lo noti."
+                },
+                {
+                  "id": "disegno_quasi_a_t3",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "Cos'è? Fammi vedere."
+                },
+                {
+                  "id": "disegno_quasi_a_t4",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Un autoritratto di Lex. Astratto. Ha talento."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "background": "assets/episodes/prologo/page_1.png",
+          "panels": [
+            {
+              "id": "disegno_quasi_b",
+              "characters": [
+                "favilla",
+                "lex",
+                "mallow"
+              ],
+              "text_blocks": [
+                {
+                  "id": "disegno_quasi_b_t1",
+                  "type": "narration",
+                  "text": "Lex la fulmina con lo sguardo. Mallow ride:"
+                },
+                {
+                  "id": "disegno_quasi_b_t2",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "Ha talento."
+                },
+                {
+                  "id": "disegno_quasi_b_t3",
+                  "type": "narration",
+                  "text": "Ma ha esitato un secondo di troppo prima di ridere. Quel secondo in cui ha guardato il disegno più attentamente del necessario."
+                },
+                {
+                  "id": "disegno_quasi_b_t4",
+                  "type": "thought",
+                  "speaker": "favilla",
+                  "text": "Non ha capito. Ma ha sentito che c'è qualcosa da capire. Domani ci ripenserà."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "branch_disegno_visto": {
+      "id": "branch_disegno_visto",
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/prologo/page_3.png",
+          "panels": [
+            {
+              "id": "disegno_visto_a",
+              "characters": [
+                "favilla",
+                "lex",
+                "mallow"
+              ],
+              "text_blocks": [
+                {
+                  "id": "disegno_visto_a_t1",
+                  "type": "narration",
+                  "text": "Mallow si avvicina mentre Favilla ha ancora il pastello in mano. È troppo tardi. Vede il disegno originale: la figura coi capelli a fuoco, l'altra che guarda, Lex che indica."
+                },
+                {
+                  "id": "disegno_visto_a_t2",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "Chi è quella?"
+                },
+                {
+                  "id": "disegno_visto_a_t3",
+                  "type": "narration",
+                  "text": "Indica i capelli di fuoco. Favilla prende il foglio, lo appallottola."
+                },
+                {
+                  "id": "disegno_visto_a_t4",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Niente. Roba da bambini."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "background": "assets/episodes/prologo/page_3.png",
+          "panels": [
+            {
+              "id": "disegno_visto_b",
+              "characters": [
+                "favilla",
+                "mallow",
+                "lex"
+              ],
+              "text_blocks": [
+                {
+                  "id": "disegno_visto_b_t1",
+                  "type": "narration",
+                  "text": "Ma Mallow non distoglie lo sguardo. Lex sorride — ha vinto lui."
+                },
+                {
+                  "id": "disegno_visto_b_t2",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "Sembrano... capelli che brillano. Come quelli del video."
+                },
+                {
+                  "id": "disegno_visto_b_t3",
+                  "type": "narration",
+                  "text": "Il silenzio dura un secondo. Lex guarda Mallow. Mallow guarda Favilla. Favilla guarda il foglio appallottolato."
+                },
+                {
+                  "id": "disegno_visto_b_t4",
+                  "type": "thought",
+                  "speaker": "favilla",
+                  "text": "Ha collegato il disegno al video. Mio figlio mi ha appena fregato. Con un pastello."
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   },
   "epilogue": {
@@ -470,7 +788,10 @@
         "panels": [
           {
             "id": "cena_epilogue_a",
-            "characters": ["favilla", "mallow"],
+            "characters": [
+              "favilla",
+              "mallow"
+            ],
             "text_blocks": [
               {
                 "id": "cena_epilogue_a_t1",

@@ -217,29 +217,44 @@
               {
                 "id": "distrai_lex",
                 "label": "You glance at Lex. He has crayons. He's drawing something.",
-                "stat_effects": {"segreto": -3},
-                "set_flags": {"cena_famiglia_fatta": true},
-                "set_memories": {"choice.s1_cena_famiglia": "distrai_lex"},
+                "stat_effects": {
+                  "segreto": -3
+                },
+                "set_flags": {
+                  "cena_famiglia_fatta": true
+                },
+                "set_memories": {
+                  "choice.s1_cena_famiglia": "distrai_lex"
+                },
                 "minigame": {
                   "type": "disegna",
                   "tiers": [
                     {
                       "min": 4,
                       "label": "Innocent drawing.",
-                      "goto_branch": "branch_umorismo",
-                      "stat_effects": {"legame": 8, "scintille": 5}
+                      "goto_branch": "branch_disegno_innocuo",
+                      "stat_effects": {
+                        "legame": 8,
+                        "scintille": 5
+                      }
                     },
                     {
                       "min": 2,
                       "label": "Almost...",
-                      "goto_branch": "branch_facciata",
-                      "stat_effects": {"segreto": 5, "resistenza": 5}
+                      "goto_branch": "branch_disegno_quasi",
+                      "stat_effects": {
+                        "segreto": -5,
+                        "legame": 3
+                      }
                     },
                     {
                       "min": 0,
                       "label": "Mallow saw.",
-                      "goto_branch": "branch_confessa",
-                      "stat_effects": {"legame": 5, "segreto": -10}
+                      "goto_branch": "branch_disegno_visto",
+                      "stat_effects": {
+                        "segreto": -12,
+                        "legame": 5
+                      }
                     }
                   ]
                 }
@@ -514,6 +529,248 @@
                   "type": "thought",
                   "speaker": "favilla",
                   "text": "Tomorrow everything will be complicated again. But tonight it's not. Tonight is ours."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "branch_disegno_innocuo": {
+      "id": "branch_disegno_innocuo",
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/prologo/page_2.png",
+          "panels": [
+            {
+              "id": "disegno_innocuo_a",
+              "characters": [
+                "favilla",
+                "lex",
+                "mallow"
+              ],
+              "text_blocks": [
+                {
+                  "id": "disegno_innocuo_a_t1",
+                  "type": "narration",
+                  "text": "Lex stares at his own drawing. The mom with fire hair now has normal hair. The sparkles have become... stars? The pointing finger is now a waving hand."
+                },
+                {
+                  "id": "disegno_innocuo_a_t2",
+                  "type": "narration",
+                  "text": "His masterpiece has been altered. By someone with a gray crayon and suspicious knowledge of his plan."
+                },
+                {
+                  "id": "disegno_innocuo_a_t3",
+                  "type": "narration",
+                  "text": "Lex glares at Favilla with the expression of someone who just lost a game of chess. Mallow walks over, looks at the paper."
+                },
+                {
+                  "id": "disegno_innocuo_a_t4",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "What a beautiful drawing! Is that us? Look, that's you, those are me and mom."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "background": "assets/episodes/prologo/page_1.png",
+          "panels": [
+            {
+              "id": "disegno_innocuo_b",
+              "characters": [
+                "favilla",
+                "lex",
+                "mallow"
+              ],
+              "text_blocks": [
+                {
+                  "id": "disegno_innocuo_b_t1",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Yes. The three of us."
+                },
+                {
+                  "id": "disegno_innocuo_b_t2",
+                  "type": "narration",
+                  "text": "Mallow smiles. Lex crosses his arms in the high chair. Defeated. For now."
+                },
+                {
+                  "id": "disegno_innocuo_b_t3",
+                  "type": "narration",
+                  "text": "The calzuovo is almost gone. The drawing is innocent. And Lex has learned that mom is faster than him even at the dinner table."
+                },
+                {
+                  "id": "disegno_innocuo_b_t4",
+                  "type": "thought",
+                  "speaker": "favilla",
+                  "text": "Nice try, little one. But tonight I win."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "branch_disegno_quasi": {
+      "id": "branch_disegno_quasi",
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/prologo/page_2.png",
+          "panels": [
+            {
+              "id": "disegno_quasi_a",
+              "characters": [
+                "favilla",
+                "lex",
+                "mallow"
+              ],
+              "text_blocks": [
+                {
+                  "id": "disegno_quasi_a_t1",
+                  "type": "narration",
+                  "text": "Favilla quickly modifies what she can. The result is a strange drawing: a figure with hair half yellow and half gray, another figure that seems to be looking but also not."
+                },
+                {
+                  "id": "disegno_quasi_a_t2",
+                  "type": "narration",
+                  "text": "A crayon rolls away. Lex follows it with his eyes. Favilla picks it up before Mallow notices."
+                },
+                {
+                  "id": "disegno_quasi_a_t3",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "What's that? Let me see."
+                },
+                {
+                  "id": "disegno_quasi_a_t4",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "A self-portrait by Lex. Abstract. He's talented."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "background": "assets/episodes/prologo/page_1.png",
+          "panels": [
+            {
+              "id": "disegno_quasi_b",
+              "characters": [
+                "favilla",
+                "lex",
+                "mallow"
+              ],
+              "text_blocks": [
+                {
+                  "id": "disegno_quasi_b_t1",
+                  "type": "narration",
+                  "text": "Lex glares at her. Mallow laughs:"
+                },
+                {
+                  "id": "disegno_quasi_b_t2",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "He's talented."
+                },
+                {
+                  "id": "disegno_quasi_b_t3",
+                  "type": "narration",
+                  "text": "But he hesitated a second too long before laughing. That second where he looked at the drawing more carefully than necessary."
+                },
+                {
+                  "id": "disegno_quasi_b_t4",
+                  "type": "thought",
+                  "speaker": "favilla",
+                  "text": "He didn't get it. But he felt there's something to get. Tomorrow he'll think about it again."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "branch_disegno_visto": {
+      "id": "branch_disegno_visto",
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/prologo/page_3.png",
+          "panels": [
+            {
+              "id": "disegno_visto_a",
+              "characters": [
+                "favilla",
+                "lex",
+                "mallow"
+              ],
+              "text_blocks": [
+                {
+                  "id": "disegno_visto_a_t1",
+                  "type": "narration",
+                  "text": "Mallow approaches while Favilla still has the crayon in her hand. Too late. He sees the original drawing: the figure with fire hair, the other watching, Lex pointing."
+                },
+                {
+                  "id": "disegno_visto_a_t2",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "Who's that?"
+                },
+                {
+                  "id": "disegno_visto_a_t3",
+                  "type": "narration",
+                  "text": "He points at the fire hair. Favilla grabs the paper, crumples it."
+                },
+                {
+                  "id": "disegno_visto_a_t4",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Nothing. Kids' stuff."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "background": "assets/episodes/prologo/page_3.png",
+          "panels": [
+            {
+              "id": "disegno_visto_b",
+              "characters": [
+                "favilla",
+                "mallow",
+                "lex"
+              ],
+              "text_blocks": [
+                {
+                  "id": "disegno_visto_b_t1",
+                  "type": "narration",
+                  "text": "But Mallow doesn't look away. Lex smiles — he won."
+                },
+                {
+                  "id": "disegno_visto_b_t2",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "They look like... glowing hair. Like the one in the video."
+                },
+                {
+                  "id": "disegno_visto_b_t3",
+                  "type": "narration",
+                  "text": "The silence lasts a second. Lex looks at Mallow. Mallow looks at Favilla. Favilla looks at the crumpled paper."
+                },
+                {
+                  "id": "disegno_visto_b_t4",
+                  "type": "thought",
+                  "speaker": "favilla",
+                  "text": "He connected the drawing to the video. My son just outplayed me. With a crayon."
                 }
               ]
             }
