@@ -19,6 +19,9 @@ class WorldQuest {
   /// Stat minime richieste per sbloccarla, es. {"segreto": 30}.
   final Map<String, int> requiresStats;
 
+  /// Stat massime (≤) per sbloccarla, es. {"segreto": 10} = segreto ≤ 10.
+  final Map<String, int> requiresStatsMax;
+
   /// World flags richiesti per rendere disponibile la quest, es. {"favilla_transformed_public": true}.
   final Map<String, bool> requiresFlags;
 
@@ -31,6 +34,7 @@ class WorldQuest {
     required this.season,
     this.requiresCompleted = const [],
     this.requiresStats = const {},
+    this.requiresStatsMax = const {},
     this.requiresFlags = const {},
   });
 
@@ -39,6 +43,8 @@ class WorldQuest {
         .cast<String>();
     final statsJson = json['requires_stats'] as Map<String, dynamic>? ?? {};
     final stats = statsJson.map((k, v) => MapEntry(k, v as int));
+    final statsMaxJson = json['requires_stats_max'] as Map<String, dynamic>? ?? {};
+    final statsMax = statsMaxJson.map((k, v) => MapEntry(k, v as int));
     final flagsJson = json['requires_flags'] as Map<String, dynamic>? ?? {};
     final flags = flagsJson.map((k, v) => MapEntry(k, v as bool));
 
@@ -51,6 +57,7 @@ class WorldQuest {
       season: json['season'] as int? ?? 1,
       requiresCompleted: completed,
       requiresStats: stats,
+      requiresStatsMax: statsMax,
       requiresFlags: flags,
     );
   }
@@ -185,6 +192,9 @@ class WorldState {
     }
     for (final entry in quest.requiresStats.entries) {
       if ((currentStats[entry.key] ?? 0) < entry.value) return false;
+    }
+    for (final entry in quest.requiresStatsMax.entries) {
+      if ((currentStats[entry.key] ?? 0) > entry.value) return false;
     }
     for (final entry in quest.requiresFlags.entries) {
       if ((currentFlags[entry.key] ?? false) != entry.value) return false;

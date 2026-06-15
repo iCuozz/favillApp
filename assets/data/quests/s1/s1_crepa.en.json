@@ -1,0 +1,554 @@
+{
+  "id": "s1_crepa",
+  "audio_theme": "ritorno_casa_hum",
+  "stat_entry": [
+    {
+      "stat": "segreto",
+      "op": "lte",
+      "value": 10,
+      "goto_branch": "intro_precaria",
+      "prepend": true
+    }
+  ],
+  "pages": [
+    {
+      "index": 0,
+      "background": "assets/episodes/prologo/page_3.png",
+      "panels": [
+        {
+          "id": "cr_p0_a",
+          "characters": ["favilla", "mallow"],
+          "text_blocks": [
+            {
+              "id": "cr_p0_a_t1",
+              "type": "narration",
+              "text": "Late night. The kitchen is dark. Only the fridge light when Mallow opens the door and stops."
+            },
+            {
+              "id": "cr_p0_a_t2",
+              "type": "narration",
+              "text": "He's holding something. A piece of fabric. The burned shirt — the one Favilla hid at the bottom of her backpack and said she'd thrown away."
+            },
+            {
+              "id": "cr_p0_a_t3",
+              "type": "dialogue",
+              "speaker": "mallow",
+              "text": "I found it this morning. While I was looking for Lex's charger."
+            },
+            {
+              "id": "cr_p0_a_t4",
+              "type": "dialogue",
+              "speaker": "mallow",
+              "text": "I wasn't trying to snoop. But once I had it in my hands... I didn't know what to do with it."
+            },
+            {
+              "id": "cr_p0_a_t5",
+              "type": "narration",
+              "text": "He's not angry. Worse. He's hurt."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "background": "assets/episodes/prologo/page_4.png",
+      "panels": [
+        {
+          "id": "cr_p1_a",
+          "characters": ["favilla", "mallow", "lex"],
+          "text_blocks": [
+            {
+              "id": "cr_p1_a_t1",
+              "type": "narration",
+              "text": "Favilla feels her hands getting warm. She hides them behind her back. Mallow notices."
+            },
+            {
+              "id": "cr_p1_a_t2",
+              "type": "dialogue",
+              "speaker": "mallow",
+              "text": "I don't want to fight. I just want to... understand. But if you can't tell me, at least tell me why you can't."
+            },
+            {
+              "id": "cr_p1_a_t3",
+              "type": "narration",
+              "text": "From the playpen, a rustle. Lex is awake."
+            },
+            {
+              "id": "cr_p1_a_t4",
+              "type": "narration",
+              "text": "He doesn't cry. He doesn't laugh. He watches. And for the first time, Favilla sees something in his eyes she's never seen before: sadness."
+            },
+            {
+              "id": "cr_p1_a_t5",
+              "type": "narration",
+              "text": "Lex wanted this. His plan was to make Dad discover the truth. But now that he sees Mom and Dad like this — facing each other, distant — he's not so sure anymore."
+            },
+            {
+              "id": "cr_p1_a_t6",
+              "type": "thought",
+              "speaker": "favilla",
+              "text": "You too, Lex. You know too. And you're hurting too."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "background": "assets/episodes/prologo/page_3.png",
+      "panels": [
+        {
+          "id": "cr_p2_a",
+          "characters": ["favilla", "mallow", "lex"],
+          "text_blocks": [
+            {
+              "id": "cr_p2_a_t1",
+              "type": "narration",
+              "text": "The air is still. Mallow waits. Lex holds his breath. Favilla's hands are burning."
+            },
+            {
+              "id": "cr_p2_a_t2",
+              "type": "thought",
+              "speaker": "favilla",
+              "text": "I can turn away. I can lie. I can tell him almost everything."
+            },
+            {
+              "id": "cr_p2_a_t3",
+              "type": "narration",
+              "text": "But nothing will be the same again. No matter what I choose."
+            }
+          ],
+          "choice": {
+            "id": "crepa_choice",
+            "prompt": "The burned shirt is on the table. Mallow waits. Lex watches.",
+            "options": [
+              {
+                "id": "fidati",
+                "label": "«I can't explain it. But trust me. Please.»",
+                "goto_branch": "branch_svolta",
+                "stat_effects": {
+                  "segreto": 10,
+                  "legame": 3,
+                  "resistenza": -5
+                },
+                "set_flags": {
+                  "crepa_svolta": true
+                },
+                "set_memories": {
+                  "choice.s1_crepa": "svolta"
+                }
+              },
+              {
+                "id": "silenzio",
+                "label": "«Let it go. I'm just tired.»",
+                "goto_branch": "branch_silenzio",
+                "stat_effects": {
+                  "segreto": 5,
+                  "legame": -8,
+                  "resistenza": -3
+                },
+                "set_flags": {
+                  "crepa_silenzio": true
+                },
+                "set_memories": {
+                  "choice.s1_crepa": "silenzio"
+                }
+              },
+              {
+                "id": "quasi_confessa",
+                "label": "«I think... I need to tell you something.»",
+                "goto_branch": "branch_crepa_bloccata",
+                "stat_effects": {
+                  "segreto": -8,
+                  "legame": 10,
+                  "resistenza": 3
+                },
+                "set_memories": {
+                  "choice.s1_crepa": "quasi_confessa"
+                },
+                "minigame": {
+                  "type": "quasi_confessa",
+                  "duration_seconds": 9,
+                  "tiers": [
+                    {
+                      "min": 3,
+                      "label": "Almost true.",
+                      "goto_branch": "branch_crepa_quasi_vera",
+                      "stat_effects": {
+                        "segreto": -15,
+                        "legame": 15,
+                        "resistenza": 5
+                      },
+                      "set_flags": {
+                        "quasi_confessato": true
+                      }
+                    },
+                    {
+                      "min": 2,
+                      "label": "Blurred.",
+                      "goto_branch": "branch_crepa_sfumata",
+                      "stat_effects": {
+                        "segreto": -5,
+                        "legame": 8
+                      }
+                    },
+                    {
+                      "min": 0,
+                      "label": "Stuck.",
+                      "goto_branch": "branch_crepa_bloccata",
+                      "stat_effects": {
+                        "segreto": 5,
+                        "legame": 3
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "branches": {
+    "intro_precaria": {
+      "id": "intro_precaria",
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/prologo/page_1.png",
+          "panels": [
+            {
+              "id": "intro_precaria_a",
+              "characters": ["favilla", "lex"],
+              "text_blocks": [
+                {
+                  "id": "intro_precaria_a_t1",
+                  "type": "narration",
+                  "text": "Favilla is on the couch. Phone in hand, screen off. She hasn't slept in hours."
+                },
+                {
+                  "id": "intro_precaria_a_t2",
+                  "type": "narration",
+                  "text": "The secret weighs. Every day that passes is another brick. And the house can feel it."
+                },
+                {
+                  "id": "intro_precaria_a_t3",
+                  "type": "narration",
+                  "text": "From the playpen, Lex watches her. He can't sleep either. He has the face of someone who wants to help but doesn't know how."
+                },
+                {
+                  "id": "intro_precaria_a_t4",
+                  "type": "thought",
+                  "speaker": "favilla",
+                  "text": "You're awake too. You feel it too. I'm sorry, little one."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "branch_svolta": {
+      "id": "branch_svolta",
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/prologo/page_2.png",
+          "panels": [
+            {
+              "id": "branch_svolta_a",
+              "characters": ["favilla", "mallow"],
+              "text_blocks": [
+                {
+                  "id": "branch_svolta_a_t1",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "I can't explain it. But trust me. Please."
+                },
+                {
+                  "id": "branch_svolta_a_t2",
+                  "type": "narration",
+                  "text": "Mallow looks at her for a long time. Then he nods — slowly, as if every millimeter of that gesture costs a tremendous effort."
+                },
+                {
+                  "id": "branch_svolta_a_t3",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "I trust you. I've always trusted you. But trusting and understanding are two different things."
+                },
+                {
+                  "id": "branch_svolta_a_t4",
+                  "type": "narration",
+                  "text": "Lex, from the playpen, opens his mouth as if to say something. Then closes it. Straightens the owlet. He's decided: for tonight, he'll let it go."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "branch_silenzio": {
+      "id": "branch_silenzio",
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/prologo/page_2.png",
+          "panels": [
+            {
+              "id": "branch_silenzio_a",
+              "characters": ["favilla", "mallow"],
+              "text_blocks": [
+                {
+                  "id": "branch_silenzio_a_t1",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Let it go. I'm just tired."
+                },
+                {
+                  "id": "branch_silenzio_a_t2",
+                  "type": "narration",
+                  "text": "Mallow says nothing. She's been saying 'tired' for weeks. He knows it's a lie. But he doesn't have the energy to chase it anymore."
+                },
+                {
+                  "id": "branch_silenzio_a_t3",
+                  "type": "narration",
+                  "text": "He folds the burned shirt. Puts it in a drawer. Doesn't throw it away — keeps it."
+                },
+                {
+                  "id": "branch_silenzio_a_t4",
+                  "type": "narration",
+                  "text": "Lex watches the scene from the playpen. Then closes his eyes. He's stopped hoping. For tonight."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "branch_crepa_quasi_vera": {
+      "id": "branch_crepa_quasi_vera",
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/prologo/page_3.png",
+          "panels": [
+            {
+              "id": "crepa_vera_a",
+              "characters": ["favilla", "mallow"],
+              "text_blocks": [
+                {
+                  "id": "crepa_vera_a_t1",
+                  "type": "narration",
+                  "text": "Favilla speaks. The words come out one after another, without the filter that's kept her safe for weeks."
+                },
+                {
+                  "id": "crepa_vera_a_t2",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "That night in the kitchen... when Lex was falling. Something happened. I... wasn't me anymore."
+                },
+                {
+                  "id": "crepa_vera_a_t3",
+                  "type": "narration",
+                  "text": "Mallow listens. He doesn't interrupt. He doesn't say 'what do you mean' — he waits."
+                },
+                {
+                  "id": "crepa_vera_a_t4",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "My hair. It lit up. Like... I don't know. Like I had the sun inside me."
+                },
+                {
+                  "id": "crepa_vera_a_t5",
+                  "type": "narration",
+                  "text": "Silence. Mallow doesn't understand. But he doesn't laugh. He doesn't judge her."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "background": "assets/episodes/prologo/page_4.png",
+          "panels": [
+            {
+              "id": "crepa_vera_b",
+              "characters": ["favilla", "mallow", "lex"],
+              "text_blocks": [
+                {
+                  "id": "crepa_vera_b_t1",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "Are you saying... that night something really happened? You didn't imagine it?"
+                },
+                {
+                  "id": "crepa_vera_b_t2",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "I didn't imagine it. Lex saw it. That's why he looks at me like that."
+                },
+                {
+                  "id": "crepa_vera_b_t3",
+                  "type": "narration",
+                  "text": "From the playpen, Lex makes a sound. Not loud. But present. Like saying: 'yes, it's true'."
+                },
+                {
+                  "id": "crepa_vera_b_t4",
+                  "type": "narration",
+                  "text": "Mallow looks at Lex. Then Favilla. He doesn't know what to think. But for the first time, he doesn't ask her to prove it."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "branch_crepa_sfumata": {
+      "id": "branch_crepa_sfumata",
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/prologo/page_2.png",
+          "panels": [
+            {
+              "id": "crepa_sfumata_a",
+              "characters": ["favilla", "mallow"],
+              "text_blocks": [
+                {
+                  "id": "crepa_sfumata_a_t1",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "That Sunday at the park... I didn't tell you everything. There were things... strange things."
+                },
+                {
+                  "id": "crepa_sfumata_a_t2",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "Strange how?"
+                },
+                {
+                  "id": "crepa_sfumata_a_t3",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Like... I don't know. Like time skipped a beat. And I was faster."
+                },
+                {
+                  "id": "crepa_sfumata_a_t4",
+                  "type": "narration",
+                  "text": "Mallow frowns. He's not satisfied. But it's something. More than he had before."
+                },
+                {
+                  "id": "crepa_sfumata_a_t5",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "Okay. I don't understand. But okay. We'll talk tomorrow."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "branch_crepa_bloccata": {
+      "id": "branch_crepa_bloccata",
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/prologo/page_1.png",
+          "panels": [
+            {
+              "id": "crepa_bloccata_a",
+              "characters": ["favilla", "mallow"],
+              "text_blocks": [
+                {
+                  "id": "crepa_bloccata_a_t1",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Mallow... I..."
+                },
+                {
+                  "id": "crepa_bloccata_a_t2",
+                  "type": "narration",
+                  "text": "Nothing. Nothing comes out. Her mouth is dry. The words are there, behind her tongue, but they can't jump."
+                },
+                {
+                  "id": "crepa_bloccata_a_t3",
+                  "type": "narration",
+                  "text": "Mallow waits. Then stops waiting."
+                },
+                {
+                  "id": "crepa_bloccata_a_t4",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "It's okay. When you're ready."
+                },
+                {
+                  "id": "crepa_bloccata_a_t5",
+                  "type": "narration",
+                  "text": "He doesn't say it gently. He says it with exhaustion. The same exhaustion Favilla has been feeling for weeks."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "epilogue": {
+    "id": "epilogue",
+    "pages": [
+      {
+        "index": 0,
+        "background": "assets/episodes/prologo/page_4.png",
+        "panels": [
+          {
+            "id": "cr_epilogo_a",
+            "characters": ["favilla"],
+            "text_blocks": [
+              {
+                "id": "cr_epilogo_a_t1",
+                "type": "narration",
+                "text": "Favilla goes back to the bedroom. Mallow is turned the other way. He's not asleep — but he's pretending."
+              },
+              {
+                "id": "cr_epilogo_a_t2",
+                "type": "narration",
+                "text": "Lex is asleep. The owlet clutched tight. His plan worked — Dad knows something's going on — but there's no victory on his face. Just sleep."
+              },
+              {
+                "id": "cr_epilogo_a_t3",
+                "type": "thought",
+                "speaker": "favilla",
+                "text": "The secret is intact. But the crack is there. And tomorrow will be another day — with a family that knows it doesn't know."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "index": 1,
+        "background": "assets/episodes/prologo/page_carmela.png",
+        "panels": [
+          {
+            "id": "cr_epilogo_b",
+            "characters": ["carmela"],
+            "text_blocks": [
+              {
+                "id": "cr_epilogo_b_t1",
+                "type": "narration",
+                "text": "Across the street, a light turns on. One second. Then it goes off."
+              },
+              {
+                "id": "cr_epilogo_b_t2",
+                "type": "narration",
+                "text": "Carmela was awake. She felt something. She doesn't know what it is. But she'll feel it again."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

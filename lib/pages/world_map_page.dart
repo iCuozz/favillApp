@@ -399,6 +399,14 @@ class _LocationSheetState extends State<_LocationSheet> {
           builder: (context, gameState, _) {
             final quests = widget.location.quests;
 
+            // Mostra solo quest completate, in corso, o effettivamente sbloccabili
+            final visibleQuests = quests.where((q) {
+              if (worldState.isQuestCompleted(q.id)) return true;
+              if (_currentEpisodeId == q.id) return true;
+              return worldState.isQuestAvailable(
+                  q, gameState.toMap(), gameState.flags);
+            }).toList();
+
             return Container(
               decoration: const BoxDecoration(
                 color: Color(0xFF1A1A2E),
@@ -454,7 +462,7 @@ class _LocationSheetState extends State<_LocationSheet> {
                   ),
                   const SizedBox(height: 20),
                   // Quest list
-                  if (quests.isEmpty)
+                  if (visibleQuests.isEmpty)
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       child: Text(
@@ -465,7 +473,7 @@ class _LocationSheetState extends State<_LocationSheet> {
                       ),
                     )
                   else
-                    ...quests.map((q) {
+                    ...visibleQuests.map((q) {
                       final available = worldState.isQuestAvailable(
                           q, gameState.toMap(), gameState.flags);
                       final completed = worldState.isQuestCompleted(q.id);

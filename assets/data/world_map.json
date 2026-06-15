@@ -85,6 +85,36 @@
             "legame": 70
           },
           "requires_flags": {}
+        },
+        {
+          "id": "s1_crepa",
+          "title": "La Crepa",
+          "subtitle": "Una camicia. Una crepa. Una famiglia.",
+          "file": "assets/data/quests/s1/s1_crepa.json",
+          "thumbnail": "assets/episodes/prologo/thumb.webp",
+          "season": 1,
+          "requires_completed": ["s1_allagamento"],
+          "requires_stats_max": {
+            "segreto": 10
+          },
+          "requires_flags": {
+            "lex_ha_un_piano": true
+          }
+        },
+        {
+          "id": "s1_disegno_lex",
+          "title": "Il Disegno di Lex",
+          "subtitle": "Pastelli. Carta. Un capolavoro.",
+          "file": "assets/data/quests/s1/s1_disegno_lex.json",
+          "thumbnail": "assets/episodes/prologo/thumb.webp",
+          "season": 1,
+          "requires_completed": ["s1_allagamento"],
+          "requires_stats": {
+            "segreto": 11
+          },
+          "requires_flags": {
+            "lex_ha_un_piano": true
+          }
         }
       ]
     },

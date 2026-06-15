@@ -1,0 +1,439 @@
+{
+  "id": "s1_disegno_lex",
+  "audio_theme": "home",
+  "pages": [
+    {
+      "index": 0,
+      "background": "assets/episodes/prologo/page_2.png",
+      "panels": [
+        {
+          "id": "dl_p0_a",
+          "characters": ["favilla", "lex", "mallow"],
+          "text_blocks": [
+            {
+              "id": "dl_p0_a_t1",
+              "type": "narration",
+              "text": "Mallow è in call da quaranta minuti. Si sente la voce attutita dalla porta chiusa — parole tipo 'sprint', 'deploy', 'hotfix'. Le solite."
+            },
+            {
+              "id": "dl_p0_a_t2",
+              "type": "narration",
+              "text": "Favilla piega il bucato. Lex è al tavolo. Ha un foglio spiegato davanti, il pennarello in mano, la lingua fuori."
+            },
+            {
+              "id": "dl_p0_a_t3",
+              "type": "narration",
+              "text": "Il foglio è coperto di linee, frecce, cerchi. Sembra il progetto di un'astronave. O di un aggeggio pericoloso."
+            },
+            {
+              "id": "dl_p0_a_t4",
+              "type": "narration",
+              "text": "Accanto al foglio, allineati con precisione militare: una molletta, un elastico, un LED rubato dalla radiosveglia del comodino. E un bicchiere di mela verde."
+            },
+            {
+              "id": "dl_p0_a_t5",
+              "type": "thought",
+              "speaker": "favilla",
+              "text": "Perché il bicchiere di mela è sul tavolo?"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "background": "assets/episodes/prologo/page_2.png",
+      "panels": [
+        {
+          "id": "dl_p1_a",
+          "characters": ["favilla", "lex"],
+          "text_blocks": [
+            {
+              "id": "dl_p1_a_t1",
+              "type": "narration",
+              "text": "Favilla si avvicina. Lex, con la velocità di un agente segreto addestrato, allarga un pannolino pulito sopra il foglio. Troppo tardi — ha già visto."
+            },
+            {
+              "id": "dl_p1_a_t2",
+              "type": "narration",
+              "text": "Il LED è collegato — nella testa di Lex — a un circuito che parte dalla molletta, passa per l'elastico come moltiplicatore di forza, e arriva al bicchiere di mela verde."
+            },
+            {
+              "id": "dl_p1_a_t3",
+              "type": "dialogue",
+              "speaker": "favilla",
+              "text": "Che fai di bello?"
+            },
+            {
+              "id": "dl_p1_a_t4",
+              "type": "narration",
+              "text": "Lex fa la faccia innocente. Quella che funziona sempre — o quasi."
+            },
+            {
+              "id": "dl_p1_a_t5",
+              "type": "thought",
+              "speaker": "favilla",
+              "text": "Sembra un rilevatore. Di qualcosa. Ma il bicchiere di mela... perché il bicchiere di mela?"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "background": "assets/episodes/prologo/page_1.png",
+      "panels": [
+        {
+          "id": "dl_p2_a",
+          "characters": ["favilla", "lex"],
+          "text_blocks": [
+            {
+              "id": "dl_p2_a_t1",
+              "type": "narration",
+              "text": "Mallow parla al telefono nella stanza accanto. Lex ha la molletta in una mano e il LED nell'altra. Il bicchiere di mela verde troneggia come un totem."
+            },
+            {
+              "id": "dl_p2_a_t2",
+              "type": "narration",
+              "text": "Favilla lo guarda. Lui la guarda. Lui dà un'occhiata significativa al bicchiere di mela, come per dire 'questo qui è la parte importante'."
+            },
+            {
+              "id": "dl_p2_a_t3",
+              "type": "thought",
+              "speaker": "favilla",
+              "text": "Lex pensa che il succo di mela sia uranio arricchito. Non so se ridere o preoccuparmi."
+            }
+          ],
+          "choice": {
+            "id": "disegno_choice",
+            "prompt": "Lex ha assemblato il suo kit. Il bicchiere di mela verde ti fissa come un reattore nucleare in miniatura.",
+            "options": [
+              {
+                "id": "fai_finta",
+                "label": "Fai finta di niente. Torni a piegare il bucato.",
+                "goto_branch": "branch_libero",
+                "stat_effects": {
+                  "segreto": 5
+                },
+                "set_memories": {
+                  "choice.s1_disegno_lex": "fai_finta"
+                }
+              },
+              {
+                "id": "ferma",
+                "label": "«La molletta no, Lex. E il bicchiere di mela rimane in frigo.»",
+                "goto_branch": "branch_ferma",
+                "stat_effects": {
+                  "legame": 5,
+                  "segreto": -3
+                },
+                "set_memories": {
+                  "choice.s1_disegno_lex": "ferma"
+                }
+              },
+              {
+                "id": "aiuta",
+                "label": "Ti siedi. «Fammi vedere cosa hai disegnato.»",
+                "goto_branch": "branch_ciak",
+                "stat_effects": {
+                  "legame": 3,
+                  "scintille": 2
+                },
+                "set_memories": {
+                  "choice.s1_disegno_lex": "aiuta"
+                },
+                "minigame": {
+                  "type": "costruzione",
+                  "duration_seconds": 15,
+                  "tiers": [
+                    {
+                      "min": 3,
+                      "label": "Montaggio perfetto!",
+                      "goto_branch": "branch_genio",
+                      "stat_effects": {
+                        "segreto": -3,
+                        "legame": 5,
+                        "scintille": 3
+                      },
+                      "set_flags": {
+                        "detector_costruito": true
+                      }
+                    },
+                    {
+                      "min": 2,
+                      "label": "Quasi funziona.",
+                      "goto_branch": "branch_quasi",
+                      "stat_effects": {
+                        "legame": 3
+                      }
+                    },
+                    {
+                      "min": 0,
+                      "label": "Ciak!",
+                      "goto_branch": "branch_ciak",
+                      "stat_effects": {
+                        "legame": 5
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "branches": {
+    "branch_libero": {
+      "id": "branch_libero",
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/prologo/page_2.png",
+          "panels": [
+            {
+              "id": "libero_a",
+              "characters": ["favilla", "lex"],
+              "text_blocks": [
+                {
+                  "id": "libero_a_t1",
+                  "type": "narration",
+                  "text": "Favilla torna al bucato. Con la coda dell'occhio vede Lex che sistema il LED sulla molletta con la concentrazione di un artificiere."
+                },
+                {
+                  "id": "libero_a_t2",
+                  "type": "narration",
+                  "text": "Ogni tanto Lex guarda il bicchiere di mela, poi annuisce come per dire 'sì, la carica è stabile'."
+                },
+                {
+                  "id": "libero_a_t3",
+                  "type": "thought",
+                  "speaker": "favilla",
+                  "text": "Se non esplode niente, va bene. Se esplode, dico che era un esperimento di chimica."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "branch_ferma": {
+      "id": "branch_ferma",
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/prologo/page_1.png",
+          "panels": [
+            {
+              "id": "ferma_a",
+              "characters": ["favilla", "lex"],
+              "text_blocks": [
+                {
+                  "id": "ferma_a_t1",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "La molletta no, Lex. E il bicchiere di mela rimane in frigo."
+                },
+                {
+                  "id": "ferma_a_t2",
+                  "type": "narration",
+                  "text": "Lex la guarda con l'espressione di uno scienziato a cui hanno appena cancellato il progetto. Prende la molletta. La mette giù. Prende il bicchiere di mela. Lo fissano."
+                },
+                {
+                  "id": "ferma_a_t3",
+                  "type": "dialogue",
+                  "speaker": "lex",
+                  "text": "Mmmm."
+                },
+                {
+                  "id": "ferma_a_t4",
+                  "type": "narration",
+                  "text": "Non è un 'ok, mamma'. È un 'questa battaglia è persa, ma la guerra continua'."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "branch_genio": {
+      "id": "branch_genio",
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/prologo/page_2.png",
+          "panels": [
+            {
+              "id": "genio_a",
+              "characters": ["favilla", "lex"],
+              "text_blocks": [
+                {
+                  "id": "genio_a_t1",
+                  "type": "narration",
+                  "text": "Favilla si siede. Lex le passa il LED con la solennità di un cavaliere che consegna la spada. Lei lo infila nella molletta. L'elastico fa da ponte."
+                },
+                {
+                  "id": "genio_a_t2",
+                  "type": "narration",
+                  "text": "Lex sistema il bicchiere di mela alla base. Con due dita — come se maneggiasse plutonio."
+                },
+                {
+                  "id": "genio_a_t3",
+                  "type": "narration",
+                  "text": "Quando Favilla avvicina la mano al rilevatore — senza volerlo, per prendere un pastello caduto — il LED si accende."
+                },
+                {
+                  "id": "genio_a_t4",
+                  "type": "narration",
+                  "text": "È un contatto volante. Un caso. Ma Lex non lo sa. I suoi occhi si spalancano. Il rilevatore funziona."
+                },
+                {
+                  "id": "genio_a_t5",
+                  "type": "narration",
+                  "text": "Lex appunta qualcosa sul foglio. Poi guarda Favilla con un'espressione che dice: 'Ho prove scientifiche'."
+                },
+                {
+                  "id": "genio_a_t6",
+                  "type": "thought",
+                  "speaker": "favilla",
+                  "text": "Ha appena costruito un rilevatore di supereroi. Con una molletta e un bicchiere di mela. Mio figlio è un genio — o un problema di sicurezza nazionale."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "branch_quasi": {
+      "id": "branch_quasi",
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/prologo/page_2.png",
+          "panels": [
+            {
+              "id": "quasi_a",
+              "characters": ["favilla", "lex"],
+              "text_blocks": [
+                {
+                  "id": "quasi_a_t1",
+                  "type": "narration",
+                  "text": "Il LED si accende un secondo. Poi si spegne. Poi si riaccende. Poi resta spento."
+                },
+                {
+                  "id": "quasi_a_t2",
+                  "type": "narration",
+                  "text": "Lex guarda il rilevatore con la fronte aggrottata. Prende il bicchiere di mela. Lo avvicina. Niente. Lo allontana. Niente."
+                },
+                {
+                  "id": "quasi_a_t3",
+                  "type": "narration",
+                  "text": "Scruta Favilla. Poi il rilevatore. Poi di nuovo Favilla."
+                },
+                {
+                  "id": "quasi_a_t4",
+                  "type": "narration",
+                  "text": "Non è convinto. Ma prende appunti. La scienza è ripetibilità."
+                },
+                {
+                  "id": "quasi_a_t5",
+                  "type": "thought",
+                  "speaker": "favilla",
+                  "text": "Ha costruito un aggeggio che non funziona e sta comunque prendendo appunti. Questo bambino andrà lontano."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "branch_ciak": {
+      "id": "branch_ciak",
+      "pages": [
+        {
+          "index": 0,
+          "background": "assets/episodes/prologo/page_2.png",
+          "panels": [
+            {
+              "id": "ciak_a",
+              "characters": ["favilla", "lex"],
+              "text_blocks": [
+                {
+                  "id": "ciak_a_t1",
+                  "type": "narration",
+                  "text": "Lex le passa il LED. Lei lo prende. Cade. Lo raccoglie. Cade di nuovo. L'elastico schizza via. La molletta si chiude da sola."
+                },
+                {
+                  "id": "ciak_a_t2",
+                  "type": "narration",
+                  "text": "Lex la guarda. Non è arrabbiato. È deluso — peggio. Come se avesse appena scoperto che la sua assistente di laboratorio non è all'altezza."
+                },
+                {
+                  "id": "ciak_a_t3",
+                  "type": "narration",
+                  "text": "Favilla raccoglie l'elastico e glielo porge con un sorriso."
+                },
+                {
+                  "id": "ciak_a_t4",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Riprova. Io tifo."
+                },
+                {
+                  "id": "ciak_a_t5",
+                  "type": "narration",
+                  "text": "Lex sospira — un sospiro profondissimo per un bambino di sette mesi — e ricomincia da capo."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "epilogue": {
+    "id": "epilogue",
+    "pages": [
+      {
+        "index": 0,
+        "background": "assets/episodes/prologo/page_1.png",
+        "panels": [
+          {
+            "id": "dl_epilogo_a",
+            "characters": ["favilla", "mallow", "lex"],
+            "text_blocks": [
+              {
+                "id": "dl_epilogo_a_t1",
+                "type": "narration",
+                "text": "Mallow esce dalla stanza. Vede il disegno di Lex sul tavolo."
+              },
+              {
+                "id": "dl_epilogo_a_t2",
+                "type": "dialogue",
+                "speaker": "mallow",
+                "text": "Bello! Cos'è?"
+              },
+              {
+                "id": "dl_epilogo_a_t3",
+                "type": "dialogue",
+                "speaker": "favilla",
+                "text": "Un aereo."
+              },
+              {
+                "id": "dl_epilogo_a_t4",
+                "type": "narration",
+                "text": "Lex la guarda. Sorride — quel sorriso con due dentini che sa tutto."
+              },
+              {
+                "id": "dl_epilogo_a_t5",
+                "type": "narration",
+                "text": "Lui sa cos'è. E se il rilevatore funziona, lo sa anche la scienza."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

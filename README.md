@@ -1,113 +1,132 @@
-# 🔥 FavillApp
+# 🔥 FavillApp — Favilla Blaze
 
-![Status](https://img.shields.io/badge/status-in%20sviluppo-f59e0b)
+![Status](https://img.shields.io/badge/status-S1%20completa%20(15%20episodi)-22c55e)
 ![Flutter](https://img.shields.io/badge/Flutter-Android%20%2F%20iOS-02569B?logo=flutter&logoColor=white)
-![Dart](https://img.shields.io/badge/Dart-app-blue?logo=dart&logoColor=white)
+![Dart](https://img.shields.io/badge/Dart-3.x-blue?logo=dart&logoColor=white)
 
 **FavillApp** è un fumetto digitale episodico con elementi RPG, dedicato all'universo di **Favilla Blaze**: una mamma collaboratrice scolastica che scopre di avere superpoteri e deve tenerli nascosti mentre gestisce casa, figlio, marito e 50 piccoli uragani a scuola.
 
----
-
-## 🦸 Universo narrativo
-
-### Favilla / Favilla Blaze
-L'eroina principale. Collaboratrice scolastica di giorno, supermamma di notte — sospesa tra quotidianità e immaginario supereroistico. Ironica, affettuosa, stanca il giusto.
-
-### Lex
-Il figlio piccolo (7 mesi e mezzo). Caos puro, adorabile. L'unico che sa davvero cosa è sua madre.
-
-### Mallow Bellow
-Il marito. Sviluppatore software, presenza costante, occhio attento. Sospetta. Forse.
-
-### Sparkle Ale
-Presenza ricorrente nell'universo. Energia, caos, meraviglia.
+Il caffè è la sua kryptonite. Il figlio Lex è l'unico testimone. Il marito Mallow non deve sapere.
 
 ---
 
-## 🚀 Funzionalità principali
+## 📖 Stagione 1 — "Alba Strana" (15 episodi)
 
-- **Prologo** — la storia inizia con il risveglio dei poteri di Favilla
-- **Mappa di Nova Tutinia** — mondo esplorabile con location che si sbloccano avanzando
-- **Quest narrative** — missioni a fumetto con pagine illustrate, dialoghi e pannelli
-- **Branching con conseguenze** — le scelte cambiano lo stato RPG e la direzione narrativa
-- **Sistema RPG a 4 stat** — Segreto, Legame, Scintille, Resistenza (0–100)
-- **Lettura ad alta voce** — TTS on-device, voce diversa per personaggio (offline, gratis)
-- **Localizzazione** — italiano (default) e inglese, con fallback automatico sui JSON
+### Episodi principali
+| # | Episodio | Location | Tono |
+|---|---|---|---|
+| P | **Prologo** - *Una Mattina Qualunque* | Scuola → Casa | Nascita dei poteri |
+| 1 | **La Mattina Dopo** | Casa | Kryptonite del caffè |
+| 2 | **Una Giornata Normale** | Scuola | La Corvi, primi segni |
+| 3 | **Il Ritorno a Casa** | Casa | Lex tenta di svelare il segreto |
+| 4 | **La Spesa del Sabato** | Supermercato | Lex Strike! + Carmela |
+| 5 | **La Domenica al Parco** | Parco | Rincorsa, trasformazione pubblica |
+| 6 | **Un Giorno al Mare** 🏖️ | Spiaggia | *Condizionale: resistenza < 30* |
+| 6alt | **GalaxiaMall** 🛍️ | Centro Commerciale | *Condizionale: resistenza ≥ 30* |
+| 7 | **Il Lunedì dell'Asilo** | Casa | Lex cracka la password |
+| 7.5 | **La Palestra** 🏋️ | Palestra | *Condizionale: resistenza < 40* |
+| 8 | **L'Allagamento** | Scuola | Thriller: Corvi + porta bloccata |
+| 9a | **La Prima Conseguenza** | Casa | *Flag: favilla_transformed_public* |
+| 9b | **La Comare** | Casa | *Flag: carmela_ha_notato* |
+| 9c | **Cena di Famiglia** | Casa | *Stat: legame ≥ 70* |
+
+### Episodi condizionali S1 (fork binari)
+| Fork | Condizione | Episodio A | Episodio B |
+|---|---|---|---|
+| Dopo EP5 | resistenza < 30 / ≥ 30 | EP6 🌊 Mare | EP6alt 🛍️ Mall |
+| Dopo EP9 | segreto ≤ 10 / > 10 + `lex_ha_un_piano` | 💔 **La Crepa** | 🎨 **Il Disegno di Lex** |
 
 ---
 
-## 🗺️ Flusso di gioco
+## 🎮 Meccaniche
 
-```
-Avvio app
-  └─► Prologo ("L'ombra della fiamma")
-        └─► Completato → Mappa di Nova Tutinia
-              └─► Location sbloccate → Quest disponibili
-                    └─► Scelta → Branch narrativo → Effetti stat → Nuove location
-```
+### Sistema RPG (4 stat)
+| Stat | Descrizione | Floor |
+|---|---|---|
+| 🔒 **Segreto** | Quanto il segreto di Favilla è al sicuro | **5** |
+| 💞 **Legame** | Intensità del rapporto con Mallow e Lex | 0 |
+| ✨ **Scintille** | **Forza in combattimento.** Influenza i minigame di potenza. | 0 |
+| 💪 **Resistenza** | Capacità di reggere il caos quotidiano | **1** |
 
-Il prologo è sempre il punto di ingresso. Una volta completato, la mappa diventa il hub centrale da cui si avvia ogni quest.
+- **Scintille ≥ 10** → Favilla può trasformarsi in Favilla Blaze
+- **Scintille < 10** → Trasformazione impossibile
+
+### ☕ Kryptonite del caffè
+Il caffè non alimenta più i poteri — **li spegne**: `✨ Scintille -8, 💪 Resistenza +1`.
+
+### ⚡ Scintille = Forza in combattimento
+Scintille influenza la difficoltà dei minigame `respira`, `rincorsa`, `rincorsa_lex`:
+`modifier = ((scintille - 50) / 10 × 0.05), clamped [-0.25, +0.25]`
+
+### 🎯 Minigame
+| Minigame | Episodio | Meccanica |
+|---|---|---|
+| `respira` | EP1 | Tap rapido + beat bar, scalato con Scintille |
+| `schiva_lex` | EP3 | 3 round schivate a tempo |
+| `lex_strike` | EP4 | Slingshot, 12 prodotti, chain reaction |
+| `rincorsa` | EP5 | Temple Run bosco, 3 corsie, gap tap |
+| `rincorsa_lex` | EP6 | Temple Run spiaggia, Lex verso il mare |
+| `carmela_dialogo` | EP6alt / EP9b | Quick-time dialogo, timer decrescente |
+| `crack_password` | EP7 | Baby Mastermind, 4 simboli |
+| `lockpick` | EP8 | 5 perni, timing window |
+| `mash_door` | EP8 | Mash rapido sfondamento |
+| `disegna` | EP9c | Stealth drawing sabotage |
+| `quasi_confessa` | 💔 La Crepa | Dialogo a tempo vero/sfumato |
+| `costruzione` | 🎨 Disegno di Lex | Assemblaggio rilevatore |
+
+### 🏴 World Flags
+Flag che persistono tra episodi e sbloccano contenuti condizionali:
+`shirt_in_backpack`, `favilla_transformed_public`, `carmela_ha_notato`, `lex_ha_un_piano`, `video_virale_visto`, `carmela_respinta`, `carmela_segno`, `cena_famiglia_fatta`, `quasi_confessato`, `detector_costruito`, `crepa_svolta`, `crepa_silenzio`.
 
 ---
 
-## 🧱 Struttura contenuti
+## 🗺️ Location di Nova Tutinia
 
-Ogni quest è un file JSON in `assets/data/quests/`:
+| Location | Sblocco |
+|---|---|
+| 🏠 Casa | Default |
+| 🏫 Scuola | Dopo EP1 |
+| 🛒 Supermercato | Dopo EP3 |
+| 🌳 Parco | Dopo EP4 |
+| 🏖️ Mare | Dopo EP5 se resistenza < 30 |
+| 🛍️ GalaxiaMall | Dopo EP5 se resistenza ≥ 30 |
+| 🏫🧸 Asilo | Dopo EP7 (sempre) |
+| 🏋️ Palestra | Dopo EP7 se resistenza < 40 |
+
+---
+
+## 🧱 Struttura tecnica
+
+Ogni episodio è un file JSON in `assets/data/quests/`:
 
 ```json
 {
   "id": "s1_mattina_dopo",
-  "pages": [
-    {
-      "index": 0,
-      "background": "assets/episodes/s1_mattina_dopo/page_0.webp",
-      "panels": [
-        {
-          "id": "md0_0",
-          "characters": ["favilla"],
-          "text_blocks": [
-            { "id": "md0_0_tb_0", "type": "narration", "text": "5:12 del mattino." },
-            { "id": "md0_0_tb_1", "type": "thought",   "text": "E io sono qui sveglia." }
-          ],
-          "interactions": []
-        }
-      ],
-      "choice": {
-        "id": "reazione",
-        "prompt": "Come reagisce Favilla?",
-        "options": [
-          {
-            "id": "sorriso",
-            "label": "Un sorriso — piccolo, caldo.",
-            "goto_branch": "branch_sorriso",
-            "stat_effects": { "segreto": 10, "legame": 5 }
-          }
-        ]
-      }
-    }
-  ],
-  "branches": { "branch_sorriso": { "pages": [] } },
-  "epilogue":  { "pages": [] }
+  "pages": [ ... ],
+  "branches": { "branch_id": { "pages": [...] } },
+  "epilogue": { "pages": [...] },
+  "stat_entry": [ ... ]
 }
 ```
 
-**Tipi di `text_block`:** `narration`, `dialogue` (richiede `speaker`), `thought`, `system`  
-**Personaggi:** definiti in `assets/data/comic_index.json` (id, display_name, ruolo)  
-**Mappa:** location e quest definite in `assets/data/world_map.json`
+**Tipi di text_block:** `narration`, `dialogue` (richiede `speaker`), `thought`, `system`
+**Personaggi:** definiti in `assets/data/comic_index.json`
+**Mappa:** location e quest in `assets/data/world_map.json`
+**Localizzazione:** `file.en.json` = traduzione inglese (struttura identica, solo testi)
 
 ---
 
 ## ⚙️ Comandi
 
 ```bash
-# Setup dopo clone (abilita i pre-commit hooks)
-git config core.hooksPath .github/hooks
-
-# Avvia in debug (con dart-defines)
-./run.sh
+# Avvia in debug (VS Code: F5)
+flutter run --dart-define-from-file=dart_defines.json
 
 # Build APK release
 flutter build apk --release --dart-define-from-file=dart_defines.json
+
+# Build iOS release
+flutter build ios --release --dart-define-from-file=dart_defines.json
 
 # Analisi statica
 flutter analyze
@@ -115,16 +134,62 @@ flutter analyze
 # Test
 flutter test
 
-# Verifica coerenza narrativa manuale
-node .github/skills/narrative-flow-checker/scripts/check-narrative-flow.cjs .
+# Validazione narrativa (floor, soglie, worst-case)
+python3 tools/validate_narrative.py
 ```
-
-In VS Code basta **F5**: il launch profile legge già `dart_defines.json`.
-
-> **Pre-commit hooks** — ogni commit che tocca `assets/data/quests/` o `comic_data.dart` esegue automaticamente il **narrative-flow-checker** (256 percorsi simulati) e blocca il commit se trova inconsistenze. Richiede `git config core.hooksPath .github/hooks` dopo ogni clone.
 
 ---
 
-## 🌐 Worker (Cloudflare)
+## 🛠️ Strumenti di authoring
 
-Il Worker gestisce la feature "Chiedi a Favilla reale" — una coda moderata di domande degli utenti a cui risponde l'autrice. Vedere [`worker/README.md`](worker/README.md).
+| Strumento | Cosa fa |
+|---|---|
+| `tools/validate_narrative.py` | Verifica floor, soglie, worst-case su tutti i 15 episodi |
+| `tools/hooks/pre-commit` | Hook git: validazione automatica prima del commit |
+| `tools/install_hooks.sh` | Installa i pre-commit hooks |
+
+---
+
+## 📚 Documenti narrativi
+
+I capisaldi della storia vivono in Obsidian (`docs/` → symlink):
+- **NARRATIVE_BIBLE.md** — mondo, personaggi, stat, minigame, flag
+- **Mappa Narrativa.md** — flow episodici, condizioni d'ingresso, grafi
+- **Libro dei Mondi.md** — prosa completa con bivi
+- **Idee & Direzioni Future.md** — planning e backlog
+
+---
+
+## 🌐 Localizzazione
+
+- 🇮🇹 Italiano (sorgente canonico) — `assets/data/quests/*.json`
+- 🇬🇧 Inglese — `assets/data/quests/*.en.json`
+
+---
+
+## 📦 Versioni
+
+- **FavillApp:** 1.0.6+9
+- **Flutter:** 3.10+
+- **Dart:** 3.0+
+- **Dipendenze:** Firebase, Sentry, TTS, audio
+
+---
+
+## 👥 Personaggi
+
+| Personaggio | Ruolo | Sa del segreto? |
+|---|---|---|
+| **Favilla** | Collaboratrice scolastica, supereroina involontaria | 👑 |
+| **Favilla Blaze** | Alter ego — quando i capelli si accendono | — |
+| **Lex** | Figlio di 7 mesi e mezzo, testimone silenzioso | ✅ |
+| **Mallow** | Marito, sviluppatore, bonaccione | ❌ (fino a S3+) |
+| **Dott.ssa Corvi** | Ispettrice distrettuale, minaccia burocratica | ❌ |
+| **Signora Carmela** | Vicina, parassita empatica | ⚠️ Sospetta |
+
+---
+
+## 📄 Licenza
+
+© 2026 Andrea Cuozzo. All rights reserved.
+Favilla Blaze — proprietà intellettuale riservata.

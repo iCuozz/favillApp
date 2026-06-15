@@ -52,7 +52,7 @@ THRESHOLDS = {
     ],
     'scintille': [
         {'value': 45, 'label': '✨ Kryptonite',  'direction': 'lt', 'impact': 'Minigame più difficili (già implementato). Intro EP2 se <45.'},
-        {'value': 20, 'label': '✨ Spenta',      'direction': 'lt', 'impact': 'EP8 intro_senza_fiamma. Poteri molto ridotti.'},
+        {'value': 35, 'label': '✨ Spenta',      'direction': 'lt', 'impact': 'EP8 intro_senza_fiamma. Poteri molto ridotti.'},
     ],
     'resistenza': [
         {'value': 40, 'label': '💪 Affaticata',  'direction': 'lt', 'impact': 'Sblocca Palestra (già implementato). Intro stanchezza.'},
@@ -80,6 +80,8 @@ EPISODES = [
     'assets/data/quests/s1/s1_prima_conseguenza.json',
     'assets/data/quests/s1/s1_comare.json',
     'assets/data/quests/s1/s1_cena_famiglia.json',
+    'assets/data/quests/s1/s1_crepa.json',
+    'assets/data/quests/s1/s1_disegno_lex.json',
 ]
 
 # ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -115,7 +117,7 @@ def get_choices_from_quest(data: dict) -> list:
     scan_pages(data.get('pages', []), 'main')
     for bname, b in data.get('branches', {}).items():
         scan_pages(b.get('pages', []), f'branch:{bname}')
-    ep = data.get('epilogue', {})
+    ep = data.get('epilogue') or {}
     scan_pages(ep.get('pages', []), 'epilogue')
     return choices
 
@@ -206,14 +208,16 @@ def simulate_worst_case_for_stat(episodes: list, target_stat: str) -> None:
         choices = get_choices_from_quest(data)
 
         for ctx, choice in choices:
+            # Filtra opzioni: safe solo se NESSUN tier (incluso base) viola il floor
             safe_opts = [
                 o for o in choice.get('options', [])
-                if not would_violate_floor(stats, o.get('stat_effects', {}))
+                if not any(would_violate_floor(stats, e) for e in _all_effects_for_option(o))
             ] or choice.get('options', [])
 
-            # Scegli l'opzione che minimizza target_stat
-            worst = min(safe_opts, key=lambda o: o.get('stat_effects', {}).get(target_stat, 0))
-            eff = worst.get('stat_effects', {})
+            # Scegli l'opzione che minimizza target_stat (considerando tier minigame)
+            worst = min(safe_opts, key=lambda o: _extreme_stat_value(_all_effects_for_option(o), target_stat, maximize=False))
+            eff_choices = _all_effects_for_option(worst)
+            eff = min(eff_choices, key=lambda e: e.get(target_stat, 0)) if eff_choices else worst.get('stat_effects', {})
             stats = apply_effects(stats, eff)
             print(f"  [{ep_id}·{ctx}] \"{worst['label'][:40]}\" {eff}")
             print(f"    → {target_stat}={stats[target_stat]}  resistenza={stats['resistenza']}")
@@ -229,11 +233,29 @@ def simulate_worst_case_for_stat(episodes: list, target_stat: str) -> None:
 
 # ─── Soglie narrative per-stat ────────────────────────────────────────
 
+def _all_effects_for_option(opt: dict) -> list[dict]:
+    """Restituisce tutti i possibili stat_effects per un'opzione,
+    inclusi quelli dei tier dei minigame. La scelta peggiore potrebbe
+    essere un tier, non l'effetto base dell'opzione."""
+    base = dict(opt.get('stat_effects', {}))
+    mg = opt.get('minigame')
+    if mg and mg.get('tiers'):
+        return [base] + [dict(t.get('stat_effects', {})) for t in mg['tiers']]
+    return [base]
+
+def _extreme_stat_value(effects_list: list[dict], stat_name: str, maximize: bool) -> int:
+    """Trova il valore min o max di stat_name in una lista di effetti."""
+    vals = [e.get(stat_name, 0) for e in effects_list]
+    return max(vals) if maximize else min(vals)
+
 def _choose_extreme(safe_opts: list, stat_name: str, maximize: bool):
-    """Sceglie l'opzione che minimizza o massimizza stat_name tra quelle safe."""
+    """Sceglie l'opzione che minimizza o massimizza stat_name tra quelle safe,
+    considerando anche i tier dei minigame."""
+    def key_fn(o):
+        return _extreme_stat_value(_all_effects_for_option(o), stat_name, maximize)
     if maximize:
-        return max(safe_opts, key=lambda o: o.get('stat_effects', {}).get(stat_name, 0))
-    return min(safe_opts, key=lambda o: o.get('stat_effects', {}).get(stat_name, 0))
+        return max(safe_opts, key=key_fn)
+    return min(safe_opts, key=key_fn)
 
 def simulate_thresholds(episodes: list) -> None:
     """Analizza quando ogni percorso incrocia le soglie narrative di ogni stat."""
@@ -256,10 +278,12 @@ def simulate_thresholds(episodes: list) -> None:
                 for ctx, choice in get_choices_from_quest(data):
                     safe_opts = [
                         o for o in choice.get('options', [])
-                        if not would_violate_floor(stats, o.get('stat_effects', {}))
+                        if not any(would_violate_floor(stats, e) for e in _all_effects_for_option(o))
                     ] or choice.get('options', [])
                     opt = _choose_extreme(safe_opts, stat_name, maximize=False)
-                    stats = apply_effects(stats, opt.get('stat_effects', {}))
+                    eff_opt = _all_effects_for_option(opt)
+                    eff = min(eff_opt, key=lambda e: e.get(stat_name, 0)) if eff_opt else opt.get('stat_effects', {})
+                    stats = apply_effects(stats, eff)
 
                 still_unresolved = []
                 for t in unresolved:
@@ -283,10 +307,12 @@ def simulate_thresholds(episodes: list) -> None:
                 for ctx, choice in get_choices_from_quest(data):
                     safe_opts = [
                         o for o in choice.get('options', [])
-                        if not would_violate_floor(stats, o.get('stat_effects', {}))
+                        if not any(would_violate_floor(stats, e) for e in _all_effects_for_option(o))
                     ] or choice.get('options', [])
                     opt = _choose_extreme(safe_opts, stat_name, maximize=True)
-                    stats = apply_effects(stats, opt.get('stat_effects', {}))
+                    eff_opt = _all_effects_for_option(opt)
+                    eff = max(eff_opt, key=lambda e: e.get(stat_name, 0)) if eff_opt else opt.get('stat_effects', {})
+                    stats = apply_effects(stats, eff)
 
                 still_unresolved = []
                 for t in unresolved:
@@ -476,7 +502,7 @@ def main():
     implemented = {
         'segreto': {50: 'EP3 (stat_entry)', 30: 'EP2 (intro_segreto_pericolo)', 15: 'EP5 (intro_segreto_corda)', 8: '—'},
         'legame': {70: 'EP9c (requires_stats)', 40: 'EP6alt (intro_legame_distante) + EP9c soglia', 10: '—'},
-        'scintille': {45: 'EP2 (stat_entry) + minigame', 20: 'EP8 (intro_senza_fiamma)'},
+        'scintille': {45: 'EP2 (stat_entry) + minigame', 35: 'EP8 (intro_senza_fiamma)'},
         'resistenza': {40: 'EP7.5 (stat unlock)', 25: 'EP4 (intro_esausta)', 10: 'EP5 (intro_resistenza_limite)'},
     }
 
@@ -499,11 +525,13 @@ def main():
                 for ctx, choice in choices:
                     safe_opts = [
                         o for o in choice.get('options', [])
-                        if not would_violate_floor(stats, o.get('stat_effects', {}))
+                        if not any(would_violate_floor(stats, e) for e in _all_effects_for_option(o))
                     ] or choice.get('options', [])
                     maximize = t['direction'] == 'gte'
                     opt = _choose_extreme(safe_opts, stat_name, maximize=maximize)
-                    stats = apply_effects(stats, opt.get('stat_effects', {}))
+                    eff_opt = _all_effects_for_option(opt)
+                    eff = max(eff_opt, key=lambda e: e.get(stat_name, 0)) if maximize else min(eff_opt, key=lambda e: e.get(stat_name, 0))
+                    stats = apply_effects(stats, eff)
 
                 # Verifica soglia
                 if t['direction'] == 'lt' and stats[stat_name] <= t['value']:
