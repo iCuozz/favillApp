@@ -54,3 +54,10 @@ worker/wrangler.toml
 worker/.dev.vars
 *.aab
 *.apk
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
