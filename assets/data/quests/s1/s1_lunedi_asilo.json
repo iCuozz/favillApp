@@ -26,7 +26,8 @@
             {
               "id": "sla0_0_tb_2",
               "type": "thought",
-              "text": "Chi ha deciso che a sette mesi si può già avere un zaino?"
+              "text": "Chi ha deciso che a sette mesi si può già avere un zaino?",
+              "speaker": "favilla"
             },
             {
               "id": "sla0_0_tb_3",
@@ -37,7 +38,8 @@
             {
               "id": "sla0_0_tb_4",
               "type": "thought",
-              "text": "Non è divertente. Un po' lo è."
+              "text": "Non è divertente. Un po' lo è.",
+              "speaker": "favilla"
             }
           ],
           "interactions": []
@@ -73,7 +75,8 @@
             {
               "id": "sla1_0_tb_3",
               "type": "thought",
-              "text": "Lex sa già il segreto. Gli serve solo entrare nel notebook per costruire il dispositivo e smascherarla."
+              "text": "Lex sa già il segreto. Gli serve solo entrare nel notebook per costruire il dispositivo e smascherarla.",
+              "speaker": "favilla"
             },
             {
               "id": "sla1_0_tb_4",
@@ -147,7 +150,6 @@
     "branch_scoperta_quasi": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_lunedi_asilo/page_scoperta.webp",
           "panels": [
             {
@@ -182,19 +184,20 @@
                 {
                   "id": "sla_scoperta_0_tb_4",
                   "type": "thought",
-                  "text": "È lì. I dati. Lo schema. Tutto quello che serviva per costruire il rilevatore. Lei lo sa che potrebbe servire."
+                  "text": "È lì. I dati. Lo schema. Tutto quello che serviva per costruire il rilevatore. Lei lo sa che potrebbe servire.",
+                  "speaker": "favilla"
                 }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bscope_p0"
         }
       ]
     },
     "branch_genio": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_lunedi_asilo/page_genio.webp",
           "panels": [
             {
@@ -216,7 +219,8 @@
                 {
                   "id": "sla_bg_0_tb_2",
                   "type": "thought",
-                  "text": "Rilevatore di energia. Sì. Come fa la mamma a scaldarsi — ci deve essere uno schema."
+                  "text": "Rilevatore di energia. Sì. Come fa la mamma a scaldarsi — ci deve essere uno schema.",
+                  "speaker": "favilla"
                 },
                 {
                   "id": "sla_bg_0_tb_3",
@@ -231,14 +235,14 @@
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bgenio_p0"
         }
       ]
     },
     "branch_quasi": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_lunedi_asilo/page_quasi.webp",
           "panels": [
             {
@@ -284,14 +288,14 @@
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bquasi_p0"
         }
       ]
     },
     "branch_beccato": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_lunedi_asilo/page_beccato.webp",
           "panels": [
             {
@@ -337,7 +341,8 @@
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bbecca_p0"
         }
       ]
     }
@@ -345,7 +350,6 @@
   "epilogue": {
     "pages": [
       {
-        "index": 0,
         "background": "assets/episodes/s1/s1_lunedi_asilo/page_epilogo_0.webp",
         "panels": [
           {
@@ -369,15 +373,16 @@
               {
                 "id": "ep_sla_0_tb_2",
                 "type": "thought",
-                "text": "Asilo. Bene. Nuovo territorio. Dopo {{memory:choice_label.s1_centro_commerciale.carmela_dialogo_choice|la scena con Carmela}}, nuove variabili da mappare."
+                "text": "Asilo. Bene. Nuovo territorio. Dopo {{memory:choice_label.s1_centro_commerciale.carmela_dialogo_choice|la scena con Carmela}}, nuove variabili da mappare.",
+                "speaker": "favilla"
               }
             ],
             "interactions": []
           }
-        ]
+        ],
+        "id": "ep_p0"
       },
       {
-        "index": 1,
         "background": "assets/episodes/s1/s1_lunedi_asilo/page_epilogo_1.webp",
         "panels": [
           {
@@ -402,7 +407,8 @@
             ],
             "interactions": []
           }
-        ]
+        ],
+        "id": "ep_p1"
       }
     ]
   }

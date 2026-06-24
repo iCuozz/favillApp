@@ -1,6 +1,6 @@
 # 🔥 FavillApp — Favilla Blaze
 
-![Status](https://img.shields.io/badge/status-S1%20completa%20(15%20episodi)-22c55e)
+![Status](https://img.shields.io/badge/status-S1%20completa%20(16%20episodi)-22c55e)
 ![Flutter](https://img.shields.io/badge/Flutter-Android%20%2F%20iOS-02569B?logo=flutter&logoColor=white)
 ![Dart](https://img.shields.io/badge/Dart-3.x-blue?logo=dart&logoColor=white)
 
@@ -10,7 +10,7 @@ Il caffè è la sua kryptonite. Il figlio Lex è l'unico testimone. Il marito Ma
 
 ---
 
-## 📖 Stagione 1 — "Alba Strana" (15 episodi)
+## 📖 Stagione 1 — "Alba Strana" (16 episodi)
 
 ### Episodi principali
 | # | Episodio | Location | Tono |
@@ -29,6 +29,8 @@ Il caffè è la sua kryptonite. Il figlio Lex è l'unico testimone. Il marito Ma
 | 9a | **La Prima Conseguenza** | Casa | *Flag: favilla_transformed_public* |
 | 9b | **La Comare** | Casa | *Flag: carmela_ha_notato* |
 | 9c | **Cena di Famiglia** | Casa | *Stat: legame ≥ 70* |
+| — | **💔 La Crepa** | Casa | *Flag: lex_ha_un_piano + segreto ≤ 10* |
+| — | **🎨 Il Disegno di Lex** | Casa | *Flag: lex_ha_un_piano + segreto > 10* |
 
 ### Episodi condizionali S1 (fork binari)
 | Fork | Condizione | Episodio A | Episodio B |
@@ -144,7 +146,7 @@ python3 tools/validate_narrative.py
 
 | Strumento | Cosa fa |
 |---|---|
-| `tools/validate_narrative.py` | Verifica floor, soglie, worst-case su tutti i 15 episodi |
+| `tools/validate_narrative.py` | Verifica floor, soglie, worst-case su tutti i 16 episodi |
 | `tools/hooks/pre-commit` | Hook git: validazione automatica prima del commit |
 | `tools/install_hooks.sh` | Installa i pre-commit hooks |
 

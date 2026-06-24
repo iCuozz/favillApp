@@ -77,7 +77,8 @@
             {
               "id": "all0_0_tb_4",
               "type": "thought",
-              "text": "Thirty minutes. Thirty minutes and she leaves. I can do this."
+              "text": "Thirty minutes. Thirty minutes and she leaves. I can do this.",
+              "speaker": "favilla"
             }
           ],
           "interactions": []
@@ -148,12 +149,14 @@
             {
               "id": "all2_0_tb_1",
               "type": "thought",
-              "text": "Soon it'll reach under the door. Into the hall. To Corvi."
+              "text": "Soon it'll reach under the door. Into the hall. To Corvi.",
+              "speaker": "favilla"
             },
             {
               "id": "all2_0_tb_2",
               "type": "thought",
-              "text": "I have to get out. How?"
+              "text": "I have to get out. How?",
+              "speaker": "favilla"
             }
           ],
           "interactions": []
@@ -280,7 +283,6 @@
     "intro_senza_fiamma": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_allagamento/page_0.webp",
           "panels": [
             {
@@ -302,18 +304,19 @@
                 {
                   "id": "all_sf_0_tb_2",
                   "type": "thought",
-                  "text": "Not today. Today you're just Favilla. And today, you have to be enough."
+                  "text": "Not today. Today you're just Favilla. And today, you have to be enough.",
+                  "speaker": "favilla"
                 }
               ]
             }
-          ]
+          ],
+          "id": "isenza_p0"
         }
       ]
     },
     "intro_sfondata": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_allagamento/page_0.webp",
           "panels": [
             {
@@ -330,18 +333,19 @@
                 {
                   "id": "all_sd_0_tb_1",
                   "type": "thought",
-                  "text": "I don't know if I have enough left to get out of here."
+                  "text": "I don't know if I have enough left to get out of here.",
+                  "speaker": "favilla"
                 }
               ]
             }
-          ]
+          ],
+          "id": "isfond_p0"
         }
       ]
     },
     "intro_segreto_fragile": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_allagamento/page_0.webp",
           "panels": [
             {
@@ -365,18 +369,19 @@
                 {
                   "id": "all_frag_0_tb_2",
                   "type": "thought",
-                  "text": "She knows something. Maybe not what. But that there's something."
+                  "text": "She knows something. Maybe not what. But that there's something.",
+                  "speaker": "favilla"
                 }
               ]
             }
-          ]
+          ],
+          "id": "isegre_p0"
         }
       ]
     },
     "intro_kryptonite": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_allagamento/page_0.webp",
           "panels": [
             {
@@ -393,18 +398,19 @@
                 {
                   "id": "all_kr_0_tb_1",
                   "type": "thought",
-                  "text": "I could use it. But it won't last long. I need to choose wisely."
+                  "text": "I could use it. But it won't last long. I need to choose wisely.",
+                  "speaker": "favilla"
                 }
               ]
             }
-          ]
+          ],
+          "id": "ikrypt_p0"
         }
       ]
     },
     "intro_voci": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_allagamento/page_0.webp",
           "panels": [
             {
@@ -433,18 +439,19 @@
                 {
                   "id": "all_voci_0_tb_3",
                   "type": "thought",
-                  "text": "She doesn't believe it. But she's thinking about it. That's almost worse."
+                  "text": "She doesn't believe it. But she's thinking about it. That's almost worse.",
+                  "speaker": "favilla"
                 }
               ]
             }
-          ]
+          ],
+          "id": "ivoci_p0"
         }
       ]
     },
     "branch_potenza": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_allagamento/page_0.webp",
           "panels": [
             {
@@ -486,14 +493,14 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bpoten_p0"
         }
       ]
     },
     "branch_forza": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_allagamento/page_0.webp",
           "panels": [
             {
@@ -536,14 +543,14 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bforza_p0"
         }
       ]
     },
     "branch_astuzia": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_allagamento/page_0.webp",
           "panels": [
             {
@@ -590,14 +597,14 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bastuz_p0"
         }
       ]
     },
     "branch_resa": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_allagamento/page_0.webp",
           "panels": [
             {
@@ -641,7 +648,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bresa_p0"
         }
       ]
     }
@@ -649,7 +657,6 @@
   "epilogue": {
     "pages": [
       {
-        "index": 0,
         "background": "assets/episodes/s1/s1_allagamento/page_epilogo.webp",
         "panels": [
           {
@@ -671,7 +678,8 @@
               {
                 "id": "all_ep_0_tb_2",
                 "type": "thought",
-                "text": "I dodged it today. But tomorrow?"
+                "text": "I dodged it today. But tomorrow?",
+                "speaker": "favilla"
               },
               {
                 "id": "all_ep_0_tb_3",
@@ -685,7 +693,8 @@
               }
             ]
           }
-        ]
+        ],
+        "id": "ep_p0"
       }
     ]
   }

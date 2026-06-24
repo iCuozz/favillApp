@@ -199,7 +199,8 @@
             {
               "id": "pr3_0_tb_7",
               "type": "thought",
-              "text": "It's time."
+              "text": "It's time.",
+              "speaker": "favilla"
             }
           ],
           "interactions": []
@@ -245,7 +246,8 @@
             {
               "id": "pr4_0_tb_5",
               "type": "thought",
-              "text": "He knows. He can't tell. But he knows."
+              "text": "He knows. He can't tell. But he knows.",
+              "speaker": "favilla"
             }
           ]
         }
@@ -315,7 +317,8 @@
             {
               "id": "pr5_0_tb_2",
               "type": "thought",
-              "text": "What do I tell him?"
+              "text": "What do I tell him?",
+              "speaker": "favilla"
             }
           ]
         }
@@ -352,7 +355,6 @@
     "branch_segreto": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_4.png",
           "panels": [
             {
@@ -383,18 +385,19 @@
                 {
                   "id": "bs_0_tb_3",
                   "type": "thought",
-                  "text": "The secret is mine. And his. Only ours."
+                  "text": "The secret is mine. And his. Only ours.",
+                  "speaker": "favilla"
                 }
               ]
             }
-          ]
+          ],
+          "id": "bsegre_p0"
         }
       ]
     },
     "branch_legame": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_4.png",
           "panels": [
             {
@@ -425,11 +428,13 @@
                 {
                   "id": "bl_0_tb_3",
                   "type": "thought",
-                  "text": "So close. I almost told him everything."
+                  "text": "So close. I almost told him everything.",
+                  "speaker": "favilla"
                 }
               ]
             }
-          ]
+          ],
+          "id": "blegam_p0"
         }
       ]
     }
@@ -437,7 +442,6 @@
   "epilogue": {
     "pages": [
       {
-        "index": 0,
         "background": "assets/episodes/prologo/page_4.png",
         "panels": [
           {
@@ -454,7 +458,8 @@
               {
                 "id": "ep_0_tb_1",
                 "type": "thought",
-                "text": "What have I become?"
+                "text": "What have I become?",
+                "speaker": "favilla"
               },
               {
                 "id": "ep_0_tb_2",
@@ -468,7 +473,8 @@
               }
             ]
           }
-        ]
+        ],
+        "id": "ep_p0"
       }
     ]
   }

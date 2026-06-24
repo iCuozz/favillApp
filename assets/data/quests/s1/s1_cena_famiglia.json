@@ -270,7 +270,6 @@
       "id": "intro_calda",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_2.png",
           "panels": [
             {
@@ -303,7 +302,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "icalda_p0"
         }
       ]
     },
@@ -311,7 +311,6 @@
       "id": "branch_confessa",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_3.png",
           "panels": [
             {
@@ -351,10 +350,10 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bconfe_p0"
         },
         {
-          "index": 1,
           "background": "assets/episodes/prologo/page_1.png",
           "panels": [
             {
@@ -383,7 +382,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bconfe_p1"
         }
       ]
     },
@@ -391,7 +391,6 @@
       "id": "branch_facciata",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_3.png",
           "panels": [
             {
@@ -426,10 +425,10 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bfacci_p0"
         },
         {
-          "index": 1,
           "background": "assets/episodes/prologo/page_1.png",
           "panels": [
             {
@@ -457,7 +456,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bfacci_p1"
         }
       ]
     },
@@ -465,7 +465,6 @@
       "id": "branch_umorismo",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_3.png",
           "panels": [
             {
@@ -500,10 +499,10 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bumori_p0"
         },
         {
-          "index": 1,
           "background": "assets/episodes/prologo/page_1.png",
           "panels": [
             {
@@ -532,7 +531,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bumori_p1"
         }
       ]
     },
@@ -540,7 +540,6 @@
       "id": "branch_disegno_innocuo",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_2.png",
           "panels": [
             {
@@ -574,10 +573,10 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bdiseg_p0"
         },
         {
-          "index": 1,
           "background": "assets/episodes/prologo/page_1.png",
           "panels": [
             {
@@ -612,7 +611,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bdiseg_p1"
         }
       ]
     },
@@ -620,7 +620,6 @@
       "id": "branch_disegno_quasi",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_2.png",
           "panels": [
             {
@@ -655,10 +654,10 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bdiseg_p0"
         },
         {
-          "index": 1,
           "background": "assets/episodes/prologo/page_1.png",
           "panels": [
             {
@@ -693,7 +692,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bdiseg_p1"
         }
       ]
     },
@@ -701,7 +701,6 @@
       "id": "branch_disegno_visto",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_3.png",
           "panels": [
             {
@@ -736,10 +735,10 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bdiseg_p0"
         },
         {
-          "index": 1,
           "background": "assets/episodes/prologo/page_3.png",
           "panels": [
             {
@@ -774,7 +773,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bdiseg_p1"
         }
       ]
     }
@@ -783,7 +783,6 @@
     "id": "epilogue",
     "pages": [
       {
-        "index": 0,
         "background": "assets/episodes/prologo/page_4.png",
         "panels": [
           {
@@ -815,7 +814,8 @@
               }
             ]
           }
-        ]
+        ],
+        "id": "ep_p0"
       }
     ]
   }

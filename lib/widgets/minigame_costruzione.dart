@@ -11,7 +11,8 @@ import 'package:flutter/material.dart';
 /// on a base blueprint. 15s total. Each correct placement counts as 1 point.
 class MinigameCostruzioneScreen extends StatefulWidget {
   final MinigameConfig config;
-  final void Function(Map<String, int> effects, String label, MinigameTier tier) onComplete;
+  final void Function(Map<String, int> effects, String label, MinigameTier tier)
+      onComplete;
 
   const MinigameCostruzioneScreen({
     super.key,
@@ -20,7 +21,8 @@ class MinigameCostruzioneScreen extends StatefulWidget {
   });
 
   @override
-  State<MinigameCostruzioneScreen> createState() => _MinigameCostruzioneScreenState();
+  State<MinigameCostruzioneScreen> createState() =>
+      _MinigameCostruzioneScreenState();
 }
 
 class _MinigameCostruzioneScreenState extends State<MinigameCostruzioneScreen> {
@@ -156,7 +158,7 @@ class _MinigameCostruzioneScreenState extends State<MinigameCostruzioneScreen> {
             const SizedBox(height: 8),
 
             // Istruzione
-            Text(
+            const Text(
               'Tocca un componente, poi tocca lo slot dove va montato',
               style: TextStyle(color: Colors.white38, fontSize: 11),
               textAlign: TextAlign.center,

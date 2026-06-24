@@ -35,7 +35,8 @@
             {
               "id": "sc1_0_0_tb_1",
               "type": "thought",
-              "text": "It was tiredness. Just tiredness. These things don't exist."
+              "text": "It was tiredness. Just tiredness. These things don't exist.",
+              "speaker": "favilla"
             },
             {
               "id": "sc1_0_0_tb_2",
@@ -45,7 +46,8 @@
             {
               "id": "sc1_0_0_tb_3",
               "type": "thought",
-              "text": "Normal day. Head down. Fixed smile."
+              "text": "Normal day. Head down. Fixed smile.",
+              "speaker": "favilla"
             }
           ],
           "interactions": []
@@ -88,7 +90,8 @@
             {
               "id": "sc1_1_0_tb_4",
               "type": "thought",
-              "text": "Thirty-five minutes. Alone."
+              "text": "Thirty-five minutes. Alone.",
+              "speaker": "favilla"
             }
           ],
           "interactions": []
@@ -113,7 +116,8 @@
             {
               "id": "sc1_2_0_tb_1",
               "type": "thought",
-              "text": "I can't do it. I can't do it. I can't—"
+              "text": "I can't do it. I can't do it. I can't—",
+              "speaker": "favilla"
             },
             {
               "id": "sc1_2_0_tb_2",
@@ -128,7 +132,8 @@
             {
               "id": "sc1_2_0_tb_4",
               "type": "thought",
-              "text": "What have I done. What have I done. What have I—"
+              "text": "What have I done. What have I done. What have I—",
+              "speaker": "favilla"
             },
             {
               "id": "sc1_2_0_tb_5",
@@ -177,7 +182,6 @@
     "intro_caffe_effect": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_scuola_1/page_0.webp",
           "panels": [
             {
@@ -194,7 +198,8 @@
                 {
                   "id": "caffe_intro_tb_1",
                   "type": "thought",
-                  "text": "The coffee. The coffee was a mistake."
+                  "text": "The coffee. The coffee was a mistake.",
+                  "speaker": "favilla"
                 },
                 {
                   "id": "caffe_intro_tb_2",
@@ -204,19 +209,20 @@
                 {
                   "id": "caffe_intro_tb_3",
                   "type": "thought",
-                  "text": "Head down. Fixed smile. Nothing strange. Perfectly normal."
+                  "text": "Head down. Fixed smile. Nothing strange. Perfectly normal.",
+                  "speaker": "favilla"
                 }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "icaffe_p0"
         }
       ]
     },
     "branch_bagno": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_scuola_1/branch_bagno.webp",
           "panels": [
             {
@@ -257,19 +263,20 @@
                 {
                   "id": "bb_0_tb_5",
                   "type": "thought",
-                  "text": "The burnt clothes are at the bottom of the bag. The secret is safe. For now."
+                  "text": "The burnt clothes are at the bottom of the bag. The secret is safe. For now.",
+                  "speaker": "favilla"
                 }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bbagno_p0"
         }
       ]
     },
     "branch_finge": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_scuola_1/branch_finge.webp",
           "panels": [
             {
@@ -310,19 +317,20 @@
                 {
                   "id": "bf_0_tb_5",
                   "type": "thought",
-                  "text": "Lie number two. Was I counting?"
+                  "text": "Lie number two. Was I counting?",
+                  "speaker": "favilla"
                 }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bfinge_p0"
         }
       ]
     },
     "intro_segreto_pericolo": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_scuola_1/page_0.webp",
           "panels": [
             {
@@ -349,11 +357,13 @@
                 {
                   "id": "sp_segreto_0_tb_3",
                   "type": "thought",
-                  "text": "He knows something's there. He doesn't know what. But he waits. And waiting, sometimes, is worse than asking."
+                  "text": "He knows something's there. He doesn't know what. But he waits. And waiting, sometimes, is worse than asking.",
+                  "speaker": "favilla"
                 }
               ]
             }
-          ]
+          ],
+          "id": "isegre_p0"
         }
       ]
     }
@@ -361,7 +371,6 @@
   "epilogue": {
     "pages": [
       {
-        "index": 0,
         "background": "assets/episodes/s1/s1_scuola_1/epilogue.webp",
         "panels": [
           {
@@ -378,7 +387,8 @@
               {
                 "id": "sc1_ep_0_tb_1",
                 "type": "thought",
-                "text": "It wasn't tiredness. It wasn't a dream. It was real."
+                "text": "It wasn't tiredness. It wasn't a dream. It was real.",
+                "speaker": "favilla"
               },
               {
                 "id": "sc1_ep_0_tb_2",
@@ -388,7 +398,8 @@
               {
                 "id": "sc1_ep_0_tb_3",
                 "type": "thought",
-                "text": "And now?"
+                "text": "And now?",
+                "speaker": "favilla"
               },
               {
                 "id": "sc1_ep_0_tb_4",
@@ -398,7 +409,8 @@
             ],
             "interactions": []
           }
-        ]
+        ],
+        "id": "ep_p0"
       }
     ]
   }

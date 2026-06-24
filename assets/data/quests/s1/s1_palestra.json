@@ -7,7 +7,9 @@
       "panels": [
         {
           "id": "spl0_0",
-          "characters": ["favilla"],
+          "characters": [
+            "favilla"
+          ],
           "text_blocks": [
             {
               "id": "spl0_0_tb_0",
@@ -22,7 +24,8 @@
             {
               "id": "spl0_0_tb_2",
               "type": "thought",
-              "text": "Entrare qui da sola dovrebbe sembrare una follia. Invece sembra un lusso."
+              "text": "Entrare qui da sola dovrebbe sembrare una follia. Invece sembra un lusso.",
+              "speaker": "favilla"
             },
             {
               "id": "spl0_0_tb_3",
@@ -40,7 +43,9 @@
       "panels": [
         {
           "id": "spl1_0",
-          "characters": ["favilla"],
+          "characters": [
+            "favilla"
+          ],
           "text_blocks": [
             {
               "id": "spl1_0_tb_0",
@@ -60,7 +65,8 @@
             {
               "id": "spl1_0_tb_3",
               "type": "thought",
-              "text": "Va bene. Posso stare qui. Solo stare."
+              "text": "Va bene. Posso stare qui. Solo stare.",
+              "speaker": "favilla"
             }
           ],
           "interactions": []
@@ -73,7 +79,9 @@
       "panels": [
         {
           "id": "spl2_0",
-          "characters": ["favilla"],
+          "characters": [
+            "favilla"
+          ],
           "text_blocks": [
             {
               "id": "spl2_0_tb_0",
@@ -93,7 +101,8 @@
             {
               "id": "spl2_0_tb_3",
               "type": "thought",
-              "text": "Oggi non devo salvare nessuno. Nemmeno me stessa."
+              "text": "Oggi non devo salvare nessuno. Nemmeno me stessa.",
+              "speaker": "favilla"
             }
           ],
           "interactions": []
@@ -129,7 +138,9 @@
               "legame": -5,
               "segreto": 5
             },
-            "setMemories": { "choice_intent.s1_palestra.palestra_choice": "escaped" }
+            "setMemories": {
+              "choice_intent.s1_palestra.palestra_choice": "escaped"
+            }
           }
         ]
       }
@@ -139,12 +150,13 @@
     "branch_respiro": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_palestra/branch_respiro.webp",
           "panels": [
             {
               "id": "spr_0",
-              "characters": ["favilla"],
+              "characters": [
+                "favilla"
+              ],
               "text_blocks": [
                 {
                   "id": "spr_0_tb_0",
@@ -164,24 +176,27 @@
                 {
                   "id": "spr_0_tb_3",
                   "type": "thought",
-                  "text": "Non sono leggera. Però sono qui."
+                  "text": "Non sono leggera. Però sono qui.",
+                  "speaker": "favilla"
                 }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "brespi_p0"
         }
       ]
     },
     "branch_spinge": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_palestra/branch_spinge.webp",
           "panels": [
             {
               "id": "sps_0",
-              "characters": ["favilla"],
+              "characters": [
+                "favilla"
+              ],
               "text_blocks": [
                 {
                   "id": "sps_0_tb_0",
@@ -201,24 +216,27 @@
                 {
                   "id": "sps_0_tb_3",
                   "type": "thought",
-                  "text": "Non è pace. È sfogo. Oggi basta."
+                  "text": "Non è pace. È sfogo. Oggi basta.",
+                  "speaker": "favilla"
                 }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bsping_p0"
         }
       ]
     },
     "branch_scappa": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_palestra/branch_scappa.webp",
           "panels": [
             {
               "id": "sc_0",
-              "characters": ["favilla"],
+              "characters": [
+                "favilla"
+              ],
               "text_blocks": [
                 {
                   "id": "sc_0_tb_0",
@@ -238,12 +256,14 @@
                 {
                   "id": "sc_0_tb_3",
                   "type": "thought",
-                  "text": "Non posso stare qui. Non posso stare da nessuna parte."
+                  "text": "Non posso stare qui. Non posso stare da nessuna parte.",
+                  "speaker": "favilla"
                 }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bscapp_p0"
         }
       ]
     }
@@ -251,12 +271,14 @@
   "epilogue": {
     "pages": [
       {
-        "index": 0,
         "background": "assets/episodes/s1/s1_palestra/page_epilogo.webp",
         "panels": [
           {
             "id": "spp_0",
-            "characters": ["favilla", "mallow"],
+            "characters": [
+              "favilla",
+              "mallow"
+            ],
             "text_blocks": [
               {
                 "id": "spp_0_tb_0",
@@ -283,7 +305,8 @@
               {
                 "id": "spp_0_tb_4",
                 "type": "thought",
-                "text": "Per una sera può essere stanca soltanto. E le torna in mente {{memory:narrative.unwind_memory|quel piccolo istante di tregua}}."
+                "text": "Per una sera può essere stanca soltanto. E le torna in mente {{memory:narrative.unwind_memory|quel piccolo istante di tregua}}.",
+                "speaker": "favilla"
               },
               {
                 "id": "spp_0_tb_5",
@@ -293,7 +316,8 @@
             ],
             "interactions": []
           }
-        ]
+        ],
+        "id": "ep_p0"
       }
     ]
   }

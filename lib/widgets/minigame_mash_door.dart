@@ -51,7 +51,9 @@ class _MinigameMashDoorScreenState extends State<MinigameMashDoorScreen>
     _timerCtrl = AnimationController(
       vsync: this,
       duration: const Duration(seconds: _kTimerSeconds),
-    )..addListener(() {if (mounted) setState(() {});});
+    )..addListener(() {
+        if (mounted) setState(() {});
+      });
     _timerCtrl.addStatusListener((status) {
       if (status == AnimationStatus.completed && !_gameOver) _endGame();
     });
@@ -130,7 +132,7 @@ class _MinigameMashDoorScreenState extends State<MinigameMashDoorScreen>
             ),
             const SizedBox(height: 8),
             Text(
-              '${_taps}/${_threshold} colpi',
+              '$_taps/$_threshold colpi',
               style: const TextStyle(color: Colors.white54, fontSize: 14),
             ),
             const SizedBox(height: 12),
@@ -195,10 +197,15 @@ class _MinigameMashDoorScreenState extends State<MinigameMashDoorScreen>
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text('🚪 SFONDA', style: TextStyle(fontSize: 36, fontWeight: FontWeight.w900, color: Colors.orangeAccent)),
+              const Text('🚪 SFONDA',
+                  style: TextStyle(
+                      fontSize: 36,
+                      fontWeight: FontWeight.w900,
+                      color: Colors.orangeAccent)),
               const SizedBox(height: 24),
               Container(
-                width: 120, height: 160,
+                width: 120,
+                height: 160,
                 decoration: BoxDecoration(
                   color: const Color(0xFF1A1A2E),
                   borderRadius: BorderRadius.circular(12),
@@ -207,9 +214,16 @@ class _MinigameMashDoorScreenState extends State<MinigameMashDoorScreen>
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.pan_tool_rounded, size: 40, color: Colors.orangeAccent.withValues(alpha: 0.6)),
+                    Icon(Icons.pan_tool_rounded,
+                        size: 40,
+                        color: Colors.orangeAccent.withValues(alpha: 0.6)),
                     const SizedBox(height: 8),
-                    Container(height: 40, width: 8, decoration: BoxDecoration(color: Colors.orangeAccent, borderRadius: BorderRadius.circular(4))),
+                    Container(
+                        height: 40,
+                        width: 8,
+                        decoration: BoxDecoration(
+                            color: Colors.orangeAccent,
+                            borderRadius: BorderRadius.circular(4))),
                   ],
                 ),
               ),
@@ -226,7 +240,10 @@ class _MinigameMashDoorScreenState extends State<MinigameMashDoorScreen>
               ),
               const SizedBox(height: 32),
               ElevatedButton(
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.orangeAccent, padding: const EdgeInsets.symmetric(horizontal: 48, vertical: 16)),
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.orangeAccent,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 48, vertical: 16)),
                 onPressed: () => setState(() => _tutorialDone = true),
                 child: const Text('INIZIA'),
               ),

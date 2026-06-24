@@ -7,7 +7,9 @@
       "panels": [
         {
           "id": "spl0_0",
-          "characters": ["favilla"],
+          "characters": [
+            "favilla"
+          ],
           "text_blocks": [
             {
               "id": "spl0_0_tb_0",
@@ -22,7 +24,8 @@
             {
               "id": "spl0_0_tb_2",
               "type": "thought",
-              "text": "Coming in here alone should feel like madness. Instead it feels like a luxury."
+              "text": "Coming in here alone should feel like madness. Instead it feels like a luxury.",
+              "speaker": "favilla"
             },
             {
               "id": "spl0_0_tb_3",
@@ -40,7 +43,9 @@
       "panels": [
         {
           "id": "spl1_0",
-          "characters": ["favilla"],
+          "characters": [
+            "favilla"
+          ],
           "text_blocks": [
             {
               "id": "spl1_0_tb_0",
@@ -60,7 +65,8 @@
             {
               "id": "spl1_0_tb_3",
               "type": "thought",
-              "text": "Okay. I can stay here. Just stay."
+              "text": "Okay. I can stay here. Just stay.",
+              "speaker": "favilla"
             }
           ],
           "interactions": []
@@ -73,7 +79,9 @@
       "panels": [
         {
           "id": "spl2_0",
-          "characters": ["favilla"],
+          "characters": [
+            "favilla"
+          ],
           "text_blocks": [
             {
               "id": "spl2_0_tb_0",
@@ -93,7 +101,8 @@
             {
               "id": "spl2_0_tb_3",
               "type": "thought",
-              "text": "Today I don't have to save anyone. Not even myself."
+              "text": "Today I don't have to save anyone. Not even myself.",
+              "speaker": "favilla"
             }
           ],
           "interactions": []
@@ -129,7 +138,9 @@
               "legame": -5,
               "segreto": 5
             },
-            "setMemories": { "choice_intent.s1_palestra.palestra_choice": "escaped" }
+            "setMemories": {
+              "choice_intent.s1_palestra.palestra_choice": "escaped"
+            }
           }
         ]
       }
@@ -139,12 +150,13 @@
     "branch_respiro": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_palestra/branch_respiro.webp",
           "panels": [
             {
               "id": "spr_0",
-              "characters": ["favilla"],
+              "characters": [
+                "favilla"
+              ],
               "text_blocks": [
                 {
                   "id": "spr_0_tb_0",
@@ -164,24 +176,27 @@
                 {
                   "id": "spr_0_tb_3",
                   "type": "thought",
-                  "text": "I'm not light. But I'm here."
+                  "text": "I'm not light. But I'm here.",
+                  "speaker": "favilla"
                 }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "brespi_p0"
         }
       ]
     },
     "branch_spinge": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_palestra/branch_spinge.webp",
           "panels": [
             {
               "id": "sps_0",
-              "characters": ["favilla"],
+              "characters": [
+                "favilla"
+              ],
               "text_blocks": [
                 {
                   "id": "sps_0_tb_0",
@@ -201,24 +216,27 @@
                 {
                   "id": "sps_0_tb_3",
                   "type": "thought",
-                  "text": "This isn't peace. It's release. For today, that's enough."
+                  "text": "This isn't peace. It's release. For today, that's enough.",
+                  "speaker": "favilla"
                 }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bsping_p0"
         }
       ]
     },
     "branch_scappa": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_palestra/branch_scappa.webp",
           "panels": [
             {
               "id": "sc_0",
-              "characters": ["favilla"],
+              "characters": [
+                "favilla"
+              ],
               "text_blocks": [
                 {
                   "id": "sc_0_tb_0",
@@ -238,12 +256,14 @@
                 {
                   "id": "sc_0_tb_3",
                   "type": "thought",
-                  "text": "I can't stay here. I can't stay anywhere."
+                  "text": "I can't stay here. I can't stay anywhere.",
+                  "speaker": "favilla"
                 }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bscapp_p0"
         }
       ]
     }
@@ -251,12 +271,14 @@
   "epilogue": {
     "pages": [
       {
-        "index": 0,
         "background": "assets/episodes/s1/s1_palestra/page_epilogo.webp",
         "panels": [
           {
             "id": "spp_0",
-            "characters": ["favilla", "mallow"],
+            "characters": [
+              "favilla",
+              "mallow"
+            ],
             "text_blocks": [
               {
                 "id": "spp_0_tb_0",
@@ -283,7 +305,8 @@
               {
                 "id": "spp_0_tb_4",
                 "type": "thought",
-                "text": "For one evening, she can be tired only. And she remembers {{memory:narrative.unwind_memory|that small moment of respite}}."
+                "text": "For one evening, she can be tired only. And she remembers {{memory:narrative.unwind_memory|that small moment of respite}}.",
+                "speaker": "favilla"
               },
               {
                 "id": "spp_0_tb_5",
@@ -293,7 +316,8 @@
             ],
             "interactions": []
           }
-        ]
+        ],
+        "id": "ep_p0"
       }
     ]
   }

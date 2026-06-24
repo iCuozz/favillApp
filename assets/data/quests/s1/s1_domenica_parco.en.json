@@ -30,13 +30,38 @@
       "panels": [
         {
           "id": "dp0_0",
-          "characters": ["favilla", "mallow", "lex"],
+          "characters": [
+            "favilla",
+            "mallow",
+            "lex"
+          ],
           "text_blocks": [
-            { "id": "dp0_0_tb_0", "type": "narration", "text": "Sunday. Nova Tutinia Public Gardens. 10:32 a.m." },
-            { "id": "dp0_0_tb_1", "type": "narration", "text": "Favilla had forgotten that sunshine could be this... normal." },
-            { "id": "dp0_0_tb_2", "type": "narration", "text": "Lex in the pushchair, discovering that a world exists beyond the flat window." },
-            { "id": "dp0_0_tb_3", "type": "narration", "text": "Mallow walks light. Without the laptop, he becomes almost a different person." },
-            { "id": "dp0_0_tb_4", "type": "thought", "text": "Maybe I can do this. Maybe all of it can coexist." }
+            {
+              "id": "dp0_0_tb_0",
+              "type": "narration",
+              "text": "Sunday. Nova Tutinia Public Gardens. 10:32 a.m."
+            },
+            {
+              "id": "dp0_0_tb_1",
+              "type": "narration",
+              "text": "Favilla had forgotten that sunshine could be this... normal."
+            },
+            {
+              "id": "dp0_0_tb_2",
+              "type": "narration",
+              "text": "Lex in the pushchair, discovering that a world exists beyond the flat window."
+            },
+            {
+              "id": "dp0_0_tb_3",
+              "type": "narration",
+              "text": "Mallow walks light. Without the laptop, he becomes almost a different person."
+            },
+            {
+              "id": "dp0_0_tb_4",
+              "type": "thought",
+              "text": "Maybe I can do this. Maybe all of it can coexist.",
+              "speaker": "favilla"
+            }
           ],
           "interactions": []
         }
@@ -48,22 +73,58 @@
       "panels": [
         {
           "id": "dp1_0",
-          "characters": ["mallow", "lex"],
+          "characters": [
+            "mallow",
+            "lex"
+          ],
           "text_blocks": [
-            { "id": "dp1_0_tb_0", "type": "narration", "text": "Mallow takes Lex to the baby swings. Lex discovers the concept of up and down." },
-            { "id": "dp1_0_tb_1", "type": "dialogue", "speaker": "lex", "text": "AAH! AAH! AAH!" },
-            { "id": "dp1_0_tb_2", "type": "dialogue", "speaker": "mallow", "text": "Yeah! Cool, right?" }
+            {
+              "id": "dp1_0_tb_0",
+              "type": "narration",
+              "text": "Mallow takes Lex to the baby swings. Lex discovers the concept of up and down."
+            },
+            {
+              "id": "dp1_0_tb_1",
+              "type": "dialogue",
+              "speaker": "lex",
+              "text": "AAH! AAH! AAH!"
+            },
+            {
+              "id": "dp1_0_tb_2",
+              "type": "dialogue",
+              "speaker": "mallow",
+              "text": "Yeah! Cool, right?"
+            }
           ],
           "interactions": []
         },
         {
           "id": "dp1_1",
-          "characters": ["favilla"],
+          "characters": [
+            "favilla"
+          ],
           "text_blocks": [
-            { "id": "dp1_1_tb_0", "type": "narration", "text": "Favilla watches them from the bench." },
-            { "id": "dp1_1_tb_1", "type": "thought", "text": "This. This is the world they need to have." },
-            { "id": "dp1_1_tb_2", "type": "narration", "text": "For five minutes she thinks of nothing." },
-            { "id": "dp1_1_tb_3", "type": "narration", "text": "Five entire minutes." }
+            {
+              "id": "dp1_1_tb_0",
+              "type": "narration",
+              "text": "Favilla watches them from the bench."
+            },
+            {
+              "id": "dp1_1_tb_1",
+              "type": "thought",
+              "text": "This. This is the world they need to have.",
+              "speaker": "favilla"
+            },
+            {
+              "id": "dp1_1_tb_2",
+              "type": "narration",
+              "text": "For five minutes she thinks of nothing."
+            },
+            {
+              "id": "dp1_1_tb_3",
+              "type": "narration",
+              "text": "Five entire minutes."
+            }
           ],
           "interactions": []
         }
@@ -75,20 +136,80 @@
       "panels": [
         {
           "id": "dp2_0",
-          "characters": ["favilla", "mallow", "lex"],
+          "characters": [
+            "favilla",
+            "mallow",
+            "lex"
+          ],
           "text_blocks": [
-            { "id": "dp2_0_tb_0", "type": "narration", "text": "Mallow comes back with two stracciatella cones and Lex who's starting to droop." },
-            { "id": "dp2_0_tb_1", "type": "dialogue", "speaker": "mallow", "text": "Stracciatella. Put it on your CV." },
-            { "id": "dp2_0_tb_2", "type": "dialogue", "speaker": "favilla", "text": "What?" },
-            { "id": "dp2_0_tb_3", "type": "dialogue", "speaker": "mallow", "text": "'Knows how to pick the right flavour at the right moment.'" },
-            { "id": "dp2_0_tb_4", "type": "narration", "text": "Favilla laughs. A real laugh, short, surprised at herself." },
-            { "id": "dp2_0_tb_5", "type": "thought", "text": "When was the last time?" },
-            { "id": "dp2_0_tb_6", "type": "dialogue", "speaker": "mallow", "text": "You look well today." },
-            { "id": "dp2_0_tb_7", "type": "dialogue", "speaker": "favilla", "text": "I am well." },
-            { "id": "dp2_0_tb_8", "type": "dialogue", "speaker": "mallow", "text": "I know. You can tell." },
-            { "id": "dp2_0_tb_9", "type": "narration", "text": "Lex goes down. Head to the side. Out of action." },
-            { "id": "dp2_0_tb_10", "type": "narration", "text": "A pigeon lands three metres away. Mallow studies it with suspicion." },
-            { "id": "dp2_0_tb_11", "type": "thought", "text": "This. I need to protect this." }
+            {
+              "id": "dp2_0_tb_0",
+              "type": "narration",
+              "text": "Mallow comes back with two stracciatella cones and Lex who's starting to droop."
+            },
+            {
+              "id": "dp2_0_tb_1",
+              "type": "dialogue",
+              "speaker": "mallow",
+              "text": "Stracciatella. Put it on your CV."
+            },
+            {
+              "id": "dp2_0_tb_2",
+              "type": "dialogue",
+              "speaker": "favilla",
+              "text": "What?"
+            },
+            {
+              "id": "dp2_0_tb_3",
+              "type": "dialogue",
+              "speaker": "mallow",
+              "text": "'Knows how to pick the right flavour at the right moment.'"
+            },
+            {
+              "id": "dp2_0_tb_4",
+              "type": "narration",
+              "text": "Favilla laughs. A real laugh, short, surprised at herself."
+            },
+            {
+              "id": "dp2_0_tb_5",
+              "type": "thought",
+              "text": "When was the last time?",
+              "speaker": "favilla"
+            },
+            {
+              "id": "dp2_0_tb_6",
+              "type": "dialogue",
+              "speaker": "mallow",
+              "text": "You look well today."
+            },
+            {
+              "id": "dp2_0_tb_7",
+              "type": "dialogue",
+              "speaker": "favilla",
+              "text": "I am well."
+            },
+            {
+              "id": "dp2_0_tb_8",
+              "type": "dialogue",
+              "speaker": "mallow",
+              "text": "I know. You can tell."
+            },
+            {
+              "id": "dp2_0_tb_9",
+              "type": "narration",
+              "text": "Lex goes down. Head to the side. Out of action."
+            },
+            {
+              "id": "dp2_0_tb_10",
+              "type": "narration",
+              "text": "A pigeon lands three metres away. Mallow studies it with suspicion."
+            },
+            {
+              "id": "dp2_0_tb_11",
+              "type": "thought",
+              "text": "This. I need to protect this.",
+              "speaker": "favilla"
+            }
           ],
           "interactions": []
         }
@@ -100,14 +221,42 @@
       "panels": [
         {
           "id": "dp3_0",
-          "characters": ["favilla", "ladro"],
+          "characters": [
+            "favilla",
+            "ladro"
+          ],
           "text_blocks": [
-            { "id": "dp3_0_tb_0", "type": "narration", "text": "It happens in half a second." },
-            { "id": "dp3_0_tb_1", "type": "narration", "text": "A figure — dark hoodie, hood pulled low — snatches the bag from Favilla's shoulder." },
-            { "id": "dp3_0_tb_2", "type": "narration", "text": "Mallow is still watching the pigeon." },
-            { "id": "dp3_0_tb_3", "type": "narration", "text": "Lex is asleep." },
-            { "id": "dp3_0_tb_4", "type": "narration", "text": "The figure vanishes into the trees of the grove." },
-            { "id": "dp3_0_tb_5", "type": "thought", "text": "No. No no no. My documents. The keys. Everything." }
+            {
+              "id": "dp3_0_tb_0",
+              "type": "narration",
+              "text": "It happens in half a second."
+            },
+            {
+              "id": "dp3_0_tb_1",
+              "type": "narration",
+              "text": "A figure — dark hoodie, hood pulled low — snatches the bag from Favilla's shoulder."
+            },
+            {
+              "id": "dp3_0_tb_2",
+              "type": "narration",
+              "text": "Mallow is still watching the pigeon."
+            },
+            {
+              "id": "dp3_0_tb_3",
+              "type": "narration",
+              "text": "Lex is asleep."
+            },
+            {
+              "id": "dp3_0_tb_4",
+              "type": "narration",
+              "text": "The figure vanishes into the trees of the grove."
+            },
+            {
+              "id": "dp3_0_tb_5",
+              "type": "thought",
+              "text": "No. No no no. My documents. The keys. Everything.",
+              "speaker": "favilla"
+            }
           ],
           "interactions": []
         }
@@ -120,7 +269,10 @@
             "id": "rincorri",
             "label": "Go after him. Now.",
             "goto_branch": "branch_presa",
-            "stat_effects": { "resistenza": -12, "segreto": -8 },
+            "stat_effects": {
+              "resistenza": -12,
+              "segreto": -8
+            },
             "minigame": {
               "type": "rincorsa",
               "duration_seconds": 15,
@@ -129,20 +281,32 @@
                   "min": 2,
                   "label": "Caught!",
                   "goto_branch": "branch_presa",
-                  "stat_effects": { "segreto": 5, "scintille": 8 }
+                  "stat_effects": {
+                    "segreto": 5,
+                    "scintille": 8
+                  }
                 },
                 {
                   "min": 1,
                   "label": "Almost…",
                   "goto_branch": "branch_quasi",
-                  "stat_effects": { "resistenza": -8, "segreto": -5 }
+                  "stat_effects": {
+                    "resistenza": -8,
+                    "segreto": -5
+                  }
                 },
                 {
                   "min": 0,
                   "label": "Lost.",
                   "goto_branch": "branch_perso_trasformazione",
-                  "stat_effects": { "resistenza": -12, "segreto": -8, "scintille": 10 },
-                  "set_flags": { "favilla_transformed_public": true }
+                  "stat_effects": {
+                    "resistenza": -12,
+                    "segreto": -8,
+                    "scintille": 10
+                  },
+                  "set_flags": {
+                    "favilla_transformed_public": true
+                  }
                 }
               ]
             }
@@ -155,181 +319,473 @@
     "intro_mani_calde": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_domenica_parco/page_0.webp",
           "panels": [
             {
               "id": "imc_0",
-              "characters": ["favilla"],
+              "characters": [
+                "favilla"
+              ],
               "text_blocks": [
-                { "id": "imc_0_tb_0", "type": "narration", "text": "Favilla's hands are already warm when she steps through the park entrance." },
-                { "id": "imc_0_tb_1", "type": "thought", "text": "Keep them down. Controlled. Today is Sunday. Nothing happens today." },
-                { "id": "imc_0_tb_2", "type": "narration", "text": "Lex doesn't understand why Mum moves like this — careful, contained, as if carrying something fragile." },
-                { "id": "imc_0_tb_3", "type": "thought", "text": "He understands everything, actually." }
+                {
+                  "id": "imc_0_tb_0",
+                  "type": "narration",
+                  "text": "Favilla's hands are already warm when she steps through the park entrance."
+                },
+                {
+                  "id": "imc_0_tb_1",
+                  "type": "thought",
+                  "text": "Keep them down. Controlled. Today is Sunday. Nothing happens today.",
+                  "speaker": "favilla"
+                },
+                {
+                  "id": "imc_0_tb_2",
+                  "type": "narration",
+                  "text": "Lex doesn't understand why Mum moves like this — careful, contained, as if carrying something fragile."
+                },
+                {
+                  "id": "imc_0_tb_3",
+                  "type": "thought",
+                  "text": "He understands everything, actually.",
+                  "speaker": "favilla"
+                }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "imani__p0"
         }
       ]
     },
     "branch_presa": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_domenica_parco/branch_presa_0.webp",
           "panels": [
             {
               "id": "bp_0",
-              "characters": ["favilla", "ladro"],
+              "characters": [
+                "favilla",
+                "ladro"
+              ],
               "text_blocks": [
-                { "id": "bp_0_tb_0", "type": "narration", "text": "The grove swallows everything — light, voices, the sound of the park." },
-                { "id": "bp_0_tb_1", "type": "narration", "text": "Favilla runs. The branches don't slow her down." },
-                { "id": "bp_0_tb_2", "type": "narration", "text": "The thief is fast. She is faster." },
-                { "id": "bp_0_tb_3", "type": "narration", "text": "She grabs him by the collar three metres from the fence." },
-                { "id": "bp_0_tb_4", "type": "narration", "text": "The thief turns. In his eyes, something he can't categorise." },
-                { "id": "bp_0_tb_5", "type": "narration", "text": "He hits his forehead on a low branch he hadn't seen." },
-                { "id": "bp_0_tb_6", "type": "dialogue", "speaker": "ladro", "text": "Wha... what—" },
-                { "id": "bp_0_tb_7", "type": "narration", "text": "He doesn't finish. Drops the bag and runs screaming toward the gate." },
-                { "id": "bp_0_tb_8", "type": "thought", "text": "He doesn't know what he saw. He doesn't even know himself." }
+                {
+                  "id": "bp_0_tb_0",
+                  "type": "narration",
+                  "text": "The grove swallows everything — light, voices, the sound of the park."
+                },
+                {
+                  "id": "bp_0_tb_1",
+                  "type": "narration",
+                  "text": "Favilla runs. The branches don't slow her down."
+                },
+                {
+                  "id": "bp_0_tb_2",
+                  "type": "narration",
+                  "text": "The thief is fast. She is faster."
+                },
+                {
+                  "id": "bp_0_tb_3",
+                  "type": "narration",
+                  "text": "She grabs him by the collar three metres from the fence."
+                },
+                {
+                  "id": "bp_0_tb_4",
+                  "type": "narration",
+                  "text": "The thief turns. In his eyes, something he can't categorise."
+                },
+                {
+                  "id": "bp_0_tb_5",
+                  "type": "narration",
+                  "text": "He hits his forehead on a low branch he hadn't seen."
+                },
+                {
+                  "id": "bp_0_tb_6",
+                  "type": "dialogue",
+                  "speaker": "ladro",
+                  "text": "Wha... what—"
+                },
+                {
+                  "id": "bp_0_tb_7",
+                  "type": "narration",
+                  "text": "He doesn't finish. Drops the bag and runs screaming toward the gate."
+                },
+                {
+                  "id": "bp_0_tb_8",
+                  "type": "thought",
+                  "text": "He doesn't know what he saw. He doesn't even know himself.",
+                  "speaker": "favilla"
+                }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bpresa_p0"
         },
         {
-          "index": 1,
           "background": "assets/episodes/s1/s1_domenica_parco/branch_presa_1.webp",
           "panels": [
             {
               "id": "bp_1",
-              "characters": ["favilla", "mallow"],
+              "characters": [
+                "favilla",
+                "mallow"
+              ],
               "text_blocks": [
-                { "id": "bp_1_tb_0", "type": "narration", "text": "Favilla picks up the bag. Checks it. Everything's there." },
-                { "id": "bp_1_tb_1", "type": "narration", "text": "She walks out of the grove as if she's been for a stroll." },
-                { "id": "bp_1_tb_2", "type": "narration", "text": "Mallow is on the bench. The pigeon has gone." },
-                { "id": "bp_1_tb_3", "type": "dialogue", "speaker": "mallow", "text": "Where were you?" },
-                { "id": "bp_1_tb_4", "type": "dialogue", "speaker": "favilla", "text": "I followed a pigeon." },
-                { "id": "bp_1_tb_5", "type": "narration", "text": "Pause." },
-                { "id": "bp_1_tb_6", "type": "dialogue", "speaker": "mallow", "text": "...the bag?" },
-                { "id": "bp_1_tb_7", "type": "dialogue", "speaker": "favilla", "text": "Always been mine." },
-                { "id": "bp_1_tb_8", "type": "narration", "text": "Mallow looks at her with the expression of someone who has many questions and has learned not to ask them all at once." },
-                { "id": "bp_1_tb_9", "type": "thought", "text": "Good." }
+                {
+                  "id": "bp_1_tb_0",
+                  "type": "narration",
+                  "text": "Favilla picks up the bag. Checks it. Everything's there."
+                },
+                {
+                  "id": "bp_1_tb_1",
+                  "type": "narration",
+                  "text": "She walks out of the grove as if she's been for a stroll."
+                },
+                {
+                  "id": "bp_1_tb_2",
+                  "type": "narration",
+                  "text": "Mallow is on the bench. The pigeon has gone."
+                },
+                {
+                  "id": "bp_1_tb_3",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "Where were you?"
+                },
+                {
+                  "id": "bp_1_tb_4",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "I followed a pigeon."
+                },
+                {
+                  "id": "bp_1_tb_5",
+                  "type": "narration",
+                  "text": "Pause."
+                },
+                {
+                  "id": "bp_1_tb_6",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "...the bag?"
+                },
+                {
+                  "id": "bp_1_tb_7",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Always been mine."
+                },
+                {
+                  "id": "bp_1_tb_8",
+                  "type": "narration",
+                  "text": "Mallow looks at her with the expression of someone who has many questions and has learned not to ask them all at once."
+                },
+                {
+                  "id": "bp_1_tb_9",
+                  "type": "thought",
+                  "text": "Good.",
+                  "speaker": "favilla"
+                }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bpresa_p1"
         }
       ]
     },
     "branch_quasi": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_domenica_parco/branch_quasi.webp",
           "panels": [
             {
               "id": "bq_0",
-              "characters": ["favilla"],
+              "characters": [
+                "favilla"
+              ],
               "text_blocks": [
-                { "id": "bq_0_tb_0", "type": "narration", "text": "The grove is denser than it looks from outside." },
-                { "id": "bq_0_tb_1", "type": "narration", "text": "Favilla runs. The thief knows these trees better than she does." },
-                { "id": "bq_0_tb_2", "type": "narration", "text": "One turn. Another. Another." },
-                { "id": "bq_0_tb_3", "type": "narration", "text": "She stops." },
-                { "id": "bq_0_tb_4", "type": "narration", "text": "Silence." },
-                { "id": "bq_0_tb_5", "type": "thought", "text": "No." },
-                { "id": "bq_0_tb_6", "type": "narration", "text": "No sound of footsteps. No dark hood among the leaves." },
-                { "id": "bq_0_tb_7", "type": "narration", "text": "Gone." }
+                {
+                  "id": "bq_0_tb_0",
+                  "type": "narration",
+                  "text": "The grove is denser than it looks from outside."
+                },
+                {
+                  "id": "bq_0_tb_1",
+                  "type": "narration",
+                  "text": "Favilla runs. The thief knows these trees better than she does."
+                },
+                {
+                  "id": "bq_0_tb_2",
+                  "type": "narration",
+                  "text": "One turn. Another. Another."
+                },
+                {
+                  "id": "bq_0_tb_3",
+                  "type": "narration",
+                  "text": "She stops."
+                },
+                {
+                  "id": "bq_0_tb_4",
+                  "type": "narration",
+                  "text": "Silence."
+                },
+                {
+                  "id": "bq_0_tb_5",
+                  "type": "thought",
+                  "text": "No.",
+                  "speaker": "favilla"
+                },
+                {
+                  "id": "bq_0_tb_6",
+                  "type": "narration",
+                  "text": "No sound of footsteps. No dark hood among the leaves."
+                },
+                {
+                  "id": "bq_0_tb_7",
+                  "type": "narration",
+                  "text": "Gone."
+                }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bquasi_p0"
         },
         {
-          "index": 1,
           "background": "assets/episodes/s1/s1_domenica_parco/branch_quasi.webp",
           "panels": [
             {
               "id": "bq_1",
-              "characters": ["favilla", "mallow"],
+              "characters": [
+                "favilla",
+                "mallow"
+              ],
               "text_blocks": [
-                { "id": "bq_1_tb_0", "type": "narration", "text": "She comes out of the grove. Hair dishevelled. One knee scraped." },
-                { "id": "bq_1_tb_1", "type": "narration", "text": "Mallow sees her coming and springs to his feet." },
-                { "id": "bq_1_tb_2", "type": "dialogue", "speaker": "mallow", "text": "What happened?" },
-                { "id": "bq_1_tb_3", "type": "dialogue", "speaker": "favilla", "text": "I got mugged." },
-                { "id": "bq_1_tb_4", "type": "dialogue", "speaker": "mallow", "text": "The bag?" },
-                { "id": "bq_1_tb_5", "type": "dialogue", "speaker": "favilla", "text": "In the grove. I didn't catch him." },
-                { "id": "bq_1_tb_6", "type": "narration", "text": "Mallow looks at the grove. Looks at her. Takes out his phone." },
-                { "id": "bq_1_tb_7", "type": "narration", "text": "Two hours at the police station. A three-page form." },
-                { "id": "bq_1_tb_8", "type": "narration", "text": "Lex paces back and forth on the linoleum floor with the expression of a defeated general." },
-                { "id": "bq_1_tb_9", "type": "thought", "text": "Resistance: in freefall." }
+                {
+                  "id": "bq_1_tb_0",
+                  "type": "narration",
+                  "text": "She comes out of the grove. Hair dishevelled. One knee scraped."
+                },
+                {
+                  "id": "bq_1_tb_1",
+                  "type": "narration",
+                  "text": "Mallow sees her coming and springs to his feet."
+                },
+                {
+                  "id": "bq_1_tb_2",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "What happened?"
+                },
+                {
+                  "id": "bq_1_tb_3",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "I got mugged."
+                },
+                {
+                  "id": "bq_1_tb_4",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "The bag?"
+                },
+                {
+                  "id": "bq_1_tb_5",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "In the grove. I didn't catch him."
+                },
+                {
+                  "id": "bq_1_tb_6",
+                  "type": "narration",
+                  "text": "Mallow looks at the grove. Looks at her. Takes out his phone."
+                },
+                {
+                  "id": "bq_1_tb_7",
+                  "type": "narration",
+                  "text": "Two hours at the police station. A three-page form."
+                },
+                {
+                  "id": "bq_1_tb_8",
+                  "type": "narration",
+                  "text": "Lex paces back and forth on the linoleum floor with the expression of a defeated general."
+                },
+                {
+                  "id": "bq_1_tb_9",
+                  "type": "thought",
+                  "text": "Resistance: in freefall.",
+                  "speaker": "favilla"
+                }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bquasi_p1"
         }
       ]
     },
     "branch_perso_trasformazione": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_domenica_parco/branch_trasformazione.webp",
           "panels": [
             {
               "id": "bpt_0",
-              "characters": ["favilla"],
+              "characters": [
+                "favilla"
+              ],
               "text_blocks": [
-                { "id": "bpt_0_tb_0", "type": "narration", "text": "Halfway through the grove, her legs give way." },
-                { "id": "bpt_0_tb_1", "type": "thought", "text": "I can't. I can't. I can't—" },
-                { "id": "bpt_0_tb_2", "type": "narration", "text": "And then something gives way before her mind does." },
-                { "id": "bpt_0_tb_3", "type": "narration", "text": "A flash. White. Very brief." },
-                { "id": "bpt_0_tb_4", "type": "narration", "text": "0.3 seconds later, Favilla Blaze is standing in front of the thief." },
-                { "id": "bpt_0_tb_5", "type": "narration", "text": "The thief sees something. His brain can't process it." },
-                { "id": "bpt_0_tb_6", "type": "dialogue", "speaker": "ladro", "text": "AAAHHH! AAAHHH!" },
-                { "id": "bpt_0_tb_7", "type": "narration", "text": "He drops the bag. Runs toward the park exit without ever looking back." }
+                {
+                  "id": "bpt_0_tb_0",
+                  "type": "narration",
+                  "text": "Halfway through the grove, her legs give way."
+                },
+                {
+                  "id": "bpt_0_tb_1",
+                  "type": "thought",
+                  "text": "I can't. I can't. I can't—",
+                  "speaker": "favilla"
+                },
+                {
+                  "id": "bpt_0_tb_2",
+                  "type": "narration",
+                  "text": "And then something gives way before her mind does."
+                },
+                {
+                  "id": "bpt_0_tb_3",
+                  "type": "narration",
+                  "text": "A flash. White. Very brief."
+                },
+                {
+                  "id": "bpt_0_tb_4",
+                  "type": "narration",
+                  "text": "0.3 seconds later, Favilla Blaze is standing in front of the thief."
+                },
+                {
+                  "id": "bpt_0_tb_5",
+                  "type": "narration",
+                  "text": "The thief sees something. His brain can't process it."
+                },
+                {
+                  "id": "bpt_0_tb_6",
+                  "type": "dialogue",
+                  "speaker": "ladro",
+                  "text": "AAAHHH! AAAHHH!"
+                },
+                {
+                  "id": "bpt_0_tb_7",
+                  "type": "narration",
+                  "text": "He drops the bag. Runs toward the park exit without ever looking back."
+                }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bperso_p0"
         },
         {
-          "index": 1,
           "background": "assets/episodes/s1/s1_domenica_parco/branch_trasformazione.webp",
           "panels": [
             {
               "id": "bpt_1",
-              "characters": ["favilla", "mallow"],
+              "characters": [
+                "favilla",
+                "mallow"
+              ],
               "text_blocks": [
-                { "id": "bpt_1_tb_0", "type": "narration", "text": "Favilla stands in the grove. Her hands are shaking." },
-                { "id": "bpt_1_tb_1", "type": "narration", "text": "But she's holding the bag." },
-                { "id": "bpt_1_tb_2", "type": "thought", "text": "He saw something. But he doesn't know what he saw. He doesn't even know himself." },
-                { "id": "bpt_1_tb_3", "type": "thought", "text": "He thinks he hit his head. He thinks he hallucinated. Maybe tomorrow he won't remember a thing." },
-                { "id": "bpt_1_tb_4", "type": "narration", "text": "Maybe." },
-                { "id": "bpt_1_tb_5", "type": "narration", "text": "She walks out of the grove. Mallow sees her and raises his hands." },
-                { "id": "bpt_1_tb_6", "type": "dialogue", "speaker": "mallow", "text": "Everything okay?" },
-                { "id": "bpt_1_tb_7", "type": "dialogue", "speaker": "favilla", "text": "Yes. I caught him off guard. He dropped everything and ran." },
-                { "id": "bpt_1_tb_8", "type": "dialogue", "speaker": "mallow", "text": "...how?" },
-                { "id": "bpt_1_tb_9", "type": "dialogue", "speaker": "favilla", "text": "He had the hood on. Couldn't see well. He tripped." },
-                { "id": "bpt_1_tb_10", "type": "narration", "text": "Mallow looks at her." },
-                { "id": "bpt_1_tb_11", "type": "narration", "text": "Lex: face saying \"you're getting there, Dad\"." },
-                { "id": "bpt_1_tb_12", "type": "narration", "text": "Neither of them says anything more." }
+                {
+                  "id": "bpt_1_tb_0",
+                  "type": "narration",
+                  "text": "Favilla stands in the grove. Her hands are shaking."
+                },
+                {
+                  "id": "bpt_1_tb_1",
+                  "type": "narration",
+                  "text": "But she's holding the bag."
+                },
+                {
+                  "id": "bpt_1_tb_2",
+                  "type": "thought",
+                  "text": "He saw something. But he doesn't know what he saw. He doesn't even know himself.",
+                  "speaker": "favilla"
+                },
+                {
+                  "id": "bpt_1_tb_3",
+                  "type": "thought",
+                  "text": "He thinks he hit his head. He thinks he hallucinated. Maybe tomorrow he won't remember a thing.",
+                  "speaker": "favilla"
+                },
+                {
+                  "id": "bpt_1_tb_4",
+                  "type": "narration",
+                  "text": "Maybe."
+                },
+                {
+                  "id": "bpt_1_tb_5",
+                  "type": "narration",
+                  "text": "She walks out of the grove. Mallow sees her and raises his hands."
+                },
+                {
+                  "id": "bpt_1_tb_6",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "Everything okay?"
+                },
+                {
+                  "id": "bpt_1_tb_7",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Yes. I caught him off guard. He dropped everything and ran."
+                },
+                {
+                  "id": "bpt_1_tb_8",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "...how?"
+                },
+                {
+                  "id": "bpt_1_tb_9",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "He had the hood on. Couldn't see well. He tripped."
+                },
+                {
+                  "id": "bpt_1_tb_10",
+                  "type": "narration",
+                  "text": "Mallow looks at her."
+                },
+                {
+                  "id": "bpt_1_tb_11",
+                  "type": "narration",
+                  "text": "Lex: face saying \"you're getting there, Dad\"."
+                },
+                {
+                  "id": "bpt_1_tb_12",
+                  "type": "narration",
+                  "text": "Neither of them says anything more."
+                }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bperso_p1"
         }
       ]
     },
     "intro_segreto_corda": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_domenica_parco/page_0.webp",
           "panels": [
             {
               "id": "sp_corda_0",
-              "characters": ["favilla", "mallow", "lex"],
+              "characters": [
+                "favilla",
+                "mallow",
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "id": "sp_corda_0_tb_0",
@@ -349,23 +805,26 @@
                 {
                   "id": "sp_corda_0_tb_3",
                   "type": "thought",
-                  "text": "Not long now. A few more cracks and the secret comes down all at once."
+                  "text": "Not long now. A few more cracks and the secret comes down all at once.",
+                  "speaker": "favilla"
                 }
               ]
             }
-          ]
+          ],
+          "id": "isegre_p0"
         }
       ]
     },
     "intro_resistenza_limite": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_domenica_parco/page_0.webp",
           "panels": [
             {
               "id": "sp_limite_0",
-              "characters": ["favilla"],
+              "characters": [
+                "favilla"
+              ],
               "text_blocks": [
                 {
                   "id": "sp_limite_0_tb_0",
@@ -390,11 +849,13 @@
                 {
                   "id": "sp_limite_0_tb_4",
                   "type": "thought",
-                  "text": "Not now. Not here. Not in front of them."
+                  "text": "Not now. Not here. Not in front of them.",
+                  "speaker": "favilla"
                 }
               ]
             }
-          ]
+          ],
+          "id": "iresis_p0"
         }
       ]
     }
@@ -402,79 +863,182 @@
   "epilogue": {
     "pages": [
       {
-        "index": 0,
         "background": "assets/episodes/s1/s1_domenica_parco/epilogue_0.webp",
         "panels": [
           {
             "id": "ep_dp_0",
-            "characters": ["favilla", "mallow", "lex"],
+            "characters": [
+              "favilla",
+              "mallow",
+              "lex"
+            ],
             "text_blocks": [
-              { "id": "ep_dp_0_tb_0", "type": "narration", "text": "They head home along the usual route." },
-              { "id": "ep_dp_0_tb_1", "type": "narration", "text": "Lex asleep in the pushchair. Ice cream forgotten on a bench." },
-              { "id": "ep_dp_0_tb_2", "type": "narration", "text": "Mallow holds Favilla's hand." },
-              { "id": "ep_dp_0_tb_3", "type": "thought", "text": "An almost normal Sunday." },
-              { "id": "ep_dp_0_tb_4", "type": "narration", "text": "Almost." }
+              {
+                "id": "ep_dp_0_tb_0",
+                "type": "narration",
+                "text": "They head home along the usual route."
+              },
+              {
+                "id": "ep_dp_0_tb_1",
+                "type": "narration",
+                "text": "Lex asleep in the pushchair. Ice cream forgotten on a bench."
+              },
+              {
+                "id": "ep_dp_0_tb_2",
+                "type": "narration",
+                "text": "Mallow holds Favilla's hand."
+              },
+              {
+                "id": "ep_dp_0_tb_3",
+                "type": "thought",
+                "text": "An almost normal Sunday.",
+                "speaker": "favilla"
+              },
+              {
+                "id": "ep_dp_0_tb_4",
+                "type": "narration",
+                "text": "Almost."
+              }
             ],
             "interactions": []
           }
-        ]
+        ],
+        "id": "ep_p0"
       },
       {
-        "index": 1,
         "background": "assets/episodes/s1/s1_domenica_parco/epilogue_gatto_1.webp",
         "panels": [
           {
             "id": "ep_dp_1",
-            "characters": ["gatto"],
+            "characters": [
+              "gatto"
+            ],
             "text_blocks": [
-              { "id": "ep_dp_1_tb_0", "type": "narration", "text": "---" },
-              { "id": "ep_dp_1_tb_1", "type": "narration", "text": "In the grove." },
-              { "id": "ep_dp_1_tb_2", "type": "narration", "text": "Among the bushes near Favilla's bench." },
-              { "id": "ep_dp_1_tb_3", "type": "narration", "text": "Two yellow eyes." },
-              { "id": "ep_dp_1_tb_4", "type": "narration", "text": "The cat had been there from the start." },
-              { "id": "ep_dp_1_tb_5", "type": "narration", "text": "It hadn't moved." }
+              {
+                "id": "ep_dp_1_tb_0",
+                "type": "narration",
+                "text": "---"
+              },
+              {
+                "id": "ep_dp_1_tb_1",
+                "type": "narration",
+                "text": "In the grove."
+              },
+              {
+                "id": "ep_dp_1_tb_2",
+                "type": "narration",
+                "text": "Among the bushes near Favilla's bench."
+              },
+              {
+                "id": "ep_dp_1_tb_3",
+                "type": "narration",
+                "text": "Two yellow eyes."
+              },
+              {
+                "id": "ep_dp_1_tb_4",
+                "type": "narration",
+                "text": "The cat had been there from the start."
+              },
+              {
+                "id": "ep_dp_1_tb_5",
+                "type": "narration",
+                "text": "It hadn't moved."
+              }
             ],
             "interactions": []
           }
-        ]
+        ],
+        "id": "ep_p1"
       },
       {
-        "index": 2,
         "background": "assets/episodes/s1/s1_domenica_parco/epilogue_gatto_2.webp",
         "panels": [
           {
             "id": "ep_dp_2",
-            "characters": ["gatto"],
+            "characters": [
+              "gatto"
+            ],
             "text_blocks": [
-              { "id": "ep_dp_2_tb_0", "type": "narration", "text": "It gets up now." },
-              { "id": "ep_dp_2_tb_1", "type": "narration", "text": "A slow stretch. As if it has all the time in the world." },
-              { "id": "ep_dp_2_tb_2", "type": "narration", "text": "It walks out of the grove." },
-              { "id": "ep_dp_2_tb_3", "type": "narration", "text": "Crosses the park without hurrying." },
-              { "id": "ep_dp_2_tb_4", "type": "narration", "text": "Children step aside." }
+              {
+                "id": "ep_dp_2_tb_0",
+                "type": "narration",
+                "text": "It gets up now."
+              },
+              {
+                "id": "ep_dp_2_tb_1",
+                "type": "narration",
+                "text": "A slow stretch. As if it has all the time in the world."
+              },
+              {
+                "id": "ep_dp_2_tb_2",
+                "type": "narration",
+                "text": "It walks out of the grove."
+              },
+              {
+                "id": "ep_dp_2_tb_3",
+                "type": "narration",
+                "text": "Crosses the park without hurrying."
+              },
+              {
+                "id": "ep_dp_2_tb_4",
+                "type": "narration",
+                "text": "Children step aside."
+              }
             ],
             "interactions": []
           }
-        ]
+        ],
+        "id": "ep_p2"
       },
       {
-        "index": 3,
         "background": "assets/episodes/s1/s1_domenica_parco/epilogue_gatto_3.webp",
         "panels": [
           {
             "id": "ep_dp_3",
-            "characters": ["gatto"],
+            "characters": [
+              "gatto"
+            ],
             "text_blocks": [
-              { "id": "ep_dp_3_tb_0", "type": "narration", "text": "Out through the gate." },
-              { "id": "ep_dp_3_tb_1", "type": "narration", "text": "Along the pavement." },
-              { "id": "ep_dp_3_tb_2", "type": "narration", "text": "Blemish and Blister Street." },
-              { "id": "ep_dp_3_tb_3", "type": "narration", "text": "Number 18." },
-              { "id": "ep_dp_3_tb_4", "type": "narration", "text": "Ground floor. A window left ajar." },
-              { "id": "ep_dp_3_tb_5", "type": "narration", "text": "Home." },
-              { "id": "ep_dp_3_tb_6", "type": "system", "text": "MISSION COMPLETE — Sunday at the Park" }
+              {
+                "id": "ep_dp_3_tb_0",
+                "type": "narration",
+                "text": "Out through the gate."
+              },
+              {
+                "id": "ep_dp_3_tb_1",
+                "type": "narration",
+                "text": "Along the pavement."
+              },
+              {
+                "id": "ep_dp_3_tb_2",
+                "type": "narration",
+                "text": "Blemish and Blister Street."
+              },
+              {
+                "id": "ep_dp_3_tb_3",
+                "type": "narration",
+                "text": "Number 18."
+              },
+              {
+                "id": "ep_dp_3_tb_4",
+                "type": "narration",
+                "text": "Ground floor. A window left ajar."
+              },
+              {
+                "id": "ep_dp_3_tb_5",
+                "type": "narration",
+                "text": "Home."
+              },
+              {
+                "id": "ep_dp_3_tb_6",
+                "type": "system",
+                "text": "MISSION COMPLETE — Sunday at the Park"
+              }
             ],
             "interactions": []
           }
-        ]
+        ],
+        "id": "ep_p3"
       }
     ]
   }

@@ -24,7 +24,10 @@ class MinigameRincorsaLexScreen extends StatefulWidget {
       onComplete;
 
   const MinigameRincorsaLexScreen(
-      {super.key, required this.config, required this.scintille, required this.onComplete});
+      {super.key,
+      required this.config,
+      required this.scintille,
+      required this.onComplete});
 
   @override
   State<MinigameRincorsaLexScreen> createState() =>
@@ -468,7 +471,8 @@ class _MinigameRincorsaLexScreenState extends State<MinigameRincorsaLexScreen>
                   color: p.color,
                   shape: BoxShape.circle,
                   boxShadow: [
-                    BoxShadow(color: p.color.withOpacity(0.6), blurRadius: 4)
+                    BoxShadow(
+                        color: p.color.withValues(alpha: 0.6), blurRadius: 4)
                   ],
                 ),
               ),
@@ -487,7 +491,7 @@ class _MinigameRincorsaLexScreenState extends State<MinigameRincorsaLexScreen>
           animation: _flashAnim,
           builder: (ctx, _) => Opacity(
             opacity: _flashAnim.value,
-            child: Container(color: Colors.red.withOpacity(0.65)),
+            child: Container(color: Colors.red.withValues(alpha: 0.65)),
           ),
         ),
 
@@ -570,7 +574,7 @@ class _MinigameRincorsaLexScreenState extends State<MinigameRincorsaLexScreen>
                       borderRadius: BorderRadius.circular(30),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color(0xFFFF6B35).withOpacity(0.5),
+                          color: const Color(0xFFFF6B35).withValues(alpha: 0.5),
                           blurRadius: 16,
                           spreadRadius: 2,
                         ),
@@ -666,7 +670,7 @@ class _TrackPainter extends CustomPainter {
 
     // Shimmer reflection dots
     final dotPaint = Paint()
-      ..color = Colors.white.withOpacity(0.35)
+      ..color = Colors.white.withValues(alpha: 0.35)
       ..strokeWidth = 1.5
       ..style = PaintingStyle.fill;
     final rng = Random(42);
@@ -691,7 +695,8 @@ class _TrackPainter extends CustomPainter {
     canvas.drawRect(rect, paint);
 
     // Sand texture: random dots/pebbles
-    final pebble = Paint()..color = const Color(0xFFB8934A).withOpacity(0.4);
+    final pebble = Paint()
+      ..color = const Color(0xFFB8934A).withValues(alpha: 0.4);
     final rng = Random(7);
     for (int i = 0; i < 60; i++) {
       final x = rng.nextDouble() * size.width;
@@ -725,7 +730,7 @@ class _TrackPainter extends CustomPainter {
       Canvas canvas, Size size, double horizonY, double bHalfW) {
     final cx = size.width / 2;
     final dashPaint = Paint()
-      ..color = Colors.white.withOpacity(0.55)
+      ..color = Colors.white.withValues(alpha: 0.55)
       ..strokeWidth = 2.5
       ..strokeCap = StrokeCap.round;
 
@@ -766,7 +771,7 @@ class _TrackPainter extends CustomPainter {
         ..shader = LinearGradient(
           begin: Alignment.centerRight,
           end: Alignment.centerLeft,
-          colors: [Colors.transparent, Colors.black.withOpacity(0.22)],
+          colors: [Colors.transparent, Colors.black.withValues(alpha: 0.22)],
         ).createShader(Rect.fromLTWH(0, 0, cx, size.height)),
     );
     // Right edge vignette
@@ -781,7 +786,7 @@ class _TrackPainter extends CustomPainter {
         ..shader = LinearGradient(
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
-          colors: [Colors.transparent, Colors.black.withOpacity(0.22)],
+          colors: [Colors.transparent, Colors.black.withValues(alpha: 0.22)],
         ).createShader(Rect.fromLTWH(cx, 0, cx, size.height)),
     );
   }
@@ -1017,10 +1022,10 @@ class _ObstacleSprite extends StatelessWidget {
             height: size * 1.6,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Colors.red.withOpacity(0.18 * glowFactor),
+              color: Colors.red.withValues(alpha: 0.18 * glowFactor),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.red.withOpacity(0.35 * glowFactor),
+                  color: Colors.red.withValues(alpha: 0.35 * glowFactor),
                   blurRadius: 18,
                   spreadRadius: 4,
                 ),
@@ -1034,7 +1039,7 @@ class _ObstacleSprite extends StatelessWidget {
             width: size * 0.9,
             height: size * 0.12,
             decoration: BoxDecoration(
-              color: Colors.black.withOpacity(0.25),
+              color: Colors.black.withValues(alpha: 0.25),
               borderRadius: BorderRadius.circular(size),
             ),
           ),
@@ -1063,7 +1068,7 @@ class _FavillaSprite extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color: (stunned ? Colors.red : const Color(0xFFFFB300))
-                    .withOpacity(stunned ? 0.7 : 0.4),
+                    .withValues(alpha: stunned ? 0.7 : 0.4),
                 blurRadius: 18,
                 spreadRadius: stunned ? 6 : 2,
               ),
@@ -1092,7 +1097,7 @@ class _LexSprite extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
             decoration: BoxDecoration(
-              color: Colors.red.withOpacity(0.85),
+              color: Colors.red.withValues(alpha: 0.85),
               borderRadius: BorderRadius.circular(4),
             ),
             child: Text(
@@ -1161,8 +1166,8 @@ class _Hud extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
                 decoration: BoxDecoration(
                   color: secondsLeft <= 5
-                      ? Colors.red.withOpacity(0.85)
-                      : Colors.black.withOpacity(0.55),
+                      ? Colors.red.withValues(alpha: 0.85)
+                      : Colors.black.withValues(alpha: 0.55),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
@@ -1184,7 +1189,7 @@ class _Hud extends StatelessWidget {
             child: LinearProgressIndicator(
               value: timeProgress,
               minHeight: 5,
-              backgroundColor: Colors.white.withOpacity(0.15),
+              backgroundColor: Colors.white.withValues(alpha: 0.15),
               valueColor: AlwaysStoppedAnimation<Color>(
                 timeProgress > 0.5
                     ? const Color(0xFF4CAF50)
@@ -1207,7 +1212,7 @@ class _Hud extends StatelessWidget {
                   child: LinearProgressIndicator(
                     value: 1.0 - gap,
                     minHeight: 8,
-                    backgroundColor: Colors.white.withOpacity(0.15),
+                    backgroundColor: Colors.white.withValues(alpha: 0.15),
                     valueColor: AlwaysStoppedAnimation<Color>(
                       gap < 0.30
                           ? const Color(0xFF4CAF50)
@@ -1240,7 +1245,7 @@ class _Hud extends StatelessWidget {
                       ? const Color(0xFFFFD700)
                       : scintilleBoost < 0
                           ? const Color(0xFF90CAF9)
-                          : Colors.white.withOpacity(0.6),
+                          : Colors.white.withValues(alpha: 0.6),
                   letterSpacing: 0.5,
                 ),
               ),
@@ -1252,7 +1257,7 @@ class _Hud extends StatelessWidget {
               _gapLabel(gap),
               style: TextStyle(
                 fontSize: 11,
-                color: Colors.white.withOpacity(0.7),
+                color: Colors.white.withValues(alpha: 0.7),
                 letterSpacing: 1,
                 fontWeight: FontWeight.w600,
               ),

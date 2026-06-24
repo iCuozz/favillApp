@@ -3,6 +3,13 @@
   "audio_theme": "allagamento",
   "stat_entry": [
     {
+      "stat": "segreto",
+      "op": "lt",
+      "value": 8,
+      "goto_branch": "intro_segreto_rivelazione",
+      "prepend": true
+    },
+    {
       "stat": "legame",
       "op": "lt",
       "value": 40,
@@ -122,7 +129,6 @@
       "id": "intro_sola",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_1.png",
           "panels": [
             {
@@ -154,7 +160,83 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "isola_p0"
+        }
+      ]
+    },
+    "intro_segreto_rivelazione": {
+      "id": "intro_segreto_rivelazione",
+      "pages": [
+        {
+          "background": "assets/episodes/prologo/page_1.png",
+          "panels": [
+            {
+              "id": "isr_comare_a",
+              "characters": [
+                "favilla"
+              ],
+              "text_blocks": [
+                {
+                  "id": "isr_comare_a_t1",
+                  "type": "narration",
+                  "text": "Favilla è sul divano. Dieci minuti di silenzio. Ma non è vero silenzio — è quel tipo di quiete in cui ogni rumore del condominio ti fa sussultare."
+                },
+                {
+                  "id": "isr_comare_a_t2",
+                  "type": "narration",
+                  "text": "Il segreto è così fragile che quasi le brucia dentro. Ogni volta che Mallow la guarda, ogni volta che Lex fa un verso strano, ogni volta che il telefono squilla — il cuore accelera."
+                },
+                {
+                  "id": "isr_comare_a_t3",
+                  "type": "narration",
+                  "text": "Si sente osservata anche quando è sola. Perché forse non è mai sola. Non più."
+                },
+                {
+                  "id": "isr_comare_a_t4",
+                  "type": "thought",
+                  "speaker": "favilla",
+                  "text": "Non posso più sbagliare. Ogni parola, ogni gesto. Un passo falso e crolla tutto — Mallow, Lex, la normalità. Tutto."
+                }
+              ]
+            }
+          ],
+          "id": "isr_comare_p0"
+        },
+        {
+          "background": "assets/episodes/prologo/page_carmela.png",
+          "panels": [
+            {
+              "id": "isr_comare_b",
+              "characters": [
+                "favilla"
+              ],
+              "text_blocks": [
+                {
+                  "id": "isr_comare_b_t1",
+                  "type": "narration",
+                  "text": "Poi suonano alla porta. Una volta. Breve. Precisa."
+                },
+                {
+                  "id": "isr_comare_b_t2",
+                  "type": "narration",
+                  "text": "Favilla sa già chi è. Lo sente — letteralmente. Un ronzio sotto la pelle, come se qualcosa stesse tirando il filo a cui è appeso il segreto."
+                },
+                {
+                  "id": "isr_comare_b_t3",
+                  "type": "narration",
+                  "text": "Carmela non poteva scegliere momento peggiore. O migliore — per lei."
+                },
+                {
+                  "id": "isr_comare_b_t4",
+                  "type": "thought",
+                  "speaker": "favilla",
+                  "text": "Lei lo sa che sono fragile. Lo annusa. E io sto per aprire quella porta."
+                }
+              ]
+            }
+          ],
+          "id": "isr_comare_p1"
         }
       ]
     },
@@ -162,7 +244,6 @@
       "id": "branch_apre",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_1.png",
           "panels": [
             {
@@ -195,10 +276,10 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bapre_p0"
         },
         {
-          "index": 1,
           "background": "assets/episodes/prologo/page_3.png",
           "panels": [
             {
@@ -356,7 +437,8 @@
                 ]
               }
             }
-          ]
+          ],
+          "id": "bapre_p1"
         }
       ]
     },
@@ -364,7 +446,6 @@
       "id": "branch_non_apre",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_2.png",
           "panels": [
             {
@@ -398,10 +479,10 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bnon_a_p0"
         },
         {
-          "index": 1,
           "background": "assets/episodes/prologo/page_1.png",
           "panels": [
             {
@@ -428,7 +509,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bnon_a_p1"
         }
       ]
     },
@@ -436,7 +518,6 @@
       "id": "branch_carmela_bene",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_2.png",
           "panels": [
             {
@@ -470,10 +551,10 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bcarme_p0"
         },
         {
-          "index": 1,
           "background": "assets/episodes/prologo/page_1.png",
           "panels": [
             {
@@ -495,7 +576,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bcarme_p1"
         }
       ]
     },
@@ -503,7 +585,6 @@
       "id": "branch_carmela_quasi",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_2.png",
           "panels": [
             {
@@ -537,10 +618,10 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bcarme_p0"
         },
         {
-          "index": 1,
           "background": "assets/episodes/prologo/page_1.png",
           "panels": [
             {
@@ -567,7 +648,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bcarme_p1"
         }
       ]
     },
@@ -575,7 +657,6 @@
       "id": "branch_carmela_disastro",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_2.png",
           "panels": [
             {
@@ -608,10 +689,10 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bcarme_p0"
         },
         {
-          "index": 1,
           "background": "assets/episodes/prologo/page_3.png",
           "panels": [
             {
@@ -646,7 +727,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bcarme_p1"
         }
       ]
     }
@@ -655,7 +737,6 @@
     "id": "epilogue",
     "pages": [
       {
-        "index": 0,
         "background": "assets/episodes/prologo/page_4.png",
         "panels": [
           {
@@ -686,7 +767,8 @@
               }
             ]
           }
-        ]
+        ],
+        "id": "ep_p0"
       }
     ]
   }

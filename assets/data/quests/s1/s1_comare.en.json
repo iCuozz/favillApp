@@ -3,6 +3,13 @@
   "audio_theme": "allagamento",
   "stat_entry": [
     {
+      "stat": "segreto",
+      "op": "lt",
+      "value": 8,
+      "goto_branch": "intro_segreto_rivelazione",
+      "prepend": true
+    },
+    {
       "stat": "legame",
       "op": "lt",
       "value": 40,
@@ -25,17 +32,17 @@
             {
               "id": "comare_p0_a_t1",
               "type": "narration",
-              "text": "Afternoon. Mallow is out running an errand. Lex dozes in the playpen. Favilla has ten minutes of silence."
+              "text": "Afternoon. Mallow is out on an errand. Lex dozes in the playpen. Favilla has ten minutes of silence."
             },
             {
               "id": "comare_p0_a_t2",
               "type": "narration",
-              "text": "Then the doorbell rings. Once. Short. Precise."
+              "text": "Then the doorbell rings. Once. Brief. Precise."
             },
             {
               "id": "comare_p0_a_t3",
               "type": "narration",
-              "text": "Favilla looks through the peephole. Carmela. Straw hat. An envelope in her hand. Smiling."
+              "text": "Favilla looks through the peephole. Carmela. Straw hat. An envelope in hand. Smiling."
             },
             {
               "id": "comare_p0_a_t4",
@@ -60,13 +67,13 @@
             {
               "id": "comare_p1_a_t1",
               "type": "narration",
-              "text": "Through the peephole, Carmela is motionless. The envelope has the Bellow name on it — the neighbors downstairs."
+              "text": "Through the peephole, Carmela is motionless. The envelope has the Bellow family's name, the downstairs neighbors."
             },
             {
               "id": "comare_p1_a_t2",
               "type": "dialogue",
               "speaker": "carmela",
-              "text": "Mrs. Bellow? They delivered your mail to my door by mistake."
+              "text": "Mrs. Bellow? They delivered your mail wrong. They left it at my place."
             },
             {
               "id": "comare_p1_a_t3",
@@ -77,7 +84,7 @@
               "id": "comare_p1_a_t4",
               "type": "thought",
               "speaker": "favilla",
-              "text": "Lex. Lex stopped smiling. And that scares me more than Carmela."
+              "text": "Lex. Lex stopped laughing. And that scares me more than Carmela."
             }
           ],
           "choice": {
@@ -98,7 +105,7 @@
               },
               {
                 "id": "tieni_chiuso",
-                "label": "«Thanks, just leave it in the mail slot!»",
+                "label": "\"Thanks, just leave it in the mail slot!\"",
                 "goto_branch": "branch_non_apre",
                 "stat_effects": {
                   "segreto": 8,
@@ -122,7 +129,6 @@
       "id": "intro_sola",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_1.png",
           "panels": [
             {
@@ -139,7 +145,7 @@
                 {
                   "id": "intro_sola_a_t2",
                   "type": "narration",
-                  "text": "She hasn't really talked to anyone in days. Mallow tries to ask, but she deflects. She's gotten good at deflecting."
+                  "text": "It's been days since she's really talked to anyone. Mallow tries to ask, but she deflects. She's gotten good at deflecting."
                 },
                 {
                   "id": "intro_sola_a_t3",
@@ -154,7 +160,83 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "isola_p0"
+        }
+      ]
+    },
+    "intro_segreto_rivelazione": {
+      "id": "intro_segreto_rivelazione",
+      "pages": [
+        {
+          "background": "assets/episodes/prologo/page_1.png",
+          "panels": [
+            {
+              "id": "isr_comare_a",
+              "characters": [
+                "favilla"
+              ],
+              "text_blocks": [
+                {
+                  "id": "isr_comare_a_t1",
+                  "type": "narration",
+                  "text": "Favilla is on the couch. Ten minutes of silence. But it's not real silence — it's the kind of quiet where every sound from the building makes you flinch."
+                },
+                {
+                  "id": "isr_comare_a_t2",
+                  "type": "narration",
+                  "text": "The secret is so fragile it almost burns inside her. Every time Mallow looks at her, every time Lex makes a weird sound, every time the phone rings — her heart races."
+                },
+                {
+                  "id": "isr_comare_a_t3",
+                  "type": "narration",
+                  "text": "She feels watched even when she's alone. Because maybe she's never alone. Not anymore."
+                },
+                {
+                  "id": "isr_comare_a_t4",
+                  "type": "thought",
+                  "speaker": "favilla",
+                  "text": "I can't make any more mistakes. Every word, every gesture. One wrong move and everything collapses — Mallow, Lex, normalcy. Everything."
+                }
+              ]
+            }
+          ],
+          "id": "isr_comare_p0"
+        },
+        {
+          "background": "assets/episodes/prologo/page_carmela.png",
+          "panels": [
+            {
+              "id": "isr_comare_b",
+              "characters": [
+                "favilla"
+              ],
+              "text_blocks": [
+                {
+                  "id": "isr_comare_b_t1",
+                  "type": "narration",
+                  "text": "Then the doorbell rings. Once. Brief. Precise."
+                },
+                {
+                  "id": "isr_comare_b_t2",
+                  "type": "narration",
+                  "text": "Favilla already knows who it is. She feels it — literally. A hum under her skin, as if something is pulling the thread the secret hangs from."
+                },
+                {
+                  "id": "isr_comare_b_t3",
+                  "type": "narration",
+                  "text": "Carmela couldn't have picked a worse moment. Or a better one — for her."
+                },
+                {
+                  "id": "isr_comare_b_t4",
+                  "type": "thought",
+                  "speaker": "favilla",
+                  "text": "She knows I'm fragile. She can smell it. And I'm about to open that door."
+                }
+              ]
+            }
+          ],
+          "id": "isr_comare_p1"
         }
       ]
     },
@@ -162,7 +244,6 @@
       "id": "branch_apre",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_1.png",
           "panels": [
             {
@@ -175,7 +256,7 @@
                 {
                   "id": "branch_apre_a_t1",
                   "type": "narration",
-                  "text": "Favilla opens the door. Carmela enters with the calm of someone who has crossed this threshold a thousand times. Even though it's the first."
+                  "text": "Favilla opens the door. Carmela enters with the calm of someone who has crossed that threshold a thousand times. Even though it's the first."
                 },
                 {
                   "id": "branch_apre_a_t2",
@@ -186,19 +267,19 @@
                 {
                   "id": "branch_apre_a_t3",
                   "type": "narration",
-                  "text": "She looks around. Not like someone admiring decor. Like someone taking notes."
+                  "text": "She looks around. Not like someone admiring décor. Like someone taking notes."
                 },
                 {
                   "id": "branch_apre_a_t4",
                   "type": "narration",
-                  "text": "Lex in the playpen is motionless. His eyes follow Carmela like she's a predator. He's never looked at anyone like this."
+                  "text": "Lex in the playpen is motionless. His eyes follow Carmela as if she were a predator. He's never looked at anyone like this."
                 }
               ]
             }
-          ]
+          ],
+          "id": "bapre_p0"
         },
         {
-          "index": 1,
           "background": "assets/episodes/prologo/page_3.png",
           "panels": [
             {
@@ -217,7 +298,7 @@
                 {
                   "id": "branch_apre_b_t2",
                   "type": "narration",
-                  "text": "Favilla feels something. A hum. Under her skin. Like when the Sparks activate, but in reverse. As if something is draining her warmth."
+                  "text": "Favilla feels something. A hum. Under her skin. Like when the Sparks activate, but in reverse. As if something were draining her heat."
                 },
                 {
                   "id": "branch_apre_b_t3",
@@ -232,7 +313,7 @@
                 "options": [
                   {
                     "id": "affronta_carmela",
-                    "label": "Answer. Stay calm.",
+                    "label": "Answer. Calmly.",
                     "stat_effects": {
                       "segreto": -5,
                       "resistenza": -5
@@ -242,7 +323,7 @@
                       "extra": {
                         "questions": [
                           {
-                            "text": "\"So peaceful here. You wouldn't say from outside. There's something different about you, Favilla.\"",
+                            "text": "\"Such peace in here. You wouldn't tell from outside. There's something different about you, Favilla.\"",
                             "timer": 4.0,
                             "options": [
                               {
@@ -250,7 +331,7 @@
                                 "safe": true
                               },
                               {
-                                "label": "\"I've been feeling good lately.\"",
+                                "label": "\"I've been feeling good, lately.\"",
                                 "safe": true
                               },
                               {
@@ -261,15 +342,15 @@
                             "timeout_index": 2
                           },
                           {
-                            "text": "\"Funny thing, the other day I heard a strange noise from your floor. It was late.\"",
+                            "text": "\"It's funny, the other day I heard a strange noise from your floor. It was late.\"",
                             "timer": 3.5,
                             "options": [
                               {
-                                "label": "\"Oh, that was probably Lex playing on the floor.\"",
+                                "label": "\"Oh, it was probably Lex playing on the floor.\"",
                                 "safe": true
                               },
                               {
-                                "label": "\"I didn't hear anything, I was probably asleep.\"",
+                                "label": "\"I didn't hear anything, maybe I was asleep.\"",
                                 "safe": true
                               },
                               {
@@ -284,11 +365,11 @@
                             "timer": 3.0,
                             "options": [
                               {
-                                "label": "\"Must've been a barbecue. There were tons of people.\"",
+                                "label": "\"Probably a barbecue. There were lots of people.\"",
                                 "safe": true
                               },
                               {
-                                "label": "\"The park is big, it could've been anyone.\"",
+                                "label": "\"The park is big, it could have been anyone.\"",
                                 "safe": true
                               },
                               {
@@ -303,7 +384,7 @@
                             "timer": 2.5,
                             "options": [
                               {
-                                "label": "\"Must be Mallow's TV, he keeps his monitor on late.\"",
+                                "label": "\"Must be Mallow's TV, he keeps the monitor on late.\"",
                                 "safe": true
                               },
                               {
@@ -311,7 +392,7 @@
                                 "safe": true
                               },
                               {
-                                "label": "\"What have you seen? Exactly?\"",
+                                "label": "\"What did you see? Exactly?\"",
                                 "safe": false
                               }
                             ],
@@ -322,7 +403,7 @@
                       "tiers": [
                         {
                           "min": 3,
-                          "label": "Untouchable.",
+                          "label": "Unshakeable.",
                           "goto_branch": "branch_carmela_bene",
                           "stat_effects": {
                             "segreto": 10,
@@ -331,7 +412,7 @@
                         },
                         {
                           "min": 1,
-                          "label": "Shaky.",
+                          "label": "Wobbly.",
                           "goto_branch": "branch_carmela_quasi",
                           "stat_effects": {
                             "segreto": -5,
@@ -356,7 +437,8 @@
                 ]
               }
             }
-          ]
+          ],
+          "id": "bapre_p1"
         }
       ]
     },
@@ -364,7 +446,6 @@
       "id": "branch_non_apre",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_2.png",
           "panels": [
             {
@@ -388,20 +469,20 @@
                 {
                   "id": "branch_non_apre_a_t3",
                   "type": "narration",
-                  "text": "Favilla holds her breath. Lex watches from the playpen. He understood."
+                  "text": "Favilla holds her breath. Lex watches her from the playpen. He understood."
                 },
                 {
                   "id": "branch_non_apre_a_t4",
                   "type": "thought",
                   "speaker": "favilla",
-                  "text": "Not opening was the right call. But she knows I'm afraid. And fear is what she's looking for."
+                  "text": "Not opening was the right choice. But she knows I'm afraid. And fear is what she's looking for."
                 }
               ]
             }
-          ]
+          ],
+          "id": "bnon_a_p0"
         },
         {
-          "index": 1,
           "background": "assets/episodes/prologo/page_1.png",
           "panels": [
             {
@@ -413,22 +494,23 @@
                 {
                   "id": "branch_non_apre_b_t1",
                   "type": "narration",
-                  "text": "Favilla waits ten seconds. Then goes to the door. The envelope is there — really addressed to the Bellows."
+                  "text": "Favilla waits ten seconds. Then goes to the door. The envelope is there — actually addressed to the Bellows."
                 },
                 {
                   "id": "branch_non_apre_b_t2",
                   "type": "narration",
-                  "text": "Maybe it was a real excuse. Maybe not. With Carmela, you can never know."
+                  "text": "Maybe it was a real excuse. Maybe not. With Carmela you can never know."
                 },
                 {
                   "id": "branch_non_apre_b_t3",
                   "type": "thought",
                   "speaker": "favilla",
-                  "text": "She'll be back. I gave her what she wanted: certainty that I'm hiding."
+                  "text": "She'll be back. I gave her what she wanted: proof that I'm hiding."
                 }
               ]
             }
-          ]
+          ],
+          "id": "bnon_a_p1"
         }
       ]
     },
@@ -436,7 +518,6 @@
       "id": "branch_carmela_bene",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_2.png",
           "panels": [
             {
@@ -460,7 +541,7 @@
                 {
                   "id": "branch_carmela_bene_a_t3",
                   "type": "narration",
-                  "text": "She turns toward the door. Hesitates for a second. Then leaves. Favilla closes it and leans against it. Exhales."
+                  "text": "She turns toward the door. Hesitates for a second. Then leaves. Favilla closes the door and leans against it. Breathes."
                 },
                 {
                   "id": "branch_carmela_bene_a_t4",
@@ -470,10 +551,10 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bcarme_p0"
         },
         {
-          "index": 1,
           "background": "assets/episodes/prologo/page_1.png",
           "panels": [
             {
@@ -486,16 +567,17 @@
                 {
                   "id": "branch_carmela_bene_b_t1",
                   "type": "narration",
-                  "text": "Lex has started playing again. Carmela is gone and he's back to normal. As if the danger had passed."
+                  "text": "Lex has started playing again. Carmela is gone and he's back to normal. As if the danger has passed."
                 },
                 {
                   "id": "branch_carmela_bene_b_t2",
                   "type": "narration",
-                  "text": "Favilla picks him up. He touches her hair. No warmth. No Sparks. Just mom and baby."
+                  "text": "Favilla picks him up. He touches her hair. No heat. No Spark. Just mom and baby."
                 }
               ]
             }
-          ]
+          ],
+          "id": "bcarme_p1"
         }
       ]
     },
@@ -503,7 +585,6 @@
       "id": "branch_carmela_quasi",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_2.png",
           "panels": [
             {
@@ -527,20 +608,20 @@
                 {
                   "id": "branch_carmela_quasi_a_t3",
                   "type": "narration",
-                  "text": "At the door, she stops. She doesn't turn around."
+                  "text": "At the door, she stops. Doesn't turn around."
                 },
                 {
                   "id": "branch_carmela_quasi_a_t4",
                   "type": "dialogue",
                   "speaker": "carmela",
-                  "text": "Oh, I almost forgot. Come by and say hello sometime. I'd like that."
+                  "text": "Oh, I forgot. Come visit me sometime, when you can. I'd like that."
                 }
               ]
             }
-          ]
+          ],
+          "id": "bcarme_p0"
         },
         {
-          "index": 1,
           "background": "assets/episodes/prologo/page_1.png",
           "panels": [
             {
@@ -552,22 +633,23 @@
                 {
                   "id": "branch_carmela_quasi_b_t1",
                   "type": "narration",
-                  "text": "The door closes. Favilla stares at the wood. 'Come by and say hello.' That wasn't an invitation. That was a summons."
+                  "text": "The door closes. Favilla stares at the wood. 'Come visit me.' It wasn't an invitation. It was a summons."
                 },
                 {
                   "id": "branch_carmela_quasi_b_t2",
                   "type": "narration",
-                  "text": "Lex watches the door from his playpen. Then looks at Favilla. Same expression as when he almost hacked the notebook."
+                  "text": "Lex from the playpen watches the door. Then watches Favilla. He has the same expression as when he almost hacked the notebook."
                 },
                 {
                   "id": "branch_carmela_quasi_b_t3",
                   "type": "thought",
                   "speaker": "favilla",
-                  "text": "She sniffed me out. She doesn't know what it is, but she knows there's something."
+                  "text": "She sniffed me. She doesn't know what it is, but she knows something's there."
                 }
               ]
             }
-          ]
+          ],
+          "id": "bcarme_p1"
         }
       ]
     },
@@ -575,7 +657,6 @@
       "id": "branch_carmela_disastro",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_2.png",
           "panels": [
             {
@@ -588,30 +669,30 @@
                 {
                   "id": "branch_carmela_disastro_a_t1",
                   "type": "narration",
-                  "text": "Carmela is no longer smiling. She stands up. She gets closer. Too close."
+                  "text": "Carmela isn't smiling anymore. She stands up. Gets closer. Too close."
                 },
                 {
                   "id": "branch_carmela_disastro_a_t2",
                   "type": "dialogue",
                   "speaker": "carmela",
-                  "text": "You're carrying something big inside you. I can feel it."
+                  "text": "You carry something big inside you. I can feel it."
                 },
                 {
                   "id": "branch_carmela_disastro_a_t3",
                   "type": "narration",
-                  "text": "Favilla feels the hum intensify. As if Carmela is draining something from her. Her hair trembles — once, imperceptibly."
+                  "text": "Favilla feels the hum increase. As if Carmela is draining something from her. Her hair quivers — just once, imperceptibly."
                 },
                 {
                   "id": "branch_carmela_disastro_a_t4",
                   "type": "narration",
-                  "text": "Carmela notices. She doesn't say anything. But she notices."
+                  "text": "Carmela notices. She says nothing. But she notices."
                 }
               ]
             }
-          ]
+          ],
+          "id": "bcarme_p0"
         },
         {
-          "index": 1,
           "background": "assets/episodes/prologo/page_3.png",
           "panels": [
             {
@@ -625,13 +706,13 @@
                 {
                   "id": "branch_carmela_disastro_b_t1",
                   "type": "narration",
-                  "text": "At the door, Carmela turns around. Lex stares at her from the playpen. He never once looked away."
+                  "text": "At the door, Carmela turns around. Lex stares at her from the playpen. He hasn't looked away. Not once."
                 },
                 {
                   "id": "branch_carmela_disastro_b_t2",
                   "type": "dialogue",
                   "speaker": "carmela",
-                  "text": "What a clever child. He feels it too, doesn't he?"
+                  "text": "What a bright child. He... feels it too, doesn't he?"
                 },
                 {
                   "id": "branch_carmela_disastro_b_t3",
@@ -642,11 +723,12 @@
                   "id": "branch_carmela_disastro_b_t4",
                   "type": "thought",
                   "speaker": "favilla",
-                  "text": "She left a mark. I don't know what. But it's in here now. And she didn't really leave."
+                  "text": "She left a mark. I don't know what. But it's in here. And she never really left."
                 }
               ]
             }
-          ]
+          ],
+          "id": "bcarme_p1"
         }
       ]
     }
@@ -655,7 +737,6 @@
     "id": "epilogue",
     "pages": [
       {
-        "index": 0,
         "background": "assets/episodes/prologo/page_4.png",
         "panels": [
           {
@@ -677,16 +758,17 @@
               {
                 "id": "comare_epilogue_a_t3",
                 "type": "narration",
-                "text": "Lex sleeps in the playpen. Restless sleep. As if he's dreaming of something dark."
+                "text": "Lex sleeps in the playpen. Restless sleep. As if dreaming of something dark."
               },
               {
                 "id": "comare_epilogue_a_t4",
                 "type": "system",
-                "text": "MISSION COMPLETE — The Godmother"
+                "text": "MISSION COMPLETE — The Nosy Neighbor"
               }
             ]
           }
-        ]
+        ],
+        "id": "ep_p0"
       }
     ]
   }

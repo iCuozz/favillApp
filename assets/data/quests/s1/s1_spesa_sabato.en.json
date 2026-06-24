@@ -57,7 +57,8 @@
             {
               "id": "ss0_0_tb_5",
               "type": "thought",
-              "text": "What a good boy. Looks at everything so calmly."
+              "text": "What a good boy. Looks at everything so calmly.",
+              "speaker": "favilla"
             },
             {
               "id": "ss0_0_tb_6",
@@ -246,7 +247,8 @@
                 {
                   "id": "imc_0_p0_tb_1",
                   "type": "thought",
-                  "text": "Again. More and more."
+                  "text": "Again. More and more.",
+                  "speaker": "favilla"
                 },
                 {
                   "id": "imc_0_p0_tb_2",
@@ -256,7 +258,8 @@
                 {
                   "id": "imc_0_p0_tb_3",
                   "type": "thought",
-                  "text": "Supermarket. List. Home. Simple."
+                  "text": "Supermarket. List. Home. Simple.",
+                  "speaker": "favilla"
                 }
               ],
               "interactions": []
@@ -399,7 +402,8 @@
                 {
                   "id": "bt_2_p0_tb_5",
                   "type": "thought",
-                  "text": "No. He didn't understand. He's just a baby. He saw lights, noise. It scared him. It happens."
+                  "text": "No. He didn't understand. He's just a baby. He saw lights, noise. It scared him. It happens.",
+                  "speaker": "favilla"
                 },
                 {
                   "id": "bt_2_p0_tb_6",
@@ -444,7 +448,8 @@
                 {
                   "id": "bp_0_p0_tb_2",
                   "type": "thought",
-                  "text": "No."
+                  "text": "No.",
+                  "speaker": "favilla"
                 },
                 {
                   "id": "bp_0_p0_tb_3",
@@ -476,7 +481,8 @@
                 {
                   "id": "bp_0_p0_tb_8",
                   "type": "thought",
-                  "text": "Exactly, 'eh'. Deferred."
+                  "text": "Exactly, 'eh'. Deferred.",
+                  "speaker": "favilla"
                 }
               ],
               "interactions": []
@@ -545,12 +551,14 @@
                 {
                   "id": "bp_1_p0_tb_9",
                   "type": "thought",
-                  "text": "Who is she?"
+                  "text": "Who is she?",
+                  "speaker": "favilla"
                 },
                 {
                   "id": "bp_1_p0_tb_10",
                   "type": "thought",
-                  "text": "Why was she looking at my hands?"
+                  "text": "Why was she looking at my hands?",
+                  "speaker": "favilla"
                 }
               ],
               "interactions": []
@@ -585,12 +593,14 @@
                 {
                   "id": "eo_0_p0_tb_2",
                   "type": "thought",
-                  "text": "A seven-month-old baby just tried to make me transform in the pasta aisle."
+                  "text": "A seven-month-old baby just tried to make me transform in the pasta aisle.",
+                  "speaker": "favilla"
                 },
                 {
                   "id": "eo_0_p0_tb_3",
                   "type": "thought",
-                  "text": "With a fabric bear."
+                  "text": "With a fabric bear.",
+                  "speaker": "favilla"
                 },
                 {
                   "id": "eo_0_p0_tb_4",
@@ -600,12 +610,14 @@
                 {
                   "id": "eo_0_p0_tb_5",
                   "type": "thought",
-                  "text": "It'll get better. I'm learning."
+                  "text": "It'll get better. I'm learning.",
+                  "speaker": "favilla"
                 },
                 {
                   "id": "eo_0_p0_tb_6",
                   "type": "thought",
-                  "text": "Him too."
+                  "text": "Him too.",
+                  "speaker": "favilla"
                 }
               ],
               "interactions": []
@@ -634,12 +646,14 @@
                 {
                   "id": "ec_0_p0_tb_1",
                   "type": "thought",
-                  "text": "She was looking at my hands. Not Lex. Not the jars. My hands."
+                  "text": "She was looking at my hands. Not Lex. Not the jars. My hands.",
+                  "speaker": "favilla"
                 },
                 {
                   "id": "ec_0_p0_tb_2",
                   "type": "thought",
-                  "text": "As if he already knows what to look for."
+                  "text": "As if he already knows what to look for.",
+                  "speaker": "favilla"
                 },
                 {
                   "id": "ec_0_p0_tb_3",
@@ -649,7 +663,8 @@
                 {
                   "id": "ec_0_p0_tb_4",
                   "type": "thought",
-                  "text": "I need to be more careful. About everything."
+                  "text": "I need to be more careful. About everything.",
+                  "speaker": "favilla"
                 },
                 {
                   "id": "ec_0_p0_tb_5",
@@ -681,20 +696,20 @@
               "characters": [],
               "text_blocks": [
                 {
-                  "speaker": "",
-                  "text": "The bear hits the side of the shelf."
+                  "text": "The bear hits the side of the shelf.",
+                  "type": "narration"
                 },
                 {
-                  "speaker": "",
-                  "text": "Three jars fall. A dull thud. One rolls to the middle of the aisle."
+                  "text": "Three jars fall. A dull thud. One rolls to the middle of the aisle.",
+                  "type": "narration"
                 },
                 {
-                  "speaker": "",
-                  "text": "Favilla turns around."
+                  "text": "Favilla turns around.",
+                  "type": "narration"
                 },
                 {
-                  "speaker": "",
-                  "text": "Jars on the floor. Lex still holding the dummy cord. That face."
+                  "text": "Jars on the floor. Lex still holding the dummy cord. That face.",
+                  "type": "narration"
                 }
               ],
               "interactions": []
@@ -710,20 +725,20 @@
               "characters": [],
               "text_blocks": [
                 {
-                  "speaker": "",
-                  "text": "Favilla's hands warm up. Just for a moment. Not enough."
+                  "text": "Favilla's hands warm up. Just for a moment. Not enough.",
+                  "type": "narration"
                 },
                 {
-                  "speaker": "",
-                  "text": "A woman with a bag stops and looks at the jars."
+                  "text": "A woman with a bag stops and looks at the jars.",
+                  "type": "narration"
                 },
                 {
-                  "speaker": "",
-                  "text": "Then looks at Lex. Then Favilla."
+                  "text": "Then looks at Lex. Then Favilla.",
+                  "type": "narration"
                 },
                 {
-                  "speaker": "",
-                  "text": "Favilla feels her hair — just the tips — tremble slightly. Like when there's too much electricity in the air."
+                  "text": "Favilla feels her hair — just the tips — tremble slightly. Like when there's too much electricity in the air.",
+                  "type": "narration"
                 }
               ],
               "interactions": []
@@ -770,20 +785,20 @@
               "characters": [],
               "text_blocks": [
                 {
-                  "speaker": "",
-                  "text": "The bear shoots through the air. Clears it."
+                  "text": "The bear shoots through the air. Clears it.",
+                  "type": "narration"
                 },
                 {
-                  "speaker": "",
-                  "text": "It lands softly on the floor a metre from the shelves."
+                  "text": "It lands softly on the floor a metre from the shelves.",
+                  "type": "narration"
                 },
                 {
-                  "speaker": "",
-                  "text": "Silence. The shelves are intact. The jars still."
+                  "text": "Silence. The shelves are intact. The jars still.",
+                  "type": "narration"
                 },
                 {
-                  "speaker": "",
-                  "text": "Favilla didn't even turn around."
+                  "text": "Favilla didn't even turn around.",
+                  "type": "narration"
                 }
               ],
               "interactions": []
@@ -800,15 +815,16 @@
               "text_blocks": [
                 {
                   "speaker": "lex",
-                  "text": "..."
+                  "text": "...",
+                  "type": "dialogue"
                 },
                 {
-                  "speaker": "",
-                  "text": "Lex stares at the bear. Then the shelves. Then the bear again."
+                  "text": "Lex stares at the bear. Then the shelves. Then the bear again.",
+                  "type": "narration"
                 },
                 {
-                  "speaker": "",
-                  "text": "The plan was perfect in theory."
+                  "text": "The plan was perfect in theory.",
+                  "type": "narration"
                 }
               ],
               "interactions": []
@@ -824,28 +840,29 @@
               "characters": [],
               "text_blocks": [
                 {
-                  "speaker": "",
-                  "text": "At the checkout. Favilla places the items on the belt."
+                  "text": "At the checkout. Favilla places the items on the belt.",
+                  "type": "narration"
                 },
                 {
-                  "speaker": "",
-                  "text": "Lex is in the pushchair. Legs still for the first time today."
+                  "text": "Lex is in the pushchair. Legs still for the first time today.",
+                  "type": "narration"
                 },
                 {
-                  "speaker": "",
-                  "text": "Looking at the ceiling with the eyes of someone already redesigning everything."
+                  "text": "Looking at the ceiling with the eyes of someone already redesigning everything.",
+                  "type": "narration"
                 },
                 {
                   "speaker": "lex",
-                  "text": "..."
+                  "text": "...",
+                  "type": "dialogue"
                 },
                 {
-                  "speaker": "",
-                  "text": "Next time it needs more speed. Or a heavier dummy."
+                  "text": "Next time it needs more speed. Or a heavier dummy.",
+                  "type": "narration"
                 },
                 {
-                  "speaker": "",
-                  "text": "Or both."
+                  "text": "Or both.",
+                  "type": "narration"
                 }
               ],
               "interactions": []
@@ -866,24 +883,25 @@
               "characters": [],
               "text_blocks": [
                 {
-                  "speaker": "",
-                  "text": "She picks them up. One, two, three. Puts them back on the shelf."
+                  "text": "She picks them up. One, two, three. Puts them back on the shelf.",
+                  "type": "narration"
                 },
                 {
-                  "speaker": "",
-                  "text": "The woman nods and moves on."
+                  "text": "The woman nods and moves on.",
+                  "type": "narration"
                 },
                 {
-                  "speaker": "",
-                  "text": "The tips of her hair tremble for a few more seconds, then settle."
+                  "text": "The tips of her hair tremble for a few more seconds, then settle.",
+                  "type": "narration"
                 },
                 {
                   "speaker": "favilla",
-                  "text": "Everything's fine."
+                  "text": "Everything's fine.",
+                  "type": "dialogue"
                 },
                 {
-                  "speaker": "",
-                  "text": "It's not clear who he's saying it to."
+                  "text": "It's not clear who he's saying it to.",
+                  "type": "narration"
                 }
               ],
               "interactions": []
@@ -899,20 +917,20 @@
               "characters": [],
               "text_blocks": [
                 {
-                  "speaker": "",
-                  "text": "At the checkout. Favilla places the items on the belt."
+                  "text": "At the checkout. Favilla places the items on the belt.",
+                  "type": "narration"
                 },
                 {
-                  "speaker": "",
-                  "text": "Lex is in the pushchair, too quiet."
+                  "text": "Lex is in the pushchair, too quiet.",
+                  "type": "narration"
                 },
                 {
-                  "speaker": "",
-                  "text": "Looking at the ceiling with the expression of someone already revising the calculations."
+                  "text": "Looking at the ceiling with the expression of someone already revising the calculations.",
+                  "type": "narration"
                 },
                 {
-                  "speaker": "",
-                  "text": "Suspicious silence."
+                  "text": "Suspicious silence.",
+                  "type": "narration"
                 }
               ],
               "interactions": []
@@ -933,20 +951,20 @@
               "characters": [],
               "text_blocks": [
                 {
-                  "speaker": "",
-                  "text": "She turns the trolley. Walks away."
+                  "text": "She turns the trolley. Walks away.",
+                  "type": "narration"
                 },
                 {
-                  "speaker": "",
-                  "text": "A jar is still rolling across the floor behind her."
+                  "text": "A jar is still rolling across the floor behind her.",
+                  "type": "narration"
                 },
                 {
-                  "speaker": "",
-                  "text": "The woman with the bag watches her go."
+                  "text": "The woman with the bag watches her go.",
+                  "type": "narration"
                 },
                 {
-                  "speaker": "",
-                  "text": "Favilla doesn't turn around."
+                  "text": "Favilla doesn't turn around.",
+                  "type": "narration"
                 }
               ],
               "interactions": []
@@ -962,20 +980,20 @@
               "characters": [],
               "text_blocks": [
                 {
-                  "speaker": "",
-                  "text": "At the checkout. Favilla places the items on the belt."
+                  "text": "At the checkout. Favilla places the items on the belt.",
+                  "type": "narration"
                 },
                 {
-                  "speaker": "",
-                  "text": "Lex is in the pushchair, too quiet."
+                  "text": "Lex is in the pushchair, too quiet.",
+                  "type": "narration"
                 },
                 {
-                  "speaker": "",
-                  "text": "Looking at the ceiling with the expression of someone already revising the calculations."
+                  "text": "Looking at the ceiling with the expression of someone already revising the calculations.",
+                  "type": "narration"
                 },
                 {
-                  "speaker": "",
-                  "text": "Suspicious silence."
+                  "text": "Suspicious silence.",
+                  "type": "narration"
                 }
               ],
               "interactions": []
@@ -987,7 +1005,6 @@
     "intro_esausta": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_spesa_sabato/page_0.webp",
           "panels": [
             {
@@ -1015,11 +1032,13 @@
                 {
                   "id": "sp_esausta_0_tb_3",
                   "type": "thought",
-                  "text": "One more aisle. Then the checkout. Then home. I can do this."
+                  "text": "One more aisle. Then the checkout. Then home. I can do this.",
+                  "speaker": "favilla"
                 }
               ]
             }
-          ]
+          ],
+          "id": "iesaus_p0"
         }
       ]
     }
@@ -1050,7 +1069,8 @@
               {
                 "id": "ep_uscita_p0_tb_2",
                 "type": "thought",
-                "text": "Suspicious silence."
+                "text": "Suspicious silence.",
+                "speaker": "favilla"
               }
             ],
             "interactions": []

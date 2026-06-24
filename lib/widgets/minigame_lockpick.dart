@@ -165,7 +165,7 @@ class _MinigameLockpickScreenState extends State<MinigameLockpickScreen>
               ),
             ),
             Text(
-              '${_fixedCount}/$_kTotalPins pin fissati',
+              '$_fixedCount/$_kTotalPins pin fissati',
               style: const TextStyle(color: Colors.white70, fontSize: 14),
             ),
             const SizedBox(height: 20),
@@ -212,9 +212,9 @@ class _MinigameLockpickScreenState extends State<MinigameLockpickScreen>
           children: [
             // Green zone indicator
             Positioned(
-              top: (1 - (zone - _kGreenZoneWidth / 2) / _kIndicatorRange) *
-                      240 +
-                  10,
+              top:
+                  (1 - (zone - _kGreenZoneWidth / 2) / _kIndicatorRange) * 240 +
+                      10,
               left: 8,
               right: 8,
               height: (_kGreenZoneWidth / _kIndicatorRange) * 240,
@@ -233,16 +233,16 @@ class _MinigameLockpickScreenState extends State<MinigameLockpickScreen>
               height: 12,
               child: Container(
                 decoration: BoxDecoration(
-                  color: fixed
-                      ? Colors.greenAccent
-                      : Colors.pinkAccent,
+                  color: fixed ? Colors.greenAccent : Colors.pinkAccent,
                   borderRadius: BorderRadius.circular(6),
                   boxShadow: fixed
                       ? []
-                      : [BoxShadow(
-                          color: Colors.pinkAccent.withValues(alpha: 0.5),
-                          blurRadius: 8,
-                        )],
+                      : [
+                          BoxShadow(
+                            color: Colors.pinkAccent.withValues(alpha: 0.5),
+                            blurRadius: 8,
+                          )
+                        ],
                 ),
               ),
             ),
@@ -331,7 +331,7 @@ class _MinigameLockpickScreenState extends State<MinigameLockpickScreen>
               ),
               const SizedBox(height: 12),
               Text(
-                'Hai ${_kTimerSeconds} secondi prima che\nl\'acqua arrivi sotto la porta.',
+                'Hai $_kTimerSeconds secondi prima che\nl\'acqua arrivi sotto la porta.',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.grey.shade500,
@@ -342,8 +342,8 @@ class _MinigameLockpickScreenState extends State<MinigameLockpickScreen>
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.pinkAccent,
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 48, vertical: 16),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 48, vertical: 16),
                 ),
                 onPressed: () => setState(() => _tutorialDone = true),
                 child: const Text('INIZIA'),

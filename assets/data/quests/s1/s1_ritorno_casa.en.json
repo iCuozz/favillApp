@@ -135,7 +135,6 @@
     "intro_vestiti_bruciati": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_ritorno_casa/ivb_0.webp",
           "panels": [
             {
@@ -182,10 +181,10 @@
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "ivesti_p0"
         },
         {
-          "index": 1,
           "background": "assets/episodes/s1/s1_ritorno_casa/ivb_1.webp",
           "panels": [
             {
@@ -214,10 +213,10 @@
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "ivesti_p1"
         },
         {
-          "index": 2,
           "background": "assets/episodes/s1/s1_ritorno_casa/ivb_2.webp",
           "panels": [
             {
@@ -264,10 +263,10 @@
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "ivesti_p2"
         },
         {
-          "index": 3,
           "background": "assets/episodes/s1/s1_ritorno_casa/ivb_3.webp",
           "panels": [
             {
@@ -302,10 +301,10 @@
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "ivesti_p3"
         },
         {
-          "index": 4,
           "background": "assets/episodes/s1/s1_ritorno_casa/ivb_4.webp",
           "panels": [
             {
@@ -408,14 +407,14 @@
                 }
               }
             ]
-          }
+          },
+          "id": "ivesti_p4"
         }
       ]
     },
     "branch_bisbiglia": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_ritorno_casa/branch_bisbiglia.webp",
           "panels": [
             {
@@ -433,7 +432,8 @@
                 {
                   "id": "bb_0_0_tb_1",
                   "type": "thought",
-                  "text": "You already know, don't you. You've known from the start."
+                  "text": "You already know, don't you. You've known from the start.",
+                  "speaker": "favilla"
                 },
                 {
                   "id": "bb_0_0_tb_2",
@@ -443,7 +443,8 @@
                 {
                   "id": "bb_0_0_tb_3",
                   "type": "thought",
-                  "text": "I need to learn to control it. Not for myself. For you."
+                  "text": "I need to learn to control it. Not for myself. For you.",
+                  "speaker": "favilla"
                 },
                 {
                   "id": "bb_0_0_tb_4",
@@ -453,7 +454,8 @@
                 {
                   "id": "bb_0_0_tb_5",
                   "type": "thought",
-                  "text": "You already know everything. Help me understand how it works, sometimes?"
+                  "text": "You already know everything. Help me understand how it works, sometimes?",
+                  "speaker": "favilla"
                 },
                 {
                   "id": "bb_0_0_tb_6",
@@ -468,14 +470,14 @@
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bbisbi_p0"
         }
       ]
     },
     "branch_stringe": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_ritorno_casa/branch_stringe.webp",
           "panels": [
             {
@@ -498,7 +500,8 @@
                 {
                   "id": "bs_0_0_tb_2",
                   "type": "thought",
-                  "text": "I need to learn to control it. Not for myself. For you."
+                  "text": "I need to learn to control it. Not for myself. For you.",
+                  "speaker": "favilla"
                 },
                 {
                   "id": "bs_0_0_tb_3",
@@ -508,7 +511,8 @@
                 {
                   "id": "bs_0_0_tb_4",
                   "type": "thought",
-                  "text": "You already know everything. Help me understand how it works, sometimes?"
+                  "text": "You already know everything. Help me understand how it works, sometimes?",
+                  "speaker": "favilla"
                 },
                 {
                   "id": "bs_0_0_tb_5",
@@ -523,14 +527,14 @@
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bstrin_p0"
         }
       ]
     },
     "branch_ride": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_ritorno_casa/branch_ride.webp",
           "panels": [
             {
@@ -582,17 +586,20 @@
                 {
                   "id": "br_0_0_tb_7",
                   "type": "thought",
-                  "text": "You tried everything you had. Fingers, the bag, your arms."
+                  "text": "You tried everything you had. Fingers, the bag, your arms.",
+                  "speaker": "favilla"
                 },
                 {
                   "id": "br_0_0_tb_8",
                   "type": "thought",
-                  "text": "You were magnificent."
+                  "text": "You were magnificent.",
+                  "speaker": "favilla"
                 },
                 {
                   "id": "br_0_0_tb_9",
                   "type": "thought",
-                  "text": "Please never do that again."
+                  "text": "Please never do that again.",
+                  "speaker": "favilla"
                 },
                 {
                   "id": "br_0_0_tb_10",
@@ -602,12 +609,14 @@
                 {
                   "id": "br_0_0_tb_11",
                   "type": "thought",
-                  "text": "I need to learn to control it. Not for myself."
+                  "text": "I need to learn to control it. Not for myself.",
+                  "speaker": "favilla"
                 },
                 {
                   "id": "br_0_0_tb_12",
                   "type": "thought",
-                  "text": "For you."
+                  "text": "For you.",
+                  "speaker": "favilla"
                 },
                 {
                   "id": "br_0_0_tb_13",
@@ -617,14 +626,14 @@
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bride_p0"
         }
       ]
     },
     "branch_letto": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_ritorno_casa/branch_letto.webp",
           "panels": [
             {
@@ -642,7 +651,8 @@
                 {
                   "id": "bl_0_0_tb_1",
                   "type": "thought",
-                  "text": "At least one of us knows what they're doing."
+                  "text": "At least one of us knows what they're doing.",
+                  "speaker": "favilla"
                 },
                 {
                   "id": "bl_0_0_tb_2",
@@ -652,17 +662,20 @@
                 {
                   "id": "bl_0_0_tb_3",
                   "type": "thought",
-                  "text": "You tried everything you had. Fingers, the bag, your arms."
+                  "text": "You tried everything you had. Fingers, the bag, your arms.",
+                  "speaker": "favilla"
                 },
                 {
                   "id": "bl_0_0_tb_4",
                   "type": "thought",
-                  "text": "You were magnificent."
+                  "text": "You were magnificent.",
+                  "speaker": "favilla"
                 },
                 {
                   "id": "bl_0_0_tb_5",
                   "type": "thought",
-                  "text": "Please never do that again."
+                  "text": "Please never do that again.",
+                  "speaker": "favilla"
                 },
                 {
                   "id": "bl_0_0_tb_6",
@@ -672,12 +685,14 @@
                 {
                   "id": "bl_0_0_tb_7",
                   "type": "thought",
-                  "text": "I need to learn to control it. Not for myself."
+                  "text": "I need to learn to control it. Not for myself.",
+                  "speaker": "favilla"
                 },
                 {
                   "id": "bl_0_0_tb_8",
                   "type": "thought",
-                  "text": "For you."
+                  "text": "For you.",
+                  "speaker": "favilla"
                 },
                 {
                   "id": "bl_0_0_tb_9",
@@ -687,14 +702,14 @@
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bletto_p0"
         }
       ]
     },
     "branch_lex_quasi_scoperto": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_ritorno_casa/branch_lex_quasi_scoperto.webp",
           "panels": [
             {
@@ -744,7 +759,8 @@
                 {
                   "id": "blqs_0_0_tb_7",
                   "type": "thought",
-                  "text": "Why is Lex smiling? Why did he scream so fast?"
+                  "text": "Why is Lex smiling? Why did he scream so fast?",
+                  "speaker": "favilla"
                 },
                 {
                   "id": "blqs_0_0_tb_8",
@@ -759,12 +775,14 @@
                 {
                   "id": "blqs_0_0_tb_10",
                   "type": "thought",
-                  "text": "You tried. And he knows you did it."
+                  "text": "You tried. And he knows you did it.",
+                  "speaker": "favilla"
                 },
                 {
                   "id": "blqs_0_0_tb_11",
                   "type": "thought",
-                  "text": "Now Mallow starts to wonder."
+                  "text": "Now Mallow starts to wonder.",
+                  "speaker": "favilla"
                 },
                 {
                   "id": "blqs_0_0_tb_12",
@@ -774,14 +792,14 @@
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "blex_q_p0"
         }
       ]
     },
     "intro_vestiti_bruciati_indosso": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_ritorno_casa/ivb_0.webp",
           "panels": [
             {
@@ -828,10 +846,10 @@
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "ivesti_p0"
         },
         {
-          "index": 1,
           "background": "assets/episodes/s1/s1_ritorno_casa/ivb_1.webp",
           "panels": [
             {
@@ -860,10 +878,10 @@
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "ivesti_p1"
         },
         {
-          "index": 2,
           "background": "assets/episodes/s1/s1_ritorno_casa/ivb_2.webp",
           "panels": [
             {
@@ -910,10 +928,10 @@
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "ivesti_p2"
         },
         {
-          "index": 3,
           "background": "assets/episodes/s1/s1_ritorno_casa/ivb_3.webp",
           "panels": [
             {
@@ -948,10 +966,10 @@
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "ivesti_p3"
         },
         {
-          "index": 4,
           "background": "assets/episodes/s1/s1_ritorno_casa/ivb_4.webp",
           "panels": [
             {
@@ -1054,7 +1072,8 @@
                 }
               }
             ]
-          }
+          },
+          "id": "ivesti_p4"
         }
       ]
     }

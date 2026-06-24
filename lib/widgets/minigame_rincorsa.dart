@@ -24,7 +24,10 @@ class MinigameRincorsaScreen extends StatefulWidget {
       onComplete;
 
   const MinigameRincorsaScreen(
-      {super.key, required this.config, required this.scintille, required this.onComplete});
+      {super.key,
+      required this.config,
+      required this.scintille,
+      required this.onComplete});
 
   @override
   State<MinigameRincorsaScreen> createState() => _MinigameRincorsaScreenState();
@@ -88,10 +91,8 @@ class _MinigameRincorsaScreenState extends State<MinigameRincorsaScreen>
   double get _scintilleModifier =>
       ((widget.scintille - 50) / 10 * 0.05).clamp(-0.25, 0.25);
 
-  double get _startGap =>
-      _kBaseStartGap * (1.0 - _scintilleModifier);
-  double get _naturalRecovery =>
-      _kBaseRecovery * (1.0 + _scintilleModifier);
+  double get _startGap => _kBaseStartGap * (1.0 - _scintilleModifier);
+  double get _naturalRecovery => _kBaseRecovery * (1.0 + _scintilleModifier);
   double get _collisionPenalty =>
       _kBaseCollisionPenalty * (1.0 - _scintilleModifier);
 
@@ -426,7 +427,8 @@ class _MinigameRincorsaScreenState extends State<MinigameRincorsaScreen>
                   color: p.color,
                   shape: BoxShape.circle,
                   boxShadow: [
-                    BoxShadow(color: p.color.withOpacity(0.6), blurRadius: 4)
+                    BoxShadow(
+                        color: p.color.withValues(alpha: 0.6), blurRadius: 4)
                   ],
                 ),
               ),
@@ -437,7 +439,8 @@ class _MinigameRincorsaScreenState extends State<MinigameRincorsaScreen>
         Positioned(
           left: favillaVisX - 24,
           top: size.height * 0.84,
-          child: _FavillaSprite(stunned: _runState == _RunState.stunned, gap: _gap),
+          child: _FavillaSprite(
+              stunned: _runState == _RunState.stunned, gap: _gap),
         ),
 
         // ── Flash overlay ─────────────────────────────────────────────────
@@ -445,7 +448,7 @@ class _MinigameRincorsaScreenState extends State<MinigameRincorsaScreen>
           animation: _flashAnim,
           builder: (ctx, _) => Opacity(
             opacity: _flashAnim.value,
-            child: Container(color: Colors.red.withOpacity(0.65)),
+            child: Container(color: Colors.red.withValues(alpha: 0.65)),
           ),
         ),
 
@@ -528,7 +531,7 @@ class _MinigameRincorsaScreenState extends State<MinigameRincorsaScreen>
                       borderRadius: BorderRadius.circular(30),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color(0xFFFF6B35).withOpacity(0.5),
+                          color: const Color(0xFFFF6B35).withValues(alpha: 0.5),
                           blurRadius: 16,
                           spreadRadius: 2,
                         ),
@@ -606,7 +609,7 @@ class _TrackPainter extends CustomPainter {
       ).createShader(rect);
     canvas.drawRect(rect, paint);
 
-    final cloudPaint = Paint()..color = Colors.white.withOpacity(0.85);
+    final cloudPaint = Paint()..color = Colors.white.withValues(alpha: 0.85);
 
     void drawCloud(double x, double y) {
       canvas.drawCircle(Offset(x - 12, y + 1), 10, cloudPaint);
@@ -657,7 +660,7 @@ class _TrackPainter extends CustomPainter {
     );
     canvas.drawRect(
       trunkRect.shift(const Offset(2, 2)),
-      Paint()..color = Colors.black.withOpacity(0.20),
+      Paint()..color = Colors.black.withValues(alpha: 0.20),
     );
     canvas.drawRect(trunkRect, Paint()..color = const Color(0xFF5D4037));
 
@@ -687,9 +690,11 @@ class _TrackPainter extends CustomPainter {
       Canvas canvas, Size size, double horizonY, double bHalfW) {
     final rng = Random(91);
     final bushLight = Paint()
-      ..color = const Color(0xFF4CAF50).withOpacity(0.95);
-    final bushDark = Paint()..color = const Color(0xFF2E7D32).withOpacity(0.95);
-    final tuft = Paint()..color = const Color(0xFF2E7D32).withOpacity(0.72);
+      ..color = const Color(0xFF4CAF50).withValues(alpha: 0.95);
+    final bushDark = Paint()
+      ..color = const Color(0xFF2E7D32).withValues(alpha: 0.95);
+    final tuft = Paint()
+      ..color = const Color(0xFF2E7D32).withValues(alpha: 0.72);
 
     for (int side = 0; side < 2; side++) {
       for (int i = 0; i < 8; i++) {
@@ -780,8 +785,8 @@ class _TrackPainter extends CustomPainter {
       final halfW = lerpDouble(_kHorizonHalfW, bHalfW, t)!;
       final x = cx - halfW * 0.88 + rngLeaves.nextDouble() * (halfW * 1.76);
       final width = 6.0 + rngLeaves.nextDouble() * 6.0;
-      final color =
-          leafColors[rngLeaves.nextInt(leafColors.length)].withOpacity(0.6);
+      final color = leafColors[rngLeaves.nextInt(leafColors.length)]
+          .withValues(alpha: 0.6);
       canvas.save();
       canvas.translate(x, y);
       canvas.rotate((rngLeaves.nextDouble() - 0.5) * 1.2);
@@ -793,7 +798,7 @@ class _TrackPainter extends CustomPainter {
     }
 
     final rootPaint = Paint()
-      ..color = const Color(0xFF4E342E).withOpacity(0.45)
+      ..color = const Color(0xFF4E342E).withValues(alpha: 0.45)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.5
       ..strokeCap = StrokeCap.round;
@@ -819,7 +824,7 @@ class _TrackPainter extends CustomPainter {
     final cx = size.width / 2;
     // Sentiero di terra: solchi scuri animati al posto delle strisce stradali
     final rutPaint = Paint()
-      ..color = const Color(0xFF2F1B12).withOpacity(0.62)
+      ..color = const Color(0xFF2F1B12).withValues(alpha: 0.62)
       ..strokeWidth = 1.8
       ..strokeCap = StrokeCap.round;
 
@@ -859,7 +864,7 @@ class _TrackPainter extends CustomPainter {
         ..shader = LinearGradient(
           begin: Alignment.centerRight,
           end: Alignment.centerLeft,
-          colors: [Colors.transparent, Colors.black.withOpacity(0.22)],
+          colors: [Colors.transparent, Colors.black.withValues(alpha: 0.22)],
         ).createShader(Rect.fromLTWH(0, 0, cx, size.height)),
     );
     // Right edge vignette
@@ -874,7 +879,7 @@ class _TrackPainter extends CustomPainter {
         ..shader = LinearGradient(
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
-          colors: [Colors.transparent, Colors.black.withOpacity(0.22)],
+          colors: [Colors.transparent, Colors.black.withValues(alpha: 0.22)],
         ).createShader(Rect.fromLTWH(cx, 0, cx, size.height)),
     );
   }
@@ -917,10 +922,10 @@ class _ObstacleSprite extends StatelessWidget {
             height: size * 1.6,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Colors.red.withOpacity(0.18 * glowFactor),
+              color: Colors.red.withValues(alpha: 0.18 * glowFactor),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.red.withOpacity(0.35 * glowFactor),
+                  color: Colors.red.withValues(alpha: 0.35 * glowFactor),
                   blurRadius: 18,
                   spreadRadius: 4,
                 ),
@@ -934,7 +939,7 @@ class _ObstacleSprite extends StatelessWidget {
             width: size * 0.9,
             height: size * 0.12,
             decoration: BoxDecoration(
-              color: Colors.black.withOpacity(0.25),
+              color: Colors.black.withValues(alpha: 0.25),
               borderRadius: BorderRadius.circular(size),
             ),
           ),
@@ -952,7 +957,7 @@ class _FavillaSprite extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final catching  = !stunned && gap < 0.50;
+    final catching = !stunned && gap < 0.50;
     final almostThere = !stunned && gap < 0.30;
     // Intensity: 0 at gap=0.50, 1 at gap=0.0
     final intensity = catching ? ((0.50 - gap) / 0.50).clamp(0.0, 1.0) : 0.0;
@@ -982,7 +987,7 @@ class _FavillaSprite extends StatelessWidget {
                 BoxShadow(
                   color: almostThere
                       ? const Color(0xFF66BB6A).withValues(alpha: 0.72)
-                      : const Color(0xFFFFD54F).withOpacity(0.42),
+                      : const Color(0xFFFFD54F).withValues(alpha: 0.42),
                   blurRadius: almostThere ? 30 : 18,
                   spreadRadius: almostThere ? 8 : 3,
                 ),
@@ -1027,7 +1032,7 @@ class _LexSprite extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
             decoration: BoxDecoration(
-              color: Colors.red.withOpacity(0.85),
+              color: Colors.red.withValues(alpha: 0.85),
               borderRadius: BorderRadius.circular(4),
             ),
             child: Text(
@@ -1096,8 +1101,8 @@ class _Hud extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
                 decoration: BoxDecoration(
                   color: secondsLeft <= 5
-                      ? Colors.red.withOpacity(0.85)
-                      : Colors.black.withOpacity(0.55),
+                      ? Colors.red.withValues(alpha: 0.85)
+                      : Colors.black.withValues(alpha: 0.55),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
@@ -1119,7 +1124,7 @@ class _Hud extends StatelessWidget {
             child: LinearProgressIndicator(
               value: timeProgress,
               minHeight: 5,
-              backgroundColor: Colors.white.withOpacity(0.15),
+              backgroundColor: Colors.white.withValues(alpha: 0.15),
               valueColor: AlwaysStoppedAnimation<Color>(
                 timeProgress > 0.5
                     ? const Color(0xFF4CAF50)
@@ -1142,7 +1147,7 @@ class _Hud extends StatelessWidget {
                   child: LinearProgressIndicator(
                     value: 1.0 - gap,
                     minHeight: 8,
-                    backgroundColor: Colors.white.withOpacity(0.15),
+                    backgroundColor: Colors.white.withValues(alpha: 0.15),
                     valueColor: AlwaysStoppedAnimation<Color>(
                       gap < 0.30
                           ? const Color(0xFF4CAF50)
@@ -1176,7 +1181,7 @@ class _Hud extends StatelessWidget {
                       ? const Color(0xFFFFD700)
                       : scintilleBoost < 0
                           ? const Color(0xFF90CAF9)
-                          : Colors.white.withOpacity(0.6),
+                          : Colors.white.withValues(alpha: 0.6),
                   letterSpacing: 0.5,
                 ),
               ),
@@ -1188,7 +1193,7 @@ class _Hud extends StatelessWidget {
               _gapLabel(gap),
               style: TextStyle(
                 fontSize: 11,
-                color: Colors.white.withOpacity(0.7),
+                color: Colors.white.withValues(alpha: 0.7),
                 letterSpacing: 1,
                 fontWeight: FontWeight.w600,
               ),

@@ -7,7 +7,11 @@
       "panels": [
         {
           "id": "sla0_0",
-          "characters": ["favilla", "mallow", "lex"],
+          "characters": [
+            "favilla",
+            "mallow",
+            "lex"
+          ],
           "text_blocks": [
             {
               "id": "sla0_0_tb_0",
@@ -22,7 +26,8 @@
             {
               "id": "sla0_0_tb_2",
               "type": "thought",
-              "text": "Who decided that at seven months you can already have a backpack?"
+              "text": "Who decided that at seven months you can already have a backpack?",
+              "speaker": "favilla"
             },
             {
               "id": "sla0_0_tb_3",
@@ -33,7 +38,8 @@
             {
               "id": "sla0_0_tb_4",
               "type": "thought",
-              "text": "It's not funny. It kind of is."
+              "text": "It's not funny. It kind of is.",
+              "speaker": "favilla"
             }
           ],
           "interactions": []
@@ -46,7 +52,10 @@
       "panels": [
         {
           "id": "sla1_0",
-          "characters": ["mallow", "lex"],
+          "characters": [
+            "mallow",
+            "lex"
+          ],
           "text_blocks": [
             {
               "id": "sla1_0_tb_0",
@@ -66,7 +75,8 @@
             {
               "id": "sla1_0_tb_3",
               "type": "thought",
-              "text": "Lex already knows the secret. He just needs notebook access to build the device and expose her."
+              "text": "Lex already knows the secret. He just needs notebook access to build the device and expose her.",
+              "speaker": "favilla"
             },
             {
               "id": "sla1_0_tb_4",
@@ -90,7 +100,9 @@
               "resistenza": -3,
               "legame": -2
             },
-            "setMemories": { "choice_intent.s1_lunedi_asilo.crack_password_choice": "panicked" }
+            "setMemories": {
+              "choice_intent.s1_lunedi_asilo.crack_password_choice": "panicked"
+            }
           },
           {
             "id": "tenta_password",
@@ -104,20 +116,28 @@
                   "min": 2,
                   "label": "Genius.",
                   "goto_branch": "branch_genio",
-                  "stat_effects": { "segreto": -5 },
-                  "set_flags": { "lex_ha_un_piano": true }
+                  "stat_effects": {
+                    "segreto": -5
+                  },
+                  "set_flags": {
+                    "lex_ha_un_piano": true
+                  }
                 },
                 {
                   "min": 1,
                   "label": "Almost.",
                   "goto_branch": "branch_quasi",
-                  "stat_effects": { "legame": 5 }
+                  "stat_effects": {
+                    "legame": 5
+                  }
                 },
                 {
                   "min": 0,
                   "label": "Busted.",
                   "goto_branch": "branch_beccato",
-                  "stat_effects": { "legame": 10 }
+                  "stat_effects": {
+                    "legame": 10
+                  }
                 }
               ]
             }
@@ -130,12 +150,15 @@
     "branch_scoperta_quasi": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_lunedi_asilo/page_scoperta.webp",
           "panels": [
             {
               "id": "sla_scoperta_0",
-              "characters": ["favilla", "mallow", "lex"],
+              "characters": [
+                "favilla",
+                "mallow",
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "id": "sla_scoperta_0_tb_0",
@@ -161,24 +184,27 @@
                 {
                   "id": "sla_scoperta_0_tb_4",
                   "type": "thought",
-                  "text": "It's there. The data. The schema. Everything needed to build the detector. She knows it could be useful."
+                  "text": "It's there. The data. The schema. Everything needed to build the detector. She knows it could be useful.",
+                  "speaker": "favilla"
                 }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bscope_p0"
         }
       ]
     },
     "branch_genio": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_lunedi_asilo/page_genio.webp",
           "panels": [
             {
               "id": "sla_bg_0",
-              "characters": ["lex"],
+              "characters": [
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "id": "sla_bg_0_tb_0",
@@ -193,7 +219,8 @@
                 {
                   "id": "sla_bg_0_tb_2",
                   "type": "thought",
-                  "text": "Energy detector. Yes. The way mom heats up — there must be a pattern."
+                  "text": "Energy detector. Yes. The way mom heats up — there must be a pattern.",
+                  "speaker": "favilla"
                 },
                 {
                   "id": "sla_bg_0_tb_3",
@@ -208,19 +235,23 @@
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bgenio_p0"
         }
       ]
     },
     "branch_quasi": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_lunedi_asilo/page_quasi.webp",
           "panels": [
             {
               "id": "sla_bq_0",
-              "characters": ["lex", "mallow", "favilla"],
+              "characters": [
+                "lex",
+                "mallow",
+                "favilla"
+              ],
               "text_blocks": [
                 {
                   "id": "sla_bq_0_tb_0",
@@ -257,19 +288,23 @@
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bquasi_p0"
         }
       ]
     },
     "branch_beccato": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_lunedi_asilo/page_beccato.webp",
           "panels": [
             {
               "id": "sla_bb_0",
-              "characters": ["lex", "mallow", "favilla"],
+              "characters": [
+                "lex",
+                "mallow",
+                "favilla"
+              ],
               "text_blocks": [
                 {
                   "id": "sla_bb_0_tb_0",
@@ -306,7 +341,8 @@
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bbecca_p0"
         }
       ]
     }
@@ -314,12 +350,15 @@
   "epilogue": {
     "pages": [
       {
-        "index": 0,
         "background": "assets/episodes/s1/s1_lunedi_asilo/page_epilogo_0.webp",
         "panels": [
           {
             "id": "ep_sla_0",
-            "characters": ["favilla", "mallow", "lex"],
+            "characters": [
+              "favilla",
+              "mallow",
+              "lex"
+            ],
             "text_blocks": [
               {
                 "id": "ep_sla_0_tb_0",
@@ -334,15 +373,16 @@
               {
                 "id": "ep_sla_0_tb_2",
                 "type": "thought",
-                "text": "Nursery school. Good. New territory. After {{memory:choice_label.s1_centro_commerciale.carmela_dialogo_choice|that scene with Carmela}}, new variables to map."
+                "text": "Nursery school. Good. New territory. After {{memory:choice_label.s1_centro_commerciale.carmela_dialogo_choice|that scene with Carmela}}, new variables to map.",
+                "speaker": "favilla"
               }
             ],
             "interactions": []
           }
-        ]
+        ],
+        "id": "ep_p0"
       },
       {
-        "index": 1,
         "background": "assets/episodes/s1/s1_lunedi_asilo/page_epilogo_1.webp",
         "panels": [
           {
@@ -367,7 +407,8 @@
             ],
             "interactions": []
           }
-        ]
+        ],
+        "id": "ep_p1"
       }
     ]
   }

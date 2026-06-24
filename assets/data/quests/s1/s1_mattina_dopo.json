@@ -19,7 +19,8 @@
             {
               "id": "md0_0_tb_1",
               "type": "thought",
-              "text": "E io sono qui, sveglia, a fissare il soffitto come se avesse le risposte."
+              "text": "E io sono qui, sveglia, a fissare il soffitto come se avesse le risposte.",
+              "speaker": "favilla"
             },
             {
               "id": "md0_0_tb_2",
@@ -29,7 +30,8 @@
             {
               "id": "md0_0_tb_3",
               "type": "thought",
-              "text": "So solo che adesso la pasta è cotta al punto giusto e mio figlio è al sicuro."
+              "text": "So solo che adesso la pasta è cotta al punto giusto e mio figlio è al sicuro.",
+              "speaker": "favilla"
             }
           ],
           "interactions": []
@@ -71,7 +73,8 @@
             {
               "id": "md1_0_tb_4",
               "type": "thought",
-              "text": "Tu c'eri. Hai visto."
+              "text": "Tu c'eri. Hai visto.",
+              "speaker": "favilla"
             }
           ],
           "interactions": []
@@ -157,7 +160,6 @@
     "branch_sorriso": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_mattina_dopo/branch_sorriso.webp",
           "panels": [
             {
@@ -188,19 +190,20 @@
                 {
                   "id": "bs_0_tb_3",
                   "type": "thought",
-                  "text": "Il segreto è al sicuro. Per ora è ancora nostro — mio e suo."
+                  "text": "Il segreto è al sicuro. Per ora è ancora nostro — mio e suo.",
+                  "speaker": "favilla"
                 }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bsorri_p0"
         }
       ]
     },
     "branch_sudore": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_mattina_dopo/branch_sudore.webp",
           "panels": [
             {
@@ -235,7 +238,8 @@
                 {
                   "id": "bsu_0_tb_4",
                   "type": "thought",
-                  "text": "Sembravi bruciata."
+                  "text": "Sembravi bruciata.",
+                  "speaker": "favilla"
                 },
                 {
                   "id": "bsu_0_tb_5",
@@ -251,7 +255,8 @@
                 {
                   "id": "bsu_0_tb_7",
                   "type": "thought",
-                  "text": "Ho dovuto mentire più velocemente del previsto."
+                  "text": "Ho dovuto mentire più velocemente del previsto.",
+                  "speaker": "favilla"
                 },
                 {
                   "id": "bsu_0_tb_8",
@@ -266,14 +271,14 @@
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bsudor_p0"
         }
       ]
     },
     "epilogue_caffe": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_mattina_dopo/epilogue.webp",
           "panels": [
             {
@@ -295,7 +300,8 @@
                 {
                   "id": "ep_caffe_0_tb_2",
                   "type": "thought",
-                  "text": "Non si scalda. Il caffè... spegne."
+                  "text": "Non si scalda. Il caffè... spegne.",
+                  "speaker": "favilla"
                 },
                 {
                   "id": "ep_caffe_0_tb_3",
@@ -310,14 +316,14 @@
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "epilog_p0"
         }
       ]
     },
     "epilogue_no_caffe": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_mattina_dopo/epilogue.webp",
           "panels": [
             {
@@ -335,7 +341,8 @@
                 {
                   "id": "ep_nocaffe_0_tb_1",
                   "type": "thought",
-                  "text": "Se il caffè c'entra qualcosa, voglio scoprirlo con la testa lucida."
+                  "text": "Se il caffè c'entra qualcosa, voglio scoprirlo con la testa lucida.",
+                  "speaker": "favilla"
                 },
                 {
                   "id": "ep_nocaffe_0_tb_2",
@@ -372,7 +379,8 @@
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "epilog_p0"
         }
       ]
     }
@@ -380,7 +388,6 @@
   "epilogue": {
     "pages": [
       {
-        "index": 0,
         "background": "assets/episodes/s1/s1_mattina_dopo/epilogue.webp",
         "panels": [
           {
@@ -402,7 +409,8 @@
               {
                 "id": "md_ep_0_tb_2",
                 "type": "thought",
-                "text": "Nova Tutinia non sa ancora cosa si nasconde al terzo piano di Via delle Vesciche e dei Brufoli 18."
+                "text": "Nova Tutinia non sa ancora cosa si nasconde al terzo piano di Via delle Vesciche e dei Brufoli 18.",
+                "speaker": "favilla"
               },
               {
                 "id": "md_ep_0_tb_3",
@@ -439,7 +447,8 @@
               }
             }
           ]
-        }
+        },
+        "id": "ep_p0"
       }
     ]
   }

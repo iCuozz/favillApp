@@ -57,7 +57,8 @@
             {
               "id": "scc0_0_tb_3",
               "type": "thought",
-              "text": "Nobody knows me here. Here I can just buy soap and nothing else."
+              "text": "Nobody knows me here. Here I can just buy soap and nothing else.",
+              "speaker": "favilla"
             }
           ],
           "interactions": []
@@ -131,7 +132,8 @@
             {
               "id": "scc2_0_tb_3",
               "type": "thought",
-              "text": "Too late to turn around."
+              "text": "Too late to turn around.",
+              "speaker": "favilla"
             }
           ],
           "interactions": []
@@ -146,7 +148,9 @@
             "label": "«Carmela, hi!»",
             "goto_branch": "branch_risposta_bene",
             "stat_effects": {},
-            "setMemories": { "narrative.unwind_memory": "that almost normal afternoon at the mall" },
+            "setMemories": {
+              "narrative.unwind_memory": "that almost normal afternoon at the mall"
+            },
             "minigame": {
               "type": "carmela_dialogo",
               "extra": {
@@ -272,7 +276,10 @@
               "legame": -5,
               "segreto": 5
             },
-            "setMemories": { "choice_intent.s1_centro_commerciale.carmela_dialogo_choice": "avoided", "narrative.unwind_memory": "that afternoon at the mall, cut short" }
+            "setMemories": {
+              "choice_intent.s1_centro_commerciale.carmela_dialogo_choice": "avoided",
+              "narrative.unwind_memory": "that afternoon at the mall, cut short"
+            }
           }
         ]
       }
@@ -282,7 +289,6 @@
     "branch_evita": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_centro_commerciale/page_cassa.webp",
           "panels": [
             {
@@ -311,19 +317,20 @@
                 {
                   "id": "scc_evita_0_tb_3",
                   "type": "thought",
-                  "text": "Not facing it = problem postponed. The best kind of problem."
+                  "text": "Not facing it = problem postponed. The best kind of problem.",
+                  "speaker": "favilla"
                 }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bevita_p0"
         }
       ]
     },
     "intro_mallow_sa_qualcosa": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_centro_commerciale/page_intro_mallow.webp",
           "panels": [
             {
@@ -352,19 +359,20 @@
                 {
                   "id": "scc_imq_0_tb_3",
                   "type": "thought",
-                  "text": "She knows. Doesn't know what. But she knows there's something. And she's chosen to wait."
+                  "text": "She knows. Doesn't know what. But she knows there's something. And she's chosen to wait.",
+                  "speaker": "favilla"
                 }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "imallo_p0"
         }
       ]
     },
     "intro_mani_calde": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_centro_commerciale/page_intro_mani.webp",
           "panels": [
             {
@@ -386,19 +394,20 @@
                 {
                   "id": "scc_imc_0_tb_2",
                   "type": "thought",
-                  "text": "Crowds. Lights. Air conditioning. After {{memory:choice_label.s1_scuola_1.scottature_choice|what happened at school}}, at least nobody can see anything here."
+                  "text": "Crowds. Lights. Air conditioning. After {{memory:choice_label.s1_scuola_1.scottature_choice|what happened at school}}, at least nobody can see anything here.",
+                  "speaker": "favilla"
                 }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "imani__p0"
         }
       ]
     },
     "branch_risposta_bene": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_centro_commerciale/page_cassa.webp",
           "panels": [
             {
@@ -427,19 +436,20 @@
                 {
                   "id": "scc_rb_0_tb_3",
                   "type": "thought",
-                  "text": "She doesn't know anything. She just confirmed that I can't lie well enough to be uninteresting."
+                  "text": "She doesn't know anything. She just confirmed that I can't lie well enough to be uninteresting.",
+                  "speaker": "favilla"
                 }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "brispo_p0"
         }
       ]
     },
     "branch_risposta_quasi": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_centro_commerciale/page_cassa.webp",
           "panels": [
             {
@@ -468,19 +478,20 @@
                 {
                   "id": "scc_rq_0_tb_3",
                   "type": "thought",
-                  "text": "That wasn't a request."
+                  "text": "That wasn't a request.",
+                  "speaker": "favilla"
                 }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "brispo_p0"
         }
       ]
     },
     "branch_risposta_disastro": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_centro_commerciale/page_cassa.webp",
           "panels": [
             {
@@ -509,24 +520,29 @@
                 {
                   "id": "scc_rd_0_tb_3",
                   "type": "thought",
-                  "text": "She knows. Doesn't know what. But she knows there's something — and now she's looking for a name to give it."
+                  "text": "She knows. Doesn't know what. But she knows there's something — and now she's looking for a name to give it.",
+                  "speaker": "favilla"
                 }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "brispo_p0"
         }
       ]
     },
     "intro_legame_distante": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_centro_commerciale/page_0.webp",
           "panels": [
             {
               "id": "sp_legame_0",
-              "characters": ["favilla", "mallow", "lex"],
+              "characters": [
+                "favilla",
+                "mallow",
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "id": "sp_legame_0_tb_0",
@@ -546,11 +562,13 @@
                 {
                   "id": "sp_legame_0_tb_3",
                   "type": "thought",
-                  "text": "Fighting isn't the problem. It's the silence. The silence is much louder."
+                  "text": "Fighting isn't the problem. It's the silence. The silence is much louder.",
+                  "speaker": "favilla"
                 }
               ]
             }
-          ]
+          ],
+          "id": "ilegam_p0"
         }
       ]
     }
@@ -558,7 +576,6 @@
   "epilogue": {
     "pages": [
       {
-        "index": 0,
         "background": "assets/episodes/s1/s1_centro_commerciale/page_parcheggio.webp",
         "panels": [
           {
@@ -587,15 +604,16 @@
               {
                 "id": "ep_scc_0_tb_3",
                 "type": "thought",
-                "text": "It was normal. It was almost normal."
+                "text": "It was normal. It was almost normal.",
+                "speaker": "favilla"
               }
             ],
             "interactions": []
           }
-        ]
+        ],
+        "id": "ep_p0"
       },
       {
-        "index": 1,
         "background": "assets/episodes/s1/s1_centro_commerciale/page_gatto_parcheggio.webp",
         "panels": [
           {
@@ -622,7 +640,8 @@
             ],
             "interactions": []
           }
-        ]
+        ],
+        "id": "ep_p1"
       }
     ]
   }

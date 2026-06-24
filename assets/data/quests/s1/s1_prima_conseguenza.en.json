@@ -29,12 +29,12 @@
             {
               "id": "pc_p0_a_t1",
               "type": "narration",
-              "text": "Home. Afternoon. Lex plays on the rug with the GalaxiaMall owl. Favilla folds laundry. Everything normal."
+              "text": "Home. Afternoon. Lex plays on the rug with the GalaxiaMall owl plushie. Favilla folds laundry. Everything normal."
             },
             {
               "id": "pc_p0_a_t2",
               "type": "narration",
-              "text": "Then Mallow walks out of the study with his phone in hand. He has the expression of someone who just saw something he shouldn't have."
+              "text": "Then Mallow comes out of the study with his phone in hand. He has the expression of someone who just saw something he wasn't supposed to see."
             },
             {
               "id": "pc_p0_a_t3",
@@ -45,7 +45,7 @@
             {
               "id": "pc_p0_a_t4",
               "type": "narration",
-              "text": "Lex looks up from the owl. He noticed Mallow's tone too. That tone."
+              "text": "Lex looks up from the owl plushie. He noticed Mallow's tone too. That tone."
             }
           ]
         }
@@ -65,17 +65,17 @@
             {
               "id": "pc_p1_a_t1",
               "type": "narration",
-              "text": "On the screen: a TikTok video. Filmed at the park, last Sunday. Shaky footage, 240p, backlit."
+              "text": "On the screen: a TikTok video. Filmed at the park, last Sunday. Shaky framing, 240p, backlit."
             },
             {
               "id": "pc_p1_a_t2",
               "type": "narration",
-              "text": "A figure moving at impossible speed through the trees. Hair that seems to glow. But the shadows are long and the backlight erases every detail."
+              "text": "A figure moves at impossible speed through the trees. Hair that seems to glow. But the shadows are long and the backlight erases every detail."
             },
             {
               "id": "pc_p1_a_t3",
               "type": "narration",
-              "text": "Below: 847,000 views. Comments: 'Fake', 'I saw her too!', 'Superhero in Nova Tutinia??'"
+              "text": "Below: 847,000 views. Comments: 'It's a fake', 'I saw her too!', 'Superhero in Nova Tutinia??'"
             },
             {
               "id": "pc_p1_a_t4",
@@ -100,27 +100,27 @@
             {
               "id": "pc_p2_a_t1",
               "type": "narration",
-              "text": "Mallow is standing, phone still in hand. Looking at her like he's searching for something in her face."
+              "text": "Mallow is standing, phone still in hand. He looks at her as if searching for something in her face."
             },
             {
               "id": "pc_p2_a_t2",
               "type": "dialogue",
               "speaker": "mallow",
-              "text": "It was filmed on Sunday. At the park. When you lost your purse."
+              "text": "It was filmed Sunday. At the park. When you lost your purse."
             },
             {
               "id": "pc_p2_a_t3",
               "type": "narration",
-              "text": "Lex, on the rug, has stopped playing. He's staring at Favilla. He recognized the video before even looking at it."
+              "text": "Lex, on the rug, has stopped playing. He stares at Favilla. He recognized the video before even looking at it."
             }
           ],
           "choice": {
             "id": "video_choice",
-            "prompt": "The video plays. The shadows are indistinct. But you know.",
+            "prompt": "The video plays. The shadows are indistinguishable. But you know.",
             "options": [
               {
                 "id": "minimizza",
-                "label": "Shrug. «Weird. But you know TikTok, everything looks like a ghost.»",
+                "label": "Shrug. \"Weird. But you know TikTok, everything looks like a ghost.\"",
                 "goto_branch": "branch_minimizza",
                 "stat_effects": {
                   "segreto": 10,
@@ -135,7 +135,7 @@
               },
               {
                 "id": "devia",
-                "label": "«Anyway, Lex did something incredible today...»",
+                "label": "\"Anyway, Lex did something amazing today...\"",
                 "goto_branch": "branch_devia",
                 "stat_effects": {
                   "resistenza": 5,
@@ -150,7 +150,7 @@
               },
               {
                 "id": "quasi_confessa",
-                "label": "You hesitate. Look at the video. «That day... I was there.»",
+                "label": "\"Maybe... I need to tell you something.\"",
                 "goto_branch": "branch_quasi_confessa",
                 "stat_effects": {
                   "segreto": -10,
@@ -174,7 +174,6 @@
       "id": "intro_gia_visto",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_1.png",
           "panels": [
             {
@@ -197,11 +196,12 @@
                   "id": "intro_gia_visto_a_t3",
                   "type": "thought",
                   "speaker": "favilla",
-                  "text": "I need to be more careful. Much more careful."
+                  "text": "I have to be more careful. Much more careful."
                 }
               ]
             }
-          ]
+          ],
+          "id": "igia_v_p0"
         }
       ]
     },
@@ -209,7 +209,6 @@
       "id": "branch_minimizza",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_2.png",
           "panels": [
             {
@@ -222,31 +221,31 @@
                 {
                   "id": "branch_minimizza_a_t1",
                   "type": "narration",
-                  "text": "Favilla scrolls the video with one finger. Shrugs. Smiles — that smile she learned to make without thinking."
+                  "text": "Favilla swipes past the video with one finger. Shrugs. Smiles — that smile she's learned to make without thinking."
                 },
                 {
                   "id": "branch_minimizza_a_t2",
                   "type": "dialogue",
                   "speaker": "favilla",
-                  "text": "Weird. But you know TikTok. Perspective, backlight, editing. Everything looks like a ghost."
+                  "text": "Weird. But you know TikTok, everything looks like a ghost. Perspective, backlight, editing."
                 },
                 {
                   "id": "branch_minimizza_a_t3",
                   "type": "narration",
-                  "text": "Mallow looks at the video. Then at her. Then at the video again. Something doesn't add up, but he doesn't know what."
+                  "text": "Mallow looks at the video. Then her. Then the video again. Something doesn't add up, but he can't tell what."
                 },
                 {
                   "id": "branch_minimizza_a_t4",
                   "type": "dialogue",
                   "speaker": "mallow",
-                  "text": "Right. Probably nothing. Still weird though."
+                  "text": "Yeah. Probably. Still weird though."
                 }
               ]
             }
-          ]
+          ],
+          "id": "bminim_p0"
         },
         {
-          "index": 1,
           "background": "assets/episodes/prologo/page_3.png",
           "panels": [
             {
@@ -264,7 +263,7 @@
                   "id": "branch_minimizza_b_t2",
                   "type": "thought",
                   "speaker": "favilla",
-                  "text": "He didn't recognize me. No one will. I just need to... keep going like this."
+                  "text": "He didn't recognize me. No one will. I just have to... keep going like this."
                 },
                 {
                   "id": "branch_minimizza_b_t3",
@@ -273,7 +272,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bminim_p1"
         }
       ]
     },
@@ -281,7 +281,6 @@
       "id": "branch_devia",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_2.png",
           "panels": [
             {
@@ -301,7 +300,7 @@
                   "id": "branch_devia_a_t2",
                   "type": "dialogue",
                   "speaker": "favilla",
-                  "text": "Anyway, Lex did something incredible today. At daycare. He recognized his name written on the chalkboard."
+                  "text": "Anyway, Lex did something incredible today. At daycare. He recognized his name written on the board."
                 },
                 {
                   "id": "branch_devia_a_t3",
@@ -312,14 +311,14 @@
                   "id": "branch_devia_a_t4",
                   "type": "dialogue",
                   "speaker": "mallow",
-                  "text": "Really? His name? But he's only seven months old!"
+                  "text": "Really? His name? But he's seven months old!"
                 }
               ]
             }
-          ]
+          ],
+          "id": "bdevia_p0"
         },
         {
-          "index": 1,
           "background": "assets/episodes/prologo/page_1.png",
           "panels": [
             {
@@ -332,7 +331,7 @@
                 {
                   "id": "branch_devia_b_t1",
                   "type": "narration",
-                  "text": "Mallow sits down next to her. The conversation derails into how precocious Lex is. The video is forgotten."
+                  "text": "Mallow sits next to her. The conversation derails into how precocious Lex is. The video is forgotten."
                 },
                 {
                   "id": "branch_devia_b_t2",
@@ -343,11 +342,12 @@
                   "id": "branch_devia_b_t3",
                   "type": "thought",
                   "speaker": "favilla",
-                  "text": "I didn't say anything. But he knows I'm hiding something. He's known for weeks."
+                  "text": "I didn't say anything. But he knows I'm hiding something from him. He's known for weeks."
                 }
               ]
             }
-          ]
+          ],
+          "id": "bdevia_p1"
         }
       ]
     },
@@ -355,7 +355,6 @@
       "id": "branch_quasi_confessa",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_2.png",
           "panels": [
             {
@@ -379,7 +378,7 @@
                 {
                   "id": "branch_quasi_confessa_a_t3",
                   "type": "narration",
-                  "text": "Mallow stops his fork mid-air. The seconds stretch. Lex, on the rug, is as still as a statue."
+                  "text": "Mallow stops the spoon mid-air. The seconds stretch. Lex, on the rug, is motionless as a statue."
                 },
                 {
                   "id": "branch_quasi_confessa_a_t4",
@@ -389,10 +388,10 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bquasi_p0"
         },
         {
-          "index": 1,
           "background": "assets/episodes/prologo/page_3.png",
           "panels": [
             {
@@ -432,7 +431,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bquasi_p1"
         }
       ]
     }
@@ -441,7 +441,6 @@
     "id": "epilogue",
     "pages": [
       {
-        "index": 0,
         "background": "assets/episodes/prologo/page_4.png",
         "panels": [
           {
@@ -453,17 +452,17 @@
               {
                 "id": "pc_epilogue_a_t1",
                 "type": "narration",
-                "text": "Favilla is in the bedroom. The phone is on the nightstand, screen off. But the video is still there, in her head."
+                "text": "Favilla is in the bedroom. The phone is on the nightstand, screen off. But the video is still there, in her mind."
               },
               {
                 "id": "pc_epilogue_a_t2",
                 "type": "narration",
-                "text": "A comment under the video: 'Looks like a superhero.' Another: 'Superhero? It's Photoshop.' A third: 'I live in Nova Tutinia and nothing here is normal.'"
+                "text": "A comment under the video: 'Looks like a superhero.' Another: 'Superhero my ass, it's Photoshop.' A third: 'I live in Nova Tutinia and let me tell you, nothing is normal here.'"
               },
               {
                 "id": "pc_epilogue_a_t3",
                 "type": "narration",
-                "text": "No one knows. No one must know. But the world has started to look."
+                "text": "No one knows. No one can know. But the world has started watching."
               },
               {
                 "id": "pc_epilogue_a_t4",
@@ -472,7 +471,8 @@
               }
             ]
           }
-        ]
+        ],
+        "id": "ep_p0"
       }
     ]
   }

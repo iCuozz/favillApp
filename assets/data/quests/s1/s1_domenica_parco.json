@@ -30,13 +30,38 @@
       "panels": [
         {
           "id": "dp0_0",
-          "characters": ["favilla", "mallow", "lex"],
+          "characters": [
+            "favilla",
+            "mallow",
+            "lex"
+          ],
           "text_blocks": [
-            { "id": "dp0_0_tb_0", "type": "narration", "text": "Domenica. Giardini Pubblici di Nova Tutinia. Ore 10:32." },
-            { "id": "dp0_0_tb_1", "type": "narration", "text": "Favilla non ricordava che il sole potesse essere così... normale." },
-            { "id": "dp0_0_tb_2", "type": "narration", "text": "Lex nel passeggino scopre che esiste un mondo oltre la finestra di casa." },
-            { "id": "dp0_0_tb_3", "type": "narration", "text": "Mallow cammina leggero. Senza laptop, diventa quasi un'altra persona." },
-            { "id": "dp0_0_tb_4", "type": "thought", "text": "Forse ce la faccio. Forse tutto questo può coesistere." }
+            {
+              "id": "dp0_0_tb_0",
+              "type": "narration",
+              "text": "Domenica. Giardini Pubblici di Nova Tutinia. Ore 10:32."
+            },
+            {
+              "id": "dp0_0_tb_1",
+              "type": "narration",
+              "text": "Favilla non ricordava che il sole potesse essere così... normale."
+            },
+            {
+              "id": "dp0_0_tb_2",
+              "type": "narration",
+              "text": "Lex nel passeggino scopre che esiste un mondo oltre la finestra di casa."
+            },
+            {
+              "id": "dp0_0_tb_3",
+              "type": "narration",
+              "text": "Mallow cammina leggero. Senza laptop, diventa quasi un'altra persona."
+            },
+            {
+              "id": "dp0_0_tb_4",
+              "type": "thought",
+              "text": "Forse ce la faccio. Forse tutto questo può coesistere.",
+              "speaker": "favilla"
+            }
           ],
           "interactions": []
         }
@@ -48,22 +73,58 @@
       "panels": [
         {
           "id": "dp1_0",
-          "characters": ["mallow", "lex"],
+          "characters": [
+            "mallow",
+            "lex"
+          ],
           "text_blocks": [
-            { "id": "dp1_0_tb_0", "type": "narration", "text": "Mallow porta Lex all'altalena per piccoli. Lex scopre il concetto di su e giù." },
-            { "id": "dp1_0_tb_1", "type": "dialogue", "speaker": "lex", "text": "AAH! AAH! AAH!" },
-            { "id": "dp1_0_tb_2", "type": "dialogue", "speaker": "mallow", "text": "Eh! Forte, eh?" }
+            {
+              "id": "dp1_0_tb_0",
+              "type": "narration",
+              "text": "Mallow porta Lex all'altalena per piccoli. Lex scopre il concetto di su e giù."
+            },
+            {
+              "id": "dp1_0_tb_1",
+              "type": "dialogue",
+              "speaker": "lex",
+              "text": "AAH! AAH! AAH!"
+            },
+            {
+              "id": "dp1_0_tb_2",
+              "type": "dialogue",
+              "speaker": "mallow",
+              "text": "Eh! Forte, eh?"
+            }
           ],
           "interactions": []
         },
         {
           "id": "dp1_1",
-          "characters": ["favilla"],
+          "characters": [
+            "favilla"
+          ],
           "text_blocks": [
-            { "id": "dp1_1_tb_0", "type": "narration", "text": "Favilla li guarda dalla panchina." },
-            { "id": "dp1_1_tb_1", "type": "thought", "text": "Ecco. Questo è il mondo che devono avere." },
-            { "id": "dp1_1_tb_2", "type": "narration", "text": "Per cinque minuti non pensa a niente." },
-            { "id": "dp1_1_tb_3", "type": "narration", "text": "Cinque minuti interi." }
+            {
+              "id": "dp1_1_tb_0",
+              "type": "narration",
+              "text": "Favilla li guarda dalla panchina."
+            },
+            {
+              "id": "dp1_1_tb_1",
+              "type": "thought",
+              "text": "Ecco. Questo è il mondo che devono avere.",
+              "speaker": "favilla"
+            },
+            {
+              "id": "dp1_1_tb_2",
+              "type": "narration",
+              "text": "Per cinque minuti non pensa a niente."
+            },
+            {
+              "id": "dp1_1_tb_3",
+              "type": "narration",
+              "text": "Cinque minuti interi."
+            }
           ],
           "interactions": []
         }
@@ -75,20 +136,80 @@
       "panels": [
         {
           "id": "dp2_0",
-          "characters": ["favilla", "mallow", "lex"],
+          "characters": [
+            "favilla",
+            "mallow",
+            "lex"
+          ],
           "text_blocks": [
-            { "id": "dp2_0_tb_0", "type": "narration", "text": "Mallow torna con due coni alla stracciatella e Lex che comincia ad avere gli occhi a metà." },
-            { "id": "dp2_0_tb_1", "type": "dialogue", "speaker": "mallow", "text": "Stracciatella. Ricordatelo per il curriculum." },
-            { "id": "dp2_0_tb_2", "type": "dialogue", "speaker": "favilla", "text": "Cosa?" },
-            { "id": "dp2_0_tb_3", "type": "dialogue", "speaker": "mallow", "text": "'Sa scegliere il gusto giusto al momento giusto.'" },
-            { "id": "dp2_0_tb_4", "type": "narration", "text": "Favilla ride. Una risata vera, corta, sorpresa di sé stessa." },
-            { "id": "dp2_0_tb_5", "type": "thought", "text": "Quando è stata l'ultima volta?" },
-            { "id": "dp2_0_tb_6", "type": "dialogue", "speaker": "mallow", "text": "Ti vedo bene, oggi." },
-            { "id": "dp2_0_tb_7", "type": "dialogue", "speaker": "favilla", "text": "Sto bene." },
-            { "id": "dp2_0_tb_8", "type": "dialogue", "speaker": "mallow", "text": "Lo so. Si vede." },
-            { "id": "dp2_0_tb_9", "type": "narration", "text": "Lex crolla. Testa di lato. Fuori combattimento." },
-            { "id": "dp2_0_tb_10", "type": "narration", "text": "Un colombo atterra a tre metri. Mallow lo studia con sospetto." },
-            { "id": "dp2_0_tb_11", "type": "thought", "text": "Questo. Devo proteggere questo." }
+            {
+              "id": "dp2_0_tb_0",
+              "type": "narration",
+              "text": "Mallow torna con due coni alla stracciatella e Lex che comincia ad avere gli occhi a metà."
+            },
+            {
+              "id": "dp2_0_tb_1",
+              "type": "dialogue",
+              "speaker": "mallow",
+              "text": "Stracciatella. Ricordatelo per il curriculum."
+            },
+            {
+              "id": "dp2_0_tb_2",
+              "type": "dialogue",
+              "speaker": "favilla",
+              "text": "Cosa?"
+            },
+            {
+              "id": "dp2_0_tb_3",
+              "type": "dialogue",
+              "speaker": "mallow",
+              "text": "'Sa scegliere il gusto giusto al momento giusto.'"
+            },
+            {
+              "id": "dp2_0_tb_4",
+              "type": "narration",
+              "text": "Favilla ride. Una risata vera, corta, sorpresa di sé stessa."
+            },
+            {
+              "id": "dp2_0_tb_5",
+              "type": "thought",
+              "text": "Quando è stata l'ultima volta?",
+              "speaker": "favilla"
+            },
+            {
+              "id": "dp2_0_tb_6",
+              "type": "dialogue",
+              "speaker": "mallow",
+              "text": "Ti vedo bene, oggi."
+            },
+            {
+              "id": "dp2_0_tb_7",
+              "type": "dialogue",
+              "speaker": "favilla",
+              "text": "Sto bene."
+            },
+            {
+              "id": "dp2_0_tb_8",
+              "type": "dialogue",
+              "speaker": "mallow",
+              "text": "Lo so. Si vede."
+            },
+            {
+              "id": "dp2_0_tb_9",
+              "type": "narration",
+              "text": "Lex crolla. Testa di lato. Fuori combattimento."
+            },
+            {
+              "id": "dp2_0_tb_10",
+              "type": "narration",
+              "text": "Un colombo atterra a tre metri. Mallow lo studia con sospetto."
+            },
+            {
+              "id": "dp2_0_tb_11",
+              "type": "thought",
+              "text": "Questo. Devo proteggere questo.",
+              "speaker": "favilla"
+            }
           ],
           "interactions": []
         }
@@ -100,14 +221,42 @@
       "panels": [
         {
           "id": "dp3_0",
-          "characters": ["favilla", "ladro"],
+          "characters": [
+            "favilla",
+            "ladro"
+          ],
           "text_blocks": [
-            { "id": "dp3_0_tb_0", "type": "narration", "text": "Succede in mezzo secondo." },
-            { "id": "dp3_0_tb_1", "type": "narration", "text": "Una figura — felpa scura, cappuccio abbassato — strappa la borsetta dalla spalla di Favilla." },
-            { "id": "dp3_0_tb_2", "type": "narration", "text": "Mallow è ancora a guardare il colombo." },
-            { "id": "dp3_0_tb_3", "type": "narration", "text": "Lex dorme." },
-            { "id": "dp3_0_tb_4", "type": "narration", "text": "La figura sparisce tra gli alberi del boschetto." },
-            { "id": "dp3_0_tb_5", "type": "thought", "text": "No. No no no. I documenti. Le chiavi. Tutto." }
+            {
+              "id": "dp3_0_tb_0",
+              "type": "narration",
+              "text": "Succede in mezzo secondo."
+            },
+            {
+              "id": "dp3_0_tb_1",
+              "type": "narration",
+              "text": "Una figura — felpa scura, cappuccio abbassato — strappa la borsetta dalla spalla di Favilla."
+            },
+            {
+              "id": "dp3_0_tb_2",
+              "type": "narration",
+              "text": "Mallow è ancora a guardare il colombo."
+            },
+            {
+              "id": "dp3_0_tb_3",
+              "type": "narration",
+              "text": "Lex dorme."
+            },
+            {
+              "id": "dp3_0_tb_4",
+              "type": "narration",
+              "text": "La figura sparisce tra gli alberi del boschetto."
+            },
+            {
+              "id": "dp3_0_tb_5",
+              "type": "thought",
+              "text": "No. No no no. I documenti. Le chiavi. Tutto.",
+              "speaker": "favilla"
+            }
           ],
           "interactions": []
         }
@@ -120,7 +269,10 @@
             "id": "rincorri",
             "label": "Rincorrilo. Adesso.",
             "goto_branch": "branch_presa",
-            "stat_effects": { "resistenza": -12, "segreto": -8 },
+            "stat_effects": {
+              "resistenza": -12,
+              "segreto": -8
+            },
             "minigame": {
               "type": "rincorsa",
               "duration_seconds": 15,
@@ -129,20 +281,32 @@
                   "min": 2,
                   "label": "Presa!",
                   "goto_branch": "branch_presa",
-                  "stat_effects": { "segreto": 5, "scintille": 8 }
+                  "stat_effects": {
+                    "segreto": 5,
+                    "scintille": 8
+                  }
                 },
                 {
                   "min": 1,
                   "label": "Quasi...",
                   "goto_branch": "branch_quasi",
-                  "stat_effects": { "resistenza": -8, "segreto": -5 }
+                  "stat_effects": {
+                    "resistenza": -8,
+                    "segreto": -5
+                  }
                 },
                 {
                   "min": 0,
                   "label": "Perso.",
                   "goto_branch": "branch_perso_trasformazione",
-                  "stat_effects": { "resistenza": -12, "segreto": -8, "scintille": 10 },
-                  "set_flags": { "favilla_transformed_public": true }
+                  "stat_effects": {
+                    "resistenza": -12,
+                    "segreto": -8,
+                    "scintille": 10
+                  },
+                  "set_flags": {
+                    "favilla_transformed_public": true
+                  }
                 }
               ]
             }
@@ -155,181 +319,473 @@
     "intro_mani_calde": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_domenica_parco/page_0.webp",
           "panels": [
             {
               "id": "imc_0",
-              "characters": ["favilla"],
+              "characters": [
+                "favilla"
+              ],
               "text_blocks": [
-                { "id": "imc_0_tb_0", "type": "narration", "text": "Le mani di Favilla sono già calde quando varca l'ingresso del parco." },
-                { "id": "imc_0_tb_1", "type": "thought", "text": "Tenerle basse. Concentrate. Oggi è domenica. Oggi non succede niente." },
-                { "id": "imc_0_tb_2", "type": "narration", "text": "Lex non capisce perché la mamma si muova così — attenta, contenuta, come se portasse qualcosa di fragile." },
-                { "id": "imc_0_tb_3", "type": "thought", "text": "Capisce tutto, invece." }
+                {
+                  "id": "imc_0_tb_0",
+                  "type": "narration",
+                  "text": "Le mani di Favilla sono già calde quando varca l'ingresso del parco."
+                },
+                {
+                  "id": "imc_0_tb_1",
+                  "type": "thought",
+                  "text": "Tenerle basse. Concentrate. Oggi è domenica. Oggi non succede niente.",
+                  "speaker": "favilla"
+                },
+                {
+                  "id": "imc_0_tb_2",
+                  "type": "narration",
+                  "text": "Lex non capisce perché la mamma si muova così — attenta, contenuta, come se portasse qualcosa di fragile."
+                },
+                {
+                  "id": "imc_0_tb_3",
+                  "type": "thought",
+                  "text": "Capisce tutto, invece.",
+                  "speaker": "favilla"
+                }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "imani__p0"
         }
       ]
     },
     "branch_presa": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_domenica_parco/branch_presa_0.webp",
           "panels": [
             {
               "id": "bp_0",
-              "characters": ["favilla", "ladro"],
+              "characters": [
+                "favilla",
+                "ladro"
+              ],
               "text_blocks": [
-                { "id": "bp_0_tb_0", "type": "narration", "text": "Il boschetto inghiotte tutto — luce, voci, il rumore del parco." },
-                { "id": "bp_0_tb_1", "type": "narration", "text": "Favilla corre. I rami non la rallentano." },
-                { "id": "bp_0_tb_2", "type": "narration", "text": "Il ladro è veloce. Lei è di più." },
-                { "id": "bp_0_tb_3", "type": "narration", "text": "Lo aggancia per il colletto a tre metri dalla recinzione." },
-                { "id": "bp_0_tb_4", "type": "narration", "text": "Il ladro si gira. Nei suoi occhi, qualcosa che non riesce a catalogare." },
-                { "id": "bp_0_tb_5", "type": "narration", "text": "Sbatte la fronte contro un ramo basso che non aveva visto." },
-                { "id": "bp_0_tb_6", "type": "dialogue", "speaker": "ladro", "text": "Cos... cosa—" },
-                { "id": "bp_0_tb_7", "type": "narration", "text": "Non finisce. Lascia cadere la borsetta e scappa urlando verso il cancello." },
-                { "id": "bp_0_tb_8", "type": "thought", "text": "Non sa cosa ha visto. Non lo sa nemmeno lui." }
+                {
+                  "id": "bp_0_tb_0",
+                  "type": "narration",
+                  "text": "Il boschetto inghiotte tutto — luce, voci, il rumore del parco."
+                },
+                {
+                  "id": "bp_0_tb_1",
+                  "type": "narration",
+                  "text": "Favilla corre. I rami non la rallentano."
+                },
+                {
+                  "id": "bp_0_tb_2",
+                  "type": "narration",
+                  "text": "Il ladro è veloce. Lei è di più."
+                },
+                {
+                  "id": "bp_0_tb_3",
+                  "type": "narration",
+                  "text": "Lo aggancia per il colletto a tre metri dalla recinzione."
+                },
+                {
+                  "id": "bp_0_tb_4",
+                  "type": "narration",
+                  "text": "Il ladro si gira. Nei suoi occhi, qualcosa che non riesce a catalogare."
+                },
+                {
+                  "id": "bp_0_tb_5",
+                  "type": "narration",
+                  "text": "Sbatte la fronte contro un ramo basso che non aveva visto."
+                },
+                {
+                  "id": "bp_0_tb_6",
+                  "type": "dialogue",
+                  "speaker": "ladro",
+                  "text": "Cos... cosa—"
+                },
+                {
+                  "id": "bp_0_tb_7",
+                  "type": "narration",
+                  "text": "Non finisce. Lascia cadere la borsetta e scappa urlando verso il cancello."
+                },
+                {
+                  "id": "bp_0_tb_8",
+                  "type": "thought",
+                  "text": "Non sa cosa ha visto. Non lo sa nemmeno lui.",
+                  "speaker": "favilla"
+                }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bpresa_p0"
         },
         {
-          "index": 1,
           "background": "assets/episodes/s1/s1_domenica_parco/branch_presa_1.webp",
           "panels": [
             {
               "id": "bp_1",
-              "characters": ["favilla", "mallow"],
+              "characters": [
+                "favilla",
+                "mallow"
+              ],
               "text_blocks": [
-                { "id": "bp_1_tb_0", "type": "narration", "text": "Favilla raccoglie la borsetta. Controlla. C'è tutto." },
-                { "id": "bp_1_tb_1", "type": "narration", "text": "Cammina fuori dal boschetto come se stesse tornando da una passeggiata." },
-                { "id": "bp_1_tb_2", "type": "narration", "text": "Mallow è sulla panchina. Il colombo se n'è andato." },
-                { "id": "bp_1_tb_3", "type": "dialogue", "speaker": "mallow", "text": "Dov'eri?" },
-                { "id": "bp_1_tb_4", "type": "dialogue", "speaker": "favilla", "text": "Ho seguito un colombo." },
-                { "id": "bp_1_tb_5", "type": "narration", "text": "Pausa." },
-                { "id": "bp_1_tb_6", "type": "dialogue", "speaker": "mallow", "text": "...la borsetta?" },
-                { "id": "bp_1_tb_7", "type": "dialogue", "speaker": "favilla", "text": "È sempre stata mia." },
-                { "id": "bp_1_tb_8", "type": "narration", "text": "Mallow la guarda con l'espressione di chi ha molte domande e ha imparato a non farle tutte insieme." },
-                { "id": "bp_1_tb_9", "type": "thought", "text": "Bene così." }
+                {
+                  "id": "bp_1_tb_0",
+                  "type": "narration",
+                  "text": "Favilla raccoglie la borsetta. Controlla. C'è tutto."
+                },
+                {
+                  "id": "bp_1_tb_1",
+                  "type": "narration",
+                  "text": "Cammina fuori dal boschetto come se stesse tornando da una passeggiata."
+                },
+                {
+                  "id": "bp_1_tb_2",
+                  "type": "narration",
+                  "text": "Mallow è sulla panchina. Il colombo se n'è andato."
+                },
+                {
+                  "id": "bp_1_tb_3",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "Dov'eri?"
+                },
+                {
+                  "id": "bp_1_tb_4",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Ho seguito un colombo."
+                },
+                {
+                  "id": "bp_1_tb_5",
+                  "type": "narration",
+                  "text": "Pausa."
+                },
+                {
+                  "id": "bp_1_tb_6",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "...la borsetta?"
+                },
+                {
+                  "id": "bp_1_tb_7",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "È sempre stata mia."
+                },
+                {
+                  "id": "bp_1_tb_8",
+                  "type": "narration",
+                  "text": "Mallow la guarda con l'espressione di chi ha molte domande e ha imparato a non farle tutte insieme."
+                },
+                {
+                  "id": "bp_1_tb_9",
+                  "type": "thought",
+                  "text": "Bene così.",
+                  "speaker": "favilla"
+                }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bpresa_p1"
         }
       ]
     },
     "branch_quasi": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_domenica_parco/branch_quasi.webp",
           "panels": [
             {
               "id": "bq_0",
-              "characters": ["favilla"],
+              "characters": [
+                "favilla"
+              ],
               "text_blocks": [
-                { "id": "bq_0_tb_0", "type": "narration", "text": "Il boschetto è più fitto di quanto sembri dall'esterno." },
-                { "id": "bq_0_tb_1", "type": "narration", "text": "Favilla corre. Il ladro conosce questi alberi meglio di lei." },
-                { "id": "bq_0_tb_2", "type": "narration", "text": "Una svolta. Un'altra. Un'altra ancora." },
-                { "id": "bq_0_tb_3", "type": "narration", "text": "Si ferma." },
-                { "id": "bq_0_tb_4", "type": "narration", "text": "Silenzio." },
-                { "id": "bq_0_tb_5", "type": "thought", "text": "No." },
-                { "id": "bq_0_tb_6", "type": "narration", "text": "Nessun rumore di passi. Nessun cappuccio scuro tra le foglie." },
-                { "id": "bq_0_tb_7", "type": "narration", "text": "Perso." }
+                {
+                  "id": "bq_0_tb_0",
+                  "type": "narration",
+                  "text": "Il boschetto è più fitto di quanto sembri dall'esterno."
+                },
+                {
+                  "id": "bq_0_tb_1",
+                  "type": "narration",
+                  "text": "Favilla corre. Il ladro conosce questi alberi meglio di lei."
+                },
+                {
+                  "id": "bq_0_tb_2",
+                  "type": "narration",
+                  "text": "Una svolta. Un'altra. Un'altra ancora."
+                },
+                {
+                  "id": "bq_0_tb_3",
+                  "type": "narration",
+                  "text": "Si ferma."
+                },
+                {
+                  "id": "bq_0_tb_4",
+                  "type": "narration",
+                  "text": "Silenzio."
+                },
+                {
+                  "id": "bq_0_tb_5",
+                  "type": "thought",
+                  "text": "No.",
+                  "speaker": "favilla"
+                },
+                {
+                  "id": "bq_0_tb_6",
+                  "type": "narration",
+                  "text": "Nessun rumore di passi. Nessun cappuccio scuro tra le foglie."
+                },
+                {
+                  "id": "bq_0_tb_7",
+                  "type": "narration",
+                  "text": "Perso."
+                }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bquasi_p0"
         },
         {
-          "index": 1,
           "background": "assets/episodes/s1/s1_domenica_parco/branch_quasi.webp",
           "panels": [
             {
               "id": "bq_1",
-              "characters": ["favilla", "mallow"],
+              "characters": [
+                "favilla",
+                "mallow"
+              ],
               "text_blocks": [
-                { "id": "bq_1_tb_0", "type": "narration", "text": "Torna fuori dal boschetto. Capelli arruffati. Un ginocchio sbucciato." },
-                { "id": "bq_1_tb_1", "type": "narration", "text": "Mallow la vede arrivare e si alza di scatto." },
-                { "id": "bq_1_tb_2", "type": "dialogue", "speaker": "mallow", "text": "Cos'è successo?" },
-                { "id": "bq_1_tb_3", "type": "dialogue", "speaker": "favilla", "text": "Mi hanno scippato." },
-                { "id": "bq_1_tb_4", "type": "dialogue", "speaker": "mallow", "text": "La borsetta?" },
-                { "id": "bq_1_tb_5", "type": "dialogue", "speaker": "favilla", "text": "Nel boschetto. Non l'ho preso." },
-                { "id": "bq_1_tb_6", "type": "narration", "text": "Mallow guarda il boschetto. Guarda lei. Prende il telefono." },
-                { "id": "bq_1_tb_7", "type": "narration", "text": "Due ore in questura. Un modulo lungo tre pagine." },
-                { "id": "bq_1_tb_8", "type": "narration", "text": "Lex percorre avanti e indietro il pavimento di linoleum con un'espressione da generale sconfitto." },
-                { "id": "bq_1_tb_9", "type": "thought", "text": "Resistenza: in calo libero." }
+                {
+                  "id": "bq_1_tb_0",
+                  "type": "narration",
+                  "text": "Torna fuori dal boschetto. Capelli arruffati. Un ginocchio sbucciato."
+                },
+                {
+                  "id": "bq_1_tb_1",
+                  "type": "narration",
+                  "text": "Mallow la vede arrivare e si alza di scatto."
+                },
+                {
+                  "id": "bq_1_tb_2",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "Cos'è successo?"
+                },
+                {
+                  "id": "bq_1_tb_3",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Mi hanno scippato."
+                },
+                {
+                  "id": "bq_1_tb_4",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "La borsetta?"
+                },
+                {
+                  "id": "bq_1_tb_5",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Nel boschetto. Non l'ho preso."
+                },
+                {
+                  "id": "bq_1_tb_6",
+                  "type": "narration",
+                  "text": "Mallow guarda il boschetto. Guarda lei. Prende il telefono."
+                },
+                {
+                  "id": "bq_1_tb_7",
+                  "type": "narration",
+                  "text": "Due ore in questura. Un modulo lungo tre pagine."
+                },
+                {
+                  "id": "bq_1_tb_8",
+                  "type": "narration",
+                  "text": "Lex percorre avanti e indietro il pavimento di linoleum con un'espressione da generale sconfitto."
+                },
+                {
+                  "id": "bq_1_tb_9",
+                  "type": "thought",
+                  "text": "Resistenza: in calo libero.",
+                  "speaker": "favilla"
+                }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bquasi_p1"
         }
       ]
     },
     "branch_perso_trasformazione": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_domenica_parco/branch_trasformazione.webp",
           "panels": [
             {
               "id": "bpt_0",
-              "characters": ["favilla"],
+              "characters": [
+                "favilla"
+              ],
               "text_blocks": [
-                { "id": "bpt_0_tb_0", "type": "narration", "text": "A metà boschetto, le gambe cedono." },
-                { "id": "bpt_0_tb_1", "type": "thought", "text": "Non ce la faccio. Non ce la faccio. Non ce la—" },
-                { "id": "bpt_0_tb_2", "type": "narration", "text": "E poi qualcosa cede prima della testa." },
-                { "id": "bpt_0_tb_3", "type": "narration", "text": "Un lampo. Bianco. Brevissimo." },
-                { "id": "bpt_0_tb_4", "type": "narration", "text": "0,3 secondi dopo, Favilla Blaze è davanti al ladro." },
-                { "id": "bpt_0_tb_5", "type": "narration", "text": "Il ladro vede qualcosa. Il cervello non lo elabora." },
-                { "id": "bpt_0_tb_6", "type": "dialogue", "speaker": "ladro", "text": "AAAAAH! AAAAAH!" },
-                { "id": "bpt_0_tb_7", "type": "narration", "text": "Lascia cadere la borsetta. Scappa verso l'uscita del parco senza voltarsi mai." }
+                {
+                  "id": "bpt_0_tb_0",
+                  "type": "narration",
+                  "text": "A metà boschetto, le gambe cedono."
+                },
+                {
+                  "id": "bpt_0_tb_1",
+                  "type": "thought",
+                  "text": "Non ce la faccio. Non ce la faccio. Non ce la—",
+                  "speaker": "favilla"
+                },
+                {
+                  "id": "bpt_0_tb_2",
+                  "type": "narration",
+                  "text": "E poi qualcosa cede prima della testa."
+                },
+                {
+                  "id": "bpt_0_tb_3",
+                  "type": "narration",
+                  "text": "Un lampo. Bianco. Brevissimo."
+                },
+                {
+                  "id": "bpt_0_tb_4",
+                  "type": "narration",
+                  "text": "0,3 secondi dopo, Favilla Blaze è davanti al ladro."
+                },
+                {
+                  "id": "bpt_0_tb_5",
+                  "type": "narration",
+                  "text": "Il ladro vede qualcosa. Il cervello non lo elabora."
+                },
+                {
+                  "id": "bpt_0_tb_6",
+                  "type": "dialogue",
+                  "speaker": "ladro",
+                  "text": "AAAAAH! AAAAAH!"
+                },
+                {
+                  "id": "bpt_0_tb_7",
+                  "type": "narration",
+                  "text": "Lascia cadere la borsetta. Scappa verso l'uscita del parco senza voltarsi mai."
+                }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bperso_p0"
         },
         {
-          "index": 1,
           "background": "assets/episodes/s1/s1_domenica_parco/branch_trasformazione.webp",
           "panels": [
             {
               "id": "bpt_1",
-              "characters": ["favilla", "mallow"],
+              "characters": [
+                "favilla",
+                "mallow"
+              ],
               "text_blocks": [
-                { "id": "bpt_1_tb_0", "type": "narration", "text": "Favilla è ferma nel boschetto. Le mani tremano." },
-                { "id": "bpt_1_tb_1", "type": "narration", "text": "Ma tiene la borsetta." },
-                { "id": "bpt_1_tb_2", "type": "thought", "text": "Ha visto qualcosa. Ma non sa cosa ha visto. Non lo sa nemmeno lui." },
-                { "id": "bpt_1_tb_3", "type": "thought", "text": "Pensa di aver sbattuto la testa. Pensa di aver allucinato. Forse domani non si ricorda niente." },
-                { "id": "bpt_1_tb_4", "type": "narration", "text": "Forse." },
-                { "id": "bpt_1_tb_5", "type": "narration", "text": "Torna fuori dal boschetto. Mallow la vede e alza le mani." },
-                { "id": "bpt_1_tb_6", "type": "dialogue", "speaker": "mallow", "text": "Tutto okay?" },
-                { "id": "bpt_1_tb_7", "type": "dialogue", "speaker": "favilla", "text": "Sì. L'ho preso di sorpresa. Ha lasciato cadere tutto." },
-                { "id": "bpt_1_tb_8", "type": "dialogue", "speaker": "mallow", "text": "...come?" },
-                { "id": "bpt_1_tb_9", "type": "dialogue", "speaker": "favilla", "text": "Aveva il cappuccio. Non ci vedeva bene. È inciampato." },
-                { "id": "bpt_1_tb_10", "type": "narration", "text": "Mallow la guarda." },
-                { "id": "bpt_1_tb_11", "type": "narration", "text": "Lex: faccia da \"ci stai arrivando, papà\"." },
-                { "id": "bpt_1_tb_12", "type": "narration", "text": "Nessuno dei due dice altro." }
+                {
+                  "id": "bpt_1_tb_0",
+                  "type": "narration",
+                  "text": "Favilla è ferma nel boschetto. Le mani tremano."
+                },
+                {
+                  "id": "bpt_1_tb_1",
+                  "type": "narration",
+                  "text": "Ma tiene la borsetta."
+                },
+                {
+                  "id": "bpt_1_tb_2",
+                  "type": "thought",
+                  "text": "Ha visto qualcosa. Ma non sa cosa ha visto. Non lo sa nemmeno lui.",
+                  "speaker": "favilla"
+                },
+                {
+                  "id": "bpt_1_tb_3",
+                  "type": "thought",
+                  "text": "Pensa di aver sbattuto la testa. Pensa di aver allucinato. Forse domani non si ricorda niente.",
+                  "speaker": "favilla"
+                },
+                {
+                  "id": "bpt_1_tb_4",
+                  "type": "narration",
+                  "text": "Forse."
+                },
+                {
+                  "id": "bpt_1_tb_5",
+                  "type": "narration",
+                  "text": "Torna fuori dal boschetto. Mallow la vede e alza le mani."
+                },
+                {
+                  "id": "bpt_1_tb_6",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "Tutto okay?"
+                },
+                {
+                  "id": "bpt_1_tb_7",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Sì. L'ho preso di sorpresa. Ha lasciato cadere tutto."
+                },
+                {
+                  "id": "bpt_1_tb_8",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "...come?"
+                },
+                {
+                  "id": "bpt_1_tb_9",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "Aveva il cappuccio. Non ci vedeva bene. È inciampato."
+                },
+                {
+                  "id": "bpt_1_tb_10",
+                  "type": "narration",
+                  "text": "Mallow la guarda."
+                },
+                {
+                  "id": "bpt_1_tb_11",
+                  "type": "narration",
+                  "text": "Lex: faccia da \"ci stai arrivando, papà\"."
+                },
+                {
+                  "id": "bpt_1_tb_12",
+                  "type": "narration",
+                  "text": "Nessuno dei due dice altro."
+                }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bperso_p1"
         }
       ]
     },
     "intro_segreto_corda": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_domenica_parco/page_0.webp",
           "panels": [
             {
               "id": "sp_corda_0",
-              "characters": ["favilla", "mallow", "lex"],
+              "characters": [
+                "favilla",
+                "mallow",
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "id": "sp_corda_0_tb_0",
@@ -349,23 +805,26 @@
                 {
                   "id": "sp_corda_0_tb_3",
                   "type": "thought",
-                  "text": "Manca poco. Ancora qualche crepa e il segreto viene giù tutto insieme."
+                  "text": "Manca poco. Ancora qualche crepa e il segreto viene giù tutto insieme.",
+                  "speaker": "favilla"
                 }
               ]
             }
-          ]
+          ],
+          "id": "isegre_p0"
         }
       ]
     },
     "intro_resistenza_limite": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_domenica_parco/page_0.webp",
           "panels": [
             {
               "id": "sp_limite_0",
-              "characters": ["favilla"],
+              "characters": [
+                "favilla"
+              ],
               "text_blocks": [
                 {
                   "id": "sp_limite_0_tb_0",
@@ -390,11 +849,13 @@
                 {
                   "id": "sp_limite_0_tb_4",
                   "type": "thought",
-                  "text": "Non ora. Non qui. Non davanti a loro."
+                  "text": "Non ora. Non qui. Non davanti a loro.",
+                  "speaker": "favilla"
                 }
               ]
             }
-          ]
+          ],
+          "id": "iresis_p0"
         }
       ]
     }
@@ -402,79 +863,182 @@
   "epilogue": {
     "pages": [
       {
-        "index": 0,
         "background": "assets/episodes/s1/s1_domenica_parco/epilogue_0.webp",
         "panels": [
           {
             "id": "ep_dp_0",
-            "characters": ["favilla", "mallow", "lex"],
+            "characters": [
+              "favilla",
+              "mallow",
+              "lex"
+            ],
             "text_blocks": [
-              { "id": "ep_dp_0_tb_0", "type": "narration", "text": "Tornano verso casa per la strada solita." },
-              { "id": "ep_dp_0_tb_1", "type": "narration", "text": "Lex dorme nel passeggino. Gelato dimenticato su una panchina." },
-              { "id": "ep_dp_0_tb_2", "type": "narration", "text": "Mallow tiene la mano di Favilla." },
-              { "id": "ep_dp_0_tb_3", "type": "thought", "text": "Una domenica quasi normale." },
-              { "id": "ep_dp_0_tb_4", "type": "narration", "text": "Quasi." }
+              {
+                "id": "ep_dp_0_tb_0",
+                "type": "narration",
+                "text": "Tornano verso casa per la strada solita."
+              },
+              {
+                "id": "ep_dp_0_tb_1",
+                "type": "narration",
+                "text": "Lex dorme nel passeggino. Gelato dimenticato su una panchina."
+              },
+              {
+                "id": "ep_dp_0_tb_2",
+                "type": "narration",
+                "text": "Mallow tiene la mano di Favilla."
+              },
+              {
+                "id": "ep_dp_0_tb_3",
+                "type": "thought",
+                "text": "Una domenica quasi normale.",
+                "speaker": "favilla"
+              },
+              {
+                "id": "ep_dp_0_tb_4",
+                "type": "narration",
+                "text": "Quasi."
+              }
             ],
             "interactions": []
           }
-        ]
+        ],
+        "id": "ep_p0"
       },
       {
-        "index": 1,
         "background": "assets/episodes/s1/s1_domenica_parco/epilogue_gatto_1.webp",
         "panels": [
           {
             "id": "ep_dp_1",
-            "characters": ["gatto"],
+            "characters": [
+              "gatto"
+            ],
             "text_blocks": [
-              { "id": "ep_dp_1_tb_0", "type": "narration", "text": "---" },
-              { "id": "ep_dp_1_tb_1", "type": "narration", "text": "Nel boschetto." },
-              { "id": "ep_dp_1_tb_2", "type": "narration", "text": "Tra i cespugli vicino alla panchina di Favilla." },
-              { "id": "ep_dp_1_tb_3", "type": "narration", "text": "Due occhi gialli." },
-              { "id": "ep_dp_1_tb_4", "type": "narration", "text": "Il gatto era lì dall'inizio." },
-              { "id": "ep_dp_1_tb_5", "type": "narration", "text": "Non si era mosso." }
+              {
+                "id": "ep_dp_1_tb_0",
+                "type": "narration",
+                "text": "---"
+              },
+              {
+                "id": "ep_dp_1_tb_1",
+                "type": "narration",
+                "text": "Nel boschetto."
+              },
+              {
+                "id": "ep_dp_1_tb_2",
+                "type": "narration",
+                "text": "Tra i cespugli vicino alla panchina di Favilla."
+              },
+              {
+                "id": "ep_dp_1_tb_3",
+                "type": "narration",
+                "text": "Due occhi gialli."
+              },
+              {
+                "id": "ep_dp_1_tb_4",
+                "type": "narration",
+                "text": "Il gatto era lì dall'inizio."
+              },
+              {
+                "id": "ep_dp_1_tb_5",
+                "type": "narration",
+                "text": "Non si era mosso."
+              }
             ],
             "interactions": []
           }
-        ]
+        ],
+        "id": "ep_p1"
       },
       {
-        "index": 2,
         "background": "assets/episodes/s1/s1_domenica_parco/epilogue_gatto_2.webp",
         "panels": [
           {
             "id": "ep_dp_2",
-            "characters": ["gatto"],
+            "characters": [
+              "gatto"
+            ],
             "text_blocks": [
-              { "id": "ep_dp_2_tb_0", "type": "narration", "text": "Si alza adesso." },
-              { "id": "ep_dp_2_tb_1", "type": "narration", "text": "Stiramento lento. Come se avesse tutto il tempo del mondo." },
-              { "id": "ep_dp_2_tb_2", "type": "narration", "text": "Cammina fuori dal boschetto." },
-              { "id": "ep_dp_2_tb_3", "type": "narration", "text": "Attraversa il parco senza fretta." },
-              { "id": "ep_dp_2_tb_4", "type": "narration", "text": "I bambini si fanno da parte." }
+              {
+                "id": "ep_dp_2_tb_0",
+                "type": "narration",
+                "text": "Si alza adesso."
+              },
+              {
+                "id": "ep_dp_2_tb_1",
+                "type": "narration",
+                "text": "Stiramento lento. Come se avesse tutto il tempo del mondo."
+              },
+              {
+                "id": "ep_dp_2_tb_2",
+                "type": "narration",
+                "text": "Cammina fuori dal boschetto."
+              },
+              {
+                "id": "ep_dp_2_tb_3",
+                "type": "narration",
+                "text": "Attraversa il parco senza fretta."
+              },
+              {
+                "id": "ep_dp_2_tb_4",
+                "type": "narration",
+                "text": "I bambini si fanno da parte."
+              }
             ],
             "interactions": []
           }
-        ]
+        ],
+        "id": "ep_p2"
       },
       {
-        "index": 3,
         "background": "assets/episodes/s1/s1_domenica_parco/epilogue_gatto_3.webp",
         "panels": [
           {
             "id": "ep_dp_3",
-            "characters": ["gatto"],
+            "characters": [
+              "gatto"
+            ],
             "text_blocks": [
-              { "id": "ep_dp_3_tb_0", "type": "narration", "text": "Fuori dal cancello." },
-              { "id": "ep_dp_3_tb_1", "type": "narration", "text": "Sul marciapiede." },
-              { "id": "ep_dp_3_tb_2", "type": "narration", "text": "Via delle Vesciche e dei Brufoli." },
-              { "id": "ep_dp_3_tb_3", "type": "narration", "text": "Numero 19." },
-              { "id": "ep_dp_3_tb_4", "type": "narration", "text": "Terzo piano. Una finestra socchiusa." },
-              { "id": "ep_dp_3_tb_5", "type": "narration", "text": "A casa di Carmela." },
-              { "id": "ep_dp_3_tb_6", "type": "system", "text": "MISSIONE COMPLETATA — La Domenica al Parco" }
+              {
+                "id": "ep_dp_3_tb_0",
+                "type": "narration",
+                "text": "Fuori dal cancello."
+              },
+              {
+                "id": "ep_dp_3_tb_1",
+                "type": "narration",
+                "text": "Sul marciapiede."
+              },
+              {
+                "id": "ep_dp_3_tb_2",
+                "type": "narration",
+                "text": "Via delle Vesciche e dei Brufoli."
+              },
+              {
+                "id": "ep_dp_3_tb_3",
+                "type": "narration",
+                "text": "Numero 19."
+              },
+              {
+                "id": "ep_dp_3_tb_4",
+                "type": "narration",
+                "text": "Terzo piano. Una finestra socchiusa."
+              },
+              {
+                "id": "ep_dp_3_tb_5",
+                "type": "narration",
+                "text": "A casa di Carmela."
+              },
+              {
+                "id": "ep_dp_3_tb_6",
+                "type": "system",
+                "text": "MISSIONE COMPLETATA — La Domenica al Parco"
+              }
             ],
             "interactions": []
           }
-        ]
+        ],
+        "id": "ep_p3"
       }
     ]
   }

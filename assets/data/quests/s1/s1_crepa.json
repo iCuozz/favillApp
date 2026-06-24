@@ -17,7 +17,10 @@
       "panels": [
         {
           "id": "cr_p0_a",
-          "characters": ["favilla", "mallow"],
+          "characters": [
+            "favilla",
+            "mallow"
+          ],
           "text_blocks": [
             {
               "id": "cr_p0_a_t1",
@@ -56,7 +59,11 @@
       "panels": [
         {
           "id": "cr_p1_a",
-          "characters": ["favilla", "mallow", "lex"],
+          "characters": [
+            "favilla",
+            "mallow",
+            "lex"
+          ],
           "text_blocks": [
             {
               "id": "cr_p1_a_t1",
@@ -100,7 +107,11 @@
       "panels": [
         {
           "id": "cr_p2_a",
-          "characters": ["favilla", "mallow", "lex"],
+          "characters": [
+            "favilla",
+            "mallow",
+            "lex"
+          ],
           "text_blocks": [
             {
               "id": "cr_p2_a_t1",
@@ -216,12 +227,14 @@
       "id": "intro_precaria",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_1.png",
           "panels": [
             {
               "id": "intro_precaria_a",
-              "characters": ["favilla", "lex"],
+              "characters": [
+                "favilla",
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "id": "intro_precaria_a_t1",
@@ -246,7 +259,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "ipreca_p0"
         }
       ]
     },
@@ -254,12 +268,14 @@
       "id": "branch_svolta",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_2.png",
           "panels": [
             {
               "id": "branch_svolta_a",
-              "characters": ["favilla", "mallow"],
+              "characters": [
+                "favilla",
+                "mallow"
+              ],
               "text_blocks": [
                 {
                   "id": "branch_svolta_a_t1",
@@ -285,7 +301,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bsvolt_p0"
         }
       ]
     },
@@ -293,12 +310,14 @@
       "id": "branch_silenzio",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_2.png",
           "panels": [
             {
               "id": "branch_silenzio_a",
-              "characters": ["favilla", "mallow"],
+              "characters": [
+                "favilla",
+                "mallow"
+              ],
               "text_blocks": [
                 {
                   "id": "branch_silenzio_a_t1",
@@ -323,7 +342,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bsilen_p0"
         }
       ]
     },
@@ -331,12 +351,14 @@
       "id": "branch_crepa_quasi_vera",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_3.png",
           "panels": [
             {
               "id": "crepa_vera_a",
-              "characters": ["favilla", "mallow"],
+              "characters": [
+                "favilla",
+                "mallow"
+              ],
               "text_blocks": [
                 {
                   "id": "crepa_vera_a_t1",
@@ -367,15 +389,19 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bcrepa_p0"
         },
         {
-          "index": 1,
           "background": "assets/episodes/prologo/page_4.png",
           "panels": [
             {
               "id": "crepa_vera_b",
-              "characters": ["favilla", "mallow", "lex"],
+              "characters": [
+                "favilla",
+                "mallow",
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "id": "crepa_vera_b_t1",
@@ -401,7 +427,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bcrepa_p1"
         }
       ]
     },
@@ -409,12 +436,14 @@
       "id": "branch_crepa_sfumata",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_2.png",
           "panels": [
             {
               "id": "crepa_sfumata_a",
-              "characters": ["favilla", "mallow"],
+              "characters": [
+                "favilla",
+                "mallow"
+              ],
               "text_blocks": [
                 {
                   "id": "crepa_sfumata_a_t1",
@@ -447,7 +476,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bcrepa_p0"
         }
       ]
     },
@@ -455,12 +485,14 @@
       "id": "branch_crepa_bloccata",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_1.png",
           "panels": [
             {
               "id": "crepa_bloccata_a",
-              "characters": ["favilla", "mallow"],
+              "characters": [
+                "favilla",
+                "mallow"
+              ],
               "text_blocks": [
                 {
                   "id": "crepa_bloccata_a_t1",
@@ -491,7 +523,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bcrepa_p0"
         }
       ]
     }
@@ -500,12 +533,13 @@
     "id": "epilogue",
     "pages": [
       {
-        "index": 0,
         "background": "assets/episodes/prologo/page_4.png",
         "panels": [
           {
             "id": "cr_epilogo_a",
-            "characters": ["favilla"],
+            "characters": [
+              "favilla"
+            ],
             "text_blocks": [
               {
                 "id": "cr_epilogo_a_t1",
@@ -525,15 +559,17 @@
               }
             ]
           }
-        ]
+        ],
+        "id": "ep_p0"
       },
       {
-        "index": 1,
         "background": "assets/episodes/prologo/page_carmela.png",
         "panels": [
           {
             "id": "cr_epilogo_b",
-            "characters": ["carmela"],
+            "characters": [
+              "carmela"
+            ],
             "text_blocks": [
               {
                 "id": "cr_epilogo_b_t1",
@@ -547,7 +583,8 @@
               }
             ]
           }
-        ]
+        ],
+        "id": "ep_p1"
       }
     ]
   }

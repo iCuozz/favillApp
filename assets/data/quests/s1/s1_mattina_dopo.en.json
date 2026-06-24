@@ -19,7 +19,8 @@
             {
               "id": "md0_0_tb_1",
               "type": "thought",
-              "text": "And here I am, wide awake, staring at the ceiling as if it had all the answers."
+              "text": "And here I am, wide awake, staring at the ceiling as if it had all the answers.",
+              "speaker": "favilla"
             },
             {
               "id": "md0_0_tb_2",
@@ -29,7 +30,8 @@
             {
               "id": "md0_0_tb_3",
               "type": "thought",
-              "text": "All I know is that now the pasta is perfectly cooked and my son is safe."
+              "text": "All I know is that now the pasta is perfectly cooked and my son is safe.",
+              "speaker": "favilla"
             }
           ],
           "interactions": []
@@ -71,7 +73,8 @@
             {
               "id": "md1_0_tb_4",
               "type": "thought",
-              "text": "You were there. You saw."
+              "text": "You were there. You saw.",
+              "speaker": "favilla"
             }
           ],
           "interactions": []
@@ -157,7 +160,6 @@
     "branch_sorriso": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_mattina_dopo/branch_sorriso.webp",
           "panels": [
             {
@@ -188,19 +190,20 @@
                 {
                   "id": "bs_0_tb_3",
                   "type": "thought",
-                  "text": "The secret is safe. For now it's still ours — mine and his."
+                  "text": "The secret is safe. For now it's still ours — mine and his.",
+                  "speaker": "favilla"
                 }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bsorri_p0"
         }
       ]
     },
     "branch_sudore": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_mattina_dopo/branch_sudore.webp",
           "panels": [
             {
@@ -235,7 +238,8 @@
                 {
                   "id": "bsu_0_tb_4",
                   "type": "thought",
-                  "text": "You looked burned."
+                  "text": "You looked burned.",
+                  "speaker": "favilla"
                 },
                 {
                   "id": "bsu_0_tb_5",
@@ -251,7 +255,8 @@
                 {
                   "id": "bsu_0_tb_7",
                   "type": "thought",
-                  "text": "I had to lie faster than expected."
+                  "text": "I had to lie faster than expected.",
+                  "speaker": "favilla"
                 },
                 {
                   "id": "bsu_0_tb_8",
@@ -266,14 +271,14 @@
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bsudor_p0"
         }
       ]
     },
     "epilogue_caffe": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_mattina_dopo/epilogue.webp",
           "panels": [
             {
@@ -295,7 +300,8 @@
                 {
                   "id": "ep_caffe_0_tb_2",
                   "type": "thought",
-                  "text": "It doesn't warm. Coffee... extinguishes."
+                  "text": "It doesn't warm. Coffee... extinguishes.",
+                  "speaker": "favilla"
                 },
                 {
                   "id": "ep_caffe_0_tb_3",
@@ -310,14 +316,14 @@
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "epilog_p0"
         }
       ]
     },
     "epilogue_no_caffe": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_mattina_dopo/epilogue.webp",
           "panels": [
             {
@@ -335,7 +341,8 @@
                 {
                   "id": "ep_nocaffe_0_tb_1",
                   "type": "thought",
-                  "text": "If coffee has anything to do with it, I want to figure that out with a clear head."
+                  "text": "If coffee has anything to do with it, I want to figure that out with a clear head.",
+                  "speaker": "favilla"
                 },
                 {
                   "id": "ep_nocaffe_0_tb_2",
@@ -372,7 +379,8 @@
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "epilog_p0"
         }
       ]
     }
@@ -380,7 +388,6 @@
   "epilogue": {
     "pages": [
       {
-        "index": 0,
         "background": "assets/episodes/s1/s1_mattina_dopo/epilogue.webp",
         "panels": [
           {
@@ -402,7 +409,8 @@
               {
                 "id": "md_ep_0_tb_2",
                 "type": "thought",
-                "text": "Nova Tutinia doesn't yet know what's hiding on the third floor of 18 Blemish and Blister Street."
+                "text": "Nova Tutinia doesn't yet know what's hiding on the third floor of 18 Blemish and Blister Street.",
+                "speaker": "favilla"
               },
               {
                 "id": "md_ep_0_tb_3",
@@ -439,7 +447,8 @@
               }
             }
           ]
-        }
+        },
+        "id": "ep_p0"
       }
     ]
   }

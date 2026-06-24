@@ -437,9 +437,17 @@ def check_stat_entry_reachability(episodes: list) -> bool:
 
                 if op in ('lt', 'lte'):
                     min_val, _ = _min_max_stat_for_episode(episodes, stat, ep_idx)
-                    if value <= min_val:
+                    # lt: unreachable when value <= min_val (min already >= threshold)
+                    # lte: unreachable when value < min_val (min already > threshold)
+                    if op == 'lte':
+                        unreachable = value < min_val
+                        cmp = "<"
+                    else:
+                        unreachable = value <= min_val
+                        cmp = "\u2264"
+                    if unreachable:
                         print(f"  \U0001f534 [{ep_id}] stat_entry[{rule_idx}]: {stat} {op} {value} \u2192 {branch}")
-                        print(f"     Soglia {value} \u2264 min raggiungibile {min_val} \u2014 CONDIZIONE MAI VERA")
+                        print(f"     Soglia {value} {cmp} min raggiungibile {min_val} \u2014 CONDIZIONE MAI VERA")
                         ok = False
 
                 elif op in ('gt', 'gte'):
@@ -500,7 +508,7 @@ def main():
 
     # Mappa delle soglie già implementate nel motore
     implemented = {
-        'segreto': {50: 'EP3 (stat_entry)', 30: 'EP2 (intro_segreto_pericolo)', 15: 'EP5 (intro_segreto_corda)', 8: '—'},
+        'segreto': {50: 'EP3 (stat_entry)', 30: 'EP2 (intro_segreto_pericolo)', 15: 'EP5 (intro_segreto_corda)', 8: 'EP6 mare + EP9b comare'},
         'legame': {70: 'EP9c (requires_stats)', 40: 'EP6alt (intro_legame_distante) + EP9c soglia', 10: '—'},
         'scintille': {45: 'EP2 (stat_entry) + minigame', 35: 'EP8 (intro_senza_fiamma)'},
         'resistenza': {40: 'EP7.5 (stat unlock)', 25: 'EP4 (intro_esausta)', 10: 'EP5 (intro_resistenza_limite)'},

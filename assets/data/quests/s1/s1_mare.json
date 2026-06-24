@@ -2,8 +2,20 @@
   "id": "s1_mare",
   "stat_entry": [
     {
-      "flag_conditions": [{ "flag": "favilla_transformed_public", "is": true }],
+      "flag_conditions": [
+        {
+          "flag": "favilla_transformed_public",
+          "is": true
+        }
+      ],
       "goto_branch": "intro_mallow_sa_qualcosa",
+      "prepend": true
+    },
+    {
+      "stat": "segreto",
+      "op": "lte",
+      "value": 10,
+      "goto_branch": "intro_segreto_rivelazione",
       "prepend": true
     },
     {
@@ -28,12 +40,33 @@
       "panels": [
         {
           "id": "sm0_0",
-          "characters": ["favilla", "mallow", "lex"],
+          "characters": [
+            "favilla",
+            "mallow",
+            "lex"
+          ],
           "text_blocks": [
-            { "id": "sm0_0_tb_0", "type": "narration", "text": "L'ombrellone richiede diciassette minuti e tre istruzioni in italiano-tecnico per essere montato." },
-            { "id": "sm0_0_tb_1", "type": "narration", "text": "Mallow ci riesce, con Lex nel marsupio che supervisiona ogni mossa con estrema serietà." },
-            { "id": "sm0_0_tb_2", "type": "narration", "text": "Favilla si stende sulla sdraio. Chiude gli occhi." },
-            { "id": "sm0_0_tb_3", "type": "thought", "text": "Per due secondi interi — record personale da settimane — non pensa a niente." }
+            {
+              "id": "sm0_0_tb_0",
+              "type": "narration",
+              "text": "L'ombrellone richiede diciassette minuti e tre istruzioni in italiano-tecnico per essere montato."
+            },
+            {
+              "id": "sm0_0_tb_1",
+              "type": "narration",
+              "text": "Mallow ci riesce, con Lex nel marsupio che supervisiona ogni mossa con estrema serietà."
+            },
+            {
+              "id": "sm0_0_tb_2",
+              "type": "narration",
+              "text": "Favilla si stende sulla sdraio. Chiude gli occhi."
+            },
+            {
+              "id": "sm0_0_tb_3",
+              "type": "thought",
+              "text": "Per due secondi interi — record personale da settimane — non pensa a niente.",
+              "speaker": "favilla"
+            }
           ],
           "interactions": []
         }
@@ -45,12 +78,32 @@
       "panels": [
         {
           "id": "sm1_0",
-          "characters": ["favilla", "mallow"],
+          "characters": [
+            "favilla",
+            "mallow"
+          ],
           "text_blocks": [
-            { "id": "sm1_0_tb_0", "type": "narration", "text": "Mallow torna dal bar del lido con una borraccia d'acqua fresca — e un caffè." },
-            { "id": "sm1_0_tb_1", "type": "narration", "text": "Lo mette sul tavolino di plastica, accanto alla mano di Favilla." },
-            { "id": "sm1_0_tb_2", "type": "dialogue", "speaker": "mallow", "text": "«Ti ho portato anche il caffè. Ma se non lo vuoi non fa niente.»" },
-            { "id": "sm1_0_tb_3", "type": "narration", "text": "La guarda aspettando. Non insiste. Non lo fa mai." }
+            {
+              "id": "sm1_0_tb_0",
+              "type": "narration",
+              "text": "Mallow torna dal bar del lido con una borraccia d'acqua fresca — e un caffè."
+            },
+            {
+              "id": "sm1_0_tb_1",
+              "type": "narration",
+              "text": "Lo mette sul tavolino di plastica, accanto alla mano di Favilla."
+            },
+            {
+              "id": "sm1_0_tb_2",
+              "type": "dialogue",
+              "speaker": "mallow",
+              "text": "«Ti ho portato anche il caffè. Ma se non lo vuoi non fa niente.»"
+            },
+            {
+              "id": "sm1_0_tb_3",
+              "type": "narration",
+              "text": "La guarda aspettando. Non insiste. Non lo fa mai."
+            }
           ],
           "interactions": []
         }
@@ -63,22 +116,41 @@
             "id": "prende_caffe",
             "label": "Lo prende.",
             "goto_branch": "branch_caffe_si",
-            "stat_effects": { "scintille": -8, "resistenza": 1, "legame": 10 },
-            "setMemories": { "narrative.unwind_memory": "quel caffè al mare, con Mallow che sorrideva" }
+            "stat_effects": {
+              "scintille": -8,
+              "resistenza": 1,
+              "legame": 10
+            },
+            "setMemories": {
+              "narrative.unwind_memory": "quel caffè al mare, con Mallow che sorrideva"
+            }
           },
           {
             "id": "lascia_caffe",
             "label": "Lo lascia lì.",
             "goto_branch": "branch_caffe_no",
-            "stat_effects": { "resistenza": 10, "legame": -5 },
-            "setMemories": { "narrative.unwind_memory": "quel caffè lasciato al mare, in silenzio" }
+            "stat_effects": {
+              "resistenza": 10,
+              "legame": -5
+            },
+            "setMemories": {
+              "narrative.unwind_memory": "quel caffè lasciato al mare, in silenzio"
+            }
           },
           {
             "id": "caffe_irritato",
             "label": "«Grazie.» Fredda. Innervosita cumulata.",
             "goto_branch": "branch_caffe_irritato",
-            "stat_effects": { "scintille": -8, "resistenza": -5, "legame": -3, "segreto": 3 },
-            "setMemories": { "choice_tone.s1_mare.caffe_choice": "irritato", "narrative.unwind_memory": "quel momento di tensione al mare" }
+            "stat_effects": {
+              "scintille": -8,
+              "resistenza": -5,
+              "legame": -3,
+              "segreto": 3
+            },
+            "setMemories": {
+              "choice_tone.s1_mare.caffe_choice": "irritato",
+              "narrative.unwind_memory": "quel momento di tensione al mare"
+            }
           }
         ]
       }
@@ -88,93 +160,244 @@
     "intro_mallow_sa_qualcosa": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_mare/page_intro_mallow.webp",
           "panels": [
             {
               "id": "imq_0",
-              "characters": ["favilla", "mallow"],
+              "characters": [
+                "favilla",
+                "mallow"
+              ],
               "text_blocks": [
-                { "id": "imq_0_tb_0", "type": "narration", "text": "In macchina, Mallow guida piano. Al semaforo dice una cosa sola." },
-                { "id": "imq_0_tb_1", "type": "dialogue", "speaker": "mallow", "text": "«In parco l'altro giorno... cercavo Lex con gli occhi e per un secondo non ti trovavo. Poi c'eri di nuovo.»" },
-                { "id": "imq_0_tb_2", "type": "narration", "text": "Pausa. Non aggiunge altro. Favilla guarda fuori dal finestrino. Non sa cosa rispondere — allora non risponde." },
-                { "id": "imq_0_tb_3", "type": "narration", "text": "Non è una domanda. È un fatto che Mallow ha deciso di mettere nel mondo." }
+                {
+                  "id": "imq_0_tb_0",
+                  "type": "narration",
+                  "text": "In macchina, Mallow guida piano. Al semaforo dice una cosa sola."
+                },
+                {
+                  "id": "imq_0_tb_1",
+                  "type": "dialogue",
+                  "speaker": "mallow",
+                  "text": "«In parco l'altro giorno... cercavo Lex con gli occhi e per un secondo non ti trovavo. Poi c'eri di nuovo.»"
+                },
+                {
+                  "id": "imq_0_tb_2",
+                  "type": "narration",
+                  "text": "Pausa. Non aggiunge altro. Favilla guarda fuori dal finestrino. Non sa cosa rispondere — allora non risponde."
+                },
+                {
+                  "id": "imq_0_tb_3",
+                  "type": "narration",
+                  "text": "Non è una domanda. È un fatto che Mallow ha deciso di mettere nel mondo."
+                }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "imallo_p0"
         }
       ]
     },
     "intro_esausta": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_mare/page_intro_esausta.webp",
           "panels": [
             {
               "id": "ie_0",
-              "characters": ["favilla"],
+              "characters": [
+                "favilla"
+              ],
               "text_blocks": [
-                { "id": "ie_0_tb_0", "type": "narration", "text": "In macchina, Favilla dorme. Non se ne accorge nemmeno — la testa sul finestrino, gli occhi chiusi, i capelli scomposti dall'aria condizionata." },
-                { "id": "ie_0_tb_1", "type": "narration", "text": "Si sveglia quando sentono il profumo del sale." },
-                { "id": "ie_0_tb_2", "type": "narration", "text": "E quando Lex emette un suono che non aveva mai fatto prima — qualcosa tra uno strillo e una rivelazione." }
+                {
+                  "id": "ie_0_tb_0",
+                  "type": "narration",
+                  "text": "In macchina, Favilla dorme. Non se ne accorge nemmeno — la testa sul finestrino, gli occhi chiusi, i capelli scomposti dall'aria condizionata."
+                },
+                {
+                  "id": "ie_0_tb_1",
+                  "type": "narration",
+                  "text": "Si sveglia quando sentono il profumo del sale."
+                },
+                {
+                  "id": "ie_0_tb_2",
+                  "type": "narration",
+                  "text": "E quando Lex emette un suono che non aveva mai fatto prima — qualcosa tra uno strillo e una rivelazione."
+                }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "iesaus_p0"
         }
       ]
     },
     "intro_mani_calde": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_mare/page_intro_mani.webp",
           "panels": [
             {
               "id": "imc_0",
-              "characters": ["favilla", "lex"],
+              "characters": [
+                "favilla",
+                "lex"
+              ],
               "text_blocks": [
-                { "id": "imc_0_tb_0", "type": "narration", "text": "Già in macchina, le mani di Favilla sul cruscotto sono tiepide. Come sempre, ultimamente." },
-                { "id": "imc_0_tb_1", "type": "narration", "text": "Come se il calore non avesse mai smesso di cercarla." },
-                { "id": "imc_0_tb_2", "type": "narration", "text": "Lex la guarda con quella sua espressione di chi sta prendendo appunti." }
+                {
+                  "id": "imc_0_tb_0",
+                  "type": "narration",
+                  "text": "Già in macchina, le mani di Favilla sul cruscotto sono tiepide. Come sempre, ultimamente."
+                },
+                {
+                  "id": "imc_0_tb_1",
+                  "type": "narration",
+                  "text": "Come se il calore non avesse mai smesso di cercarla."
+                },
+                {
+                  "id": "imc_0_tb_2",
+                  "type": "narration",
+                  "text": "Lex la guarda con quella sua espressione di chi sta prendendo appunti."
+                }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "imani__p0"
+        }
+      ]
+    },
+    "intro_segreto_rivelazione": {
+      "pages": [
+        {
+          "background": "assets/episodes/s1/s1_mare/page_intro_esausta.webp",
+          "panels": [
+            {
+              "id": "isr_0",
+              "characters": [
+                "favilla",
+                "mallow"
+              ],
+              "text_blocks": [
+                {
+                  "id": "isr_0_tb_0",
+                  "type": "narration",
+                  "text": "In macchina, Favilla non parla. Non da dieci minuti. Mallow guida con una mano — l'altra è sul bracciolo, vicino alla sua, ma non la tocca."
+                },
+                {
+                  "id": "isr_0_tb_1",
+                  "type": "narration",
+                  "text": "Ogni suo silenzio è più rumoroso di una domanda. Ogni sguardo nello specchietto retrovisore è un processo."
+                },
+                {
+                  "id": "isr_0_tb_2",
+                  "type": "narration",
+                  "text": "Favilla lo sa. Il segreto è appeso a un filo — e il filo è visibile. Mallow non chiede perché ha paura della risposta."
+                },
+                {
+                  "id": "isr_0_tb_3",
+                  "type": "thought",
+                  "text": "Lo sa. Non tutto — ma abbastanza. Se faccio un errore oggi, è finita.",
+                  "speaker": "favilla"
+                }
+              ],
+              "interactions": []
+            }
+          ],
+          "id": "isegre_p0"
+        },
+        {
+          "background": "assets/episodes/s1/s1_mare/page_intro_esausta.webp",
+          "panels": [
+            {
+              "id": "isr_1",
+              "characters": [
+                "favilla",
+                "lex"
+              ],
+              "text_blocks": [
+                {
+                  "id": "isr_1_tb_0",
+                  "type": "narration",
+                  "text": "Lex, sul seggiolino dietro, non dorme. Non gioca. Guarda i suoi genitori con un'intensità che un bambino di sette mesi non dovrebbe avere."
+                },
+                {
+                  "id": "isr_1_tb_1",
+                  "type": "narration",
+                  "text": "Ha smesso di provare a dire la verità a modo suo. Ha capito che papà ci sta arrivando da solo. E questo, per qualche motivo, lo rende triste."
+                },
+                {
+                  "id": "isr_1_tb_2",
+                  "type": "narration",
+                  "text": "Quando il segreto è così fragile, anche un bambino lo sente. Soprattutto questo bambino."
+                }
+              ],
+              "interactions": []
+            }
+          ],
+          "id": "isegre_p1"
         }
       ]
     },
     "branch_caffe_si": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_mare/page_caffe.webp",
           "panels": [
             {
               "id": "bcs_0",
-              "characters": ["favilla", "mallow", "lex"],
+              "characters": [
+                "favilla",
+                "mallow",
+                "lex"
+              ],
               "text_blocks": [
-                { "id": "bcs_0_tb_0", "type": "narration", "text": "Lo prende. Lo beve d'un sorso. Caldo, forte, familiare." },
-                { "id": "bcs_0_tb_1", "type": "narration", "text": "Mallow sorride — quel sorriso piccolo che tiene sempre pronto per lei." },
-                { "id": "bcs_0_tb_2", "type": "narration", "text": "Lex guarda il caffè. Poi i capelli di Favilla. Oggi non brilla. Prende nota. Il caffè è il nemico." }
+                {
+                  "id": "bcs_0_tb_0",
+                  "type": "narration",
+                  "text": "Lo prende. Lo beve d'un sorso. Caldo, forte, familiare."
+                },
+                {
+                  "id": "bcs_0_tb_1",
+                  "type": "narration",
+                  "text": "Mallow sorride — quel sorriso piccolo che tiene sempre pronto per lei."
+                },
+                {
+                  "id": "bcs_0_tb_2",
+                  "type": "narration",
+                  "text": "Lex guarda il caffè. Poi i capelli di Favilla. Oggi non brilla. Prende nota. Il caffè è il nemico."
+                }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bcaffe_p0"
         },
         {
-          "index": 1,
           "background": "assets/episodes/s1/s1_mare/page_lex_acqua.webp",
           "panels": [
             {
               "id": "bcs_1",
-              "characters": ["favilla", "lex"],
+              "characters": [
+                "favilla",
+                "lex"
+              ],
               "text_blocks": [
-                { "id": "bcs_1_tb_0", "type": "narration", "text": "È sull'asciugamano da tre minuti quando individua il bersaglio." },
-                { "id": "bcs_1_tb_1", "type": "narration", "text": "Il mare. Grande. Luccicante. Come la mamma — quella volta." },
-                { "id": "bcs_1_tb_2", "type": "narration", "text": "Inizia a muoversi." }
+                {
+                  "id": "bcs_1_tb_0",
+                  "type": "narration",
+                  "text": "È sull'asciugamano da tre minuti quando individua il bersaglio."
+                },
+                {
+                  "id": "bcs_1_tb_1",
+                  "type": "narration",
+                  "text": "Il mare. Grande. Luccicante. Come la mamma — quella volta."
+                },
+                {
+                  "id": "bcs_1_tb_2",
+                  "type": "narration",
+                  "text": "Inizia a muoversi."
+                }
               ],
               "interactions": []
             }
@@ -192,116 +415,234 @@
                   "type": "rincorsa_lex",
                   "duration_seconds": 15,
                   "tiers": [
-                    { "min": 5, "label": "Preso!", "goto_branch": "branch_preso_bene", "stat_effects": { "resistenza": 10, "legame": 5 } },
-                    { "min": 3, "label": "Quasi...", "goto_branch": "branch_quasi_visto", "stat_effects": { "segreto": -8, "legame": 5 } },
-                    { "min": 0, "label": "Tramonto.", "goto_branch": "branch_momento_magico", "stat_effects": { "segreto": -5, "legame": 15, "resistenza": 5 } }
+                    {
+                      "min": 5,
+                      "label": "Preso!",
+                      "goto_branch": "branch_preso_bene",
+                      "stat_effects": {
+                        "resistenza": 10,
+                        "legame": 5
+                      }
+                    },
+                    {
+                      "min": 3,
+                      "label": "Quasi...",
+                      "goto_branch": "branch_quasi_visto",
+                      "stat_effects": {
+                        "segreto": -8,
+                        "legame": 5
+                      }
+                    },
+                    {
+                      "min": 0,
+                      "label": "Tramonto.",
+                      "goto_branch": "branch_momento_magico",
+                      "stat_effects": {
+                        "segreto": -5,
+                        "legame": 15,
+                        "resistenza": 5
+                      }
+                    }
                   ]
                 }
               }
             ]
-          }
+          },
+          "id": "bcaffe_p1"
         }
       ]
     },
     "branch_caffe_irritato": {
       "pages": [
-       {
-         "index": 0,
-         "background": "assets/episodes/s1/s1_mare/page_caffe.webp",
-         "panels": [
-           {
-             "id": "bci_0",
-             "characters": ["favilla", "mallow", "lex"],
-             "text_blocks": [
-               { "id": "bci_0_tb_0", "type": "dialogue", "speaker": "favilla", "text": "«Grazie.»" },
-               { "id": "bci_0_tb_1", "type": "narration", "text": "La parola esce fredda. Non offensiva — ma fredda. Come se il sole al mare avesse bruciato via la capacità di parlare come un essere umano." },
-               { "id": "bci_0_tb_2", "type": "narration", "text": "Mallow la sente. La registra. Non dice niente. Lex guarda il caffè, poi guarda mamma, poi torna al caffè. La registra anche lui." },
-               { "id": "bci_0_tb_3", "type": "thought", "text": "Vorrei essere altrove. Non da lui. Non con nessuno." }
-             ],
-             "interactions": []
-           }
-         ]
-       },
-       {
-         "index": 1,
-         "background": "assets/episodes/s1/s1_mare/page_lex_acqua.webp",
-         "panels": [
-           {
-             "id": "bci_1",
-             "characters": ["favilla", "lex"],
-             "text_blocks": [
-               { "id": "bci_1_tb_0", "type": "narration", "text": "È sull'asciugamano da tre minuti quando individua il bersaglio." },
-               { "id": "bci_1_tb_1", "type": "narration", "text": "Il mare. Grande. Luccicante. Come la mamma — quella volta." },
-               { "id": "bci_1_tb_2", "type": "narration", "text": "Inizia a muoversi." }
-             ],
-             "interactions": []
-           }
-         ],
-         "choice": {
-           "id": "distrai_lex_choice_irritato",
-           "prompt": "Lex si muove verso l'acqua.",
-           "options": [
-             {
-               "id": "distrai_lex_irritato",
-               "label": "Lo prende. Ma lo tira indietro secco.",
-               "goto_branch": "branch_preso_male",
-               "stat_effects": { "resistenza": 5, "legame": -5, "segreto": 5 }
-             }
-           ]
-         }
-       }
+        {
+          "background": "assets/episodes/s1/s1_mare/page_caffe.webp",
+          "panels": [
+            {
+              "id": "bci_0",
+              "characters": [
+                "favilla",
+                "mallow",
+                "lex"
+              ],
+              "text_blocks": [
+                {
+                  "id": "bci_0_tb_0",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "«Grazie.»"
+                },
+                {
+                  "id": "bci_0_tb_1",
+                  "type": "narration",
+                  "text": "La parola esce fredda. Non offensiva — ma fredda. Come se il sole al mare avesse bruciato via la capacità di parlare come un essere umano."
+                },
+                {
+                  "id": "bci_0_tb_2",
+                  "type": "narration",
+                  "text": "Mallow la sente. La registra. Non dice niente. Lex guarda il caffè, poi guarda mamma, poi torna al caffè. La registra anche lui."
+                },
+                {
+                  "id": "bci_0_tb_3",
+                  "type": "thought",
+                  "text": "Vorrei essere altrove. Non da lui. Non con nessuno.",
+                  "speaker": "favilla"
+                }
+              ],
+              "interactions": []
+            }
+          ],
+          "id": "bcaffe_p0"
+        },
+        {
+          "background": "assets/episodes/s1/s1_mare/page_lex_acqua.webp",
+          "panels": [
+            {
+              "id": "bci_1",
+              "characters": [
+                "favilla",
+                "lex"
+              ],
+              "text_blocks": [
+                {
+                  "id": "bci_1_tb_0",
+                  "type": "narration",
+                  "text": "È sull'asciugamano da tre minuti quando individua il bersaglio."
+                },
+                {
+                  "id": "bci_1_tb_1",
+                  "type": "narration",
+                  "text": "Il mare. Grande. Luccicante. Come la mamma — quella volta."
+                },
+                {
+                  "id": "bci_1_tb_2",
+                  "type": "narration",
+                  "text": "Inizia a muoversi."
+                }
+              ],
+              "interactions": []
+            }
+          ],
+          "choice": {
+            "id": "distrai_lex_choice_irritato",
+            "prompt": "Lex si muove verso l'acqua.",
+            "options": [
+              {
+                "id": "distrai_lex_irritato",
+                "label": "Lo prende. Ma lo tira indietro secco.",
+                "goto_branch": "branch_preso_male",
+                "stat_effects": {
+                  "resistenza": 5,
+                  "legame": -5,
+                  "segreto": 5
+                }
+              }
+            ]
+          },
+          "id": "bcaffe_p1"
+        }
       ]
     },
     "branch_preso_male": {
       "pages": [
-       {
-         "index": 0,
-         "background": "assets/episodes/s1/s1_mare/page_lex_preso.webp",
-         "panels": [
-           {
-             "id": "bpm_0",
-             "characters": ["favilla", "lex"],
-             "text_blocks": [
-               { "id": "bpm_0_tb_0", "type": "narration", "text": "Afferrato. La presa è brusca, innervosita." },
-               { "id": "bpm_0_tb_1", "type": "narration", "text": "Non fa male, ma Lex sente il cambio. Sente quando la mamma non è più con lui nello spazio." },
-               { "id": "bpm_0_tb_2", "type": "narration", "text": "Per un secondo lo sguarda di Lex si azzera." },
-               { "id": "bpm_0_tb_3", "type": "thought", "text": "Perfetto. Ho rotto il momento." }
-             ],
-             "interactions": []
-           }
-         ]
-       }
+        {
+          "background": "assets/episodes/s1/s1_mare/page_lex_preso.webp",
+          "panels": [
+            {
+              "id": "bpm_0",
+              "characters": [
+                "favilla",
+                "lex"
+              ],
+              "text_blocks": [
+                {
+                  "id": "bpm_0_tb_0",
+                  "type": "narration",
+                  "text": "Afferrato. La presa è brusca, innervosita."
+                },
+                {
+                  "id": "bpm_0_tb_1",
+                  "type": "narration",
+                  "text": "Non fa male, ma Lex sente il cambio. Sente quando la mamma non è più con lui nello spazio."
+                },
+                {
+                  "id": "bpm_0_tb_2",
+                  "type": "narration",
+                  "text": "Per un secondo lo sguarda di Lex si azzera."
+                },
+                {
+                  "id": "bpm_0_tb_3",
+                  "type": "thought",
+                  "text": "Perfetto. Ho rotto il momento.",
+                  "speaker": "favilla"
+                }
+              ],
+              "interactions": []
+            }
+          ],
+          "id": "bpreso_p0"
+        }
       ]
     },
     "branch_caffe_no": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_mare/page_caffe.webp",
           "panels": [
             {
               "id": "bcn_0",
-              "characters": ["favilla", "mallow", "lex"],
+              "characters": [
+                "favilla",
+                "mallow",
+                "lex"
+              ],
               "text_blocks": [
-                { "id": "bcn_0_tb_0", "type": "dialogue", "speaker": "favilla", "text": "«Oggi no.»" },
-                { "id": "bcn_0_tb_1", "type": "narration", "text": "Mallow non batte ciglio. Prende lui il caffè e lo finisce senza fretta, guardando il mare." },
-                { "id": "bcn_0_tb_2", "type": "narration", "text": "Lex guarda il caffè di Mallow. Poi guarda Favilla. Poi torna a guardare il caffè. Un'espressione di calcoli rivisti — ma non abbandonati." }
+                {
+                  "id": "bcn_0_tb_0",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "«Oggi no.»"
+                },
+                {
+                  "id": "bcn_0_tb_1",
+                  "type": "narration",
+                  "text": "Mallow non batte ciglio. Prende lui il caffè e lo finisce senza fretta, guardando il mare."
+                },
+                {
+                  "id": "bcn_0_tb_2",
+                  "type": "narration",
+                  "text": "Lex guarda il caffè di Mallow. Poi guarda Favilla. Poi torna a guardare il caffè. Un'espressione di calcoli rivisti — ma non abbandonati."
+                }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bcaffe_p0"
         },
         {
-          "index": 1,
           "background": "assets/episodes/s1/s1_mare/page_lex_acqua.webp",
           "panels": [
             {
               "id": "bcn_1",
-              "characters": ["favilla", "lex"],
+              "characters": [
+                "favilla",
+                "lex"
+              ],
               "text_blocks": [
-                { "id": "bcn_1_tb_0", "type": "narration", "text": "È sull'asciugamano da tre minuti quando individua il bersaglio." },
-                { "id": "bcn_1_tb_1", "type": "narration", "text": "Il mare. Grande. Luccicante. Come la mamma — quella volta." },
-                { "id": "bcn_1_tb_2", "type": "narration", "text": "Inizia a muoversi." }
+                {
+                  "id": "bcn_1_tb_0",
+                  "type": "narration",
+                  "text": "È sull'asciugamano da tre minuti quando individua il bersaglio."
+                },
+                {
+                  "id": "bcn_1_tb_1",
+                  "type": "narration",
+                  "text": "Il mare. Grande. Luccicante. Come la mamma — quella volta."
+                },
+                {
+                  "id": "bcn_1_tb_2",
+                  "type": "narration",
+                  "text": "Inizia a muoversi."
+                }
               ],
               "interactions": []
             }
@@ -319,75 +660,152 @@
                   "type": "rincorsa_lex",
                   "duration_seconds": 15,
                   "tiers": [
-                    { "min": 5, "label": "Preso!", "goto_branch": "branch_preso_bene", "stat_effects": { "resistenza": 10, "legame": 5 } },
-                    { "min": 3, "label": "Quasi...", "goto_branch": "branch_quasi_visto", "stat_effects": { "segreto": -8, "legame": 5 } },
-                    { "min": 0, "label": "Tramonto.", "goto_branch": "branch_momento_magico", "stat_effects": { "segreto": -5, "legame": 15, "resistenza": 5 } }
+                    {
+                      "min": 5,
+                      "label": "Preso!",
+                      "goto_branch": "branch_preso_bene",
+                      "stat_effects": {
+                        "resistenza": 10,
+                        "legame": 5
+                      }
+                    },
+                    {
+                      "min": 3,
+                      "label": "Quasi...",
+                      "goto_branch": "branch_quasi_visto",
+                      "stat_effects": {
+                        "segreto": -8,
+                        "legame": 5
+                      }
+                    },
+                    {
+                      "min": 0,
+                      "label": "Tramonto.",
+                      "goto_branch": "branch_momento_magico",
+                      "stat_effects": {
+                        "segreto": -5,
+                        "legame": 15,
+                        "resistenza": 5
+                      }
+                    }
                   ]
                 }
               }
             ]
-          }
+          },
+          "id": "bcaffe_p1"
         }
       ]
     },
     "branch_preso_bene": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_mare/page_lex_preso.webp",
           "panels": [
             {
               "id": "bpb_0",
-              "characters": ["favilla", "lex"],
+              "characters": [
+                "favilla",
+                "lex"
+              ],
               "text_blocks": [
-                { "id": "bpb_0_tb_0", "type": "narration", "text": "Afferrato in tempo. Lex emette un verso di protesta solenne — poi trova una conchiglia e se ne dimentica di tutto il resto." },
-                { "id": "bpb_0_tb_1", "type": "dialogue", "speaker": "favilla", "text": "«Un fulmine, eh.»" },
-                { "id": "bpb_0_tb_2", "type": "narration", "text": "Lex non risponde. Sta già analizzando la conchiglia con la stessa intensità con cui, un attimo prima, stava analizzando il mare." }
+                {
+                  "id": "bpb_0_tb_0",
+                  "type": "narration",
+                  "text": "Afferrato in tempo. Lex emette un verso di protesta solenne — poi trova una conchiglia e se ne dimentica di tutto il resto."
+                },
+                {
+                  "id": "bpb_0_tb_1",
+                  "type": "dialogue",
+                  "speaker": "favilla",
+                  "text": "«Un fulmine, eh.»"
+                },
+                {
+                  "id": "bpb_0_tb_2",
+                  "type": "narration",
+                  "text": "Lex non risponde. Sta già analizzando la conchiglia con la stessa intensità con cui, un attimo prima, stava analizzando il mare."
+                }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bpreso_p0"
         }
       ]
     },
     "branch_quasi_visto": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_mare/page_lex_preso.webp",
           "panels": [
             {
               "id": "bqv_0",
-              "characters": ["favilla", "lex"],
+              "characters": [
+                "favilla",
+                "lex"
+              ],
               "text_blocks": [
-                { "id": "bqv_0_tb_0", "type": "narration", "text": "Preso — ma la signora con il cappello di paglia ha visto qualcosa. O pensa di aver visto." },
-                { "id": "bqv_0_tb_1", "type": "narration", "text": "Favilla sorride — quel sorriso generico da spiaggia che dice 'bambini, eh' — e la signora annuisce, non del tutto convinta." },
-                { "id": "bqv_0_tb_2", "type": "narration", "text": "Lex fa l'occhiolino alla signora. La signora non sa cosa ha visto. Lex sì." }
+                {
+                  "id": "bqv_0_tb_0",
+                  "type": "narration",
+                  "text": "Preso — ma la signora con il cappello di paglia ha visto qualcosa. O pensa di aver visto."
+                },
+                {
+                  "id": "bqv_0_tb_1",
+                  "type": "narration",
+                  "text": "Favilla sorride — quel sorriso generico da spiaggia che dice 'bambini, eh' — e la signora annuisce, non del tutto convinta."
+                },
+                {
+                  "id": "bqv_0_tb_2",
+                  "type": "narration",
+                  "text": "Lex fa l'occhiolino alla signora. La signora non sa cosa ha visto. Lex sì."
+                }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bquasi_p0"
         }
       ]
     },
     "branch_momento_magico": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_mare/page_tramonto_riva.webp",
           "panels": [
             {
               "id": "bmm_0",
-              "characters": ["favilla", "lex", "mallow"],
+              "characters": [
+                "favilla",
+                "lex",
+                "mallow"
+              ],
               "text_blocks": [
-                { "id": "bmm_0_tb_0", "type": "narration", "text": "Favilla lo prende proprio in riva all'acqua — la schiuma fredda ai piedi, Lex sollevato di peso, ridendo." },
-                { "id": "bmm_0_tb_1", "type": "narration", "text": "La luce del tramonto. I capelli di Favilla — per un secondo, solo un secondo — hanno una sfumatura che non è solo arancione del sole." },
-                { "id": "bmm_0_tb_2", "type": "narration", "text": "Mallow la guarda da lontano. Pensa: quanto è bella." },
-                { "id": "bmm_0_tb_3", "type": "narration", "text": "Non capisce. Non ancora. Ma questo momento lui lo fotografa con gli occhi e non lo butterà via." }
+                {
+                  "id": "bmm_0_tb_0",
+                  "type": "narration",
+                  "text": "Favilla lo prende proprio in riva all'acqua — la schiuma fredda ai piedi, Lex sollevato di peso, ridendo."
+                },
+                {
+                  "id": "bmm_0_tb_1",
+                  "type": "narration",
+                  "text": "La luce del tramonto. I capelli di Favilla — per un secondo, solo un secondo — hanno una sfumatura che non è solo arancione del sole."
+                },
+                {
+                  "id": "bmm_0_tb_2",
+                  "type": "narration",
+                  "text": "Mallow la guarda da lontano. Pensa: quanto è bella."
+                },
+                {
+                  "id": "bmm_0_tb_3",
+                  "type": "narration",
+                  "text": "Non capisce. Non ancora. Ma questo momento lui lo fotografa con gli occhi e non lo butterà via."
+                }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bmomen_p0"
         }
       ]
     }
@@ -395,48 +813,93 @@
   "epilogue": {
     "pages": [
       {
-        "index": 0,
         "background": "assets/episodes/s1/s1_mare/page_tramonto.webp",
         "panels": [
           {
             "id": "ep_sm_0",
-            "characters": ["favilla", "mallow", "lex"],
+            "characters": [
+              "favilla",
+              "mallow",
+              "lex"
+            ],
             "text_blocks": [
-              { "id": "ep_sm_0_tb_0", "type": "narration", "text": "Tramonto. Lex addormentato sul petto di Mallow, la mano piccola stretta al suo maglione." },
-              { "id": "ep_sm_0_tb_1", "type": "narration", "text": "Il mare fa quel rumore lì. Quello che non smette mai." }
+              {
+                "id": "ep_sm_0_tb_0",
+                "type": "narration",
+                "text": "Tramonto. Lex addormentato sul petto di Mallow, la mano piccola stretta al suo maglione."
+              },
+              {
+                "id": "ep_sm_0_tb_1",
+                "type": "narration",
+                "text": "Il mare fa quel rumore lì. Quello che non smette mai."
+              }
             ],
             "interactions": []
           }
-        ]
+        ],
+        "id": "ep_p0"
       },
       {
-        "index": 1,
         "background": "assets/episodes/s1/s1_mare/page_tramonto.webp",
         "panels": [
           {
             "id": "ep_sm_1",
-            "characters": ["favilla", "mallow"],
+            "characters": [
+              "favilla",
+              "mallow"
+            ],
             "text_blocks": [
-              { "id": "ep_sm_1_tb_0", "type": "narration", "text": "Mallow le prende la mano senza guardare." },
-              { "id": "ep_sm_1_tb_1", "type": "dialogue", "speaker": "mallow", "text": "«Grazie per essere venuta.»" },
-              { "id": "ep_sm_1_tb_2", "type": "narration", "text": "Non 'grazie per avermi detto che stavi male.' Non 'grazie per essere onesta.' Solo: grazie per essere venuta. Come se bastasse quello." },
-              { "id": "ep_sm_1_tb_3", "type": "narration", "text": "Come se, forse, bastasse davvero." }
+              {
+                "id": "ep_sm_1_tb_0",
+                "type": "narration",
+                "text": "Mallow le prende la mano senza guardare."
+              },
+              {
+                "id": "ep_sm_1_tb_1",
+                "type": "dialogue",
+                "speaker": "mallow",
+                "text": "«Grazie per essere venuta.»"
+              },
+              {
+                "id": "ep_sm_1_tb_2",
+                "type": "narration",
+                "text": "Non 'grazie per avermi detto che stavi male.' Non 'grazie per essere onesta.' Solo: grazie per essere venuta. Come se bastasse quello."
+              },
+              {
+                "id": "ep_sm_1_tb_3",
+                "type": "narration",
+                "text": "Come se, forse, bastasse davvero."
+              }
             ],
             "interactions": []
           }
-        ]
+        ],
+        "id": "ep_p1"
       },
       {
-        "index": 2,
         "background": "assets/episodes/s1/s1_mare/page_gatto_lungomare.webp",
         "panels": [
           {
             "id": "ep_sm_2",
-            "characters": ["gatto"],
+            "characters": [
+              "gatto"
+            ],
             "text_blocks": [
-              { "id": "ep_sm_2_tb_0", "type": "narration", "text": "Sul lungomare, seduto su un muretto, il gatto." },
-              { "id": "ep_sm_2_tb_1", "type": "narration", "text": "Gli occhi gialli che guardano la famiglia come se stesse prendendo appunti." },
-              { "id": "ep_sm_2_tb_2", "type": "narration", "text": "Poi si alza, gira la coda. Direzione civico 19, terzo piano." }
+              {
+                "id": "ep_sm_2_tb_0",
+                "type": "narration",
+                "text": "Sul lungomare, seduto su un muretto, il gatto."
+              },
+              {
+                "id": "ep_sm_2_tb_1",
+                "type": "narration",
+                "text": "Gli occhi gialli che guardano la famiglia come se stesse prendendo appunti."
+              },
+              {
+                "id": "ep_sm_2_tb_2",
+                "type": "narration",
+                "text": "Poi si alza, gira la coda. Direzione civico 19, terzo piano."
+              }
             ],
             "interactions": []
           }
@@ -449,10 +912,13 @@
               "id": "torna_casa",
               "label": "Il mare funziona.",
               "goto_branch": "",
-              "stat_effects": { "resistenza": 20 }
+              "stat_effects": {
+                "resistenza": 20
+              }
             }
           ]
-        }
+        },
+        "id": "ep_p2"
       }
     ]
   }

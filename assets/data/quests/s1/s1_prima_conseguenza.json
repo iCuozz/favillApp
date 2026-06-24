@@ -4,7 +4,10 @@
   "stat_entry": [
     {
       "flag_conditions": [
-        {"flag": "video_virale_visto", "is": true}
+        {
+          "flag": "video_virale_visto",
+          "is": true
+        }
       ],
       "goto_branch": "intro_gia_visto",
       "prepend": true
@@ -17,7 +20,11 @@
       "panels": [
         {
           "id": "pc_p0_a",
-          "characters": ["favilla", "mallow", "lex"],
+          "characters": [
+            "favilla",
+            "mallow",
+            "lex"
+          ],
           "text_blocks": [
             {
               "id": "pc_p0_a_t1",
@@ -50,7 +57,10 @@
       "panels": [
         {
           "id": "pc_p1_a",
-          "characters": ["favilla", "mallow"],
+          "characters": [
+            "favilla",
+            "mallow"
+          ],
           "text_blocks": [
             {
               "id": "pc_p1_a_t1",
@@ -82,7 +92,10 @@
       "panels": [
         {
           "id": "pc_p2_a",
-          "characters": ["favilla", "mallow"],
+          "characters": [
+            "favilla",
+            "mallow"
+          ],
           "text_blocks": [
             {
               "id": "pc_p2_a_t1",
@@ -109,25 +122,46 @@
                 "id": "minimizza",
                 "label": "Alza le spalle. «Strano. Ma sai com'è TikTok, tutto sembra un fantasma.»",
                 "goto_branch": "branch_minimizza",
-                "stat_effects": {"segreto": 10, "legame": -5},
-                "set_flags": {"video_virale_visto": true},
-                "set_memories": {"choice.s1_prima_conseguenza": "minimizza"}
+                "stat_effects": {
+                  "segreto": 10,
+                  "legame": -5
+                },
+                "set_flags": {
+                  "video_virale_visto": true
+                },
+                "set_memories": {
+                  "choice.s1_prima_conseguenza": "minimizza"
+                }
               },
               {
                 "id": "devia",
                 "label": "«Piuttosto, Lex oggi ha fatto una cosa incredibile...»",
                 "goto_branch": "branch_devia",
-                "stat_effects": {"resistenza": 5, "legame": -3},
-                "set_flags": {"video_virale_visto": true},
-                "set_memories": {"choice.s1_prima_conseguenza": "devia"}
+                "stat_effects": {
+                  "resistenza": 5,
+                  "legame": -3
+                },
+                "set_flags": {
+                  "video_virale_visto": true
+                },
+                "set_memories": {
+                  "choice.s1_prima_conseguenza": "devia"
+                }
               },
               {
                 "id": "quasi_confessa",
                 "label": "Esiti. Guardi il video. «Quel giorno... io c'ero.»",
                 "goto_branch": "branch_quasi_confessa",
-                "stat_effects": {"segreto": -10, "legame": 8},
-                "set_flags": {"video_virale_visto": true},
-                "set_memories": {"choice.s1_prima_conseguenza": "quasi_confessa"}
+                "stat_effects": {
+                  "segreto": -10,
+                  "legame": 8
+                },
+                "set_flags": {
+                  "video_virale_visto": true
+                },
+                "set_memories": {
+                  "choice.s1_prima_conseguenza": "quasi_confessa"
+                }
               }
             ]
           }
@@ -140,12 +174,13 @@
       "id": "intro_gia_visto",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_1.png",
           "panels": [
             {
               "id": "intro_gia_visto_a",
-              "characters": ["favilla"],
+              "characters": [
+                "favilla"
+              ],
               "text_blocks": [
                 {
                   "id": "intro_gia_visto_a_t1",
@@ -165,7 +200,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "igia_v_p0"
         }
       ]
     },
@@ -173,12 +209,14 @@
       "id": "branch_minimizza",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_2.png",
           "panels": [
             {
               "id": "branch_minimizza_a",
-              "characters": ["favilla", "mallow"],
+              "characters": [
+                "favilla",
+                "mallow"
+              ],
               "text_blocks": [
                 {
                   "id": "branch_minimizza_a_t1",
@@ -204,15 +242,17 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bminim_p0"
         },
         {
-          "index": 1,
           "background": "assets/episodes/prologo/page_3.png",
           "panels": [
             {
               "id": "branch_minimizza_b",
-              "characters": ["favilla"],
+              "characters": [
+                "favilla"
+              ],
               "text_blocks": [
                 {
                   "id": "branch_minimizza_b_t1",
@@ -232,7 +272,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bminim_p1"
         }
       ]
     },
@@ -240,12 +281,15 @@
       "id": "branch_devia",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_2.png",
           "panels": [
             {
               "id": "branch_devia_a",
-              "characters": ["favilla", "mallow", "lex"],
+              "characters": [
+                "favilla",
+                "mallow",
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "id": "branch_devia_a_t1",
@@ -271,15 +315,18 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bdevia_p0"
         },
         {
-          "index": 1,
           "background": "assets/episodes/prologo/page_1.png",
           "panels": [
             {
               "id": "branch_devia_b",
-              "characters": ["favilla", "mallow"],
+              "characters": [
+                "favilla",
+                "mallow"
+              ],
               "text_blocks": [
                 {
                   "id": "branch_devia_b_t1",
@@ -299,7 +346,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bdevia_p1"
         }
       ]
     },
@@ -307,12 +355,14 @@
       "id": "branch_quasi_confessa",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_2.png",
           "panels": [
             {
               "id": "branch_quasi_confessa_a",
-              "characters": ["favilla", "mallow"],
+              "characters": [
+                "favilla",
+                "mallow"
+              ],
               "text_blocks": [
                 {
                   "id": "branch_quasi_confessa_a_t1",
@@ -338,15 +388,18 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bquasi_p0"
         },
         {
-          "index": 1,
           "background": "assets/episodes/prologo/page_3.png",
           "panels": [
             {
               "id": "branch_quasi_confessa_b",
-              "characters": ["favilla", "mallow"],
+              "characters": [
+                "favilla",
+                "mallow"
+              ],
               "text_blocks": [
                 {
                   "id": "branch_quasi_confessa_b_t1",
@@ -378,7 +431,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bquasi_p1"
         }
       ]
     }
@@ -387,12 +441,13 @@
     "id": "epilogue",
     "pages": [
       {
-        "index": 0,
         "background": "assets/episodes/prologo/page_4.png",
         "panels": [
           {
             "id": "pc_epilogue_a",
-            "characters": ["favilla"],
+            "characters": [
+              "favilla"
+            ],
             "text_blocks": [
               {
                 "id": "pc_epilogue_a_t1",
@@ -416,7 +471,8 @@
               }
             ]
           }
-        ]
+        ],
+        "id": "ep_p0"
       }
     ]
   }

@@ -8,7 +8,11 @@
       "panels": [
         {
           "id": "dl_p0_a",
-          "characters": ["favilla", "lex", "mallow"],
+          "characters": [
+            "favilla",
+            "lex",
+            "mallow"
+          ],
           "text_blocks": [
             {
               "id": "dl_p0_a_t1",
@@ -46,7 +50,10 @@
       "panels": [
         {
           "id": "dl_p1_a",
-          "characters": ["favilla", "lex"],
+          "characters": [
+            "favilla",
+            "lex"
+          ],
           "text_blocks": [
             {
               "id": "dl_p1_a_t1",
@@ -85,7 +92,10 @@
       "panels": [
         {
           "id": "dl_p2_a",
-          "characters": ["favilla", "lex"],
+          "characters": [
+            "favilla",
+            "lex"
+          ],
           "text_blocks": [
             {
               "id": "dl_p2_a_t1",
@@ -189,12 +199,14 @@
       "id": "branch_libero",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_2.png",
           "panels": [
             {
               "id": "libero_a",
-              "characters": ["favilla", "lex"],
+              "characters": [
+                "favilla",
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "id": "libero_a_t1",
@@ -214,7 +226,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bliber_p0"
         }
       ]
     },
@@ -222,12 +235,14 @@
       "id": "branch_ferma",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_1.png",
           "panels": [
             {
               "id": "ferma_a",
-              "characters": ["favilla", "lex"],
+              "characters": [
+                "favilla",
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "id": "ferma_a_t1",
@@ -253,7 +268,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bferma_p0"
         }
       ]
     },
@@ -261,12 +277,14 @@
       "id": "branch_genio",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_2.png",
           "panels": [
             {
               "id": "genio_a",
-              "characters": ["favilla", "lex"],
+              "characters": [
+                "favilla",
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "id": "genio_a_t1",
@@ -301,7 +319,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bgenio_p0"
         }
       ]
     },
@@ -309,12 +328,14 @@
       "id": "branch_quasi",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_2.png",
           "panels": [
             {
               "id": "quasi_a",
-              "characters": ["favilla", "lex"],
+              "characters": [
+                "favilla",
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "id": "quasi_a_t1",
@@ -344,7 +365,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bquasi_p0"
         }
       ]
     },
@@ -352,12 +374,14 @@
       "id": "branch_ciak",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_2.png",
           "panels": [
             {
               "id": "ciak_a",
-              "characters": ["favilla", "lex"],
+              "characters": [
+                "favilla",
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "id": "ciak_a_t1",
@@ -387,7 +411,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bciak_p0"
         }
       ]
     }
@@ -396,12 +421,15 @@
     "id": "epilogue",
     "pages": [
       {
-        "index": 0,
         "background": "assets/episodes/prologo/page_1.png",
         "panels": [
           {
             "id": "dl_epilogo_a",
-            "characters": ["favilla", "mallow", "lex"],
+            "characters": [
+              "favilla",
+              "mallow",
+              "lex"
+            ],
             "text_blocks": [
               {
                 "id": "dl_epilogo_a_t1",
@@ -432,7 +460,8 @@
               }
             ]
           }
-        ]
+        ],
+        "id": "ep_p0"
       }
     ]
   }

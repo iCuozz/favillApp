@@ -121,7 +121,8 @@
             {
               "id": "pr2_0_tb_3",
               "type": "thought",
-              "text": "Respira. Ce la fai. Sei una professionista del caos."
+              "text": "Respira. Ce la fai. Sei una professionista del caos.",
+              "speaker": "favilla"
             }
           ],
           "interactions": []
@@ -158,7 +159,8 @@
             {
               "id": "pr3_0_tb_3",
               "type": "thought",
-              "text": "No. No no no—"
+              "text": "No. No no no—",
+              "speaker": "favilla"
             }
           ],
           "interactions": []
@@ -204,7 +206,8 @@
             {
               "id": "pr4_0_tb_5",
               "type": "thought",
-              "text": "Sa. Non può dirlo. Ma sa."
+              "text": "Sa. Non può dirlo. Ma sa.",
+              "speaker": "favilla"
             }
           ],
           "interactions": []
@@ -275,7 +278,8 @@
             {
               "id": "pr5_0_tb_2",
               "type": "thought",
-              "text": "Cosa gli dico?"
+              "text": "Cosa gli dico?",
+              "speaker": "favilla"
             }
           ],
           "interactions": []
@@ -313,7 +317,6 @@
     "branch_segreto": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_4.png",
           "panels": [
             {
@@ -344,19 +347,20 @@
                 {
                   "id": "bs_0_tb_3",
                   "type": "thought",
-                  "text": "Il segreto è mio. E suo. Solo nostro."
+                  "text": "Il segreto è mio. E suo. Solo nostro.",
+                  "speaker": "favilla"
                 }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bsegre_p0"
         }
       ]
     },
     "branch_legame": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_4.png",
           "panels": [
             {
@@ -387,12 +391,14 @@
                 {
                   "id": "bl_0_tb_3",
                   "type": "thought",
-                  "text": "Quasi. Quasi gli ho detto tutto."
+                  "text": "Quasi. Quasi gli ho detto tutto.",
+                  "speaker": "favilla"
                 }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "blegam_p0"
         }
       ]
     }
@@ -400,7 +406,6 @@
   "epilogue": {
     "pages": [
       {
-        "index": 0,
         "background": "assets/episodes/prologo/page_4.png",
         "panels": [
           {
@@ -417,7 +422,8 @@
               {
                 "id": "ep_0_tb_1",
                 "type": "thought",
-                "text": "Cosa sono diventata?"
+                "text": "Cosa sono diventata?",
+                "speaker": "favilla"
               },
               {
                 "id": "ep_0_tb_2",
@@ -432,7 +438,8 @@
             ],
             "interactions": []
           }
-        ]
+        ],
+        "id": "ep_p0"
       }
     ]
   }

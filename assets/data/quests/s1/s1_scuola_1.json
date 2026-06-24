@@ -35,7 +35,8 @@
             {
               "id": "sc1_0_0_tb_1",
               "type": "thought",
-              "text": "Era stanchezza. Era solo stanchezza. Queste cose non esistono."
+              "text": "Era stanchezza. Era solo stanchezza. Queste cose non esistono.",
+              "speaker": "favilla"
             },
             {
               "id": "sc1_0_0_tb_2",
@@ -45,7 +46,8 @@
             {
               "id": "sc1_0_0_tb_3",
               "type": "thought",
-              "text": "Giornata normale. Testa bassa. Sorriso fisso."
+              "text": "Giornata normale. Testa bassa. Sorriso fisso.",
+              "speaker": "favilla"
             }
           ],
           "interactions": []
@@ -88,7 +90,8 @@
             {
               "id": "sc1_1_0_tb_4",
               "type": "thought",
-              "text": "Trentacinque minuti. Da sola."
+              "text": "Trentacinque minuti. Da sola.",
+              "speaker": "favilla"
             }
           ],
           "interactions": []
@@ -113,7 +116,8 @@
             {
               "id": "sc1_2_0_tb_1",
               "type": "thought",
-              "text": "Non ce la faccio. Non ce la faccio. Non ce la—"
+              "text": "Non ce la faccio. Non ce la faccio. Non ce la—",
+              "speaker": "favilla"
             },
             {
               "id": "sc1_2_0_tb_2",
@@ -128,7 +132,8 @@
             {
               "id": "sc1_2_0_tb_4",
               "type": "thought",
-              "text": "Cosa ho fatto. Cosa ho fatto. Cosa ho—"
+              "text": "Cosa ho fatto. Cosa ho fatto. Cosa ho—",
+              "speaker": "favilla"
             },
             {
               "id": "sc1_2_0_tb_5",
@@ -177,7 +182,6 @@
     "intro_caffe_effect": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_scuola_1/page_0.webp",
           "panels": [
             {
@@ -194,7 +198,8 @@
                 {
                   "id": "caffe_intro_tb_1",
                   "type": "thought",
-                  "text": "Il caffè. Il caffè è stato un errore."
+                  "text": "Il caffè. Il caffè è stato un errore.",
+                  "speaker": "favilla"
                 },
                 {
                   "id": "caffe_intro_tb_2",
@@ -204,19 +209,20 @@
                 {
                   "id": "caffe_intro_tb_3",
                   "type": "thought",
-                  "text": "Testa bassa. Sorriso fisso. Niente di strano. Tutto normalissimo."
+                  "text": "Testa bassa. Sorriso fisso. Niente di strano. Tutto normalissimo.",
+                  "speaker": "favilla"
                 }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "icaffe_p0"
         }
       ]
     },
     "branch_bagno": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_scuola_1/branch_bagno.webp",
           "panels": [
             {
@@ -257,19 +263,20 @@
                 {
                   "id": "bb_0_tb_5",
                   "type": "thought",
-                  "text": "I vestiti bruciati sono in fondo allo zaino. Il segreto è al sicuro. Per ora."
+                  "text": "I vestiti bruciati sono in fondo allo zaino. Il segreto è al sicuro. Per ora.",
+                  "speaker": "favilla"
                 }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bbagno_p0"
         }
       ]
     },
     "branch_finge": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_scuola_1/branch_finge.webp",
           "panels": [
             {
@@ -310,19 +317,20 @@
                 {
                   "id": "bf_0_tb_5",
                   "type": "thought",
-                  "text": "Bugia numero due. Le stavo contando?"
+                  "text": "Bugia numero due. Le stavo contando?",
+                  "speaker": "favilla"
                 }
               ],
               "interactions": []
             }
-          ]
+          ],
+          "id": "bfinge_p0"
         }
       ]
     },
     "intro_segreto_pericolo": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_scuola_1/page_0.webp",
           "panels": [
             {
@@ -349,11 +357,13 @@
                 {
                   "id": "sp_segreto_0_tb_3",
                   "type": "thought",
-                  "text": "Sa che c'è qualcosa. Non sa cosa. Ma aspetta. E aspettare, a volte, è peggio che chiedere."
+                  "text": "Sa che c'è qualcosa. Non sa cosa. Ma aspetta. E aspettare, a volte, è peggio che chiedere.",
+                  "speaker": "favilla"
                 }
               ]
             }
-          ]
+          ],
+          "id": "isegre_p0"
         }
       ]
     }
@@ -361,7 +371,6 @@
   "epilogue": {
     "pages": [
       {
-        "index": 0,
         "background": "assets/episodes/s1/s1_scuola_1/epilogue.webp",
         "panels": [
           {
@@ -378,7 +387,8 @@
               {
                 "id": "sc1_ep_0_tb_1",
                 "type": "thought",
-                "text": "It wasn't tiredness. It wasn't a dream. It was real."
+                "text": "It wasn't tiredness. It wasn't a dream. It was real.",
+                "speaker": "favilla"
               },
               {
                 "id": "sc1_ep_0_tb_2",
@@ -388,7 +398,8 @@
               {
                 "id": "sc1_ep_0_tb_3",
                 "type": "thought",
-                "text": "And now?"
+                "text": "And now?",
+                "speaker": "favilla"
               },
               {
                 "id": "sc1_ep_0_tb_4",
@@ -398,7 +409,8 @@
             ],
             "interactions": []
           }
-        ]
+        ],
+        "id": "ep_p0"
       }
     ]
   }

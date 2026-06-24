@@ -48,7 +48,10 @@
       "panels": [
         {
           "id": "all0_0",
-          "characters": ["favilla", "corvi"],
+          "characters": [
+            "favilla",
+            "corvi"
+          ],
           "text_blocks": [
             {
               "id": "all0_0_tb_0",
@@ -74,7 +77,8 @@
             {
               "id": "all0_0_tb_4",
               "type": "thought",
-              "text": "Trenta minuti. Trenta minuti e se ne va. Posso farcela."
+              "text": "Trenta minuti. Trenta minuti e se ne va. Posso farcela.",
+              "speaker": "favilla"
             }
           ],
           "interactions": []
@@ -87,7 +91,9 @@
       "panels": [
         {
           "id": "all1_0",
-          "characters": ["favilla"],
+          "characters": [
+            "favilla"
+          ],
           "text_blocks": [
             {
               "id": "all1_0_tb_0",
@@ -131,7 +137,9 @@
       "panels": [
         {
           "id": "all2_0",
-          "characters": ["favilla"],
+          "characters": [
+            "favilla"
+          ],
           "text_blocks": [
             {
               "id": "all2_0_tb_0",
@@ -141,12 +149,14 @@
             {
               "id": "all2_0_tb_1",
               "type": "thought",
-              "text": "Tra poco arriva sotto la porta. Arriva nell'atrio. Arriva dalla Corvi."
+              "text": "Tra poco arriva sotto la porta. Arriva nell'atrio. Arriva dalla Corvi.",
+              "speaker": "favilla"
             },
             {
               "id": "all2_0_tb_2",
               "type": "thought",
-              "text": "Devo uscire. Come?"
+              "text": "Devo uscire. Come?",
+              "speaker": "favilla"
             }
           ],
           "interactions": []
@@ -272,12 +282,13 @@
     "intro_senza_fiamma": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_allagamento/page_0.webp",
           "panels": [
             {
               "id": "all_sf_0",
-              "characters": ["favilla"],
+              "characters": [
+                "favilla"
+              ],
               "text_blocks": [
                 {
                   "id": "all_sf_0_tb_0",
@@ -292,23 +303,26 @@
                 {
                   "id": "all_sf_0_tb_2",
                   "type": "thought",
-                  "text": "Non oggi. Oggi sei solo Favilla. E oggi devi bastare."
+                  "text": "Non oggi. Oggi sei solo Favilla. E oggi devi bastare.",
+                  "speaker": "favilla"
                 }
               ]
             }
-          ]
+          ],
+          "id": "isenza_p0"
         }
       ]
     },
     "intro_sfondata": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_allagamento/page_0.webp",
           "panels": [
             {
               "id": "all_sd_0",
-              "characters": ["favilla"],
+              "characters": [
+                "favilla"
+              ],
               "text_blocks": [
                 {
                   "id": "all_sd_0_tb_0",
@@ -318,23 +332,27 @@
                 {
                   "id": "all_sd_0_tb_1",
                   "type": "thought",
-                  "text": "Non so se ho abbastanza per uscire da qui."
+                  "text": "Non so se ho abbastanza per uscire da qui.",
+                  "speaker": "favilla"
                 }
               ]
             }
-          ]
+          ],
+          "id": "isfond_p0"
         }
       ]
     },
     "intro_segreto_fragile": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_allagamento/page_0.webp",
           "panels": [
             {
               "id": "all_frag_0",
-              "characters": ["favilla", "corvi"],
+              "characters": [
+                "favilla",
+                "corvi"
+              ],
               "text_blocks": [
                 {
                   "id": "all_frag_0_tb_0",
@@ -350,23 +368,26 @@
                 {
                   "id": "all_frag_0_tb_2",
                   "type": "thought",
-                  "text": "Sa qualcosa. Forse non cosa. Ma che c'è."
+                  "text": "Sa qualcosa. Forse non cosa. Ma che c'è.",
+                  "speaker": "favilla"
                 }
               ]
             }
-          ]
+          ],
+          "id": "isegre_p0"
         }
       ]
     },
     "intro_kryptonite": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_allagamento/page_0.webp",
           "panels": [
             {
               "id": "all_kr_0",
-              "characters": ["favilla"],
+              "characters": [
+                "favilla"
+              ],
               "text_blocks": [
                 {
                   "id": "all_kr_0_tb_0",
@@ -376,23 +397,27 @@
                 {
                   "id": "all_kr_0_tb_1",
                   "type": "thought",
-                  "text": "Potrei usarla. Ma durerà poco. Devo scegliere bene."
+                  "text": "Potrei usarla. Ma durerà poco. Devo scegliere bene.",
+                  "speaker": "favilla"
                 }
               ]
             }
-          ]
+          ],
+          "id": "ikrypt_p0"
         }
       ]
     },
     "intro_voci": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_allagamento/page_0.webp",
           "panels": [
             {
               "id": "all_voci_0",
-              "characters": ["favilla", "corvi"],
+              "characters": [
+                "favilla",
+                "corvi"
+              ],
               "text_blocks": [
                 {
                   "id": "all_voci_0_tb_0",
@@ -413,23 +438,27 @@
                 {
                   "id": "all_voci_0_tb_3",
                   "type": "thought",
-                  "text": "Non ci crede. Ma ci sta pensando. È quasi peggio."
+                  "text": "Non ci crede. Ma ci sta pensando. È quasi peggio.",
+                  "speaker": "favilla"
                 }
               ]
             }
-          ]
+          ],
+          "id": "ivoci_p0"
         }
       ]
     },
     "branch_potenza": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_allagamento/page_0.webp",
           "panels": [
             {
               "id": "pot0_0",
-              "characters": ["favilla", "favilla_blaze"],
+              "characters": [
+                "favilla",
+                "favilla_blaze"
+              ],
               "text_blocks": [
                 {
                   "id": "pot0_0_tb_0",
@@ -463,19 +492,21 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bpoten_p0"
         }
       ]
     },
     "branch_forza": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_allagamento/page_0.webp",
           "panels": [
             {
               "id": "for0_0",
-              "characters": ["favilla"],
+              "characters": [
+                "favilla"
+              ],
               "text_blocks": [
                 {
                   "id": "for0_0_tb_0",
@@ -511,19 +542,21 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bforza_p0"
         }
       ]
     },
     "branch_astuzia": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_allagamento/page_0.webp",
           "panels": [
             {
               "id": "ast0_0",
-              "characters": ["favilla"],
+              "characters": [
+                "favilla"
+              ],
               "text_blocks": [
                 {
                   "id": "ast0_0_tb_0",
@@ -563,19 +596,22 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bastuz_p0"
         }
       ]
     },
     "branch_resa": {
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/s1/s1_allagamento/page_0.webp",
           "panels": [
             {
               "id": "res0_0",
-              "characters": ["favilla", "corvi"],
+              "characters": [
+                "favilla",
+                "corvi"
+              ],
               "text_blocks": [
                 {
                   "id": "res0_0_tb_0",
@@ -611,7 +647,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bresa_p0"
         }
       ]
     }
@@ -619,12 +656,13 @@
   "epilogue": {
     "pages": [
       {
-        "index": 0,
         "background": "assets/episodes/s1/s1_allagamento/page_epilogo.webp",
         "panels": [
           {
             "id": "all_ep_0",
-            "characters": ["favilla"],
+            "characters": [
+              "favilla"
+            ],
             "text_blocks": [
               {
                 "id": "all_ep_0_tb_0",
@@ -639,7 +677,8 @@
               {
                 "id": "all_ep_0_tb_2",
                 "type": "thought",
-                "text": "Oggi l'ho scampata. Ma domani?"
+                "text": "Oggi l'ho scampata. Ma domani?",
+                "speaker": "favilla"
               },
               {
                 "id": "all_ep_0_tb_3",
@@ -653,7 +692,8 @@
               }
             ]
           }
-        ]
+        ],
+        "id": "ep_p0"
       }
     ]
   }

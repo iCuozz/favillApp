@@ -53,7 +53,7 @@ enum _GamePhase { tutorial, playing, success, caught }
 class MinigameDisegnaScreen extends StatefulWidget {
   final MinigameConfig config;
   final void Function(
-      Map<String, int> statEffects, String tierLabel, MinigameTier tier)
+          Map<String, int> statEffects, String tierLabel, MinigameTier tier)
       onComplete;
 
   const MinigameDisegnaScreen(
@@ -151,8 +151,8 @@ class _MinigameDisegnaScreenState extends State<MinigameDisegnaScreen>
     _attentionTimer?.cancel();
     final nextSafe = _isSafe
         ? _kSafeWindowMin.inMilliseconds +
-            _rng.nextInt(_kSafeWindowMax.inMilliseconds -
-                _kSafeWindowMin.inMilliseconds)
+            _rng.nextInt(
+                _kSafeWindowMax.inMilliseconds - _kSafeWindowMin.inMilliseconds)
         : _kDangerWindowMin.inMilliseconds +
             _rng.nextInt(_kDangerWindowMax.inMilliseconds -
                 _kDangerWindowMin.inMilliseconds);
@@ -245,8 +245,8 @@ class _MinigameDisegnaScreenState extends State<MinigameDisegnaScreen>
     matched ??= tiers.last;
 
     final isSuccess = effectiveScore >= 3;
-    AudioService.instance.playSfx(
-        isSuccess ? SfxEvent.minigameSuccess : SfxEvent.minigameFail);
+    AudioService.instance
+        .playSfx(isSuccess ? SfxEvent.minigameSuccess : SfxEvent.minigameFail);
 
     widget.onComplete(
       Map<String, int>.from(matched.statEffects),
@@ -279,9 +279,7 @@ class _MinigameDisegnaScreenState extends State<MinigameDisegnaScreen>
     return Scaffold(
       backgroundColor: const Color(0xFFF5E6D3), // warm paper color
       body: SafeArea(
-        child: _phase == _GamePhase.tutorial
-            ? _buildTutorial()
-            : _buildGame(),
+        child: _phase == _GamePhase.tutorial ? _buildTutorial() : _buildGame(),
       ),
     );
   }
@@ -309,7 +307,7 @@ class _MinigameDisegnaScreenState extends State<MinigameDisegnaScreen>
                 border: Border.all(color: const Color(0xFFD4A574), width: 2),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.08),
+                    color: Colors.black.withValues(alpha: 0.08),
                     blurRadius: 12,
                     offset: const Offset(0, 4),
                   ),
@@ -352,7 +350,7 @@ class _MinigameDisegnaScreenState extends State<MinigameDisegnaScreen>
                     shape: BoxShape.circle,
                     color: i == _tutorialStep
                         ? const Color(0xFFE67E22)
-                        : const Color(0xFFD4A574).withOpacity(0.4),
+                        : const Color(0xFFD4A574).withValues(alpha: 0.4),
                   ),
                 );
               }),
@@ -363,7 +361,7 @@ class _MinigameDisegnaScreenState extends State<MinigameDisegnaScreen>
               style: TextStyle(
                 fontFamily: 'ComicNeue',
                 fontSize: 13,
-                color: const Color(0xFF8B7355).withOpacity(0.6),
+                color: const Color(0xFF8B7355).withValues(alpha: 0.6),
               ),
             ),
           ],
@@ -415,13 +413,13 @@ class _MinigameDisegnaScreenState extends State<MinigameDisegnaScreen>
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(
                   color: _isSafe
-                      ? const Color(0xFF27AE60).withOpacity(0.3)
-                      : const Color(0xFFE74C3C).withOpacity(0.3),
+                      ? const Color(0xFF27AE60).withValues(alpha: 0.3)
+                      : const Color(0xFFE74C3C).withValues(alpha: 0.3),
                   width: 2,
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.06),
+                    color: Colors.black.withValues(alpha: 0.06),
                     blurRadius: 16,
                     offset: const Offset(0, 6),
                   ),
@@ -472,7 +470,7 @@ class _MinigameDisegnaScreenState extends State<MinigameDisegnaScreen>
                     // Caught flash
                     if (_phase == _GamePhase.caught)
                       Container(
-                        color: const Color(0xFFE74C3C).withOpacity(0.15),
+                        color: const Color(0xFFE74C3C).withValues(alpha: 0.15),
                       ),
                   ],
                 ),
@@ -498,9 +496,10 @@ class _MinigameDisegnaScreenState extends State<MinigameDisegnaScreen>
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
       decoration: BoxDecoration(
-        color: indicatorColor.withOpacity(0.08),
+        color: indicatorColor.withValues(alpha: 0.08),
         border: Border(
-          bottom: BorderSide(color: indicatorColor.withOpacity(0.2), width: 1),
+          bottom: BorderSide(
+              color: indicatorColor.withValues(alpha: 0.2), width: 1),
         ),
       ),
       child: Row(
@@ -535,14 +534,15 @@ class _MinigameDisegnaScreenState extends State<MinigameDisegnaScreen>
               mainAxisSize: MainAxisSize.min,
               children: [
                 Icon(Icons.warning_amber_rounded,
-                    color: const Color(0xFFE74C3C).withOpacity(0.7), size: 18),
+                    color: const Color(0xFFE74C3C).withValues(alpha: 0.7),
+                    size: 18),
                 const SizedBox(width: 4),
                 Text(
                   '$_caughtCount',
                   style: TextStyle(
                     fontFamily: 'ComicNeue',
                     fontSize: 15,
-                    color: const Color(0xFFE74C3C).withOpacity(0.7),
+                    color: const Color(0xFFE74C3C).withValues(alpha: 0.7),
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -604,8 +604,7 @@ class _DrawingElement {
     required this.top,
     required this.size,
     required this.rotation,
-    this.isFixed = false,
-  });
+  }) : isFixed = false;
 }
 
 // ── Custom painter ───────────────────────────────────────────────────────────
@@ -627,7 +626,7 @@ class _DrawingPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     // Background: subtle ruled lines like notebook paper
     final linePaint = Paint()
-      ..color = const Color(0xFFE8F0FE).withOpacity(0.5)
+      ..color = const Color(0xFFE8F0FE).withValues(alpha: 0.5)
       ..strokeWidth = 1;
     for (double y = 20; y < size.height; y += 28) {
       canvas.drawLine(Offset(0, y), Offset(size.width, y), linePaint);
@@ -655,7 +654,7 @@ class _DrawingPainter extends CustomPainter {
 
     // Title: "IL DISEGNO DI LEX" in child handwriting style at the bottom
     final titlePaint = Paint()
-      ..color = const Color(0xFF2C3E50).withOpacity(0.6)
+      ..color = const Color(0xFF2C3E50).withValues(alpha: 0.6)
       ..strokeWidth = 1.5
       ..style = PaintingStyle.stroke;
     // Just a simple underline suggesting a title
@@ -666,24 +665,23 @@ class _DrawingPainter extends CustomPainter {
     );
   }
 
-  void _drawIncriminatingElement(
-      Canvas canvas, _DrawingElement el, Size size) {
+  void _drawIncriminatingElement(Canvas canvas, _DrawingElement el, Size size) {
     final s = el.size;
 
     // Glowing pulse when safe
     final fillPaint = Paint()
-      ..color = el.color.withOpacity(isSafe ? 0.35 : 0.18)
+      ..color = el.color.withValues(alpha: isSafe ? 0.35 : 0.18)
       ..style = PaintingStyle.fill;
 
     final strokePaint = Paint()
-      ..color = el.color.withOpacity(isSafe ? 0.7 : 0.3)
+      ..color = el.color.withValues(alpha: isSafe ? 0.7 : 0.3)
       ..style = PaintingStyle.stroke
       ..strokeWidth = isSafe ? 2.5 : 1.5
       ..strokeCap = StrokeCap.round;
 
     // Draw a child-like shape: circle with squiggly outline
     final path = Path();
-    final n = 12;
+    const n = 12;
     for (int i = 0; i < n; i++) {
       final angle = (i / n) * 2 * pi;
       final r = s * (0.5 + 0.08 * sin(angle * 3 + el.id));
@@ -701,21 +699,21 @@ class _DrawingPainter extends CustomPainter {
     canvas.drawPath(path, strokePaint);
 
     // Draw the label (what element it is) — child handwriting simulation
-    _drawChildLabel(canvas, el.label, 0, s * 0.75, el.color.withOpacity(0.6));
+    _drawChildLabel(
+        canvas, el.label, 0, s * 0.75, el.color.withValues(alpha: 0.6));
   }
 
-  void _drawFixingElement(
-      Canvas canvas, _DrawingElement el, Size size) {
+  void _drawFixingElement(Canvas canvas, _DrawingElement el, Size size) {
     final s = el.size;
-    final progress = 0.5; // Mid-fix
+    const progress = 0.5; // Mid-fix
 
     // Transition: color fading
     final fixPaint = Paint()
-      ..color = const Color(0xFF27AE60).withOpacity(0.4)
+      ..color = const Color(0xFF27AE60).withValues(alpha: 0.4)
       ..style = PaintingStyle.fill;
 
     final path = Path();
-    final n = 12;
+    const n = 12;
     for (int i = 0; i < n; i++) {
       final angle = (i / n) * 2 * pi;
       final r = s * (0.5 + 0.06 * sin(angle * 3 + el.id));
@@ -732,7 +730,7 @@ class _DrawingPainter extends CustomPainter {
 
     // Scribble overlay (simulating Favilla "fixing" the drawing)
     final scribblePaint = Paint()
-      ..color = const Color(0xFF27AE60).withOpacity(0.7)
+      ..color = const Color(0xFF27AE60).withValues(alpha: 0.7)
       ..strokeWidth = 3
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
@@ -746,17 +744,16 @@ class _DrawingPainter extends CustomPainter {
     }
   }
 
-  void _drawFixedElement(
-      Canvas canvas, _DrawingElement el, Size size) {
+  void _drawFixedElement(Canvas canvas, _DrawingElement el, Size size) {
     final s = el.size;
 
     // Neutral, "fixed" version — a simple shape
     final fillPaint = Paint()
-      ..color = const Color(0xFF95A5A6).withOpacity(0.2)
+      ..color = const Color(0xFF95A5A6).withValues(alpha: 0.2)
       ..style = PaintingStyle.fill;
 
     final strokePaint = Paint()
-      ..color = const Color(0xFF7F8C8D).withOpacity(0.4)
+      ..color = const Color(0xFF7F8C8D).withValues(alpha: 0.4)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.5
       ..strokeCap = StrokeCap.round;

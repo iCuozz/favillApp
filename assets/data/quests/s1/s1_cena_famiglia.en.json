@@ -32,7 +32,7 @@
               "id": "cena_p0_a_t2",
               "type": "dialogue",
               "speaker": "mallow",
-              "text": "Two eggs. Crack them like this, put the cheese inside, fold them like a calzone. Fry in butter. My grandma called it calzuovo — egg-calzone."
+              "text": "Two eggs. You crack them like this, put cheese inside, fold them like a calzone. You fry them. It's called 'calzuovo.' My grandmother's recipe."
             },
             {
               "id": "cena_p0_a_t3",
@@ -49,7 +49,7 @@
               "id": "cena_p0_a_t5",
               "type": "dialogue",
               "speaker": "mallow",
-              "text": "Exactly. It's the warrior's dish. Or at least the hungry programmer's."
+              "text": "Exactly. It's the warriors' dish. Or at least hungry programmers'."
             }
           ]
         }
@@ -70,24 +70,24 @@
             {
               "id": "cena_p1_a_t1",
               "type": "narration",
-              "text": "The calzuovo arrives at the table. Mallow serves it with the pride of a Michelin-starred chef. Lex looks at it. Then at Favilla. Then back at Mallow."
+              "text": "The calzuovo arrives at the table. Mallow serves it with the pride of a Michelin-starred chef. Lex looks at the plate. Then at Favilla. Then at the plate again."
             },
             {
               "id": "cena_p1_a_t2",
               "type": "thought",
               "speaker": "favilla",
-              "text": "He's plotting. I can see it. Same face as the pasta aisle."
+              "text": "He's plotting. I can tell. He has the same face as in the pasta aisle."
             },
             {
               "id": "cena_p1_a_t3",
               "type": "narration",
-              "text": "Lex pushes his plate away. He doesn't eat. He squints. Points his little finger toward Favilla, then toward Mallow. Like a silent conductor."
+              "text": "Lex pushes the plate away. He doesn't eat. He squints. Points his little finger toward Favilla. Then toward Mallow. Back and forth."
             },
             {
               "id": "cena_p1_a_t4",
               "type": "dialogue",
               "speaker": "mallow",
-              "text": "What's up with you tonight? Don't you like calzuovo?"
+              "text": "What's up with you tonight? You don't like calzuovo?"
             },
             {
               "id": "cena_p1_a_t5",
@@ -114,7 +114,7 @@
             {
               "id": "cena_p2_a_t1",
               "type": "narration",
-              "text": "Lex has now staged a small sabotage. The spoon falls. Then the cup. Then three more things in rapid succession. Each time he points at Favilla."
+              "text": "Lex is now staging a small sabotage. The spoon falls. Then the cup. Then the bib. One object at a time, with increasing emphasis on the target: Favilla."
             },
             {
               "id": "cena_p2_a_t2",
@@ -125,7 +125,7 @@
               "id": "cena_p2_a_t3",
               "type": "dialogue",
               "speaker": "mallow",
-              "text": "You know what's weird? For the past few weeks, every time something... strange happens, Lex looks at you. Not me. You."
+              "text": "You know what's weird? For a few weeks now, every time something... strange happens, he does exactly this."
             },
             {
               "id": "cena_p2_a_t4",
@@ -151,7 +151,7 @@
             {
               "id": "cena_p3_a_t1",
               "type": "narration",
-              "text": "Mallow puts down his fork. Dinner is half-eaten. Lex has stopped throwing things and now stares at his father with almost comical intensity."
+              "text": "Mallow puts down his fork. Dinner is halfway through. Lex has stopped throwing objects and is staring at Favilla with unprecedented intensity."
             },
             {
               "id": "cena_p3_a_t2",
@@ -162,16 +162,16 @@
             {
               "id": "cena_p3_a_t3",
               "type": "narration",
-              "text": "He's not angry. He's... tender. Like he's asking permission to know. Lex holds his breath."
+              "text": "He's not angry. He's... gentle. As if he's asking permission to know."
             }
           ],
           "choice": {
             "id": "cena_choice",
-            "prompt": "Mallow is looking at you. Lex too. Dinner is a powder keg.",
+            "prompt": "Mallow looks at you. Lex too. Dinner is a powder keg.",
             "options": [
               {
                 "id": "confessa_piccolo",
-                "label": "«Mallow... I need to tell you something. That Sunday at the park...»",
+                "label": "\"Mallow... I need to tell you something. That Sunday at the park...\"",
                 "goto_branch": "branch_confessa",
                 "stat_effects": {
                   "legame": 8,
@@ -186,7 +186,7 @@
               },
               {
                 "id": "facciata",
-                "label": "«Lex, eat. Mallow, this is delicious. Everything's fine.»",
+                "label": "\"Lex, eat. Mallow, this is delicious. Everything's fine.\"",
                 "goto_branch": "branch_facciata",
                 "stat_effects": {
                   "segreto": 8,
@@ -201,7 +201,7 @@
               },
               {
                 "id": "umorismo",
-                "label": "«Mallow, your son is trying to be a matchmaker. Or maybe a film director.»",
+                "label": "\"Mallow, your son is trying to direct a movie. Or maybe an exposé.\"",
                 "goto_branch": "branch_umorismo",
                 "stat_effects": {
                   "legame": 5,
@@ -216,7 +216,7 @@
               },
               {
                 "id": "distrai_lex",
-                "label": "You glance at Lex. He has crayons. He's drawing something.",
+                "label": "You look at Lex. He has crayons in hand. He's drawing something.",
                 "stat_effects": {
                   "segreto": -3
                 },
@@ -231,7 +231,7 @@
                   "tiers": [
                     {
                       "min": 4,
-                      "label": "Innocent drawing.",
+                      "label": "Disegno innocuo.",
                       "goto_branch": "branch_disegno_innocuo",
                       "stat_effects": {
                         "legame": 8,
@@ -240,7 +240,7 @@
                     },
                     {
                       "min": 2,
-                      "label": "Almost...",
+                      "label": "Quasi...",
                       "goto_branch": "branch_disegno_quasi",
                       "stat_effects": {
                         "segreto": -5,
@@ -249,7 +249,7 @@
                     },
                     {
                       "min": 0,
-                      "label": "Mallow saw.",
+                      "label": "Mallow ha visto.",
                       "goto_branch": "branch_disegno_visto",
                       "stat_effects": {
                         "segreto": -12,
@@ -270,7 +270,6 @@
       "id": "intro_calda",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_2.png",
           "panels": [
             {
@@ -283,27 +282,28 @@
                 {
                   "id": "intro_calda_a_t1",
                   "type": "narration",
-                  "text": "Mallow spent the afternoon cooking. The calzuovo isn't just a recipe — it's his way of saying 'I love you' without having to say it."
+                  "text": "Mallow spent the afternoon at the stove. Calzuovo isn't just a recipe — it's a declaration. When Mallow cooks, he's saying what he can't put into words."
                 },
                 {
                   "id": "intro_calda_a_t2",
                   "type": "narration",
-                  "text": "Favilla knows this. And it's exactly this warmth she risks losing if he ever finds out everything."
+                  "text": "Favilla knows. And it's exactly this warmth she risks losing if one day he finds out everything at the wrong time, in the wrong way."
                 },
                 {
                   "id": "intro_calda_a_t3",
                   "type": "dialogue",
                   "speaker": "mallow",
-                  "text": "I figured after the week you've had... you deserved a real dinner."
+                  "text": "I thought that after the week you've had... you deserved a real dinner."
                 },
                 {
                   "id": "intro_calda_a_t4",
                   "type": "narration",
-                  "text": "Lex watches from the high chair. Calculating. Tonight, dad is on his side."
+                  "text": "Lex from the high chair watches the scene. He's calculating. Tonight, dad is on his side."
                 }
               ]
             }
-          ]
+          ],
+          "id": "icalda_p0"
         }
       ]
     },
@@ -311,7 +311,6 @@
       "id": "branch_confessa",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_3.png",
           "panels": [
             {
@@ -324,13 +323,13 @@
                 {
                   "id": "branch_confessa_a_t1",
                   "type": "narration",
-                  "text": "Favilla puts down her fork. Lex stops breathing — or at least seems to, for a seven-and-a-half-month-old."
+                  "text": "Favilla puts down her fork. Lex stops breathing — or so it seems, for a seven-and-a-half-month-old."
                 },
                 {
                   "id": "branch_confessa_a_t2",
                   "type": "dialogue",
                   "speaker": "favilla",
-                  "text": "That Sunday at the park... something happened. I don't know how to explain it. Not even to myself."
+                  "text": "That Sunday at the park... something happened. I don't know how to explain it. Even to myself."
                 },
                 {
                   "id": "branch_confessa_a_t3",
@@ -341,7 +340,7 @@
                   "id": "branch_confessa_a_t4",
                   "type": "dialogue",
                   "speaker": "mallow",
-                  "text": "When you're ready, I'm here. I'm not going anywhere."
+                  "text": "Whenever you're ready, I'm here. I'm not going anywhere."
                 },
                 {
                   "id": "branch_confessa_a_t5",
@@ -351,10 +350,10 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bconfe_p0"
         },
         {
-          "index": 1,
           "background": "assets/episodes/prologo/page_1.png",
           "panels": [
             {
@@ -368,7 +367,7 @@
                 {
                   "id": "branch_confessa_b_t1",
                   "type": "narration",
-                  "text": "Lex releases his breath. Then smiles — that accomplice smile with two tiny teeth that only Favilla can decipher."
+                  "text": "Lex releases his breath. Then smiles — that conspiratorial two-tooth smile that says 'finally'."
                 },
                 {
                   "id": "branch_confessa_b_t2",
@@ -383,7 +382,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bconfe_p1"
         }
       ]
     },
@@ -391,7 +391,6 @@
       "id": "branch_facciata",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_3.png",
           "panels": [
             {
@@ -405,31 +404,31 @@
                 {
                   "id": "branch_facciata_a_t1",
                   "type": "narration",
-                  "text": "Favilla smiles. It's a well-practiced smile. She changes the subject with the fluidity of someone who's been doing it for months."
+                  "text": "Favilla smiles. A well-practiced smile. She changes the subject with the fluidity of someone who's done it many times before."
                 },
                 {
                   "id": "branch_facciata_a_t2",
                   "type": "dialogue",
                   "speaker": "favilla",
-                  "text": "Everything's fine, really. Just tired. La Corvi, the inspection. Heavy week. But this calzuovo is a miracle."
+                  "text": "Everything's fine, really. Just tired. Corvi, the inspection. Heavy week. But this calzuovo is a miracle."
                 },
                 {
                   "id": "branch_facciata_a_t3",
                   "type": "narration",
-                  "text": "Mallow nods. But he hasn't stopped looking at her. Lex huffs — frustrated, theatrical, definitive."
+                  "text": "Mallow nods. But he hasn't stopped looking at her. Lex snorts — frustrated, theatrical."
                 },
                 {
                   "id": "branch_facciata_a_t4",
                   "type": "thought",
                   "speaker": "favilla",
-                  "text": "I lied to him again. And Lex knows. And he's mad at me."
+                  "text": "I lied to him again. And Lex knows. And he's angry at me."
                 }
               ]
             }
-          ]
+          ],
+          "id": "bfacci_p0"
         },
         {
-          "index": 1,
           "background": "assets/episodes/prologo/page_1.png",
           "panels": [
             {
@@ -442,22 +441,23 @@
                 {
                   "id": "branch_facciata_b_t1",
                   "type": "narration",
-                  "text": "Mallow goes back to eating. He talks about work, a new JavaScript library. The evening derails into normality."
+                  "text": "Mallow goes back to eating. Talks about work, about a new JavaScript library. The evening derails into normalcy."
                 },
                 {
                   "id": "branch_facciata_b_t2",
                   "type": "narration",
-                  "text": "But Lex won't look at her anymore. His arms are crossed on the high chair. Seven months old and already capable of holding a grudge."
+                  "text": "But Lex won't look at her anymore. He has his arms crossed on the high chair. Seven months old and already capable of holding a grudge."
                 },
                 {
                   "id": "branch_facciata_b_t3",
                   "type": "thought",
                   "speaker": "favilla",
-                  "text": "I kept the secret. But I lost something with my son. I'll get it back tomorrow. Or maybe not."
+                  "text": "I kept the secret. But I lost something with my son. I'll make it up tomorrow. Or maybe I won't."
                 }
               ]
             }
-          ]
+          ],
+          "id": "bfacci_p1"
         }
       ]
     },
@@ -465,7 +465,6 @@
       "id": "branch_umorismo",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_3.png",
           "panels": [
             {
@@ -479,13 +478,13 @@
                 {
                   "id": "branch_umorismo_a_t1",
                   "type": "narration",
-                  "text": "Favilla looks at Lex. Then at Mallow. Then bursts out laughing — that real, full laugh that hasn't come out in days."
+                  "text": "Favilla looks at Lex. Then at Mallow. Then bursts out laughing — that real, full laugh she's almost forgotten she had."
                 },
                 {
                   "id": "branch_umorismo_a_t2",
                   "type": "dialogue",
                   "speaker": "favilla",
-                  "text": "Mallow, look at him. He has the face of someone trying to make us divorce. Is he our baby, or a tiny secret agent?"
+                  "text": "Mallow, look at him. He has the face of someone trying to make us divorce. He's our tiny villain."
                 },
                 {
                   "id": "branch_umorismo_a_t3",
@@ -496,14 +495,14 @@
                   "id": "branch_umorismo_a_t4",
                   "type": "dialogue",
                   "speaker": "mallow",
-                  "text": "He's got more charisma than me. I say that with pride and a little fear."
+                  "text": "He has more charisma than me. I say it with pride and a little fear."
                 }
               ]
             }
-          ]
+          ],
+          "id": "bumori_p0"
         },
         {
-          "index": 1,
           "background": "assets/episodes/prologo/page_1.png",
           "panels": [
             {
@@ -517,7 +516,7 @@
                 {
                   "id": "branch_umorismo_b_t1",
                   "type": "narration",
-                  "text": "All three of them laugh at the same moment. The calzuovo is gone, but it doesn't matter. For an instant, it's just a family having dinner."
+                  "text": "All three of them laugh at the same moment. The calzuovo is finished, but it doesn't matter. For an instant, it's just a family having dinner."
                 },
                 {
                   "id": "branch_umorismo_b_t2",
@@ -528,11 +527,12 @@
                   "id": "branch_umorismo_b_t3",
                   "type": "thought",
                   "speaker": "favilla",
-                  "text": "Tomorrow everything will be complicated again. But tonight it's not. Tonight is ours."
+                  "text": "Tomorrow everything will be complicated again. But not tonight. Tonight is ours."
                 }
               ]
             }
-          ]
+          ],
+          "id": "bumori_p1"
         }
       ]
     },
@@ -540,7 +540,6 @@
       "id": "branch_disegno_innocuo",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_2.png",
           "panels": [
             {
@@ -554,30 +553,30 @@
                 {
                   "id": "disegno_innocuo_a_t1",
                   "type": "narration",
-                  "text": "Lex stares at his own drawing. The mom with fire hair now has normal hair. The sparkles have become... stars? The pointing finger is now a waving hand."
+                  "text": "Lex looks at his own drawing. The mom with fire hair now has normal hair. The sparks have become... little stars. Generic. Harmless."
                 },
                 {
                   "id": "disegno_innocuo_a_t2",
                   "type": "narration",
-                  "text": "His masterpiece has been altered. By someone with a gray crayon and suspicious knowledge of his plan."
+                  "text": "His masterpiece has been modified. By someone who had a gray crayon and suspicious knowledge of his plan."
                 },
                 {
                   "id": "disegno_innocuo_a_t3",
                   "type": "narration",
-                  "text": "Lex glares at Favilla with the expression of someone who just lost a game of chess. Mallow walks over, looks at the paper."
+                  "text": "Lex stares at Favilla with the expression of someone who just lost a chess match against their own mother."
                 },
                 {
                   "id": "disegno_innocuo_a_t4",
                   "type": "dialogue",
                   "speaker": "mallow",
-                  "text": "What a beautiful drawing! Is that us? Look, that's you, those are me and mom."
+                  "text": "What a nice drawing! Is that us? Look, that's you, those are me and mom."
                 }
               ]
             }
-          ]
+          ],
+          "id": "bdiseg_p0"
         },
         {
-          "index": 1,
           "background": "assets/episodes/prologo/page_1.png",
           "panels": [
             {
@@ -597,22 +596,23 @@
                 {
                   "id": "disegno_innocuo_b_t2",
                   "type": "narration",
-                  "text": "Mallow smiles. Lex crosses his arms in the high chair. Defeated. For now."
+                  "text": "Mallow smiles. Lex crosses his arms on the high chair. Defeated. For now."
                 },
                 {
                   "id": "disegno_innocuo_b_t3",
                   "type": "narration",
-                  "text": "The calzuovo is almost gone. The drawing is innocent. And Lex has learned that mom is faster than him even at the dinner table."
+                  "text": "The calzuovo is almost finished. The drawing is harmless. And Lex has learned that mom is faster than him even at the dinner table."
                 },
                 {
                   "id": "disegno_innocuo_b_t4",
                   "type": "thought",
                   "speaker": "favilla",
-                  "text": "Nice try, little one. But tonight I win."
+                  "text": "Nice try, little one. But I win tonight."
                 }
               ]
             }
-          ]
+          ],
+          "id": "bdiseg_p1"
         }
       ]
     },
@@ -620,7 +620,6 @@
       "id": "branch_disegno_quasi",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_2.png",
           "panels": [
             {
@@ -634,12 +633,12 @@
                 {
                   "id": "disegno_quasi_a_t1",
                   "type": "narration",
-                  "text": "Favilla quickly modifies what she can. The result is a strange drawing: a figure with hair half yellow and half gray, another figure that seems to be looking but also not."
+                  "text": "Favilla quickly modifies what she can. The result is a strange drawing: a figure with half-yellow, half-gray hair. A smile erased and redrawn."
                 },
                 {
                   "id": "disegno_quasi_a_t2",
                   "type": "narration",
-                  "text": "A crayon rolls away. Lex follows it with his eyes. Favilla picks it up before Mallow notices."
+                  "text": "A crayon rolls away. Lex follows it with his eyes. Favilla picks it up before he can point at it."
                 },
                 {
                   "id": "disegno_quasi_a_t3",
@@ -655,10 +654,10 @@
                 }
               ]
             }
-          ]
+          ],
+          "id": "bdiseg_p0"
         },
         {
-          "index": 1,
           "background": "assets/episodes/prologo/page_1.png",
           "panels": [
             {
@@ -683,17 +682,18 @@
                 {
                   "id": "disegno_quasi_b_t3",
                   "type": "narration",
-                  "text": "But he hesitated a second too long before laughing. That second where he looked at the drawing more carefully than necessary."
+                  "text": "But he hesitated a second too long before laughing. That second in which he looked at the drawing more carefully than necessary."
                 },
                 {
                   "id": "disegno_quasi_b_t4",
                   "type": "thought",
                   "speaker": "favilla",
-                  "text": "He didn't get it. But he felt there's something to get. Tomorrow he'll think about it again."
+                  "text": "He didn't understand. But he felt there's something to understand. Tomorrow he'll think about it again."
                 }
               ]
             }
-          ]
+          ],
+          "id": "bdiseg_p1"
         }
       ]
     },
@@ -701,7 +701,6 @@
       "id": "branch_disegno_visto",
       "pages": [
         {
-          "index": 0,
           "background": "assets/episodes/prologo/page_3.png",
           "panels": [
             {
@@ -715,7 +714,7 @@
                 {
                   "id": "disegno_visto_a_t1",
                   "type": "narration",
-                  "text": "Mallow approaches while Favilla still has the crayon in her hand. Too late. He sees the original drawing: the figure with fire hair, the other watching, Lex pointing."
+                  "text": "Mallow approaches while Favilla still has the crayon in hand. It's too late."
                 },
                 {
                   "id": "disegno_visto_a_t2",
@@ -726,20 +725,20 @@
                 {
                   "id": "disegno_visto_a_t3",
                   "type": "narration",
-                  "text": "He points at the fire hair. Favilla grabs the paper, crumples it."
+                  "text": "He points to the fire hair. Favilla takes the sheet. Crumples it."
                 },
                 {
                   "id": "disegno_visto_a_t4",
                   "type": "dialogue",
                   "speaker": "favilla",
-                  "text": "Nothing. Kids' stuff."
+                  "text": "Nothing. Kid stuff."
                 }
               ]
             }
-          ]
+          ],
+          "id": "bdiseg_p0"
         },
         {
-          "index": 1,
           "background": "assets/episodes/prologo/page_3.png",
           "panels": [
             {
@@ -759,22 +758,23 @@
                   "id": "disegno_visto_b_t2",
                   "type": "dialogue",
                   "speaker": "mallow",
-                  "text": "They look like... glowing hair. Like the one in the video."
+                  "text": "They look like... glowing hair. Like in the video."
                 },
                 {
                   "id": "disegno_visto_b_t3",
                   "type": "narration",
-                  "text": "The silence lasts a second. Lex looks at Mallow. Mallow looks at Favilla. Favilla looks at the crumpled paper."
+                  "text": "The silence lasts a second. Lex looks at Mallow. Mallow looks at Favilla. Favilla looks at the crumpled drawing."
                 },
                 {
                   "id": "disegno_visto_b_t4",
                   "type": "thought",
                   "speaker": "favilla",
-                  "text": "He connected the drawing to the video. My son just outplayed me. With a crayon."
+                  "text": "He connected the drawing to the video. My son just screwed me. With a crayon."
                 }
               ]
             }
-          ]
+          ],
+          "id": "bdiseg_p1"
         }
       ]
     }
@@ -783,7 +783,6 @@
     "id": "epilogue",
     "pages": [
       {
-        "index": 0,
         "background": "assets/episodes/prologo/page_4.png",
         "panels": [
           {
@@ -801,7 +800,7 @@
               {
                 "id": "cena_epilogue_a_t2",
                 "type": "narration",
-                "text": "She doesn't say anything. He doesn't turn around. But he raises one soapy hand in a gesture that says everything."
+                "text": "She says nothing. He doesn't turn around. But he raises a soapy hand in a gesture that means 'I know you're there'."
               },
               {
                 "id": "cena_epilogue_a_t3",
@@ -815,7 +814,8 @@
               }
             ]
           }
-        ]
+        ],
+        "id": "ep_p0"
       }
     ]
   }
