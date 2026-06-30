@@ -236,7 +236,8 @@
             {
               "id": "imc_0_p0",
               "characters": [
-                "favilla"
+                "favilla",
+                "lex"
               ],
               "text_blocks": [
                 {
@@ -319,7 +320,8 @@
             {
               "id": "bt_1_p0",
               "characters": [
-                "favilla"
+                "favilla",
+                "lex"
               ],
               "text_blocks": [
                 {
@@ -497,7 +499,8 @@
               "id": "bp_1_p0",
               "characters": [
                 "favilla",
-                "carmela"
+                "carmela",
+                "lex"
               ],
               "text_blocks": [
                 {
@@ -693,7 +696,10 @@
           "panels": [
             {
               "id": "btp_0_p0",
-              "characters": [],
+              "characters": [
+                "favilla",
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "text": "The bear hits the side of the shelf.",
@@ -722,7 +728,10 @@
           "panels": [
             {
               "id": "btp_1_p0",
-              "characters": [],
+              "characters": [
+                "favilla",
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "text": "Favilla's hands warm up. Just for a moment. Not enough.",
@@ -782,7 +791,10 @@
           "panels": [
             {
               "id": "btm_0_p0",
-              "characters": [],
+              "characters": [
+                "favilla",
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "text": "The bear shoots through the air. Clears it.",
@@ -811,7 +823,9 @@
           "panels": [
             {
               "id": "btm_1_p0",
-              "characters": [],
+              "characters": [
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "speaker": "lex",
@@ -837,7 +851,10 @@
           "panels": [
             {
               "id": "btm_2_p0",
-              "characters": [],
+              "characters": [
+                "favilla",
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "text": "At the checkout. Favilla places the items on the belt.",
@@ -880,7 +897,10 @@
           "panels": [
             {
               "id": "bps_0_p0",
-              "characters": [],
+              "characters": [
+                "favilla",
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "text": "She picks them up. One, two, three. Puts them back on the shelf.",
@@ -914,7 +934,10 @@
           "panels": [
             {
               "id": "bps_1_p0",
-              "characters": [],
+              "characters": [
+                "favilla",
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "text": "At the checkout. Favilla places the items on the belt.",
@@ -948,7 +971,10 @@
           "panels": [
             {
               "id": "bpl_0_p0",
-              "characters": [],
+              "characters": [
+                "favilla",
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "text": "She turns the trolley. Walks away.",
@@ -977,7 +1003,10 @@
           "panels": [
             {
               "id": "bpl_1_p0",
-              "characters": [],
+              "characters": [
+                "favilla",
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "text": "At the checkout. Favilla places the items on the belt.",

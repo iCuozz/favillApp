@@ -236,7 +236,8 @@
             {
               "id": "imc_0_p0",
               "characters": [
-                "favilla"
+                "favilla",
+                "lex"
               ],
               "text_blocks": [
                 {
@@ -319,7 +320,8 @@
             {
               "id": "bt_1_p0",
               "characters": [
-                "favilla"
+                "favilla",
+                "lex"
               ],
               "text_blocks": [
                 {
@@ -497,7 +499,8 @@
               "id": "bp_1_p0",
               "characters": [
                 "favilla",
-                "carmela"
+                "carmela",
+                "lex"
               ],
               "text_blocks": [
                 {
@@ -693,7 +696,10 @@
           "panels": [
             {
               "id": "btp_0_p0",
-              "characters": [],
+              "characters": [
+                "favilla",
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "text": "L'orsetto colpisce lo scaffale di lato.",
@@ -726,7 +732,10 @@
           "panels": [
             {
               "id": "btp_1_p0",
-              "characters": [],
+              "characters": [
+                "favilla",
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "text": "Le mani di Favilla si scaldano. Solo un istante. Non abbastanza.",
@@ -790,7 +799,10 @@
           "panels": [
             {
               "id": "btm_0_p0",
-              "characters": [],
+              "characters": [
+                "favilla",
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "text": "L'orsetto sfreccia. Pulisce l'aria.",
@@ -823,7 +835,9 @@
           "panels": [
             {
               "id": "btm_1_p0",
-              "characters": [],
+              "characters": [
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "speaker": "lex",
@@ -852,7 +866,10 @@
           "panels": [
             {
               "id": "btm_2_p0",
-              "characters": [],
+              "characters": [
+                "favilla",
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "text": "Alla cassa. Favilla passa i prodotti sul nastro.",
@@ -901,7 +918,10 @@
           "panels": [
             {
               "id": "bps_0_p0",
-              "characters": [],
+              "characters": [
+                "favilla",
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "text": "Raccoglie. Uno, due, tre. Li rimette sullo scaffale.",
@@ -940,7 +960,10 @@
           "panels": [
             {
               "id": "bps_1_p0",
-              "characters": [],
+              "characters": [
+                "favilla",
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "text": "Alla cassa. Favilla passa i prodotti sul nastro.",
@@ -978,7 +1001,10 @@
           "panels": [
             {
               "id": "bpl_0_p0",
-              "characters": [],
+              "characters": [
+                "favilla",
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "text": "Gira il carrello. Si allontana.",
@@ -1011,7 +1037,10 @@
           "panels": [
             {
               "id": "bpl_1_p0",
-              "characters": [],
+              "characters": [
+                "favilla",
+                "lex"
+              ],
               "text_blocks": [
                 {
                   "text": "Alla cassa. Favilla passa i prodotti sul nastro.",

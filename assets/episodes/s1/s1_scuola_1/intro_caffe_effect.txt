@@ -1,0 +1,24 @@
+CHARACTERS: Favilla, a blonde Italian woman in her early 30s, slim athletic build, cat-eye black glasses, expressive hazel eyes, wearing the EXACT SAME plain white blouse with small dark 'Stars Hollow' lettering on the chest in every scene, tight blue skinny jeans, black-and-white Nike Panda sneakers, blonde hair tied back in a ponytail, at work in a school. EPISODE CONSISTENCY: EPISODIO: s1_scuola_1 — "Una Giornata Normale"
+Favilla è a scuola. Una mattina come tante — ma il suo corpo non è più lo stesso.
+NIENTE VIGNETTE: Ogni immagine è un'unica illustrazione a piena pagina. Niente suddivisione in vignette, niente balloon, niente bordi di vignetta.
+
+VESTITI PERSONAGGI (validi per TUTTO l'episodio):
+- Favilla: STESSA camicia bianca con scritta "Stars Hollow", STESSI jeans attillati, STESSE scarpe Nike Panda bianche e nere, STESSI occhiali gatto neri, STESSI capelli biondi raccolti in coda, corporatura atletica. SOLO in branch_bagno si cambia con camicia di ricambio identica.
+- Corvi: STESSI capelli scuri sempre raccolti in crocchia severa, STESSO tailleur scuro, STESSI tacchi alti, STESSA cartella di pelle.
+- Corvi: tailleur scuro, tacchi alti, cartella di pelle, capelli stretti tirati indietro, espressione severa
+- Collega: camicia chiara, pantaloni scuri, looks da impiegato scolastico semplice
+
+LUOGHI:
+- Scuola elementare di Nova Tutinia: pareti giallo pallido e celesti, corridoi con disegni dei bambini, pavimento piastrelle crema
+- Palestra scolastica: scaffali metallici, attrezzatura vecchia, luci al neon, odore di chiuso
+- Bagno della scuola: piastrelle bianche e celesti, specchio, luce fredda
+
+COERENZA:
+- Favilla è in orario di lavoro, si muove per la scuola
+- I capelli di Favilla fremono ogni tanto (effetto collaterale dei poteri)
+- Corvi è fredda, professionale, intimidatoria
+- Favilla cerca di nascondere che qualcosa in lei sta cambiando PAGE DETAILS: SCENA: 7:55, Favilla davanti ai cancelli della scuola. È appena arrivata. I capelli non fremono più — il caffè li ha spenti. Prova a sembrare normale, testa bassa, sorriso fisso.
+INQUADRATURA: Campo medio — Favilla all'ingresso della scuola, zaino in spalla, espressione neutra ma tesa. Mattina presto.
+LUCE: Mattina, luce chiara all'aperto.
+DETTAGLI: Favilla con la STESSA camicia bianca con scritta 'Stars Hollow', STESSI jeans attillati, STESSE scarpe Nike Panda bianche e nere, STESSI occhiali gatto neri, STESSI capelli raccolti, zaino. Cancello della scuola sullo sfondo.
+COERENZA: Favilla sola. Il caffè ha neutralizzato i suoi poteri — si sente spenta. Scuola WORLD BIBLE. SETTING: Italian elementary school classroom. Pale yellow walls with children's drawings, chalkboard, rows of wooden desks, tall windows with morning light, teacher's desk with coffee mug, chalk dust in sunbeams. LOCATION DETAILS: An Italian elementary school classroom in Nova Tutinia. Pale yellow walls, one wall covered in children's colorful artwork and drawings. A large chalkboard at the front with faint traces of writing. Rows of small wooden desks with attached chairs, arranged in three columns. Tall windows with sheer curtains let in warm morning light. A teacher's desk at the front with papers, books, and a ceramic coffee mug. Chalk dust floats in the sunbeams. The floor is cream ceramic tile. Institutional but lively atmosphere, the quiet before the children arrive. SCENE: 7:55. Le porte della scuola. Come sempre. I capelli non fremono più. Dove ieri c'era una brace pronta ad accendersi, ora c'è solo cenere fredda.. MOOD: Warm intimate atmosphere, soft golden sunlight, family love and gentle chaos. The beauty of everyday life. STYLE: Italian comic book illustration style, expressive line art, warm Mediterranean color palette, cinematic framing, Franco-Belgian comic style with bold clean black outlines, semi-flat colors, detailed backgrounds, emotional character expressions, soft natural lighting, 2D digital art, portrait 9:16 vertical composition, vibrant but grounded colors, no speech bubbles, no text, no watermarks. IMPORTANT: No text, no letters, no speech bubbles, no watermarks, no signatures anywhere in the image.

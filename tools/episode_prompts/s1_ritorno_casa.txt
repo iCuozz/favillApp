@@ -1,0 +1,19 @@
+EPISODIO: s1_ritorno_casa — "Il Ritorno a Casa"
+Favilla torna a casa dopo la giornata a scuola. Mallow la nota subito diversa. Lex tenta per la prima volta di rivelare il segreto al padre.
+NIENTE VIGNETTE: Ogni immagine è un'unica illustrazione a piena pagina. Niente suddivisione in vignette, niente balloon, niente bordi di vignetta.
+
+VESTITI PERSONAGGI (validi per TUTTO l'episodio) — REGOLE FISSE:
+- Favilla: STESSA camicia bianca con scritta "Stars Hollow", STESSI jeans attillati, STESSE scarpe Nike Panda bianche e nere, STESSI occhiali gatto neri, STESSI capelli biondi in coda — ma piú stanchi, dopo una lunga giornata. In alcune scene (intro_vestiti_bruciati*) la camicia ha SEGNI DI BRUCIATURA SUGLI STESSI PUNTI — sempre sul davanti, lato sinistro, all'altezza del petto, tre/quattro piccoli fori scuri con orli anneriti.
+- Mallow: maglietta NERA con pipistrello GIALLO al centro, jeans dritti, SCARPE CONVERSE GIALLE (sempre gialle, sempre Converse), capelli castano chiaro mini-mohawk, rilassato in casa
+- Lex: tutina morbida chiara (bianca o azzurra), SEMPRE SCALZO (mai scarpe, mai calzini), mini-mohawk castano chiaro, due dentini, guance paffute — NON cammina, gattona o si solleva sugli appoggi
+
+LUOGHI:
+- Scene in casa (sera): appartamento giovane famiglia, parquet spina di pesce, cucina moderna bianca — NESSUNA PENISOLA, NESSUN'ISOLA — solo tavolo bianco tondo con sedie giallo ocra al centro, divano carta da zucchero, laptop di Mallow sul tavolo, giocattoli sparsi, finestre con luce della sera
+- Scene in camera da letto (notte): parquet spina di pesce, culla di Lex in legno attaccata al letto matrimoniale, luna dalla finestra, atmosfera intima
+
+COERENZA:
+- È sera — luce calda artificiale dalla cucina, ombre lunghe
+- Favilla è stanca ma cerca di sembrare normale
+- Lex è insolitamente attivo: tenta di comunicare qualcosa a Mallow con gesti e oggetti
+- Mallow è ignaro, rilassato, interpreta tutto come "fasi del bambino"
+- L'episodio bilancia momenti di tensione (camicia bruciata, quasi-scoperta) con intimità familiare

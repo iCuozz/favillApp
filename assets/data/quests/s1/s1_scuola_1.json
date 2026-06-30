@@ -182,7 +182,7 @@
     "intro_caffe_effect": {
       "pages": [
         {
-          "background": "assets/episodes/s1/s1_scuola_1/page_0.webp",
+          "background": "assets/episodes/s1/s1_scuola_1/intro_caffe_effect.webp",
           "panels": [
             {
               "id": "caffe_intro_0",
@@ -331,7 +331,7 @@
     "intro_segreto_pericolo": {
       "pages": [
         {
-          "background": "assets/episodes/s1/s1_scuola_1/page_0.webp",
+          "background": "assets/episodes/s1/s1_scuola_1/intro_segreto_pericolo.webp",
           "panels": [
             {
               "id": "sp_segreto_0",

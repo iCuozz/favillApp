@@ -1,0 +1,20 @@
+EPISODIO: s1_scuola_1 — "Una Giornata Normale"
+Favilla è a scuola. Una mattina come tante — ma il suo corpo non è più lo stesso.
+NIENTE VIGNETTE: Ogni immagine è un'unica illustrazione a piena pagina. Niente suddivisione in vignette, niente balloon, niente bordi di vignetta.
+
+VESTITI PERSONAGGI (validi per TUTTO l'episodio):
+- Favilla: STESSA camicia bianca con scritta "Stars Hollow", STESSI jeans attillati, STESSE scarpe Nike Panda bianche e nere, STESSI occhiali gatto neri, STESSI capelli biondi raccolti in coda, corporatura atletica. SOLO in branch_bagno si cambia con camicia di ricambio identica.
+- Corvi: STESSI capelli scuri sempre raccolti in crocchia severa, STESSO tailleur scuro, STESSI tacchi alti, STESSA cartella di pelle.
+- Corvi: tailleur scuro, tacchi alti, cartella di pelle, capelli stretti tirati indietro, espressione severa
+- Collega: camicia chiara, pantaloni scuri, looks da impiegato scolastico semplice
+
+LUOGHI:
+- Scuola elementare di Nova Tutinia: pareti giallo pallido e celesti, corridoi con disegni dei bambini, pavimento piastrelle crema
+- Palestra scolastica: scaffali metallici, attrezzatura vecchia, luci al neon, odore di chiuso
+- Bagno della scuola: piastrelle bianche e celesti, specchio, luce fredda
+
+COERENZA:
+- Favilla è in orario di lavoro, si muove per la scuola
+- I capelli di Favilla fremono ogni tanto (effetto collaterale dei poteri)
+- Corvi è fredda, professionale, intimidatoria
+- Favilla cerca di nascondere che qualcosa in lei sta cambiando

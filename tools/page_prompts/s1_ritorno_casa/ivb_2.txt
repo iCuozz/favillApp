@@ -1,0 +1,5 @@
+SCENA: TENTATIVO 1 di Lex di rivelare il segreto. O VARIANTE A: Lex si trascina fino allo zaino di Favilla ancora aperto per terra, ci infila il braccetto, tira fuori la camicetta bruciata nascosta dentro, e la agita in aria come una bandiera — "BAAAAAAAH!!" Favilla gliela strappa in un millisecondo. O VARIANTE B (camicia ancora addosso): Lex afferra con entrambe le manine l'orlo della camicetta bruciata di Favilla e tira con tutte le sue forze verso Mallow. Favilla: "BAAAAAAAH!!" Mallow si gira: "Cosa c'è?"
+INQUADRATURA: Azione — Lex con la camicia in mano (o che tira l'orlo). Favilla che si piega a raccoglierlo o trattenerlo. Mallow sullo sfondo che si gira. Dinamico, movimento.
+LUCE: Luce serale calda, movimento crea ombre dinamiche.
+DETTAGLI: Manine di Lex che stringono la stoffa bianca bruciata. Favilla mezza piegata, mossa veloce. Mallow che si volta. Zaino aperto per terra (variante A). Camicia bruciata visibile.
+COERENZA: STESSO ambiente di ivb_0. Lex è per terra o in braccio — NON cammina stabilmente. La camicia bruciata è lo stesso oggetto di ivb_0.

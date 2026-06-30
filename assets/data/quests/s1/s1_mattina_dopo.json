@@ -279,7 +279,7 @@
     "epilogue_caffe": {
       "pages": [
         {
-          "background": "assets/episodes/s1/s1_mattina_dopo/epilogue.webp",
+          "background": "assets/episodes/s1/s1_mattina_dopo/epilogue_caffe.webp",
           "panels": [
             {
               "id": "ep_caffe_0",
@@ -324,7 +324,7 @@
     "epilogue_no_caffe": {
       "pages": [
         {
-          "background": "assets/episodes/s1/s1_mattina_dopo/epilogue.webp",
+          "background": "assets/episodes/s1/s1_mattina_dopo/epilogue_no_caffe.webp",
           "panels": [
             {
               "id": "ep_nocaffe_0",
@@ -388,7 +388,7 @@
   "epilogue": {
     "pages": [
       {
-        "background": "assets/episodes/s1/s1_mattina_dopo/epilogue.webp",
+        "background": "assets/episodes/s1/s1_mattina_dopo/epilogue_main.webp",
         "panels": [
           {
             "id": "md_ep_0",

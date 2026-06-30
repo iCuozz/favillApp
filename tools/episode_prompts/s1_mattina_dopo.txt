@@ -1,0 +1,19 @@
+EPISODIO: s1_mattina_dopo — "La Mattina Dopo"
+È il mattino dopo la trasformazione. Tutto è uguale ma niente è come prima.
+NIENTE VIGNETTE: Ogni immagine è un'unica illustrazione a piena pagina. Niente suddivisione in vignette, niente balloon, niente bordi di vignetta.
+
+VESTITI PERSONAGGI (validi per TUTTO l'episodio):
+- Favilla: canottiera bianca, pantaloni del pigiama chiari, capelli biondi raccolti in una coda disordinata, niente occhiali (li ha persi nella trasformazione? o forse no)
+- Mallow: maglietta bianca semplice, pantaloni del pigiama scuri, capelli arruffati, assonnato
+- Lex: tutina da notte chiara con piedini, senza scarpe
+
+LUOGHI:
+- Scene in camera da letto (mattina presto): parquet spina di pesce, culla di Lex, finestra con luce dell'alba
+- Scene in cucina-soggiorno: tavolo bianco con sedie giallo ocra, divano carta da zucchero, parquet, luce mattutina
+
+COERENZA:
+- È l'alba/mattina presto — luce tenue, atmosfera intima
+- La casa è in ordine (dopo la trasformazione)
+- Favilla è turbata ma cerca di sembrare normale
+- Lex è più attento del solito verso Favilla
+- Mallow è ignaro, assonnato, fa colazione

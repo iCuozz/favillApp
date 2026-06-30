@@ -255,7 +255,7 @@
     },
     {
       "index": 6,
-      "background": "assets/episodes/prologo/page_4.png",
+      "background": "assets/episodes/prologo/page_6.png",
       "panels": [
         {
           "id": "pr5_0",
@@ -317,7 +317,7 @@
     "branch_segreto": {
       "pages": [
         {
-          "background": "assets/episodes/prologo/page_4.png",
+          "background": "assets/episodes/prologo/branch_segreto.png",
           "panels": [
             {
               "id": "bs_0",
@@ -361,7 +361,7 @@
     "branch_legame": {
       "pages": [
         {
-          "background": "assets/episodes/prologo/page_4.png",
+          "background": "assets/episodes/prologo/branch_legame.png",
           "panels": [
             {
               "id": "bl_0",
@@ -406,7 +406,7 @@
   "epilogue": {
     "pages": [
       {
-        "background": "assets/episodes/prologo/page_4.png",
+        "background": "assets/episodes/prologo/epilogue.png",
         "panels": [
           {
             "id": "ep_0",

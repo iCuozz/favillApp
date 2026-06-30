@@ -46,6 +46,7 @@ app.*.map.json
 /android/key.properties
 
 # Secrets / non-committable
+tools/.gpt_key
 upload-keystore*.jks
 *.keystore
 upload_certificate*.pem

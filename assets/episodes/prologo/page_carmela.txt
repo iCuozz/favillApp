@@ -1,1 +1,20 @@
-CHARACTERS: Signora Carmela, an elderly Italian woman, white hair under a wide straw hat or in a bun, too-alert knowing eyes with faint violet glow, floral dress, blue shopping trolley nearby, unsettling mysterious presence, always watching. SETTING: Night view across a quiet Italian street in Nova Tutinia, dark window on third floor of old apartment building, elderly woman silhouette barely visible in darkness, orange street lamp glow on empty street below, tense mysterious atmosphere. SCENE: Dall'altra parte della strada, una finestra buia. Nel buio, qualcosa si muove. Due occhi si aprono di scatto.. MOOD: Quiet melancholy, soft muted cool colors, diffused flat light. A moment of stillness and introspection. STYLE: Italian comic book illustration style, expressive line art, warm Mediterranean color palette, cinematic framing, Franco-Belgian comic style with bold clean black outlines, semi-flat colors, detailed backgrounds, emotional character expressions, soft natural lighting, 2D digital art, portrait 9:16 vertical composition, vibrant but grounded colors, no speech bubbles, no text, no watermarks. IMPORTANT: No text, no letters, no speech bubbles, no watermarks, no signatures anywhere in the image.
+CHARACTERS: Signora Carmela, an elderly Italian woman, white hair under a wide straw hat or in a bun, too-alert knowing eyes with faint violet glow, floral dress, blue shopping trolley nearby, unsettling mysterious presence, always watching. EPISODE CONSISTENCY: EPISODIO: Prologo — "Una Mattina Qualunque"
+Questa è la prima comparsa di ogni personaggio e luogo. Tutto deve essere stabilito in modo chiaro.
+NIENTE VIGNETTE: Ogni immagine è un'unica illustrazione a piena pagina. Niente suddivisione in vignette, niente balloon, niente bordi di vignetta.
+
+VESTITI PERSONAGGI (validi per TUTTO l'episodio):
+- Favilla: camicetta bianca, jeans aderenti, scarpe bianche e nere, occhiali gatto neri, capelli biondi raccolti
+- Mallow: polo azzurra chiara, jeans dritti, scarpe gialle alte, capelli castano chiaro mini-mohawk
+- Lex: tutina morbida azzurra con stampa di orsetto, calzini bianchi, gambe paffute nude
+- Carmela: vestito floreale, cappello di paglia largo o crocchia, carrello blu della spesa
+- Corvi: tailleur scuro, tacchi alti, cartella di pelle, capelli tirati
+
+LUOGHI:
+- Scene a casa (mattina): appartamento famiglia giovane, parquet spina di pesce, cucina moderna bianca
+- Scene a scuola: aula elementare, pareti gialle con disegni bambini, banchi di legno
+- Strada notturna con Carmela: finestra buia al terzo piano, sagoma che osserva
+
+COERENZA:
+- I giocattoli di Lex sparsi sul pavimento (anelli colorati, palla morbida)
+- Il laptop argentato di Mallow sempre sul tavolo di legno
+- La casa è vissuta, calda, caotica — mai sterile SETTING: Quiet street at night in Nova Tutinia. Old ochre apartment buildings, orange street lamps, dark third-floor window with watching silhouette, cobblestone pavement, tense mysterious stillness. LOCATION DETAILS: A quiet Italian street in Nova Tutinia at night. A row of attached old apartment buildings with cream and ochre facades. Orange sodium street lamps cast warm pools of light on the empty cobblestone pavement. One specific third-floor window is dark — but a barely visible elderly woman silhouette stands motionless in the darkness, watching the street below. A blue shopping trolley is parked by a doorway. Tense, mysterious atmosphere. The stillness of a small town at night, hiding secrets. SCENE: Dall'altra parte della strada, una finestra buia. Nel buio, qualcosa si muove. Due occhi si aprono di scatto.. MOOD: Quiet melancholy, soft muted cool colors, diffused flat light. A moment of stillness and introspection. STYLE: Italian comic book illustration style, expressive line art, warm Mediterranean color palette, cinematic framing, Franco-Belgian comic style with bold clean black outlines, semi-flat colors, detailed backgrounds, emotional character expressions, soft natural lighting, 2D digital art, portrait 9:16 vertical composition, vibrant but grounded colors, no speech bubbles, no text, no watermarks. IMPORTANT: No text, no letters, no speech bubbles, no watermarks, no signatures anywhere in the image.
