@@ -255,9 +255,10 @@ EP_CHAR_OVERRIDES = {
         "favilla": (
             "Favilla, a blonde Italian woman in her early 30s, cat-eye black glasses, "
             "expressive hazel eyes, athletic build, blonde hair down, "
-            "wearing a dress with a LONG FULL SKIRT (vestitino con gonnellone lungo — "
-            "a flowing floor-length feminine dress, same color and pattern in EVERY scene, "
-            "NOT jeans, NOT shorts, NOT a tight pencil skirt), "
+            "wearing a SOLID ORANGE DRESS with a LONG FULL SKIRT (vestitino arancione "
+            "tinta unita con gonnellone lungo — same solid orange dress in EVERY scene), "
+            "YELLOW GOLD HOOP EARRINGS (orecchini a cerchio oro giallo — "
+            "visible in EVERY scene, NEVER missing), "
             "open flat shoes (scarpe basse aperte — open-toe flat sandals, same pair in EVERY scene), "
             "carrying a small shoulder bag"
         ),
