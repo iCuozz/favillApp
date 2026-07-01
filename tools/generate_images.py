@@ -221,6 +221,36 @@ EP_CHAR_OVERRIDES = {
             "sweating and out of breath, a desperate park thief"
         ),
     },
+    "s1_mare": {
+        "favilla": (
+            "Favilla, a blonde Italian woman in her early 30s, athletic build, "
+            "blonde hair loose and flowing, "
+            "wearing a YELLOW BIKINI (two-piece bright yellow bikini — yellow top and yellow bottom), "
+            "dark sunglasses, barefoot on the beach, "
+            "sometimes with a light white or beige beach cover-up/kimono over the bikini, "
+            "relaxed beach look, warm expression"
+        ),
+        "mallow": (
+            "Mallow, an Italian man in his early 30s, short mini-mohawk light brown hair, "
+            "wearing colorful BIRD-PATTERN SWIM TRUNKS (tropical print shorts with exotic bird motifs, "
+            "NOT regular shorts, NOT jeans), barefoot or simple flip-flops, "
+            "bare chest or light linen shirt sometimes, "
+            "gentle easygoing expression, warm brown eyes, relaxed beach day"
+        ),
+        "lex": (
+            "Lex, a 7-month-old baby boy, light brown spiky hair in a tiny mohawk like his dad, "
+            "big expressive hazel eyes, mischievous curious smile, two tiny bottom teeth, "
+            "wearing a duck-print swim diaper (little yellow duck pattern on light blue/white background), "
+            "diaper visible, "
+            "COMPLETELY BAREFOOT — no socks, no shoes of any kind, bare feet with tiny toes always clearly visible, "
+            "chubby bare legs, on a beach towel or in someone's arms"
+        ),
+        "gatto": (
+            "Filippo, a sleek black cat, "
+            "piercing yellow-green eyes, silent graceful movements, "
+            "always watchful and knowing, sitting on a seaside wall"
+        ),
+    },
 }
 
 # ─── Mood ────────────────────────────────────────────────────────────
@@ -231,6 +261,8 @@ MOOD_DESC = {
                   "families laughing in the distance, a perfect peaceful Sunday at the park.",
     "warm_boschetto": "Muted green light through dense foliage, shafts of sunlight breaking through the canopy, "
                       "isolated quiet within the city noise, nature all around.",
+    "warm_mare": "Golden seaside light, warm Mediterranean sun, the sound of waves, relaxed beach atmosphere, "
+                 "sunlight reflecting off the water creating sparkling highlights.",
     "power": "Supernatural energy explodes through the scene. Golden light radiates from Favilla, "
              "sparks and embers float in the air, casting long dramatic shadows. Awe-inspiring transformation moment.",
     "sad": "Quiet melancholy, soft muted cool colors, diffused flat light. A moment of stillness and introspection.",
@@ -266,6 +298,8 @@ def detect_location(bg_path, narration_texts):
         return "boschetto"
     if "parco" in ctx or "giardini" in ctx:
         return "parco"
+    if "mare" in ctx or "spiaggia" in ctx or "lido" in ctx or "ombrellone" in ctx:
+        return "mare"
     if "carmela" in bg_lower or ("carmela" in ctx and "strada" in ctx):
         return "strada_notte"
     if ("strada" in ctx or "finestra" in ctx) and ("notte" in ctx or "buio" in ctx):
