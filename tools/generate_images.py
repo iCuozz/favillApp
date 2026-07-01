@@ -251,6 +251,42 @@ EP_CHAR_OVERRIDES = {
             "always watchful and knowing, sitting on a seaside wall"
         ),
     },
+    "s1_centro_commerciale": {
+        "favilla": (
+            "Favilla, a blonde Italian woman in her early 30s, cat-eye black glasses, "
+            "expressive hazel eyes, athletic build, blonde hair down, "
+            "wearing a dress with a LONG FULL SKIRT (vestitino con gonnellone lungo — "
+            "a flowing floor-length feminine dress, same color and pattern in EVERY scene, "
+            "NOT jeans, NOT shorts, NOT a tight pencil skirt), "
+            "open flat shoes (scarpe basse aperte — open-toe flat sandals, same pair in EVERY scene), "
+            "carrying a small shoulder bag"
+        ),
+        "mallow": (
+            "Mallow, an Italian man in his early 30s, short mini-mohawk light brown hair, "
+            "wearing a VINTAGE NOVELTY SHIRT covered in printed retro objects and patterns "
+            "(NOT a plain t-shirt, NOT the Hard Rock Osaka shirt, "
+            "a colorful vintage short-sleeve button-up shirt with whimsical object prints), "
+            "VINTAGE BEIGE CONVERSE sneakers (beige/cream-colored Converse high-tops, "
+            "vintage worn-in look, NOT any other color, NOT any other brand), "
+            "jeans or casual trousers, "
+            "gentle easygoing expression, warm brown eyes, relaxed mall day"
+        ),
+        "lex": (
+            "Lex, a 7-month-old baby boy, light brown spiky hair in a tiny mohawk like his dad, "
+            "big expressive hazel eyes, mischievous curious smile, two tiny bottom teeth, "
+            "wearing a BABY T-SHIRT (soft cotton, any color) and BABY SHORTS (pantaloncino), "
+            "COMPLETELY BAREFOOT — no socks, no shoes of any kind, bare feet with tiny toes always clearly visible, "
+            "chubby bare legs, sitting in a baby stroller"
+        ),
+        "carmela": (
+            "Signora Carmela, an elderly Italian woman in her late 70s, "
+            "white hair gathered in a soft bun, stern knowing face, "
+            "wearing a floral dress (light blue and lilac flower pattern on white background, "
+            "modest cut, long sleeves, below-knee length), "
+            "a straw sun hat, holding a blue shopping trolley, "
+            "unsettling too-alert eyes with a faint VIOLET glow, mysterious quiet presence"
+        ),
+    },
 }
 
 # ─── Mood ────────────────────────────────────────────────────────────
@@ -263,6 +299,8 @@ MOOD_DESC = {
                       "isolated quiet within the city noise, nature all around.",
     "warm_mare": "Golden seaside light, warm Mediterranean sun, the sound of waves, relaxed beach atmosphere, "
                  "sunlight reflecting off the water creating sparkling highlights.",
+    "warm_centro_commerciale": "Bright indoor shopping mall lighting, colorful storefronts, the hum of weekend crowds, "
+                               "a modern consumer cathedral of glass and light.",
     "power": "Supernatural energy explodes through the scene. Golden light radiates from Favilla, "
              "sparks and embers float in the air, casting long dramatic shadows. Awe-inspiring transformation moment.",
     "sad": "Quiet melancholy, soft muted cool colors, diffused flat light. A moment of stillness and introspection.",
@@ -292,6 +330,10 @@ def detect_location(bg_path, narration_texts):
     ctx = " ".join(narration_texts).lower()
     if "scuola" in ctx or "scuola" in bg_lower:
         return "scuola"
+    if "galaxiamall" in bg_lower or "centro commerciale" in ctx or "mall" in ctx:
+        return "centro_commerciale"
+    if "parcheggio" in bg_lower or "parking" in ctx:
+        return "parcheggio_mall"
     if "supermercato" in ctx or "iperpassata" in ctx or "spesa" in bg_lower or "cassa" in ctx or "scaffale" in ctx or "carrello" in ctx:
         return "supermercato"
     if "boschetto" in ctx or "boschetto" in bg_lower:
