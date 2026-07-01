@@ -191,7 +191,8 @@ EP_CHAR_OVERRIDES = {
             "Favilla, a blonde Italian woman in her early 30s, cat-eye black glasses, "
             "expressive hazel eyes, athletic build, wearing a vintage white 'Hard Rock Stars Hollow' "
             "concert t-shirt with retro lettering, light denim shorts, bare legs, "
-            "black-and-white sneakers, blonde hair tied back loosely, relaxed Sunday look"
+            "black-and-white Nike Panda sneakers (exact black-and-white Nike Panda model with black swoosh), "
+            "blonde hair tied back loosely, relaxed Sunday look"
         ),
         "favilla_blaze": (
             "Favilla Blaze, same woman transformed: cat-eye glasses vanished, eyes glowing bright amber, "
@@ -204,13 +205,14 @@ EP_CHAR_OVERRIDES = {
         "mallow": (
             "Mallow, an Italian man in his early 30s, short mini-mohawk light brown hair, "
             "wearing a black 'Hard Rock Osaka' concert t-shirt with bold white lettering, "
-            "khaki shorts, YELLOW CONVERSE sneakers (high-top, specifically Converse brand), bare legs, "
+            "khaki shorts, WHITE CONVERSE sneakers (high-top, specifically Converse brand, white color — NOT yellow, NOT any other color), bare legs, "
             "gentle easygoing expression, warm brown eyes, relaxed Sunday look"
         ),
         "lex": (
             "Lex, a 7-month-old baby boy, light brown spiky hair in a tiny mohawk like his dad, "
             "big expressive hazel eyes, mischievous curious smile, two tiny bottom teeth, "
-            "wearing a purple-and-gold Los Angeles Lakers baby onesie, tiny white sneakers, "
+            "wearing a purple-and-gold Los Angeles Lakers baby onesie, "
+            "COMPLETELY BAREFOOT — no socks, no shoes of any kind, bare feet with tiny toes always clearly visible, "
             "chubby bare legs, sitting securely in a baby stroller"
         ),
         "ladro": (

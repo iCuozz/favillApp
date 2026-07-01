@@ -54,4 +54,4 @@ android/app/google-services.json
 worker/wrangler.toml
 worker/.dev.vars
 *.aab
-*.apk
+*.apk__pycache__/

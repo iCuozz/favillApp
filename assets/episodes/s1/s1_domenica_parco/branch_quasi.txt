@@ -1,14 +1,21 @@
-CHARACTERS: Favilla, a blonde Italian woman in her early 30s, cat-eye black glasses, expressive hazel eyes, athletic build, wearing a vintage white 'Hard Rock Stars Hollow' concert t-shirt with retro lettering, light denim shorts, bare legs, black-and-white sneakers, blonde hair tied back loosely, relaxed Sunday look. PAGE DETAILS: SCENA: All'interno del boschetto fitto. Favilla ha perso il ladro. È ferma, in piedi tra gli alberi, sola. Intorno solo foglie, rami, radici. Silenzio. Il ladro è sparito. Nessun rumore di passi. Niente cappuccio scuro tra le foglie. Il boschetto l'ha inghiottito.
+CHARACTERS: Favilla, a blonde Italian woman in her early 30s, cat-eye black glasses, expressive hazel eyes, athletic build, wearing a vintage white 'Hard Rock Stars Hollow' concert t-shirt with retro lettering, light denim shorts, bare legs, black-and-white Nike Panda sneakers (exact black-and-white Nike Panda model with black swoosh), blonde hair tied back loosely, relaxed Sunday look. PAGE DETAILS: ⚠️ VESTITI IDENTICI A TUTTE LE ALTRE PAGINE — Favilla: STESSA identica maglietta bianca "Hard Rock Stars Hollow", STESSI shorts jeans, STESSE Nike Panda bianco-nere, STESSI occhiali gatto neri. IDENTICA in ogni pagina.
+
+SCENA: All'interno del boschetto fitto. Favilla ha perso il ladro. È ferma, in piedi tra gli alberi, sola. Intorno solo foglie, rami, radici. Silenzio. Il ladro è sparito. Nessun rumore di passi. Niente cappuccio scuro tra le foglie. Il boschetto l'ha inghiottito.
 INQUADRATURA: Favilla sola in mezzo al boschetto. In piedi ferma, guarda intorno — persa. Alberi fitti, rami bassi, foglie morte, muschio. Luce a chiazze. Atmosfera di sconfitta silenziosa.
 LUCE: Muted green light. Dense foliage overhead. Isolamento dalla città.
-DETTAGLI: Favilla: maglietta bianca "Hard Rock Stars Hollow" con qualche foglia attaccata, shorts jeans, capelli scompigliati, ginocchio sbucciato, espressione di frustrazione e sconfitta. Boschetto fitto in tutte le direzioni. Ramo basso vicino al suo viso. Radici affioranti.
-COERENZA: Favilla ha perso il ladro nel boschetto. È sola e frustrata. CARMELA NON PRESENTE. EPISODE CONSISTENCY: EPISODIO: s1_domenica_parco — "La Domenica al Parco"
+DETTAGLI FISSI: Favilla: maglietta bianca "Hard Rock Stars Hollow" (sempre uguale, con qualche foglia attaccata), shorts jeans (sempre uguali), Nike Panda bianco-nere (sempre uguali), occhiali gatto neri (sempre uguali), capelli scompigliati, ginocchio sbucciato, espressione di frustrazione e sconfitta. Boschetto fitto in tutte le direzioni. Ramo basso vicino al suo viso. Radici affioranti. EPISODE CONSISTENCY: EPISODIO: s1_domenica_parco — "La Domenica al Parco"
 Domenica mattina ai Giardini Pubblici di Nova Tutinia. Favilla, Mallow e Lex passano una giornata al parco. Un ladro scippa Favilla — lei rincorre o reagisce. Tono: prima parte calda e familiare, poi tensione. NIENTE VIGNETTE: illustrazione a piena pagina, niente balloon, niente suddivisioni.
 
+⚠️ CRITICAL — CLOTHING CONSISTENCY (must be EXACT in every image):
+- Favilla: white Hard Rock Stars Hollow t-shirt, denim shorts, NIKE PANDA BLACK-AND-WHITE SNEAKERS — NEVER any other shoes, NEVER pants
+- Mallow: black Hard Rock Osaka t-shirt, khaki shorts, WHITE HIGH-TOP CONVERSE — NOT yellow, NOT any other brand or color
+- Lex: purple-gold Lakers onesie, ALWAYS BAREFOOT — NO shoes, NO socks, bare feet with tiny toes visible in every scene
+These outfits are IDENTICAL in every single image of this episode. No exceptions.
+
 REGOLE FISSE:
-- Favilla: maglietta bianca vintage "Hard Rock Stars Hollow" con lettering retrò, shorts di jeans chiari, gambe scoperte, sneakers bianco-nere, occhiali gatto neri, capelli biondi raccolti. MAI camicia, MAI pantaloni lunghi.
-- Mallow: maglietta nera "Hard Rock Osaka" con lettering bianco, shorts cachi, CONVERSE GIALLE alte (NON sneakers generiche, NON altre scarpe). MAI polo azzurra, MAI pipistrello giallo (oggi è domenica, versione casual).
-- Lex: completino baby Lakers viola-oro (onesie), scarpine bianche minuscole, gambe paffute scoperte, seduto nel passeggino. MAI scalzo (è al parco, ok scarpe).
+- Favilla: maglietta bianca vintage "Hard Rock Stars Hollow" con lettering retrò, shorts di jeans chiari, gambe scoperte, sneakers Nike Panda bianco-nere (con swoosh nero), occhiali gatto neri, capelli biondi raccolti. MAI camicia, MAI pantaloni lunghi.
+- Mallow: maglietta nera "Hard Rock Osaka" con lettering bianco, shorts cachi, CONVERSE BIANCHE alte (NON gialle, NON altre marche). MAI polo azzurra, MAI pipistrello giallo (oggi è domenica, versione casual).
+- Lex: completino baby Lakers viola-oro (onesie), SEMPRE SCALZO — niente scarpe, niente calzini, piedini nudi sempre visibili, gambe paffute scoperte, seduto nel passeggino.
 - Ladro: felpa grigio scuro, jeans strappati, sneakers consumate, occhi nervosi.
 - Carmela NON APPARE in questo episodio (solo il suo gatto Filippo). ZERO Carmela.
 - Gatto Filippo: gatto nero lucido, occhi giallo-verdi, movimenti silenziosi.
