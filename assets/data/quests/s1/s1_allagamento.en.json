@@ -283,7 +283,7 @@
     "intro_senza_fiamma": {
       "pages": [
         {
-          "background": "assets/episodes/s1/s1_allagamento/page_0.webp",
+          "background": "assets/episodes/s1/s1_allagamento/page_intro_senza_fiamma.webp",
           "panels": [
             {
               "id": "all_sf_0",
@@ -317,7 +317,7 @@
     "intro_sfondata": {
       "pages": [
         {
-          "background": "assets/episodes/s1/s1_allagamento/page_0.webp",
+          "background": "assets/episodes/s1/s1_allagamento/page_intro_sfondata.webp",
           "panels": [
             {
               "id": "all_sd_0",
@@ -346,7 +346,7 @@
     "intro_segreto_fragile": {
       "pages": [
         {
-          "background": "assets/episodes/s1/s1_allagamento/page_0.webp",
+          "background": "assets/episodes/s1/s1_allagamento/page_intro_segreto_fragile.webp",
           "panels": [
             {
               "id": "all_frag_0",
@@ -382,7 +382,7 @@
     "intro_kryptonite": {
       "pages": [
         {
-          "background": "assets/episodes/s1/s1_allagamento/page_0.webp",
+          "background": "assets/episodes/s1/s1_allagamento/page_intro_kryptonite.webp",
           "panels": [
             {
               "id": "all_kr_0",
@@ -411,7 +411,7 @@
     "intro_voci": {
       "pages": [
         {
-          "background": "assets/episodes/s1/s1_allagamento/page_0.webp",
+          "background": "assets/episodes/s1/s1_allagamento/page_intro_voci.webp",
           "panels": [
             {
               "id": "all_voci_0",
@@ -452,7 +452,7 @@
     "branch_potenza": {
       "pages": [
         {
-          "background": "assets/episodes/s1/s1_allagamento/page_0.webp",
+          "background": "assets/episodes/s1/s1_allagamento/page_branch_potenza.webp",
           "panels": [
             {
               "id": "pot0_0",
@@ -501,7 +501,7 @@
     "branch_forza": {
       "pages": [
         {
-          "background": "assets/episodes/s1/s1_allagamento/page_0.webp",
+          "background": "assets/episodes/s1/s1_allagamento/page_branch_forza.webp",
           "panels": [
             {
               "id": "for0_0",
@@ -551,7 +551,7 @@
     "branch_astuzia": {
       "pages": [
         {
-          "background": "assets/episodes/s1/s1_allagamento/page_0.webp",
+          "background": "assets/episodes/s1/s1_allagamento/page_branch_astuzia.webp",
           "panels": [
             {
               "id": "ast0_0",
@@ -605,7 +605,7 @@
     "branch_resa": {
       "pages": [
         {
-          "background": "assets/episodes/s1/s1_allagamento/page_0.webp",
+          "background": "assets/episodes/s1/s1_allagamento/page_branch_resa.webp",
           "panels": [
             {
               "id": "res0_0",

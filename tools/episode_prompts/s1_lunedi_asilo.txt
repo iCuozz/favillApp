@@ -1,0 +1,22 @@
+EPISODIO: s1_lunedi_asilo — "Asilo"
+Lunedì mattina in casa. Favilla prepara lo zaino di Lex per il primo giorno all'asilo. Lex, nel box, trova il notebook di Mallow aperto e tenta di hackerarlo. Tono: caldo e divertente, family comedy. NIENTE VIGNETTE: illustrazione a piena pagina, niente balloon, niente suddivisioni.
+
+⚠️ CRITICAL — CLOTHING CONSISTENCY (must be EXACT in every image):
+- Favilla: casual white t-shirt, blue jeans, cat-eye black glasses, hair in a slightly messy ponytail, simple flat shoes. NEVER a dress, NEVER orange.
+- Mallow: BLACK t-shirt with YELLOW BAT graphic, straight blue jeans, YELLOW CONVERSE sneakers. NEVER a novelty shirt, NEVER beige Converse.
+- Lex: BABY T-SHIRT + BABY SHORTS, 7-month-old baby proportions, ALWAYS BAREFOOT — NO shoes, NO socks. Never a onesie.
+These outfits are IDENTICAL in every single image of this episode. No exceptions.
+
+REGOLE FISSE:
+- Favilla: t-shirt bianca, jeans blu, occhiali gatto neri, capelli in coda morbida, scarpe basse. MAI vestito.
+- Mallow: maglietta NERA con PIPISTRELLO GIALLO, jeans dritti, CONVERSE GIALLE. MAI camicia vintage.
+- Lex: maglietta + pantaloncino, SEMPRE SCALZO. Proporzioni da neonato 7 mesi: testa grande, guance paffute, corpo piccolino.
+- Gufetto: piccolo peluche gufo, sempre con Lex o nello zaino.
+
+⚠️ CRITICAL — OBJECT CONSISTENCY:
+
+LEX CON IL LAPTOP (page_1 e branch): Lex è SEDUTO SUL PAVIMENTO (parquet spina di pesce) con il laptop aperto davanti a lui. NIENTE box, niente tavolino — Lex e il laptop sono DIRETTAMENTE sul pavimento del soggiorno. Mallow ha lasciato il notebook aperto a terra ed è andato in cucina.
+
+LAPTOP: un normale laptop tradizionale argentato con schermo FISICAMENTE ATTACCATO alla base/tastiera tramite cerniera visibile (NON è un tablet, NON è staccabile, NON è un 2-in-1). APERTO a terra sul parquet, con lo SCHERMO RIVOLTO VERSO LEX. Chi guarda vede il RETRO del coperchio (superficie liscia grigio-argento, SENZA display). Il display è girato verso Lex, invisibile a chi guarda. La tastiera è visibile sul lato rivolto verso Lex.
+
+LOCATION: Casa (appartamento, parquet spina di pesce, cucina bianca). ATTENZIONE: il tavolo della cucina è SEMPRE ROTONDO BIANCO con 4 sedie GIALL0 OCRA — MAI rettangolare, MAI penisola, MAI isola. Asilo Comunale (edificio un piano, murales animali colorato, cortile recintato con giochi).

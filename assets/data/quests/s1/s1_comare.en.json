@@ -61,7 +61,8 @@
         {
           "id": "comare_p1_a",
           "characters": [
-            "favilla"
+            "favilla",
+            "lex"
           ],
           "text_blocks": [
             {
@@ -250,7 +251,8 @@
               "id": "branch_apre_a",
               "characters": [
                 "favilla",
-                "carmela"
+                "carmela",
+                "lex"
               ],
               "text_blocks": [
                 {
@@ -452,7 +454,8 @@
               "id": "branch_non_apre_a",
               "characters": [
                 "favilla",
-                "carmela"
+                "carmela",
+                "lex"
               ],
               "text_blocks": [
                 {
@@ -627,7 +630,8 @@
             {
               "id": "branch_carmela_quasi_b",
               "characters": [
-                "favilla"
+                "favilla",
+                "lex"
               ],
               "text_blocks": [
                 {

@@ -94,7 +94,8 @@
           "id": "pc_p2_a",
           "characters": [
             "favilla",
-            "mallow"
+            "mallow",
+            "lex"
           ],
           "text_blocks": [
             {
@@ -251,7 +252,8 @@
             {
               "id": "branch_minimizza_b",
               "characters": [
-                "favilla"
+                "favilla",
+                "lex"
               ],
               "text_blocks": [
                 {
@@ -361,7 +363,8 @@
               "id": "branch_quasi_confessa_a",
               "characters": [
                 "favilla",
-                "mallow"
+                "mallow",
+                "lex"
               ],
               "text_blocks": [
                 {
@@ -398,7 +401,8 @@
               "id": "branch_quasi_confessa_b",
               "characters": [
                 "favilla",
-                "mallow"
+                "mallow",
+                "lex"
               ],
               "text_blocks": [
                 {

@@ -1,0 +1,15 @@
+EPISODIO: s1_allagamento — "L'Allagamento"
+Favilla è a scuola con la Corvi per un'ispezione. Resta chiusa in un bagno dove si allaga il tubo. Acqua che sale. Tensione crescente. Possibile trasformazione. Tono: da scolastico a claustrofobico, poi drammatico/esplosivo. NIENTE VIGNETTE: illustrazione a piena pagina.
+
+⚠️ CRITICAL — "CORVI" È IL COGNOME DELL'ISPETTRICE: "Corvi" suona come "corvi/crows" in italiano ma NON è un uccello. Dr. Livia Corvi è una DONNA, un'ispettrice scolastica umana severa di circa 50 anni. NIENTE piume, niente becchi, niente corvi/uccelli in scena. MAI disegnare animali al posto suo. È SEMPRE un essere umano in tailleur scuro con occhiali e cartella.
+
+⚠️ CLOTHING:
+- Favilla (scuola): white blouse with small dark "Stars Hollow" lettering on chest, tight blue skinny jeans, black-and-white Nike Panda sneakers, blonde hair in ponytail, cat-eye black glasses. DA ASCIUTTA A COMPLETAMENTE BAGNATA (nelle scene del bagno: vestiti zuppi, capelli gocciolanti, occhiali appannati, acqua che cola).
+- Favilla Blaze (branch_potenza): transformed — cat-eye glasses vanished, eyes glowing bright amber, blonde hair erupting into floating luminous golden fire, white blouse and jeans still on but soaking wet, golden energy crackling, sparks and embers.
+- Corvi: severe dark blazer and pencil skirt, black high heels, dark hair pulled back in a tight severe bun, leather briefcase, intimidating bureaucratic presence, strict glasses.
+
+REGOLE FISSE:
+- Lex e Carmela NON compaiono. Mai.
+- Acqua, acqua ovunque — pavimento allagato, schizzi, gocce, riflessi.
+
+LOCATION: Scuola elementare (corridoio, bagno scolastico — piastrelle bianche, lavandini, rubinetti, porta bloccata, acqua sul pavimento). Stessa scuola di s1_scuola_1.

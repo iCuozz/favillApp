@@ -251,6 +251,85 @@ EP_CHAR_OVERRIDES = {
             "always watchful and knowing, sitting on a seaside wall"
         ),
     },
+    "s1_lunedi_asilo": {
+        "favilla": (
+            "Favilla, a blonde Italian woman in her early 30s, cat-eye black glasses, "
+            "expressive hazel eyes, athletic build, "
+            "wearing a casual WHITE T-SHIRT, blue jeans, simple flat shoes, "
+            "blonde hair tied back in a slightly messy ponytail, "
+            "tired but determined morning expression. "
+            "NEVER a dress, NEVER orange, NEVER hoop earrings."
+        ),
+        "mallow": (
+            "Mallow, an Italian man in his early 30s, short mini-mohawk light brown hair, "
+            "wearing a BLACK T-SHIRT with a LARGE YELLOW BAT graphic in the center, "
+            "straight blue jeans, YELLOW CONVERSE sneakers (always yellow Converse, never any other shoe), "
+            "gentle easygoing expression, warm brown eyes, relaxed morning at home. "
+            "NEVER a novelty shirt, NEVER beige Converse."
+        ),
+        "lex": (
+            "Lex, a 7-month-old baby boy with INFANT PROPORTIONS "
+            "(large head relative to body, chubby round cheeks, tiny hands and feet, short chubby limbs "
+            "— MUST look like a 7-month-old, NOT a toddler, NOT a 2-year-old), "
+            "light brown spiky hair in a tiny mohawk like his dad, "
+            "big expressive hazel eyes, mischievous curious smile, two tiny bottom teeth, "
+            "wearing a BABY T-SHIRT (soft cotton) and BABY SHORTS (pantaloncino), "
+            "COMPLETELY BAREFOOT — no socks, no shoes of any kind, "
+            "bare feet with tiny baby toes always clearly visible, "
+            "chubby bare legs, sitting on the floor at a laptop keyboard"
+        ),
+    },
+    "s1_palestra": {
+        "favilla": (
+            "Favilla, a blonde Italian woman in her early 30s, athletic build, "
+            "WITHOUT glasses at the gym, "
+            "wearing BLACK LEGGINGS, a loose GRAY TANK TOP, "
+            "gym sneakers, blonde hair tied in a HIGH PONYTAIL, "
+            "sweating lightly, focused workout expression. "
+            "In the epilogue (at home): same woman with her cat-eye glasses back on, "
+            "white t-shirt, blue jeans, simple flat shoes, damp hair in a ponytail, "
+            "holding a gym bag, relaxed evening expression."
+        ),
+        "mallow": (
+            "Mallow, an Italian man in his early 30s, short mini-mohawk light brown hair, "
+            "wearing a LIGHT BLUE-GREY T-SHIRT (color carta da zucchero), "
+            "BEIGE SHORTS (pantaloncino beige), WHITE CONVERSE sneakers, "
+            "prescription GLASSES (occhiali da vista), "
+            "gentle easygoing expression, warm brown eyes, "
+            "standing in the kitchen, cooking or holding a wooden spoon."
+        ),
+    },
+    "s1_allagamento": {
+        "favilla": (
+            "Favilla, a blonde Italian woman in her early 30s, cat-eye black glasses, "
+            "expressive hazel eyes, athletic build, "
+            "wearing a white blouse with small dark 'Stars Hollow' lettering on chest, "
+            "tight blue skinny jeans, black-and-white Nike Panda sneakers, "
+            "blonde hair tied back in a ponytail, "
+            "at school during an inspection, tense but composed. "
+            "In the bathroom scenes she is COMPLETELY SOAKING WET — "
+            "drenched white blouse clinging to skin (slightly see-through), "
+            "wet dark jeans, water dripping from hair, "
+            "fogged-up glasses, standing in rising water."
+        ),
+        "favilla_blaze": (
+            "Favilla Blaze, same woman transformed: cat-eye glasses vanished, "
+            "eyes glowing bright amber, "
+            "blonde hair erupting into floating luminous golden fire like a corona of flames, "
+            "white blouse and jeans still on but SOAKING WET, "
+            "golden energy crackling around her hands, "
+            "sparks and embers floating upward, "
+            "water around her feet reflecting golden light, "
+            "expression of shock mixed with determination"
+        ),
+        "corvi": (
+            "Dr. Livia Corvi, a cold Italian school inspector in her 50s, severe expression, "
+            "tailored dark blazer and pencil skirt, black high heels, "
+            "leather briefcase, dark hair pulled back tightly in a severe bun, "
+            "strict rectangular glasses, intimidating bureaucratic presence, "
+            "thin unsmiling lips"
+        ),
+    },
     "s1_centro_commerciale": {
         "favilla": (
             "Favilla, a blonde Italian woman in her early 30s, cat-eye black glasses, "
@@ -329,6 +408,14 @@ def collect_all_pages(episode_data):
 def detect_location(bg_path, narration_texts):
     bg_lower = bg_path.lower()
     ctx = " ".join(narration_texts).lower()
+    if "asilo" in ctx or "asilo" in bg_lower:
+        return "asilo"
+    if "palestra" in ctx or "palestra" in bg_lower:
+        return "palestra"
+    if ("bagno" in ctx and "scuola" in ctx) or "bagno" in bg_lower:
+        return "scuola_bagno"
+    if ("corridoio" in ctx and "scuola" in ctx) or "corridoio" in bg_lower:
+        return "scuola_corridoio"
     if "scuola" in ctx or "scuola" in bg_lower:
         return "scuola"
     if "galaxiamall" in bg_lower or "centro commerciale" in ctx or "mall" in ctx:
@@ -415,7 +502,9 @@ def build_prompt(page_data, episode_id="", episode_global_prompt="", page_prompt
         elif tt == "thought":
             thought_texts.append(t)
 
-    location = detect_location(bg_path, narration_texts)
+    # Use ALL text for location detection (narration may not mention the location)
+    all_texts = narration_texts + dialogue_texts + thought_texts
+    location = detect_location(bg_path, all_texts)
     mood = detect_mood(narration_texts, thought_texts)
 
     ep_overrides = EP_CHAR_OVERRIDES.get(episode_id, {})

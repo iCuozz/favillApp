@@ -274,7 +274,8 @@
               "id": "branch_svolta_a",
               "characters": [
                 "favilla",
-                "mallow"
+                "mallow",
+                "lex"
               ],
               "text_blocks": [
                 {
@@ -316,7 +317,8 @@
               "id": "branch_silenzio_a",
               "characters": [
                 "favilla",
-                "mallow"
+                "mallow",
+                "lex"
               ],
               "text_blocks": [
                 {
@@ -538,7 +540,8 @@
           {
             "id": "cr_epilogo_a",
             "characters": [
-              "favilla"
+              "favilla",
+              "lex"
             ],
             "text_blocks": [
               {

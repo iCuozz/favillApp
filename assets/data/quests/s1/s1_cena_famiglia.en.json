@@ -145,7 +145,8 @@
           "id": "cena_p3_a",
           "characters": [
             "mallow",
-            "favilla"
+            "favilla",
+            "lex"
           ],
           "text_blocks": [
             {
@@ -276,7 +277,8 @@
               "id": "intro_calda_a",
               "characters": [
                 "favilla",
-                "mallow"
+                "mallow",
+                "lex"
               ],
               "text_blocks": [
                 {
@@ -317,7 +319,8 @@
               "id": "branch_confessa_a",
               "characters": [
                 "favilla",
-                "mallow"
+                "mallow",
+                "lex"
               ],
               "text_blocks": [
                 {
@@ -435,7 +438,8 @@
               "id": "branch_facciata_b",
               "characters": [
                 "favilla",
-                "mallow"
+                "mallow",
+                "lex"
               ],
               "text_blocks": [
                 {

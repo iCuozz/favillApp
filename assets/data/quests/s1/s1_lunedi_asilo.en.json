@@ -53,7 +53,6 @@
         {
           "id": "sla1_0",
           "characters": [
-            "mallow",
             "lex"
           ],
           "text_blocks": [
@@ -387,7 +386,9 @@
         "panels": [
           {
             "id": "ep_sla_1",
-            "characters": [],
+            "characters": [
+              "bambini"
+            ],
             "text_blocks": [
               {
                 "id": "ep_sla_1_tb_0",
