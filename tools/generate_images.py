@@ -367,6 +367,59 @@ EP_CHAR_OVERRIDES = {
             "unsettling too-alert eyes with a faint VIOLET glow, mysterious quiet presence"
         ),
     },
+    "s1_prima_conseguenza": {
+        "favilla": (
+            "Favilla, a blonde Italian woman in her early 30s, slim athletic build, "
+            "cat-eye black glasses, expressive hazel eyes, "
+            "wearing an OCRE short-sleeve t-shirt (warm earth-toned ochre/orangey-brown), "
+            "WHITE shorts, WHITE CONVERSE sneakers, "
+            "blonde hair in a loose ponytail, "
+            "at home in the afternoon, casual relaxed look"
+        ),
+        "mallow": (
+            "Mallow, an Italian man in his early 30s, short mini-mohawk light brown hair, "
+            "wearing a VINTAGE patterned short-sleeve button-up shirt "
+            "(retro geometric or floral pattern, muted 70s colors), "
+            "GREEN shorts, VINTAGE BEIGE CONVERSE sneakers, "
+            "gentle easygoing expression, warm brown eyes, relaxed afternoon at home"
+        ),
+        "lex": (
+            "Lex, a 7-month-old baby boy, light brown spiky hair in a tiny mohawk like his dad, "
+            "big expressive hazel eyes, mischievous curious smile, two tiny bottom teeth, "
+            "wearing a baby LIGHT BLUE Nike Jordan t-shirt and matching LIGHT BLUE baby shorts, "
+            "ALWAYS BAREFOOT - no socks, no shoes of any kind, "
+            "chubby bare feet with tiny toes always clearly visible, "
+            "playing on the rug with an owl plushie"
+        ),
+    },
+    "s1_comare": {
+        "favilla": (
+            "Favilla, a blonde Italian woman in her early 30s, slim athletic build, "
+            "cat-eye black glasses, expressive hazel eyes, "
+            "wearing a MINT GREEN short-sleeve t-shirt (soft pastel mint), "
+            "CREAM/BEIGE shorts, WHITE CONVERSE sneakers, "
+            "blonde hair in a ponytail, "
+            "at home in the afternoon, on edge but trying to appear calm"
+        ),
+        "lex": (
+            "Lex, a 7-month-old baby boy, light brown spiky hair in a tiny mohawk like his dad, "
+            "big expressive hazel eyes, mischievous curious smile, two tiny bottom teeth, "
+            "wearing a WHITE baby t-shirt with a tiny ELEPHANT print on the chest "
+            "and light baby shorts, "
+            "ALWAYS BAREFOOT — no socks, no shoes of any kind, "
+            "chubby bare feet with tiny toes always clearly visible, "
+            "sitting on a baby playmat on the floor (soft beige rectangular playmat with simple geometric patterns)"
+        ),
+        "carmela": (
+            "Signora Carmela, an elderly Italian woman in her late 70s, "
+            "white hair gathered in a soft bun under a wide straw hat, "
+            "stern knowing face with unsettling violet-glowing eyes, "
+            "wearing a floral dress (light blue and lilac flower pattern on white background, "
+            "modest cut, long sleeves, below-knee length), "
+            "holding a wicker basket, carrying an envelope in her hand, "
+            "mysterious and quietly menacing presence"
+        ),
+    },
 }
 
 # ─── Mood ────────────────────────────────────────────────────────────

@@ -20,7 +20,7 @@
   "pages": [
     {
       "index": 0,
-      "background": "assets/episodes/prologo/page_1.png",
+      "background": "assets/episodes/s1/s1_comare/page_0.webp",
       "panels": [
         {
           "id": "comare_p0_a",
@@ -56,7 +56,7 @@
     },
     {
       "index": 1,
-      "background": "assets/episodes/prologo/page_2.png",
+      "background": "assets/episodes/s1/s1_comare/page_1.webp",
       "panels": [
         {
           "id": "comare_p1_a",
@@ -130,7 +130,7 @@
       "id": "intro_sola",
       "pages": [
         {
-          "background": "assets/episodes/prologo/page_1.png",
+          "background": "assets/episodes/s1/s1_comare/intro_sola.webp",
           "panels": [
             {
               "id": "intro_sola_a",
@@ -170,7 +170,7 @@
       "id": "intro_segreto_rivelazione",
       "pages": [
         {
-          "background": "assets/episodes/prologo/page_1.png",
+          "background": "assets/episodes/s1/s1_comare/intro_segreto_rivelazione_0.webp",
           "panels": [
             {
               "id": "isr_comare_a",
@@ -205,7 +205,7 @@
           "id": "isr_comare_p0"
         },
         {
-          "background": "assets/episodes/prologo/page_carmela.png",
+          "background": "assets/episodes/s1/s1_comare/intro_segreto_rivelazione_1.webp",
           "panels": [
             {
               "id": "isr_comare_b",
@@ -245,7 +245,7 @@
       "id": "branch_apre",
       "pages": [
         {
-          "background": "assets/episodes/prologo/page_1.png",
+          "background": "assets/episodes/s1/s1_comare/branch_apre_0.webp",
           "panels": [
             {
               "id": "branch_apre_a",
@@ -282,7 +282,7 @@
           "id": "bapre_p0"
         },
         {
-          "background": "assets/episodes/prologo/page_3.png",
+          "background": "assets/episodes/s1/s1_comare/branch_apre_1.webp",
           "panels": [
             {
               "id": "branch_apre_b",
@@ -448,7 +448,7 @@
       "id": "branch_non_apre",
       "pages": [
         {
-          "background": "assets/episodes/prologo/page_2.png",
+          "background": "assets/episodes/s1/s1_comare/branch_non_apre_0.webp",
           "panels": [
             {
               "id": "branch_non_apre_a",
@@ -486,7 +486,7 @@
           "id": "bnon_a_p0"
         },
         {
-          "background": "assets/episodes/prologo/page_1.png",
+          "background": "assets/episodes/s1/s1_comare/branch_non_apre_1.webp",
           "panels": [
             {
               "id": "branch_non_apre_b",
@@ -521,7 +521,7 @@
       "id": "branch_carmela_bene",
       "pages": [
         {
-          "background": "assets/episodes/prologo/page_2.png",
+          "background": "assets/episodes/s1/s1_comare/branch_carmela_bene_0.webp",
           "panels": [
             {
               "id": "branch_carmela_bene_a",
@@ -558,7 +558,7 @@
           "id": "bcarme_p0"
         },
         {
-          "background": "assets/episodes/prologo/page_1.png",
+          "background": "assets/episodes/s1/s1_comare/branch_carmela_bene_1.webp",
           "panels": [
             {
               "id": "branch_carmela_bene_b",
@@ -588,7 +588,7 @@
       "id": "branch_carmela_quasi",
       "pages": [
         {
-          "background": "assets/episodes/prologo/page_2.png",
+          "background": "assets/episodes/s1/s1_comare/branch_carmela_quasi_0.webp",
           "panels": [
             {
               "id": "branch_carmela_quasi_a",
@@ -625,7 +625,7 @@
           "id": "bcarme_p0"
         },
         {
-          "background": "assets/episodes/prologo/page_1.png",
+          "background": "assets/episodes/s1/s1_comare/branch_carmela_quasi_1.webp",
           "panels": [
             {
               "id": "branch_carmela_quasi_b",
@@ -661,7 +661,7 @@
       "id": "branch_carmela_disastro",
       "pages": [
         {
-          "background": "assets/episodes/prologo/page_2.png",
+          "background": "assets/episodes/s1/s1_comare/branch_carmela_disastro_0.webp",
           "panels": [
             {
               "id": "branch_carmela_disastro_a",
@@ -697,7 +697,7 @@
           "id": "bcarme_p0"
         },
         {
-          "background": "assets/episodes/prologo/page_3.png",
+          "background": "assets/episodes/s1/s1_comare/branch_carmela_disastro_1.webp",
           "panels": [
             {
               "id": "branch_carmela_disastro_b",
@@ -741,7 +741,7 @@
     "id": "epilogue",
     "pages": [
       {
-        "background": "assets/episodes/prologo/page_4.png",
+        "background": "assets/episodes/s1/s1_comare/epilogue.webp",
         "panels": [
           {
             "id": "comare_epilogue_a",

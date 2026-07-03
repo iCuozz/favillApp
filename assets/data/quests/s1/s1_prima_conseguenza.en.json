@@ -16,7 +16,7 @@
   "pages": [
     {
       "index": 0,
-      "background": "assets/episodes/prologo/page_1.png",
+      "background": "assets/episodes/s1/s1_prima_conseguenza/page_0.webp",
       "panels": [
         {
           "id": "pc_p0_a",
@@ -53,7 +53,7 @@
     },
     {
       "index": 1,
-      "background": "assets/episodes/prologo/page_2.png",
+      "background": "assets/episodes/s1/s1_prima_conseguenza/page_1.webp",
       "panels": [
         {
           "id": "pc_p1_a",
@@ -88,7 +88,7 @@
     },
     {
       "index": 2,
-      "background": "assets/episodes/prologo/page_3.png",
+      "background": "assets/episodes/s1/s1_prima_conseguenza/page_2.webp",
       "panels": [
         {
           "id": "pc_p2_a",
@@ -175,7 +175,7 @@
       "id": "intro_gia_visto",
       "pages": [
         {
-          "background": "assets/episodes/prologo/page_1.png",
+          "background": "assets/episodes/s1/s1_prima_conseguenza/intro_gia_visto.webp",
           "panels": [
             {
               "id": "intro_gia_visto_a",
@@ -210,7 +210,7 @@
       "id": "branch_minimizza",
       "pages": [
         {
-          "background": "assets/episodes/prologo/page_2.png",
+          "background": "assets/episodes/s1/s1_prima_conseguenza/branch_minimizza_0.webp",
           "panels": [
             {
               "id": "branch_minimizza_a",
@@ -247,7 +247,7 @@
           "id": "bminim_p0"
         },
         {
-          "background": "assets/episodes/prologo/page_3.png",
+          "background": "assets/episodes/s1/s1_prima_conseguenza/branch_minimizza_1.webp",
           "panels": [
             {
               "id": "branch_minimizza_b",
@@ -283,7 +283,7 @@
       "id": "branch_devia",
       "pages": [
         {
-          "background": "assets/episodes/prologo/page_2.png",
+          "background": "assets/episodes/s1/s1_prima_conseguenza/branch_devia_0.webp",
           "panels": [
             {
               "id": "branch_devia_a",
@@ -321,7 +321,7 @@
           "id": "bdevia_p0"
         },
         {
-          "background": "assets/episodes/prologo/page_1.png",
+          "background": "assets/episodes/s1/s1_prima_conseguenza/branch_devia_1.webp",
           "panels": [
             {
               "id": "branch_devia_b",
@@ -357,7 +357,7 @@
       "id": "branch_quasi_confessa",
       "pages": [
         {
-          "background": "assets/episodes/prologo/page_2.png",
+          "background": "assets/episodes/s1/s1_prima_conseguenza/branch_quasi_confessa_0.webp",
           "panels": [
             {
               "id": "branch_quasi_confessa_a",
@@ -395,7 +395,7 @@
           "id": "bquasi_p0"
         },
         {
-          "background": "assets/episodes/prologo/page_3.png",
+          "background": "assets/episodes/s1/s1_prima_conseguenza/branch_quasi_confessa_1.webp",
           "panels": [
             {
               "id": "branch_quasi_confessa_b",
@@ -445,7 +445,7 @@
     "id": "epilogue",
     "pages": [
       {
-        "background": "assets/episodes/prologo/page_4.png",
+        "background": "assets/episodes/s1/s1_prima_conseguenza/epilogue.webp",
         "panels": [
           {
             "id": "pc_epilogue_a",
